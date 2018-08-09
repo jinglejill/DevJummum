@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Prompt-Regular.ttf">
+            <string>Prompt-Regular</string>
+        </array>
+        <array key="Prompt-SemiBold.ttf">
+            <string>Prompt-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="169" id="KGk-i7-Jjw" customClass="CustomTableViewCellRating">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="169"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="168.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please rate my service" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qn6-C6-y2h">
+                        <rect key="frame" x="32" y="11" width="256" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="ahW-8g-6Q7"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="15"/>
+                        <color key="textColor" red="0.27058823529411763" green="0.27058823529411763" blue="0.27058823529411763" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Excellent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWO-8b-aoU">
+                        <rect key="frame" x="32" y="94" width="256" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="vmi-QD-lIa"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUL-Pi-TqO">
+                        <rect key="frame" x="28" y="42" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="WhB-Dt-tU0"/>
+                            <constraint firstAttribute="height" constant="44" id="tLQ-Me-nYo"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="starRatingGray.png"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbj-Rd-PeN">
+                        <rect key="frame" x="83" y="42" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="1ef-GM-XLL"/>
+                            <constraint firstAttribute="height" constant="44" id="hmm-Dw-Rds"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="starRatingGray.png"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ofg-F5-QoP">
+                        <rect key="frame" x="138" y="42" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="e5S-89-UWR"/>
+                            <constraint firstAttribute="height" constant="44" id="sBl-Oc-3zj"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="starRatingGray.png"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BD-Hu-h3k">
+                        <rect key="frame" x="193" y="42" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="LrQ-TH-hjQ"/>
+                            <constraint firstAttribute="height" constant="44" id="tNV-ue-Mvh"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="starRatingGray.png"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q5p-uO-gLh">
+                        <rect key="frame" x="248" y="42" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="MES-pq-WVd"/>
+                            <constraint firstAttribute="width" constant="44" id="NQ7-0o-AoV"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="starRatingGray.png"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIS-Ol-fGA">
+                        <rect key="frame" x="0.0" y="124.5" width="320" height="44"/>
+                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="cvq-Np-ngR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
+                        <state key="normal" title="Submit">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="pIS-Ol-fGA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="02S-wD-ck9"/>
+                    <constraint firstAttribute="trailing" secondItem="pIS-Ol-fGA" secondAttribute="trailing" id="3Dx-bG-nQF"/>
+                    <constraint firstItem="0BD-Hu-h3k" firstAttribute="centerY" secondItem="bUL-Pi-TqO" secondAttribute="centerY" id="9ms-fI-Ji1"/>
+                    <constraint firstItem="Q5p-uO-gLh" firstAttribute="leading" secondItem="0BD-Hu-h3k" secondAttribute="trailing" constant="11" id="CQg-vY-iJE"/>
+                    <constraint firstItem="qn6-C6-y2h" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="CYL-GJ-3eP"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="vWO-8b-aoU" secondAttribute="trailing" constant="16" id="G2C-yb-GUV"/>
+                    <constraint firstAttribute="bottom" secondItem="pIS-Ol-fGA" secondAttribute="bottom" id="INP-lS-OKw"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="qn6-C6-y2h" secondAttribute="trailing" constant="16" id="Nua-ej-jmd"/>
+                    <constraint firstItem="vbj-Rd-PeN" firstAttribute="centerY" secondItem="bUL-Pi-TqO" secondAttribute="centerY" id="P9M-2W-IkA"/>
+                    <constraint firstItem="vWO-8b-aoU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="R8j-Q2-BzH"/>
+                    <constraint firstItem="qn6-C6-y2h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="SXL-FM-tGB"/>
+                    <constraint firstItem="0BD-Hu-h3k" firstAttribute="leading" secondItem="Ofg-F5-QoP" secondAttribute="trailing" constant="11" id="UcA-2X-Bxc"/>
+                    <constraint firstItem="Ofg-F5-QoP" firstAttribute="centerY" secondItem="bUL-Pi-TqO" secondAttribute="centerY" id="Uf2-UX-gJH"/>
+                    <constraint firstItem="Ofg-F5-QoP" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="cw6-fa-Dad"/>
+                    <constraint firstItem="Ofg-F5-QoP" firstAttribute="top" secondItem="qn6-C6-y2h" secondAttribute="bottom" constant="8" id="d9p-mf-h5L"/>
+                    <constraint firstItem="Q5p-uO-gLh" firstAttribute="centerY" secondItem="bUL-Pi-TqO" secondAttribute="centerY" id="ew2-tE-lEg"/>
+                    <constraint firstItem="Ofg-F5-QoP" firstAttribute="leading" secondItem="vbj-Rd-PeN" secondAttribute="trailing" constant="11" id="h81-xe-mng"/>
+                    <constraint firstItem="vWO-8b-aoU" firstAttribute="top" secondItem="Ofg-F5-QoP" secondAttribute="bottom" constant="8" id="nKy-aW-l5d"/>
+                    <constraint firstItem="vbj-Rd-PeN" firstAttribute="leading" secondItem="bUL-Pi-TqO" secondAttribute="trailing" constant="11" id="xON-Bg-Uvd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="btnAction" destination="pIS-Ol-fGA" id="m1C-FC-GQg"/>
+                <outlet property="btnRate1" destination="bUL-Pi-TqO" id="2G9-cV-hQa"/>
+                <outlet property="btnRate2" destination="vbj-Rd-PeN" id="e67-9p-Iyk"/>
+                <outlet property="btnRate3" destination="Ofg-F5-QoP" id="F1s-BW-wTD"/>
+                <outlet property="btnRate4" destination="0BD-Hu-h3k" id="UKC-uR-U36"/>
+                <outlet property="btnRate5" destination="Q5p-uO-gLh" id="exW-SD-Elm"/>
+                <outlet property="lblRate" destination="vWO-8b-aoU" id="qIB-Oi-Vjb"/>
+                <outlet property="lblTitle" destination="qn6-C6-y2h" id="gHd-U4-yZv"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="103"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="starRatingGray.png" width="100" height="100"/>
+    </resources>
+</document>

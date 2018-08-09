@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Prompt-Regular.ttf">
+            <string>Prompt-Regular</string>
+        </array>
+        <array key="Prompt-SemiBold.ttf">
+            <string>Prompt-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="8gD-fi-aeZ" customClass="CustomTableViewCellRedemption">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="312"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAMARIN ก๋วยเตี๋ยวบ้านบึง" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ci0-Lf-C9v">
+                    <rect key="frame" x="16" y="20" width="343" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="vkF-GA-YSu"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="14"/>
+                    <color key="textColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ฟรี น้ำเก๊กฮวยอบควันเทียน มูลค่า 45 บาท" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Sa-8d-Ykz">
+                    <rect key="frame" x="16" y="46" width="343" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="5PW-CH-ccF"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="13"/>
+                    <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="900 points" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ohp-L2-Pan">
+                    <rect key="frame" x="288.5" y="71" width="70.5" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="QFn-fO-R3h"/>
+                        <constraint firstAttribute="width" constant="70.5" id="yy9-al-8bP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="13"/>
+                    <color key="textColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e82-Pl-jJf">
+                    <rect key="frame" x="152" y="138" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="igM-zO-6DI"/>
+                        <constraint firstAttribute="width" constant="70" id="n8l-d8-rT8"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZR-n7-VS4">
+                    <rect key="frame" x="16" y="97" width="343" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="Jh1-5F-05a"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="14"/>
+                    <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chefHat_green.png" translatesAutoresizingMaskIntoConstraints="NO" id="yFa-Kn-blX">
+                    <rect key="frame" x="257.5" y="68" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="XTy-aM-5pf"/>
+                        <constraint firstAttribute="width" constant="25" id="btB-sY-sDF"/>
+                    </constraints>
+                </imageView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="XXXXXX" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="G8x-7u-yvW">
+                    <rect key="frame" x="16" y="222" width="343" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="tm8-Xw-IQZ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Tc-8z-5nk">
+                    <rect key="frame" x="16" y="268" width="343" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="8mW-lC-eS7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
+                    <state key="normal" title="คัดลอก">
+                        <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="rR9-b5-40z" firstAttribute="trailing" secondItem="7Tc-8z-5nk" secondAttribute="trailing" constant="16" id="08p-my-JmP"/>
+                <constraint firstItem="4Sa-8d-Ykz" firstAttribute="leading" secondItem="rR9-b5-40z" secondAttribute="leading" constant="16" id="3y2-Hx-nLL"/>
+                <constraint firstItem="4Sa-8d-Ykz" firstAttribute="top" secondItem="ci0-Lf-C9v" secondAttribute="bottom" constant="8" id="7Re-bm-GCj"/>
+                <constraint firstItem="bZR-n7-VS4" firstAttribute="leading" secondItem="rR9-b5-40z" secondAttribute="leading" constant="16" id="Afq-ZK-ful"/>
+                <constraint firstItem="ci0-Lf-C9v" firstAttribute="top" secondItem="rR9-b5-40z" secondAttribute="top" constant="20" id="EXd-dh-NXo"/>
+                <constraint firstItem="e82-Pl-jJf" firstAttribute="top" secondItem="bZR-n7-VS4" secondAttribute="bottom" constant="20" id="FOb-ON-gQ1"/>
+                <constraint firstItem="Ohp-L2-Pan" firstAttribute="centerY" secondItem="yFa-Kn-blX" secondAttribute="centerY" id="KB6-th-zK4"/>
+                <constraint firstItem="7Tc-8z-5nk" firstAttribute="leading" secondItem="rR9-b5-40z" secondAttribute="leading" constant="16" id="LWP-2o-Lz4"/>
+                <constraint firstItem="rR9-b5-40z" firstAttribute="trailing" secondItem="bZR-n7-VS4" secondAttribute="trailing" constant="16" id="MWb-Al-LU1"/>
+                <constraint firstItem="ci0-Lf-C9v" firstAttribute="leading" secondItem="rR9-b5-40z" secondAttribute="leading" constant="16" id="YLT-Fo-Ie8"/>
+                <constraint firstItem="e82-Pl-jJf" firstAttribute="centerX" secondItem="8gD-fi-aeZ" secondAttribute="centerX" id="bCv-j6-RcS"/>
+                <constraint firstItem="rR9-b5-40z" firstAttribute="trailing" secondItem="Ohp-L2-Pan" secondAttribute="trailing" constant="16" id="bsm-XM-wk1"/>
+                <constraint firstItem="G8x-7u-yvW" firstAttribute="leading" secondItem="rR9-b5-40z" secondAttribute="leading" constant="16" id="eHy-pL-wD1"/>
+                <constraint firstItem="G8x-7u-yvW" firstAttribute="top" secondItem="e82-Pl-jJf" secondAttribute="bottom" constant="14" id="elg-lC-CH3"/>
+                <constraint firstItem="Ohp-L2-Pan" firstAttribute="top" secondItem="4Sa-8d-Ykz" secondAttribute="bottom" constant="8" id="fGf-3n-mYf"/>
+                <constraint firstItem="rR9-b5-40z" firstAttribute="trailing" secondItem="4Sa-8d-Ykz" secondAttribute="trailing" constant="16" id="jbE-Pz-9hC"/>
+                <constraint firstItem="rR9-b5-40z" firstAttribute="trailing" secondItem="G8x-7u-yvW" secondAttribute="trailing" constant="16" id="m7l-Wj-C3B"/>
+                <constraint firstItem="7Tc-8z-5nk" firstAttribute="top" secondItem="G8x-7u-yvW" secondAttribute="bottom" constant="16" id="mit-Ek-zrR"/>
+                <constraint firstItem="bZR-n7-VS4" firstAttribute="top" secondItem="Ohp-L2-Pan" secondAttribute="bottom" constant="8" id="sKu-ub-FYP"/>
+                <constraint firstItem="Ohp-L2-Pan" firstAttribute="leading" secondItem="yFa-Kn-blX" secondAttribute="trailing" constant="6" id="xRG-OW-L0N"/>
+                <constraint firstItem="rR9-b5-40z" firstAttribute="trailing" secondItem="ci0-Lf-C9v" secondAttribute="trailing" constant="16" id="xdd-sy-BZx"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="rR9-b5-40z"/>
+            <connections>
+                <outlet property="btnCopy" destination="7Tc-8z-5nk" id="uVc-tm-8cM"/>
+                <outlet property="imgQrCode" destination="e82-Pl-jJf" id="Efx-79-9gf"/>
+                <outlet property="lblHeader" destination="ci0-Lf-C9v" id="raz-Id-J1X"/>
+                <outlet property="lblHeaderHeight" destination="vkF-GA-YSu" id="uVJ-Bd-o8R"/>
+                <outlet property="lblRedeemDate" destination="bZR-n7-VS4" id="7Fh-Ux-WAp"/>
+                <outlet property="lblRemark" destination="Ohp-L2-Pan" id="qol-5f-nWh"/>
+                <outlet property="lblRemarkWidth" destination="yy9-al-8bP" id="Cwr-pJ-6qp"/>
+                <outlet property="lblSubTitle" destination="4Sa-8d-Ykz" id="1DN-Gy-SQj"/>
+                <outlet property="lblSubTitleHeight" destination="5PW-CH-ccF" id="I17-ss-CwO"/>
+                <outlet property="txvPromoCode" destination="G8x-7u-yvW" id="oyU-CB-M9f"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="-313"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="chefHat_green.png" width="226" height="226"/>
+    </resources>
+</document>
