@@ -2748,6 +2748,7 @@
                         <segue destination="uxx-Px-8LI" kind="show" identifier="segCreditCardAndOrderSummary" id="jVQ-j3-veY"/>
                         <segue destination="btE-BM-gjN" kind="show" identifier="segOrderDetail" id="urY-tP-jgl"/>
                         <segue destination="4WA-Zl-OI4" kind="unwind" identifier="segUnwindToHotDeal" unwindAction="unwindToHotDeal:" id="Kjw-Rg-dJc"/>
+                        <segue destination="oGW-Dn-caM" kind="show" identifier="segMenuSelection" id="BEB-iv-AGa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Se-Dr-KSv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3896,7 +3897,7 @@
         <segue reference="2Iw-Lt-h1E"/>
         <segue reference="hjD-fg-as6"/>
         <segue reference="jVQ-j3-veY"/>
-        <segue reference="odZ-6m-Wsi"/>
+        <segue reference="BEB-iv-AGa"/>
         <segue reference="bDK-E7-xJt"/>
     </inferredMetricsTieBreakers>
 </document>

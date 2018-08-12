@@ -722,19 +722,33 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         {
             if(item == 0)
             {
-                UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"cell"];
-                if (!cell)
-                {
-                    cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-                }
+//                UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"cell"];
+//                if (!cell)
+//                {
+//                    cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+//                }
+//
+//
+//                cell.textLabel.text = @"สรุปรายการอาหาร";
+//                cell.textLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];
+//                cell.textLabel.textColor = cSystem1;
+//
+//
+//                return cell;
+                CustomTableViewCellLabelLabel *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabelLabel];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 
-                cell.textLabel.text = @"สรุปรายการอาหาร";
-                cell.textLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];
-                cell.textLabel.textColor = cSystem1;
+                cell.lblText.text = @"สรุปรายการอาหาร";
+                cell.lblText.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+                [cell.lblText sizeToFit];
                 
                 
-                return cell;
+                cell.lblTextWidthConstant.constant = cell.lblText.frame.size.width;
+                cell.lblValue.hidden = YES;
+                
+                
+                return  cell;
             }
             else
             {
@@ -835,7 +849,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 
                 
                 CGSize noteLabelSize = [self suggestedSizeWithFont:cell.lblNote.font size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:[strAllNote string]];
-                noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?13.13:noteLabelSize.height;
+                noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?0:noteLabelSize.height;
                 CGRect frame2 = cell.lblNote.frame;
                 frame2.size.width = noteLabelSize.width;
                 frame2.size.height = noteLabelSize.height;
@@ -1311,7 +1325,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 
                 CGSize menuNameLabelSize = [self suggestedSizeWithFont:fontMenuName size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:strMenuName];//153 from storyboard
                 CGSize noteLabelSize = [self suggestedSizeWithFont:fontNote size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:[strAllNote string]];
-                noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?13.13:noteLabelSize.height;
+                noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?0:noteLabelSize.height;
                 
                 
                 float height = menuNameLabelSize.height+noteLabelSize.height+8+8+2;
@@ -1351,6 +1365,14 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 {
     cell.backgroundColor = [UIColor whiteColor];
     [cell setSeparatorInset:UIEdgeInsetsMake(16, 16, 16, 16)];
+    if([tableView isEqual:tbvData])
+    {
+        if(indexPath.section == 2)
+//            if(indexPath.section == 2 && indexPath.row != 0)
+        {
+            cell.separatorInset = UIEdgeInsetsMake(0.0f, self.view.bounds.size.width, 0.0f, CGFLOAT_MAX);
+        }
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1772,8 +1794,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         _receipt = receipt;
         [self performSegueWithIdentifier:@"segPaymentComplete" sender:self];
     }
-    
-
 }
 
 -(void)alertMsg:(NSString *)msg

@@ -9,6 +9,7 @@
 #import "CustomViewController.h"
 #import "Branch.h"
 #import "CustomerTable.h"
+#import "Receipt.h"
 
 
 @interface MenuSelectionViewController : CustomViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UISearchBarDelegate>
@@ -18,10 +19,11 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblTotalQuantity;
 @property (strong, nonatomic) IBOutlet UILabel *lblTotalAmount;
 @property (strong, nonatomic) IBOutlet UIView *vwBottomShadow;
-@property (strong, nonatomic) Branch *branch;
-@property (strong, nonatomic) CustomerTable *customerTable;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomButtonHeight;
+@property (strong, nonatomic) Branch *branch;
+@property (strong, nonatomic) CustomerTable *customerTable;
+@property (strong, nonatomic) Receipt *buffetReceipt;
 
 
 -(IBAction)unwindToMenuSelection:(UIStoryboardSegue *)segue;

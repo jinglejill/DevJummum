@@ -11,6 +11,8 @@
 #import "CustomTableViewCellReceiptSummary.h"
 #import "CustomTableViewCellOrderSummary.h"
 #import "CustomTableViewCellTotal.h"
+#import "CustomTableViewCellLabelRemark.h"
+#import "CustomTableViewCellSeparatorLine.h"
 #import "Branch.h"
 #import "OrderTaking.h"
 #import "Note.h"
@@ -32,6 +34,8 @@ static NSString * const reuseIdentifierLogo = @"CustomTableViewCellLogo";
 static NSString * const reuseIdentifierReceiptSummary = @"CustomTableViewCellReceiptSummary";
 static NSString * const reuseIdentifierOrderSummary = @"CustomTableViewCellOrderSummary";
 static NSString * const reuseIdentifierTotal = @"CustomTableViewCellTotal";
+static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelRemark";
+static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSeparatorLine";
 
 
 @synthesize receipt;
@@ -75,6 +79,14 @@ static NSString * const reuseIdentifierTotal = @"CustomTableViewCellTotal";
     {
         UINib *nib = [UINib nibWithNibName:reuseIdentifierTotal bundle:nil];
         [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierTotal];
+    }
+    {
+        UINib *nib = [UINib nibWithNibName:reuseIdentifierLabelRemark bundle:nil];
+        [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierLabelRemark];
+    }
+    {
+        UINib *nib = [UINib nibWithNibName:reuseIdentifierSeparatorLine bundle:nil];
+        [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierSeparatorLine];
     }
     
 }
@@ -246,7 +258,7 @@ static NSString * const reuseIdentifierTotal = @"CustomTableViewCellTotal";
         
         
         CGSize noteLabelSize = [self suggestedSizeWithFont:cell.lblNote.font size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:[strAllNote string]];
-        noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?13.13:noteLabelSize.height;
+        noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?0:noteLabelSize.height;
         CGRect frame2 = cell.lblNote.frame;
         frame2.size.width = noteLabelSize.width;
         frame2.size.height = noteLabelSize.height;
@@ -274,7 +286,14 @@ static NSString * const reuseIdentifierTotal = @"CustomTableViewCellTotal";
     /////
     
     
-    
+    //separatorLine
+    if([Utility isStringEmpty:receipt.remark])
+    {
+        CustomTableViewCellSeparatorLine *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierSeparatorLine];
+        
+        UIImage *image = [self imageFromView:cell];
+        [arrImage addObject:image];
+    }
     
     
     //section 1 --> total //
@@ -284,6 +303,27 @@ static NSString * const reuseIdentifierTotal = @"CustomTableViewCellTotal";
         
         if(receipt.discountValue == 0 && receipt.serviceChargePercent == 0)//3 rows
         {
+            //remark
+            if(![Utility isStringEmpty:receipt.remark])
+            {
+                CustomTableViewCellLabelRemark *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
+                NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
+                cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
+                [cell.lblText sizeToFit];
+                cell.lblTextHeight.constant = cell.lblText.frame.size.height;
+                
+                
+                UIImage *image = [self imageFromView:cell];
+                [arrImage addObject:image];
+                
+                
+                //separatorLine
+                CustomTableViewCellSeparatorLine *cell2 = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierSeparatorLine];
+                
+                UIImage *image2 = [self imageFromView:cell2];
+                [arrImage addObject:image2];
+            }
+            
             // 0:
             {
                 CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
@@ -347,7 +387,27 @@ static NSString * const reuseIdentifierTotal = @"CustomTableViewCellTotal";
         }
         else if(receipt.discountValue > 0 && receipt.serviceChargePercent == 0)//5 rows
         {
-            
+            //remark
+            if(![Utility isStringEmpty:receipt.remark])
+            {
+                CustomTableViewCellLabelRemark *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
+                NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
+                cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
+                [cell.lblText sizeToFit];
+                cell.lblTextHeight.constant = cell.lblText.frame.size.height;
+                
+                
+                UIImage *image = [self imageFromView:cell];
+                [arrImage addObject:image];
+                
+                
+                
+                //separatorLine
+                CustomTableViewCellSeparatorLine *cell2 = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierSeparatorLine];
+                
+                UIImage *image2 = [self imageFromView:cell2];
+                [arrImage addObject:image2];
+            }
             // 0:
             {
                 CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
@@ -453,6 +513,27 @@ static NSString * const reuseIdentifierTotal = @"CustomTableViewCellTotal";
         }
         else if(receipt.discountValue == 0 && receipt.serviceChargePercent > 0)//4 rows
         {
+            //remark
+            if(![Utility isStringEmpty:receipt.remark])
+            {
+                CustomTableViewCellLabelRemark *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
+                NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
+                cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
+                [cell.lblText sizeToFit];
+                cell.lblTextHeight.constant = cell.lblText.frame.size.height;
+                
+                
+                UIImage *image = [self imageFromView:cell];
+                [arrImage addObject:image];
+                
+                
+                
+                //separatorLine
+                CustomTableViewCellSeparatorLine *cell2 = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierSeparatorLine];
+                
+                UIImage *image2 = [self imageFromView:cell2];
+                [arrImage addObject:image2];
+            }
             // 0:
             {
                 CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
@@ -539,7 +620,28 @@ static NSString * const reuseIdentifierTotal = @"CustomTableViewCellTotal";
         }
         else if(receipt.discountValue > 0 && receipt.serviceChargePercent > 0)//6 rows
         {
-            
+            //remark
+            if(![Utility isStringEmpty:receipt.remark])
+            {
+                CustomTableViewCellLabelRemark *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
+                NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
+                cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
+                [cell.lblText sizeToFit];
+                cell.lblTextHeight.constant = cell.lblText.frame.size.height;
+                
+                
+                UIImage *image = [self imageFromView:cell];
+                [arrImage addObject:image];
+                
+                
+                
+                //separatorLine
+                CustomTableViewCellSeparatorLine *cell2 = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierSeparatorLine];
+                
+                UIImage *image2 = [self imageFromView:cell2];
+                [arrImage addObject:image2];
+            }
+            // 0:
             {
                 CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
                 NSString *strTitle = [NSString stringWithFormat:@"%ld รายการ",[orderTakingList count]];

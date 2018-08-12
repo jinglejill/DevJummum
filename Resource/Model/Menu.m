@@ -13,12 +13,13 @@
 #import "SharedMenu.h"
 #import "SharedCurrentMenu.h"
 #import "Utility.h"
+#import "Receipt.h"
 
 
 
 @implementation Menu
 
--(Menu *)initWithMenuCode:(NSString *)menuCode titleThai:(NSString *)titleThai price:(float)price menuTypeID:(NSInteger)menuTypeID subMenuTypeID:(NSInteger)subMenuTypeID subMenuType2ID:(NSInteger)subMenuType2ID subMenuType3ID:(NSInteger)subMenuType3ID imageUrl:(NSString *)imageUrl color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status remark:(NSString *)remark
+-(Menu *)initWithMenuCode:(NSString *)menuCode titleThai:(NSString *)titleThai price:(float)price menuTypeID:(NSInteger)menuTypeID subMenuTypeID:(NSInteger)subMenuTypeID subMenuType2ID:(NSInteger)subMenuType2ID subMenuType3ID:(NSInteger)subMenuType3ID buffetMenu:(NSInteger)buffetMenu belongToMenuID:(NSInteger)belongToMenuID timeToOrder:(NSInteger)timeToOrder imageUrl:(NSString *)imageUrl color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status remark:(NSString *)remark
 {
     self = [super init];
     if(self)
@@ -31,6 +32,9 @@
         self.subMenuTypeID = subMenuTypeID;
         self.subMenuType2ID = subMenuType2ID;
         self.subMenuType3ID = subMenuType3ID;
+        self.buffetMenu = buffetMenu;
+        self.belongToMenuID = belongToMenuID;
+        self.timeToOrder = timeToOrder;
         self.imageUrl = imageUrl;
         self.color = color;
         self.orderNo = orderNo;
@@ -90,20 +94,6 @@
     [dataList addObjectsFromArray:menuList];
 }
 
-+(void)addListCheckDuplicate:(NSMutableArray *)menuList
-{
-    NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
-    for(Menu *item in menuList)
-    {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_menuID = %ld and _branchID = %ld",item.menuID,item.branchID];
-        NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
-        if([filterArray count] == 0)
-        {
-            [dataList addObject:item];
-        }
-    }
-}
-
 +(void)removeList:(NSMutableArray *)menuList
 {
     NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
@@ -114,18 +104,6 @@
 {
     NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_menuID = %ld",menuID];
-    NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
-    if([filterArray count] > 0)
-    {
-        return filterArray[0];
-    }
-    return nil;
-}
-
-+(Menu *)getMenu:(NSInteger)menuID branchID:(NSInteger)branchID
-{
-    NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_menuID = %ld and _branchID = %ld",menuID,branchID];
     NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
     if([filterArray count] > 0)
     {
@@ -148,6 +126,9 @@
         ((Menu *)copy).subMenuTypeID = self.subMenuTypeID;
         ((Menu *)copy).subMenuType2ID = self.subMenuType2ID;
         ((Menu *)copy).subMenuType3ID = self.subMenuType3ID;
+        ((Menu *)copy).buffetMenu = self.buffetMenu;
+        ((Menu *)copy).belongToMenuID = self.belongToMenuID;
+        ((Menu *)copy).timeToOrder = self.timeToOrder;
         [copy setImageUrl:self.imageUrl];
         [copy setColor:self.color];
         ((Menu *)copy).orderNo = self.orderNo;
@@ -155,8 +136,6 @@
         [copy setRemark:self.remark];
         [copy setModifiedUser:[Utility modifiedUser]];
         [copy setModifiedDate:[Utility currentDateTime]];
-        
-        
     }
     
     return copy;
@@ -172,6 +151,9 @@
        && self.subMenuTypeID == editingMenu.subMenuTypeID
        && self.subMenuType2ID == editingMenu.subMenuType2ID
        && self.subMenuType3ID == editingMenu.subMenuType3ID
+       && self.buffetMenu == editingMenu.buffetMenu
+       && self.belongToMenuID == editingMenu.belongToMenuID
+       && self.timeToOrder == editingMenu.timeToOrder
        && [self.imageUrl isEqualToString:editingMenu.imageUrl]
        && [self.color isEqualToString:editingMenu.color]
        && self.orderNo == editingMenu.orderNo
@@ -194,6 +176,9 @@
     toMenu.subMenuTypeID = fromMenu.subMenuTypeID;
     toMenu.subMenuType2ID = fromMenu.subMenuType2ID;
     toMenu.subMenuType3ID = fromMenu.subMenuType3ID;
+    toMenu.buffetMenu = fromMenu.buffetMenu;
+    toMenu.belongToMenuID = fromMenu.belongToMenuID;
+    toMenu.timeToOrder = fromMenu.timeToOrder;
     toMenu.imageUrl = fromMenu.imageUrl;
     toMenu.color = fromMenu.color;
     toMenu.orderNo = fromMenu.orderNo;
@@ -203,6 +188,18 @@
     toMenu.modifiedDate = [Utility currentDateTime];
     
     return toMenu;
+}
+
++(Menu *)getMenu:(NSInteger)menuID branchID:(NSInteger)branchID
+{
+    NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_menuID = %ld and _branchID = %ld",menuID,branchID];
+    NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
+    if([filterArray count] > 0)
+    {
+        return filterArray[0];
+    }
+    return nil;
 }
 
 +(NSMutableArray *)getMenuListWithMenuType:(NSInteger)menuTypeID menuList:(NSMutableArray *)menuList
@@ -302,4 +299,45 @@
     NSMutableArray *dataList = [SharedCurrentMenu SharedCurrentMenu].menuList;
     [dataList removeAllObjects];
 }
+
++(NSMutableArray *)getMenuListALaCarteWithBranchID:(NSInteger)branchID
+{
+    NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _belongToMenuID = 0",branchID];
+    NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
+    
+    return [filterArray mutableCopy];
+}
+
++(NSMutableArray *)getMenuListBuffetWithReceipt:(Receipt *)receipt
+{
+    NSMutableArray *buffetMenuList = [[NSMutableArray alloc]init];
+    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
+    for(OrderTaking *item in orderTakingList)
+    {
+        Menu *menu = [Menu getMenu:item.menuID branchID:item.branchID];
+        if(menu.buffetMenu)
+        {
+            [buffetMenuList addObject:menu];
+        }
+    }
+    return buffetMenuList;
+}
+
++(NSMutableArray *)getMenuListBelongToBuffetWithBuffetMenuList:(NSMutableArray *)buffetMenuList
+{
+    NSMutableArray *belongToBuffetMenuList = [[NSMutableArray alloc]init];
+    for(Menu *item in buffetMenuList)
+    {
+        NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _belongToMenuID = %ld",item.branchID,item.menuID];
+        NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
+        
+        
+        [belongToBuffetMenuList addObjectsFromArray:filterArray];
+    }
+    
+    return belongToBuffetMenuList;
+}
+
 @end

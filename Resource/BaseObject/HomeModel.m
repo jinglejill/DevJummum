@@ -191,7 +191,7 @@
             break;
         case dbOpeningTime:
         {
-            arrClassName = @[@"Message"];
+            arrClassName = @[@"Message",@"SpecialPriceProgram"];
         }
             break;
         case dbBranchSearch:
@@ -2214,6 +2214,24 @@
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlMenuNoteGetList]]];
         }
             break;
+        case dbMenuBelongToBuffet:
+        {
+            NSArray *dataList = (NSArray *)data;
+            Branch *branch = dataList[0];
+            NSMutableArray *buffetMenuList = dataList[1];
+            NSInteger countBuffetMenu = 0;
+            
+            
+            noteDataString = [NSString stringWithFormat:@"branchID=%ld&countMenu=%ld",branch.branchID,[buffetMenuList count]];
+            for(Menu *item in buffetMenuList)
+            {
+                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:item withRunningNo:countBuffetMenu]];
+                countBuffetMenu++;
+            }
+            
+            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlMenuBelongToBuffetGetList]]];
+        }
+            break;
     }
     
     noteDataString = [NSString stringWithFormat:@"%@&modifiedDeviceToken=%@&modifiedUser=%@",noteDataString,[Utility deviceToken],[Utility modifiedUser]];
@@ -2243,6 +2261,9 @@
                 {
                     case dbMenuNoteList:
                         arrClassName = @[@"MenuNote"];
+                        break;
+                    case dbMenuBelongToBuffet:
+                        arrClassName = @[@"Message",@"Menu",@"MenuType"];
                         break;
                 }
                 
@@ -2304,7 +2325,7 @@
                 // Ready to notify delegate that data is ready and pass back items
                 if (self.delegate)
                 {
-                    if(propCurrentDB == dbMenuNoteList)
+                    if(propCurrentDB == dbMenuNoteList || propCurrentDB == dbMenuBelongToBuffet)
                     {
                         completionBlock(YES,arrItem);
                     }

@@ -77,4 +77,5 @@
 +(NSInteger)getBranchIDWithMaxModifiedDateWithMemberID:(NSInteger)memberID;
 +(NSInteger)getIndex:(NSMutableArray *)receiptList receipt:(Receipt *)receipt;
 +(NSInteger)getPriorStatus:(Receipt *)receipt;
++(BOOL)hasBuffetMenu:(NSInteger)receiptID;
 @end

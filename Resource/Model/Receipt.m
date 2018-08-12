@@ -10,6 +10,8 @@
 #import "SharedReceipt.h"
 #import "Utility.h"
 #import "Setting.h"
+#import "OrderTaking.h"
+#import "Menu.h"
 
 
 @implementation Receipt
@@ -615,6 +617,20 @@
         return [arrStatus[[arrStatus count]-2] integerValue];
     }
     return 0;
+}
+
++(BOOL)hasBuffetMenu:(NSInteger)receiptID
+{
+    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
+    for(OrderTaking *item in orderTakingList)
+    {
+        Menu *menu = [Menu getMenu:item.menuID branchID:item.branchID];
+        if(menu.buffetMenu)
+        {
+            return YES;
+        }
+    }
     
+    return NO;
 }
 @end

@@ -97,6 +97,7 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
     NSString *message = [Setting getValue:@"117m" example:@"ค้นหา Deal"];
     searchBar.delegate = self;
     searchBar.placeholder = message;
+    [searchBar setInputAccessoryView:self.toolBar];
     UITextField *textField = [searchBar valueForKey:@"searchField"];
     textField.layer.borderColor = [cTextFieldBorder CGColor];
     textField.layer.borderWidth = 1;
@@ -113,6 +114,10 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
         [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierPromoThumbNail];
     }
     
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
+    [self.view addGestureRecognizer:tapGesture];
+    [tapGesture setCancelsTouchesInView:NO];
 }
 
 ///tableview section

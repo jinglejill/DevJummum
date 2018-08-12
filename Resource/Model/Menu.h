@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Receipt.h"
 
 @interface Menu : NSObject
 @property (nonatomic) NSInteger menuID;
@@ -17,6 +18,9 @@
 @property (nonatomic) NSInteger subMenuTypeID;
 @property (nonatomic) NSInteger subMenuType2ID;
 @property (nonatomic) NSInteger subMenuType3ID;
+@property (nonatomic) NSInteger buffetMenu;
+@property (nonatomic) NSInteger belongToMenuID;
+@property (nonatomic) NSInteger timeToOrder;
 @property (retain, nonatomic) NSString * imageUrl;
 @property (retain, nonatomic) NSString * color;
 @property (nonatomic) NSInteger orderNo;
@@ -27,7 +31,6 @@
 
 
 
-
 @property (nonatomic) NSInteger menuOrderNo;
 @property (nonatomic) NSInteger subMenuOrderNo;
 @property (nonatomic) NSInteger expand;
@@ -35,7 +38,9 @@
 
 
 
--(Menu *)initWithMenuCode:(NSString *)menuCode titleThai:(NSString *)titleThai price:(float)price menuTypeID:(NSInteger)menuTypeID subMenuTypeID:(NSInteger)subMenuTypeID subMenuType2ID:(NSInteger)subMenuType2ID subMenuType3ID:(NSInteger)subMenuType3ID imageUrl:(NSString *)imageUrl color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status remark:(NSString *)remark;
+
+-(Menu *)initWithMenuCode:(NSString *)menuCode titleThai:(NSString *)titleThai price:(float)price menuTypeID:(NSInteger)menuTypeID subMenuTypeID:(NSInteger)subMenuTypeID subMenuType2ID:(NSInteger)subMenuType2ID subMenuType3ID:(NSInteger)subMenuType3ID buffetMenu:(NSInteger)buffetMenu belongToMenuID:(NSInteger)belongToMenuID timeToOrder:(NSInteger)timeToOrder imageUrl:(NSString *)imageUrl color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status remark:(NSString *)remark;
+
 +(NSInteger)getNextID;
 +(void)addObject:(Menu *)menu;
 +(void)removeObject:(Menu *)menu;
@@ -55,4 +60,7 @@
 +(NSMutableArray *)getCurrentMenuList;
 +(void)setCurrentMenuList:(NSMutableArray *)menuList;
 +(void)removeCurrentMenuList;
++(NSMutableArray *)getMenuListALaCarteWithBranchID:(NSInteger)branchID;
++(NSMutableArray *)getMenuListBuffetWithReceipt:(Receipt *)receipt;
++(NSMutableArray *)getMenuListBelongToBuffetWithBuffetMenuList:(NSMutableArray *)buffetMenuList;
 @end

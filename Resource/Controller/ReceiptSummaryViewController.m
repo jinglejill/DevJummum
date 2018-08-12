@@ -9,10 +9,13 @@
 #import "ReceiptSummaryViewController.h"
 #import "OrderDetailViewController.h"
 #import "CreditCardAndOrderSummaryViewController.h"
+#import "MenuSelectionViewController.h"
 #import "CustomTableViewCellReceiptSummary.h"
 #import "CustomTableViewCellOrderSummary.h"
 #import "CustomTableViewCellTotal.h"
 #import "CustomTableViewCellLabelLabel.h"
+#import "CustomTableViewCellLabelRemark.h"
+#import "CustomTableViewCellButton.h"
 #import "Receipt.h"
 #import "UserAccount.h"
 #import "Branch.h"
@@ -38,6 +41,8 @@ static NSString * const reuseIdentifierReceiptSummary = @"CustomTableViewCellRec
 static NSString * const reuseIdentifierOrderSummary = @"CustomTableViewCellOrderSummary";
 static NSString * const reuseIdentifierTotal = @"CustomTableViewCellTotal";
 static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLabel";
+static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelRemark";
+static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
 
 
 @synthesize lblNavTitle;
@@ -122,7 +127,10 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
         UINib *nib = [UINib nibWithNibName:reuseIdentifierReceiptSummary bundle:nil];
         [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierReceiptSummary];
     }
-    
+    {
+        UINib *nib = [UINib nibWithNibName:reuseIdentifierLabelRemark bundle:nil];
+        [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierLabelRemark];
+    }
     
     [self setReceiptList];
 }
@@ -165,7 +173,7 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
         NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
         orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
         
-        return [orderTakingList count]+1+1;
+        return [orderTakingList count]+4;
     }
 }
 
@@ -201,6 +209,14 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
         {
             UINib *nib = [UINib nibWithNibName:reuseIdentifierLabelLabel bundle:nil];
             [cell.tbvOrderDetail registerNib:nib forCellReuseIdentifier:reuseIdentifierLabelLabel];
+        }
+        {
+            UINib *nib = [UINib nibWithNibName:reuseIdentifierLabelRemark bundle:nil];
+            [cell.tbvOrderDetail registerNib:nib forCellReuseIdentifier:reuseIdentifierLabelRemark];
+        }
+        {
+            UINib *nib = [UINib nibWithNibName:reuseIdentifierButton bundle:nil];
+            [cell.tbvOrderDetail registerNib:nib forCellReuseIdentifier:reuseIdentifierButton];
         }
         
         
@@ -329,7 +345,7 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
             
             
             CGSize noteLabelSize = [self suggestedSizeWithFont:cell.lblNote.font size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:[strAllNote string]];
-            noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?13.13:noteLabelSize.height;
+            noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?0:noteLabelSize.height;
             CGRect frame2 = cell.lblNote.frame;
             frame2.size.width = noteLabelSize.width;
             frame2.size.height = noteLabelSize.height;
@@ -363,6 +379,27 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
         }
         else if(item == [orderTakingList count])
         {
+            CustomTableViewCellLabelRemark *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            
+            Receipt *receipt = [Receipt getReceipt:receiptID];
+            if([Utility isStringEmpty:receipt.remark])
+            {
+                cell.lblText.attributedText = [self setAttributedString:@"" text:receipt.remark];
+            }
+            else
+            {
+                NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
+                cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
+            }
+            [cell.lblText sizeToFit];
+            cell.lblTextHeight.constant = cell.lblText.frame.size.height;
+            
+            return cell;
+        }
+        else if(item == [orderTakingList count]+1)
+        {
             CustomTableViewCellTotal *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
@@ -382,7 +419,7 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
             
             return cell;
         }
-        else if(item == [orderTakingList count]+1)
+        else if(item == [orderTakingList count]+2)
         {
             CustomTableViewCellLabelLabel *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabelLabel];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -410,6 +447,25 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
             cell.lblText.text = @"";
             
         
+            
+            return cell;
+        }
+        else if(item == [orderTakingList count]+3)
+        {
+            CustomTableViewCellButton *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierButton];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            
+            NSString *title = [Setting getValue:@"127t" example:@"สั่งบุฟเฟ่ต์"];
+            
+            
+            cell.btnValue.tag = receiptID;
+            cell.btnValue.hidden = ![Receipt hasBuffetMenu:receiptID];
+            cell.btnValue.backgroundColor = cSystem1;
+            [cell.btnValue setTitle:title forState:UIControlStateNormal];
+            [cell.btnValue addTarget:self action:@selector(orderBuffet:) forControlEvents:UIControlEventTouchUpInside];
+            [self setButtonDesign:cell.btnValue];
+            
             
             return cell;
         }
@@ -508,14 +564,37 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
             
             CGSize menuNameLabelSize = [self suggestedSizeWithFont:fontMenuName size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:strMenuName];//153 from storyboard
             CGSize noteLabelSize = [self suggestedSizeWithFont:fontNote size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:[strAllNote string]];
-            noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?13.13:noteLabelSize.height;
+            noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?0:noteLabelSize.height;
             
             
             float height = menuNameLabelSize.height+noteLabelSize.height+8+8+2;
             sumHeight += height;
         }
         
-        return sumHeight+83+34+34;//+37;
+        
+        //remarkHeight
+        CustomTableViewCellReceiptSummary *receiptSummaryCell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierReceiptSummary];
+        CustomTableViewCellLabelRemark *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
+        if([Utility isStringEmpty:receipt.remark])
+        {
+            cell.lblText.attributedText = [self setAttributedString:@"" text:receipt.remark];
+        }
+        else
+        {
+            NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
+            cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
+        }
+        [cell.lblText sizeToFit];
+        cell.lblTextHeight.constant = cell.lblText.frame.size.height;
+        
+        cell.lblTextHeight.constant = cell.lblTextHeight.constant<18?18:cell.lblTextHeight.constant;
+        float remarkHeight = [Utility isStringEmpty:receipt.remark]?0:4+cell.lblTextHeight.constant+4;
+        
+        
+        
+        float btnBuffetHeight = [Receipt hasBuffetMenu:receipt.receiptID]?44:0;
+        
+        return sumHeight+83+remarkHeight+34+34+btnBuffetHeight;//+37;
     }
     else
     {
@@ -606,7 +685,7 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
             
             CGSize menuNameLabelSize = [self suggestedSizeWithFont:fontMenuName size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:strMenuName];//153 from storyboard
             CGSize noteLabelSize = [self suggestedSizeWithFont:fontNote size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:[strAllNote string]];
-            noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?13.13:noteLabelSize.height;
+            noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?0:noteLabelSize.height;
             
             
             float height = menuNameLabelSize.height+noteLabelSize.height+8+8+2;
@@ -614,11 +693,45 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
         }
         else if(indexPath.item == [orderTakingList count])
         {
-            return 34;
+            CustomTableViewCellLabelRemark *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
+            
+            
+            Receipt *receipt = [Receipt getReceipt:receiptID];
+            if([Utility isStringEmpty:receipt.remark])
+            {
+                cell.lblText.attributedText = [self setAttributedString:@"" text:receipt.remark];
+            }
+            else
+            {
+                NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
+                cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
+            }
+            [cell.lblText sizeToFit];
+            cell.lblTextHeight.constant = cell.lblText.frame.size.height;
+            
+            if([Utility isStringEmpty:receipt.remark])
+            {
+                return 0;
+            }
+            else
+            {
+                cell.lblTextHeight.constant = cell.lblTextHeight.constant<18?18:cell.lblTextHeight.constant;
+                float remarkHeight = [Utility isStringEmpty:receipt.remark]?0:4+cell.lblTextHeight.constant+4;
+                
+                return remarkHeight;
+            }
         }
         else if(indexPath.item == [orderTakingList count]+1)
         {
             return 34;
+        }
+        else if(indexPath.item == [orderTakingList count]+2)
+        {
+            return 34;
+        }
+        else if(indexPath.item == [orderTakingList count]+3)
+        {
+            return [Receipt hasBuffetMenu:receiptID]?44:0;
         }
     }
     return 0;
@@ -635,14 +748,18 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
         NSInteger receiptID = tableView.tag;
         NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
         orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
-        if(indexPath.item == [orderTakingList count]+1)
-        {
-            cell.separatorInset = UIEdgeInsetsMake(0.0f, self.view.bounds.size.width, 0.0f, CGFLOAT_MAX);
-        }
-        else
+        Receipt *receipt = [Receipt getReceipt:receiptID];
+        cell.separatorInset = UIEdgeInsetsMake(0.0f, self.view.bounds.size.width, 0.0f, CGFLOAT_MAX);
+        if([Utility isStringEmpty:receipt.remark] && indexPath.item == [orderTakingList count]-1)
         {
             [cell setSeparatorInset:UIEdgeInsetsMake(16, 16, 16, 16)];
         }
+        
+        
+        if(indexPath.item == [orderTakingList count] || indexPath.item == [orderTakingList count]+1)
+        {
+            [cell setSeparatorInset:UIEdgeInsetsMake(16, 16, 16, 16)];
+        }        
     }
 }
 
@@ -737,11 +854,23 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
         OrderDetailViewController *vc = segue.destinationViewController;
         vc.receipt = _selectedReceipt;
     }
+    else if([[segue identifier] isEqualToString:@"segMenuSelection"])
+    {
+        MenuSelectionViewController *vc = segue.destinationViewController;
+        vc.buffetReceipt = _selectedReceipt;
+    }
 }
 
 -(void)segueToOrderDetailAuto:(Receipt *)receipt
 {
     _selectedReceipt = receipt;
     [self performSegueWithIdentifier:@"segOrderDetail" sender:self];
+}
+
+-(void)orderBuffet:(id)sender
+{
+    UIButton *btnValue = sender;
+    _selectedReceipt = [Receipt getReceipt:btnValue.tag];
+    [self performSegueWithIdentifier:@"segMenuSelection" sender:self];
 }
 @end

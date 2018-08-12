@@ -28,17 +28,7 @@
 {
     NSMutableArray *_menuList;
     NSMutableArray *_menuTypeList;
-    NSMutableArray *_menuNoteList;
-    NSMutableArray *_noteList;
-    NSMutableArray *_noteTypeList;
-    NSMutableArray *_subMenuTypeList;
-    NSMutableArray *_specialPriceProgramList;
-    
-
     NSMutableArray *_filterMenuList;
-    OrderTaking *_orderTaking;
-    OrderTaking *_copyOrderTaking;
-    NSInteger _showCheckOnly;
     NSInteger _selectedMenuTypeIndex;
 }
 
@@ -61,6 +51,8 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
 @synthesize lblTotalAmount;
 @synthesize topViewHeight;
 @synthesize bottomButtonHeight;
+@synthesize buffetReceipt;
+
 
 -(IBAction)unwindToMenuSelection:(UIStoryboardSegue *)segue
 {
@@ -128,73 +120,83 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     tbvMenu.delegate = self;
     tbvMenu.dataSource = self;
     [self setShadow:vwBottomShadow];
-    NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
-    if([orderTakingList count]>0)
+    if(buffetReceipt)
     {
-        OrderTaking *orderTaking = orderTakingList[0];
-        if(orderTaking.branchID == branch.branchID)
+        [Menu removeCurrentMenuList];
+        [OrderTaking removeCurrentOrderTakingList];
+        [CreditCard removeCurrentCreditCard];
+        lblTotalQuantity.text = @"0";
+        lblTotalQuantityTop.text = @"";
+        lblTotalAmount.text = [Utility addPrefixBahtSymbol:@"0.00"];
+        
+        
+        NSMutableArray *buffetMenuList = [Menu getMenuListBuffetWithReceipt:buffetReceipt];
+        _menuList = [Menu getMenuListBelongToBuffetWithBuffetMenuList:buffetMenuList];
+        
+    }
+    else
+    {
+        NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+        if([orderTakingList count]>0)
         {
-            lblTotalQuantity.text = [Utility formatDecimal:[orderTakingList count] withMinFraction:0 andMaxFraction:0];
-            lblTotalQuantityTop.text = lblTotalQuantity.text;
-            
-            
-            NSString *strTotal = [Utility formatDecimal:[OrderTaking getSubTotalAmount:orderTakingList] withMinFraction:2 andMaxFraction:2];
-            strTotal = [Utility addPrefixBahtSymbol:strTotal];
-            lblTotalAmount.text = strTotal;
+            OrderTaking *orderTaking = orderTakingList[0];
+            if(orderTaking.branchID == branch.branchID)
+            {
+                lblTotalQuantity.text = [Utility formatDecimal:[orderTakingList count] withMinFraction:0 andMaxFraction:0];
+                lblTotalQuantityTop.text = lblTotalQuantity.text;
+                
+                
+                NSString *strTotal = [Utility formatDecimal:[OrderTaking getSubTotalAmount:orderTakingList] withMinFraction:2 andMaxFraction:2];
+                strTotal = [Utility addPrefixBahtSymbol:strTotal];
+                lblTotalAmount.text = strTotal;
+            }
+            else
+            {
+                [Menu removeCurrentMenuList];
+                [OrderTaking removeCurrentOrderTakingList];
+                [CreditCard removeCurrentCreditCard];
+                lblTotalQuantity.text = @"0";
+                lblTotalQuantityTop.text = @"";
+                lblTotalAmount.text = [Utility addPrefixBahtSymbol:@"0.00"];
+            }
         }
         else
         {
             [Menu removeCurrentMenuList];
-            [OrderTaking removeCurrentOrderTakingList];            
-            [CreditCard removeCurrentCreditCard];
             lblTotalQuantity.text = @"0";
             lblTotalQuantityTop.text = @"";
             lblTotalAmount.text = [Utility addPrefixBahtSymbol:@"0.00"];
         }
-    }
-    else
-    {
-        [Menu removeCurrentMenuList];
-        lblTotalQuantity.text = @"0";
-        lblTotalQuantityTop.text = @"";
-        lblTotalAmount.text = [Utility addPrefixBahtSymbol:@"0.00"];
+        
+        
+        
+        
+        _menuList = [Menu getCurrentMenuList];
+        if([_menuList count] == 0)
+        {
+            [self loadingOverlayView];
+            self.homeModel = [[HomeModel alloc]init];
+            self.homeModel.delegate = self;
+            [self.homeModel downloadItems:dbMenuList withData:branch];
+        }
+        else
+        {
+            _menuList = [Menu getMenuListALaCarteWithBranchID:branch.branchID];
+            _menuTypeList = [MenuType getMenuTypeListALarCarteWithBranchID:branch.branchID];
+            _menuTypeList = [MenuType sortList:_menuTypeList];
+            _filterMenuList = _menuList;
+            [self setData];
+            
+            
+            
+            
+            //check opening time การสั่งอาหารด้วยตัวเอง
+            self.homeModel = [[HomeModel alloc]init];
+            self.homeModel.delegate = self;
+            [self.homeModel downloadItems:dbOpeningTime withData:branch];
+        }
     }
     
-    
-    _menuList = [Menu getCurrentMenuList];
-    if([_menuList count] == 0)
-    {
-        [self loadingOverlayView];
-        self.homeModel = [[HomeModel alloc]init];
-        self.homeModel.delegate = self;
-        [self.homeModel downloadItems:dbMenuList withData:branch];
-    }
-    else
-    {
-
-        _menuTypeList = [MenuType getMenuTypeList];
-        _menuNoteList = [MenuNote getMenuNoteList];
-        _noteList = [Note getNoteList];
-        _noteTypeList = [NoteType getNoteTypeList];
-        _subMenuTypeList = [SubMenuType getSubMenuTypeList];
-        _menuTypeList = [MenuType sortList:_menuTypeList];
-        
-        
-        
-        _filterMenuList = _menuList;
-        [self setData];
-        
-        
-        
-        
-        
-        
-        
-        //check opening time การสั่งอาหารด้วยตัวเอง
-        self.homeModel = [[HomeModel alloc]init];
-        self.homeModel.delegate = self;
-        [self.homeModel downloadItems:dbOpeningTime withData:branch];
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -205,7 +207,6 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
 - (IBAction)goBackHome:(id)sender
 {
     [self performSegueWithIdentifier:@"segUnwindToQRCodeScanTable" sender:self];
-//    [self performSegueWithIdentifier:@"segUnwindToBranchSearch" sender:self];
 }
 
 - (IBAction)viewBasket:(id)sender
@@ -258,6 +259,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.sbText.delegate = self;
             cell.sbText.tag = 300;
+            [cell.sbText setInputAccessoryView:self.toolBar];
             UITextField *textField = [cell.sbText valueForKey:@"searchField"];
             textField.layer.borderColor = [cTextFieldBorder CGColor];
             textField.layer.borderWidth = 1;
@@ -418,7 +420,6 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     HomeModel *homeModel = (HomeModel *)objHomeModel;
     if(homeModel.propCurrentDB == dbMenuList)
     {
-        NSLog(@"menuList");
         NSMutableArray *messageList = [items[0] mutableCopy];
         Message *message = messageList[0];
         if(![message.text integerValue])
@@ -428,25 +429,14 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         }
         
         
-        _menuList = [items[1] mutableCopy];
-        _menuTypeList = [items[2] mutableCopy];
-        _noteList = [items[3] mutableCopy];
-        _noteTypeList = [items[4] mutableCopy];
-        _specialPriceProgramList = [items[5] mutableCopy];
-        _menuTypeList = [MenuType sortList:_menuTypeList];
-        
-        
-//        _menuList = [Menu setBranchID:branch.branchID menuList:_menuList];
-        _filterMenuList = _menuList;
-        [Menu setCurrentMenuList:_menuList];
         
         [Utility updateSharedObject:items];
-//        [Menu addListCheckDuplicate:_menuList];//ต้องเฉพาะไม่ซ้ำ
-//        [MenuType setSharedData:_menuTypeList];
-//        [Note setSharedData:_noteList];
-//        [NoteType setSharedData:_noteTypeList];
-//        [SpecialPriceProgram setSharedData:_specialPriceProgramList];
-        
+        _menuList = [Menu getMenuListALaCarteWithBranchID:branch.branchID];
+        _menuTypeList = [MenuType getMenuTypeListALarCarteWithBranchID:branch.branchID];
+        _menuTypeList = [MenuType sortList:_menuTypeList];
+        _filterMenuList = _menuList;
+        [Menu setCurrentMenuList:_menuList];
+     
         
         
         [self setData];
@@ -455,8 +445,8 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     }
     else if(homeModel.propCurrentDB == dbOpeningTime)
     {
-        NSLog(@"openingTime");
         [self removeOverlayViews];
+        [Utility updateSharedObject:items];
         NSMutableArray *messageList = items[0];
         Message *message = messageList[0];
         if(![message.text integerValue])//open
@@ -464,11 +454,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
             NSString *message = [Setting getValue:@"124m" example:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
             [self showAlert:@"" message:message];
         }
-    }
-    else if(homeModel.propCurrentDB == dbMenuNoteList)
-    {
-        _menuNoteList = [items[0] mutableCopy];
-        [MenuNote setSharedData:_menuNoteList];
+        [tbvMenu reloadData];
     }
 }
 

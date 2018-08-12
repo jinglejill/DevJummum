@@ -68,6 +68,13 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9t-Gz-Dkm">
+                    <rect key="frame" x="16" y="91" width="343" height="1"/>
+                    <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="AE2-Vl-fkk"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -77,12 +84,15 @@
                 <constraint firstItem="rtg-O7-PPv" firstAttribute="leading" secondItem="fNP-Kq-HeX" secondAttribute="trailing" constant="8" id="NNc-Q3-T8R"/>
                 <constraint firstItem="LrP-pm-5NA" firstAttribute="top" secondItem="8KU-CG-XN7" secondAttribute="bottom" constant="8" id="PaV-PG-VR8"/>
                 <constraint firstItem="fNP-Kq-HeX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="RQe-tv-R4F"/>
+                <constraint firstItem="g9t-Gz-Dkm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="RUW-Ez-9US"/>
+                <constraint firstAttribute="trailing" secondItem="g9t-Gz-Dkm" secondAttribute="trailing" constant="16" id="Sll-ZB-6xe"/>
                 <constraint firstItem="8KU-CG-XN7" firstAttribute="top" secondItem="fNP-Kq-HeX" secondAttribute="bottom" constant="12" id="cc7-5y-Css"/>
                 <constraint firstItem="rtg-O7-PPv" firstAttribute="centerY" secondItem="8KU-CG-XN7" secondAttribute="centerY" id="lZr-KU-IbB"/>
                 <constraint firstItem="LrP-pm-5NA" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="m5g-RL-lyf"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pRB-X6-wwb" secondAttribute="trailing" constant="16" id="mD4-bD-hWT"/>
                 <constraint firstItem="fNP-Kq-HeX" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="ncl-3c-Y8E"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rtg-O7-PPv" secondAttribute="trailing" constant="16" id="pct-8J-2fZ"/>
+                <constraint firstItem="g9t-Gz-Dkm" firstAttribute="top" secondItem="8KU-CG-XN7" secondAttribute="bottom" constant="8" id="wIq-Ut-xmt"/>
                 <constraint firstItem="LrP-pm-5NA" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="z49-Bz-laR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

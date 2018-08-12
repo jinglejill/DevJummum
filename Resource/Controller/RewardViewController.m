@@ -153,6 +153,7 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
         cell.sbText.delegate = self;
         cell.sbText.tag = 300;
         cell.sbText.placeholder = message;
+        [cell.sbText setInputAccessoryView:self.toolBar];
         UITextField *textField = [cell.sbText valueForKey:@"searchField"];
         textField.layer.borderColor = [cTextFieldBorder CGColor];
         textField.layer.borderWidth = 1;

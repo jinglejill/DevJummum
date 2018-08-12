@@ -19,6 +19,8 @@
 @property (retain, nonatomic) NSDate * modifiedDate;
 
 
+@property (nonatomic) NSInteger branchID;
+
 
 -(MenuType *)initWithName:(NSString *)name allowDiscount:(NSInteger)allowDiscount color:(NSString *)color status:(NSInteger)status orderNo:(NSInteger)orderNo;
 +(NSInteger)getNextID;
@@ -32,5 +34,6 @@
 +(void)setSharedData:(NSMutableArray *)dataList;
 +(NSMutableArray *)getMenuTypeList;
 +(NSMutableArray *)sortList:(NSMutableArray *)menuTypeList;
-
++(NSMutableArray * )getMenuTypeListWithBranchID:(NSInteger)branchID;
++(NSMutableArray * )getMenuTypeListALarCarteWithBranchID:(NSInteger)branchID;
 @end

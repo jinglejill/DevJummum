@@ -9,6 +9,7 @@
 #import "MenuType.h"
 #import "SharedMenuType.h"
 #import "Utility.h"
+#import "Menu.h"
 
 
 @implementation MenuType
@@ -164,5 +165,27 @@
     NSArray *sortArray = [menuTypeList sortedArrayUsingDescriptors:sortDescriptors];
     
     return [sortArray mutableCopy];
+}
+
++(NSMutableArray * )getMenuTypeListWithBranchID:(NSInteger)branchID
+{
+    NSMutableArray *dataList = [SharedMenuType sharedMenuType].menuTypeList;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld",branchID];
+    NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
+    return [filterArray mutableCopy];
+}
+
++(NSMutableArray * )getMenuTypeListALarCarteWithBranchID:(NSInteger)branchID
+{
+    NSMutableArray *menuTypeList = [[NSMutableArray alloc]init];
+    NSMutableArray *menuList = [Menu getMenuListALaCarteWithBranchID:branchID];
+    NSSet *menuTypeIDSet = [NSSet setWithArray:[menuList valueForKey:@"_menuTypeID"]];
+    for(NSNumber *menuTypeID in menuTypeIDSet)
+    {
+        MenuType *menuType = [MenuType getMenuType:[menuTypeID integerValue]];
+        [menuTypeList addObject:menuType];
+    }
+    
+    return menuTypeList;
 }
 @end

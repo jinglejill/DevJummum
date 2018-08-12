@@ -90,6 +90,7 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
     tbvBranch.delegate = self;
     tbvBranch.dataSource = self;
     sbText.delegate = self;
+    [sbText setInputAccessoryView:self.toolBar];
     UITextField *textField = [sbText valueForKey:@"searchField"];
     textField.layer.borderColor = [cTextFieldBorder CGColor];
     textField.layer.borderWidth = 1;
