@@ -9,7 +9,7 @@
 #import "CustomViewController.h"
 #import "Branch.h"
 #import "CustomerTable.h"
-#import "CustomViewVoucher.h"
+#import "Receipt.h"
 
 
 @interface BasketViewController : CustomViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITextFieldDelegate>
@@ -17,9 +17,9 @@
 @property (strong, nonatomic) IBOutlet UITableView *tbvOrder;
 @property (strong, nonatomic) IBOutlet UITableView *tbvTotal;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tbvTotalHeightConstant;
-@property (strong, nonatomic) IBOutlet CustomViewVoucher *voucherView;
 @property (strong, nonatomic) Branch *branch;
 @property (strong, nonatomic) CustomerTable *customerTable;
+@property (strong, nonatomic) Receipt *buffetReceipt;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomButtonHeight;
 

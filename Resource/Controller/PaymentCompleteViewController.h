@@ -12,14 +12,17 @@
 
 @interface PaymentCompleteViewController : CustomViewController
 @property (strong, nonatomic) IBOutlet UIButton *btnSaveToCameraRoll;
+@property (strong, nonatomic) IBOutlet UIButton *btnOrderBuffet;
 
 @property (strong, nonatomic) Receipt *receipt;
 @property (strong, nonatomic) IBOutlet UILabel *lblTitle;
 @property (strong, nonatomic) IBOutlet UILabel *lblMessage;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgVwCheckTop;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnOrderBuffetHeight;
 
 
 - (IBAction)button1Clicked:(id)sender;
 - (IBAction)button2Clicked:(id)sender;
+- (IBAction)orderBuffet:(id)sender;
 @end

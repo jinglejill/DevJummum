@@ -43,6 +43,8 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 @synthesize lblTitle;
 @synthesize lblMessage;
 @synthesize imgVwCheckTop;
+@synthesize btnOrderBuffet;
+@synthesize btnOrderBuffetHeight;
 
 
 -(void)viewDidLayoutSubviews
@@ -52,6 +54,24 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
     
     
     imgVwCheckTop.constant = (self.view.frame.size.height - 63 - (559-69))/2;
+    if(receipt.buffetReceiptID)
+    {
+        lblTitle.text = @"สั่งบุฟเฟ่ต์สำเร็จ";
+    }
+    else
+    {
+        lblTitle.text = @"ชำระเงินสำเร็จ";
+    }
+    if([Receipt hasBuffetMenu:receipt.receiptID] || receipt.buffetReceiptID)
+    {
+        [self setButtonDesign:btnOrderBuffet];
+        [btnSaveToCameraRoll setTitle:@"บันทึกใบเสร็จ และสั่งบุฟเฟต์" forState:UIControlStateNormal];
+    }
+    else
+    {
+        btnOrderBuffet.hidden = YES;
+        [btnSaveToCameraRoll setTitle:@"บันทึกใบเสร็จลงอัลบั้ม" forState:UIControlStateNormal];
+    }
     
 }
 
@@ -95,12 +115,24 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 {
     //save to camera roll
     [self screenCaptureBill:receipt];
-    [self performSegueWithIdentifier:@"segUnwindToHotDeal" sender:self];
+    if([Receipt hasBuffetMenu:receipt.receiptID])
+    {
+        [self performSegueWithIdentifier:@"segUnwindToMe" sender:self];
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"segUnwindToHotDeal" sender:self];
+    }
 }
 
 - (IBAction)button2Clicked:(id)sender
 {
     [self performSegueWithIdentifier:@"segUnwindToHotDeal" sender:self];
+}
+
+- (IBAction)orderBuffet:(id)sender
+{
+    [self performSegueWithIdentifier:@"segUnwindToMe" sender:self];
 }
 
 -(void)screenCaptureBill:(Receipt *)receipt

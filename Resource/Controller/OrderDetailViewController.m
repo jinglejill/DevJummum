@@ -104,7 +104,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
     lblNavTitle.text = title;
     tbvData.delegate = self;
     tbvData.dataSource = self;
-//    tbvData.separatorColor = [UIColor clearColor];
+    tbvData.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     
     tbvRating.delegate = self;
@@ -188,17 +188,24 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
         }
         else if(section == 1)
         {
-            NSInteger numberOfRow = 3+1;//total,vat,net total---->(1,0,0),(1,1,0),(1,0,1),(1,1,1) *** บวกหมายเหตุ 1 row
-            if(receipt.discountValue > 0)
+            if(receipt.buffetReceiptID)
             {
-                numberOfRow += 2 ;
+                return 1+1;//total and remark
             }
-            if(receipt.serviceChargePercent > 0)
+            else
             {
-                numberOfRow += 1;
+                NSInteger numberOfRow = 3+1;//total,vat,net total---->(1,0,0),(1,1,0),(1,0,1),(1,1,1) *** บวกหมายเหตุ 1 row
+                if(receipt.discountValue > 0)
+                {
+                    numberOfRow += 2 ;
+                }
+                if(receipt.serviceChargePercent > 0)
+                {
+                    numberOfRow += 1;
+                }
+                
+                return numberOfRow;
             }
-    
-            return numberOfRow;
         }
         else if(section == 2)
         {
@@ -2340,6 +2347,8 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
         vc.branch = _receiptBranch;
         vc.customerTable = nil;
         vc.fromOrderDetailMenu = 1;
+        Receipt *buffetReceipt = [Receipt getReceipt:receipt.buffetReceiptID];
+        vc.buffetReceipt = buffetReceipt;
     }
     else if([[segue identifier] isEqualToString:@"segConfirmDispute"])
     {

@@ -66,10 +66,10 @@ static NSString * const reuseIdentifierVoucherCode = @"CustomTableViewCellVouche
 @synthesize tbvTotal;
 @synthesize branch;
 @synthesize customerTable;
-@synthesize voucherView;
 @synthesize tbvTotalHeightConstant;
 @synthesize topViewHeight;
 @synthesize bottomButtonHeight;
+@synthesize buffetReceipt;
 
 
 -(IBAction)unwindToBasket:(UIStoryboardSegue *)segue;
@@ -155,7 +155,8 @@ static NSString * const reuseIdentifierVoucherCode = @"CustomTableViewCellVouche
     {
         CreditCardAndOrderSummaryViewController *vc = segue.destinationViewController;
         vc.branch = branch;
-        vc.customerTable = customerTable;        
+        vc.customerTable = customerTable;
+        vc.buffetReceipt = buffetReceipt;
     }
 }
 

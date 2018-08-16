@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "__47-[HomeModel insertItems:withData:actionScreen:]_block_invoke:HomeModel.m">
+      </ContextState>
+      <ContextState
+         contextName = "__42-[MenuSelectionViewController viewDidLoad]_block_invoke:MenuSelectionViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ReceiptSummaryViewController populateLabelwithTime:receipt:]:ReceiptSummaryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[tbvData cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]">
+            </PersistentString>
+            <PersistentString
+               value = "cellTimeToCountDown.lblText.text">
+            </PersistentString>
+            <PersistentString
+               value = "cellTimeToCountDown">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ReceiptSummaryViewController tableView:cellForRowAtIndexPath:]:ReceiptSummaryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "section">
+            </PersistentString>
+            <PersistentString
+               value = "item">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

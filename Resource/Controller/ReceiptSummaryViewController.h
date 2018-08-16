@@ -14,9 +14,12 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblNavTitle;
 @property (strong, nonatomic) IBOutlet UITableView *tbvData;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
--(IBAction)unwindToReceiptSummary:(UIStoryboardSegue *)segue;
+@property (nonatomic) BOOL goToBuffetOrder;
+
 - (IBAction)goBack:(id)sender;
-- (void)reloadTableView;
 - (IBAction)refresh:(id)sender;
--(void)segueToOrderDetailAuto:(Receipt *)receipt;
+- (IBAction)unwindToReceiptSummary:(UIStoryboardSegue *)segue;
+- (void)reloadTableView;
+- (void)segueToOrderDetailAuto:(Receipt *)receipt;
+
 @end

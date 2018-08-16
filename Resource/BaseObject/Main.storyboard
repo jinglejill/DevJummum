@@ -471,7 +471,10 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="wuV-70-lEf"/>
                                         </constraints>
-                                        <state key="normal" image="home_icon_red.png"/>
+                                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
+                                        <state key="normal" title="&lt;" image="home_icon_red.png">
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="goBackHome:" destination="oGW-Dn-caM" eventType="touchUpInside" id="7Do-Ih-fuN"/>
                                         </connections>
@@ -619,6 +622,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomButtonHeight" destination="0VX-1v-gab" id="2zN-LS-jOX"/>
+                        <outlet property="btnBack" destination="9e1-Cj-nfr" id="h6h-Ok-Gzo"/>
                         <outlet property="lblNavTitle" destination="kTP-0K-jqj" id="Wzb-Cy-vcv"/>
                         <outlet property="lblTotalAmount" destination="Bia-3L-6vS" id="aL6-77-OQN"/>
                         <outlet property="lblTotalQuantity" destination="0Rf-He-E0k" id="bR6-VD-UVL"/>
@@ -628,7 +632,8 @@
                         <segue destination="uX0-Uh-PuC" kind="unwind" identifier="segUnwindToQRCodeScanTable" unwindAction="unwindToQRCodeScanTable:" id="05Q-MX-YmP"/>
                         <segue destination="uX0-Uh-PuC" kind="unwind" identifier="segUnwindToBranchSearch" unwindAction="unwindToBranchSearch:" id="j6R-b8-eDc"/>
                         <segue destination="70l-RA-GXn" kind="show" identifier="segViewBasket" id="dN2-SP-tDV"/>
-                        <segue destination="uX0-Uh-PuC" kind="unwind" identifier="segUnwindToMe" unwindAction="unwindToMe:" id="B91-5l-tii"/>
+                        <segue destination="uX0-Uh-PuC" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="US8-C5-DSW"/>
+                        <segue destination="uX0-Uh-PuC" kind="unwind" identifier="segUnwindToMe" unwindAction="unwindToMe:" id="m88-df-z5j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o17-jl-gGa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3701,7 +3706,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ชำระเงินสำเร็จ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgZ-ei-F2m">
-                                        <rect key="frame" x="94" y="407" width="187" height="49"/>
+                                        <rect key="frame" x="94" y="395" width="187" height="49"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="187" id="8c2-qs-az0"/>
                                             <constraint firstAttribute="height" constant="49" id="wtt-n1-SIo"/>
@@ -3711,7 +3716,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ขอบคุณที่ใช้บริการจั้มมั่ม" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58Q-hr-zDL">
-                                        <rect key="frame" x="111" y="464" width="153" height="23"/>
+                                        <rect key="frame" x="111" y="452" width="153" height="23"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23" id="ZLH-es-emh"/>
                                             <constraint firstAttribute="width" constant="153" id="wj2-dW-8p7"/>
@@ -3735,7 +3740,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFJ-5e-RFy">
-                                        <rect key="frame" x="20" y="521" width="335" height="38"/>
+                                        <rect key="frame" x="20" y="509" width="335" height="38"/>
                                         <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="38" id="Jef-LE-j8d"/>
@@ -3749,14 +3754,32 @@
                                             <action selector="button1Clicked:" destination="6m9-ZY-XmN" eventType="touchUpInside" id="Ui4-2o-C0B"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHr-dr-UG7">
+                                        <rect key="frame" x="20" y="555" width="335" height="38"/>
+                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="38" id="g0J-cq-hdD"/>
+                                            <constraint firstAttribute="width" constant="335" id="ytZ-3A-tLg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="17"/>
+                                        <state key="normal" title="สั่งบุฟเฟ่ต์">
+                                            <color key="titleColor" red="0.0" green="0.35294117650000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="orderBuffet:" destination="6m9-ZY-XmN" eventType="touchUpInside" id="vd9-L1-U1z"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="NgZ-ei-F2m" firstAttribute="top" secondItem="1C2-zA-bd4" secondAttribute="bottom" constant="25" id="5zi-WH-4sr"/>
+                                    <constraint firstItem="NgZ-ei-F2m" firstAttribute="top" secondItem="1C2-zA-bd4" secondAttribute="bottom" constant="13" id="5zi-WH-4sr"/>
+                                    <constraint firstItem="VHr-dr-UG7" firstAttribute="leading" secondItem="9pP-ga-kts" secondAttribute="leading" constant="20" id="60F-w5-baM"/>
                                     <constraint firstItem="58Q-hr-zDL" firstAttribute="centerX" secondItem="9pP-ga-kts" secondAttribute="centerX" id="6WX-Vz-sWH"/>
                                     <constraint firstItem="gFJ-5e-RFy" firstAttribute="top" secondItem="58Q-hr-zDL" secondAttribute="bottom" constant="34" id="7Ik-aB-c2O"/>
                                     <constraint firstItem="P2e-kj-xQ8" firstAttribute="centerX" secondItem="9pP-ga-kts" secondAttribute="centerX" id="BIz-CV-KwX"/>
                                     <constraint firstItem="gFJ-5e-RFy" firstAttribute="centerX" secondItem="9pP-ga-kts" secondAttribute="centerX" id="HMF-cd-KgN"/>
+                                    <constraint firstAttribute="trailing" secondItem="VHr-dr-UG7" secondAttribute="trailing" constant="20" id="I6M-Zc-gPx"/>
+                                    <constraint firstItem="VHr-dr-UG7" firstAttribute="top" secondItem="gFJ-5e-RFy" secondAttribute="bottom" constant="8" id="MSO-ky-QAC"/>
                                     <constraint firstItem="NgZ-ei-F2m" firstAttribute="centerX" secondItem="9pP-ga-kts" secondAttribute="centerX" id="Mrp-1w-Mc5"/>
                                     <constraint firstItem="58Q-hr-zDL" firstAttribute="top" secondItem="NgZ-ei-F2m" secondAttribute="bottom" constant="8" id="QGQ-Al-LGv"/>
                                     <constraint firstItem="p0I-1n-xAm" firstAttribute="centerX" secondItem="9pP-ga-kts" secondAttribute="centerX" id="SeW-96-bOr"/>
@@ -3777,6 +3800,8 @@
                         <viewLayoutGuide key="safeArea" id="N5c-kS-jU5"/>
                     </view>
                     <connections>
+                        <outlet property="btnOrderBuffet" destination="VHr-dr-UG7" id="iTd-ec-vq1"/>
+                        <outlet property="btnOrderBuffetHeight" destination="g0J-cq-hdD" id="8JS-Mk-OnP"/>
                         <outlet property="btnSaveToCameraRoll" destination="gFJ-5e-RFy" id="UCb-ga-hey"/>
                         <outlet property="imgVwCheckTop" destination="WXw-z5-KyO" id="Kbw-kO-yyx"/>
                         <outlet property="lblMessage" destination="58Q-hr-zDL" id="diT-hx-jtZ"/>
@@ -3889,7 +3914,7 @@
         <image name="white.png" width="226" height="132"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VWF-Um-mlZ"/>
+        <segue reference="aHo-2G-vPP"/>
         <segue reference="8cS-48-gwU"/>
         <segue reference="UZ8-nN-acy"/>
         <segue reference="UTS-nM-B10"/>
@@ -3898,6 +3923,6 @@
         <segue reference="hjD-fg-as6"/>
         <segue reference="jVQ-j3-veY"/>
         <segue reference="BEB-iv-AGa"/>
-        <segue reference="bDK-E7-xJt"/>
+        <segue reference="aNU-Zf-Wbq"/>
     </inferredMetricsTieBreakers>
 </document>

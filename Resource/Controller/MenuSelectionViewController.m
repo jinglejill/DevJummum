@@ -22,6 +22,7 @@
 #import "Utility.h"
 #import "Message.h"
 #import "CreditCard.h"
+#import "Branch.h"
 
 
 @interface MenuSelectionViewController ()
@@ -52,6 +53,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
 @synthesize topViewHeight;
 @synthesize bottomButtonHeight;
 @synthesize buffetReceipt;
+@synthesize btnBack;
 
 
 -(IBAction)unwindToMenuSelection:(UIStoryboardSegue *)segue
@@ -69,6 +71,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         BasketViewController *vc = segue.destinationViewController;
         vc.branch = branch;
         vc.customerTable = customerTable;
+        vc.buffetReceipt = buffetReceipt;
     }
 }
 
@@ -130,9 +133,36 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         lblTotalAmount.text = [Utility addPrefixBahtSymbol:@"0.00"];
         
         
-        NSMutableArray *buffetMenuList = [Menu getMenuListBuffetWithReceipt:buffetReceipt];
-        _menuList = [Menu getMenuListBelongToBuffetWithBuffetMenuList:buffetMenuList];
-        
+        [btnBack setImage:nil forState:UIControlStateNormal];
+        branch = [Branch getBranch:buffetReceipt.branchID];
+        customerTable = [CustomerTable getCustomerTable:buffetReceipt.customerTableID];
+        self.homeModel = [[HomeModel alloc]init];
+        self.homeModel.delegate = self;
+        [self loadingOverlayView];
+        [self.homeModel downloadItems:dbMenuBelongToBuffet withData:buffetReceipt completionBlock:^(BOOL succeeded, NSMutableArray *items)
+        {
+            [self removeOverlayViews];
+            NSMutableArray *messageList = [items[0] mutableCopy];
+            Message *message = messageList[0];
+            if(![message.text integerValue])
+            {
+                NSString *message = [Setting getValue:@"124m" example:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
+                [self showAlert:@"" message:message];
+            }
+            
+            
+            
+            [Utility updateSharedObject:items];
+            _menuList = items[1];
+            _menuTypeList = items[2];
+            _menuTypeList = [MenuType sortList:_menuTypeList];
+            _filterMenuList = _menuList;
+            [Menu setCurrentMenuList:_menuList];
+            
+            
+            
+            [self setData];
+        }];
     }
     else
     {
@@ -206,7 +236,15 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
 
 - (IBAction)goBackHome:(id)sender
 {
-    [self performSegueWithIdentifier:@"segUnwindToQRCodeScanTable" sender:self];
+    if(buffetReceipt)
+    {
+        [OrderTaking removeCurrentOrderTakingList];
+        [self performSegueWithIdentifier:@"segUnwindToReceiptSummary" sender:self];
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"segUnwindToQRCodeScanTable" sender:self];
+    }
 }
 
 - (IBAction)viewBasket:(id)sender
@@ -316,6 +354,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
                 cell.lblPrice.attributedText = attrString;
                 cell.lblSpecialPrice.text = @"";
             }
+            
             
             
             NSString *imageFileName = [Utility isStringEmpty:menu.imageUrl]?@"./Image/NoImage.jpg":[NSString stringWithFormat:@"./%@/Image/Menu/%@",branch.dbName,menu.imageUrl];

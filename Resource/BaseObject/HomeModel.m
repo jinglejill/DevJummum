@@ -815,19 +815,27 @@
             url = [NSURL URLWithString:[Utility url:urlOmiseCheckOut]];
         }
             break;
-        case dbFacebookComment:
+        case dbBuffetOrder:
         {
-            NSMutableArray *facebookCommentList = (NSMutableArray *)data;
-            NSInteger countFacebookComment = 0;
+            NSArray *dataList = (NSArray *)data;
+            Receipt *receipt = dataList[0];
+            NSMutableArray *orderTakingList = dataList[1];
+            NSMutableArray *orderNoteList = dataList[2];
             
-            noteDataString = [NSString stringWithFormat:@"countFacebookComment=%ld",[facebookCommentList count]];
-            for(FacebookComment *item in facebookCommentList)
+                        
+            noteDataString = [NSString stringWithFormat:@"countOtOrderTaking=%ld&countOnOrderNote=%ld",(unsigned long)[orderTakingList count],[orderNoteList count]];
+            noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:receipt]];
+            for(int i=0; i<[orderTakingList count]; i++)
             {
-                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:item withRunningNo3Digit:countFacebookComment]];
-                countFacebookComment++;
+                OrderTaking *orderTaking = orderTakingList[i];
+                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:orderTaking withPrefix:@"ot" runningNo:i]];
             }
-            
-            url = [NSURL URLWithString:[Utility url:urlFacebookComment]];
+            for(int i=0; i<[orderNoteList count]; i++)
+            {
+                OrderNote *orderNote = orderNoteList[i];
+                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:orderNote withPrefix:@"on" runningNo:i]];
+            }
+            url = [NSURL URLWithString:[Utility url:urlBuffetOrderInsertList]];
         }
             break;
         case dbUserAccountValidate:
@@ -1158,16 +1166,14 @@
                                 }
                                 else
                                 {
-//                                    @[@"Message",@"Menu",@"MenuType",@"MenuNote",@"Note",@"NoteType",@"SubMenuType",@"SpecialPriceProgram"];
-                                    arrClassName = @[@"UserAccount",@"Receipt",@"Branch",@"OrderTaking",@"Menu",@"MenuType",@"OrderNote",@"Note",@"NoteType"];
-//                                    arrClassName = @[@"UserAccount",@"Receipt",@"OrderTaking",@"Menu",@"OrderNote",@"Note",@"NoteType",@"MenuType",@"SubMenuType"];
+                                    arrClassName = @[@"UserAccount",@"Receipt",@"CustomerTable",@"Branch",@"OrderTaking",@"Menu",@"MenuType",@"OrderNote",@"Note",@"NoteType"];
                                 }
                             }
                             else if([strTableName isEqualToString:@"UserAccountForgotPassword"])
                             {
                                 arrClassName = @[@"UserAccount"];
                             }
-                            else if([strTableName isEqualToString:@"OmiseCheckOut"])
+                            else if([strTableName isEqualToString:@"OmiseCheckOut"] || [strTableName isEqualToString:@"BufferOrder"])
                             {
                                 arrClassName = @[@"Receipt",@"OrderTaking",@"OrderNote"];
                             }
@@ -2216,22 +2222,28 @@
             break;
         case dbMenuBelongToBuffet:
         {
-            NSArray *dataList = (NSArray *)data;
-            Branch *branch = dataList[0];
-            NSMutableArray *buffetMenuList = dataList[1];
-            NSInteger countBuffetMenu = 0;
-            
-            
-            noteDataString = [NSString stringWithFormat:@"branchID=%ld&countMenu=%ld",branch.branchID,[buffetMenuList count]];
-            for(Menu *item in buffetMenuList)
-            {
-                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:item withRunningNo:countBuffetMenu]];
-                countBuffetMenu++;
-            }
-            
+            noteDataString = [Utility getNoteDataString:data];
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlMenuBelongToBuffetGetList]]];
         }
             break;
+//        case dbMenuBelongToBuffet:
+//        {
+//            NSArray *dataList = (NSArray *)data;
+//            Branch *branch = dataList[0];
+//            NSMutableArray *buffetMenuList = dataList[1];
+//            NSInteger countBuffetMenu = 0;
+//
+//
+//            noteDataString = [NSString stringWithFormat:@"branchID=%ld&countMenu=%ld",branch.branchID,[buffetMenuList count]];
+//            for(Menu *item in buffetMenuList)
+//            {
+//                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:item withRunningNo:countBuffetMenu]];
+//                countBuffetMenu++;
+//            }
+//
+//            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlMenuBelongToBuffetGetList]]];
+//        }
+//            break;
     }
     
     noteDataString = [NSString stringWithFormat:@"%@&modifiedDeviceToken=%@&modifiedUser=%@",noteDataString,[Utility deviceToken],[Utility modifiedUser]];
@@ -2263,7 +2275,7 @@
                         arrClassName = @[@"MenuNote"];
                         break;
                     case dbMenuBelongToBuffet:
-                        arrClassName = @[@"Message",@"Menu",@"MenuType"];
+                        arrClassName = @[@"Message",@"Menu",@"MenuType",@"Note",@"NoteType"];
                         break;
                 }
                 
@@ -2325,7 +2337,7 @@
                 // Ready to notify delegate that data is ready and pass back items
                 if (self.delegate)
                 {
-                    if(propCurrentDB == dbMenuNoteList || propCurrentDB == dbMenuBelongToBuffet)
+//                    if(propCurrentDB == dbMenuNoteList || propCurrentDB == dbMenuBelongToBuffet)
                     {
                         completionBlock(YES,arrItem);
                     }

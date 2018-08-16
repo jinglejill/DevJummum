@@ -88,6 +88,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 @synthesize topViewHeight;
 @synthesize bottomButtonHeight;
 @synthesize btnAddRemoveMenu;
+@synthesize buffetReceipt;
 
 
 -(IBAction)unwindToCreditCardAndOrderSummary:(UIStoryboardSegue *)segue
@@ -455,24 +456,31 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         }
         else if(section == 1)
         {
-            NSInteger selectCreditCard = 0;//has card saved
-            UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-            NSMutableDictionary *dicCreditCard = [[[NSUserDefaults standardUserDefaults] objectForKey:@"creditCard"] mutableCopy];
-            if(dicCreditCard)
+            if(buffetReceipt)
             {
-                NSMutableArray *creditCardList = [dicCreditCard objectForKey:userAccount.username];
-                if(creditCardList && [creditCardList count] > 0)
+                return 0;
+            }
+            else
+            {
+                NSInteger selectCreditCard = 0;//has card saved
+                UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+                NSMutableDictionary *dicCreditCard = [[[NSUserDefaults standardUserDefaults] objectForKey:@"creditCard"] mutableCopy];
+                if(dicCreditCard)
                 {
-                    selectCreditCard = 1;
+                    NSMutableArray *creditCardList = [dicCreditCard objectForKey:userAccount.username];
+                    if(creditCardList && [creditCardList count] > 0)
+                    {
+                        selectCreditCard = 1;
+                    }
                 }
+                
+                if(!_creditCard.primaryCard && selectCreditCard)
+                {
+                    return 3;
+                }
+                
+                return 2;
             }
-            
-            if(!_creditCard.primaryCard && selectCreditCard)
-            {
-                return 3;
-            }
-            
-            return 2;
         }
         else if(section == 2)
         {
@@ -483,11 +491,18 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             return 1;
         }
     }
-    
     else if([tableView isEqual:tbvTotal])
     {
-        tbvTotalHeightConstant.constant = branch.serviceChargePercent > 0?230:204;
-        return branch.serviceChargePercent > 0?6:5;
+        if(buffetReceipt)
+        {
+            tbvTotalHeightConstant.constant = 26+44;
+            return 1;
+        }
+        else
+        {
+            tbvTotalHeightConstant.constant = branch.serviceChargePercent > 0?230:204;
+            return branch.serviceChargePercent > 0?6:5;
+        }
     }
     
     return 0;
@@ -722,19 +737,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         {
             if(item == 0)
             {
-//                UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"cell"];
-//                if (!cell)
-//                {
-//                    cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-//                }
-//
-//
-//                cell.textLabel.text = @"สรุปรายการอาหาร";
-//                cell.textLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];
-//                cell.textLabel.textColor = cSystem1;
-//
-//
-//                return cell;
                 CustomTableViewCellLabelLabel *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabelLabel];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
@@ -1352,6 +1354,20 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         {
             return 8;
         }
+        else if(section == 1)
+        {
+            if(buffetReceipt)
+            {
+                return CGFLOAT_MIN;
+            }
+        }
+        else if(section == 2)
+        {
+            if(buffetReceipt)
+            {
+                return CGFLOAT_MIN;
+            }
+        }
         return tableView.sectionHeaderHeight;
     }
     else
@@ -1490,8 +1506,16 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     {
         CustomTableViewHeaderFooterButton *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifierHeaderFooterButton];
         
+        if(buffetReceipt)
+        {
+            [footerView.btnValue setTitle:@"สั่งบุฟเฟ่ต์" forState:UIControlStateNormal];
+        }
+        else
+        {
+            [footerView.btnValue setTitle:@"ชำระเงิน" forState:UIControlStateNormal];
+        }
+        
         _btnPay = footerView.btnValue;
-        [footerView.btnValue setTitle:@"ชำระเงิน" forState:UIControlStateNormal];
         [footerView.btnValue addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
         
         
@@ -1523,150 +1547,174 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     //validate
     [self.view endEditing:YES];
     
-    //customerTable
-    if(!customerTable)
+    if(buffetReceipt)
     {
-        [self blinkAlertMsg:@"กรุณาระบุเลขโต๊ะ"];
-        return;
+        UIButton *btnPay = (UIButton *)sender;
+        btnPay.enabled = NO;
+        [self loadWaitingView];
+        
+        
+        UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+        Receipt *receipt = [[Receipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID servingPerson:0 customerType:4 openTableDate:[Utility currentDateTime] cashAmount:0 cashReceive:0 creditCardType:[self getCreditCardType:_creditCard.creditCardNo] creditCardNo:_creditCard.creditCardNo creditCardAmount:_netTotal transferDate:[Utility notIdentifiedDate] transferAmount:0 remark:_remark discountType:_discountType discountAmount:_discountAmount discountValue:_discountValue discountReason:@"" serviceChargePercent:branch.serviceChargePercent serviceChargeValue:_serviceChargeValue priceIncludeVat:branch.priceIncludeVat vatPercent:branch.percentVat vatValue:_vatValue status:2 statusRoute:@"" receiptNoID:@"" receiptNoTaxID:@"" receiptDate:[Utility currentDateTime] sendToKitchenDate:[Utility notIdentifiedDate] deliveredDate:[Utility notIdentifiedDate] mergeReceiptID:0 buffetReceiptID:0];
+        
+        
+        
+        //paymentmethod,discount,receiptno
+        NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+        NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingList:orderTakingList];
+        orderTakingList = [OrderTaking updateStatus:0 orderTakingList:orderTakingList];
+        
+        
+        
+        [self.homeModel insertItems:dbBuffetOrder withData:@[receipt,orderTakingList,orderNoteList] actionScreen:@"buffet order insert"];
     }
-    
-    
-    
-    //credit card
-    if([Utility isStringEmpty:_creditCard.firstName])
+    else
     {
-        [self blinkAlertMsg:@"กรุณาใส่ชื่อ"];
-        UIView *vwInvalid = [self.view viewWithTag:11];
-        vwInvalid.backgroundColor = cSystem1;
-        return;
-    }
-    if([Utility isStringEmpty:_creditCard.lastName])
-    {
-        [self blinkAlertMsg:@"กรุณาใส่นามสกุล"];
-        UIView *vwInvalid = [self.view viewWithTag:12];
-        vwInvalid.backgroundColor = cSystem1;
-        return;
-    }
-    if(![OMSCardNumber validate:_creditCard.creditCardNo])
-    {
-        [self blinkAlertMsg:@"หมายเลขบัตรเครดิตไม่ถูกต้อง"];
-        UIView *vwInvalid = [self.view viewWithTag:13];
-        vwInvalid.backgroundColor = cSystem1;
-        return;
-    }
-    if(_creditCard.month < 1 || _creditCard.month > 12)
-    {
-        [self blinkAlertMsg:@"เดือนไม่ถูกต้อง กรุณาใส่เดือนระหว่าง 01 ถึง 12"];
-        UIView *vwInvalid = [self.view viewWithTag:14];
-        vwInvalid.backgroundColor = cSystem1;
-        return;
-    }
-    if([[NSString stringWithFormat:@"%ld",_creditCard.year] length] < 4)
-    {
-        [self blinkAlertMsg:@"ปีไม่ถูกต้อง กรุณาใส่ปีจำนวน 4 หลัก"];
-        UIView *vwInvalid = [self.view viewWithTag:15];
-        vwInvalid.backgroundColor = cSystem1;
-        return;
-    }
-    NSString *strExpiredDate = [NSString stringWithFormat:@"%04ld%02ld01 00:00:00",_creditCard.year,_creditCard.month];
-    NSDate *expireDate = [Utility stringToDate:strExpiredDate fromFormat:@"yyyyMMdd HH:mm:ss"];
-    if(![Utility isExpiredDateValid:expireDate])
-    {
-        [self blinkAlertMsg:@"บัตรใบนี้หมดอายุแล้ว"];
-        UIView *vwInvalid = [self.view viewWithTag:15];
-        vwInvalid.backgroundColor = cSystem1;
-        return;
-    }
-    if([_creditCard.ccv length] < 3)
-    {
-        [self blinkAlertMsg:@"กรุณาใส่รหัสความปลอดภัย 3 หลัก"];
-        UIView *vwInvalid = [self.view viewWithTag:16];
-        vwInvalid.backgroundColor = cSystem1;
-        return;
-    }
-    
-    
-    UIButton *btnPay = (UIButton *)sender;
-    btnPay.enabled = NO;
-    [self loadWaitingView];
-    
-    
-    
-    NSString *strCreditCardName = [NSString stringWithFormat:@"%@ %@",_creditCard.firstName,_creditCard.lastName];
-    OMSTokenRequest *request = [[OMSTokenRequest alloc]initWithName:strCreditCardName number:_creditCard.creditCardNo expirationMonth:_creditCard.month expirationYear:_creditCard.year securityCode:_creditCard.ccv city:@"" postalCode:@""];
-
-
-
-    NSString *publicKey = [Setting getSettingValueWithKeyName:@"PublicKey"];
-    OMSSDKClient *client = [[OMSSDKClient alloc]initWithPublicKey:publicKey];
-    [client sendRequest:request callback:^(OMSToken * _Nullable token, NSError * _Nullable error) {
-        //
-        if(!error)
+        //customerTable
+        if(!customerTable)
         {
-            NSLog(@"%@",[token tokenId]);
-
-
-
-
-            //update nsuserdefault _creditcard
-            if(_creditCard.saveCard)
+            [self blinkAlertMsg:@"กรุณาระบุเลขโต๊ะ"];
+            return;
+        }
+        
+        
+        
+        //credit card
+        if([Utility isStringEmpty:_creditCard.firstName])
+        {
+            [self blinkAlertMsg:@"กรุณาใส่ชื่อ"];
+            UIView *vwInvalid = [self.view viewWithTag:11];
+            vwInvalid.backgroundColor = cSystem1;
+            return;
+        }
+        if([Utility isStringEmpty:_creditCard.lastName])
+        {
+            [self blinkAlertMsg:@"กรุณาใส่นามสกุล"];
+            UIView *vwInvalid = [self.view viewWithTag:12];
+            vwInvalid.backgroundColor = cSystem1;
+            return;
+        }
+        if(![OMSCardNumber validate:_creditCard.creditCardNo])
+        {
+            [self blinkAlertMsg:@"หมายเลขบัตรเครดิตไม่ถูกต้อง"];
+            UIView *vwInvalid = [self.view viewWithTag:13];
+            vwInvalid.backgroundColor = cSystem1;
+            return;
+        }
+        if(_creditCard.month < 1 || _creditCard.month > 12)
+        {
+            [self blinkAlertMsg:@"เดือนไม่ถูกต้อง กรุณาใส่เดือนระหว่าง 01 ถึง 12"];
+            UIView *vwInvalid = [self.view viewWithTag:14];
+            vwInvalid.backgroundColor = cSystem1;
+            return;
+        }
+        if([[NSString stringWithFormat:@"%ld",_creditCard.year] length] < 4)
+        {
+            [self blinkAlertMsg:@"ปีไม่ถูกต้อง กรุณาใส่ปีจำนวน 4 หลัก"];
+            UIView *vwInvalid = [self.view viewWithTag:15];
+            vwInvalid.backgroundColor = cSystem1;
+            return;
+        }
+        NSString *strExpiredDate = [NSString stringWithFormat:@"%04ld%02ld01 00:00:00",_creditCard.year,_creditCard.month];
+        NSDate *expireDate = [Utility stringToDate:strExpiredDate fromFormat:@"yyyyMMdd HH:mm:ss"];
+        if(![Utility isExpiredDateValid:expireDate])
+        {
+            [self blinkAlertMsg:@"บัตรใบนี้หมดอายุแล้ว"];
+            UIView *vwInvalid = [self.view viewWithTag:15];
+            vwInvalid.backgroundColor = cSystem1;
+            return;
+        }
+        if([_creditCard.ccv length] < 3)
+        {
+            [self blinkAlertMsg:@"กรุณาใส่รหัสความปลอดภัย 3 หลัก"];
+            UIView *vwInvalid = [self.view viewWithTag:16];
+            vwInvalid.backgroundColor = cSystem1;
+            return;
+        }
+        
+        
+        UIButton *btnPay = (UIButton *)sender;
+        btnPay.enabled = NO;
+        [self loadWaitingView];
+        
+        
+        
+        NSString *strCreditCardName = [NSString stringWithFormat:@"%@ %@",_creditCard.firstName,_creditCard.lastName];
+        OMSTokenRequest *request = [[OMSTokenRequest alloc]initWithName:strCreditCardName number:_creditCard.creditCardNo expirationMonth:_creditCard.month expirationYear:_creditCard.year securityCode:_creditCard.ccv city:@"" postalCode:@""];
+        
+        
+        
+        NSString *publicKey = [Setting getSettingValueWithKeyName:@"PublicKey"];
+        OMSSDKClient *client = [[OMSSDKClient alloc]initWithPublicKey:publicKey];
+        [client sendRequest:request callback:^(OMSToken * _Nullable token, NSError * _Nullable error) {
+            //
+            if(!error)
             {
-                UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-                NSMutableDictionary *dicCreditCard = [[[NSUserDefaults standardUserDefaults] objectForKey:@"creditCard"] mutableCopy];
-                NSMutableArray *creditCardList;
-                if(!dicCreditCard)
+                NSLog(@"%@",[token tokenId]);
+                
+                
+                
+                
+                //update nsuserdefault _creditcard
+                if(_creditCard.saveCard)
                 {
-                    dicCreditCard = [[NSMutableDictionary alloc]init];
-                    creditCardList = [[NSMutableArray alloc]init];
+                    UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+                    NSMutableDictionary *dicCreditCard = [[[NSUserDefaults standardUserDefaults] objectForKey:@"creditCard"] mutableCopy];
+                    NSMutableArray *creditCardList;
+                    if(!dicCreditCard)
+                    {
+                        dicCreditCard = [[NSMutableDictionary alloc]init];
+                        creditCardList = [[NSMutableArray alloc]init];
+                    }
+                    else
+                    {
+                        creditCardList = [dicCreditCard objectForKey:userAccount.username];
+                        creditCardList = [creditCardList mutableCopy];
+                        if(!creditCardList)
+                        {
+                            creditCardList = [[NSMutableArray alloc]init];
+                        }
+                    }
+                    
+                    
+                    
+                    [CreditCard updatePrimaryCard:_creditCard creditCardList:creditCardList];
+                    
+                }
+                
+                
+                
+                
+                UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+                Receipt *receipt = [[Receipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID servingPerson:0 customerType:4 openTableDate:[Utility currentDateTime] cashAmount:0 cashReceive:0 creditCardType:[self getCreditCardType:_creditCard.creditCardNo] creditCardNo:_creditCard.creditCardNo creditCardAmount:_netTotal transferDate:[Utility notIdentifiedDate] transferAmount:0 remark:_remark discountType:_discountType discountAmount:_discountAmount discountValue:_discountValue discountReason:@"" serviceChargePercent:branch.serviceChargePercent serviceChargeValue:_serviceChargeValue priceIncludeVat:branch.priceIncludeVat vatPercent:branch.percentVat vatValue:_vatValue status:2 statusRoute:@"" receiptNoID:@"" receiptNoTaxID:@"" receiptDate:[Utility currentDateTime] sendToKitchenDate:[Utility notIdentifiedDate] deliveredDate:[Utility notIdentifiedDate] mergeReceiptID:0 buffetReceiptID:buffetReceipt.receiptID];
+                
+                
+                
+                //paymentmethod,discount,receiptno
+                NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+                NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingList:orderTakingList];
+                orderTakingList = [OrderTaking updateStatus:0 orderTakingList:orderTakingList];
+                
+                
+                
+                if(_promotionOrRewardRedemption == 1)
+                {
+                    UserPromotionUsed *userPromotionUsed = [[UserPromotionUsed alloc]initWithUserAccountID:userAccount.userAccountID promotionID:_promotionUsed.promotionID receiptID:0];
+                    [self.homeModel insertItems:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,userPromotionUsed,@(_promotionUsed.promoCodeID)] actionScreen:@"call omise checkout at server"];
                 }
                 else
                 {
-                    creditCardList = [dicCreditCard objectForKey:userAccount.username];
-                    creditCardList = [creditCardList mutableCopy];
-                    if(!creditCardList)
-                    {
-                        creditCardList = [[NSMutableArray alloc]init];
-                    }
+                    UserRewardRedemptionUsed *userRewardRedemptionUsed = [[UserRewardRedemptionUsed alloc]initWithUserAccountID:userAccount.userAccountID rewardRedemptionID:_promotionUsed.rewardRedemptionID receiptID:0];
+                    [self.homeModel insertItems:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,userRewardRedemptionUsed,@(_promotionUsed.promoCodeID)] actionScreen:@"call omise checkout at server"];
                 }
-
-
-
-                [CreditCard updatePrimaryCard:_creditCard creditCardList:creditCardList];
-
-            }
-
-
-
-
-            UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-            Receipt *receipt = [[Receipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID servingPerson:0 customerType:4 openTableDate:[Utility currentDateTime] cashAmount:0 cashReceive:0 creditCardType:[self getCreditCardType:_creditCard.creditCardNo] creditCardNo:_creditCard.creditCardNo creditCardAmount:_netTotal transferDate:[Utility notIdentifiedDate] transferAmount:0 remark:_remark discountType:_discountType discountAmount:_discountAmount discountValue:_discountValue discountReason:@"" serviceChargePercent:branch.serviceChargePercent serviceChargeValue:_serviceChargeValue priceIncludeVat:branch.priceIncludeVat vatPercent:branch.percentVat vatValue:_vatValue status:2 statusRoute:@"" receiptNoID:@"" receiptNoTaxID:@"" receiptDate:[Utility currentDateTime] mergeReceiptID:0];
-
-
-
-            //paymentmethod,discount,receiptno
-            NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
-            NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingList:orderTakingList];
-            orderTakingList = [OrderTaking updateStatus:0 orderTakingList:orderTakingList];
-
-
-
-            if(_promotionOrRewardRedemption == 1)
-            {
-                UserPromotionUsed *userPromotionUsed = [[UserPromotionUsed alloc]initWithUserAccountID:userAccount.userAccountID promotionID:_promotionUsed.promotionID receiptID:0];
-                [self.homeModel insertItems:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,userPromotionUsed,@(_promotionUsed.promoCodeID)] actionScreen:@"call omise checkout at server"];
             }
             else
             {
-                UserRewardRedemptionUsed *userRewardRedemptionUsed = [[UserRewardRedemptionUsed alloc]initWithUserAccountID:userAccount.userAccountID rewardRedemptionID:_promotionUsed.rewardRedemptionID receiptID:0];
-                [self.homeModel insertItems:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,userRewardRedemptionUsed,@(_promotionUsed.promoCodeID)] actionScreen:@"call omise checkout at server"];
+                NSString *message = [Setting getValue:@"041m" example:@"การจ่ายด้วยบัตรเครดิตขัดข้อง กรุณาติดต่อเจ้าหน้าที่ที่เกี่ยวข้อง"];
+                [self showAlert:@"" message:message];
             }
-        }
-        else
-        {
-            NSString *message = [Setting getValue:@"041m" example:@"การจ่ายด้วยบัตรเครดิตขัดข้อง กรุณาติดต่อเจ้าหน้าที่ที่เกี่ยวข้อง"];
-            [self showAlert:@"" message:message];
-        }
-    }];
+        }];
+    }
 }
 
 -(void)swtSaveDidChange:(id)sender
@@ -1773,26 +1821,38 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 
 -(void)itemsInsertedWithReturnData:(NSArray *)items
 {
-    if([items count] == 1)
+//    if(buffetReceipt)
+//    {
+//        [self removeWaitingView];
+//        [OrderTaking removeCurrentOrderTakingList];
+//        [CreditCard removeCurrentCreditCard];
+//
+//
+//
+//    }
+//    else
     {
-        [self removeWaitingView];
-        _btnPay.enabled = YES;
-        NSMutableArray *messageList = items[0];
-        Message *message = messageList[0];
-        [self showAlert:@"" message:message.text];
-    }
-    else
-    {
-        [self removeWaitingView];
-        [OrderTaking removeCurrentOrderTakingList];
-        [CreditCard removeCurrentCreditCard];
-        
-        
-        [Utility addToSharedDataList:items];
-        NSMutableArray *receiptList = items[0];
-        Receipt *receipt = receiptList[0];
-        _receipt = receipt;
-        [self performSegueWithIdentifier:@"segPaymentComplete" sender:self];
+        if([items count] == 1)
+        {
+            [self removeWaitingView];
+            _btnPay.enabled = YES;
+            NSMutableArray *messageList = items[0];
+            Message *message = messageList[0];
+            [self showAlert:@"" message:message.text];
+        }
+        else
+        {
+            [self removeWaitingView];
+            [OrderTaking removeCurrentOrderTakingList];
+            [CreditCard removeCurrentCreditCard];
+            
+            
+            [Utility addToSharedDataList:items];
+            NSMutableArray *receiptList = items[0];
+            Receipt *receipt = receiptList[0];
+            _receipt = receipt;
+            [self performSegueWithIdentifier:@"segPaymentComplete" sender:self];
+        }
     }
 }
 

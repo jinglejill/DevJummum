@@ -997,16 +997,16 @@
 		EF33CDEE211C36D100560C69 /* BaseObject */ = {
 			isa = PBXGroup;
 			children = (
-				EF33CDEF211C36D100560C69 /* HomeModel.h */,
 				EF33CDF0211C36D100560C69 /* AppDelegate.h */,
-				EF33CDF1211C36D100560C69 /* Utility.m */,
-				EF33CDF2211C36D100560C69 /* iOSDeviceModelMapping.plist */,
-				EF33CDF3211C36D100560C69 /* Main.storyboard */,
-				EF33CDF4211C36D100560C69 /* HomeModel.m */,
 				EF33CDF5211C36D100560C69 /* AppDelegate.m */,
+				EF33CDEF211C36D100560C69 /* HomeModel.h */,
+				EF33CDF4211C36D100560C69 /* HomeModel.m */,
+				EF33CDF2211C36D100560C69 /* iOSDeviceModelMapping.plist */,
 				EF33CDF6211C36D100560C69 /* Launch Screen.storyboard */,
+				EF33CDF3211C36D100560C69 /* Main.storyboard */,
 				EF33CDF7211C36D100560C69 /* Property List.plist */,
 				EF33CDF8211C36D100560C69 /* Utility.h */,
+				EF33CDF1211C36D100560C69 /* Utility.m */,
 			);
 			path = BaseObject;
 			sourceTree = "<group>";

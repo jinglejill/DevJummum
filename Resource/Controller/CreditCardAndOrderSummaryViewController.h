@@ -24,6 +24,7 @@
 @property (strong, nonatomic) Branch *branch;
 @property (strong, nonatomic) CustomerTable *customerTable;
 @property (strong, nonatomic) Receipt *receipt;
+@property (strong, nonatomic) Receipt *buffetReceipt;
 @property (nonatomic) NSInteger fromReceiptSummaryMenu;
 @property (nonatomic) NSInteger fromOrderDetailMenu;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;

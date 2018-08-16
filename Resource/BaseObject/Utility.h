@@ -143,7 +143,6 @@ enum enumDB
     dbReceiptMaxModifiedDate,
     dbReceipt,
     dbPromotion,
-    dbFacebookComment,
     dbRewardPoint,
     dbRewardPointList,
     dbRewardPointSpent,
@@ -187,7 +186,8 @@ enum enumDB
     dbMenuNote,
     dbMenuNoteList,
     dbOpeningTime,
-    dbMenuBelongToBuffet
+    dbMenuBelongToBuffet,
+    dbBuffetOrder
 
 
     
@@ -335,7 +335,8 @@ enum enumUrl
     urlMenuNoteDeleteList,
     urlOpeningTimeGet,
     urlContactUs,
-    urlMenuBelongToBuffetGetList
+    urlMenuBelongToBuffetGetList,
+    urlBuffetOrderInsertList
     
 
     

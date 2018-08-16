@@ -16,7 +16,7 @@
 
 @implementation Receipt
 
--(Receipt *)initWithBranchID:(NSInteger)branchID customerTableID:(NSInteger)customerTableID memberID:(NSInteger)memberID servingPerson:(NSInteger)servingPerson customerType:(NSInteger)customerType openTableDate:(NSDate *)openTableDate cashAmount:(float)cashAmount cashReceive:(float)cashReceive creditCardType:(NSInteger)creditCardType creditCardNo:(NSString *)creditCardNo creditCardAmount:(float)creditCardAmount transferDate:(NSDate *)transferDate transferAmount:(float)transferAmount remark:(NSString *)remark discountType:(NSInteger)discountType discountAmount:(float)discountAmount discountValue:(float)discountValue discountReason:(NSString *)discountReason serviceChargePercent:(float)serviceChargePercent serviceChargeValue:(float)serviceChargeValue priceIncludeVat:(NSInteger)priceIncludeVat vatPercent:(float)vatPercent vatValue:(float)vatValue status:(NSInteger)status statusRoute:(NSString *)statusRoute receiptNoID:(NSString *)receiptNoID receiptNoTaxID:(NSString *)receiptNoTaxID receiptDate:(NSDate *)receiptDate mergeReceiptID:(NSInteger)mergeReceiptID
+-(Receipt *)initWithBranchID:(NSInteger)branchID customerTableID:(NSInteger)customerTableID memberID:(NSInteger)memberID servingPerson:(NSInteger)servingPerson customerType:(NSInteger)customerType openTableDate:(NSDate *)openTableDate cashAmount:(float)cashAmount cashReceive:(float)cashReceive creditCardType:(NSInteger)creditCardType creditCardNo:(NSString *)creditCardNo creditCardAmount:(float)creditCardAmount transferDate:(NSDate *)transferDate transferAmount:(float)transferAmount remark:(NSString *)remark discountType:(NSInteger)discountType discountAmount:(float)discountAmount discountValue:(float)discountValue discountReason:(NSString *)discountReason serviceChargePercent:(float)serviceChargePercent serviceChargeValue:(float)serviceChargeValue priceIncludeVat:(NSInteger)priceIncludeVat vatPercent:(float)vatPercent vatValue:(float)vatValue status:(NSInteger)status statusRoute:(NSString *)statusRoute receiptNoID:(NSString *)receiptNoID receiptNoTaxID:(NSString *)receiptNoTaxID receiptDate:(NSDate *)receiptDate sendToKitchenDate:(NSDate *)sendToKitchenDate deliveredDate:(NSDate *)deliveredDate mergeReceiptID:(NSInteger)mergeReceiptID buffetReceiptID:(NSInteger)buffetReceiptID
 {
     self = [super init];
     if(self)
@@ -50,7 +50,10 @@
         self.receiptNoID = receiptNoID;
         self.receiptNoTaxID = receiptNoTaxID;
         self.receiptDate = receiptDate;
+        self.sendToKitchenDate = sendToKitchenDate;
+        self.deliveredDate = deliveredDate;
         self.mergeReceiptID = mergeReceiptID;
+        self.buffetReceiptID = buffetReceiptID;
         self.modifiedUser = [Utility modifiedUser];
         self.modifiedDate = [Utility currentDateTime];
     }
@@ -158,11 +161,12 @@
         [copy setReceiptNoID:self.receiptNoID];
         [copy setReceiptNoTaxID:self.receiptNoTaxID];
         [copy setReceiptDate:self.receiptDate];
+        [copy setSendToKitchenDate:self.sendToKitchenDate];
+        [copy setDeliveredDate:self.deliveredDate];
         ((Receipt *)copy).mergeReceiptID = self.mergeReceiptID;
+        ((Receipt *)copy).buffetReceiptID = self.buffetReceiptID;
         [copy setModifiedUser:[Utility modifiedUser]];
-        [copy setModifiedDate:[Utility currentDateTime]];
-        
-        
+        [copy setModifiedDate:[Utility currentDateTime]];        
     }
     
     return copy;
@@ -199,7 +203,10 @@
        && [self.receiptNoID isEqualToString:editingReceipt.receiptNoID]
        && [self.receiptNoTaxID isEqualToString:editingReceipt.receiptNoTaxID]
        && [self.receiptDate isEqual:editingReceipt.receiptDate]
+       && [self.sendToKitchenDate isEqual:editingReceipt.sendToKitchenDate]
+       && [self.deliveredDate isEqual:editingReceipt.deliveredDate]
        && self.mergeReceiptID == editingReceipt.mergeReceiptID
+       && self.buffetReceiptID == editingReceipt.buffetReceiptID
        )
     {
         return NO;
@@ -238,7 +245,10 @@
     toReceipt.receiptNoID = fromReceipt.receiptNoID;
     toReceipt.receiptNoTaxID = fromReceipt.receiptNoTaxID;
     toReceipt.receiptDate = fromReceipt.receiptDate;
+    toReceipt.sendToKitchenDate = fromReceipt.sendToKitchenDate;
+    toReceipt.deliveredDate = fromReceipt.deliveredDate;
     toReceipt.mergeReceiptID = fromReceipt.mergeReceiptID;
+    toReceipt.buffetReceiptID = fromReceipt.buffetReceiptID;
     toReceipt.modifiedUser = [Utility modifiedUser];
     toReceipt.modifiedDate = [Utility currentDateTime];
     
@@ -633,4 +643,20 @@
     
     return NO;
 }
+
++(NSInteger)getTimeToOrder:(NSInteger)receiptID
+{
+    NSInteger timeToOrder = 0;
+    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
+    for(OrderTaking *item in orderTakingList)
+    {
+        Menu *menu = [Menu getMenu:item.menuID branchID:item.branchID];
+        if(menu.buffetMenu)
+        {            
+            return menu.timeToOrder;
+        }
+    }
+    return timeToOrder;
+}
+
 @end
