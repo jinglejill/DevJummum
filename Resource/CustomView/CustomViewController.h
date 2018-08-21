@@ -44,8 +44,6 @@
 -(void)alertMsg:(NSString *)msg;
 -(void) showAlert:(NSString *)title message:(NSString *)message;
 -(void) showAlert:(NSString *)title message:(NSString *)message method:(SEL)method;
--(void)vibrateAndCallPushSync;
--(void)showAlertAndCallPushSync:(NSString *)title message:(NSString *)message;
 -(void) showAlert:(NSString *)title message:(NSString *)message firstResponder:(UIView *)view;
 -(void)loadViewProcess;
 -(void)setShadow:(UIView *)view;
@@ -62,7 +60,6 @@
 -(void)makeBottomRightRoundedCorner:(UIView *)view;
 -(void)showStatus:(NSString *)status;
 -(void)hideStatus;
-- (void)syncItems;
 -(NSString *)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename;
 -(BOOL)inPeriod:(NSInteger)period;
 -(NSString*) deviceName;
@@ -74,5 +71,4 @@
 -(UIImage *)imageFromView:(UIView *)view;
 -(NSAttributedString *)setAttributedString:(NSString *)title text:(NSString *)text;
 -(void)dismissKeyboard;
-//-(void)segueToOrderDetail:(Receipt *)receipt;
 @end

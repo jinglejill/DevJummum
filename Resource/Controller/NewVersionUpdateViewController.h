@@ -20,10 +20,13 @@
 - (IBAction)cancel:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *lblHeader;
 @property (strong, nonatomic) IBOutlet UILabel *lblSubtitle;
+@property (strong, nonatomic) IBOutlet UILabel *lblTitle;
+@property (strong, nonatomic) IBOutlet UILabel *lblMessage;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *vwAlertHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnDismissTop;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnDismissHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnCancelHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnCancelTop;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgVwLogoTop;
 @property (strong, nonatomic) NSString *appStoreVersion;
 @end

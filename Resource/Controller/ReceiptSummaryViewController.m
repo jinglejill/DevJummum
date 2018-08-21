@@ -199,9 +199,11 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         
+        
         Receipt *receipt = _receiptList[section];
         Branch *branch = [Branch getBranch:receipt.branchID];
-        cell.lblReceiptNo.text = [NSString stringWithFormat:@"Order no. #%@", receipt.receiptNoID];
+        NSString *showBuffetOrder = receipt.buffetReceiptID?@" (Buffet)":@"";
+        cell.lblReceiptNo.text = [NSString stringWithFormat:@"Order no. #%@%@", receipt.receiptNoID,showBuffetOrder];
         cell.lblReceiptDate.text = [Utility dateToString:receipt.modifiedDate toFormat:@"d MMM yy HH:mm"];
         cell.lblBranchName.text = [NSString stringWithFormat:@"ร้าน %@",branch.name];
         cell.lblBranchName.textColor = cSystem1;
@@ -479,7 +481,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             {
                 cell.lblText.text = @"";
             }
-            cell.lblTextWidthConstant.constant = 154;
+            cell.lblTextWidthConstant.constant = 70;
             
         
             
@@ -907,7 +909,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         Receipt *buffetReceipt = [Receipt getReceipt:_orderItAgainReceipt.buffetReceiptID];
         vc.buffetReceipt = buffetReceipt;
     }
-    else if([[segue identifier] isEqualToString:@"segOrderDetail"])
+    else if([[segue identifier] isEqualToString:@"segOrderDetail"] || [[segue identifier] isEqualToString:@"segOrderDetailNoAnimate"])
     {
         OrderDetailViewController *vc = segue.destinationViewController;
         vc.receipt = _selectedReceipt;
@@ -922,7 +924,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
 -(void)segueToOrderDetailAuto:(Receipt *)receipt
 {
     _selectedReceipt = receipt;
-    [self performSegueWithIdentifier:@"segOrderDetail" sender:self];
+    [self performSegueWithIdentifier:@"segOrderDetailNoAnimate" sender:self];
 }
 
 -(void)orderBuffet:(id)sender
@@ -969,7 +971,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     
     
     CustomTableViewCellLabelLabel *cellTimeToCountDown = [cell.tbvOrderDetail cellForRowAtIndexPath:indexPathOrderDetail];
-    cellTimeToCountDown.lblText.text = [NSString stringWithFormat:@"เวลาคงเหลือ: %02ld:%02ld:%02ld", hours, minutes, seconds];
+    cellTimeToCountDown.lblText.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", hours, minutes, seconds];
 //    [cellTimeToCountDown.lblText sizeToFit];
 }
 @end

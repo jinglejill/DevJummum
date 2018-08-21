@@ -88,7 +88,7 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
         case 0:
         {
             UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-            cell.lblText.text = @"อีเมล";
+            cell.lblText.text = [Utility validateEmailWithString:userAccount.username]?@"อีเมล":@"อีเมล (FB)";
             [cell.lblText sizeToFit];
             cell.lblTextWidthConstant.constant = cell.lblText.frame.size.width;
             cell.lblValue.text = userAccount.email;

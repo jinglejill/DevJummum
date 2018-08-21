@@ -276,6 +276,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.txtValue.delegate = self;
                 cell.txtValue.inputView = pickerVw;
                 [cell.txtValue setInputAccessoryView:self.toolBar];
+                [cell.txtValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 
                 
                 DisputeReason *disputeReason = [DisputeReason getDisputeReason:_dispute.disputeReasonID];
@@ -384,6 +385,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.txtValue.delegate = self;
                 cell.txtValue.inputView = pickerVw;
                 [cell.txtValue setInputAccessoryView:self.toolBar];
+                [cell.txtValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 
                 
                 DisputeReason *disputeReason = [DisputeReason getDisputeReason:_dispute.disputeReasonID];
@@ -428,6 +430,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.txtValue.keyboardType = UIKeyboardTypeDecimalPad;
                 cell.txtValue.text = [Utility formatDecimal:_dispute.refundAmount withMinFraction:0 andMaxFraction:2];
                 [cell.txtValue setInputAccessoryView:self.toolBar];
+                [cell.txtValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 if(_dispute.refundAmount == 0)
                 {
                     cell.txtValue.text = @"";

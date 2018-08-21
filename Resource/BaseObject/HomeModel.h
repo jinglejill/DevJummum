@@ -27,6 +27,7 @@
 - (void)connectionFail;
 - (void)itemsInsertedWithReturnID:(NSString *)strID;
 - (void)itemsInsertedWithReturnData:(NSArray *)items;
+- (void)itemsInsertedWithManager:(NSObject *)objHomeModel items:(NSArray *)items;
 - (void)alertMsg:(NSString *)msg;
 - (void)itemsFail;
 - (void)salesGenerated:(NSString *)fileName;
@@ -60,8 +61,6 @@ enum enumAction
 - (void)insertItems:(enum enumDB)currentDB withData:(NSObject *)data actionScreen:(NSString *)actionScreen;
 - (void)updateItems:(enum enumDB)currentDB withData:(NSObject *)data actionScreen:(NSString *)actionScreen;
 - (void)deleteItems:(enum enumDB)currentDB withData:(NSObject *)data actionScreen:(NSString *)actionScreen;
-- (void)syncItems:(enum enumDB)currentDB withData:(NSObject *)data;
-//- (void)syncItemsWithoutLoadViewProcess:(enum enumDB)currentDB withData:(NSObject *)data;
 - (void)sendEmail:(NSString *)toAddress withSubject:(NSString *)subject andBody:(NSString *)body;
 - (void)uploadPhoto:(NSData *)photo fileName:(NSString *)fileName;
 - (void)downloadImageWithFileName:(NSString *)fileName completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock;
@@ -69,4 +68,3 @@ enum enumAction
 - (void)downloadFileWithFileName:(NSString *)fileName completionBlock:(void (^)(BOOL succeeded, NSData *data))completionBlock;
 - (void)downloadItems:(enum enumDB)currentDB withData:(NSObject *)data completionBlock:(void (^)(BOOL succeeded, NSMutableArray *items))completionBlock;
 @end
-

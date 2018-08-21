@@ -187,7 +187,8 @@ enum enumDB
     dbMenuNoteList,
     dbOpeningTime,
     dbMenuBelongToBuffet,
-    dbBuffetOrder
+    dbBuffetOrder,
+    dbSettingWithKey
 
 
     
@@ -336,7 +337,8 @@ enum enumUrl
     urlOpeningTimeGet,
     urlContactUs,
     urlMenuBelongToBuffetGetList,
-    urlBuffetOrderInsertList
+    urlBuffetOrderInsertList,
+    urlSettingWithKeyGet
     
 
     

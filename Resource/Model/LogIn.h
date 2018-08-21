@@ -13,16 +13,18 @@
 @property (retain, nonatomic) NSString * username;
 @property (nonatomic) NSInteger status;
 @property (retain, nonatomic) NSString * deviceToken;
-@property (retain, nonatomic) NSString * modifiedUser;//ใช้ตอน delete row ที่ duplicate key
+@property (retain, nonatomic) NSString * model;
+@property (retain, nonatomic) NSString * modifiedUser;
 @property (retain, nonatomic) NSDate * modifiedDate;
 
-
-//ใช้เฉพาะตอน push type = 'd'
-//ใช้ตอน update or delete
-
-
--(LogIn *)initWithUsername:(NSString *)username status:(NSInteger)status deviceToken:(NSString *)deviceToken;
+-(LogIn *)initWithUsername:(NSString *)username status:(NSInteger)status deviceToken:(NSString *)deviceToken model:(NSString *)model;
 +(NSInteger)getNextID;
 +(void)addObject:(LogIn *)logIn;
++(void)removeObject:(LogIn *)logIn;
++(void)addList:(NSMutableArray *)logInList;
++(void)removeList:(NSMutableArray *)logInList;
++(LogIn *)getLogIn:(NSInteger)logInID;
+-(BOOL)editLogIn:(LogIn *)editingLogIn;
++(LogIn *)copyFrom:(LogIn *)fromLogIn to:(LogIn *)toLogIn;
 
 @end

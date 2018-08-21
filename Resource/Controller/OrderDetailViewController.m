@@ -267,7 +267,8 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
             
             
             Branch *branch = [Branch getBranch:receipt.branchID];
-            cell.lblReceiptNo.text = [NSString stringWithFormat:@"Order no. #%@", receipt.receiptNoID];
+            NSString *showBuffetOrder = receipt.buffetReceiptID?@" (Buffet)":@"";
+            cell.lblReceiptNo.text = [NSString stringWithFormat:@"Order no. #%@%@", receipt.receiptNoID,showBuffetOrder];
             cell.lblReceiptDate.text = [Utility dateToString:receipt.modifiedDate toFormat:@"d MMM yy HH:mm"];
             cell.lblBranchName.text = [NSString stringWithFormat:@"ร้าน %@",branch.name];
             cell.lblBranchName.textColor = cSystem1;
@@ -888,6 +889,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                     
                     cell.btnValue.backgroundColor = cSystem1;
                     [cell.btnValue setTitle:title forState:UIControlStateNormal];
+                    [cell.btnValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                     [cell.btnValue addTarget:self action:@selector(cancelOrder:) forControlEvents:UIControlEventTouchUpInside];
                     [self setButtonDesign:cell.btnValue];
                     
@@ -908,6 +910,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                     
                     [cell.btnValue setTitle:title forState:UIControlStateNormal];
                     cell.btnValue.backgroundColor = cSystem1;
+                    [cell.btnValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                     [cell.btnValue addTarget:self action:@selector(disputeOrder:) forControlEvents:UIControlEventTouchUpInside];
                     [self setButtonDesign:cell.btnValue];
                     
@@ -1221,6 +1224,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                         [cell.btnValue setTitle:@"Confirm" forState:UIControlStateNormal];
                         cell.btnValue.backgroundColor = cSystem2;
                         [cell.btnValue setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                        [cell.btnValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                         [cell.btnValue addTarget:self action:@selector(confirmNegotiate:) forControlEvents:UIControlEventTouchUpInside];
                         [self setButtonDesign:cell.btnValue];
                         
@@ -1238,6 +1242,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                         [cell.btnValue setTitle:@"Negotiate" forState:UIControlStateNormal];
                         cell.btnValue.backgroundColor = cSystem1;
                         [cell.btnValue setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                        [cell.btnValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                         [cell.btnValue addTarget:self action:@selector(negotiate:) forControlEvents:UIControlEventTouchUpInside];
                         [self setButtonDesign:cell.btnValue];
                         
@@ -1255,6 +1260,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                         [cell.btnValue setTitle:@"Cancel" forState:UIControlStateNormal];
                         cell.btnValue.backgroundColor = cSystem4_10;
                         [cell.btnValue setTitleColor:cSystem4 forState:UIControlStateNormal];
+                        [cell.btnValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                         [cell.btnValue addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
                         [self setButtonDesign:cell.btnValue];
                         

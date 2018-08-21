@@ -12,7 +12,6 @@
 
 @interface LaunchScreenViewController : CustomViewController
 @property (strong, nonatomic) UIProgressView *progressBar;
-@property (strong, nonatomic) IBOutlet UILabel *lblAppStoreVersion;
 @property (strong, nonatomic) IBOutlet UILabel *lblTitle;
 @property (strong, nonatomic) IBOutlet UILabel *lblMessage;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgVwLogoTop;

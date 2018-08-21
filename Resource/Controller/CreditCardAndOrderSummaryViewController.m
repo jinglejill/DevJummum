@@ -331,7 +331,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     lblNavTitle.text = title;
     NSString *message = [Setting getValue:@"123m" example:@"ใส่หมายเหตุที่ต้องการแจ้งเพิ่มเติมกับทางร้านอาหาร"];
     _strPlaceHolder = message;
-    
+    _voucherCode = @"";
     
     
     if(fromReceiptSummaryMenu || fromOrderDetailMenu)
@@ -528,16 +528,28 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             
             
             cell.lblTextWidthConstant.constant = cell.lblText.frame.size.width;
-            if(customerTable)
+            if(buffetReceipt)
             {
-                cell.lblValue.text = [NSString stringWithFormat:@"เลขโต๊ะ: %@",customerTable.tableName];
+                CustomerTable *buffetTable = [CustomerTable getCustomerTable:buffetReceipt.customerTableID];
+                NSString *customerTableName = buffetTable.tableName;
+                cell.lblValue.text = [NSString stringWithFormat:@"เลขโต๊ะ: %@",customerTableName];
                 cell.lblValue.textColor = cSystem4;
             }
             else
             {
-                cell.lblValue.text = @"เลือกโต๊ะ";
-                cell.lblValue.textColor = cSystem2;
+                if(customerTable)
+                {
+                    NSString *customerTableName = customerTable.tableName;
+                    cell.lblValue.text = [NSString stringWithFormat:@"เลขโต๊ะ: %@",customerTableName];
+                    cell.lblValue.textColor = cSystem4;
+                }
+                else
+                {
+                    cell.lblValue.text = @"เลือกโต๊ะ";
+                    cell.lblValue.textColor = cSystem2;
+                }
             }
+            
             
             
             return  cell;
@@ -1555,7 +1567,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         
         
         UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-        Receipt *receipt = [[Receipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID servingPerson:0 customerType:4 openTableDate:[Utility currentDateTime] cashAmount:0 cashReceive:0 creditCardType:[self getCreditCardType:_creditCard.creditCardNo] creditCardNo:_creditCard.creditCardNo creditCardAmount:_netTotal transferDate:[Utility notIdentifiedDate] transferAmount:0 remark:_remark discountType:_discountType discountAmount:_discountAmount discountValue:_discountValue discountReason:@"" serviceChargePercent:branch.serviceChargePercent serviceChargeValue:_serviceChargeValue priceIncludeVat:branch.priceIncludeVat vatPercent:branch.percentVat vatValue:_vatValue status:2 statusRoute:@"" receiptNoID:@"" receiptNoTaxID:@"" receiptDate:[Utility currentDateTime] sendToKitchenDate:[Utility notIdentifiedDate] deliveredDate:[Utility notIdentifiedDate] mergeReceiptID:0 buffetReceiptID:0];
+        Receipt *receipt = [[Receipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID servingPerson:0 customerType:4 openTableDate:[Utility currentDateTime] cashAmount:0 cashReceive:0 creditCardType:[self getCreditCardType:_creditCard.creditCardNo] creditCardNo:_creditCard.creditCardNo creditCardAmount:_netTotal transferDate:[Utility notIdentifiedDate] transferAmount:0 remark:_remark discountType:_discountType discountAmount:_discountAmount discountValue:_discountValue discountReason:@"" serviceChargePercent:branch.serviceChargePercent serviceChargeValue:_serviceChargeValue priceIncludeVat:branch.priceIncludeVat vatPercent:branch.percentVat vatValue:_vatValue status:2 statusRoute:@"" receiptNoID:@"" receiptNoTaxID:@"" receiptDate:[Utility currentDateTime] sendToKitchenDate:[Utility notIdentifiedDate] deliveredDate:[Utility notIdentifiedDate] mergeReceiptID:0 buffetReceiptID:buffetReceipt.receiptID];
         
         
         
@@ -1821,38 +1833,26 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 
 -(void)itemsInsertedWithReturnData:(NSArray *)items
 {
-//    if(buffetReceipt)
-//    {
-//        [self removeWaitingView];
-//        [OrderTaking removeCurrentOrderTakingList];
-//        [CreditCard removeCurrentCreditCard];
-//
-//
-//
-//    }
-//    else
+    if([items count] == 1)
     {
-        if([items count] == 1)
-        {
-            [self removeWaitingView];
-            _btnPay.enabled = YES;
-            NSMutableArray *messageList = items[0];
-            Message *message = messageList[0];
-            [self showAlert:@"" message:message.text];
-        }
-        else
-        {
-            [self removeWaitingView];
-            [OrderTaking removeCurrentOrderTakingList];
-            [CreditCard removeCurrentCreditCard];
-            
-            
-            [Utility addToSharedDataList:items];
-            NSMutableArray *receiptList = items[0];
-            Receipt *receipt = receiptList[0];
-            _receipt = receipt;
-            [self performSegueWithIdentifier:@"segPaymentComplete" sender:self];
-        }
+        [self removeWaitingView];
+        _btnPay.enabled = YES;
+        NSMutableArray *messageList = items[0];
+        Message *message = messageList[0];
+        [self showAlert:@"" message:message.text];
+    }
+    else
+    {
+        [self removeWaitingView];
+        [OrderTaking removeCurrentOrderTakingList];
+        [CreditCard removeCurrentCreditCard];
+        
+        
+        [Utility addToSharedDataList:items];
+        NSMutableArray *receiptList = items[0];
+        Receipt *receipt = receiptList[0];
+        _receipt = receipt;
+        [self performSegueWithIdentifier:@"segPaymentComplete" sender:self];
     }
 }
 

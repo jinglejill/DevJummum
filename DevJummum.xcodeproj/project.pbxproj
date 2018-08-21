@@ -342,6 +342,7 @@
 		EF33D118211C36D200560C69 /* Kanit-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF33CFD2211C36D100560C69 /* Kanit-ExtraLightItalic.ttf */; };
 		EF33D119211C36D200560C69 /* Kanit-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF33CFD3211C36D100560C69 /* Kanit-Medium.ttf */; };
 		EF33D11A211C36D200560C69 /* Kanit-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF33CFD4211C36D100560C69 /* Kanit-SemiBoldItalic.otf */; };
+		EF5D243F212756880073F1A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF5D243E212756870073F1A1 /* GoogleService-Info.plist */; };
 		EF639E0A211F233E00C70A98 /* CustomTableViewCellSeparatorLine.m in Sources */ = {isa = PBXBuildFile; fileRef = EF639E04211F233D00C70A98 /* CustomTableViewCellSeparatorLine.m */; };
 		EF639E0B211F233E00C70A98 /* CustomTableViewCellLabelRemark.m in Sources */ = {isa = PBXBuildFile; fileRef = EF639E06211F233D00C70A98 /* CustomTableViewCellLabelRemark.m */; };
 		EF639E0C211F233E00C70A98 /* CustomTableViewCellSeparatorLine.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF639E07211F233D00C70A98 /* CustomTableViewCellSeparatorLine.xib */; };
@@ -865,6 +866,7 @@
 		EF33CFD2211C36D100560C69 /* Kanit-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		EF33CFD3211C36D100560C69 /* Kanit-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-Medium.ttf"; sourceTree = "<group>"; };
 		EF33CFD4211C36D100560C69 /* Kanit-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-SemiBoldItalic.otf"; sourceTree = "<group>"; };
+		EF5D243E212756870073F1A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EF639E04211F233D00C70A98 /* CustomTableViewCellSeparatorLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCellSeparatorLine.m; sourceTree = "<group>"; };
 		EF639E05211F233D00C70A98 /* CustomTableViewCellSeparatorLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCellSeparatorLine.h; sourceTree = "<group>"; };
 		EF639E06211F233D00C70A98 /* CustomTableViewCellLabelRemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCellLabelRemark.m; sourceTree = "<group>"; };
@@ -950,6 +952,7 @@
 		EF33CD72211C26C200560C69 /* DevJummum */ = {
 			isa = PBXGroup;
 			children = (
+				EF5D243E212756870073F1A1 /* GoogleService-Info.plist */,
 				EF33CDA8211C297700560C69 /* DevJummum.entitlements */,
 				EF33CD76211C26C200560C69 /* ViewController.h */,
 				EF33CD77211C26C200560C69 /* ViewController.m */,
@@ -1695,6 +1698,7 @@
 				EF33D0A7211C36D200560C69 /* CustomTableViewHeaderFooterButton.xib in Resources */,
 				EF33D033211C36D200560C69 /* Icon-Small@2x.png in Resources */,
 				EF33D0F8211C36D200560C69 /* Kanit-SemiBold.otf in Resources */,
+				EF5D243F212756880073F1A1 /* GoogleService-Info.plist in Resources */,
 				EF33D017211C36D200560C69 /* triangle_dev_om.png in Resources */,
 				EF33D008211C36D200560C69 /* basketWhite.png in Resources */,
 				EF33D0F2211C36D200560C69 /* Kanit-Black.ttf in Resources */,

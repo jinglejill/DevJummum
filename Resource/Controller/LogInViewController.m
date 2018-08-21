@@ -104,7 +104,7 @@
     userAccount.password = [Utility hashTextSHA256:txtPassword.text];
     
     
-    LogIn *logIn = [[LogIn alloc]initWithUsername:userAccount.username status:1 deviceToken:[Utility deviceToken]];
+    LogIn *logIn = [[LogIn alloc]initWithUsername:userAccount.username status:1 deviceToken:[Utility deviceToken] model:[self deviceName]];
     [self.homeModel insertItems:dbUserAccountValidate withData:@[userAccount,logIn] actionScreen:@"validate userAccount"];
     [self loadingOverlayView];
     
@@ -113,12 +113,6 @@
 
 - (IBAction)registerNow:(id)sender
 {
-    //test
-//    BOOL turnOnRemote = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
-//    NSLog(@"turn on remote push: %ld",turnOnRemote);
-//    NSString *iTunesLink = @"https://itunes.apple.com/th/app/the-1-card/id442873215?mt=8";
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
-    
     [self performSegueWithIdentifier:@"segRegisterNow" sender:self];
 }
 
@@ -272,7 +266,7 @@
                  //2.insert useraccount if not exist
                  NSString *modifiedUser = [NSString stringWithFormat:@"%@",result[@"email"]];
                  [Utility setModifiedUser:modifiedUser];
-                 LogIn *logIn = [[LogIn alloc]initWithUsername:result[@"id"] status:1 deviceToken:[Utility deviceToken]];
+                 LogIn *logIn = [[LogIn alloc]initWithUsername:result[@"id"] status:1 deviceToken:[Utility deviceToken] model:[self deviceName]];
                  UserAccount *userAccount = [[UserAccount alloc]initWithUsername:result[@"id"] password:txtPassword.text deviceToken:[Utility deviceToken] fullName:result[@"name"] nickName:@"" birthDate:birthday email:result[@"email"] phoneNo:@"" lineID:@"" roleID:0];
                  [self.homeModel insertItems:dbLogInUserAccount withData:@[logIn,userAccount] actionScreen:@"insert login and useraccount if not exist in logIn screen"];
                  [self loadingOverlayView];

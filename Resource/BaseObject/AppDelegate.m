@@ -89,11 +89,15 @@ void myExceptionHandler(NSException *exception)
     
 }
 
+-(void)applicationReceivedRemoteMessage:(FIRMessagingRemoteMessage *)remoteMessage
+{
+    NSLog(@"remoteMessageAppData: %@",remoteMessage.appData);
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-//    NSString *key = [NSString stringWithFormat:@"dismiss verion:%@",@"1.4.4"];
+//    NSString *key = [NSString stringWithFormat:@"dismiss verion:(null)"];
 //    [[NSUserDefaults standardUserDefaults] setValue:@0 forKey:key];
     
     UIBarButtonItem *barButtonAppearance = [UIBarButtonItem appearance];
@@ -136,10 +140,7 @@ void myExceptionHandler(NSException *exception)
     }
     
     
-//    [[NSUserDefaults standardUserDefaults] setValue:@"AND_JUMMUM" forKey:BRANCH];
-    
-    
-    
+
     //write exception of latest app crash to log file
     NSSetUncaughtExceptionHandler(&myExceptionHandler);
     NSString *stackTrace = [[NSUserDefaults standardUserDefaults] stringForKey:@"exception"];
@@ -153,25 +154,11 @@ void myExceptionHandler(NSException *exception)
         [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"exception"];
     }
     
-//    
-//    //write app version to log file
-//    NSSetUncaughtExceptionHandler(&myExceptionHandler);
-//    NSString *stackTrace2 = [[NSUserDefaults standardUserDefaults] stringForKey:@"appVersion"];
-//    if(!stackTrace2)
-//    {
-//        [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"appVersion"];
-//    }
-//    else if(![stackTrace2 isEqualToString:@""])
-//    {
-//        [_homeModel insertItems:dbWriteLog withData:stackTrace2 actionScreen:@"appVersion test"];
-//        [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"appVersion"];
-//    }
-//    
-    
-    
+
     //push notification
     {
-        if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0"))
+        [FIRApp configure];
+        if ([UNUserNotificationCenter class] != nil)//version >= 10
         {
             
             UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
@@ -180,7 +167,6 @@ void myExceptionHandler(NSException *exception)
              {
                  if( !error )
                  {
-                     [[UIApplication sharedApplication] registerForRemoteNotifications];  // required to get the app to do anything at all about push notifications
                      NSLog( @"Push registration success." );
                  }
                  else
@@ -190,32 +176,15 @@ void myExceptionHandler(NSException *exception)
                      NSLog( @"SUGGESTIONS: %@ - %@", error.localizedRecoveryOptions, error.localizedRecoverySuggestion );
                  }
              }];
-            
-            
-            UNNotificationAction *notificationAction1 = [UNNotificationAction actionWithIdentifier:@"Print"
-                                                                                             title:@"Print"
-                                                                                           options:UNNotificationActionOptionForeground];
-            UNNotificationAction *notificationAction2 = [UNNotificationAction actionWithIdentifier:@"View"
-                                                                                             title:@"View"
-                                                                                           options:UNNotificationActionOptionForeground];
-            UNNotificationCategory *notificationCategory = [UNNotificationCategory categoryWithIdentifier:@"Print"                                                                                                     actions:@[notificationAction1,notificationAction2] intentIdentifiers:@[] options:UNNotificationCategoryOptionNone];
-            
-            
-            // Register the notification categories.
-            UNUserNotificationCenter* center2 = [UNUserNotificationCenter currentNotificationCenter];
-            center2.delegate = self;
-            [center2 setNotificationCategories:[NSSet setWithObjects:notificationCategory,nil]];
-            
-            
         }
         else
         {
             UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
             UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
             [application registerUserNotificationSettings:settings];
-            [application registerForRemoteNotifications];
-            [[UIApplication sharedApplication] registerForRemoteNotifications];
-        }   
+        }
+        [application registerForRemoteNotifications];  // required to get the app to do anything at all about push notifications
+        [FIRMessaging messaging].delegate = self;
     }
     
     
@@ -256,13 +225,45 @@ void myExceptionHandler(NSException *exception)
     NSDictionary *userInfo = notification.request.content.userInfo;
     NSLog(@"notification is delivered to a foreground app: %@", userInfo);
     
+    //////////////////
     
+    //reload when in receipt summary and orderDetail vc
+    //Get current vc
+    CustomViewController *currentVc;
+    CustomViewController *parentViewController = (CustomViewController *)[[[UIApplication sharedApplication] delegate] window].rootViewController;
+    
+    while (parentViewController.presentedViewController != nil && ![parentViewController.presentedViewController isKindOfClass:[UIAlertController class]])
+    {
+        parentViewController = (CustomViewController *)parentViewController.presentedViewController;
+    }
+    if([parentViewController isKindOfClass:[UITabBarController class]])
+    {
+        currentVc = ((UITabBarController *)parentViewController).selectedViewController;
+    }
+    else
+    {
+        currentVc = parentViewController;
+    }
+    
+    
+    if([currentVc isKindOfClass:[ReceiptSummaryViewController class]])
+    {
+    }
+    else if([currentVc isKindOfClass:[OrderDetailViewController class]])
+    {
+    }
+    else
+    {
+        completionHandler(UNNotificationPresentationOptionAlert);
+    }
+    //////////////////
     
     NSDictionary *myAps = [userInfo objectForKey:@"aps"];
     NSString *categoryIdentifier = [myAps objectForKey:@"category"];
     if([categoryIdentifier isEqualToString:@"updateStatus"])
     {
-        NSNumber *receiptID = [myAps objectForKey:@"receiptID"];
+        NSDictionary *data = [myAps objectForKey:@"data"];
+        NSNumber *receiptID = [data objectForKey:@"receiptID"];
         
         
         Receipt *receipt = [Receipt getReceipt:[receiptID integerValue]];
@@ -297,7 +298,8 @@ void myExceptionHandler(NSException *exception)
     
     if([categoryIdentifier isEqualToString:@"updateStatus"])
     {
-        NSNumber *receiptID = [myAps objectForKey:@"receiptID"];
+        NSDictionary *data = [myAps objectForKey:@"data"];
+        NSNumber *receiptID = [data objectForKey:@"receiptID"];
         
         
         Receipt *receipt = [Receipt getReceipt:[receiptID integerValue]];
@@ -332,6 +334,16 @@ void myExceptionHandler(NSException *exception)
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
+    NSLog(@"FCM registration token: %@", fcmToken);
+    // Notify about received token.
+    NSDictionary *dataDict = [NSDictionary dictionaryWithObject:fcmToken forKey:@"token"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:
+     @"FCMToken" object:nil userInfo:dataDict];
+    // TODO: If necessary send token to application server.
+    // Note: This callback is fired at each app startup and whenever a new token is generated.
+}
+
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
     //    NSLog([error localizedDescription]);
@@ -346,7 +358,8 @@ void myExceptionHandler(NSException *exception)
     NSString *categoryIdentifier = [myAps objectForKey:@"category"];
     if([categoryIdentifier isEqualToString:@"updateStatus"])
     {
-        NSNumber *receiptID = [myAps objectForKey:@"receiptID"];
+        NSDictionary *data = [myAps objectForKey:@"data"];
+        NSNumber *receiptID = [data objectForKey:@"receiptID"];
         
         
         Receipt *receipt = [Receipt getReceipt:[receiptID integerValue]];

@@ -32,6 +32,7 @@
 #import "RecommendShop.h"
 #import "Rating.h"
 #import "MenuNote.h"
+#import "CustomViewController.h"
 
 
 @interface HomeModel()
@@ -75,6 +76,7 @@
         }
     }
 }
+
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)dataRaw;
 {
     NSArray *arrClassName;
@@ -200,6 +202,11 @@
             arrClassName = @[@"Branch"];
         }
             break;
+        case dbSettingWithKey:
+        {
+            arrClassName = @[@"Setting"];
+        }
+        break;
         default:
             break;
     }
@@ -209,69 +216,79 @@
         if([ _dataToDownload length ]/_downloadSize == 1.0f)
         {
             NSMutableArray *arrItem = [[NSMutableArray alloc] init];
-            
-            NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:_dataToDownload options:NSJSONReadingAllowFragments error:nil];
-            
-            if(!jsonArray)
+            NSDictionary *dicJson = [NSJSONSerialization JSONObjectWithData:_dataToDownload options:NSJSONReadingAllowFragments error:nil];
+            NSString *status = dicJson[@"status"];
+            if([status integerValue] == 3)
             {
-                return;
+                CustomViewController *vc = (CustomViewController *)self.delegate;
+                [vc performSegueWithIdentifier:@"segUnwindToLaunchScreen" sender:self];
             }
-            for(int i=0; i<[jsonArray count]; i++)
+            else
             {
-                //arrdatatemp <= arrdata
-                NSMutableArray *arrDataTemp = [[NSMutableArray alloc]init];
-                NSArray *arrData = jsonArray[i];
-                for(int j=0; j< arrData.count; j++)
+                NSArray *jsonArray = dicJson[@"data"];
+                //            NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:_dataToDownload options:NSJSONReadingAllowFragments error:nil];
+                
+                if(!jsonArray)
                 {
-                    NSDictionary *jsonElement = arrData[j];
-                    NSObject *object = [[NSClassFromString([Utility getMasterClassName:i from:arrClassName]) alloc] init];
-                    
-                    unsigned int propertyCount = 0;
-                    objc_property_t * properties = class_copyPropertyList([object class], &propertyCount);
-                    
-                    for (unsigned int i = 0; i < propertyCount; ++i)
+                    return;
+                }
+                for(int i=0; i<[jsonArray count]; i++)
+                {
+                    //arrdatatemp <= arrdata
+                    NSMutableArray *arrDataTemp = [[NSMutableArray alloc]init];
+                    NSArray *arrData = jsonArray[i];
+                    for(int j=0; j< arrData.count; j++)
                     {
-                        objc_property_t property = properties[i];
-                        const char * name = property_getName(property);
-                        NSString *key = [NSString stringWithUTF8String:name];
+                        NSDictionary *jsonElement = arrData[j];
+                        NSObject *object = [[NSClassFromString([Utility getMasterClassName:i from:arrClassName]) alloc] init];
                         
+                        unsigned int propertyCount = 0;
+                        objc_property_t * properties = class_copyPropertyList([object class], &propertyCount);
                         
-                        NSString *dbColumnName = [Utility makeFirstLetterUpperCase:key];
-                        if(!jsonElement[dbColumnName])
+                        for (unsigned int i = 0; i < propertyCount; ++i)
                         {
-                            continue;
-                        }
-                        
-                        
-                        if([Utility isDateColumn:dbColumnName])
-                        {
-                            NSDate *date = [Utility stringToDate:jsonElement[dbColumnName] fromFormat:@"yyyy-MM-dd HH:mm:ss"];
-                            if(!date)
+                            objc_property_t property = properties[i];
+                            const char * name = property_getName(property);
+                            NSString *key = [NSString stringWithUTF8String:name];
+                            
+                            
+                            NSString *dbColumnName = [Utility makeFirstLetterUpperCase:key];
+                            if(!jsonElement[dbColumnName])
                             {
-                                date = [Utility stringToDate:jsonElement[dbColumnName] fromFormat:@"yyyy-MM-dd"];
+                                continue;
                             }
-                            [object setValue:date forKey:key];
+                            
+                            
+                            if([Utility isDateColumn:dbColumnName])
+                            {
+                                NSDate *date = [Utility stringToDate:jsonElement[dbColumnName] fromFormat:@"yyyy-MM-dd HH:mm:ss"];
+                                if(!date)
+                                {
+                                    date = [Utility stringToDate:jsonElement[dbColumnName] fromFormat:@"yyyy-MM-dd"];
+                                }
+                                [object setValue:date forKey:key];
+                            }
+                            else
+                            {
+                                [object setValue:jsonElement[dbColumnName] forKey:key];
+                            }
                         }
-                        else
-                        {
-                            [object setValue:jsonElement[dbColumnName] forKey:key];
-                        }
+                        [arrDataTemp addObject:object];
                     }
-                    [arrDataTemp addObject:object];
+                    [arrItem addObject:arrDataTemp];
                 }
-                [arrItem addObject:arrDataTemp];
-            }
-            
-            // Ready to notify delegate that data is ready and pass back items
-            if (self.delegate)
-            {
-                if(propCurrentDB == dbHotDeal || propCurrentDB == dbHotDealWithBranchID || propCurrentDB == dbReceiptSummary || propCurrentDB == dbReceiptMaxModifiedDate ||propCurrentDB == dbRewardPoint || propCurrentDB == dbRewardRedemptionWithBranchID || propCurrentDB == dbReceipt || propCurrentDB == dbOpeningTime || propCurrentDB == dbReceiptDisputeRating || propCurrentDB == dbReceiptDisputeRatingAllAfterReceipt || propCurrentDB == dbReceiptDisputeRatingUpdateAndReload || propCurrentDB == dbReceiptDisputeRatingAllAfterReceiptUpdateAndReload || propCurrentDB == dbMenuList || propCurrentDB == dbMenuNoteList || propCurrentDB == dbBranchAndCustomerTable || propCurrentDB == dbBranchAndCustomerTableQR || propCurrentDB == dbBranchSearch || propCurrentDB == dbBranchSearchMore || propCurrentDB == dbCustomerTable)
+                
+                // Ready to notify delegate that data is ready and pass back items
+                if (self.delegate)
                 {
-                    [self.delegate itemsDownloaded:arrItem manager:self];
-                }
-                else
-                {
-                    [self.delegate itemsDownloaded:arrItem];
+                    if(propCurrentDB == dbHotDeal || propCurrentDB == dbHotDealWithBranchID || propCurrentDB == dbReceiptSummary || propCurrentDB == dbReceiptMaxModifiedDate ||propCurrentDB == dbRewardPoint || propCurrentDB == dbRewardRedemptionWithBranchID || propCurrentDB == dbReceipt || propCurrentDB == dbOpeningTime || propCurrentDB == dbReceiptDisputeRating || propCurrentDB == dbReceiptDisputeRatingAllAfterReceipt || propCurrentDB == dbReceiptDisputeRatingUpdateAndReload || propCurrentDB == dbReceiptDisputeRatingAllAfterReceiptUpdateAndReload || propCurrentDB == dbMenuList || propCurrentDB == dbMenuNoteList || propCurrentDB == dbBranchAndCustomerTable || propCurrentDB == dbBranchAndCustomerTableQR || propCurrentDB == dbBranchSearch || propCurrentDB == dbBranchSearchMore || propCurrentDB == dbCustomerTable || propCurrentDB == dbSettingWithKey)
+                    {
+                        [self.delegate itemsDownloaded:arrItem manager:self];
+                    }
+                    else
+                    {
+                        [self.delegate itemsDownloaded:arrItem];
+                    }
                 }
             }
         }
@@ -282,84 +299,97 @@
 {
     NSLog(@"start prepare data");
     NSMutableArray *arrItem = [[NSMutableArray alloc] init];
+
     
-    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:_dataToDownload options:NSJSONReadingAllowFragments error:nil];
-    
-    
-    //check loaded data ให้ไม่ต้องใส่ data แล้ว ไปบอก delegate ว่าให้ show alert error occur, please try again
-    if([jsonArray count] == 0)
+    NSDictionary *dicJson = [NSJSONSerialization JSONObjectWithData:_dataToDownload options:NSJSONReadingAllowFragments error:nil];
+    NSString *status = dicJson[@"status"];
+    if([status integerValue] == 3)
     {
+        CustomViewController *vc = (CustomViewController *)self.delegate;
+        [vc performSegueWithIdentifier:@"segUnwindToLaunchScreen" sender:self];
+    }
+    else
+    {
+        NSArray *jsonArray = dicJson[@"data"];
+        //    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:_dataToDownload options:NSJSONReadingAllowFragments error:nil];
+        
+        
+        //check loaded data ให้ไม่ต้องใส่ data แล้ว ไปบอก delegate ว่าให้ show alert error occur, please try again
+        if([jsonArray count] == 0)
+        {
+            if (self.delegate)
+            {
+                [self.delegate itemsDownloaded:arrItem];
+            }
+            return;
+        }
+        else if([jsonArray count] == 1)
+        {
+            NSArray *arrData = jsonArray[0];
+            NSDictionary *jsonElement = arrData[0];
+            
+            if(jsonElement[@"Expired"])
+            {
+                if([jsonElement[@"Expired"] isEqualToString:@"1"])
+                {
+                    if (self.delegate)
+                    {
+                        [self.delegate applicationExpired];
+                    }
+                    return;
+                }
+            }
+        }
+        for(int i=0; i<[jsonArray count]; i++)
+        {
+            //arrdatatemp <= arrdata
+            NSMutableArray *arrDataTemp = [[NSMutableArray alloc]init];
+            NSArray *arrData = jsonArray[i];
+            for(int j=0; j< arrData.count; j++)
+            {
+                NSDictionary *jsonElement = arrData[j];
+                NSObject *object = [[NSClassFromString([Utility getMasterClassName:i]) alloc] init];
+                
+                unsigned int propertyCount = 0;
+                objc_property_t * properties = class_copyPropertyList([object class], &propertyCount);
+                
+                for (unsigned int i = 0; i < propertyCount; ++i)
+                {
+                    objc_property_t property = properties[i];
+                    const char * name = property_getName(property);
+                    NSString *key = [NSString stringWithUTF8String:name];
+                    
+                    
+                    NSString *dbColumnName = [Utility makeFirstLetterUpperCase:key];
+                    if(!jsonElement[dbColumnName])
+                    {
+                        continue;
+                    }
+                    
+                    if([Utility isDateColumn:dbColumnName])
+                    {
+                        NSDate *date = [Utility stringToDate:jsonElement[dbColumnName] fromFormat:@"yyyy-MM-dd HH:mm:ss"];
+                        [object setValue:date forKey:key];
+                    }
+                    else
+                    {
+                        [object setValue:jsonElement[dbColumnName] forKey:key];
+                    }
+                }
+                [arrDataTemp addObject:object];
+            }
+            [arrItem addObject:arrDataTemp];
+        }
+        NSLog(@"end prepare data");
+        
+        // Ready to notify delegate that data is ready and pass back items
         if (self.delegate)
         {
             [self.delegate itemsDownloaded:arrItem];
         }
-        return;
-    }
-    else if([jsonArray count] == 1)
-    {
-        NSArray *arrData = jsonArray[0];
-        NSDictionary *jsonElement = arrData[0];
-        
-        if(jsonElement[@"Expired"])
-        {
-            if([jsonElement[@"Expired"] isEqualToString:@"1"])
-            {
-                if (self.delegate)
-                {
-                    [self.delegate applicationExpired];
-                }
-                return;
-            }
-        }
-    }
-    for(int i=0; i<[jsonArray count]; i++)
-    {
-        //arrdatatemp <= arrdata
-        NSMutableArray *arrDataTemp = [[NSMutableArray alloc]init];
-        NSArray *arrData = jsonArray[i];
-        for(int j=0; j< arrData.count; j++)
-        {
-            NSDictionary *jsonElement = arrData[j];
-            NSObject *object = [[NSClassFromString([Utility getMasterClassName:i]) alloc] init];
-            
-            unsigned int propertyCount = 0;
-            objc_property_t * properties = class_copyPropertyList([object class], &propertyCount);
-            
-            for (unsigned int i = 0; i < propertyCount; ++i)
-            {
-                objc_property_t property = properties[i];
-                const char * name = property_getName(property);
-                NSString *key = [NSString stringWithUTF8String:name];
-                
-                
-                NSString *dbColumnName = [Utility makeFirstLetterUpperCase:key];
-                if(!jsonElement[dbColumnName])
-                {
-                    continue;
-                }
-                
-                if([Utility isDateColumn:dbColumnName])
-                {
-                    NSDate *date = [Utility stringToDate:jsonElement[dbColumnName] fromFormat:@"yyyy-MM-dd HH:mm:ss"];
-                    [object setValue:date forKey:key];
-                }
-                else
-                {
-                    [object setValue:jsonElement[dbColumnName] forKey:key];
-                }
-            }
-            [arrDataTemp addObject:object];
-        }
-        [arrItem addObject:arrDataTemp];
-    }
-    NSLog(@"end prepare data");
-    
-    // Ready to notify delegate that data is ready and pass back items
-    if (self.delegate)
-    {
-        [self.delegate itemsDownloaded:arrItem];
     }
 }
+
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler {
     completionHandler(NSURLSessionResponseAllow);
     
@@ -664,6 +694,12 @@
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlCustomerTableGetList]]];
         }
             break;
+        case dbSettingWithKey:
+        {
+            noteDataString = [Utility getNoteDataString:data];
+            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlSettingWithKeyGet]]];
+        }
+        break;
         default:
             break;
     }
@@ -714,9 +750,8 @@
             LogIn *logIn = dataList[0];
             UserAccount *userAccount = dataList[1];
             
-            
             noteDataString = [Utility getNoteDataString:logIn];
-            noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:userAccount]];
+            noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:userAccount]];            
             url = [NSURL URLWithString:[Utility url:urlLogInUserAccountInsert]];
         }
             break;
@@ -1126,122 +1161,135 @@
         
         if(!error || (error && error.code == -1005))//-1005 คือ1. ตอน push notification ไม่ได้ และ2. ตอน enterbackground ตอน transaction ยังไม่เสร็จ พอ enter foreground มันจะไม่ return data มาให้
         {
-            switch (propCurrentDB)
+            if(!dataRaw)
             {
-                default:
+                //data parameter is nil
+                NSLog(@"Error: %@", [error debugDescription]);
+                return ;
+            }
+            
+            NSDictionary *json = [NSJSONSerialization
+                                  JSONObjectWithData:dataRaw
+                                  options:kNilOptions error:&error];
+            NSString *status = json[@"status"];
+            NSString *strReturnID = json[@"returnID"];
+            NSArray *dataJson = json[@"dataJson"];
+            NSString *strTableName = json[@"tableName"];
+            //                    NSString *action = json[@"action"];
+            if([status isEqual:@"1"])
+            {
+                NSLog(@"insert success");
+                if(strReturnID)
                 {
-                    if(!dataRaw)
+                    if (self.delegate)
                     {
-                        //data parameter is nil
-                        NSLog(@"Error: %@", [error debugDescription]);
-                        return ;
+                        [self.delegate itemsInsertedWithReturnID:strReturnID];
                     }
-                    
-                    NSDictionary *json = [NSJSONSerialization
-                                          JSONObjectWithData:dataRaw
-                                          options:kNilOptions error:&error];
-                    NSString *status = json[@"status"];
-                    NSString *strReturnID = json[@"returnID"];
-                    NSArray *dataJson = json[@"dataJson"];
-                    NSString *strTableName = json[@"tableName"];
-//                    NSString *action = json[@"action"];
-                    if([status isEqual:@"1"])
+                }
+                else if(strTableName)
+                {
+                    NSArray *arrClassName;
+//                    if([strTableName isEqualToString:@"BuffetOrder"])
+//                    {
+//                        arrClassName = @[@"Receipt",@"OrderTaking",@"OrderNote"];
+//                        NSArray *items = [Utility jsonToArray:dataJson arrClassName:arrClassName];
+//                        if(self.delegate)
+//                        {
+//                            [self.delegate itemsInsertedWithManager:self items:items];
+//                        }
+//                    }                    
+//                    else
                     {
-                        NSLog(@"insert success");
-                        if(strReturnID)
+                        if([strTableName isEqualToString:@"UserAccountValidate"] || [strTableName isEqualToString:@"LogInUserAccount"])
                         {
-                            if (self.delegate)
-                            {
-                                [self.delegate itemsInsertedWithReturnID:strReturnID];
-                            }
-                        }
-                        else if(strTableName)
-                        {
-                            NSArray *arrClassName;
-                            if([strTableName isEqualToString:@"UserAccountValidate"] || [strTableName isEqualToString:@"LogInUserAccount"])
-                            {
-                                if([dataJson count] == 1)
-                                {
-                                    arrClassName = @[@"UserAccount"];
-                                }
-                                else
-                                {
-                                    arrClassName = @[@"UserAccount",@"Receipt",@"CustomerTable",@"Branch",@"OrderTaking",@"Menu",@"MenuType",@"OrderNote",@"Note",@"NoteType"];
-                                }
-                            }
-                            else if([strTableName isEqualToString:@"UserAccountForgotPassword"])
+                            if([dataJson count] == 1)
                             {
                                 arrClassName = @[@"UserAccount"];
                             }
-                            else if([strTableName isEqualToString:@"OmiseCheckOut"] || [strTableName isEqualToString:@"BufferOrder"])
-                            {
-                                arrClassName = @[@"Receipt",@"OrderTaking",@"OrderNote"];
-                            }
-                            else if([strTableName isEqualToString:@"RewardPoint"])
-                            {
-                                arrClassName = @[@"PromoCode"];
-                            }
-                            else if([strTableName isEqualToString:@"Receipt"])
-                            {
-                                arrClassName = @[@"Receipt",@"Dispute"];
-                            }
-                            else if([strTableName isEqualToString:@"Rating"])
-                            {
-                                arrClassName = @[@"Rating"];
-                            }
-                            
-                            NSArray *items = [Utility jsonToArray:dataJson arrClassName:arrClassName];
-                            if(self.delegate)
-                            {
-                                [self.delegate itemsInsertedWithReturnData:items];
-                            }
-                        }
-                        else
-                        {
-                            if(self.delegate)
-                            {
-                                [self.delegate itemsInserted];
-                            }                            
-                        }
-                    }
-                    else if([status isEqual:@"2"])
-                    {
-                        //alertMsg
-                        if(self.delegate)
-                        {
-                            if(propCurrentDBInsert == dbOmiseCheckOut)
-                            {
-                                NSString *msg = json[@"msg"];
-                                NSMutableArray *dataList = [[NSMutableArray alloc]init];
-                                NSMutableArray *messgeList = [[NSMutableArray alloc]init];
-                                Message *message = [[Message alloc]init];
-                                message.text = msg;
-                                [messgeList addObject:message];
-                                [dataList addObject:messgeList];
-                                [self.delegate itemsInsertedWithReturnData:dataList];
-                                NSLog(@"msg: %@", msg);
-                            }
                             else
                             {
-                                NSString *msg = json[@"msg"];
-                                [self.delegate alertMsg:msg];
-                                NSLog(@"status: %@", status);
-                                NSLog(@"msg: %@", msg);
+                                arrClassName = @[@"UserAccount",@"Receipt",@"CustomerTable",@"Branch",@"OrderTaking",@"Menu",@"MenuType",@"OrderNote",@"Note",@"NoteType"];
                             }
-                        }                                        
+                        }
+                        else if([strTableName isEqualToString:@"UserAccountForgotPassword"])
+                        {
+                            arrClassName = @[@"UserAccount"];
+                        }
+                        else if([strTableName isEqualToString:@"OmiseCheckOut"] || [strTableName isEqualToString:@"BuffetOrder"])
+                        {
+                            arrClassName = @[@"Receipt",@"OrderTaking",@"OrderNote"];
+                        }
+                        else if([strTableName isEqualToString:@"RewardPoint"])
+                        {
+                            arrClassName = @[@"PromoCode"];
+                        }
+                        else if([strTableName isEqualToString:@"Receipt"])
+                        {
+                            arrClassName = @[@"Receipt",@"Dispute"];
+                        }
+                        else if([strTableName isEqualToString:@"Rating"])
+                        {
+                            arrClassName = @[@"Rating"];
+                        }
+                        
+                        NSArray *items = [Utility jsonToArray:dataJson arrClassName:arrClassName];
+                        if(self.delegate)
+                        {
+                            [self.delegate itemsInsertedWithReturnData:items];
+                        }
+                    }
+                    
+                    
+                    
+                }
+                else
+                {
+                    if(self.delegate)
+                    {
+                        [self.delegate itemsInserted];
+                    }
+                }
+            }
+            else if([status isEqual:@"2"])
+            {
+                //alertMsg
+                if(self.delegate)
+                {
+                    if(propCurrentDBInsert == dbOmiseCheckOut)
+                    {
+                        NSString *msg = json[@"msg"];
+                        NSMutableArray *dataList = [[NSMutableArray alloc]init];
+                        NSMutableArray *messgeList = [[NSMutableArray alloc]init];
+                        Message *message = [[Message alloc]init];
+                        message.text = msg;
+                        [messgeList addObject:message];
+                        [dataList addObject:messgeList];
+                        [self.delegate itemsInsertedWithReturnData:dataList];
+                        NSLog(@"msg: %@", msg);
                     }
                     else
                     {
-                        //Error
-                        NSLog(@"insert fail: %ld",currentDB);
-                        NSLog(@"%@", status);
-                        if (self.delegate)
-                        {
-                            [self.delegate itemsFail];
-                        }
+                        NSString *msg = json[@"msg"];
+                        [self.delegate alertMsg:msg];
+                        NSLog(@"status: %@", status);
+                        NSLog(@"msg: %@", msg);
                     }
                 }
-                    break;
+            }
+            else if([status isEqual:@"3"])
+            {
+                CustomViewController *vc = (CustomViewController *)self.delegate;
+                [vc performSegueWithIdentifier:@"segUnwindToLaunchScreen" sender:self];
+            }
+            else
+            {
+                //Error
+                NSLog(@"insert fail");
+                NSLog(@"%@", status);
+                if (self.delegate)
+                {
+                    [self.delegate itemsFail];
+                }
             }
         }
         else
@@ -1641,6 +1689,11 @@
                     [self.delegate itemsUpdated:alert];
                 }
             }
+            else if([status isEqual:@"3"])
+            {
+                CustomViewController *vc = (CustomViewController *)self.delegate;
+                [vc performSegueWithIdentifier:@"segUnwindToLaunchScreen" sender:self];
+            }
             else
             {
                 //Error
@@ -1963,6 +2016,11 @@
             {
                 NSLog(@"delete success");
             }
+            else if([status isEqual:@"3"])
+            {
+                CustomViewController *vc = (CustomViewController *)self.delegate;
+                [vc performSegueWithIdentifier:@"segUnwindToLaunchScreen" sender:self];
+            }
             else
             {
                 //Error
@@ -2139,18 +2197,26 @@
                                   JSONObjectWithData:dataRaw
                                   options:kNilOptions error:&error];
             
-            
-            NSString *base64String = json[@"base64String"];
-            if(json && base64String && ![base64String isEqualToString:@""])
+            NSString *status = json[@"status"];
+            if([status integerValue] == 3)
             {
-                NSData *nsDataEncrypted = [[NSData alloc] initWithBase64EncodedString:base64String options:NSDataBase64DecodingIgnoreUnknownCharacters];
-                
-                UIImage *image = [[UIImage alloc] initWithData:nsDataEncrypted];
-                completionBlock(YES,image);
+                CustomViewController *vc = (CustomViewController *)self.delegate;
+                [vc performSegueWithIdentifier:@"segUnwindToLaunchScreen" sender:self];
             }
             else
             {
-                completionBlock(NO,nil);
+                NSString *base64String = json[@"base64String"];
+                if(json && base64String && ![base64String isEqualToString:@""])
+                {
+                    NSData *nsDataEncrypted = [[NSData alloc] initWithBase64EncodedString:base64String options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                    
+                    UIImage *image = [[UIImage alloc] initWithData:nsDataEncrypted];
+                    completionBlock(YES,image);
+                }
+                else
+                {
+                    completionBlock(NO,nil);
+                }
             }
         }
     }];
@@ -2185,17 +2251,26 @@
                                   options:kNilOptions error:&error];
             
             
-            NSString *base64String = json[@"base64String"];
-            if(json && base64String && ![base64String isEqualToString:@""])
+            NSString *status = json[@"status"];
+            if([status integerValue] == 3)
             {
-                NSData *nsDataEncrypted = [[NSData alloc] initWithBase64EncodedString:base64String options:NSDataBase64DecodingIgnoreUnknownCharacters];
-                
-                UIImage *image = [[UIImage alloc] initWithData:nsDataEncrypted];
-                completionBlock(YES,image);
+                CustomViewController *vc = (CustomViewController *)self.delegate;
+                [vc performSegueWithIdentifier:@"segUnwindToLaunchScreen" sender:self];
             }
             else
             {
-                completionBlock(NO,nil);
+                NSString *base64String = json[@"base64String"];
+                if(json && base64String && ![base64String isEqualToString:@""])
+                {
+                    NSData *nsDataEncrypted = [[NSData alloc] initWithBase64EncodedString:base64String options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                    
+                    UIImage *image = [[UIImage alloc] initWithData:nsDataEncrypted];
+                    completionBlock(YES,image);
+                }
+                else
+                {
+                    completionBlock(NO,nil);
+                }
             }
         }
     }];
@@ -2282,69 +2357,74 @@
                 
                 NSMutableArray *arrItem = [[NSMutableArray alloc] init];
                 
-                NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:dataRaw options:NSJSONReadingAllowFragments error:nil];
                 
-                if(!jsonArray)
+                NSDictionary *dicJson = [NSJSONSerialization JSONObjectWithData:dataRaw options:NSJSONReadingAllowFragments error:nil];
+                NSString *status = dicJson[@"status"];
+                if([status integerValue] == 3)
                 {
-                    return;
+                    CustomViewController *vc = (CustomViewController *)self.delegate;
+                    [vc performSegueWithIdentifier:@"segUnwindToLaunchScreen" sender:self];
                 }
-                for(int i=0; i<[jsonArray count]; i++)
+                else
                 {
-                    //arrdatatemp <= arrdata
-                    NSMutableArray *arrDataTemp = [[NSMutableArray alloc]init];
-                    NSArray *arrData = jsonArray[i];
-                    for(int j=0; j< arrData.count; j++)
+                    NSArray *jsonArray = dicJson[@"data"];
+                    //                NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:dataRaw options:NSJSONReadingAllowFragments error:nil];
+                    
+                    if(!jsonArray)
                     {
-                        NSDictionary *jsonElement = arrData[j];
-                        NSObject *object = [[NSClassFromString([Utility getMasterClassName:i from:arrClassName]) alloc] init];
-                        
-                        unsigned int propertyCount = 0;
-                        objc_property_t * properties = class_copyPropertyList([object class], &propertyCount);
-                        
-                        for (unsigned int i = 0; i < propertyCount; ++i)
-                        {
-                            objc_property_t property = properties[i];
-                            const char * name = property_getName(property);
-                            NSString *key = [NSString stringWithUTF8String:name];
-                            
-                            
-                            NSString *dbColumnName = [Utility makeFirstLetterUpperCase:key];
-                            if(!jsonElement[dbColumnName])
-                            {
-                                continue;
-                            }
-                            
-                            
-                            if([Utility isDateColumn:dbColumnName])
-                            {
-                                NSDate *date = [Utility stringToDate:jsonElement[dbColumnName] fromFormat:@"yyyy-MM-dd HH:mm:ss"];
-                                if(!date)
-                                {
-                                    date = [Utility stringToDate:jsonElement[dbColumnName] fromFormat:@"yyyy-MM-dd"];
-                                }
-                                [object setValue:date forKey:key];
-                            }
-                            else
-                            {
-                                [object setValue:jsonElement[dbColumnName] forKey:key];
-                            }
-                        }
-                        [arrDataTemp addObject:object];
+                        return;
                     }
-                    [arrItem addObject:arrDataTemp];
-                }
-                
-                // Ready to notify delegate that data is ready and pass back items
-                if (self.delegate)
-                {
-//                    if(propCurrentDB == dbMenuNoteList || propCurrentDB == dbMenuBelongToBuffet)
+                    for(int i=0; i<[jsonArray count]; i++)
+                    {
+                        //arrdatatemp <= arrdata
+                        NSMutableArray *arrDataTemp = [[NSMutableArray alloc]init];
+                        NSArray *arrData = jsonArray[i];
+                        for(int j=0; j< arrData.count; j++)
+                        {
+                            NSDictionary *jsonElement = arrData[j];
+                            NSObject *object = [[NSClassFromString([Utility getMasterClassName:i from:arrClassName]) alloc] init];
+                            
+                            unsigned int propertyCount = 0;
+                            objc_property_t * properties = class_copyPropertyList([object class], &propertyCount);
+                            
+                            for (unsigned int i = 0; i < propertyCount; ++i)
+                            {
+                                objc_property_t property = properties[i];
+                                const char * name = property_getName(property);
+                                NSString *key = [NSString stringWithUTF8String:name];
+                                
+                                
+                                NSString *dbColumnName = [Utility makeFirstLetterUpperCase:key];
+                                if(!jsonElement[dbColumnName])
+                                {
+                                    continue;
+                                }
+                                
+                                
+                                if([Utility isDateColumn:dbColumnName])
+                                {
+                                    NSDate *date = [Utility stringToDate:jsonElement[dbColumnName] fromFormat:@"yyyy-MM-dd HH:mm:ss"];
+                                    if(!date)
+                                    {
+                                        date = [Utility stringToDate:jsonElement[dbColumnName] fromFormat:@"yyyy-MM-dd"];
+                                    }
+                                    [object setValue:date forKey:key];
+                                }
+                                else
+                                {
+                                    [object setValue:jsonElement[dbColumnName] forKey:key];
+                                }
+                            }
+                            [arrDataTemp addObject:object];
+                        }
+                        [arrItem addObject:arrDataTemp];
+                    }
+                    
+                    // Ready to notify delegate that data is ready and pass back items
+                    if (self.delegate)
                     {
                         completionBlock(YES,arrItem);
-                    }
-//                    else
-//                    {
-//                        [self.delegate itemsDownloaded:arrItem];
-//                    }
+                    }                    
                 }
             }
         }

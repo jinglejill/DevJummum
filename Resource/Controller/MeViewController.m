@@ -57,15 +57,12 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
 -(IBAction)unwindToMe:(UIStoryboardSegue *)segue
 {
     self.showOrderDetail = 0;
-    if([[segue sourceViewController] isKindOfClass:[PaymentCompleteViewController class]])
+    CustomViewController *vc = segue.sourceViewController;
+    if([[segue sourceViewController] isKindOfClass:[PaymentCompleteViewController class]] && !vc.showOrderDetail)
     {
-        CustomViewController *vc = segue.sourceViewController;
-        if(!vc.showOrderDetail)
-        {
-            _goToBuffetOrder = 1;
-            PaymentCompleteViewController *vc = segue.sourceViewController;
-            self.selectedReceipt = vc.receipt;
-        }
+        _goToBuffetOrder = 1;
+        PaymentCompleteViewController *vc = segue.sourceViewController;
+        self.selectedReceipt = vc.receipt;
     }
     else
     {
@@ -320,7 +317,7 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
                     [self removeMemberData];
                     [self removeOverlayViews];
                     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-                    LogIn *logIn = [[LogIn alloc]initWithUsername:userAccount.username status:-1 deviceToken:[Utility deviceToken]];
+                    LogIn *logIn = [[LogIn alloc]initWithUsername:userAccount.username status:-1 deviceToken:[Utility deviceToken] model:[self deviceName]];
                     [self.homeModel insertItems:dbLogOut withData:logIn actionScreen:@"log out in Me screen"];
                     [self showAlert:@"" message:@"ออกจากระบบสำเร็จ" method:@selector(unwindToLogIn)];
                 }
@@ -348,7 +345,7 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
         TosAndPrivacyPolicyViewController *vc = segue.destinationViewController;
         vc.pageType = _pageType;
     }
-    else if([[segue identifier] isEqualToString:@"segReceiptSummary"])
+    else if([[segue identifier] isEqualToString:@"segReceiptSummary"] || [[segue identifier] isEqualToString:@"segReceiptSummaryNoAnimate"])
     {
         ReceiptSummaryViewController *vc = segue.destinationViewController;
         vc.showOrderDetail = self.showOrderDetail;
@@ -369,6 +366,6 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
 
 -(void)segueToReceiptSummaryAuto
 {
-    [self performSegueWithIdentifier:@"segReceiptSummary" sender:self];
+    [self performSegueWithIdentifier:@"segReceiptSummaryNoAnimate" sender:self];
 }
 @end

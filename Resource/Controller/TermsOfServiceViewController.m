@@ -102,7 +102,6 @@
     
     [[NSUserDefaults standardUserDefaults] setValue:[dicTosAgree copy] forKey:@"tosAgree"];
     [self performSegueWithIdentifier:@"segQrCodeScanTable" sender:self];
-//    [self performSegueWithIdentifier:@"segHotDeal" sender:self];
 }
 
 - (IBAction)goBack:(id)sender

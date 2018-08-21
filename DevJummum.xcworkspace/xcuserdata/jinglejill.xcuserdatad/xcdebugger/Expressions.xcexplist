@@ -3,6 +3,17 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[CreditCardAndOrderSummaryViewController tableView:numberOfRowsInSection:]:CreditCardAndOrderSummaryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[dicCreditCard objectForKey:userAccount.username]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HomeModel URLSession:dataTask:didReceiveData:]:HomeModel.m">
+      </ContextState>
+      <ContextState
          contextName = "__47-[HomeModel insertItems:withData:actionScreen:]_block_invoke:HomeModel.m">
       </ContextState>
       <ContextState
