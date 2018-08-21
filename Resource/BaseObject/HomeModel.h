@@ -27,7 +27,6 @@
 - (void)connectionFail;
 - (void)itemsInsertedWithReturnID:(NSString *)strID;
 - (void)itemsInsertedWithReturnData:(NSArray *)items;
-- (void)itemsInsertedWithManager:(NSObject *)objHomeModel items:(NSArray *)items;
 - (void)alertMsg:(NSString *)msg;
 - (void)itemsFail;
 - (void)salesGenerated:(NSString *)fileName;

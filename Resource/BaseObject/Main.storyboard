@@ -385,7 +385,9 @@
                         <outlet property="btnUpdate" destination="ChV-1Z-M6l" id="j77-DI-kEU"/>
                         <outlet property="imgVwLogoTop" destination="A4i-di-5Cg" id="233-n6-umA"/>
                         <outlet property="lblHeader" destination="tk7-HQ-USU" id="sfW-V8-jvB"/>
+                        <outlet property="lblMessage" destination="aaJ-ub-VBK" id="LiK-f8-u6w"/>
                         <outlet property="lblSubtitle" destination="O6Z-EQ-fXs" id="vTO-KB-lBc"/>
+                        <outlet property="lblTitle" destination="WXM-pr-AXz" id="fe8-HM-mpP"/>
                         <outlet property="vwAlert" destination="3pH-z6-uxZ" id="XFL-lh-23c"/>
                         <outlet property="vwAlertHeight" destination="9Uu-tM-x6G" id="uMS-24-Qbh"/>
                         <segue destination="r1i-sb-EyU" kind="unwind" identifier="segUnwindToLaunchScreen" unwindAction="unwindToLaunchScreen:" id="Ozf-iC-anh"/>

@@ -1189,16 +1189,6 @@
                 else if(strTableName)
                 {
                     NSArray *arrClassName;
-//                    if([strTableName isEqualToString:@"BuffetOrder"])
-//                    {
-//                        arrClassName = @[@"Receipt",@"OrderTaking",@"OrderNote"];
-//                        NSArray *items = [Utility jsonToArray:dataJson arrClassName:arrClassName];
-//                        if(self.delegate)
-//                        {
-//                            [self.delegate itemsInsertedWithManager:self items:items];
-//                        }
-//                    }                    
-//                    else
                     {
                         if([strTableName isEqualToString:@"UserAccountValidate"] || [strTableName isEqualToString:@"LogInUserAccount"])
                         {
@@ -1237,10 +1227,7 @@
                         {
                             [self.delegate itemsInsertedWithReturnData:items];
                         }
-                    }
-                    
-                    
-                    
+                    }  
                 }
                 else
                 {
