@@ -101,10 +101,12 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     
     if(self.showOrderDetail)
     {
+        self.showOrderDetail = 0;
         [self segueToOrderDetailAuto:self.selectedReceipt];
     }
     else if(self.goToBuffetOrder)
     {
+        self.goToBuffetOrder = 0;
         _selectedReceipt = self.selectedReceipt;
         [self performSegueWithIdentifier:@"segMenuSelection" sender:self];
     }

@@ -115,7 +115,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 {
     //save to camera roll
     [self screenCaptureBill:receipt];
-    if([Receipt hasBuffetMenu:receipt.receiptID])
+    if([Receipt hasBuffetMenu:receipt.receiptID] || receipt.buffetReceiptID)
     {
         [self performSegueWithIdentifier:@"segUnwindToMe" sender:self];
     }

@@ -62,7 +62,15 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
     {
         _goToBuffetOrder = 1;
         PaymentCompleteViewController *vc = segue.sourceViewController;
-        self.selectedReceipt = vc.receipt;
+        if(vc.receipt.buffetReceiptID)
+        {
+            Receipt *buffetReceipt = [Receipt getReceipt:vc.receipt.buffetReceiptID];
+            self.selectedReceipt = buffetReceipt;
+        }
+        else
+        {
+            self.selectedReceipt = vc.receipt;
+        }
     }
     else
     {
@@ -104,7 +112,11 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if(self.showOrderDetail || _goToBuffetOrder)
+    if(self.showOrderDetail)
+    {
+        [self segueToReceiptSummaryAuto];
+    }
+    else if(_goToBuffetOrder)
     {
         [self segueToReceiptSummaryAuto];
     }
@@ -345,12 +357,21 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
         TosAndPrivacyPolicyViewController *vc = segue.destinationViewController;
         vc.pageType = _pageType;
     }
-    else if([[segue identifier] isEqualToString:@"segReceiptSummary"] || [[segue identifier] isEqualToString:@"segReceiptSummaryNoAnimate"])
+    else if([[segue identifier] isEqualToString:@"segReceiptSummary"])
     {
         ReceiptSummaryViewController *vc = segue.destinationViewController;
         vc.showOrderDetail = self.showOrderDetail;
         vc.selectedReceipt = self.selectedReceipt;
         vc.goToBuffetOrder = _goToBuffetOrder;
+    }
+    else if([[segue identifier] isEqualToString:@"segReceiptSummaryNoAnimate"])
+    {
+        ReceiptSummaryViewController *vc = segue.destinationViewController;
+        vc.showOrderDetail = self.showOrderDetail;
+        vc.selectedReceipt = self.selectedReceipt;
+        vc.goToBuffetOrder = _goToBuffetOrder;
+        self.showOrderDetail = 0;
+        _goToBuffetOrder = 0;        
     }
 }
 
