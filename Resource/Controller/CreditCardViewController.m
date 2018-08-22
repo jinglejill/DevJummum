@@ -75,7 +75,7 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
         }
     }
     
-    NSString *message = [Setting getValue:@"082m" example:@"คุณไม่ได้บันทึกบัตรเครดิตไว้"];
+    NSString *message = [Setting getValue:@"082m" example:@"คุณไม่ได้บันทึกบัตรเครดิต/เดบิตไว้"];
     UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
     noDataLabel.text             = message;
     noDataLabel.textColor        = cSystem4;
@@ -85,7 +85,6 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     return 0;
     
-
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

@@ -566,7 +566,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                     }
                     
                     
-                    NSString *message = [Setting getValue:@"040m" example:@"การชำระเงิน ด้วยบัตรเครดิต"];
+                    NSString *message = [Setting getValue:@"040m" example:@"การชำระเงิน ด้วยบัตรเครดิต/เดบิต"];
                     cell.textLabel.text = message;
                     cell.textLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];
                     cell.textLabel.textColor = cSystem1;
@@ -731,7 +731,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                     }
                     
                     
-                    cell.textLabel.text = @"เลือกบัตรเครดิต";
+                    cell.textLabel.text = @"เลือกบัตรเครดิต/เดบิต";
                     cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                     cell.textLabel.textColor = cSystem4;
                     cell.detailTextLabel.text = @">";
@@ -973,6 +973,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 cell.txtVoucherCode.text = @"";
                 [self setTextFieldDesign:cell.txtVoucherCode];
                 [cell.txtVoucherCode setInputAccessoryView:self.toolBar];
+                [cell.txtVoucherCode addTarget:self action:@selector(txtVoucherCodeChanged:) forControlEvents:UIControlEventValueChanged];
                 
                 
                 cell.btnConfirmVoucherCodeWidthConstant.constant = (self.view.frame.size.width - 16*2 - 8)/2;
@@ -1608,7 +1609,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         }
         if(![OMSCardNumber validate:_creditCard.creditCardNo])
         {
-            [self blinkAlertMsg:@"หมายเลขบัตรเครดิตไม่ถูกต้อง"];
+            [self blinkAlertMsg:@"หมายเลขบัตรเครดิต/เดบิตไม่ถูกต้อง"];
             UIView *vwInvalid = [self.view viewWithTag:13];
             vwInvalid.backgroundColor = cSystem1;
             return;
@@ -1722,7 +1723,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             }
             else
             {
-                NSString *message = [Setting getValue:@"041m" example:@"การจ่ายด้วยบัตรเครดิตขัดข้อง กรุณาติดต่อเจ้าหน้าที่ที่เกี่ยวข้อง"];
+                NSString *message = [Setting getValue:@"041m" example:@"การจ่ายด้วยบัตรเครดิต/เดบิตขัดข้อง กรุณาติดต่อเจ้าหน้าที่ที่เกี่ยวข้อง"];
                 [self showAlert:@"" message:message];
             }
         }];
@@ -1997,7 +1998,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             [voucherView.lblVoucherCode sizeToFit];
             voucherView.lblVoucherCodeWidthConstant.constant = voucherView.lblVoucherCode.frame.size.width;
             _discountValue = totalPriceGetDiscount;
-//            _discountValue = totalPriceGetDiscount < promotion.discountAmount?totalPriceGetDiscount:promotion.discountAmount;
+
             
             
             voucherView.lblDiscountAmount.text = [Utility formatDecimal:_discountValue withMinFraction:2 andMaxFraction:2];
@@ -2426,4 +2427,9 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     }
 }
 
+-(void)txtVoucherCodeChanged:(id)sender
+{
+    UITextField *txtVoucherCode = sender;
+    txtVoucherCode.text = [txtVoucherCode.text uppercaseString];
+}
 @end

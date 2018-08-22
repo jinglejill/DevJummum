@@ -85,7 +85,7 @@
     }
     else
     {
-        [self showAlert:@"" message:@"เราได้ส่งอีเมลให้คุณแล้ว กรุณาเช็คอีเมลของคุณ" method:@selector(goBack:)];
+        [self showAlert:@"" message:@"เราได้ส่งอีเมลให้คุณแล้ว กรุณาเช็คอีเมลของคุณค่ะ (ถ้าไม่พบ กรุณาตรวจสอบใน Junk mail ค่ะ)" method:@selector(goBack:)];
     }
 }
 

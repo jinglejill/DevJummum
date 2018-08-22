@@ -312,7 +312,7 @@
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O6Z-EQ-fXs">
                                         <rect key="frame" x="8" y="66" width="224" height="136.5"/>
-                                        <string key="text">The Jummum app you currently running (5.3) may not work for certain photo products, and a newer version of the app is available for you</string>
+                                        <string key="text">A newer version of the app is available for you, please update it to continue to order your food, receive latest promotions &amp; benefits with JUMMUM.</string>
                                         <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

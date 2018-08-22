@@ -95,7 +95,7 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
         }
         
         
-        cell.textLabel.text = @"เพิ่มบัตรเครดิต";
+        cell.textLabel.text = @"เพิ่มบัตรเครดิต/เดบิต";
         cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
         cell.textLabel.textColor = cSystem4;
         
