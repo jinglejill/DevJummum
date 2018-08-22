@@ -973,7 +973,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 cell.txtVoucherCode.text = @"";
                 [self setTextFieldDesign:cell.txtVoucherCode];
                 [cell.txtVoucherCode setInputAccessoryView:self.toolBar];
-                [cell.txtVoucherCode addTarget:self action:@selector(txtVoucherCodeChanged:) forControlEvents:UIControlEventValueChanged];
+                [cell.txtVoucherCode addTarget:self action:@selector(txtVoucherCodeChanged:) forControlEvents:UIControlEventEditingChanged];
                 
                 
                 cell.btnConfirmVoucherCodeWidthConstant.constant = (self.view.frame.size.width - 16*2 - 8)/2;
