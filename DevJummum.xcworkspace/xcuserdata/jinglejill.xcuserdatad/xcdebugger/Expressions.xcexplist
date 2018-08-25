@@ -3,18 +3,21 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[CreditCardAndOrderSummaryViewController tableView:numberOfRowsInSection:]:CreditCardAndOrderSummaryViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[dicCreditCard objectForKey:userAccount.username]">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "__47-[HomeModel insertItems:withData:actionScreen:]_block_invoke:HomeModel.m">
       </ContextState>
       <ContextState
          contextName = "-[HomeModel URLSession:dataTask:didReceiveData:]:HomeModel.m">
       </ContextState>
       <ContextState
-         contextName = "__47-[HomeModel insertItems:withData:actionScreen:]_block_invoke:HomeModel.m">
+         contextName = "-[ReceiptSummaryViewController tableView:cellForRowAtIndexPath:]:ReceiptSummaryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "section">
+            </PersistentString>
+            <PersistentString
+               value = "item">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "__42-[MenuSelectionViewController viewDidLoad]_block_invoke:MenuSelectionViewController.m">
@@ -34,13 +37,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ReceiptSummaryViewController tableView:cellForRowAtIndexPath:]:ReceiptSummaryViewController.m">
+         contextName = "-[CreditCardAndOrderSummaryViewController tableView:numberOfRowsInSection:]:CreditCardAndOrderSummaryViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "section">
+               value = "[dicCreditCard objectForKey:userAccount.username]">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CreditCardAndOrderSummaryViewController tableView:cellForRowAtIndexPath:]:CreditCardAndOrderSummaryViewController.m">
+         <PersistentStrings>
             <PersistentString
-               value = "item">
+               value = "cell.lblValue.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

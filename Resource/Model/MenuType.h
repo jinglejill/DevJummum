@@ -36,4 +36,6 @@
 +(NSMutableArray *)sortList:(NSMutableArray *)menuTypeList;
 +(NSMutableArray * )getMenuTypeListWithBranchID:(NSInteger)branchID;
 +(NSMutableArray * )getMenuTypeListALarCarteWithBranchID:(NSInteger)branchID;
++(MenuType *)getMenuType:(NSInteger)menuTypeID branchID:(NSInteger)branchID;
++(NSMutableArray *)getMenuTypeListWithMenuList:(NSMutableArray *)menuList;
 @end

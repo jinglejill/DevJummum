@@ -184,8 +184,7 @@ enum enumDB
     dbReceiptDisputeRatingUpdateAndReload,
     dbReceiptDisputeRatingAllAfterReceiptUpdateAndReload,
     dbMenuNote,
-    dbMenuNoteList,
-    dbOpeningTime,
+    dbMenuNoteList,    
     dbMenuBelongToBuffet,
     dbBuffetOrder,
     dbSettingWithKey
@@ -335,6 +334,7 @@ enum enumUrl
     urlMenuNoteUpdateList,
     urlMenuNoteDeleteList,
     urlOpeningTimeGet,
+    urlOpeningTimeMenuBelongToBuffetGet,
     urlContactUs,
     urlMenuBelongToBuffetGetList,
     urlBuffetOrderInsertList,

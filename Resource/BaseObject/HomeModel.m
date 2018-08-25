@@ -107,6 +107,11 @@
             arrClassName = @[@"Message",@"Menu",@"MenuType",@"Note",@"NoteType",@"SpecialPriceProgram"];
         }
             break;
+        case dbMenuBelongToBuffet:
+        {
+            arrClassName = @[@"Message",@"Menu",@"MenuType",@"Note",@"NoteType",@"SpecialPriceProgram",@"Receipt"];
+        }
+            break;
         case dbMenuNoteList:
         {
             arrClassName = @[@"MenuNote"];
@@ -120,7 +125,7 @@
         case dbReceiptSummary:
         case dbReceiptMaxModifiedDate:
         {
-            arrClassName = @[@"Receipt",@"Branch",@"OrderTaking",@"Menu",@"MenuType",@"OrderNote",@"Note",@"NoteType"];
+            arrClassName = @[@"Receipt",@"CustomerTable",@"Branch",@"OrderTaking",@"Menu",@"MenuType",@"OrderNote",@"Note",@"NoteType"];
         }
             break;        
         case dbPromotion:
@@ -160,8 +165,6 @@
             arrClassName = @[@"Receipt"];
         }
             break;
-//        case dbReceiptWithModifiedDate:
-        
         case dbReceiptDisputeRating:
         case dbReceiptDisputeRatingUpdateAndReload:
         {
@@ -189,11 +192,6 @@
         case dbBranchAndCustomerTableQR:
         {
             arrClassName = @[@"Branch",@"CustomerTable"];
-        }
-            break;
-        case dbOpeningTime:
-        {
-            arrClassName = @[@"Message",@"SpecialPriceProgram"];
         }
             break;
         case dbBranchSearch:
@@ -281,7 +279,7 @@
                 // Ready to notify delegate that data is ready and pass back items
                 if (self.delegate)
                 {
-                    if(propCurrentDB == dbHotDeal || propCurrentDB == dbHotDealWithBranchID || propCurrentDB == dbReceiptSummary || propCurrentDB == dbReceiptMaxModifiedDate ||propCurrentDB == dbRewardPoint || propCurrentDB == dbRewardRedemptionWithBranchID || propCurrentDB == dbReceipt || propCurrentDB == dbOpeningTime || propCurrentDB == dbReceiptDisputeRating || propCurrentDB == dbReceiptDisputeRatingAllAfterReceipt || propCurrentDB == dbReceiptDisputeRatingUpdateAndReload || propCurrentDB == dbReceiptDisputeRatingAllAfterReceiptUpdateAndReload || propCurrentDB == dbMenuList || propCurrentDB == dbMenuNoteList || propCurrentDB == dbBranchAndCustomerTable || propCurrentDB == dbBranchAndCustomerTableQR || propCurrentDB == dbBranchSearch || propCurrentDB == dbBranchSearchMore || propCurrentDB == dbCustomerTable || propCurrentDB == dbSettingWithKey)
+                    if(propCurrentDB == dbHotDeal || propCurrentDB == dbHotDealWithBranchID || propCurrentDB == dbReceiptSummary || propCurrentDB == dbReceiptMaxModifiedDate ||propCurrentDB == dbRewardPoint || propCurrentDB == dbRewardRedemptionWithBranchID || propCurrentDB == dbReceipt || propCurrentDB == dbReceiptDisputeRating || propCurrentDB == dbReceiptDisputeRatingAllAfterReceipt || propCurrentDB == dbReceiptDisputeRatingUpdateAndReload || propCurrentDB == dbReceiptDisputeRatingAllAfterReceiptUpdateAndReload || propCurrentDB == dbMenuList || propCurrentDB == dbMenuNoteList || propCurrentDB == dbBranchAndCustomerTable || propCurrentDB == dbBranchAndCustomerTableQR || propCurrentDB == dbBranchSearch || propCurrentDB == dbBranchSearchMore || propCurrentDB == dbCustomerTable || propCurrentDB == dbSettingWithKey || propCurrentDB == dbMenuBelongToBuffet)
                     {
                         [self.delegate itemsDownloaded:arrItem manager:self];
                     }
@@ -472,6 +470,12 @@
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlMenuGetList]]];
         }
             break;
+        case dbMenuBelongToBuffet:
+        {
+            noteDataString = [Utility getNoteDataString:data];
+            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlMenuBelongToBuffetGetList]]];
+        }
+        break;
         case dbReceiptSummary:
         {
             NSArray *dataList = (NSArray *)data;
@@ -649,12 +653,6 @@
             Receipt *receipt = (Receipt *)data;
             noteDataString = [Utility getNoteDataString:receipt];
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlReceiptDisputeRatingAllAfterReceiptGet]]];
-        }
-            break;
-        case dbOpeningTime:
-        {            
-            noteDataString = [Utility getNoteDataString:data];
-            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlOpeningTimeGet]]];
         }
             break;
         case dbBranchAndCustomerTable:
@@ -2282,30 +2280,6 @@
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlMenuNoteGetList]]];
         }
             break;
-        case dbMenuBelongToBuffet:
-        {
-            noteDataString = [Utility getNoteDataString:data];
-            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlMenuBelongToBuffetGetList]]];
-        }
-            break;
-//        case dbMenuBelongToBuffet:
-//        {
-//            NSArray *dataList = (NSArray *)data;
-//            Branch *branch = dataList[0];
-//            NSMutableArray *buffetMenuList = dataList[1];
-//            NSInteger countBuffetMenu = 0;
-//
-//
-//            noteDataString = [NSString stringWithFormat:@"branchID=%ld&countMenu=%ld",branch.branchID,[buffetMenuList count]];
-//            for(Menu *item in buffetMenuList)
-//            {
-//                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:item withRunningNo:countBuffetMenu]];
-//                countBuffetMenu++;
-//            }
-//
-//            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlMenuBelongToBuffetGetList]]];
-//        }
-//            break;
     }
     
     noteDataString = [NSString stringWithFormat:@"%@&modifiedDeviceToken=%@&modifiedUser=%@",noteDataString,[Utility deviceToken],[Utility modifiedUser]];
@@ -2335,9 +2309,6 @@
                 {
                     case dbMenuNoteList:
                         arrClassName = @[@"MenuNote"];
-                        break;
-                    case dbMenuBelongToBuffet:
-                        arrClassName = @[@"Message",@"Menu",@"MenuType",@"Note",@"NoteType"];
                         break;
                 }
                 

@@ -347,6 +347,8 @@
 		EF639E0B211F233E00C70A98 /* CustomTableViewCellLabelRemark.m in Sources */ = {isa = PBXBuildFile; fileRef = EF639E06211F233D00C70A98 /* CustomTableViewCellLabelRemark.m */; };
 		EF639E0C211F233E00C70A98 /* CustomTableViewCellSeparatorLine.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF639E07211F233D00C70A98 /* CustomTableViewCellSeparatorLine.xib */; };
 		EF639E0D211F233E00C70A98 /* CustomTableViewCellLabelRemark.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF639E09211F233E00C70A98 /* CustomTableViewCellLabelRemark.xib */; };
+		EF6C7CFD21318CAA00C335AC /* SharedMenuForBuffet.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6C7CFA21318CAA00C335AC /* SharedMenuForBuffet.m */; };
+		EF6C7CFE21318CAA00C335AC /* MenuForBuffet.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6C7CFC21318CAA00C335AC /* MenuForBuffet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -873,6 +875,10 @@
 		EF639E07211F233D00C70A98 /* CustomTableViewCellSeparatorLine.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCellSeparatorLine.xib; sourceTree = "<group>"; };
 		EF639E08211F233D00C70A98 /* CustomTableViewCellLabelRemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCellLabelRemark.h; sourceTree = "<group>"; };
 		EF639E09211F233E00C70A98 /* CustomTableViewCellLabelRemark.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCellLabelRemark.xib; sourceTree = "<group>"; };
+		EF6C7CF921318CAA00C335AC /* MenuForBuffet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuForBuffet.h; sourceTree = "<group>"; };
+		EF6C7CFA21318CAA00C335AC /* SharedMenuForBuffet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedMenuForBuffet.m; sourceTree = "<group>"; };
+		EF6C7CFB21318CAA00C335AC /* SharedMenuForBuffet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedMenuForBuffet.h; sourceTree = "<group>"; };
+		EF6C7CFC21318CAA00C335AC /* MenuForBuffet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuForBuffet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1235,6 +1241,10 @@
 		EF33CEA6211C36D100560C69 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EF6C7CF921318CAA00C335AC /* MenuForBuffet.h */,
+				EF6C7CFC21318CAA00C335AC /* MenuForBuffet.m */,
+				EF6C7CFB21318CAA00C335AC /* SharedMenuForBuffet.h */,
+				EF6C7CFA21318CAA00C335AC /* SharedMenuForBuffet.m */,
 				EF33CEC2211C36D100560C69 /* Branch.h */,
 				EF33CEFE211C36D100560C69 /* Branch.m */,
 				EF33CECF211C36D100560C69 /* Comment.h */,
@@ -1973,6 +1983,7 @@
 				EF33D0B1211C36D200560C69 /* CustomTableViewCellTotal.m in Sources */,
 				EF33D04C211C36D200560C69 /* MeViewController.m in Sources */,
 				EF33D0AA211C36D200560C69 /* CustomViewController.m in Sources */,
+				EF6C7CFD21318CAA00C335AC /* SharedMenuForBuffet.m in Sources */,
 				EF33CFD8211C36D200560C69 /* HomeModel.m in Sources */,
 				EF33D03E211C36D200560C69 /* OrderDetailViewController.m in Sources */,
 				EF33D05D211C36D200560C69 /* SharedRecommendShop.m in Sources */,
@@ -2001,6 +2012,7 @@
 				EF33D0B2211C36D200560C69 /* CustomTableViewCellOrder.m in Sources */,
 				EF33D03A211C36D200560C69 /* LaunchScreenViewController.m in Sources */,
 				EF33D0C7211C36D200560C69 /* CustomTableViewCellNote.m in Sources */,
+				EF6C7CFE21318CAA00C335AC /* MenuForBuffet.m in Sources */,
 				EF33D054211C36D200560C69 /* CustomerTableSearchViewController.m in Sources */,
 				EF33CFE0211C36D200560C69 /* OmiseAuthorizingPaymentViewController.swift in Sources */,
 				EF33CFE8211C36D200560C69 /* KeychainWrapper.m in Sources */,

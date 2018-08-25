@@ -12,6 +12,7 @@
 #import "OrderTaking.h"
 #import "SharedMenu.h"
 #import "SharedCurrentMenu.h"
+#import "SharedMenuForBuffet.h"
 #import "Utility.h"
 #import "Receipt.h"
 
@@ -300,6 +301,23 @@
     [dataList removeAllObjects];
 }
 
++(MenuForBuffet *)getCurrentMenuForBuffet
+{
+    MenuForBuffet *menuForBuffet = [SharedMenuForBuffet sharedMenuForBuffet].menuForBuffet;
+    return menuForBuffet;
+}
+
++(void)setCurrentMenuForBuffet:(MenuForBuffet *)menuForBuffet
+{
+    [SharedMenuForBuffet sharedMenuForBuffet].menuForBuffet = menuForBuffet;
+}
+
++(void)removeCurrentMenuForBuffet
+{
+    MenuForBuffet *menuForBuffet = [SharedMenuForBuffet sharedMenuForBuffet].menuForBuffet;
+    menuForBuffet = nil;
+}
+
 +(NSMutableArray *)getMenuListALaCarteWithBranchID:(NSInteger)branchID
 {
     NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
@@ -338,6 +356,32 @@
     }
     
     return belongToBuffetMenuList;
+}
+
++(NSMutableArray *)getMenuBelongToBuffet:(Receipt *)receipt
+{
+    NSMutableSet *menuSet = [[NSMutableSet alloc]init];
+    NSMutableSet *menuBelongToBuffetSet = [[NSMutableSet alloc]init];
+    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
+    for(OrderTaking *item in orderTakingList)
+    {
+        Menu *menu = [Menu getMenu:item.menuID branchID:item.branchID];
+        [menuSet addObject:menu];
+    }
+    
+    for(Menu *item in menuSet)
+    {
+        if(item.buffetMenu)
+        {
+            NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _belongToMenuID = %ld",item.branchID,item.menuID];
+            NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
+            
+            [menuBelongToBuffetSet addObjectsFromArray:filterArray];
+        }
+    }
+    
+    return [[menuBelongToBuffetSet allObjects] mutableCopy];
 }
 
 @end

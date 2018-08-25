@@ -560,6 +560,9 @@ extern NSString *globalModifiedUser;
         case urlOpeningTimeGet:
             url = @"JMMOpeningTimeGet.php";
             break;
+        case urlOpeningTimeMenuBelongToBuffetGet:
+            url = @"JMMOpeningTimeMenuBelongToBuffetGet.php";
+            break;
         case urlMenuBelongToBuffetGetList:
             url = @"JMMMenuBelongToBuffetGetList.php";
             break;
