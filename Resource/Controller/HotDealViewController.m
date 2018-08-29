@@ -171,7 +171,6 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
         float imageWidth = cell.frame.size.width -2*16 > 375?375:cell.frame.size.width -2*16;
         cell.imgVwValueHeight.constant = imageWidth/16*9;
         cell.imgVwValue.contentMode = UIViewContentModeScaleAspectFit;
-        NSLog(@"imgVwValueTop :%f",cell.imgVwValueTop.constant);
         
         
         if (!_lastItemReached && section == [_filterPromotionList count]-1)

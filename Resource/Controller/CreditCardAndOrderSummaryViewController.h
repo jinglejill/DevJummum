@@ -21,18 +21,17 @@
 @property (strong, nonatomic) IBOutlet UITableView *tbvTotal;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tbvTotalHeightConstant;
 @property (strong, nonatomic) IBOutlet CustomViewVoucher *voucherView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomButtonHeight;
+@property (strong, nonatomic) IBOutlet UIButton *btnAddRemoveMenu;
 @property (strong, nonatomic) Branch *branch;
 @property (strong, nonatomic) CustomerTable *customerTable;
 @property (strong, nonatomic) Receipt *receipt;
 @property (strong, nonatomic) Receipt *buffetReceipt;
 @property (nonatomic) NSInteger fromReceiptSummaryMenu;
 @property (nonatomic) NSInteger fromOrderDetailMenu;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomButtonHeight;
-@property (strong, nonatomic) IBOutlet UIButton *btnAddRemoveMenu;
 - (IBAction)addRemoveMenu:(id)sender;
-
 - (IBAction)pay:(id)sender;
--(IBAction)unwindToCreditCardAndOrderSummary:(UIStoryboardSegue *)segue;
 - (IBAction)goBack:(id)sender;
+-(IBAction)unwindToCreditCardAndOrderSummary:(UIStoryboardSegue *)segue;
 @end

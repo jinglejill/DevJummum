@@ -22,9 +22,9 @@ extern NSString *globalPingAddress;
 extern NSString *globalDomainName;
 extern NSString *globalSubjectNoConnection;
 extern NSString *globalDetailNoConnection;
-extern BOOL globalFinishLoadSharedData;
 extern NSString *globalKey;
 extern NSString *globalModifiedUser;
+extern NSString *globalBundleID;
 
 
 
@@ -143,14 +143,13 @@ extern NSString *globalModifiedUser;
     return [[NSUserDefaults standardUserDefaults] stringForKey:BRANCH];
 }
 
-+ (BOOL) finishLoadSharedData
++(void)setBundleID:(NSString *)bundleID
 {
-    return globalFinishLoadSharedData;
+    globalBundleID = bundleID;
 }
-
-+ (void) setFinishLoadSharedData:(BOOL)finish
++(NSString *)bundleID
 {
-    globalFinishLoadSharedData = finish;
+    return globalBundleID;
 }
 
 + (NSString *) url:(enum enumUrl)eUrl
@@ -571,6 +570,9 @@ extern NSString *globalModifiedUser;
             break;
         case urlSettingWithKeyGet:
             url = @"JMMSettingWithKeyGet.php";
+            break;
+        case urlPromotionAndRewardRedemption:
+            url = @"JMMPromotionAndRewardRedemptionGetList.php";
             break;
         default:
             break;

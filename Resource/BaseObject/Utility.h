@@ -187,7 +187,8 @@ enum enumDB
     dbMenuNoteList,    
     dbMenuBelongToBuffet,
     dbBuffetOrder,
-    dbSettingWithKey
+    dbSettingWithKey,
+    dbPromotionAndRewardRedemption
 
 
     
@@ -338,7 +339,8 @@ enum enumUrl
     urlContactUs,
     urlMenuBelongToBuffetGetList,
     urlBuffetOrderInsertList,
-    urlSettingWithKeyGet
+    urlSettingWithKeyGet,
+    urlPromotionAndRewardRedemption
     
 
     
@@ -365,6 +367,8 @@ enum enumUrl
 + (NSString *) deviceToken;
 + (NSInteger) deviceID;
 + (NSString *) dbName;
++(void)setBundleID:(NSString *)bundleID;
++(NSString *)bundleID;
 + (NSString *) formatDate:(NSString *)strDate fromFormat:(NSString *)fromFormat toFormat:(NSString *)toFormat;
 + (NSDate *) stringToDate:(NSString *)strDate fromFormat:(NSString *)fromFormat;
 + (NSString *) dateToString:(NSDate *)date toFormat:(NSString *)toFormat;
@@ -393,8 +397,6 @@ enum enumUrl
 + (NSString *)modifiedUser;
 + (NSString *)modifiedVC;
 + (void)setModifiedUser:(NSString *)modifiedUser;
-+ (BOOL) finishLoadSharedData;
-+ (void) setFinishLoadSharedData:(BOOL)finish;
 + (NSData *)dataFromHexString:(NSString *)string;
 + (NSString *)makeFirstLetterLowerCase:(NSString *)text;
 + (NSString *)makeFirstLetterUpperCase:(NSString *)text;

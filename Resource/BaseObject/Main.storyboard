@@ -992,6 +992,7 @@
                         <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToQRScanTable" unwindAction="unwindToQRCodeScanTable:" id="3nh-nw-2bt"/>
                         <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="lof-As-eq3"/>
                         <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="z5s-2u-hmu"/>
+                        <segue destination="qVW-Az-F2z" kind="show" identifier="segVoucherCodeList" id="JYk-xN-VEy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TxL-MH-V7t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1002,7 +1003,7 @@
         <!--Select Payment Method View Controller-->
         <scene sceneID="kje-YX-BPl">
             <objects>
-                <viewController storyboardIdentifier="SelectPaymentMethodViewController" id="XJc-Mh-huG" customClass="SelectPaymentMethodViewController" sceneMemberID="viewController">
+                <viewController id="XJc-Mh-huG" customClass="SelectPaymentMethodViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="djs-zN-LRa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1031,7 +1032,6 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="เลือกช่องทางชำระเงิน" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qoz-7W-v4X">
                                         <rect key="frame" x="16" y="12" width="343" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="Dj0-Gp-peT"/>
                                             <constraint firstAttribute="height" constant="21" id="smF-vf-5pT"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="17"/>
@@ -1046,11 +1046,8 @@
                                     <constraint firstItem="Qoz-7W-v4X" firstAttribute="leading" secondItem="Xz8-h2-Q10" secondAttribute="leading" constant="16" id="MnX-2z-cEu"/>
                                     <constraint firstItem="UvZ-jH-fvd" firstAttribute="leading" secondItem="Xz8-h2-Q10" secondAttribute="leading" id="dXU-Nb-cNh"/>
                                     <constraint firstItem="UvZ-jH-fvd" firstAttribute="top" secondItem="Xz8-h2-Q10" secondAttribute="top" id="fI7-hq-Ktw"/>
-                                    <constraint firstItem="UvZ-jH-fvd" firstAttribute="leading" secondItem="Xz8-h2-Q10" secondAttribute="leading" id="fbo-gB-bHq"/>
                                     <constraint firstAttribute="bottom" secondItem="UvZ-jH-fvd" secondAttribute="bottom" id="oug-1S-JhW"/>
                                     <constraint firstAttribute="trailing" secondItem="Qoz-7W-v4X" secondAttribute="trailing" constant="16" id="ptV-fi-TW0"/>
-                                    <constraint firstAttribute="bottom" secondItem="UvZ-jH-fvd" secondAttribute="bottom" id="wCG-LA-lqs"/>
-                                    <constraint firstItem="UvZ-jH-fvd" firstAttribute="top" secondItem="Xz8-h2-Q10" secondAttribute="top" id="wgd-HR-gI3"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5SH-H9-kcH">
@@ -1101,6 +1098,105 @@
                 <exit id="MTK-aL-bNu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="6479" y="501"/>
+        </scene>
+        <!--Voucher Code List View Controller-->
+        <scene sceneID="l9a-NL-K3f">
+            <objects>
+                <viewController id="qVW-Az-F2z" customClass="VoucherCodeListViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="r0U-hF-wqD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="uR7-FP-AeV">
+                                <rect key="frame" x="0.0" y="96" width="375" height="571"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uCC-xV-N4s">
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="rAS-bV-XJJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="8uG-8f-s5c"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="X">
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="dismissViewController:" destination="qVW-Az-F2z" eventType="touchUpInside" id="TzV-a9-4cR"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="เลือก Voucher Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a24-yR-sDY">
+                                        <rect key="frame" x="16" y="12" width="343" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="4Gk-dz-td2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="rAS-bV-XJJ" firstAttribute="leading" secondItem="uCC-xV-N4s" secondAttribute="leading" id="0EW-x8-tfc"/>
+                                    <constraint firstItem="a24-yR-sDY" firstAttribute="centerY" secondItem="rAS-bV-XJJ" secondAttribute="centerY" id="0zn-EH-w0t"/>
+                                    <constraint firstAttribute="bottom" secondItem="rAS-bV-XJJ" secondAttribute="bottom" id="c5E-UI-h24"/>
+                                    <constraint firstAttribute="height" constant="44" id="eCF-Dn-MTJ"/>
+                                    <constraint firstItem="rAS-bV-XJJ" firstAttribute="top" secondItem="uCC-xV-N4s" secondAttribute="top" id="q96-DO-ARs"/>
+                                    <constraint firstAttribute="trailing" secondItem="a24-yR-sDY" secondAttribute="trailing" constant="16" id="soG-nQ-6ph"/>
+                                    <constraint firstItem="a24-yR-sDY" firstAttribute="leading" secondItem="uCC-xV-N4s" secondAttribute="leading" constant="16" id="yCK-eo-UaM"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXT-h6-JXY">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUN-me-7FS">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="Qta-th-vJf"/>
+                                        </constraints>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="uUN-me-7FS" firstAttribute="top" secondItem="SXT-h6-JXY" secondAttribute="top" id="BPf-6P-4Ky"/>
+                                    <constraint firstAttribute="height" constant="44" id="Z5U-KS-uHN"/>
+                                    <constraint firstItem="uUN-me-7FS" firstAttribute="leading" secondItem="SXT-h6-JXY" secondAttribute="leading" id="aNC-B4-kNE"/>
+                                    <constraint firstAttribute="bottom" secondItem="uUN-me-7FS" secondAttribute="bottom" id="bzk-Dl-oze"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uCC-xV-N4s" firstAttribute="trailing" secondItem="bTi-57-wt2" secondAttribute="trailing" id="LQb-UO-evI"/>
+                            <constraint firstItem="uR7-FP-AeV" firstAttribute="leading" secondItem="bTi-57-wt2" secondAttribute="leading" id="Xfp-2N-qr1"/>
+                            <constraint firstItem="SXT-h6-JXY" firstAttribute="top" secondItem="r0U-hF-wqD" secondAttribute="top" id="Yfx-fz-Rsd"/>
+                            <constraint firstItem="uR7-FP-AeV" firstAttribute="trailing" secondItem="bTi-57-wt2" secondAttribute="trailing" id="aZg-Yk-5SI"/>
+                            <constraint firstItem="SXT-h6-JXY" firstAttribute="leading" secondItem="bTi-57-wt2" secondAttribute="leading" id="g9R-Wj-UeW"/>
+                            <constraint firstItem="SXT-h6-JXY" firstAttribute="trailing" secondItem="bTi-57-wt2" secondAttribute="trailing" id="gYW-9s-JWT"/>
+                            <constraint firstAttribute="bottom" secondItem="uR7-FP-AeV" secondAttribute="bottom" id="n7n-SW-eFc"/>
+                            <constraint firstItem="uR7-FP-AeV" firstAttribute="top" secondItem="uCC-xV-N4s" secondAttribute="bottom" constant="8" id="sCs-ZV-C6a"/>
+                            <constraint firstItem="uCC-xV-N4s" firstAttribute="leading" secondItem="bTi-57-wt2" secondAttribute="leading" id="wrj-yS-9Jw"/>
+                            <constraint firstItem="uCC-xV-N4s" firstAttribute="top" secondItem="SXT-h6-JXY" secondAttribute="bottom" id="y4Y-33-R8P"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bTi-57-wt2"/>
+                    </view>
+                    <connections>
+                        <outlet property="lblNavTitle" destination="a24-yR-sDY" id="cXV-0n-5Pc"/>
+                        <outlet property="tbvData" destination="uR7-FP-AeV" id="mMD-3P-rf2"/>
+                        <outlet property="topViewHeight" destination="Z5U-KS-uHN" id="KrD-2g-yKJ"/>
+                        <segue destination="SfG-Pb-cig" kind="unwind" identifier="segUnwindToCreditCardAndOrderSummary" unwindAction="unwindToCreditCardAndOrderSummary:" id="52S-yy-XJD"/>
+                        <segue destination="SfG-Pb-cig" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="fLM-x8-A4u"/>
+                        <segue destination="SfG-Pb-cig" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="5RQ-Kg-rSk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hsq-0z-1wX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="SfG-Pb-cig" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="6478" y="-251"/>
         </scene>
         <!--Note View Controller-->
         <scene sceneID="eYu-ud-cqq">

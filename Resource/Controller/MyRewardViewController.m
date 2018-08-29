@@ -384,13 +384,7 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger section = indexPath.section;
-
-    {
-//        return 112+25;
-        return 139;
-    }
-    
+    return 139;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

@@ -15,9 +15,9 @@ NSString *globalDomainName;
 NSString *globalSubjectNoConnection;
 NSString *globalDetailNoConnection;
 BOOL globalRotateFromSeg;
-BOOL globalFinishLoadSharedData;
 NSString *globalKey;
 NSString *globalModifiedUser;
+NSString *globalBundleID;
 
 
 int main(int argc, char * argv[]) {

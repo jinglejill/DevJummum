@@ -104,7 +104,6 @@ void myExceptionHandler(NSException *exception)
     [barButtonAppearance setBackgroundImage:[self imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault]; // Change to your colour
     
     
-    [Utility setFinishLoadSharedData:NO];
     _homeModel = [[HomeModel alloc]init];
     _homeModel.delegate = self;
     
@@ -134,9 +133,7 @@ void myExceptionHandler(NSException *exception)
         [Utility setDetailNoConnection:[temp objectForKey:@"DetailNoConnection"]];
         [Utility setDetailNoConnection:[temp objectForKey:@"DetailNoConnection"]];
         [Utility setKey:[temp objectForKey:@"Key"]];
-        
-        
-        
+        [Utility setBundleID:[temp objectForKey:@"BundleID"]];        
     }
     
     

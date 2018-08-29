@@ -13,7 +13,6 @@
 #import "CustomTableViewCellTotal.h"
 #import "CustomTableViewCellNote.h"
 #import "CustomTableViewHeaderFooterButton.h"
-#import "CustomTableViewCellVoucherCode.h"
 #import "Receipt.h"
 #import "OrderTaking.h"
 #import "OrderNote.h"
@@ -57,7 +56,6 @@ static NSString * const reuseIdentifierOrder = @"CustomTableViewCellOrder";
 static NSString * const reuseIdentifierTotal = @"CustomTableViewCellTotal";
 static NSString * const reuseIdentifierHeaderFooterButton = @"CustomTableViewHeaderFooterButton";
 static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
-static NSString * const reuseIdentifierVoucherCode = @"CustomTableViewCellVoucherCode";
 
 
 @synthesize lblNavTitle;

@@ -349,6 +349,11 @@
 		EF639E0D211F233E00C70A98 /* CustomTableViewCellLabelRemark.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF639E09211F233E00C70A98 /* CustomTableViewCellLabelRemark.xib */; };
 		EF6C7CFD21318CAA00C335AC /* SharedMenuForBuffet.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6C7CFA21318CAA00C335AC /* SharedMenuForBuffet.m */; };
 		EF6C7CFE21318CAA00C335AC /* MenuForBuffet.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6C7CFC21318CAA00C335AC /* MenuForBuffet.m */; };
+		EF6C7D08213529B900C335AC /* VoucherCodeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6C7D07213529B900C335AC /* VoucherCodeListViewController.m */; };
+		EF88004D213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF88004A213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.xib */; };
+		EF88004E213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.m in Sources */ = {isa = PBXBuildFile; fileRef = EF88004C213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.m */; };
+		EF8800522136849E0062D9D4 /* testTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8800502136849E0062D9D4 /* testTableViewCell.m */; };
+		EF8800532136849E0062D9D4 /* testTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF8800512136849E0062D9D4 /* testTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -879,6 +884,14 @@
 		EF6C7CFA21318CAA00C335AC /* SharedMenuForBuffet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedMenuForBuffet.m; sourceTree = "<group>"; };
 		EF6C7CFB21318CAA00C335AC /* SharedMenuForBuffet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedMenuForBuffet.h; sourceTree = "<group>"; };
 		EF6C7CFC21318CAA00C335AC /* MenuForBuffet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuForBuffet.m; sourceTree = "<group>"; };
+		EF6C7D06213529B900C335AC /* VoucherCodeListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoucherCodeListViewController.h; sourceTree = "<group>"; };
+		EF6C7D07213529B900C335AC /* VoucherCodeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoucherCodeListViewController.m; sourceTree = "<group>"; };
+		EF88004A213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCellVoucherCodeExist.xib; sourceTree = "<group>"; };
+		EF88004B213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCellVoucherCodeExist.h; sourceTree = "<group>"; };
+		EF88004C213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCellVoucherCodeExist.m; sourceTree = "<group>"; };
+		EF88004F2136849E0062D9D4 /* testTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testTableViewCell.h; sourceTree = "<group>"; };
+		EF8800502136849E0062D9D4 /* testTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testTableViewCell.m; sourceTree = "<group>"; };
+		EF8800512136849E0062D9D4 /* testTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = testTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1226,6 +1239,8 @@
 				EF33CE86211C36D100560C69 /* TermsOfServiceViewController.m */,
 				EF33CE75211C36D100560C69 /* TosAndPrivacyPolicyViewController.h */,
 				EF33CE93211C36D100560C69 /* TosAndPrivacyPolicyViewController.m */,
+				EF6C7D06213529B900C335AC /* VoucherCodeListViewController.h */,
+				EF6C7D07213529B900C335AC /* VoucherCodeListViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1398,6 +1413,9 @@
 		EF33CF39211C36D100560C69 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				EF88004B213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.h */,
+				EF88004C213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.m */,
+				EF88004A213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.xib */,
 				EF639E08211F233D00C70A98 /* CustomTableViewCellLabelRemark.h */,
 				EF639E06211F233D00C70A98 /* CustomTableViewCellLabelRemark.m */,
 				EF639E09211F233E00C70A98 /* CustomTableViewCellLabelRemark.xib */,
@@ -1504,6 +1522,9 @@
 				EF33CF76211C36D100560C69 /* CustomViewVoucher.xib */,
 				EF33CF4F211C36D100560C69 /* UILabel+FontAppearance.h */,
 				EF33CF80211C36D100560C69 /* UILabel+FontAppearance.m */,
+				EF88004F2136849E0062D9D4 /* testTableViewCell.h */,
+				EF8800502136849E0062D9D4 /* testTableViewCell.m */,
+				EF8800512136849E0062D9D4 /* testTableViewCell.xib */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1773,6 +1794,7 @@
 				EF33D015211C36D200560C69 /* added.png in Resources */,
 				EF33CFFB211C36D200560C69 /* Icon-iPadPro@2x.png in Resources */,
 				EF33D0B7211C36D200560C69 /* CustomTableViewCellRewardDetail.xib in Resources */,
+				EF8800532136849E0062D9D4 /* testTableViewCell.xib in Resources */,
 				EF33CFEB211C36D200560C69 /* me.png in Resources */,
 				EF33D001211C36D200560C69 /* americanExpress.png in Resources */,
 				EF33D0EC211C36D200560C69 /* Prompt-MediumItalic.ttf in Resources */,
@@ -1787,6 +1809,7 @@
 				EF33D0C9211C36D200560C69 /* CustomTableViewCellOrderSummary.xib in Resources */,
 				EF33D10E211C36D200560C69 /* Kanit-Light.otf in Resources */,
 				EF33D059211C36D200560C69 /* beep.mp3 in Resources */,
+				EF88004D213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.xib in Resources */,
 				EF33D018211C36D200560C69 /* triangle_dev.png in Resources */,
 				EF33CFED211C36D200560C69 /* Icon-76@2x.png in Resources */,
 				EF33D0F7211C36D200560C69 /* Prompt-Light.ttf in Resources */,
@@ -2020,6 +2043,7 @@
 				EF33CD78211C26C200560C69 /* ViewController.m in Sources */,
 				EF33D042211C36D200560C69 /* RewardRedemptionViewController.m in Sources */,
 				EF33D07C211C36D200560C69 /* LogIn.m in Sources */,
+				EF6C7D08213529B900C335AC /* VoucherCodeListViewController.m in Sources */,
 				EF33D080211C36D200560C69 /* Note.m in Sources */,
 				EF33D0D2211C36D200560C69 /* CustomTableViewCellLabelLabel.m in Sources */,
 				EF33D038211C36D200560C69 /* ForgotPasswordViewController.m in Sources */,
@@ -2079,7 +2103,9 @@
 				EF33D08F211C36D200560C69 /* SharedCurrentUserAccount.m in Sources */,
 				EF33D056211C36D200560C69 /* NoteViewController.m in Sources */,
 				EF33D075211C36D200560C69 /* HotDeal.m in Sources */,
+				EF88004E213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.m in Sources */,
 				EF33D09A211C36D200560C69 /* MenuNote.m in Sources */,
+				EF8800522136849E0062D9D4 /* testTableViewCell.m in Sources */,
 				EF33D058211C36D200560C69 /* ConfirmDisputeViewController.m in Sources */,
 				EF33D0DA211C36D200560C69 /* CustomTableViewCellLabelDetailLabelWithImage.m in Sources */,
 				EF33D084211C36D200560C69 /* Dispute.m in Sources */,
