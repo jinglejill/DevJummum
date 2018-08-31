@@ -190,7 +190,6 @@ enum enumDB
     dbSettingWithKey,
     dbPromotionAndRewardRedemption
 
-
     
 };
 
@@ -340,7 +339,8 @@ enum enumUrl
     urlMenuBelongToBuffetGetList,
     urlBuffetOrderInsertList,
     urlSettingWithKeyGet,
-    urlPromotionAndRewardRedemption
+    urlPromotionAndRewardRedemption,
+    urlMenuGet
     
 
     

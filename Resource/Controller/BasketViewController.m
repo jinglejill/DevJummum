@@ -76,67 +76,101 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     [tbvTotal reloadData];
 }
 
-- (void)keyboardDidShow:(NSNotification *)notification
-{
-    NSDictionary* info = [notification userInfo];
-    CGRect kbRect = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-    kbRect = [self.view convertRect:kbRect toView:nil];
-    
-    CGSize kbSize = kbRect.size;
-    
-    
-    
-    // Assign new frame to your view
-    [UIView animateWithDuration:0.2f delay:0.0 options:UIViewAnimationOptionTransitionNone
-                     animations:^{
-                         [self.view setFrame:CGRectMake(0,kbSize.height*-1,self.view.frame.size.width,self.view.frame.size.height)]; //here taken -110 for example i.e. your view will be scrolled to -110. change its value according to your requirement.
-                     }
-                     completion:nil
-     ];
-}
-
--(void)keyboardDidHide:(NSNotification *)notification
-{
-    [UIView animateWithDuration:0.2f delay:0.0 options:UIViewAnimationOptionTransitionNone
-                     animations:^{
-                         [self.view setFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height)];
-                         [self.view layoutSubviews];
-                     }
-                     completion:nil
-     ];
-    
-}
-
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    if(textField.tag == 1)
-    {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    if(textField.tag == 1)
-    {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
-        
-        [self.view endEditing:YES];
-        return YES;
-    }
-    
-    return YES;
-}
-
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     if(textField.tag == 1)
     {
-        _voucherCode = [Utility trimString:textField.text];
+        //remove ordertaking
+        NSIndexPath *indexPath = [tbvOrder indexPathForRowAtPoint:CGPointMake(textField.frame.origin.x, textField.frame.origin.y)];
+        CustomTableViewCellOrder *cell = [tbvOrder cellForRowAtIndexPath:indexPath];
+        
+        
+
+        NSInteger menuID = cell.lblMenuName.tag;
+        NSMutableArray *currentOrderTakingList = [OrderTaking getCurrentOrderTakingList];
+        NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithMenuID:menuID orderTakingList:currentOrderTakingList];
+        NSInteger quantity = [textField.text integerValue];
+        NSInteger currentOrderTakingCount = [orderTakingList count];
+        if(quantity < currentOrderTakingCount)
+        {
+            for(int i=0; i<currentOrderTakingCount-quantity; i++)
+            {
+                NSMutableArray *currentOrderTakingList = [OrderTaking getCurrentOrderTakingList];
+                NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithMenuID:menuID orderTakingList:currentOrderTakingList];
+                
+                //remove orderTaking
+                OrderTaking *lastOrderTaking = orderTakingList[[orderTakingList count]-1];
+                [OrderTaking removeObject:lastOrderTaking];
+                [currentOrderTakingList removeObject:lastOrderTaking];
+                
+                
+                //remove orderNote
+                NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingID:lastOrderTaking.orderTakingID];
+                [OrderNote removeList:orderNoteList];
+            }
+            
+            
+            [tbvOrder reloadData];
+            [tbvTotal reloadData];
+            [self blinkRemovedNotiView];
+        }
+        else if(quantity > currentOrderTakingCount)
+        {
+            //add ordertaking
+//            NSInteger menuID = cell.lblMenuName.tag;
+            Menu *menu = [Menu getMenu:menuID branchID:branch.branchID];
+            SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menuID branchID:branch.branchID];
+            float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
+            NSMutableArray *currentOrderTakingList = [OrderTaking getCurrentOrderTakingList];
+            
+            
+            for(int i=0; i<quantity-currentOrderTakingCount; i++)
+            {
+                OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 noteIDListInText:@"" orderNo:0 status:1 receiptID:0];
+                [OrderTaking addObject:orderTaking];
+                [currentOrderTakingList addObject:orderTaking];
+            }
+            
+            [tbvOrder reloadData];
+            [tbvTotal reloadData];
+            [self blinkAddedNotiView];
+        }
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+
+    if(textField.tag == 1)
+    {
+        NSString *resultingString = [textField.text stringByReplacingCharactersInRange: range withString: string];
+        
+        // The user deleting all input is perfectly acceptable.
+        if ([resultingString length] == 0) {
+            return true;
+        }
+        
+        NSInteger holder;
+        
+        NSScanner *scan = [NSScanner scannerWithString: resultingString];
+        
+        
+        
+        //fix length
+        NSUInteger oldLength = [textField.text length];
+        NSUInteger replacementLength = [string length];
+        NSUInteger rangeLength = range.length;
+        
+        NSUInteger newLength = oldLength - rangeLength + replacementLength;
+        
+        BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
+        //**********
+        
+        
+        
+        return [scan scanInteger: &holder] && [scan isAtEnd] && (newLength <= 2 || returnKey);
+    }
+    return YES;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -224,10 +258,6 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         UINib *nib = [UINib nibWithNibName:reuseIdentifierHeaderFooterButton bundle:nil];
         [tbvTotal registerNib:nib forHeaderFooterViewReuseIdentifier:reuseIdentifierHeaderFooterButton];
     }
-    {
-        UINib *nib = [UINib nibWithNibName:reuseIdentifierVoucherCode bundle:nil];
-        [tbvTotal registerNib:nib forCellReuseIdentifier:reuseIdentifierVoucherCode];
-    }
     
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
@@ -287,6 +317,8 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         
         
         
+        
+        
         Menu *menu = _menuList[item];
         cell.lblMenuName.text = menu.titleThai;
         cell.lblMenuName.tag = menu.menuID;
@@ -296,8 +328,11 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithMenuID:menu.menuID orderTakingList:currentOrderTakingList];
         float sumQuantity = [OrderTaking getSumQuantity:orderTakingList];
         NSString *strSumQuantity = [Utility formatDecimal:sumQuantity withMinFraction:0 andMaxFraction:0];
-        cell.lblQuantity.text = strSumQuantity;
-        
+        cell.txtQuantity.text = strSumQuantity;
+        cell.txtQuantity.tag = 1;
+        cell.txtQuantity.delegate = self;
+        cell.txtQuantity.keyboardType = UIKeyboardTypeNumberPad;
+        [cell.txtQuantity setInputAccessoryView:self.toolBar];
         
         
         float totalPrice = [OrderTaking getSumSpecialPrice:orderTakingList];
@@ -709,8 +744,8 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     CustomTableViewCellOrder *cell = [tbvOrder cellForRowAtIndexPath:indexPath];
     if(button.tag == 201)
     {
-        NSInteger quantity = [cell.lblQuantity.text integerValue]-1;
-        cell.lblQuantity.text = [Utility formatDecimal:quantity withMinFraction:0 andMaxFraction:0];
+        NSInteger quantity = [cell.txtQuantity.text integerValue]-1;
+        cell.txtQuantity.text = [Utility formatDecimal:quantity withMinFraction:0 andMaxFraction:0];
         
         
         //remove ordertaking
@@ -734,8 +769,12 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     }
     else if(button.tag == 202)
     {
-        NSInteger quantity = [cell.lblQuantity.text integerValue]+1;
-        cell.lblQuantity.text = [Utility formatDecimal:quantity withMinFraction:0 andMaxFraction:0];
+        if([cell.txtQuantity.text integerValue] == 99)
+        {
+            return;
+        }
+        NSInteger quantity = [cell.txtQuantity.text integerValue]+1;
+        cell.txtQuantity.text = [Utility formatDecimal:quantity withMinFraction:0 andMaxFraction:0];
         
         
         //add ordertaking
@@ -757,7 +796,6 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         [tbvTotal reloadData];
         [self blinkAddedNotiView];
     }
-
 }
 
 -(void)deleteNote:(id)sender

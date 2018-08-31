@@ -16,7 +16,7 @@
 @property (retain, nonatomic) NSDate * modifiedDate;
 
 
-
+- (NSDictionary *)dictionary;
 -(OrderNote *)initWithOrderTakingID:(NSInteger)orderTakingID noteID:(NSInteger)noteID;
 +(NSInteger)getNextID;
 +(void)addObject:(OrderNote *)orderNote;

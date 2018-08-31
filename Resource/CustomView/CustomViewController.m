@@ -19,6 +19,8 @@
 #import "OrderTaking.h"
 #import "OrderNote.h"
 #import "CreditCard.h"
+#import "RewardRedemption.h"
+#import "Promotion.h"
 
 
 @interface CustomViewController ()
@@ -994,6 +996,8 @@ CGFloat animatedDistance;
     [OrderNote removeAllObjects];
     [OrderTaking removeCurrentOrderTakingList];
     [CreditCard removeCurrentCreditCard];
+    [Promotion removeAllObjects];
+    [RewardRedemption removeAllObjects];
 }
 
 -(UIImage *)combineImage:(NSArray *)arrImage

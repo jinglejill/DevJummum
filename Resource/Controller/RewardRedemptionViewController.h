@@ -25,4 +25,5 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelHeight;
 
 - (IBAction)goBack:(id)sender;
+-(IBAction)unwindToRewardRedemption:(UIStoryboardSegue *)segue;
 @end

@@ -56,5 +56,6 @@
 -(BOOL)editRewardRedemption:(RewardRedemption *)editingRewardRedemption;
 +(RewardRedemption *)copyFrom:(RewardRedemption *)fromRewardRedemption to:(RewardRedemption *)toRewardRedemption;
 +(NSMutableArray *)sort:(NSMutableArray *)rewardRedemptionList;
-+(NSMutableArray *)sortWithdataList:(NSMutableArray *)dataList;
++(NSMutableArray *)getRewardRedemptionList;
++(void)removeAllObjects;
 @end

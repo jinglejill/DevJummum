@@ -85,7 +85,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 @synthesize voucherView;
 @synthesize branch;
 @synthesize customerTable;
-@synthesize vwTopBorderPay;
 @synthesize tbvTotal;
 @synthesize tbvTotalHeightConstant;
 @synthesize fromReceiptSummaryMenu;
@@ -94,6 +93,10 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 @synthesize bottomButtonHeight;
 @synthesize btnAddRemoveMenu;
 @synthesize buffetReceipt;
+@synthesize fromRewardRedemption;
+@synthesize rewardRedemption;
+@synthesize fromHotDealDetail;
+@synthesize promotion;
 
 
 -(IBAction)unwindToCreditCardAndOrderSummary:(UIStoryboardSegue *)segue
@@ -179,6 +182,14 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     else if(fromOrderDetailMenu)
     {
         [self performSegueWithIdentifier:@"segUnwindToOrderDetail" sender:self];
+    }
+    else if(fromRewardRedemption)
+    {
+        [self performSegueWithIdentifier:@"segUnwindToRewardRedemption" sender:self];
+    }
+    else if(fromHotDealDetail)
+    {
+        [self performSegueWithIdentifier:@"segUnwindToHotDealDetail" sender:self];
     }
     else
     {
@@ -299,11 +310,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             _creditCard.ccv = [Utility trimString:textField.text];
         }
         break;
-//        case 31:
-//        {
-//            _voucherCode = [Utility trimString:textField.text];
-//        }
-//            break;
         default:
         break;
     }
@@ -344,7 +350,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     _promotionList = [[NSMutableArray alloc]init];
     _rewardRedemptionList = [[NSMutableArray alloc]init];
     
-    if(fromReceiptSummaryMenu || fromOrderDetailMenu)
+    if(fromReceiptSummaryMenu || fromOrderDetailMenu || fromRewardRedemption || fromHotDealDetail)
     {
         btnAddRemoveMenu.hidden = NO;
     }
@@ -1648,7 +1654,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         
         self.homeModel = [[HomeModel alloc]init];
         self.homeModel.delegate = self;
-        [self.homeModel insertItems:dbBuffetOrder withData:@[receipt,orderTakingList,orderNoteList] actionScreen:@"buffet order insert"];
+        [self.homeModel insertItemsJson:dbBuffetOrder withData:@[receipt,orderTakingList,orderNoteList] actionScreen:@"buffet order insert"];
     }
     else
     {
@@ -1784,14 +1790,14 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                     UserPromotionUsed *userPromotionUsed = [[UserPromotionUsed alloc]initWithUserAccountID:userAccount.userAccountID promotionID:_promotionUsed.promotionID receiptID:0];
                     self.homeModel = [[HomeModel alloc]init];
                     self.homeModel.delegate = self;
-                    [self.homeModel insertItems:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,userPromotionUsed,@(_promotionUsed.promoCodeID)] actionScreen:@"call omise checkout at server"];
+                    [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,userPromotionUsed,@(_promotionUsed.promoCodeID)] actionScreen:@"call omise checkout at server"];
                 }
                 else
                 {
                     UserRewardRedemptionUsed *userRewardRedemptionUsed = [[UserRewardRedemptionUsed alloc]initWithUserAccountID:userAccount.userAccountID rewardRedemptionID:_promotionUsed.rewardRedemptionID receiptID:0];
                     self.homeModel = [[HomeModel alloc]init];
                     self.homeModel.delegate = self;
-                    [self.homeModel insertItems:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,userRewardRedemptionUsed,@(_promotionUsed.promoCodeID)] actionScreen:@"call omise checkout at server"];
+                    [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,userRewardRedemptionUsed,@(_promotionUsed.promoCodeID)] actionScreen:@"call omise checkout at server"];
                 }
             }
             else
@@ -2018,13 +2024,19 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
         if(promotion.discountMenuID)
         {
-            NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithMenuID:promotion.discountMenuID];
+            NSMutableArray *currentOrderTakingList = [OrderTaking getCurrentOrderTakingList];
+            NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithMenuID:promotion.discountMenuID orderTakingList:currentOrderTakingList];
             if([orderTakingList count]>0)
             {
-                Menu *menu = [Menu getMenu:promotion.discountMenuID branchID:promotion.mainBranchID];
-                SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:promotion.discountMenuID branchID:promotion.mainBranchID];
-                float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
-                totalPriceGetDiscount = specialPrice;
+                if(promotion.discountType == 1)//baht
+                {
+                    totalPriceGetDiscount = promotion.discountAmount;
+                }
+                else if(promotion.discountType == 2)//percent
+                {
+                    Menu *menu = [Menu getMenu:promotion.discountMenuID branchID:promotion.mainBranchID];
+                    totalPriceGetDiscount = promotion.discountAmount*0.01*menu.price;
+                }
             }
             else
             {
@@ -2334,6 +2346,18 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         _promotionList = [items[0] mutableCopy];
         _rewardRedemptionList = [items[1] mutableCopy];
         [tbvTotal reloadData];
+        
+        
+        if(fromRewardRedemption)
+        {
+            _selectedVoucherCode = rewardRedemption.voucherCode;
+            [self confirmVoucherCode:_selectedVoucherCode];
+        }
+        if(fromHotDealDetail)
+        {
+            _selectedVoucherCode = promotion.voucherCode;
+            [self confirmVoucherCode:_selectedVoucherCode];
+        }
     }
 }
 

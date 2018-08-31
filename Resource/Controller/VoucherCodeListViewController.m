@@ -165,48 +165,44 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
     }
     else if(section == 1)
     {
-        {
-            CustomTableViewCellReward *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierReward];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            RewardRedemption *rewardRedemption = rewardRedemptionList[item];
-            cell.lblHeader.text = rewardRedemption.header;
-            [cell.lblHeader sizeToFit];
-            cell.lblHeaderHeight.constant = cell.lblHeader.frame.size.height>70?70:cell.lblHeader.frame.size.height;
-            
-            
-            cell.lblSubTitle.text = rewardRedemption.subTitle;
-            [cell.lblSubTitle sizeToFit];
-            cell.lblSubTitleHeight.constant = 70-8-cell.lblHeaderHeight.constant<0?0:70-8-cell.lblHeaderHeight.constant;
-            
-            
-            
-            NSString *strPoint = [Utility formatDecimal:rewardRedemption.point];
-            cell.lblRemark.text = [NSString stringWithFormat:@"%@ points",strPoint];
-            [cell.lblRemark sizeToFit];
-            cell.lblRemarkWidth.constant = cell.lblRemark.frame.size.width;
-            
-            
-            Branch *branch = [Branch getBranch:rewardRedemption.mainBranchID];
-            [self.homeModel downloadImageWithFileName:branch.imageUrl type:2 branchID:branch.branchID completionBlock:^(BOOL succeeded, UIImage *image)
+        CustomTableViewCellReward *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierReward];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        RewardRedemption *rewardRedemption = rewardRedemptionList[item];
+        cell.lblHeader.text = rewardRedemption.header;
+        [cell.lblHeader sizeToFit];
+        cell.lblHeaderHeight.constant = cell.lblHeader.frame.size.height>70?70:cell.lblHeader.frame.size.height;
+        
+        
+        cell.lblSubTitle.text = rewardRedemption.subTitle;
+        [cell.lblSubTitle sizeToFit];
+        cell.lblSubTitleHeight.constant = 70-8-cell.lblHeaderHeight.constant<0?0:70-8-cell.lblHeaderHeight.constant;
+        
+        
+        NSString *strPoint = [Utility formatDecimal:rewardRedemption.point];
+        cell.lblRemark.text = [NSString stringWithFormat:@"%@ points",strPoint];
+        [cell.lblRemark sizeToFit];
+        cell.lblRemarkWidth.constant = cell.lblRemark.frame.size.width;
+        
+        
+        Branch *branch = [Branch getBranch:rewardRedemption.mainBranchID];
+        [self.homeModel downloadImageWithFileName:branch.imageUrl type:2 branchID:branch.branchID completionBlock:^(BOOL succeeded, UIImage *image)
+         {
+             if (succeeded)
              {
-                 if (succeeded)
-                 {
-                     NSLog(@"succeed");
-                     cell.imgVwValue.image = image;
-                     [self setImageDesign:cell.imgVwValue];
-                 }
-             }];
-            if(rewardRedemption.withInPeriod == 0)
-            {
-                NSString *message = [Setting getValue:@"043m" example:@"ใช้ได้ 1 ครั้ง ภายใน %@"];
-                cell.lblCountDown.text = [NSString stringWithFormat:message,[Utility dateToString:rewardRedemption.usingEndDate toFormat:@"d MMM yyyy"]];
-            }
-            
-            
-            
-            return cell;
-        }
+                 NSLog(@"succeed");
+                 cell.imgVwValue.image = image;
+                 [self setImageDesign:cell.imgVwValue];
+             }
+         }];
+        
+        
+        cell.lblCountDownTop.constant = 0;
+        cell.lblCountDownHeight.constant = 0;
+        
+        
+        
+        return cell;
     }
     
     return nil;

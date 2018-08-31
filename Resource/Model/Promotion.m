@@ -221,8 +221,9 @@
     return toPromotion;
 }
 
-+(NSMutableArray *)sortWithdataList:(NSMutableArray *)dataList
++(NSMutableArray *)getPromotionList
 {
+    NSMutableArray *dataList = [SharedPromotion sharedPromotion].promotionList;
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"_type" ascending:YES];
     NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"_frequency" ascending:NO];
     NSSortDescriptor *sortDescriptor3 = [[NSSortDescriptor alloc] initWithKey:@"_sales" ascending:NO];
@@ -233,4 +234,9 @@
     return [sortArray mutableCopy];
 }
 
++(void)removeAllObjects
+{
+    NSMutableArray *dataList = [SharedPromotion sharedPromotion].promotionList;
+    [dataList removeAllObjects];
+}
 @end

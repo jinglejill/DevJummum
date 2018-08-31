@@ -32,6 +32,7 @@
 #import "RewardRedemptionViewController.h"
 #import "SelectPaymentMethodViewController.h"
 #import "TosAndPrivacyPolicyViewController.h"
+#import "VoucherCodeListViewController.h"
 #import "HotDealViewController.h"
 #import "RewardViewController.h"
 #import "QRCodeScanTableViewController.h"
@@ -561,7 +562,8 @@ void myExceptionHandler(NSException *exception)
                 [currentVc isKindOfClass:[RewardDetailViewController class]] ||
                 [currentVc isKindOfClass:[RewardRedemptionViewController class]] ||
                 [currentVc isKindOfClass:[SelectPaymentMethodViewController class]] ||
-                [currentVc isKindOfClass:[TosAndPrivacyPolicyViewController class]])
+                [currentVc isKindOfClass:[TosAndPrivacyPolicyViewController class]] ||
+                [currentVc isKindOfClass:[VoucherCodeListViewController class]])
         {
             currentVc.selectedReceipt = selectedReceipt;
             currentVc.showOrderDetail = 1;

@@ -26,10 +26,12 @@
 #import "RewardRedemptionViewController.h"
 #import "SelectPaymentMethodViewController.h"
 #import "TosAndPrivacyPolicyViewController.h"
+#import "VoucherCodeListViewController.h"
 #import "CustomTableViewCellImageText.h"
 #import "CustomTableViewCellProfile.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "LogIn.h"
+
 
 
 @interface MeViewController ()
@@ -90,7 +92,8 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
            [[segue sourceViewController] isKindOfClass:[RewardDetailViewController class]] ||
            [[segue sourceViewController] isKindOfClass:[RewardRedemptionViewController class]] ||
            [[segue sourceViewController] isKindOfClass:[SelectPaymentMethodViewController class]] ||
-           [[segue sourceViewController] isKindOfClass:[TosAndPrivacyPolicyViewController class]]
+           [[segue sourceViewController] isKindOfClass:[TosAndPrivacyPolicyViewController class]] ||
+            [[segue sourceViewController] isKindOfClass:[VoucherCodeListViewController class]]
            )
         {
             CustomViewController *vc = segue.sourceViewController;

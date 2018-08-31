@@ -58,6 +58,7 @@ enum enumAction
 - (void)downloadItems:(enum enumDB)currentDB;
 - (void)downloadItems:(enum enumDB)currentDB withData:(NSObject *)data;
 - (void)insertItems:(enum enumDB)currentDB withData:(NSObject *)data actionScreen:(NSString *)actionScreen;
+- (void)insertItemsJson:(enum enumDB)currentDB withData:(NSObject *)data actionScreen:(NSString *)actionScreen;
 - (void)updateItems:(enum enumDB)currentDB withData:(NSObject *)data actionScreen:(NSString *)actionScreen;
 - (void)deleteItems:(enum enumDB)currentDB withData:(NSObject *)data actionScreen:(NSString *)actionScreen;
 - (void)sendEmail:(NSString *)toAddress withSubject:(NSString *)subject andBody:(NSString *)body;

@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnAddQuantity;
 @property (strong, nonatomic) IBOutlet UIButton *btnDeleteQuantity;
 @property (strong, nonatomic) IBOutlet UIImageView *imgExpandCollapse;
+@property (strong, nonatomic) IBOutlet UITextField *txtQuantity;
 
 
 @property (nonatomic) NSInteger stepperValue;

@@ -20,6 +20,26 @@
 
 @implementation OrderTaking
 
+- (NSDictionary *)dictionary
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [self valueForKey:@"orderTakingID"]?[self valueForKey:@"orderTakingID"]:[NSNull null],@"orderTakingID",
+            [self valueForKey:@"branchID"]?[self valueForKey:@"branchID"]:[NSNull null],@"branchID",
+            [self valueForKey:@"customerTableID"]?[self valueForKey:@"customerTableID"]:[NSNull null],@"customerTableID",
+            [self valueForKey:@"menuID"]?[self valueForKey:@"menuID"]:[NSNull null],@"menuID",
+            [self valueForKey:@"quantity"]?[self valueForKey:@"quantity"]:[NSNull null],@"quantity",
+            [self valueForKey:@"specialPrice"]?[self valueForKey:@"specialPrice"]:[NSNull null],@"specialPrice",
+            [self valueForKey:@"price"]?[self valueForKey:@"price"]:[NSNull null],@"price",
+            [self valueForKey:@"takeAway"]?[self valueForKey:@"takeAway"]:[NSNull null],@"takeAway",
+            [self valueForKey:@"noteIDListInText"]?[self valueForKey:@"noteIDListInText"]:[NSNull null],@"noteIDListInText",
+            [self valueForKey:@"orderNo"]?[self valueForKey:@"orderNo"]:[NSNull null],@"orderNo",
+            [self valueForKey:@"status"]?[self valueForKey:@"status"]:[NSNull null],@"status",
+            [self valueForKey:@"receiptID"]?[self valueForKey:@"receiptID"]:[NSNull null],@"receiptID",
+            [self valueForKey:@"modifiedUser"]?[self valueForKey:@"modifiedUser"]:[NSNull null],@"modifiedUser",
+            [Utility dateToString:[self valueForKey:@"modifiedDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"modifiedDate",
+            nil];
+}
+
 -(OrderTaking *)initWithBranchID:(NSInteger)branchID customerTableID:(NSInteger)customerTableID menuID:(NSInteger)menuID quantity:(float)quantity specialPrice:(float)specialPrice price:(float)price takeAway:(NSInteger)takeAway noteIDListInText:(NSString *)noteIDListInText orderNo:(NSInteger)orderNo status:(NSInteger)status receiptID:(NSInteger)receiptID
 {
     self = [super init];

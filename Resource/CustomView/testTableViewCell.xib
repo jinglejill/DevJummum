@@ -23,8 +23,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="82.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="abc" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2gL-j2-ssg">
-                        <rect key="frame" x="112" y="6" width="97" height="30"/>
+                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="99" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2gL-j2-ssg">
+                        <rect key="frame" x="112" y="6" width="17" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="13"/>

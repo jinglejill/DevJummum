@@ -374,7 +374,7 @@
         if(item.buffetMenu)
         {
             NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _belongToMenuID = %ld",item.branchID,item.menuID];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _belongToMenuID = %ld and status = 1",item.branchID,item.menuID];
             NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
             
             [menuBelongToBuffetSet addObjectsFromArray:filterArray];

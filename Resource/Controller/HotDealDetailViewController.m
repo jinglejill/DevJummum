@@ -7,10 +7,15 @@
 //
 
 #import "HotDealDetailViewController.h"
+#import "CreditCardAndOrderSummaryViewController.h"
 #import "CustomTableViewCellRewardDetail.h"
 #import "CustomTableViewCellLabel.h"
 #import "Branch.h"
 #import "Setting.h"
+#import "Message.h"
+#import "Menu.h"
+#import "SpecialPriceProgram.h"
+#import "OrderTaking.h"
 
 
 @interface HotDealDetailViewController ()
@@ -29,6 +34,11 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
 @synthesize promotion;
 @synthesize topViewHeight;
 
+
+-(IBAction)unwindToHotDealDetail:(UIStoryboardSegue *)segue
+{
+    
+}
 
 -(void)viewDidLayoutSubviews
 {
@@ -52,7 +62,7 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
     _expandCollapse = 1;
     tbvData.delegate = self;
     tbvData.dataSource = self;
-    
+    tbvData.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     
     {
@@ -116,13 +126,29 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         cell.lblSubTitleHeight.constant = cell.lblSubTitle.frame.size.height;
         
         
-        cell.lblRemark.hidden = YES;
-        cell.lblRemark.text = @"";//[NSString stringWithFormat:@"%ld points",rewardRedemption.point];
-        [cell.lblRemark sizeToFit];
-        cell.lblRemarkWidth.constant = cell.lblRemark.frame.size.width;
-
-        
         cell.imgRemark.hidden = YES;
+        cell.lblRemark.hidden = YES;
+        cell.lblRemark.text = @"";
+        cell.lblRemarkTop.constant = 0;
+        cell.lblRemarkHeight.constant = 0;
+        
+        
+        if(promotion.discountMenuID)
+        {
+            cell.btnOrderNow.hidden = NO;
+            cell.btnOrderNowTop.constant = 7;
+            cell.btnOrderNowHeight.constant = 30;
+            [cell.btnOrderNow addTarget:self action:@selector(orderNow:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else
+        {
+            cell.btnOrderNow.hidden = YES;
+            cell.btnOrderNowTop.constant = 0;
+            cell.btnOrderNowHeight.constant = 0;
+            [cell.btnOrderNow removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
+        }
+        
+        
         
         return cell;
     }
@@ -180,9 +206,28 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         cell.lblSubTitleHeight.constant = cell.lblSubTitle.frame.size.height;
         
         
+        cell.imgRemark.hidden = YES;
+        cell.lblRemark.hidden = YES;
+        cell.lblRemark.text = @"";
+        cell.lblRemarkTop.constant = 0;
+        cell.lblRemarkHeight.constant = 0;
         
         
-        return 11+cell.imgVwValueHeight.constant+20+cell.lblHeaderHeight.constant+8+cell.lblSubTitleHeight.constant+8+18+11;
+        if(promotion.discountMenuID)
+        {
+            cell.btnOrderNow.hidden = NO;
+            cell.btnOrderNowTop.constant = 7;
+            cell.btnOrderNowHeight.constant = 30;
+        }
+        else
+        {
+            cell.btnOrderNow.hidden = YES;
+            cell.btnOrderNowTop.constant = 0;
+            cell.btnOrderNowHeight.constant = 0;
+        }
+        
+        
+        return 11+cell.imgVwValueHeight.constant+20+cell.lblHeaderHeight.constant+8+cell.lblSubTitleHeight.constant+cell.lblRemarkTop.constant+cell.lblHeaderHeight.constant+cell.btnOrderNowTop.constant+cell.btnOrderNowHeight.constant+11;
     }
     else
     {
@@ -220,5 +265,58 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
 {
     _expandCollapse = !_expandCollapse;
     [tbvData reloadData];
+}
+
+-(void)orderNow:(id)sender
+{
+    self.homeModel = [[HomeModel alloc]init];
+    self.homeModel.delegate = self;
+    [self.homeModel downloadItems:dbMenu withData:@[@(promotion.mainBranchID), @(promotion.discountMenuID)]];
+}
+
+-(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
+{
+    HomeModel *homeModel = (HomeModel *)objHomeModel;
+    if(homeModel.propCurrentDB == dbMenu)
+    {
+        [Utility updateSharedObject:items];
+        NSMutableArray *messageList = [items[0] mutableCopy];
+        Message *message = messageList[0];
+        if(![message.text integerValue])
+        {
+            NSString *message = [Setting getValue:@"124m" example:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
+            [self showAlert:@"" message:message];
+        }
+        else
+        {
+            Menu *menu = [Menu getMenu:promotion.discountMenuID branchID:promotion.mainBranchID];
+            SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:promotion.discountMenuID branchID:promotion.mainBranchID];
+            float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
+            
+            
+            OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:promotion.mainBranchID customerTableID:0 menuID:promotion.discountMenuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 noteIDListInText:@"" orderNo:0 status:1 receiptID:0];
+            
+            
+            NSMutableArray *orderTakingList = [[NSMutableArray alloc]init];
+            [orderTakingList addObject:orderTaking];
+            [OrderTaking setCurrentOrderTakingList:orderTakingList];
+            [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
+        }
+    }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier] isEqualToString:@"segCreditCardAndOrderSummary"])
+    {
+        Branch *branch = [Branch getBranch:promotion.mainBranchID];
+        CreditCardAndOrderSummaryViewController *vc = segue.destinationViewController;
+        vc.branch = branch;
+        vc.customerTable = nil;
+        vc.fromHotDealDetail = 1;
+        vc.receipt = nil;
+        vc.buffetReceipt = nil;
+        vc.promotion = promotion;
+    }
 }
 @end

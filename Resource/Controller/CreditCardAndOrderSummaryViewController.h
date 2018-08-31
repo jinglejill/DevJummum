@@ -12,12 +12,13 @@
 #import "CustomViewVoucher.h"
 #import "Promotion.h"
 #import "Receipt.h"
+#import "RewardRedemption.h"
+#import "Promotion.h"
 
 
 @interface CreditCardAndOrderSummaryViewController : CustomViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITextViewDelegate,UIPopoverPresentationControllerDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *lblNavTitle;
 @property (strong, nonatomic) IBOutlet UITableView *tbvData;
-@property (strong, nonatomic) IBOutlet UIView *vwTopBorderPay;
 @property (strong, nonatomic) IBOutlet UITableView *tbvTotal;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tbvTotalHeightConstant;
 @property (strong, nonatomic) IBOutlet CustomViewVoucher *voucherView;
@@ -28,10 +29,13 @@
 @property (strong, nonatomic) CustomerTable *customerTable;
 @property (strong, nonatomic) Receipt *receipt;
 @property (strong, nonatomic) Receipt *buffetReceipt;
+@property (strong, nonatomic) RewardRedemption *rewardRedemption;
+@property (strong, nonatomic) Promotion *promotion;
 @property (nonatomic) NSInteger fromReceiptSummaryMenu;
 @property (nonatomic) NSInteger fromOrderDetailMenu;
+@property (nonatomic) NSInteger fromRewardRedemption;
+@property (nonatomic) NSInteger fromHotDealDetail;
 - (IBAction)addRemoveMenu:(id)sender;
-- (IBAction)pay:(id)sender;
 - (IBAction)goBack:(id)sender;
 -(IBAction)unwindToCreditCardAndOrderSummary:(UIStoryboardSegue *)segue;
 @end

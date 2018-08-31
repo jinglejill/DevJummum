@@ -574,6 +574,9 @@ extern NSString *globalBundleID;
         case urlPromotionAndRewardRedemption:
             url = @"JMMPromotionAndRewardRedemptionGetList.php";
             break;
+        case urlMenuGet:
+            url = @"JMMMenuGet.php";
+            break;
         default:
             break;
     }

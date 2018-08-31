@@ -60,6 +60,7 @@
 +(Promotion *)getPromotion:(NSInteger)promotionID;
 -(BOOL)editPromotion:(Promotion *)editingPromotion;
 +(Promotion *)copyFrom:(Promotion *)fromPromotion to:(Promotion *)toPromotion;
-+(NSMutableArray *)sortWithdataList:(NSMutableArray *)dataList;
++(NSMutableArray *)getPromotionList;
++(void)removeAllObjects;
 
 @end

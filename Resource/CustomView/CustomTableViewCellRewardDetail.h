@@ -18,5 +18,10 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgVwValueHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *lblRemarkWidth;
 @property (strong, nonatomic) IBOutlet UIImageView *imgRemark;
+@property (strong, nonatomic) IBOutlet UIButton *btnOrderNow;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnOrderNowHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnOrderNowTop;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *lblRemarkTop;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *lblRemarkHeight;
 
 @end

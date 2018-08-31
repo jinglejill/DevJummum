@@ -17,5 +17,5 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
 
 - (IBAction)goBack:(id)sender;
-
+-(IBAction)unwindToHotDealDetail:(UIStoryboardSegue *)segue;
 @end

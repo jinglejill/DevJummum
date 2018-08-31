@@ -15,6 +15,17 @@
 
 @implementation OrderNote
 
+- (NSDictionary *)dictionary
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [self valueForKey:@"orderNoteID"]?[self valueForKey:@"orderNoteID"]:[NSNull null],@"orderNoteID",
+            [self valueForKey:@"orderTakingID"]?[self valueForKey:@"orderTakingID"]:[NSNull null],@"orderTakingID",
+            [self valueForKey:@"noteID"]?[self valueForKey:@"noteID"]:[NSNull null],@"noteID",
+            [self valueForKey:@"modifiedUser"]?[self valueForKey:@"modifiedUser"]:[NSNull null],@"modifiedUser",
+            [Utility dateToString:[self valueForKey:@"modifiedDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"modifiedDate",
+            nil];
+}
+
 -(OrderNote *)initWithOrderTakingID:(NSInteger)orderTakingID noteID:(NSInteger)noteID
 {
     self = [super init];

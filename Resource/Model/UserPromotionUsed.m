@@ -13,6 +13,18 @@
 
 @implementation UserPromotionUsed
 
+- (NSDictionary *)dictionary
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [self valueForKey:@"userPromotionUsedID"]?[self valueForKey:@"userPromotionUsedID"]:[NSNull null],@"userPromotionUsedID",
+            [self valueForKey:@"userAccountID"]?[self valueForKey:@"userAccountID"]:[NSNull null],@"userAccountID",
+            [self valueForKey:@"promotionID"]?[self valueForKey:@"promotionID"]:[NSNull null],@"promotionID",
+            [self valueForKey:@"receiptID"]?[self valueForKey:@"receiptID"]:[NSNull null],@"receiptID",
+            [self valueForKey:@"modifiedUser"]?[self valueForKey:@"modifiedUser"]:[NSNull null],@"modifiedUser",
+            [Utility dateToString:[self valueForKey:@"modifiedDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"modifiedDate",
+            nil];
+}
+
 -(UserPromotionUsed *)initWithUserAccountID:(NSInteger)userAccountID promotionID:(NSInteger)promotionID receiptID:(NSInteger)receiptID
 {
     self = [super init];

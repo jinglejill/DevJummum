@@ -228,16 +228,22 @@
     return [sortArray mutableCopy];
 }
 
-+(NSMutableArray *)sortWithdataList:(NSMutableArray *)dataList
++(NSMutableArray *)getRewardRedemptionList
 {
-//    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"_type" ascending:YES];
+    NSMutableArray *dataList = [SharedRewardRedemption sharedRewardRedemption].rewardRedemptionList;
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"_frequency" ascending:NO];
     NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"_sales" ascending:NO];
     NSSortDescriptor *sortDescriptor3 = [[NSSortDescriptor alloc] initWithKey:@"_orderNo" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor,sortDescriptor2,sortDescriptor3, nil];
     NSArray *sortArray = [dataList sortedArrayUsingDescriptors:sortDescriptors];
-    
+
     return [sortArray mutableCopy];
+}
+
++(void)removeAllObjects
+{
+    NSMutableArray *dataList = [SharedRewardRedemption sharedRewardRedemption].rewardRedemptionList;
+    [dataList removeAllObjects];
 }
 @end
 

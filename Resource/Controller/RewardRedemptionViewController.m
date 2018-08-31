@@ -7,10 +7,15 @@
 //
 
 #import "RewardRedemptionViewController.h"
+#import "CreditCardAndOrderSummaryViewController.h"
 #import "CustomTableViewCellRedemption.h"
 #import "CustomTableViewCellLabel.h"
 #import "CustomTableViewCellLabelDetailLabelWithImage.h"
 #import "Setting.h"
+#import "OrderTaking.h"
+#import "Menu.h"
+#import "SpecialPriceProgram.h"
+#import "Message.h"
 
 
 @interface RewardRedemptionViewController ()
@@ -41,6 +46,11 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
 @synthesize bottomLabelHeight;
 
 
+-(IBAction)unwindToRewardRedemption:(UIStoryboardSegue *)segue
+{
+    
+}
+
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -61,7 +71,7 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
     lblNavTitle.text = title;
     tbvData.delegate = self;
     tbvData.dataSource = self;
-    
+    tbvData.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     
     {
@@ -158,8 +168,18 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
         _promoCode = promoCode.code;
         
         
-        
-        [cell.btnCopy addTarget:self action:@selector(copyQRCode:) forControlEvents:UIControlEventTouchUpInside];
+        if(rewardRedemption.discountMenuID)
+        {
+            [cell.btnCopy setTitle:@"สั่งเลย" forState:UIControlStateNormal];
+            [cell.btnCopy removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
+            [cell.btnCopy addTarget:self action:@selector(goToCreditAndOrderSummary:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else
+        {
+            [cell.btnCopy setTitle:@"คัดลอก" forState:UIControlStateNormal];
+            [cell.btnCopy removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
+            [cell.btnCopy addTarget:self action:@selector(copyQRCode:) forControlEvents:UIControlEventTouchUpInside];
+        }
         
         
         return cell;
@@ -287,4 +307,59 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _promoCode;
 }
+
+-(void)goToCreditAndOrderSummary:(id)sender
+{
+    self.homeModel = [[HomeModel alloc]init];
+    self.homeModel.delegate = self;
+    [self.homeModel downloadItems:dbMenu withData:@[@(rewardRedemption.mainBranchID), @(rewardRedemption.discountMenuID)]];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier] isEqualToString:@"segCreditCardAndOrderSummary"])
+    {
+        Branch *branch = [Branch getBranch:rewardRedemption.mainBranchID];
+        rewardRedemption.voucherCode = promoCode.code;
+        CreditCardAndOrderSummaryViewController *vc = segue.destinationViewController;
+        vc.branch = branch;
+        vc.customerTable = nil;
+        vc.fromRewardRedemption = 1;
+        vc.receipt = nil;
+        vc.buffetReceipt = nil;
+        vc.rewardRedemption = rewardRedemption;
+    }
+}
+
+-(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
+{
+    HomeModel *homeModel = (HomeModel *)objHomeModel;
+    if(homeModel.propCurrentDB == dbMenu)
+    {
+        [Utility updateSharedObject:items];
+        NSMutableArray *messageList = [items[0] mutableCopy];
+        Message *message = messageList[0];
+        if(![message.text integerValue])
+        {
+            NSString *message = [Setting getValue:@"124m" example:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
+            [self showAlert:@"" message:message];
+        }
+        else
+        {
+            Menu *menu = [Menu getMenu:rewardRedemption.discountMenuID branchID:rewardRedemption.mainBranchID];
+            SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:rewardRedemption.discountMenuID branchID:rewardRedemption.mainBranchID];
+            float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
+            
+            
+            OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:rewardRedemption.mainBranchID customerTableID:0 menuID:rewardRedemption.discountMenuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 noteIDListInText:@"" orderNo:0 status:1 receiptID:0];
+            
+            
+            NSMutableArray *orderTakingList = [[NSMutableArray alloc]init];
+            [orderTakingList addObject:orderTaking];
+            [OrderTaking setCurrentOrderTakingList:orderTakingList];
+            [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
+        }
+    }
+}
+
 @end

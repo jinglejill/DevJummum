@@ -17,7 +17,7 @@
 @property (retain, nonatomic) NSDate * modifiedDate;
 
 
-
+- (NSDictionary *)dictionary;
 -(UserRewardRedemptionUsed *)initWithUserAccountID:(NSInteger)userAccountID rewardRedemptionID:(NSInteger)rewardRedemptionID receiptID:(NSInteger)receiptID;
 +(NSInteger)getNextID;
 +(void)addObject:(UserRewardRedemptionUsed *)userRewardRedemptionUsed;

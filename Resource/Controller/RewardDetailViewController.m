@@ -62,7 +62,7 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
     _expandCollapse = 1;
     tbvData.delegate = self;
     tbvData.dataSource = self;
-    
+    tbvData.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     
     {
@@ -132,6 +132,11 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         cell.lblRemarkWidth.constant = cell.lblRemark.frame.size.width;
         
         
+        cell.btnOrderNow.hidden = YES;
+        cell.btnOrderNowTop.constant = 0;
+        cell.btnOrderNowHeight.constant = 0;
+        
+        
         return cell;
     }
     else if(item == 1)
@@ -188,6 +193,9 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         cell.lblSubTitleHeight.constant = cell.lblSubTitle.frame.size.height;
         
         
+        cell.btnOrderNow.hidden = YES;
+        cell.btnOrderNowTop.constant = 0;
+        cell.btnOrderNowHeight.constant = 0;
         
        
         return 11+cell.imgVwValueHeight.constant+20+cell.lblHeaderHeight.constant+8+cell.lblSubTitleHeight.constant+8+18+11;

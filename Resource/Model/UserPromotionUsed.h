@@ -17,7 +17,7 @@
 @property (retain, nonatomic) NSDate * modifiedDate;
 
 
-
+- (NSDictionary *)dictionary;
 -(UserPromotionUsed *)initWithUserAccountID:(NSInteger)userAccountID promotionID:(NSInteger)promotionID receiptID:(NSInteger)receiptID;
 +(NSInteger)getNextID;
 +(void)addObject:(UserPromotionUsed *)userPromotionUsed;

@@ -24,6 +24,7 @@
     
     Promotion *_promotion;
     BOOL _lastItemReached;
+    BOOL _unwind;
 }
 @property (nonatomic)        BOOL           searchBarActive;
 @end
@@ -41,7 +42,7 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
 
 -(IBAction)unwindToHotDeal:(UIStoryboardSegue *)segue
 {
-    
+    _unwind = YES;
 }
 
 -(void)viewDidLayoutSubviews
@@ -66,13 +67,15 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
 {
     [super viewDidAppear:animated];
     
-    
-    UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-    self.homeModel = [[HomeModel alloc]init];
-    self.homeModel.delegate = self;
-    //เพิ่งสั่งอาหารร้านนี้ไปครั้งแรก ในหน้านี้ก็จะ โหลดข้อมูล hotdeal จาก db ของร้านนี้มาแสดง
-    NSInteger branchID = [Receipt getBranchIDWithMaxModifiedDateWithMemberID:userAccount.userAccountID];
-    [self.homeModel downloadItems:dbHotDealWithBranchID withData:@[userAccount,@(branchID),@([_promotionList count])]];
+    if(_unwind)
+    {
+        UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+        self.homeModel = [[HomeModel alloc]init];
+        self.homeModel.delegate = self;
+        //เพิ่งสั่งอาหารร้านนี้ไปครั้งแรก ในหน้านี้ก็จะ โหลดข้อมูล hotdeal จาก db ของร้านนี้มาแสดง
+        NSInteger branchID = [Receipt getBranchIDWithMaxModifiedDateWithMemberID:userAccount.userAccountID];
+        [self.homeModel downloadItems:dbHotDealWithBranchID withData:@[userAccount,@(branchID),@([_promotionList count])]];
+    }
 }
 
 
@@ -88,6 +91,7 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
     
     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
     [self.homeModel downloadItems:dbHotDeal withData:@[userAccount,@0]];
+    
     tbvData.delegate = self;
     tbvData.dataSource = self;
 
@@ -373,36 +377,37 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
 -(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
 {
     HomeModel *homeModel = (HomeModel *)objHomeModel;
-    if(homeModel.propCurrentDB == dbHotDeal)
+    if(homeModel.propCurrentDB == dbHotDeal || homeModel.propCurrentDB == dbHotDealWithBranchID)
     {
-        if([items[0] count] == 0)
+        if([items[0] count] == 0 && homeModel.propCurrentDB == dbHotDeal)
         {
             _lastItemReached = YES;
             return;
         }
-        if(!_promotionList)
-        {
-            _promotionList = [[NSMutableArray alloc]init];
-        }
-        [_promotionList addObjectsFromArray:items[0]];
-        _promotionList = [Promotion sortWithdataList:_promotionList];
+//        if(!_promotionList)
+//        {
+//            _promotionList = [[NSMutableArray alloc]init];
+//        }
+//        [_promotionList addObjectsFromArray:items[0]];
+        [Utility updateSharedObject:items];
+        _promotionList = [Promotion getPromotionList];
         [self searchBar:searchBar textDidChange:searchBar.text];
     }
-    else if(homeModel.propCurrentDB == dbHotDealWithBranchID)
-    {
-        //add update
-        NSMutableArray *promotionList = items[0];
-        if(!_promotionList)
-        {
-            _promotionList = [[NSMutableArray alloc]init];
-        }
-        BOOL update = [Utility updateDataList:promotionList dataList:_promotionList];
-        if(update)
-        {            
-            _promotionList = [Promotion sortWithdataList:_promotionList];
-            [self searchBar:searchBar textDidChange:searchBar.text];
-        }
-    }
+//    else if(homeModel.propCurrentDB == dbHotDealWithBranchID)
+//    {
+//        //add update
+////        NSMutableArray *promotionList = items[0];
+////        if(!_promotionList)
+////        {
+////            _promotionList = [[NSMutableArray alloc]init];
+////        }
+//        BOOL update = [Utility updateDataList:promotionList dataList:_promotionList];
+//        if(update)
+//        {            
+//            _promotionList = [Promotion sortWithdataList:_promotionList];
+//            [self searchBar:searchBar textDidChange:searchBar.text];
+//        }
+//    }
 }
 
 @end

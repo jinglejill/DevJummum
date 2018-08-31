@@ -34,7 +34,7 @@
 
 
 
-
+- (NSDictionary *)dictionary;
 -(OrderTaking *)initWithBranchID:(NSInteger)branchID customerTableID:(NSInteger)customerTableID menuID:(NSInteger)menuID quantity:(float)quantity specialPrice:(float)specialPrice price:(float)price takeAway:(NSInteger)takeAway noteIDListInText:(NSString *)noteIDListInText orderNo:(NSInteger)orderNo status:(NSInteger)status receiptID:(NSInteger)receiptID;
 +(NSInteger)getNextID;
 +(void)addObject:(OrderTaking *)orderTaking;
@@ -68,7 +68,6 @@
 +(NSMutableArray *)sortListByModifiedDateDesc:(NSMutableArray *)orderTakingList;
 +(NSMutableArray *)sortListByOrderTakingIDDesc:(NSMutableArray *)orderTakingList;
 +(NSMutableArray *)separateOrder:(NSMutableArray *)orderTakingList;
-//+(void)removeAllObject;
 +(NSMutableArray *)getOrderTakingList;
 +(NSMutableArray *)getCurrentOrderTakingList;
 +(void)setCurrentOrderTakingList:(NSMutableArray *)orderTakingList;

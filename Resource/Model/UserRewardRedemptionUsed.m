@@ -13,6 +13,18 @@
 
 @implementation UserRewardRedemptionUsed
 
+- (NSDictionary *)dictionary
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [self valueForKey:@"userRewardRedemptionUsedID"]?[self valueForKey:@"userRewardRedemptionUsedID"]:[NSNull null],@"userRewardRedemptionUsedID",
+            [self valueForKey:@"userAccountID"]?[self valueForKey:@"userAccountID"]:[NSNull null],@"userAccountID",
+            [self valueForKey:@"rewardRedemptionID"]?[self valueForKey:@"rewardRedemptionID"]:[NSNull null],@"rewardRedemptionID",
+            [self valueForKey:@"receiptID"]?[self valueForKey:@"receiptID"]:[NSNull null],@"receiptID",
+            [self valueForKey:@"modifiedUser"]?[self valueForKey:@"modifiedUser"]:[NSNull null],@"modifiedUser",
+            [Utility dateToString:[self valueForKey:@"modifiedDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"modifiedDate",
+            nil];
+}
+
 -(UserRewardRedemptionUsed *)initWithUserAccountID:(NSInteger)userAccountID rewardRedemptionID:(NSInteger)rewardRedemptionID receiptID:(NSInteger)receiptID
 {
     self = [super init];

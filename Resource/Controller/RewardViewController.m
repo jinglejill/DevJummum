@@ -28,6 +28,7 @@
     NSMutableArray *_filterRewardRedemptionList;
     RewardRedemption *_rewardRedemption;
     BOOL _lastItemReached;
+    BOOL _unwind;
 }
 
 @property (nonatomic)        BOOL           searchBarActive;
@@ -76,14 +77,16 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
 {
     [super viewDidAppear:animated];
     
-    
-    UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-    self.homeModel = [[HomeModel alloc]init];
-    self.homeModel.delegate = self;
-    
-    //เพิ่งสั่งอาหารร้านนี้ไปครั้งแรก ในหน้านี้ก็จะ โหลดข้อมูล rewardRedemption จาก db ของร้านนี้มาแสดง
-    NSInteger branchID = [Receipt getBranchIDWithMaxModifiedDateWithMemberID:userAccount.userAccountID];
-    [self.homeModel downloadItems:dbRewardRedemptionWithBranchID withData:@[userAccount,@(branchID),@([_rewardRedemptionList count])]];
+    if(_unwind)
+    {
+        UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+        self.homeModel = [[HomeModel alloc]init];
+        self.homeModel.delegate = self;
+        
+        //เพิ่งสั่งอาหารร้านนี้ไปครั้งแรก ในหน้านี้ก็จะ โหลดข้อมูล rewardRedemption จาก db ของร้านนี้มาแสดง
+        NSInteger branchID = [Receipt getBranchIDWithMaxModifiedDateWithMemberID:userAccount.userAccountID];
+        [self.homeModel downloadItems:dbRewardRedemptionWithBranchID withData:@[userAccount,@(branchID),@([_rewardRedemptionList count])]];
+    }    
 }
 
 - (void)viewDidLoad
@@ -342,7 +345,7 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
 {
     
     HomeModel *homeModel = (HomeModel *)objHomeModel;
-    if(homeModel.propCurrentDB == dbRewardPoint)
+    if(homeModel.propCurrentDB == dbRewardPoint || homeModel.propCurrentDB == dbRewardRedemptionWithBranchID)
     {
         [self removeOverlayViews];
         
@@ -358,7 +361,7 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
         
         //rewardRedemptionList
         NSMutableArray *rewardRedemptionList = items[1];
-        if([rewardRedemptionList count] == 0)
+        if([rewardRedemptionList count] == 0 && homeModel.propCurrentDB == dbRewardPoint)
         {
             _lastItemReached = YES;
             return;
@@ -367,37 +370,38 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
         {
             _rewardRedemptionList = [[NSMutableArray alloc]init];
         }
-        [_rewardRedemptionList addObjectsFromArray:rewardRedemptionList];
-        _rewardRedemptionList = [RewardRedemption sortWithdataList:_rewardRedemptionList];
+//        [_rewardRedemptionList addObjectsFromArray:rewardRedemptionList];
+        [Utility updateSharedObject:items];
+        _rewardRedemptionList = [RewardRedemption getRewardRedemptionList];
         UISearchBar *sbText = [self.view viewWithTag:300];
         [self searchBar:sbText textDidChange:sbText.text];
     }
-    else if(homeModel.propCurrentDB == dbRewardRedemptionWithBranchID)
-    {
-        //rewardPoint
-        NSMutableArray *rewardPointList = items[0];
-        _rewardPoint = rewardPointList[0];
-        NSRange range = NSMakeRange(1, 1);
-        NSIndexSet *section = [NSIndexSet indexSetWithIndexesInRange:range];
-        [tbvData reloadSections:section withRowAnimation:UITableViewRowAnimationNone];
-        
-        
-        
-        //rewardRedemptionList
-        //add update
-        NSMutableArray *rewardRedemptionList = items[1];
-        if(!_rewardRedemptionList)
-        {
-            _rewardRedemptionList = [[NSMutableArray alloc]init];
-        }
-        BOOL update = [Utility updateDataList:rewardRedemptionList dataList:_rewardRedemptionList];
-        _rewardRedemptionList = [RewardRedemption sortWithdataList:_rewardRedemptionList];
-        if(update)
-        {
-            UISearchBar *sbText = [self.view viewWithTag:300];
-            [self searchBar:sbText textDidChange:sbText.text];
-        }
-    }
+//    else if(homeModel.propCurrentDB == dbRewardRedemptionWithBranchID)
+//    {
+//        //rewardPoint
+//        NSMutableArray *rewardPointList = items[0];
+//        _rewardPoint = rewardPointList[0];
+//        NSRange range = NSMakeRange(1, 1);
+//        NSIndexSet *section = [NSIndexSet indexSetWithIndexesInRange:range];
+//        [tbvData reloadSections:section withRowAnimation:UITableViewRowAnimationNone];
+//
+//
+//
+//        //rewardRedemptionList
+//        //add update
+//        NSMutableArray *rewardRedemptionList = items[1];
+//        if(!_rewardRedemptionList)
+//        {
+//            _rewardRedemptionList = [[NSMutableArray alloc]init];
+//        }
+//        BOOL update = [Utility updateDataList:rewardRedemptionList dataList:_rewardRedemptionList];
+//        _rewardRedemptionList = [RewardRedemption sortWithdataList:_rewardRedemptionList];
+//        if(update)
+//        {
+//            UISearchBar *sbText = [self.view viewWithTag:300];
+//            [self searchBar:sbText textDidChange:sbText.text];
+//        }
+//    }
 }
 
 #pragma mark - search
