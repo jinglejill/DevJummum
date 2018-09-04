@@ -90,10 +90,10 @@ void myExceptionHandler(NSException *exception)
     
 }
 
--(void)applicationReceivedRemoteMessage:(FIRMessagingRemoteMessage *)remoteMessage
-{
-    NSLog(@"remoteMessageAppData: %@",remoteMessage.appData);
-}
+//-(void)applicationReceivedRemoteMessage:(FIRMessagingRemoteMessage *)remoteMessage
+//{
+//    NSLog(@"remoteMessageAppData: %@",remoteMessage.appData);
+//}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -155,7 +155,7 @@ void myExceptionHandler(NSException *exception)
 
     //push notification
     {
-        [FIRApp configure];
+//        [FIRApp configure];
         if ([UNUserNotificationCenter class] != nil)//version >= 10
         {
             
@@ -182,7 +182,7 @@ void myExceptionHandler(NSException *exception)
             [application registerUserNotificationSettings:settings];
         }
         [application registerForRemoteNotifications];  // required to get the app to do anything at all about push notifications
-        [FIRMessaging messaging].delegate = self;
+//        [FIRMessaging messaging].delegate = self;
     }
     
     
@@ -332,15 +332,15 @@ void myExceptionHandler(NSException *exception)
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
-    NSLog(@"FCM registration token: %@", fcmToken);
-    // Notify about received token.
-    NSDictionary *dataDict = [NSDictionary dictionaryWithObject:fcmToken forKey:@"token"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:
-     @"FCMToken" object:nil userInfo:dataDict];
-    // TODO: If necessary send token to application server.
-    // Note: This callback is fired at each app startup and whenever a new token is generated.
-}
+//- (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
+//    NSLog(@"FCM registration token: %@", fcmToken);
+//    // Notify about received token.
+//    NSDictionary *dataDict = [NSDictionary dictionaryWithObject:fcmToken forKey:@"token"];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:
+//     @"FCMToken" object:nil userInfo:dataDict];
+//    // TODO: If necessary send token to application server.
+//    // Note: This callback is fired at each app startup and whenever a new token is generated.
+//}
 
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {

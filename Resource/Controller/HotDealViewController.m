@@ -24,7 +24,6 @@
     
     Promotion *_promotion;
     BOOL _lastItemReached;
-    BOOL _unwind;
 }
 @property (nonatomic)        BOOL           searchBarActive;
 @end
@@ -42,7 +41,6 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
 
 -(IBAction)unwindToHotDeal:(UIStoryboardSegue *)segue
 {
-    _unwind = YES;
 }
 
 -(void)viewDidLayoutSubviews
@@ -67,7 +65,6 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
 {
     [super viewDidAppear:animated];
     
-    if(_unwind)
     {
         UserAccount *userAccount = [UserAccount getCurrentUserAccount];
         self.homeModel = [[HomeModel alloc]init];
@@ -384,30 +381,11 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
             _lastItemReached = YES;
             return;
         }
-//        if(!_promotionList)
-//        {
-//            _promotionList = [[NSMutableArray alloc]init];
-//        }
-//        [_promotionList addObjectsFromArray:items[0]];
+
         [Utility updateSharedObject:items];
         _promotionList = [Promotion getPromotionList];
         [self searchBar:searchBar textDidChange:searchBar.text];
     }
-//    else if(homeModel.propCurrentDB == dbHotDealWithBranchID)
-//    {
-//        //add update
-////        NSMutableArray *promotionList = items[0];
-////        if(!_promotionList)
-////        {
-////            _promotionList = [[NSMutableArray alloc]init];
-////        }
-//        BOOL update = [Utility updateDataList:promotionList dataList:_promotionList];
-//        if(update)
-//        {            
-//            _promotionList = [Promotion sortWithdataList:_promotionList];
-//            [self searchBar:searchBar textDidChange:searchBar.text];
-//        }
-//    }
 }
 
 @end

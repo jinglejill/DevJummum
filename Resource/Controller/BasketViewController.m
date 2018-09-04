@@ -78,15 +78,10 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if(textField.tag == 1)
+    if(textField.tag != 0)
     {
         //remove ordertaking
-        NSIndexPath *indexPath = [tbvOrder indexPathForRowAtPoint:CGPointMake(textField.frame.origin.x, textField.frame.origin.y)];
-        CustomTableViewCellOrder *cell = [tbvOrder cellForRowAtIndexPath:indexPath];
-        
-        
-
-        NSInteger menuID = cell.lblMenuName.tag;
+        NSInteger menuID = textField.tag;
         NSMutableArray *currentOrderTakingList = [OrderTaking getCurrentOrderTakingList];
         NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithMenuID:menuID orderTakingList:currentOrderTakingList];
         NSInteger quantity = [textField.text integerValue];
@@ -141,7 +136,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
 
-    if(textField.tag == 1)
+    if(textField.tag != 0)
     {
         NSString *resultingString = [textField.text stringByReplacingCharactersInRange: range withString: string];
         
@@ -329,7 +324,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         float sumQuantity = [OrderTaking getSumQuantity:orderTakingList];
         NSString *strSumQuantity = [Utility formatDecimal:sumQuantity withMinFraction:0 andMaxFraction:0];
         cell.txtQuantity.text = strSumQuantity;
-        cell.txtQuantity.tag = 1;
+        cell.txtQuantity.tag = menu.menuID;
         cell.txtQuantity.delegate = self;
         cell.txtQuantity.keyboardType = UIKeyboardTypeNumberPad;
         [cell.txtQuantity setInputAccessoryView:self.toolBar];
@@ -1128,11 +1123,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     }
 
     
-    
-//    if([_copyOrderTaking isEqual:_orderTaking])
-//    {
-//        _copyOrderTaking = nil;
-//    }
+
     [self performSegueWithIdentifier:@"segNote" sender:self];
 }
 

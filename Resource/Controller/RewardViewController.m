@@ -28,7 +28,6 @@
     NSMutableArray *_filterRewardRedemptionList;
     RewardRedemption *_rewardRedemption;
     BOOL _lastItemReached;
-    BOOL _unwind;
 }
 
 @property (nonatomic)        BOOL           searchBarActive;
@@ -77,7 +76,6 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
 {
     [super viewDidAppear:animated];
     
-    if(_unwind)
     {
         UserAccount *userAccount = [UserAccount getCurrentUserAccount];
         self.homeModel = [[HomeModel alloc]init];
@@ -370,38 +368,11 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
         {
             _rewardRedemptionList = [[NSMutableArray alloc]init];
         }
-//        [_rewardRedemptionList addObjectsFromArray:rewardRedemptionList];
         [Utility updateSharedObject:items];
         _rewardRedemptionList = [RewardRedemption getRewardRedemptionList];
         UISearchBar *sbText = [self.view viewWithTag:300];
         [self searchBar:sbText textDidChange:sbText.text];
     }
-//    else if(homeModel.propCurrentDB == dbRewardRedemptionWithBranchID)
-//    {
-//        //rewardPoint
-//        NSMutableArray *rewardPointList = items[0];
-//        _rewardPoint = rewardPointList[0];
-//        NSRange range = NSMakeRange(1, 1);
-//        NSIndexSet *section = [NSIndexSet indexSetWithIndexesInRange:range];
-//        [tbvData reloadSections:section withRowAnimation:UITableViewRowAnimationNone];
-//
-//
-//
-//        //rewardRedemptionList
-//        //add update
-//        NSMutableArray *rewardRedemptionList = items[1];
-//        if(!_rewardRedemptionList)
-//        {
-//            _rewardRedemptionList = [[NSMutableArray alloc]init];
-//        }
-//        BOOL update = [Utility updateDataList:rewardRedemptionList dataList:_rewardRedemptionList];
-//        _rewardRedemptionList = [RewardRedemption sortWithdataList:_rewardRedemptionList];
-//        if(update)
-//        {
-//            UISearchBar *sbText = [self.view viewWithTag:300];
-//            [self searchBar:sbText textDidChange:sbText.text];
-//        }
-//    }
 }
 
 #pragma mark - search

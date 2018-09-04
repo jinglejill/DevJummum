@@ -244,7 +244,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
         NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
         orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
         
-
+        
         
         return [orderTakingList count];
     }
@@ -456,12 +456,15 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                             
                             NSString *strDiscount = [Utility formatDecimal:receipt.discountAmount withMinFraction:0 andMaxFraction:2];
                             strDiscount = [NSString stringWithFormat:@"ส่วนลด %@%%",strDiscount];
+                            strDiscount = receipt.discountType==1?@"ส่วนลด":strDiscount;
+                            strDiscount = ![Utility isStringEmpty:receipt.voucherCode]?[NSString stringWithFormat:@"คูปองส่วนลด %@",receipt.voucherCode]:strDiscount;
+                            
                             
                             NSString *strAmount = [Utility formatDecimal:receipt.discountValue withMinFraction:2 andMaxFraction:2];
                             strAmount = [Utility addPrefixBahtSymbol:strAmount];
                             strAmount = [NSString stringWithFormat:@"-%@",strAmount];
                             
-                            cell.lblTitle.text = receipt.discountType==1?@"ส่วนลด":strDiscount;
+                            cell.lblTitle.text = strDiscount;
                             cell.lblAmount.text = strAmount;
                             cell.vwTopBorder.hidden = YES;
                             cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
@@ -693,7 +696,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                 }
                 else
                 {
-                    switch (item)
+                    switch (item-1)
                     {
                         case 0:
                         {
@@ -726,13 +729,16 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                             
                             NSString *strDiscount = [Utility formatDecimal:receipt.discountAmount withMinFraction:0 andMaxFraction:2];
                             strDiscount = [NSString stringWithFormat:@"ส่วนลด %@%%",strDiscount];
+                            strDiscount = receipt.discountType==1?@"ส่วนลด":strDiscount;
+                            strDiscount = ![Utility isStringEmpty:receipt.voucherCode]?[NSString stringWithFormat:@"คูปองส่วนลด %@",receipt.voucherCode]:strDiscount;
+                            
                             
                             NSString *strAmount = [Utility formatDecimal:receipt.discountValue withMinFraction:2 andMaxFraction:2];
                             strAmount = [Utility addPrefixBahtSymbol:strAmount];
                             strAmount = [NSString stringWithFormat:@"-%@",strAmount];
                             
                             
-                            cell.lblTitle.text = receipt.discountType==1?@"ส่วนลด":strDiscount;
+                            cell.lblTitle.text = strDiscount;
                             cell.lblAmount.text = strAmount;
                             cell.vwTopBorder.hidden = YES;
                             cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
@@ -1376,7 +1382,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                     [cell.btnRate4 setBackgroundImage:[UIImage imageNamed:@"starRatingGray.png"] forState:UIControlStateDisabled];
                     [cell.btnRate5 setBackgroundImage:[UIImage imageNamed:@"starRatingGray.png"] forState:UIControlStateDisabled];
                 }
-                break;
+                    break;
                 case 2:
                 {
                     [cell.btnRate1 setBackgroundImage:[UIImage imageNamed:@"starRating.png"] forState:UIControlStateDisabled];
@@ -1385,7 +1391,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                     [cell.btnRate4 setBackgroundImage:[UIImage imageNamed:@"starRatingGray.png"] forState:UIControlStateDisabled];
                     [cell.btnRate5 setBackgroundImage:[UIImage imageNamed:@"starRatingGray.png"] forState:UIControlStateDisabled];
                 }
-                break;
+                    break;
                 case 3:
                 {
                     [cell.btnRate1 setBackgroundImage:[UIImage imageNamed:@"starRating.png"] forState:UIControlStateDisabled];
@@ -1394,7 +1400,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                     [cell.btnRate4 setBackgroundImage:[UIImage imageNamed:@"starRatingGray.png"] forState:UIControlStateDisabled];
                     [cell.btnRate5 setBackgroundImage:[UIImage imageNamed:@"starRatingGray.png"] forState:UIControlStateDisabled];
                 }
-                break;
+                    break;
                 case 4:
                 {
                     [cell.btnRate1 setBackgroundImage:[UIImage imageNamed:@"starRating.png"] forState:UIControlStateDisabled];
@@ -1403,7 +1409,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                     [cell.btnRate4 setBackgroundImage:[UIImage imageNamed:@"starRating.png"] forState:UIControlStateDisabled];
                     [cell.btnRate5 setBackgroundImage:[UIImage imageNamed:@"starRatingGray.png"] forState:UIControlStateDisabled];
                 }
-                break;
+                    break;
                 case 5:
                 {
                     [cell.btnRate1 setBackgroundImage:[UIImage imageNamed:@"starRating.png"] forState:UIControlStateDisabled];
@@ -1412,9 +1418,9 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                     [cell.btnRate4 setBackgroundImage:[UIImage imageNamed:@"starRating.png"] forState:UIControlStateDisabled];
                     [cell.btnRate5 setBackgroundImage:[UIImage imageNamed:@"starRating.png"] forState:UIControlStateDisabled];
                 }
-                break;
+                    break;
                 default:
-                break;
+                    break;
             }
             
             if([Utility isStringEmpty:rating.comment])
@@ -1642,7 +1648,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
             
             
             
-        
+            
             return cell;
         }
     }
@@ -2144,7 +2150,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                     [cell.lblPhoneNo sizeToFit];
                     cell.lblPhoneNoHeight.constant = cell.lblPhoneNo.frame.size.height;
                     
-                    return 11+cell.lblRemarkHeight.constant+cell.lblReasonTop.constant+cell.lblReasonHeight.constant+8+18+cell.lblReasonDetailTop.constant+cell.lblReasonDetailHeight.constant+cell.lblPhoneNoTop.constant+cell.lblPhoneNoHeight.constant+11; 
+                    return 11+cell.lblRemarkHeight.constant+cell.lblReasonTop.constant+cell.lblReasonHeight.constant+8+18+cell.lblReasonDetailTop.constant+cell.lblReasonDetailHeight.constant+cell.lblPhoneNoTop.constant+cell.lblPhoneNoHeight.constant+11;
                 }
             }
             else
@@ -2257,7 +2263,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
 
 - (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath
 {
-
+    
     
     cell.separatorInset = UIEdgeInsetsMake(0.0f, self.view.bounds.size.width, 0.0f, CGFLOAT_MAX);
     if([tableView isEqual:tbvData])
@@ -2310,7 +2316,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
             [tbvData reloadData];
             NSString *message = [Setting getValue:@"032m" example:@"ร้านค้ากำลังปรุงอาหารให้คุณอยู่ค่ะ โปรดรอสักครู่นะคะ"];
             NSString *message2 = [Setting getValue:@"033m" example:@"อาหารได้ส่งถึงคุณแล้วค่ะ"];
-            NSString *strMessage = downloadReceipt.status == 5?message:message2;            
+            NSString *strMessage = downloadReceipt.status == 5?message:message2;
             [self showAlert:@"" message:strMessage];
         }
         else
@@ -2382,7 +2388,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
 }
 
 -(void)cancelOrder:(id)sender
-{    
+{
     //check current process in case user stay long time in this screen while the process going to another status already
     //if receipt.status == 5 then show alert msg ร้านค้ากำลังปรุงอาหารให้คุณอยู่ค่ะ โปรดรอสักครู่นะคะ
     self.homeModel = [[HomeModel alloc]init];

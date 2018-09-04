@@ -9,17 +9,6 @@
          contextName = "-[HomeModel URLSession:dataTask:didReceiveData:]:HomeModel.m">
       </ContextState>
       <ContextState
-         contextName = "-[ReceiptSummaryViewController tableView:cellForRowAtIndexPath:]:ReceiptSummaryViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "section">
-            </PersistentString>
-            <PersistentString
-               value = "item">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "__42-[MenuSelectionViewController viewDidLoad]_block_invoke:MenuSelectionViewController.m">
       </ContextState>
       <ContextState
@@ -33,6 +22,28 @@
             </PersistentString>
             <PersistentString
                value = "cellTimeToCountDown">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ReceiptSummaryViewController tableView:cellForRowAtIndexPath:]:ReceiptSummaryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "section">
+            </PersistentString>
+            <PersistentString
+               value = "item">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[BasketViewController textFieldDidEndEditing:]:BasketViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "textField.frame.origin.x">
+            </PersistentString>
+            <PersistentString
+               value = "textField.frame.origin.y">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
