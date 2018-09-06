@@ -14,7 +14,7 @@
 
 @implementation UserAccount
 
--(UserAccount *)initWithUsername:(NSString *)username password:(NSString *)password deviceToken:(NSString *)deviceToken fullName:(NSString *)fullName nickName:(NSString *)nickName birthDate:(NSDate *)birthDate email:(NSString *)email phoneNo:(NSString *)phoneNo lineID:(NSString *)lineID roleID:(NSInteger)roleID
+-(UserAccount *)initWithUsername:(NSString *)username password:(NSString *)password deviceToken:(NSString *)deviceToken firstName:(NSString *)firstName lastName:(NSString *)lastName fullName:(NSString *)fullName nickName:(NSString *)nickName birthDate:(NSDate *)birthDate email:(NSString *)email phoneNo:(NSString *)phoneNo lineID:(NSString *)lineID roleID:(NSInteger)roleID
 {
     self = [super init];
     if(self)
@@ -23,6 +23,8 @@
         self.username = username;
         self.password = password;
         self.deviceToken = deviceToken;
+        self.firstName = firstName;
+        self.lastName = lastName;
         self.fullName = fullName;
         self.nickName = nickName;
         self.birthDate = birthDate;
@@ -36,7 +38,6 @@
     return self;
 }
 
-
 +(NSInteger)getNextID
 {
     NSString *primaryKeyName = @"userAccountID";
@@ -44,21 +45,26 @@
     NSMutableArray *dataList = [SharedUserAccount sharedUserAccount].userAccountList;
     
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:propertyName ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:propertyName ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
     NSArray *sortArray = [dataList sortedArrayUsingDescriptors:sortDescriptors];
     dataList = [sortArray mutableCopy];
     
     if([dataList count] == 0)
     {
-        return 1;
+        return -1;
     }
     else
     {
         id value = [dataList[0] valueForKey:primaryKeyName];
-        NSString *strMaxID = value;
-        
-        return [strMaxID intValue]+1;
+        if([value integerValue]>0)
+        {
+            return -1;
+        }
+        else
+        {
+            return [value integerValue]-1;
+        }
     }
 }
 
@@ -66,6 +72,105 @@
 {
     NSMutableArray *dataList = [SharedUserAccount sharedUserAccount].userAccountList;
     [dataList addObject:userAccount];
+}
+
++(void)removeObject:(UserAccount *)userAccount
+{
+    NSMutableArray *dataList = [SharedUserAccount sharedUserAccount].userAccountList;
+    [dataList removeObject:userAccount];
+}
+
++(void)addList:(NSMutableArray *)userAccountList
+{
+    NSMutableArray *dataList = [SharedUserAccount sharedUserAccount].userAccountList;
+    [dataList addObjectsFromArray:userAccountList];
+}
+
++(void)removeList:(NSMutableArray *)userAccountList
+{
+    NSMutableArray *dataList = [SharedUserAccount sharedUserAccount].userAccountList;
+    [dataList removeObjectsInArray:userAccountList];
+}
+
++(UserAccount *)getUserAccount:(NSInteger)userAccountID
+{
+    NSMutableArray *dataList = [SharedUserAccount sharedUserAccount].userAccountList;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_userAccountID = %ld",userAccountID];
+    NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
+    if([filterArray count] > 0)
+    {
+        return filterArray[0];
+    }
+    return nil;
+}
+
+-(id)copyWithZone:(NSZone *)zone
+{
+    id copy = [[[self class] alloc] init];
+    
+    if (copy)
+    {
+        ((UserAccount *)copy).userAccountID = self.userAccountID;
+        [copy setUsername:self.username];
+        [copy setPassword:self.password];
+        [copy setDeviceToken:self.deviceToken];
+        [copy setFirstName:self.firstName];
+        [copy setLastName:self.lastName];
+        [copy setFullName:self.fullName];
+        [copy setNickName:self.nickName];
+        [copy setBirthDate:self.birthDate];
+        [copy setEmail:self.email];
+        [copy setPhoneNo:self.phoneNo];
+        [copy setLineID:self.lineID];
+        ((UserAccount *)copy).roleID = self.roleID;
+        [copy setModifiedUser:[Utility modifiedUser]];
+        [copy setModifiedDate:[Utility currentDateTime]];
+    }
+    
+    return copy;
+}
+
+-(BOOL)editUserAccount:(UserAccount *)editingUserAccount
+{
+    if(self.userAccountID == editingUserAccount.userAccountID
+       && [self.username isEqualToString:editingUserAccount.username]
+       && [self.password isEqualToString:editingUserAccount.password]
+       && [self.deviceToken isEqualToString:editingUserAccount.deviceToken]
+       && [self.firstName isEqualToString:editingUserAccount.firstName]
+       && [self.lastName isEqualToString:editingUserAccount.lastName]
+       && [self.fullName isEqualToString:editingUserAccount.fullName]
+       && [self.nickName isEqualToString:editingUserAccount.nickName]
+       && [self.birthDate isEqual:editingUserAccount.birthDate]
+       && [self.email isEqualToString:editingUserAccount.email]
+       && [self.phoneNo isEqualToString:editingUserAccount.phoneNo]
+       && [self.lineID isEqualToString:editingUserAccount.lineID]
+       && self.roleID == editingUserAccount.roleID
+       )
+    {
+        return NO;
+    }
+    return YES;
+}
+
++(UserAccount *)copyFrom:(UserAccount *)fromUserAccount to:(UserAccount *)toUserAccount
+{
+    toUserAccount.userAccountID = fromUserAccount.userAccountID;
+    toUserAccount.username = fromUserAccount.username;
+    toUserAccount.password = fromUserAccount.password;
+    toUserAccount.deviceToken = fromUserAccount.deviceToken;
+    toUserAccount.firstName = fromUserAccount.firstName;
+    toUserAccount.lastName = fromUserAccount.lastName;
+    toUserAccount.fullName = fromUserAccount.fullName;
+    toUserAccount.nickName = fromUserAccount.nickName;
+    toUserAccount.birthDate = fromUserAccount.birthDate;
+    toUserAccount.email = fromUserAccount.email;
+    toUserAccount.phoneNo = fromUserAccount.phoneNo;
+    toUserAccount.lineID = fromUserAccount.lineID;
+    toUserAccount.roleID = fromUserAccount.roleID;
+    toUserAccount.modifiedUser = [Utility modifiedUser];
+    toUserAccount.modifiedDate = [Utility currentDateTime];
+    
+    return toUserAccount;
 }
 
 +(BOOL) usernameExist:(NSString *)username
@@ -90,18 +195,6 @@
         return YES;
     }
     return NO;
-}
-
-+(UserAccount *)getUserAccount:(NSInteger)userAccountID
-{
-    NSMutableArray *dataList = [SharedUserAccount sharedUserAccount].userAccountList;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_userAccountID = %ld",userAccountID];
-    NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
-    if([filterArray count] > 0)
-    {
-        return  filterArray[0];
-    }
-    return nil;
 }
 
 +(UserAccount *)getUserAccountWithUsername:(NSString *)username

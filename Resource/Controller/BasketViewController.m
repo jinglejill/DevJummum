@@ -79,7 +79,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     if(textField.tag != 0)
-    {
+    {  
         //remove ordertaking
         NSInteger menuID = textField.tag;
         NSMutableArray *currentOrderTakingList = [OrderTaking getCurrentOrderTakingList];
@@ -317,6 +317,9 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         Menu *menu = _menuList[item];
         cell.lblMenuName.text = menu.titleThai;
         cell.lblMenuName.tag = menu.menuID;
+        [cell.lblMenuName sizeToFit];
+        cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height<21.5?21.5:cell.lblMenuName.frame.size.height;
+        
         
         
         NSMutableArray *currentOrderTakingList = [OrderTaking getCurrentOrderTakingList];
@@ -562,33 +565,14 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     
     if([tableView isEqual:tbvOrder])
     {
+        CustomTableViewCellOrder *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierOrder];
+        
+      
         Menu *menu = _menuList[item];
-        
-        
-        
-        NSString *strMenuName;
-//        if(orderTaking.takeAway)
-//        {
-//            strMenuName = [NSString stringWithFormat:@"ใส่ห่อ %@",menu.titleThai];
-//        }
-//        else
-        {
-            strMenuName = menu.titleThai;
-        }
-        
-        
-        
-        
-        UIFont *fontMenuName = [UIFont fontWithName:@"Prompt-Regular" size:14.0];
-        CGSize menuNameLabelSize = [self suggestedSizeWithFont:fontMenuName size:CGSizeMake(tbvOrder.frame.size.width - 70 - 68 - 8*2 - 16*2, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:strMenuName];
-        
+        cell.lblMenuName.text = menu.titleThai;
+        [cell.lblMenuName sizeToFit];
+        float height = 58.5+cell.lblMenuName.frame.size.height+8<88?88:58.5+cell.lblMenuName.frame.size.height+8;
 
-        
-        
-        float height = menuNameLabelSize.height+11;
-        height = height < 90? 90:height;
-        
-        
         
         NSMutableArray *currentOrderTakingList = [OrderTaking getCurrentOrderTakingList];
         NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithMenuID:menu.menuID orderTakingList:currentOrderTakingList];
@@ -601,7 +585,6 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     else if([tableView isEqual:tbvTotal])
     {
         return 34;
-//        return item == 1?56:26;
     }
     else
     {

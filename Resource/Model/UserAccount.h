@@ -15,6 +15,8 @@
 @property (retain, nonatomic) NSString * username;
 @property (retain, nonatomic) NSString * password;
 @property (retain, nonatomic) NSString * deviceToken;
+@property (retain, nonatomic) NSString * firstName;
+@property (retain, nonatomic) NSString * lastName;
 @property (retain, nonatomic) NSString * fullName;
 @property (retain, nonatomic) NSString * nickName;
 @property (retain, nonatomic) NSDate * birthDate;
@@ -25,9 +27,7 @@
 @property (retain, nonatomic) NSString * modifiedUser;
 @property (retain, nonatomic) NSDate * modifiedDate;
 
-
-
--(UserAccount *)initWithUsername:(NSString *)username password:(NSString *)password deviceToken:(NSString *)deviceToken fullName:(NSString *)fullName nickName:(NSString *)nickName birthDate:(NSDate *)birthDate email:(NSString *)email phoneNo:(NSString *)phoneNo lineID:(NSString *)lineID roleID:(NSInteger)roleID;
+-(UserAccount *)initWithUsername:(NSString *)username password:(NSString *)password deviceToken:(NSString *)deviceToken firstName:(NSString *)firstName lastName:(NSString *)lastName fullName:(NSString *)fullName nickName:(NSString *)nickName birthDate:(NSDate *)birthDate email:(NSString *)email phoneNo:(NSString *)phoneNo lineID:(NSString *)lineID roleID:(NSInteger)roleID;
 +(NSInteger)getNextID;
 +(void)addObject:(UserAccount *)userAccount;
 +(BOOL)usernameExist:(NSString *)username;

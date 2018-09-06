@@ -171,6 +171,12 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             [tbvData scrollToRowAtIndexPath:_currentScrollIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         }
     }];
+    
+    
+    if(fromReceiptSummaryMenu || fromOrderDetailMenu || fromRewardRedemption || fromHotDealDetail)
+    {
+        [self showAlert:@"" message:@"กรุณากดเลือกโต๊ะเพื่อสแกน QR Code เลขโต๊ะ\nคุณสามารถแก้ไขรายการอาหารได้โดยกดปุ่ม +/- ด้านมุมขวาบน"];
+    }
 }
 
 - (IBAction)goBack:(id)sender
@@ -661,6 +667,14 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                         cell.txtCCV.text = _creditCard.ccv;
                         
                         
+                        cell.txtFirstName.autocapitalizationType = UITextAutocapitalizationTypeWords;
+                        cell.txtLastName.autocapitalizationType = UITextAutocapitalizationTypeWords;
+                        cell.txtCardNo.autocapitalizationType = UITextAutocapitalizationTypeNone;
+                        cell.txtMonth.autocapitalizationType = UITextAutocapitalizationTypeNone;
+                        cell.txtYear.autocapitalizationType = UITextAutocapitalizationTypeNone;
+                        cell.txtCCV.autocapitalizationType = UITextAutocapitalizationTypeNone;
+                        
+                        
                         cell.swtSave.on = _creditCard.saveCard;
                         [cell.swtSave addTarget:self action:@selector(swtSaveDidChange:) forControlEvents:UIControlEventValueChanged];
                         [cell.txtCardNo addTarget:self action:@selector(txtCardNoDidChange:) forControlEvents:UIControlEventEditingChanged];
@@ -809,8 +823,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
-                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ใส่ห่อ"
-                                                                                                   attributes:attribute];
+                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ใส่ห่อ" attributes:attribute];
                     
                     NSDictionary *attribute2 = @{NSFontAttributeName: font};
                     NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
@@ -823,12 +836,8 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 {
                     cell.lblMenuName.text = menu.titleThai;
                 }
-                CGSize menuNameLabelSize = [self suggestedSizeWithFont:cell.lblMenuName.font size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:cell.lblMenuName.text];
-                CGRect frame = cell.lblMenuName.frame;
-                frame.size.width = menuNameLabelSize.width;
-                frame.size.height = menuNameLabelSize.height;
-                cell.lblMenuNameHeight.constant = menuNameLabelSize.height;
-                cell.lblMenuName.frame = frame;
+                [cell.lblMenuName sizeToFit];
+                cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height>46?46:cell.lblMenuName.frame.size.height;
                 
                 
                 
@@ -888,18 +897,8 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                     }
                 }
                 cell.lblNote.attributedText = strAllNote;
-                
-                
-                
-                CGSize noteLabelSize = [self suggestedSizeWithFont:cell.lblNote.font size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:[strAllNote string]];
-                noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?0:noteLabelSize.height;
-                CGRect frame2 = cell.lblNote.frame;
-                frame2.size.width = noteLabelSize.width;
-                frame2.size.height = noteLabelSize.height;
-                cell.lblNoteHeight.constant = noteLabelSize.height;
-                cell.lblNote.frame = frame2;
-                
-                
+                [cell.lblNote sizeToFit];
+                cell.lblNoteHeight.constant = cell.lblNote.frame.size.height>40?40:cell.lblNote.frame.size.height;
                 
                 
                 
@@ -1004,30 +1003,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 return cell;
             }
                 break;
-//            case 1:
-//            {
-//                //voucher code
-//                CustomTableViewCellVoucherCode *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierVoucherCode];
-//                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//
-//
-//                cell.txtVoucherCode.tag = 31;
-//                cell.txtVoucherCode.delegate = self;
-//                cell.txtVoucherCode.text = @"";
-//                [self setTextFieldDesign:cell.txtVoucherCode];
-//                [cell.txtVoucherCode setInputAccessoryView:self.toolBar];
-////                [cell.txtVoucherCode addTarget:self action:@selector(txtVoucherCodeChanged:) forControlEvents:UIControlEventEditingChanged];
-//
-//
-//                cell.btnConfirmVoucherCodeWidthConstant.constant = (self.view.frame.size.width - 16*2 - 8)/2;
-//                [cell.btnConfirmVoucherCode addTarget:self action:@selector(confirmVoucherCode:) forControlEvents:UIControlEventTouchUpInside];
-//                [self setButtonDesign:cell.btnConfirmVoucherCode];
-//
-//
-//                return cell;
-//
-//            }
-//                break;
             case 2:
             {
                 //after discount - no promoCode
@@ -1059,7 +1034,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             case 3:
             {
                 //service charge
-//                if(branch.serviceChargePercent > 0)
                 {
                     //after discount
                     CustomTableViewCellTotal *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
@@ -1092,53 +1066,13 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                     cell.lblAmount.textColor = cSystem4;
                     cell.hidden = branch.serviceChargePercent == 0;
                     
+                    
                     return  cell;
                 }
-//                else
-//                {
-//                    //vat
-//                    CustomTableViewCellTotal *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-//                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//
-//
-//                    NSString *strPercentVat = [Utility formatDecimal:branch.percentVat withMinFraction:0 andMaxFraction:2];
-//                    strPercentVat = [NSString stringWithFormat:@"Vat %@%%",strPercentVat];
-//                    float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
-//                    float serviceChargeValue;
-//                    float vatAmount;
-//                    if(branch.priceIncludeVat)
-//                    {
-//                        totalAmount = totalAmount / ((branch.percentVat+100)*0.01);
-//                        serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
-//                        serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-//                        vatAmount = totalAmount * branch.percentVat * 0.01;
-//                    }
-//                    else
-//                    {
-//                        serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
-//                        serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-//                        vatAmount = (totalAmount+serviceChargeValue)*branch.percentVat/100;
-//                    }
-//
-//                    vatAmount = roundf(vatAmount*100)/100;
-//                    _vatValue = vatAmount;
-//                    NSString *strAmount = [Utility formatDecimal:vatAmount withMinFraction:2 andMaxFraction:2];
-//                    strAmount = [Utility addPrefixBahtSymbol:strAmount];
-//                    cell.lblTitle.text = branch.percentVat==0?@"Vat":strPercentVat;
-//                    cell.lblAmount.text = strAmount;
-//                    cell.vwTopBorder.hidden = YES;
-//                    cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-//                    cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-//                    cell.lblAmount.textColor = cSystem4;
-//
-//
-//                    return cell;
-//                }
             }
                 break;
             case 4:
             {
-//                if(branch.serviceChargePercent > 0)
                 {
                     //vat
                     CustomTableViewCellTotal *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
@@ -1178,43 +1112,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                     
                     return cell;
                 }
-//                else
-//                {
-//                    //net total
-//                    CustomTableViewCellTotal *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-//                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//
-//
-//                    float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
-//                    float serviceChargeValue;
-//                    float vatAmount;
-//                    if(branch.priceIncludeVat)
-//                    {
-//                        totalAmount = totalAmount / ((branch.percentVat+100)*0.01);
-//                        serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
-//                        serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-//                        vatAmount = totalAmount * branch.percentVat * 0.01;
-//                    }
-//                    else
-//                    {
-//                        serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
-//                        serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-//                        vatAmount = (totalAmount+serviceChargeValue)*branch.percentVat/100;
-//                    }
-//
-//                    vatAmount = roundf(vatAmount*100)/100;
-//                    float netTotalAmount = totalAmount+serviceChargeValue+vatAmount;
-//                    NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
-//                    strAmount = [Utility addPrefixBahtSymbol:strAmount];
-//                    cell.lblTitle.text = @"ยอดรวมทั้งสิ้น";
-//                    cell.lblAmount.text = strAmount;
-//                    cell.vwTopBorder.hidden = YES;
-//                    _netTotal = netTotalAmount;
-////                    cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:16];
-//
-//
-//                    return cell;
-//                }
             }
                 break;
             case 5:
@@ -1308,19 +1205,36 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             }
             else
             {
-                //load order มาโชว์
+                CustomTableViewCellOrderSummary *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierOrderSummary];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                
                 OrderTaking *orderTaking = _orderTakingList[item-1];
                 Menu *menu = [Menu getMenu:orderTaking.menuID branchID:branch.branchID];
+                cell.lblQuantity.text = [Utility formatDecimal:orderTaking.quantity withMinFraction:0 andMaxFraction:0];
                 
-                NSString *strMenuName;
+                
+                //menu
                 if(orderTaking.takeAway)
                 {
-                    strMenuName = [NSString stringWithFormat:@"ใส่ห่อ %@",menu.titleThai];
+                    UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+                    NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
+                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ใส่ห่อ" attributes:attribute];
+                    
+                    NSDictionary *attribute2 = @{NSFontAttributeName: font};
+                    NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
+                    
+                    
+                    [attrString appendAttributedString:attrString2];
+                    cell.lblMenuName.attributedText = attrString;
                 }
                 else
                 {
-                    strMenuName = menu.titleThai;
+                    cell.lblMenuName.text = menu.titleThai;
                 }
+                [cell.lblMenuName sizeToFit];
+                cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height>46?46:cell.lblMenuName.frame.size.height;
+                
                 
                 
                 //note
@@ -1378,21 +1292,13 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                         strAllNote = [[NSMutableAttributedString alloc]init];
                     }
                 }
+                cell.lblNote.attributedText = strAllNote;
+                [cell.lblNote sizeToFit];
+                cell.lblNoteHeight.constant = cell.lblNote.frame.size.height>40?40:cell.lblNote.frame.size.height;
                 
-                
-                
-                UIFont *fontMenuName = [UIFont fontWithName:@"Prompt-Regular" size:14.0];
-                UIFont *fontNote = [UIFont fontWithName:@"Prompt-Regular" size:11.0];
-                
-                
-                
-                CGSize menuNameLabelSize = [self suggestedSizeWithFont:fontMenuName size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:strMenuName];//153 from storyboard
-                CGSize noteLabelSize = [self suggestedSizeWithFont:fontNote size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:[strAllNote string]];
-                noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?0:noteLabelSize.height;
-                
-                
-                float height = menuNameLabelSize.height+noteLabelSize.height+8+8+2;
+                float height = 8+cell.lblMenuNameHeight.constant+2+cell.lblNoteHeight.constant+8;
                 return height;
+            
             }
         }
         else if(section == 3)
@@ -2064,8 +1970,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             }
         }
         
-        
-        
+
         
         
         if(totalPriceGetDiscount == 0)

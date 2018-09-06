@@ -3953,13 +3953,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="VHr-dr-UG7" firstAttribute="trailing" secondItem="gFJ-5e-RFy" secondAttribute="trailing" id="5mX-px-6s7"/>
                                     <constraint firstItem="NgZ-ei-F2m" firstAttribute="top" secondItem="1C2-zA-bd4" secondAttribute="bottom" constant="13" id="5zi-WH-4sr"/>
-                                    <constraint firstItem="VHr-dr-UG7" firstAttribute="leading" secondItem="9pP-ga-kts" secondAttribute="leading" constant="20" id="60F-w5-baM"/>
                                     <constraint firstItem="58Q-hr-zDL" firstAttribute="centerX" secondItem="9pP-ga-kts" secondAttribute="centerX" id="6WX-Vz-sWH"/>
                                     <constraint firstItem="gFJ-5e-RFy" firstAttribute="top" secondItem="58Q-hr-zDL" secondAttribute="bottom" constant="34" id="7Ik-aB-c2O"/>
                                     <constraint firstItem="P2e-kj-xQ8" firstAttribute="centerX" secondItem="9pP-ga-kts" secondAttribute="centerX" id="BIz-CV-KwX"/>
                                     <constraint firstItem="gFJ-5e-RFy" firstAttribute="centerX" secondItem="9pP-ga-kts" secondAttribute="centerX" id="HMF-cd-KgN"/>
-                                    <constraint firstAttribute="trailing" secondItem="VHr-dr-UG7" secondAttribute="trailing" constant="20" id="I6M-Zc-gPx"/>
                                     <constraint firstItem="VHr-dr-UG7" firstAttribute="top" secondItem="gFJ-5e-RFy" secondAttribute="bottom" constant="8" id="MSO-ky-QAC"/>
                                     <constraint firstItem="NgZ-ei-F2m" firstAttribute="centerX" secondItem="9pP-ga-kts" secondAttribute="centerX" id="Mrp-1w-Mc5"/>
                                     <constraint firstAttribute="trailing" secondItem="NgZ-ei-F2m" secondAttribute="trailing" constant="20" id="Nyp-bF-MWb"/>
@@ -3968,6 +3967,7 @@
                                     <constraint firstItem="P2e-kj-xQ8" firstAttribute="top" secondItem="9pP-ga-kts" secondAttribute="top" constant="69" id="WXw-z5-KyO"/>
                                     <constraint firstItem="1C2-zA-bd4" firstAttribute="top" secondItem="P2e-kj-xQ8" secondAttribute="bottom" constant="13" id="Y6H-O8-j4j"/>
                                     <constraint firstItem="1C2-zA-bd4" firstAttribute="centerX" secondItem="9pP-ga-kts" secondAttribute="centerX" id="ZqX-ak-Do0"/>
+                                    <constraint firstItem="VHr-dr-UG7" firstAttribute="leading" secondItem="gFJ-5e-RFy" secondAttribute="leading" id="fua-pI-gvH"/>
                                     <constraint firstItem="NgZ-ei-F2m" firstAttribute="leading" secondItem="9pP-ga-kts" secondAttribute="leading" constant="20" id="j0y-IB-JJp"/>
                                     <constraint firstAttribute="bottom" secondItem="p0I-1n-xAm" secondAttribute="bottom" constant="28" id="qRC-Uk-9qP"/>
                                 </constraints>

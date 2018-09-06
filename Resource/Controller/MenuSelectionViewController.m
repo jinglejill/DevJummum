@@ -226,7 +226,6 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
             [self.homeModel downloadItems:dbMenuList withData:branch];
         }
     }
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -324,7 +323,8 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
             NSMutableArray *menuList = [Menu getMenuListWithMenuType:menuType.menuTypeID menuList:_filterMenuList];
             Menu *menu = menuList[item];
             cell.lblMenuName.text = menu.titleThai;
-            
+            [cell.lblMenuName sizeToFit];
+            cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height;
             
             
             
@@ -400,13 +400,24 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSInteger item = indexPath.item;
     if(indexPath.section == 0)
     {
         return SEARCH_BAR_HEIGHT;
     }
     else
     {
-        return 90;
+        CustomTableViewCellMenu *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierMenu];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
+        MenuType *menuType = _menuTypeList[_selectedMenuTypeIndex];
+        NSMutableArray *menuList = [Menu getMenuListWithMenuType:menuType.menuTypeID menuList:_filterMenuList];
+        Menu *menu = menuList[item];
+        cell.lblMenuName.text = menu.titleThai;
+        [cell.lblMenuName sizeToFit];
+        
+        return cell.lblMenuName.frame.size.height+46<90?90:cell.lblMenuName.frame.size.height+46;
     }
     return 0;
 }

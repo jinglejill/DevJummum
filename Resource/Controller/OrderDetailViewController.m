@@ -145,6 +145,10 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
         UINib *nib = [UINib nibWithNibName:reuseIdentifierLabelRemark bundle:nil];
         [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierLabelRemark];
     }
+    {
+        UINib *nib = [UINib nibWithNibName:reuseIdentifierOrderSummary bundle:nil];
+        [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierOrderSummary];
+    }
     
     
     [self.homeModel downloadItems:dbReceiptDisputeRating withData:receipt];
@@ -1548,8 +1552,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
             {
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
-                NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ใส่ห่อ"
-                                                                                               attributes:attribute];
+                NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ใส่ห่อ" attributes:attribute];
                 
                 NSDictionary *attribute2 = @{NSFontAttributeName: font};
                 NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
@@ -1562,12 +1565,8 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
             {
                 cell.lblMenuName.text = menu.titleThai;
             }
-            CGSize menuNameLabelSize = [self suggestedSizeWithFont:cell.lblMenuName.font size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:cell.lblMenuName.text];
-            CGRect frame = cell.lblMenuName.frame;
-            frame.size.width = menuNameLabelSize.width;
-            frame.size.height = menuNameLabelSize.height;
-            cell.lblMenuNameHeight.constant = menuNameLabelSize.height;
-            cell.lblMenuName.frame = frame;
+            [cell.lblMenuName sizeToFit];
+            cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height>46?46:cell.lblMenuName.frame.size.height;
             
             
             
@@ -1627,16 +1626,8 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                 }
             }
             cell.lblNote.attributedText = strAllNote;
-            
-            
-            
-            CGSize noteLabelSize = [self suggestedSizeWithFont:cell.lblNote.font size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:[strAllNote string]];
-            noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?0:noteLabelSize.height;
-            CGRect frame2 = cell.lblNote.frame;
-            frame2.size.width = noteLabelSize.width;
-            frame2.size.height = noteLabelSize.height;
-            cell.lblNoteHeight.constant = noteLabelSize.height;
-            cell.lblNote.frame = frame2;
+            [cell.lblNote sizeToFit];
+            cell.lblNoteHeight.constant = cell.lblNote.frame.size.height>40?40:cell.lblNote.frame.size.height;
             
             
             
@@ -1670,18 +1661,38 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
             float sumHeight = 0;
             for(int i=0; i<[orderTakingList count]; i++)
             {
+                
+                
+                CustomTableViewCellOrderSummary *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierOrderSummary];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                
                 OrderTaking *orderTaking = orderTakingList[i];
                 Menu *menu = [Menu getMenu:orderTaking.menuID branchID:orderTaking.branchID];
+                cell.lblQuantity.text = [Utility formatDecimal:orderTaking.quantity withMinFraction:0 andMaxFraction:0];
                 
-                NSString *strMenuName;
+                
+                //menu
                 if(orderTaking.takeAway)
                 {
-                    strMenuName = [NSString stringWithFormat:@"ใส่ห่อ %@",menu.titleThai];
+                    UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+                    NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
+                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ใส่ห่อ" attributes:attribute];
+                    
+                    NSDictionary *attribute2 = @{NSFontAttributeName: font};
+                    NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
+                    
+                    
+                    [attrString appendAttributedString:attrString2];
+                    cell.lblMenuName.attributedText = attrString;
                 }
                 else
                 {
-                    strMenuName = menu.titleThai;
+                    cell.lblMenuName.text = menu.titleThai;
                 }
+                [cell.lblMenuName sizeToFit];
+                cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height>46?46:cell.lblMenuName.frame.size.height;
+                
                 
                 
                 //note
@@ -1739,20 +1750,11 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                         strAllNote = [[NSMutableAttributedString alloc]init];
                     }
                 }
+                cell.lblNote.attributedText = strAllNote;
+                [cell.lblNote sizeToFit];
+                cell.lblNoteHeight.constant = cell.lblNote.frame.size.height>40?40:cell.lblNote.frame.size.height;
                 
-                
-                
-                UIFont *fontMenuName = [UIFont fontWithName:@"Prompt-Regular" size:14.0];
-                UIFont *fontNote = [UIFont fontWithName:@"Prompt-Regular" size:11.0];
-                
-                
-                
-                CGSize menuNameLabelSize = [self suggestedSizeWithFont:fontMenuName size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:strMenuName];//153 from storyboard
-                CGSize noteLabelSize = [self suggestedSizeWithFont:fontNote size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:[strAllNote string]];
-                noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?0:noteLabelSize.height;
-                
-                
-                float height = menuNameLabelSize.height+noteLabelSize.height+8+8+2;
+                float height = 8+cell.lblMenuNameHeight.constant+2+cell.lblNoteHeight.constant+8;                
                 sumHeight += height;
             }
             
@@ -2172,18 +2174,36 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
         
         if(indexPath.item < [orderTakingList count])
         {
+            CustomTableViewCellOrderSummary *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierOrderSummary];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            
             OrderTaking *orderTaking = orderTakingList[indexPath.item];
             Menu *menu = [Menu getMenu:orderTaking.menuID branchID:orderTaking.branchID];
+            cell.lblQuantity.text = [Utility formatDecimal:orderTaking.quantity withMinFraction:0 andMaxFraction:0];
             
-            NSString *strMenuName;
+            
+            //menu
             if(orderTaking.takeAway)
             {
-                strMenuName = [NSString stringWithFormat:@"ใส่ห่อ %@",menu.titleThai];
+                UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+                NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
+                NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ใส่ห่อ" attributes:attribute];
+                
+                NSDictionary *attribute2 = @{NSFontAttributeName: font};
+                NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
+                
+                
+                [attrString appendAttributedString:attrString2];
+                cell.lblMenuName.attributedText = attrString;
             }
             else
             {
-                strMenuName = menu.titleThai;
+                cell.lblMenuName.text = menu.titleThai;
             }
+            [cell.lblMenuName sizeToFit];
+            cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height>46?46:cell.lblMenuName.frame.size.height;
+            
             
             
             //note
@@ -2241,20 +2261,11 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                     strAllNote = [[NSMutableAttributedString alloc]init];
                 }
             }
+            cell.lblNote.attributedText = strAllNote;
+            [cell.lblNote sizeToFit];
+            cell.lblNoteHeight.constant = cell.lblNote.frame.size.height>40?40:cell.lblNote.frame.size.height;
             
-            
-            
-            UIFont *fontMenuName = [UIFont fontWithName:@"Prompt-Regular" size:14.0];
-            UIFont *fontNote = [UIFont fontWithName:@"Prompt-Regular" size:11.0];
-            
-            
-            
-            CGSize menuNameLabelSize = [self suggestedSizeWithFont:fontMenuName size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:strMenuName];//153 from storyboard
-            CGSize noteLabelSize = [self suggestedSizeWithFont:fontNote size:CGSizeMake(tbvData.frame.size.width - 75-28-2*16-2*8, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping forString:[strAllNote string]];
-            noteLabelSize.height = [Utility isStringEmpty:[strAllNote string]]?0:noteLabelSize.height;
-            
-            
-            float height = menuNameLabelSize.height+noteLabelSize.height+8+8+2;
+            float height = 8+cell.lblMenuNameHeight.constant+2+cell.lblNoteHeight.constant+8;
             return height;
         }
     }

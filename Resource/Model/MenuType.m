@@ -182,7 +182,7 @@
     NSSet *menuTypeIDSet = [NSSet setWithArray:[menuList valueForKey:@"_menuTypeID"]];
     for(NSNumber *menuTypeID in menuTypeIDSet)
     {
-        MenuType *menuType = [MenuType getMenuType:[menuTypeID integerValue]];
+        MenuType *menuType = [MenuType getMenuType:[menuTypeID integerValue] branchID:branchID];
         [menuTypeList addObject:menuType];
     }
     

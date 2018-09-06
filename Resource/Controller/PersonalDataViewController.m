@@ -31,7 +31,7 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
 {
     [super viewDidLayoutSubviews];
     UIWindow *window = UIApplication.sharedApplication.keyWindow;
-
+    
     
     float topPadding = window.safeAreaInsets.top;
     topViewHeight.constant = topPadding == 0?20:topPadding;
@@ -70,7 +70,7 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
     // Return the number of rows in the section.
     
     
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -100,10 +100,19 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
             cell.lblText.text = @"ชื่อ";
             [cell.lblText sizeToFit];
             cell.lblTextWidthConstant.constant = cell.lblText.frame.size.width;
-            cell.lblValue.text = userAccount.fullName;
+            cell.lblValue.text = userAccount.firstName;
         }
             break;
         case 2:
+        {
+            UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+            cell.lblText.text = @"นามสกุล";
+            [cell.lblText sizeToFit];
+            cell.lblTextWidthConstant.constant = cell.lblText.frame.size.width;
+            cell.lblValue.text = userAccount.lastName;
+        }
+            break;
+        case 3:
         {
             UserAccount *userAccount = [UserAccount getCurrentUserAccount];
             cell.lblText.text = @"วันเกิด";
@@ -112,7 +121,7 @@ static NSString * const reuseIdentifierLabelLabel = @"CustomTableViewCellLabelLa
             cell.lblValue.text = [Utility dateToString:userAccount.birthDate toFormat:@"d MMM yyyy"];
         }
             break;
-        case 3:
+        case 4:
         {
             UserAccount *userAccount = [UserAccount getCurrentUserAccount];
             cell.lblText.text = @"เบอร์โทร.";

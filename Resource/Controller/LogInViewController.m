@@ -59,7 +59,7 @@
     CGRect frame = _loginButton.frame;
     frame.origin.y = self.view.frame.size.height - bottomPadding - bottom + 11;//frame.origin.y + 33;
     _loginButton.frame = frame;
-
+    
     
     
     lblLogInTop.constant = 7 + bottomPadding;
@@ -142,7 +142,7 @@
         txtEmail.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"rememberEmail"];
         txtPassword.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"rememberPassword"];
     }
-        
+    
     if (![FBSDKAccessToken currentAccessToken])
     {
         _faceBookLogIn = NO;
@@ -150,7 +150,7 @@
     if(![[NSUserDefaults standardUserDefaults] integerForKey:@"logInSession"])
     {
         _appLogIn = NO;
-    } 
+    }
 }
 
 - (void)viewDidLoad
@@ -193,10 +193,10 @@
     _loginButton = [[FBSDKLoginButton alloc] init];
     _loginButton.delegate = self;
     _loginButton.readPermissions = @[@"public_profile", @"email"];
-//    _loginButton.readPermissions = @[@"public_profile", @"email",@"user_friends",@"user_birthday",@"user_about_me",@"user_likes",@"user_work_history"];
+    //    _loginButton.readPermissions = @[@"public_profile", @"email",@"user_friends",@"user_birthday",@"user_about_me",@"user_likes",@"user_work_history"];
     
     
-
+    
     // Optional: Place the button in the center of your view.
     [self.view addSubview:_loginButton];
     if ([FBSDKAccessToken currentAccessToken])
@@ -251,9 +251,9 @@
 -(void)insertUserLoginAndUserAccount
 {
     NSLog(@"insert user log in");
-//    if(_faceBookLogIn)
+    //    if(_faceBookLogIn)
     {
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"location,email,name,first_name,gender,age_range,birthday,friends,likes"}]
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"location,email,name,first_name,last_name,gender,age_range,birthday,friends,likes"}]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error)
              {
@@ -267,7 +267,7 @@
                  NSString *modifiedUser = [NSString stringWithFormat:@"%@",result[@"email"]];
                  [Utility setModifiedUser:modifiedUser];
                  LogIn *logIn = [[LogIn alloc]initWithUsername:result[@"id"] status:1 deviceToken:[Utility deviceToken] model:[self deviceName]];
-                 UserAccount *userAccount = [[UserAccount alloc]initWithUsername:result[@"id"] password:txtPassword.text deviceToken:[Utility deviceToken] fullName:result[@"name"] nickName:@"" birthDate:birthday email:result[@"email"] phoneNo:@"" lineID:@"" roleID:0];
+                 UserAccount *userAccount = [[UserAccount alloc]initWithUsername:result[@"id"] password:txtPassword.text deviceToken:[Utility deviceToken] firstName:result[@"first_name"] lastName:result[@"last_name"] fullName:result[@"name"] nickName:@"" birthDate:birthday email:result[@"email"] phoneNo:@"" lineID:@"" roleID:0];
                  [self.homeModel insertItems:dbLogInUserAccount withData:@[logIn,userAccount] actionScreen:@"insert login and useraccount if not exist in logIn screen"];
                  [self loadingOverlayView];
              }
@@ -297,7 +297,7 @@
             [UserAccount setCurrentUserAccount:userAccountList[0]];
             [Utility updateSharedObject:items];
             
-    
+            
             [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"logInSession"];
             [[NSUserDefaults standardUserDefaults] setInteger:_rememberMe forKey:@"rememberMe"];
             if(_rememberMe)
@@ -322,13 +322,13 @@
                     }
                     else
                     {
-//                        if(_autoLogIn)
+                        //                        if(_autoLogIn)
                         {
-//
+                            //
                             [UIView setAnimationsEnabled:NO];
                             self.view.hidden = YES;
                             [self performSegueWithIdentifier:@"segQrCodeScanTable" sender:self];
-
+                            
                             
                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                 [UIView setAnimationsEnabled:YES];
@@ -352,12 +352,21 @@
         _userAccount = userAccount;
         [UserAccount setCurrentUserAccount:userAccount];
         [Utility updateSharedObject:items];
-        if([Utility isStringEmpty:userAccount.phoneNo] || !userAccount.birthDate)
+        
+        NSString *fbUsername = [NSString stringWithFormat:@"FB_%@",userAccount.username];
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        if(![userDefaults boolForKey:fbUsername])
         {
-            //go to register page
+            [userDefaults setBool:YES forKey:fbUsername];
             [self performSegueWithIdentifier:@"segRegisterNowFacebook" sender:self];
             return;
         }
+        //        if([Utility isStringEmpty:userAccount.phoneNo] || !userAccount.birthDate)
+        //        {
+        //            //go to register page
+        //            [self performSegueWithIdentifier:@"segRegisterNowFacebook" sender:self];
+        //            return;
+        //        }
         
         
         //show terms of service

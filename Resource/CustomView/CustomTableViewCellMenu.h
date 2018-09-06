@@ -18,5 +18,6 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *lblPriceWidthConstant;
 
 @property (strong, nonatomic) IBOutlet UILabel *lblSpecialPrice;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *lblMenuNameHeight;
 
 @end
