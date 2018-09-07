@@ -175,7 +175,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     
     if(fromReceiptSummaryMenu || fromOrderDetailMenu || fromRewardRedemption || fromHotDealDetail)
     {
-        [self showAlert:@"" message:@"กรุณากดเลือกโต๊ะเพื่อสแกน QR Code เลขโต๊ะ\nคุณสามารถแก้ไขรายการอาหารได้โดยกดปุ่ม +/- ด้านมุมขวาบน"];
+        [self showAlert:@"" message:@"- กรุณากดเลือกโต๊ะเพื่อสแกน QR Code เลขโต๊ะ\n- คุณสามารถแก้ไขรายการอาหารได้โดยกดที่ปุ่ม +/-ด้านบนขวามือ"];
     }
 }
 
