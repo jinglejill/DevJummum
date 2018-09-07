@@ -44,9 +44,7 @@
     [self setButtonDesign:btnCancel];
     
 
-    NSString *strKey = [NSString stringWithFormat:@"UpdateVersion%@",appStoreVersion];
-    NSString *strUpdateVersion = [Setting getSettingValueWithKeyName:strKey];
-    if([strUpdateVersion integerValue])
+   
     {
         btnDismissTop.constant = 0;
         btnDismissHeight.constant = 0;
@@ -73,6 +71,13 @@
     NSString *message2 = [Setting getValue:@"002m" example:@"Pay for your order, earn and track rewards, ckeck your balance and more, all from your mobile device"];
     lblTitle.text = title2;
     lblMessage.text = message2;
+    
+    
+    
+    //check require to update now or allow to update later
+    NSString *strKey = [NSString stringWithFormat:@"UpdateVersion%@",appStoreVersion];
+    Setting *setting = [[Setting alloc]initWithKeyName:strKey value:@"" type:0 remark:@""];
+    [self.homeModel downloadItems:dbSettingWithKey withData:setting];
 }
 
 - (IBAction)dismiss:(id)sender
@@ -133,5 +138,27 @@
         [self performSegueWithIdentifier:@"segUnwindToLaunchScreen" sender:self];
     }];
     
+}
+
+
+- (void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
+{
+    HomeModel *homeModel = (HomeModel *)objHomeModel;
+    if(homeModel.propCurrentDB == dbSettingWithKey)
+    {
+        [Utility updateSharedObject:items];
+        
+        NSString *strKey = [NSString stringWithFormat:@"UpdateVersion%@",appStoreVersion];
+        NSString *strUpdateVersion = [Setting getSettingValueWithKeyName:strKey];
+        if(![strUpdateVersion integerValue])
+        {
+            btnDismissTop.constant = 8;
+            btnDismissHeight.constant = 30;
+            btnDismiss.hidden = NO;
+            btnCancelTop.constant = 8;
+            btnCancelHeight.constant = 30;
+            btnCancel.hidden = NO;
+        }
+    }
 }
 @end

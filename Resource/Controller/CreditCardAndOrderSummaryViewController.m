@@ -64,6 +64,7 @@
     NSMutableArray *_promotionList;
     NSMutableArray *_rewardRedemptionList;
     NSString *_selectedVoucherCode;
+    BOOL _showGuideMessage;
 }
 @end
 
@@ -173,9 +174,13 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     }];
     
     
-    if(fromReceiptSummaryMenu || fromOrderDetailMenu || fromRewardRedemption || fromHotDealDetail)
+    if(!_showGuideMessage)
     {
-        [self showAlert:@"" message:@"- กรุณากดเลือกโต๊ะเพื่อสแกน QR Code เลขโต๊ะ\n- คุณสามารถแก้ไขรายการอาหารได้โดยกดที่ปุ่ม +/-ด้านบนขวามือ"];
+        if(fromReceiptSummaryMenu || fromOrderDetailMenu || fromRewardRedemption || fromHotDealDetail)
+        {
+            _showGuideMessage = YES;
+            [self showAlert:@"" message:@"- กรุณากดเลือกโต๊ะเพื่อสแกน QR Code เลขโต๊ะ\n- คุณสามารถแก้ไขรายการอาหารได้โดยกดที่ปุ่ม +/-ด้านบนขวามือ"];
+        }
     }
 }
 

@@ -793,22 +793,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/LaunchScreenViewController.m"
-            timestampString = "557374607.698602"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "-viewDidAppear:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Resource/Controller/LaunchScreenViewController.m"
             timestampString = "557374607.698645"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -895,22 +879,6 @@
             startingLineNumber = "92"
             endingLineNumber = "92"
             landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Resource/Controller/LaunchScreenViewController.m"
-            timestampString = "557374607.698894"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "-itemsDownloaded:manager:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

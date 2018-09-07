@@ -61,11 +61,7 @@
             }
             else
             {
-                NSString *strKey = [NSString stringWithFormat:@"UpdateVersion%@",_appStoreVersion];
-                Setting *setting = [[Setting alloc]initWithKeyName:strKey value:@"" type:0 remark:@""];
-                self.homeModel = [[HomeModel alloc]init];
-                self.homeModel.delegate = self;
-                [self.homeModel downloadItems:dbSettingWithKey withData:setting];
+                [self performSegueWithIdentifier:@"segNewVersionUpdate" sender:self];
             }
         }
         else
@@ -131,16 +127,6 @@
     
     
     [self performSegueWithIdentifier:@"segLogIn" sender:self];
-}
-
-- (void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
-{
-    HomeModel *homeModel = (HomeModel *)objHomeModel;
-    if(homeModel.propCurrentDB == dbSettingWithKey)
-    {
-        [Utility updateSharedObject:items];
-        [self performSegueWithIdentifier:@"segNewVersionUpdate" sender:self];
-    }
 }
 
 -(BOOL) needsUpdate
