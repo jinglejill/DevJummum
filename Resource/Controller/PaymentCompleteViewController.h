@@ -18,8 +18,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblTitle;
 @property (strong, nonatomic) IBOutlet UILabel *lblMessage;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgVwCheckTop;
-
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnOrderBuffetHeight;
+@property (nonatomic) NSInteger numberOfGift;
+@property (strong, nonatomic) IBOutlet UIImageView *imgVwCheck;
+
 
 
 - (IBAction)button1Clicked:(id)sender;

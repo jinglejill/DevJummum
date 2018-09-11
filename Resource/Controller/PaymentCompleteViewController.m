@@ -7,6 +7,7 @@
 //
 
 #import "PaymentCompleteViewController.h"
+#import "LuckyDrawViewController.h"
 #import "CustomTableViewCellLogo.h"
 #import "CustomTableViewCellReceiptSummary.h"
 #import "CustomTableViewCellOrderSummary.h"
@@ -26,6 +27,7 @@
     UITableView *tbvData;
     BOOL _endOfFile;
     BOOL _logoDownloaded;
+    BOOL _addGiftBox;
 }
 @end
 
@@ -45,6 +47,8 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 @synthesize imgVwCheckTop;
 @synthesize btnOrderBuffet;
 @synthesize btnOrderBuffetHeight;
+@synthesize numberOfGift;
+@synthesize imgVwCheck;
 
 
 -(void)viewDidLayoutSubviews
@@ -72,7 +76,52 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         btnOrderBuffet.hidden = YES;
         [btnSaveToCameraRoll setTitle:@"บันทึกใบเสร็จลงอัลบั้ม" forState:UIControlStateNormal];
     }
-    
+    if(!_addGiftBox && numberOfGift > 0)
+    {
+        _addGiftBox = YES;
+        NSInteger giftWidth = 60;
+        UIImageView* animatedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-16-giftWidth, imgVwCheck.frame.origin.y, giftWidth, giftWidth)];
+//        animatedImageView.center = imgVwCheck.center;
+        imgVwCheck.hidden =YES;
+        
+        
+        UIImage *imageNormal = [UIImage imageNamed:@"jummumGiftBoxNormal.png"];
+        imageNormal = [self imageWithImage:imageNormal convertToSize:CGSizeMake(giftWidth,giftWidth)];
+        
+        UIImage *imagePop = [UIImage imageNamed:@"jummumGiftBoxPop.png"];
+        imagePop = [self imageWithImage:imagePop convertToSize:CGSizeMake(giftWidth,giftWidth)];
+        
+        animatedImageView.animationImages = [NSArray arrayWithObjects:imageNormal,imagePop,nil];
+        
+        animatedImageView.animationDuration = 1.0f;
+        animatedImageView.animationRepeatCount = 0;
+        [animatedImageView startAnimating];
+        [self.view addSubview: animatedImageView];
+        
+        
+        //add singleTap
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGiftBox)];
+        singleTap.numberOfTapsRequired = 1;
+        [animatedImageView setUserInteractionEnabled:YES];
+        [animatedImageView addGestureRecognizer:singleTap];
+        
+        
+        
+        //uilabel
+        NSString *strTicket = numberOfGift==1?@"ticket":@"tickets";
+        UILabel *lblGiftNum = [[UILabel alloc]init];
+        lblGiftNum.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+        lblGiftNum.textColor = [UIColor whiteColor];
+        lblGiftNum.textAlignment = NSTextAlignmentRight;        
+        lblGiftNum.numberOfLines = 1;
+        lblGiftNum.text = [NSString stringWithFormat:@"You've got %ld %@",numberOfGift,strTicket];
+        [lblGiftNum sizeToFit];
+        lblGiftNum.center = animatedImageView.center;
+        CGRect frame = lblGiftNum.frame;
+        frame.origin.x = self.view.frame.size.width-16-animatedImageView.frame.size.width-8-lblGiftNum.frame.size.width;        
+        lblGiftNum.frame = frame;        
+        [self.view addSubview:lblGiftNum];
+    }
 }
 
 - (void)viewDidLoad
@@ -811,6 +860,20 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         UIImage *combineImage = [self combineImage:arrImage];
         UIImageWriteToSavedPhotosAlbum(combineImage, nil, nil, nil);
         return;
+    }
+}
+
+-(void)tapGiftBox
+{
+    [self performSegueWithIdentifier:@"segLuckyDraw" sender:self];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier] isEqualToString:@"segLuckyDraw"])
+    {
+        LuckyDrawViewController *vc = segue.destinationViewController;
+        vc.receipt = receipt;
     }
 }
 

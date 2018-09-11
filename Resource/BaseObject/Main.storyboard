@@ -675,6 +675,7 @@
                     <connections>
                         <outlet property="bottomButtonHeight" destination="0VX-1v-gab" id="2zN-LS-jOX"/>
                         <outlet property="btnBack" destination="9e1-Cj-nfr" id="h6h-Ok-Gzo"/>
+                        <outlet property="btnViewBasket" destination="SbW-hI-yGP" id="trL-MO-i1L"/>
                         <outlet property="lblNavTitle" destination="kTP-0K-jqj" id="Wzb-Cy-vcv"/>
                         <outlet property="lblTotalAmount" destination="Bia-3L-6vS" id="aL6-77-OQN"/>
                         <outlet property="lblTotalQuantity" destination="0Rf-He-E0k" id="bR6-VD-UVL"/>
@@ -995,6 +996,7 @@
                         <segue destination="qVW-Az-F2z" kind="show" identifier="segVoucherCodeList" id="JYk-xN-VEy"/>
                         <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToRewardRedemption" unwindAction="unwindToRewardRedemption:" id="V3C-p5-Ojs"/>
                         <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToHotDealDetail" unwindAction="unwindToHotDealDetail:" id="WrD-Gg-E4H"/>
+                        <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToLuckyDraw" unwindAction="unwindToLuckyDraw:" id="7xD-bH-ZqW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TxL-MH-V7t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3986,6 +3988,7 @@
                         <outlet property="btnOrderBuffet" destination="VHr-dr-UG7" id="iTd-ec-vq1"/>
                         <outlet property="btnOrderBuffetHeight" destination="g0J-cq-hdD" id="8JS-Mk-OnP"/>
                         <outlet property="btnSaveToCameraRoll" destination="gFJ-5e-RFy" id="UCb-ga-hey"/>
+                        <outlet property="imgVwCheck" destination="P2e-kj-xQ8" id="faN-IF-uLN"/>
                         <outlet property="imgVwCheckTop" destination="WXw-z5-KyO" id="Kbw-kO-yyx"/>
                         <outlet property="lblMessage" destination="58Q-hr-zDL" id="diT-hx-jtZ"/>
                         <outlet property="lblTitle" destination="NgZ-ei-F2m" id="fh6-pe-BhY"/>
@@ -3994,12 +3997,33 @@
                         <segue destination="6xM-VG-NIx" kind="unwind" identifier="segUnwindToHotDeal" unwindAction="unwindToHotDeal:" id="BT9-x7-GZa"/>
                         <segue destination="6xM-VG-NIx" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="mak-e9-Kp4"/>
                         <segue destination="6xM-VG-NIx" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="nxL-v0-oRd"/>
+                        <segue destination="MOe-p2-Chk" kind="show" identifier="segLuckyDraw" id="xLp-2h-vDb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nH7-CS-u0j" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="6xM-VG-NIx" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5712.8000000000002" y="1286.8065967016494"/>
+        </scene>
+        <!--Lucky Draw View Controller-->
+        <scene sceneID="lhQ-nH-h57">
+            <objects>
+                <viewController id="MOe-p2-Chk" customClass="LuckyDrawViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qIP-uo-1ZU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="wZf-Ns-UB3"/>
+                    </view>
+                    <connections>
+                        <segue destination="aSy-Ex-xPa" kind="unwind" identifier="segUnwindToHotDeal" unwindAction="unwindToHotDeal:" id="wln-Nn-c5S"/>
+                        <segue destination="uxx-Px-8LI" kind="show" identifier="segCreditCardAndOrderSummary" id="bZ7-dw-aX2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C6x-ll-QSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="aSy-Ex-xPa" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="6478" y="1287"/>
         </scene>
         <!--Launch Screen View Controller-->
         <scene sceneID="kay-GA-1YA">
@@ -4107,7 +4131,7 @@
         <segue reference="Evt-HH-TlE"/>
         <segue reference="2Iw-Lt-h1E"/>
         <segue reference="3fp-yp-yps"/>
-        <segue reference="fi3-c3-4Ra"/>
+        <segue reference="bZ7-dw-aX2"/>
         <segue reference="BEB-iv-AGa"/>
         <segue reference="aNU-Zf-Wbq"/>
     </inferredMetricsTieBreakers>

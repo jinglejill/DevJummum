@@ -170,15 +170,17 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
         
         if(rewardRedemption.discountMenuID)
         {
+            cell.btnCopy.hidden = NO;
             [cell.btnCopy setTitle:@"สั่งเลย" forState:UIControlStateNormal];
             [cell.btnCopy removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
             [cell.btnCopy addTarget:self action:@selector(goToCreditAndOrderSummary:) forControlEvents:UIControlEventTouchUpInside];
         }
         else
         {
-            [cell.btnCopy setTitle:@"คัดลอก" forState:UIControlStateNormal];
-            [cell.btnCopy removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
-            [cell.btnCopy addTarget:self action:@selector(copyQRCode:) forControlEvents:UIControlEventTouchUpInside];
+            cell.btnCopy.hidden = YES;
+//            [cell.btnCopy setTitle:@"คัดลอก" forState:UIControlStateNormal];
+//            [cell.btnCopy removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
+//            [cell.btnCopy addTarget:self action:@selector(copyQRCode:) forControlEvents:UIControlEventTouchUpInside];
         }
         
         

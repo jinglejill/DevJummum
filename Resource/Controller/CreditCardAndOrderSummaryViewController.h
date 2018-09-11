@@ -35,6 +35,7 @@
 @property (nonatomic) NSInteger fromOrderDetailMenu;
 @property (nonatomic) NSInteger fromRewardRedemption;
 @property (nonatomic) NSInteger fromHotDealDetail;
+@property (nonatomic) NSInteger fromLuckyDraw;
 - (IBAction)addRemoveMenu:(id)sender;
 - (IBAction)goBack:(id)sender;
 -(IBAction)unwindToCreditCardAndOrderSummary:(UIStoryboardSegue *)segue;

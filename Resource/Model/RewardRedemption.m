@@ -13,7 +13,41 @@
 
 @implementation RewardRedemption
 
--(RewardRedemption *)initWithMainBranchID:(NSInteger)mainBranchID startDate:(NSDate *)startDate endDate:(NSDate *)endDate header:(NSString *)header subTitle:(NSString *)subTitle imageUrl:(NSString *)imageUrl point:(NSInteger)point prefixPromoCode:(NSString *)prefixPromoCode suffixPromoCode:(NSString *)suffixPromoCode rewardLimit:(NSInteger)rewardLimit withInPeriod:(NSInteger)withInPeriod detail:(NSString *)detail termsConditions:(NSString *)termsConditions usingStartDate:(NSDate *)usingStartDate usingEndDate:(NSDate *)usingEndDate discountType:(NSInteger)discountType discountAmount:(float)discountAmount minimumSpending:(NSInteger)minimumSpending maxDiscountAmountPerDay:(NSInteger)maxDiscountAmountPerDay allowDiscountForAllMenuType:(NSInteger)allowDiscountForAllMenuType discountMenuID:(NSInteger)discountMenuID orderNo:(NSInteger)orderNo status:(NSInteger)status
+- (NSDictionary *)dictionary
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [self valueForKey:@"rewardRedemptionID"]?[self valueForKey:@"rewardRedemptionID"]:[NSNull null],@"rewardRedemptionID",
+            [self valueForKey:@"mainBranchID"]?[self valueForKey:@"mainBranchID"]:[NSNull null],@"mainBranchID",
+            [Utility dateToString:[self valueForKey:@"startDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"startDate",
+            [Utility dateToString:[self valueForKey:@"endDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"endDate",
+            [self valueForKey:@"header"]?[self valueForKey:@"header"]:[NSNull null],@"header",
+            [self valueForKey:@"subTitle"]?[self valueForKey:@"subTitle"]:[NSNull null],@"subTitle",
+            [self valueForKey:@"imageUrl"]?[self valueForKey:@"imageUrl"]:[NSNull null],@"imageUrl",
+            [self valueForKey:@"point"]?[self valueForKey:@"point"]:[NSNull null],@"point",
+            [self valueForKey:@"prefixPromoCode"]?[self valueForKey:@"prefixPromoCode"]:[NSNull null],@"prefixPromoCode",
+            [self valueForKey:@"suffixPromoCode"]?[self valueForKey:@"suffixPromoCode"]:[NSNull null],@"suffixPromoCode",
+            [self valueForKey:@"rewardLimit"]?[self valueForKey:@"rewardLimit"]:[NSNull null],@"rewardLimit",
+            [self valueForKey:@"withInPeriod"]?[self valueForKey:@"withInPeriod"]:[NSNull null],@"withInPeriod",
+            [self valueForKey:@"detail"]?[self valueForKey:@"detail"]:[NSNull null],@"detail",
+            [self valueForKey:@"termsConditions"]?[self valueForKey:@"termsConditions"]:[NSNull null],@"termsConditions",
+            [Utility dateToString:[self valueForKey:@"usingStartDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"usingStartDate",
+            [Utility dateToString:[self valueForKey:@"usingEndDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"usingEndDate",
+            [self valueForKey:@"discountType"]?[self valueForKey:@"discountType"]:[NSNull null],@"discountType",
+            [self valueForKey:@"discountAmount"]?[self valueForKey:@"discountAmount"]:[NSNull null],@"discountAmount",
+            [self valueForKey:@"minimumSpending"]?[self valueForKey:@"minimumSpending"]:[NSNull null],@"minimumSpending",
+            [self valueForKey:@"maxDiscountAmountPerDay"]?[self valueForKey:@"maxDiscountAmountPerDay"]:[NSNull null],@"maxDiscountAmountPerDay",
+            [self valueForKey:@"allowDiscountForAllMenuType"]?[self valueForKey:@"allowDiscountForAllMenuType"]:[NSNull null],@"allowDiscountForAllMenuType",
+            [self valueForKey:@"discountMenuID"]?[self valueForKey:@"discountMenuID"]:[NSNull null],@"discountMenuID",
+            [self valueForKey:@"type"]?[self valueForKey:@"type"]:[NSNull null],@"type",
+            [self valueForKey:@"rewardRank"]?[self valueForKey:@"rewardRank"]:[NSNull null],@"rewardRank",
+            [self valueForKey:@"orderNo"]?[self valueForKey:@"orderNo"]:[NSNull null],@"orderNo",
+            [self valueForKey:@"status"]?[self valueForKey:@"status"]:[NSNull null],@"status",
+            [self valueForKey:@"modifiedUser"]?[self valueForKey:@"modifiedUser"]:[NSNull null],@"modifiedUser",
+            [Utility dateToString:[self valueForKey:@"modifiedDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"modifiedDate",
+            nil];
+}
+
+-(RewardRedemption *)initWithMainBranchID:(NSInteger)mainBranchID startDate:(NSDate *)startDate endDate:(NSDate *)endDate header:(NSString *)header subTitle:(NSString *)subTitle imageUrl:(NSString *)imageUrl point:(NSInteger)point prefixPromoCode:(NSString *)prefixPromoCode suffixPromoCode:(NSString *)suffixPromoCode rewardLimit:(NSInteger)rewardLimit withInPeriod:(NSInteger)withInPeriod detail:(NSString *)detail termsConditions:(NSString *)termsConditions usingStartDate:(NSDate *)usingStartDate usingEndDate:(NSDate *)usingEndDate discountType:(NSInteger)discountType discountAmount:(float)discountAmount minimumSpending:(NSInteger)minimumSpending maxDiscountAmountPerDay:(NSInteger)maxDiscountAmountPerDay allowDiscountForAllMenuType:(NSInteger)allowDiscountForAllMenuType discountMenuID:(NSInteger)discountMenuID type:(NSInteger)type rewardRank:(NSInteger)rewardRank orderNo:(NSInteger)orderNo status:(NSInteger)status
 {
     self = [super init];
     if(self)
@@ -40,6 +74,8 @@
         self.maxDiscountAmountPerDay = maxDiscountAmountPerDay;
         self.allowDiscountForAllMenuType = allowDiscountForAllMenuType;
         self.discountMenuID = discountMenuID;
+        self.type = type;
+        self.rewardRank = rewardRank;
         self.orderNo = orderNo;
         self.status = status;
         self.modifiedUser = [Utility modifiedUser];
@@ -142,12 +178,12 @@
         ((RewardRedemption *)copy).maxDiscountAmountPerDay = self.maxDiscountAmountPerDay;
         ((RewardRedemption *)copy).allowDiscountForAllMenuType = self.allowDiscountForAllMenuType;
         ((RewardRedemption *)copy).discountMenuID = self.discountMenuID;
+        ((RewardRedemption *)copy).type = self.type;
+        ((RewardRedemption *)copy).rewardRank = self.rewardRank;
         ((RewardRedemption *)copy).orderNo = self.orderNo;
         ((RewardRedemption *)copy).status = self.status;
         [copy setModifiedUser:[Utility modifiedUser]];
         [copy setModifiedDate:[Utility currentDateTime]];
-        
-        
     }
     
     return copy;
@@ -177,6 +213,8 @@
        && self.maxDiscountAmountPerDay == editingRewardRedemption.maxDiscountAmountPerDay
        && self.allowDiscountForAllMenuType == editingRewardRedemption.allowDiscountForAllMenuType
        && self.discountMenuID == editingRewardRedemption.discountMenuID
+       && self.type == editingRewardRedemption.type
+       && self.rewardRank == editingRewardRedemption.rewardRank
        && self.orderNo == editingRewardRedemption.orderNo
        && self.status == editingRewardRedemption.status
        )
@@ -210,6 +248,8 @@
     toRewardRedemption.maxDiscountAmountPerDay = fromRewardRedemption.maxDiscountAmountPerDay;
     toRewardRedemption.allowDiscountForAllMenuType = fromRewardRedemption.allowDiscountForAllMenuType;
     toRewardRedemption.discountMenuID = fromRewardRedemption.discountMenuID;
+    toRewardRedemption.type = fromRewardRedemption.type;
+    toRewardRedemption.rewardRank = fromRewardRedemption.rewardRank;
     toRewardRedemption.orderNo = fromRewardRedemption.orderNo;
     toRewardRedemption.status = fromRewardRedemption.status;
     toRewardRedemption.modifiedUser = [Utility modifiedUser];

@@ -30,4 +30,5 @@
 -(IBAction)unwindToMenuSelection:(UIStoryboardSegue *)segue;
 - (IBAction)goBackHome:(id)sender;
 - (IBAction)viewBasket:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *btnViewBasket;
 @end

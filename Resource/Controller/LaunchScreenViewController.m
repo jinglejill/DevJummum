@@ -101,7 +101,7 @@
     
     
     NSString *title = [Setting getValue:@"002t" example:@"Welcome"];
-    NSString *message = [Setting getValue:@"002m" example:@"Pay for your order, earn and track rewards, ckeck your balance and more, all from your mobile device"];
+    NSString *message = [Setting getValue:@"002m" example:@"Pay for your order, earn and track rewards, check your balance and more, all from your mobile device"];
     lblTitle.text = title;
     lblMessage.text = message;
 }

@@ -71,4 +71,5 @@
 -(UIImage *)imageFromView:(UIView *)view;
 -(NSAttributedString *)setAttributedString:(NSString *)title text:(NSString *)text;
 -(void)dismissKeyboard;
+- (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size;
 @end

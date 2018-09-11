@@ -32,7 +32,9 @@
 #import "RecommendShop.h"
 #import "Rating.h"
 #import "MenuNote.h"
+#import "LuckyDrawTicket.h"
 #import "CustomViewController.h"
+
 
 
 @interface HomeModel()
@@ -211,6 +213,11 @@
             arrClassName = @[@"Setting"];
         }
         break;
+        case dbRewardRedemptionLuckyDraw:
+        {
+            arrClassName = @[@"RewardRedemption",@"LuckyDrawTicket"];
+        }
+            break;
         default:
             break;
     }
@@ -230,8 +237,21 @@
             else
             {
                 NSArray *jsonArray = dicJson[@"data"];
-                //            NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:_dataToDownload options:NSJSONReadingAllowFragments error:nil];
-                
+                BOOL success = [dicJson[@"success"] boolValue];
+                if(!success)
+                {
+                    NSString *error = dicJson[@"error"];
+                    CustomViewController *vc = (CustomViewController *)self.delegate;
+                    [vc removeOverlayViews];
+                    [vc showAlert:@"" message:error];
+                    
+                    if(self.delegate)//luckyDraw
+                    {
+                        [self.delegate itemsDownloaded:arrItem manager:self];
+                    }
+                    
+                    return;
+                }
                 if(!jsonArray)
                 {
                     return;
@@ -285,10 +305,10 @@
                 // Ready to notify delegate that data is ready and pass back items
                 if (self.delegate)
                 {
-                    if(propCurrentDB == dbHotDeal || propCurrentDB == dbHotDealWithBranchID || propCurrentDB == dbReceiptSummary || propCurrentDB == dbReceiptMaxModifiedDate ||propCurrentDB == dbRewardPoint || propCurrentDB == dbRewardRedemptionWithBranchID || propCurrentDB == dbReceipt || propCurrentDB == dbReceiptDisputeRating || propCurrentDB == dbReceiptDisputeRatingAllAfterReceipt || propCurrentDB == dbReceiptDisputeRatingUpdateAndReload || propCurrentDB == dbReceiptDisputeRatingAllAfterReceiptUpdateAndReload || propCurrentDB == dbMenuList || propCurrentDB == dbMenuNoteList || propCurrentDB == dbBranchAndCustomerTable || propCurrentDB == dbBranchAndCustomerTableQR || propCurrentDB == dbBranchSearch || propCurrentDB == dbBranchSearchMore || propCurrentDB == dbCustomerTable || propCurrentDB == dbSettingWithKey || propCurrentDB == dbMenuBelongToBuffet || propCurrentDB == dbPromotionAndRewardRedemption || propCurrentDB == dbPromotion || propCurrentDB == dbMenu)
+                    if(propCurrentDB == dbHotDeal || propCurrentDB == dbHotDealWithBranchID || propCurrentDB == dbReceiptSummary || propCurrentDB == dbReceiptMaxModifiedDate ||propCurrentDB == dbRewardPoint || propCurrentDB == dbRewardRedemptionWithBranchID || propCurrentDB == dbReceipt || propCurrentDB == dbReceiptDisputeRating || propCurrentDB == dbReceiptDisputeRatingAllAfterReceipt || propCurrentDB == dbReceiptDisputeRatingUpdateAndReload || propCurrentDB == dbReceiptDisputeRatingAllAfterReceiptUpdateAndReload || propCurrentDB == dbMenuList || propCurrentDB == dbMenuNoteList || propCurrentDB == dbBranchAndCustomerTable || propCurrentDB == dbBranchAndCustomerTableQR || propCurrentDB == dbBranchSearch || propCurrentDB == dbBranchSearchMore || propCurrentDB == dbCustomerTable || propCurrentDB == dbSettingWithKey || propCurrentDB == dbMenuBelongToBuffet || propCurrentDB == dbPromotionAndRewardRedemption || propCurrentDB == dbPromotion || propCurrentDB == dbMenu || propCurrentDB == dbRewardRedemptionLuckyDraw)
                     {
                         [self.delegate itemsDownloaded:arrItem manager:self];
-                    }
+                    }                    
                     else
                     {
                         [self.delegate itemsDownloaded:arrItem];
@@ -720,6 +740,12 @@
             NSNumber *objMenuID = dataList[1];
             noteDataString = [NSString stringWithFormat:@"branchID=%ld&menuID=%ld",[objBranchID integerValue],[objMenuID integerValue]];
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlMenuGet]]];
+        }
+            break;
+        case dbRewardRedemptionLuckyDraw:
+        {
+            noteDataString = [Utility getNoteDataString:data];
+            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlRewardRedemptionLuckyDrawGet]]];
         }
             break;
         default:
@@ -1162,6 +1188,27 @@
             url = [NSURL URLWithString:[Utility url:urlLogOutInsert]];
         }
             break;
+        case dbLuckyDrawTicket:
+        {
+            noteDataString = [Utility getNoteDataString:data];
+            url = [NSURL URLWithString:[Utility url:urlLuckyDrawTicketInsert]];
+        }
+            break;
+        case dbLuckyDrawTicketList:
+        {
+            NSMutableArray *luckyDrawTicketList = (NSMutableArray *)data;
+            NSInteger countLuckyDrawTicket = 0;
+            
+            noteDataString = [NSString stringWithFormat:@"countLuckyDrawTicket=%ld",[luckyDrawTicketList count]];
+            for(LuckyDrawTicket *item in luckyDrawTicketList)
+            {
+                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:item withRunningNo:countLuckyDrawTicket]];
+                countLuckyDrawTicket++;
+            }
+            
+            url = [NSURL URLWithString:[Utility url:urlLuckyDrawTicketInsertList]];
+        }
+            break;
         default:
             break;
     }
@@ -1226,10 +1273,6 @@
                         else if([strTableName isEqualToString:@"UserAccountForgotPassword"])
                         {
                             arrClassName = @[@"UserAccount"];
-                        }
-                        else if([strTableName isEqualToString:@"OmiseCheckOut"] || [strTableName isEqualToString:@"BuffetOrder"])
-                        {
-                            arrClassName = @[@"Receipt",@"OrderTaking",@"OrderNote"];
                         }
                         else if([strTableName isEqualToString:@"RewardPoint"])
                         {
@@ -1409,6 +1452,27 @@
             url = [NSURL URLWithString:[Utility url:urlBuffetOrderInsertList]];
         }
             break;
+        case dbLuckyDrawTicket:
+        {
+            noteDataString = [Utility getNoteDataString:data];
+            url = [NSURL URLWithString:[Utility url:urlLuckyDrawTicketUpdate]];
+        }
+            break;
+        case dbLuckyDrawTicketList:
+        {
+            NSMutableArray *luckyDrawTicketList = (NSMutableArray *)data;
+            NSInteger countLuckyDrawTicket = 0;
+            
+            noteDataString = [NSString stringWithFormat:@"countLuckyDrawTicket=%ld",[luckyDrawTicketList count]];
+            for(LuckyDrawTicket *item in luckyDrawTicketList)
+            {
+                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:item withRunningNo:countLuckyDrawTicket]];
+                countLuckyDrawTicket++;
+            }
+            
+            url = [NSURL URLWithString:[Utility url:urlLuckyDrawTicketUpdateList]];
+        }
+            break;
         default:
             break;
     }
@@ -1464,7 +1528,11 @@
                         else if(strTableName)
                         {
                             NSArray *arrClassName;
-                            if([strTableName isEqualToString:@"OmiseCheckOut"] || [strTableName isEqualToString:@"BuffetOrder"])
+                            if([strTableName isEqualToString:@"OmiseCheckOut"])
+                            {
+                                arrClassName = @[@"Receipt",@"OrderTaking",@"OrderNote",@"LuckyDrawTicket"];
+                            }
+                            else if([strTableName isEqualToString:@"BuffetOrder"])
                             {
                                 arrClassName = @[@"Receipt",@"OrderTaking",@"OrderNote"];
                             }
@@ -1857,6 +1925,27 @@
             url = [NSURL URLWithString:[Utility url:urlRatingUpdateList]];
         }
         break;
+        case dbLuckyDrawTicket:
+        {
+            noteDataString = [Utility getNoteDataString:data];
+            url = [NSURL URLWithString:[Utility url:urlLuckyDrawTicketDelete]];
+        }
+            break;
+        case dbLuckyDrawTicketList:
+        {
+            NSMutableArray *luckyDrawTicketList = (NSMutableArray *)data;
+            NSInteger countLuckyDrawTicket = 0;
+            
+            noteDataString = [NSString stringWithFormat:@"countLuckyDrawTicket=%ld",[luckyDrawTicketList count]];
+            for(LuckyDrawTicket *item in luckyDrawTicketList)
+            {
+                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:item withRunningNo:countLuckyDrawTicket]];
+                countLuckyDrawTicket++;
+            }
+            
+            url = [NSURL URLWithString:[Utility url:urlLuckyDrawTicketDeleteList]];
+        }
+            break;
         default:
             break;
     }

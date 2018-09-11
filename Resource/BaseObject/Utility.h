@@ -45,6 +45,7 @@
 #define cSystem4     [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1]
 #define cSystem4_10     [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1]
 #define cSystem1_20     [UIColor colorWithRed:255/255.0 green:215/255.0 blue:218/255.0 alpha:1]
+#define cSystem1_30     [UIColor colorWithRed:255/255.0 green:196/255.0 blue:200/255.0 alpha:1]
 
 //#define cSystem4_10     [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1]
 //#define cSystem1_20     [UIColor colorWithRed:255/255.0 green:215/255.0 blue:218/255.0 alpha:1]
@@ -188,7 +189,10 @@ enum enumDB
     dbMenuBelongToBuffet,
     dbBuffetOrder,
     dbSettingWithKey,
-    dbPromotionAndRewardRedemption
+    dbPromotionAndRewardRedemption,
+    dbLuckyDrawTicket,
+    dbLuckyDrawTicketList,
+    dbRewardRedemptionLuckyDraw
 
     
 };
@@ -340,7 +344,14 @@ enum enumUrl
     urlBuffetOrderInsertList,
     urlSettingWithKeyGet,
     urlPromotionAndRewardRedemption,
-    urlMenuGet
+    urlMenuGet,
+    urlLuckyDrawTicketInsert,
+    urlLuckyDrawTicketUpdate,
+    urlLuckyDrawTicketDelete,
+    urlLuckyDrawTicketInsertList,
+    urlLuckyDrawTicketUpdateList,
+    urlLuckyDrawTicketDeleteList,
+    urlRewardRedemptionLuckyDrawGet
     
 
     

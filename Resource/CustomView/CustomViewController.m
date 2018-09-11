@@ -1090,10 +1090,14 @@ CGFloat animatedDistance;
     [self.view endEditing:YES];
 }
 
-//-(void)segueToOrderDetail:(Receipt *)receipt
-//{
-//    [self performSegueWithIdentifier:@"segOrderDetail" sender:self];
-//}
+- (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size
+{
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *destImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return destImage;
+}
 
 @end
 

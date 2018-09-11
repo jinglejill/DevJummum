@@ -354,6 +354,104 @@
 		EF88004E213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.m in Sources */ = {isa = PBXBuildFile; fileRef = EF88004C213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.m */; };
 		EF8800522136849E0062D9D4 /* testTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8800502136849E0062D9D4 /* testTableViewCell.m */; };
 		EF8800532136849E0062D9D4 /* testTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF8800512136849E0062D9D4 /* testTableViewCell.xib */; };
+		EF88014321430C330062D9D4 /* jummumGiftBoxNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = EF88014121430C320062D9D4 /* jummumGiftBoxNormal.png */; };
+		EF88014421430C330062D9D4 /* jummumGiftBoxPop.png in Resources */ = {isa = PBXBuildFile; fileRef = EF88014221430C320062D9D4 /* jummumGiftBoxPop.png */; };
+		EF8801E52143793C0062D9D4 /* LuckyDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8801E42143793C0062D9D4 /* LuckyDrawViewController.m */; };
+		EF8801E8214380060062D9D4 /* LuckyDrawTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8801E7214380060062D9D4 /* LuckyDrawTicket.m */; };
+		EF8801EB2143801F0062D9D4 /* SharedLuckyDrawTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8801EA2143801F0062D9D4 /* SharedLuckyDrawTicket.m */; };
+		EF88039C2146B0360062D9D4 /* orderNow.png in Resources */ = {isa = PBXBuildFile; fileRef = EF88039B2146B0350062D9D4 /* orderNow.png */; };
+		EF88058D2147820E0062D9D4 /* giftBoxExcellent00021.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88052E2147820E0062D9D4 /* giftBoxExcellent00021.jpg */; };
+		EF88058E2147820E0062D9D4 /* giftBoxExcellent00009.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88052F2147820E0062D9D4 /* giftBoxExcellent00009.jpg */; };
+		EF88058F2147820E0062D9D4 /* giftBoxExcellent00008.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805302147820E0062D9D4 /* giftBoxExcellent00008.jpg */; };
+		EF8805902147820E0062D9D4 /* giftBoxExcellent00020.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805312147820E0062D9D4 /* giftBoxExcellent00020.jpg */; };
+		EF8805912147820E0062D9D4 /* giftBoxExcellent00022.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805322147820E0062D9D4 /* giftBoxExcellent00022.jpg */; };
+		EF8805922147820E0062D9D4 /* giftBoxExcellent00023.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805332147820E0062D9D4 /* giftBoxExcellent00023.jpg */; };
+		EF8805932147820E0062D9D4 /* giftBoxExcellent00018.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805342147820E0062D9D4 /* giftBoxExcellent00018.jpg */; };
+		EF8805942147820E0062D9D4 /* giftBoxExcellent00019.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805352147820E0062D9D4 /* giftBoxExcellent00019.jpg */; };
+		EF8805952147820E0062D9D4 /* giftBoxExcellent00014.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805362147820E0062D9D4 /* giftBoxExcellent00014.jpg */; };
+		EF8805962147820E0062D9D4 /* giftBoxExcellent00001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805372147820E0062D9D4 /* giftBoxExcellent00001.jpg */; };
+		EF8805972147820E0062D9D4 /* giftBoxExcellent00015.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805382147820E0062D9D4 /* giftBoxExcellent00015.jpg */; };
+		EF8805982147820E0062D9D4 /* giftBoxExcellent00003.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805392147820E0062D9D4 /* giftBoxExcellent00003.jpg */; };
+		EF8805992147820E0062D9D4 /* giftBoxExcellent00017.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88053A2147820E0062D9D4 /* giftBoxExcellent00017.jpg */; };
+		EF88059A2147820E0062D9D4 /* giftBoxExcellent00016.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88053B2147820E0062D9D4 /* giftBoxExcellent00016.jpg */; };
+		EF88059B2147820E0062D9D4 /* giftBoxExcellent00002.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88053C2147820E0062D9D4 /* giftBoxExcellent00002.jpg */; };
+		EF88059C2147820E0062D9D4 /* giftBoxExcellent00006.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88053D2147820E0062D9D4 /* giftBoxExcellent00006.jpg */; };
+		EF88059D2147820E0062D9D4 /* giftBoxExcellent00012.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88053E2147820E0062D9D4 /* giftBoxExcellent00012.jpg */; };
+		EF88059E2147820E0062D9D4 /* giftBoxExcellent00013.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88053F2147820E0062D9D4 /* giftBoxExcellent00013.jpg */; };
+		EF88059F2147820E0062D9D4 /* giftBoxExcellent00007.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805402147820E0062D9D4 /* giftBoxExcellent00007.jpg */; };
+		EF8805A02147820E0062D9D4 /* giftBoxExcellent00011.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805412147820E0062D9D4 /* giftBoxExcellent00011.jpg */; };
+		EF8805A12147820E0062D9D4 /* giftBoxExcellent00005.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805422147820E0062D9D4 /* giftBoxExcellent00005.jpg */; };
+		EF8805A22147820E0062D9D4 /* giftBoxExcellent00004.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805432147820E0062D9D4 /* giftBoxExcellent00004.jpg */; };
+		EF8805A32147820E0062D9D4 /* giftBoxExcellent00010.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805442147820E0062D9D4 /* giftBoxExcellent00010.jpg */; };
+		EF8805A42147820E0062D9D4 /* giftBoxGood00021.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805462147820E0062D9D4 /* giftBoxGood00021.jpg */; };
+		EF8805A52147820E0062D9D4 /* giftBoxGood00009.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805472147820E0062D9D4 /* giftBoxGood00009.jpg */; };
+		EF8805A62147820E0062D9D4 /* giftBoxGood00008.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805482147820E0062D9D4 /* giftBoxGood00008.jpg */; };
+		EF8805A72147820E0062D9D4 /* giftBoxGood00020.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805492147820E0062D9D4 /* giftBoxGood00020.jpg */; };
+		EF8805A82147820E0062D9D4 /* giftBoxGood00022.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88054A2147820E0062D9D4 /* giftBoxGood00022.jpg */; };
+		EF8805A92147820E0062D9D4 /* giftBoxGood00023.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88054B2147820E0062D9D4 /* giftBoxGood00023.jpg */; };
+		EF8805AA2147820E0062D9D4 /* giftBoxGood00018.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88054C2147820E0062D9D4 /* giftBoxGood00018.jpg */; };
+		EF8805AB2147820E0062D9D4 /* giftBoxGood00019.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88054D2147820E0062D9D4 /* giftBoxGood00019.jpg */; };
+		EF8805AC2147820E0062D9D4 /* giftBoxGood00014.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88054E2147820E0062D9D4 /* giftBoxGood00014.jpg */; };
+		EF8805AD2147820E0062D9D4 /* giftBoxGood00015.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88054F2147820E0062D9D4 /* giftBoxGood00015.jpg */; };
+		EF8805AE2147820E0062D9D4 /* giftBoxGood00001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805502147820E0062D9D4 /* giftBoxGood00001.jpg */; };
+		EF8805AF2147820E0062D9D4 /* giftBoxGood00017.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805512147820E0062D9D4 /* giftBoxGood00017.jpg */; };
+		EF8805B02147820E0062D9D4 /* giftBoxGood00003.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805522147820E0062D9D4 /* giftBoxGood00003.jpg */; };
+		EF8805B12147820E0062D9D4 /* giftBoxGood00002.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805532147820E0062D9D4 /* giftBoxGood00002.jpg */; };
+		EF8805B22147820E0062D9D4 /* giftBoxGood00016.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805542147820E0062D9D4 /* giftBoxGood00016.jpg */; };
+		EF8805B32147820E0062D9D4 /* giftBoxGood00012.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805552147820E0062D9D4 /* giftBoxGood00012.jpg */; };
+		EF8805B42147820E0062D9D4 /* giftBoxGood00006.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805562147820E0062D9D4 /* giftBoxGood00006.jpg */; };
+		EF8805B52147820E0062D9D4 /* giftBoxGood00007.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805572147820E0062D9D4 /* giftBoxGood00007.jpg */; };
+		EF8805B62147820E0062D9D4 /* giftBoxGood00013.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805582147820E0062D9D4 /* giftBoxGood00013.jpg */; };
+		EF8805B72147820E0062D9D4 /* giftBoxGood00005.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805592147820E0062D9D4 /* giftBoxGood00005.jpg */; };
+		EF8805B82147820E0062D9D4 /* giftBoxGood00011.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88055A2147820E0062D9D4 /* giftBoxGood00011.jpg */; };
+		EF8805B92147820E0062D9D4 /* giftBoxGood00010.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88055B2147820E0062D9D4 /* giftBoxGood00010.jpg */; };
+		EF8805BA2147820E0062D9D4 /* giftBoxGood00004.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88055C2147820E0062D9D4 /* giftBoxGood00004.jpg */; };
+		EF8805BB2147820E0062D9D4 /* giftBoxBoo00006.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88055E2147820E0062D9D4 /* giftBoxBoo00006.jpg */; };
+		EF8805BC2147820E0062D9D4 /* giftBoxBoo00012.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88055F2147820E0062D9D4 /* giftBoxBoo00012.jpg */; };
+		EF8805BD2147820E0062D9D4 /* giftBoxBoo00013.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805602147820E0062D9D4 /* giftBoxBoo00013.jpg */; };
+		EF8805BE2147820E0062D9D4 /* giftBoxBoo00007.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805612147820E0062D9D4 /* giftBoxBoo00007.jpg */; };
+		EF8805BF2147820E0062D9D4 /* giftBoxBoo00011.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805622147820E0062D9D4 /* giftBoxBoo00011.jpg */; };
+		EF8805C02147820E0062D9D4 /* giftBoxBoo00005.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805632147820E0062D9D4 /* giftBoxBoo00005.jpg */; };
+		EF8805C12147820E0062D9D4 /* giftBoxBoo00004.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805642147820E0062D9D4 /* giftBoxBoo00004.jpg */; };
+		EF8805C22147820E0062D9D4 /* giftBoxBoo00010.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805652147820E0062D9D4 /* giftBoxBoo00010.jpg */; };
+		EF8805C32147820E0062D9D4 /* giftBoxBoo00014.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805662147820E0062D9D4 /* giftBoxBoo00014.jpg */; };
+		EF8805C42147820E0062D9D4 /* giftBoxBoo00001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805672147820E0062D9D4 /* giftBoxBoo00001.jpg */; };
+		EF8805C52147820E0062D9D4 /* giftBoxBoo00015.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805682147820E0062D9D4 /* giftBoxBoo00015.jpg */; };
+		EF8805C62147820E0062D9D4 /* giftBoxBoo00003.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805692147820E0062D9D4 /* giftBoxBoo00003.jpg */; };
+		EF8805C72147820E0062D9D4 /* giftBoxBoo00017.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88056A2147820E0062D9D4 /* giftBoxBoo00017.jpg */; };
+		EF8805C82147820E0062D9D4 /* giftBoxBoo00016.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88056B2147820E0062D9D4 /* giftBoxBoo00016.jpg */; };
+		EF8805C92147820E0062D9D4 /* giftBoxBoo00002.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88056C2147820E0062D9D4 /* giftBoxBoo00002.jpg */; };
+		EF8805CA2147820E0062D9D4 /* giftBoxBoo00018.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88056D2147820E0062D9D4 /* giftBoxBoo00018.jpg */; };
+		EF8805CB2147820E0062D9D4 /* giftBoxBoo00019.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88056E2147820E0062D9D4 /* giftBoxBoo00019.jpg */; };
+		EF8805CC2147820E0062D9D4 /* giftBoxBoo00021.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88056F2147820E0062D9D4 /* giftBoxBoo00021.jpg */; };
+		EF8805CD2147820E0062D9D4 /* giftBoxBoo00009.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805702147820E0062D9D4 /* giftBoxBoo00009.jpg */; };
+		EF8805CE2147820E0062D9D4 /* giftBoxBoo00008.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805712147820E0062D9D4 /* giftBoxBoo00008.jpg */; };
+		EF8805CF2147820E0062D9D4 /* giftBoxBoo00020.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805722147820E0062D9D4 /* giftBoxBoo00020.jpg */; };
+		EF8805D02147820E0062D9D4 /* giftBoxBoo00022.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805732147820E0062D9D4 /* giftBoxBoo00022.jpg */; };
+		EF8805D12147820E0062D9D4 /* giftBoxBoo00023.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805742147820E0062D9D4 /* giftBoxBoo00023.jpg */; };
+		EF8805D22147820E0062D9D4 /* giftBoxAwesome00018.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805762147820E0062D9D4 /* giftBoxAwesome00018.jpg */; };
+		EF8805D32147820E0062D9D4 /* giftBoxAwesome00019.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805772147820E0062D9D4 /* giftBoxAwesome00019.jpg */; };
+		EF8805D42147820E0062D9D4 /* giftBoxAwesome00021.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805782147820E0062D9D4 /* giftBoxAwesome00021.jpg */; };
+		EF8805D52147820E0062D9D4 /* giftBoxAwesome00009.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805792147820E0062D9D4 /* giftBoxAwesome00009.jpg */; };
+		EF8805D62147820E0062D9D4 /* giftBoxAwesome00008.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88057A2147820E0062D9D4 /* giftBoxAwesome00008.jpg */; };
+		EF8805D72147820E0062D9D4 /* giftBoxAwesome00020.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88057B2147820E0062D9D4 /* giftBoxAwesome00020.jpg */; };
+		EF8805D82147820E0062D9D4 /* giftBoxAwesome00022.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88057C2147820E0062D9D4 /* giftBoxAwesome00022.jpg */; };
+		EF8805D92147820E0062D9D4 /* giftBoxAwesome00023.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88057D2147820E0062D9D4 /* giftBoxAwesome00023.jpg */; };
+		EF8805DA2147820E0062D9D4 /* giftBoxAwesome00012.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88057E2147820E0062D9D4 /* giftBoxAwesome00012.jpg */; };
+		EF8805DB2147820E0062D9D4 /* giftBoxAwesome00006.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88057F2147820E0062D9D4 /* giftBoxAwesome00006.jpg */; };
+		EF8805DC2147820E0062D9D4 /* giftBoxAwesome00007.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805802147820E0062D9D4 /* giftBoxAwesome00007.jpg */; };
+		EF8805DD2147820E0062D9D4 /* giftBoxAwesome00013.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805812147820E0062D9D4 /* giftBoxAwesome00013.jpg */; };
+		EF8805DE2147820E0062D9D4 /* giftBoxAwesome00005.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805822147820E0062D9D4 /* giftBoxAwesome00005.jpg */; };
+		EF8805DF2147820E0062D9D4 /* giftBoxAwesome00011.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805832147820E0062D9D4 /* giftBoxAwesome00011.jpg */; };
+		EF8805E02147820E0062D9D4 /* giftBoxAwesome00010.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805842147820E0062D9D4 /* giftBoxAwesome00010.jpg */; };
+		EF8805E12147820E0062D9D4 /* giftBoxAwesome00004.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805852147820E0062D9D4 /* giftBoxAwesome00004.jpg */; };
+		EF8805E22147820E0062D9D4 /* giftBoxAwesome00014.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805862147820E0062D9D4 /* giftBoxAwesome00014.jpg */; };
+		EF8805E32147820E0062D9D4 /* giftBoxAwesome00015.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805872147820E0062D9D4 /* giftBoxAwesome00015.jpg */; };
+		EF8805E42147820E0062D9D4 /* giftBoxAwesome00001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805882147820E0062D9D4 /* giftBoxAwesome00001.jpg */; };
+		EF8805E52147820E0062D9D4 /* giftBoxAwesome00017.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8805892147820E0062D9D4 /* giftBoxAwesome00017.jpg */; };
+		EF8805E62147820E0062D9D4 /* giftBoxAwesome00003.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88058A2147820E0062D9D4 /* giftBoxAwesome00003.jpg */; };
+		EF8805E72147820E0062D9D4 /* giftBoxAwesome00002.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88058B2147820E0062D9D4 /* giftBoxAwesome00002.jpg */; };
+		EF8805E82147820E0062D9D4 /* giftBoxAwesome00016.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88058C2147820E0062D9D4 /* giftBoxAwesome00016.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -892,6 +990,107 @@
 		EF88004F2136849E0062D9D4 /* testTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testTableViewCell.h; sourceTree = "<group>"; };
 		EF8800502136849E0062D9D4 /* testTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testTableViewCell.m; sourceTree = "<group>"; };
 		EF8800512136849E0062D9D4 /* testTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = testTableViewCell.xib; sourceTree = "<group>"; };
+		EF88014121430C320062D9D4 /* jummumGiftBoxNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jummumGiftBoxNormal.png; sourceTree = "<group>"; };
+		EF88014221430C320062D9D4 /* jummumGiftBoxPop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jummumGiftBoxPop.png; sourceTree = "<group>"; };
+		EF8801E32143793C0062D9D4 /* LuckyDrawViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuckyDrawViewController.h; sourceTree = "<group>"; };
+		EF8801E42143793C0062D9D4 /* LuckyDrawViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuckyDrawViewController.m; sourceTree = "<group>"; };
+		EF8801E6214380060062D9D4 /* LuckyDrawTicket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuckyDrawTicket.h; sourceTree = "<group>"; };
+		EF8801E7214380060062D9D4 /* LuckyDrawTicket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuckyDrawTicket.m; sourceTree = "<group>"; };
+		EF8801E92143801F0062D9D4 /* SharedLuckyDrawTicket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedLuckyDrawTicket.h; sourceTree = "<group>"; };
+		EF8801EA2143801F0062D9D4 /* SharedLuckyDrawTicket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedLuckyDrawTicket.m; sourceTree = "<group>"; };
+		EF88039B2146B0350062D9D4 /* orderNow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orderNow.png; sourceTree = "<group>"; };
+		EF88052E2147820E0062D9D4 /* giftBoxExcellent00021.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00021.jpg; sourceTree = "<group>"; };
+		EF88052F2147820E0062D9D4 /* giftBoxExcellent00009.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00009.jpg; sourceTree = "<group>"; };
+		EF8805302147820E0062D9D4 /* giftBoxExcellent00008.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00008.jpg; sourceTree = "<group>"; };
+		EF8805312147820E0062D9D4 /* giftBoxExcellent00020.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00020.jpg; sourceTree = "<group>"; };
+		EF8805322147820E0062D9D4 /* giftBoxExcellent00022.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00022.jpg; sourceTree = "<group>"; };
+		EF8805332147820E0062D9D4 /* giftBoxExcellent00023.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00023.jpg; sourceTree = "<group>"; };
+		EF8805342147820E0062D9D4 /* giftBoxExcellent00018.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00018.jpg; sourceTree = "<group>"; };
+		EF8805352147820E0062D9D4 /* giftBoxExcellent00019.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00019.jpg; sourceTree = "<group>"; };
+		EF8805362147820E0062D9D4 /* giftBoxExcellent00014.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00014.jpg; sourceTree = "<group>"; };
+		EF8805372147820E0062D9D4 /* giftBoxExcellent00001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00001.jpg; sourceTree = "<group>"; };
+		EF8805382147820E0062D9D4 /* giftBoxExcellent00015.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00015.jpg; sourceTree = "<group>"; };
+		EF8805392147820E0062D9D4 /* giftBoxExcellent00003.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00003.jpg; sourceTree = "<group>"; };
+		EF88053A2147820E0062D9D4 /* giftBoxExcellent00017.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00017.jpg; sourceTree = "<group>"; };
+		EF88053B2147820E0062D9D4 /* giftBoxExcellent00016.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00016.jpg; sourceTree = "<group>"; };
+		EF88053C2147820E0062D9D4 /* giftBoxExcellent00002.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00002.jpg; sourceTree = "<group>"; };
+		EF88053D2147820E0062D9D4 /* giftBoxExcellent00006.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00006.jpg; sourceTree = "<group>"; };
+		EF88053E2147820E0062D9D4 /* giftBoxExcellent00012.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00012.jpg; sourceTree = "<group>"; };
+		EF88053F2147820E0062D9D4 /* giftBoxExcellent00013.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00013.jpg; sourceTree = "<group>"; };
+		EF8805402147820E0062D9D4 /* giftBoxExcellent00007.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00007.jpg; sourceTree = "<group>"; };
+		EF8805412147820E0062D9D4 /* giftBoxExcellent00011.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00011.jpg; sourceTree = "<group>"; };
+		EF8805422147820E0062D9D4 /* giftBoxExcellent00005.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00005.jpg; sourceTree = "<group>"; };
+		EF8805432147820E0062D9D4 /* giftBoxExcellent00004.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00004.jpg; sourceTree = "<group>"; };
+		EF8805442147820E0062D9D4 /* giftBoxExcellent00010.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxExcellent00010.jpg; sourceTree = "<group>"; };
+		EF8805462147820E0062D9D4 /* giftBoxGood00021.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00021.jpg; sourceTree = "<group>"; };
+		EF8805472147820E0062D9D4 /* giftBoxGood00009.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00009.jpg; sourceTree = "<group>"; };
+		EF8805482147820E0062D9D4 /* giftBoxGood00008.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00008.jpg; sourceTree = "<group>"; };
+		EF8805492147820E0062D9D4 /* giftBoxGood00020.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00020.jpg; sourceTree = "<group>"; };
+		EF88054A2147820E0062D9D4 /* giftBoxGood00022.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00022.jpg; sourceTree = "<group>"; };
+		EF88054B2147820E0062D9D4 /* giftBoxGood00023.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00023.jpg; sourceTree = "<group>"; };
+		EF88054C2147820E0062D9D4 /* giftBoxGood00018.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00018.jpg; sourceTree = "<group>"; };
+		EF88054D2147820E0062D9D4 /* giftBoxGood00019.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00019.jpg; sourceTree = "<group>"; };
+		EF88054E2147820E0062D9D4 /* giftBoxGood00014.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00014.jpg; sourceTree = "<group>"; };
+		EF88054F2147820E0062D9D4 /* giftBoxGood00015.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00015.jpg; sourceTree = "<group>"; };
+		EF8805502147820E0062D9D4 /* giftBoxGood00001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00001.jpg; sourceTree = "<group>"; };
+		EF8805512147820E0062D9D4 /* giftBoxGood00017.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00017.jpg; sourceTree = "<group>"; };
+		EF8805522147820E0062D9D4 /* giftBoxGood00003.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00003.jpg; sourceTree = "<group>"; };
+		EF8805532147820E0062D9D4 /* giftBoxGood00002.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00002.jpg; sourceTree = "<group>"; };
+		EF8805542147820E0062D9D4 /* giftBoxGood00016.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00016.jpg; sourceTree = "<group>"; };
+		EF8805552147820E0062D9D4 /* giftBoxGood00012.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00012.jpg; sourceTree = "<group>"; };
+		EF8805562147820E0062D9D4 /* giftBoxGood00006.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00006.jpg; sourceTree = "<group>"; };
+		EF8805572147820E0062D9D4 /* giftBoxGood00007.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00007.jpg; sourceTree = "<group>"; };
+		EF8805582147820E0062D9D4 /* giftBoxGood00013.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00013.jpg; sourceTree = "<group>"; };
+		EF8805592147820E0062D9D4 /* giftBoxGood00005.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00005.jpg; sourceTree = "<group>"; };
+		EF88055A2147820E0062D9D4 /* giftBoxGood00011.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00011.jpg; sourceTree = "<group>"; };
+		EF88055B2147820E0062D9D4 /* giftBoxGood00010.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00010.jpg; sourceTree = "<group>"; };
+		EF88055C2147820E0062D9D4 /* giftBoxGood00004.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxGood00004.jpg; sourceTree = "<group>"; };
+		EF88055E2147820E0062D9D4 /* giftBoxBoo00006.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00006.jpg; sourceTree = "<group>"; };
+		EF88055F2147820E0062D9D4 /* giftBoxBoo00012.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00012.jpg; sourceTree = "<group>"; };
+		EF8805602147820E0062D9D4 /* giftBoxBoo00013.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00013.jpg; sourceTree = "<group>"; };
+		EF8805612147820E0062D9D4 /* giftBoxBoo00007.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00007.jpg; sourceTree = "<group>"; };
+		EF8805622147820E0062D9D4 /* giftBoxBoo00011.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00011.jpg; sourceTree = "<group>"; };
+		EF8805632147820E0062D9D4 /* giftBoxBoo00005.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00005.jpg; sourceTree = "<group>"; };
+		EF8805642147820E0062D9D4 /* giftBoxBoo00004.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00004.jpg; sourceTree = "<group>"; };
+		EF8805652147820E0062D9D4 /* giftBoxBoo00010.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00010.jpg; sourceTree = "<group>"; };
+		EF8805662147820E0062D9D4 /* giftBoxBoo00014.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00014.jpg; sourceTree = "<group>"; };
+		EF8805672147820E0062D9D4 /* giftBoxBoo00001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00001.jpg; sourceTree = "<group>"; };
+		EF8805682147820E0062D9D4 /* giftBoxBoo00015.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00015.jpg; sourceTree = "<group>"; };
+		EF8805692147820E0062D9D4 /* giftBoxBoo00003.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00003.jpg; sourceTree = "<group>"; };
+		EF88056A2147820E0062D9D4 /* giftBoxBoo00017.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00017.jpg; sourceTree = "<group>"; };
+		EF88056B2147820E0062D9D4 /* giftBoxBoo00016.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00016.jpg; sourceTree = "<group>"; };
+		EF88056C2147820E0062D9D4 /* giftBoxBoo00002.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00002.jpg; sourceTree = "<group>"; };
+		EF88056D2147820E0062D9D4 /* giftBoxBoo00018.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00018.jpg; sourceTree = "<group>"; };
+		EF88056E2147820E0062D9D4 /* giftBoxBoo00019.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00019.jpg; sourceTree = "<group>"; };
+		EF88056F2147820E0062D9D4 /* giftBoxBoo00021.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00021.jpg; sourceTree = "<group>"; };
+		EF8805702147820E0062D9D4 /* giftBoxBoo00009.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00009.jpg; sourceTree = "<group>"; };
+		EF8805712147820E0062D9D4 /* giftBoxBoo00008.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00008.jpg; sourceTree = "<group>"; };
+		EF8805722147820E0062D9D4 /* giftBoxBoo00020.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00020.jpg; sourceTree = "<group>"; };
+		EF8805732147820E0062D9D4 /* giftBoxBoo00022.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00022.jpg; sourceTree = "<group>"; };
+		EF8805742147820E0062D9D4 /* giftBoxBoo00023.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBoo00023.jpg; sourceTree = "<group>"; };
+		EF8805762147820E0062D9D4 /* giftBoxAwesome00018.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00018.jpg; sourceTree = "<group>"; };
+		EF8805772147820E0062D9D4 /* giftBoxAwesome00019.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00019.jpg; sourceTree = "<group>"; };
+		EF8805782147820E0062D9D4 /* giftBoxAwesome00021.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00021.jpg; sourceTree = "<group>"; };
+		EF8805792147820E0062D9D4 /* giftBoxAwesome00009.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00009.jpg; sourceTree = "<group>"; };
+		EF88057A2147820E0062D9D4 /* giftBoxAwesome00008.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00008.jpg; sourceTree = "<group>"; };
+		EF88057B2147820E0062D9D4 /* giftBoxAwesome00020.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00020.jpg; sourceTree = "<group>"; };
+		EF88057C2147820E0062D9D4 /* giftBoxAwesome00022.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00022.jpg; sourceTree = "<group>"; };
+		EF88057D2147820E0062D9D4 /* giftBoxAwesome00023.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00023.jpg; sourceTree = "<group>"; };
+		EF88057E2147820E0062D9D4 /* giftBoxAwesome00012.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00012.jpg; sourceTree = "<group>"; };
+		EF88057F2147820E0062D9D4 /* giftBoxAwesome00006.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00006.jpg; sourceTree = "<group>"; };
+		EF8805802147820E0062D9D4 /* giftBoxAwesome00007.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00007.jpg; sourceTree = "<group>"; };
+		EF8805812147820E0062D9D4 /* giftBoxAwesome00013.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00013.jpg; sourceTree = "<group>"; };
+		EF8805822147820E0062D9D4 /* giftBoxAwesome00005.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00005.jpg; sourceTree = "<group>"; };
+		EF8805832147820E0062D9D4 /* giftBoxAwesome00011.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00011.jpg; sourceTree = "<group>"; };
+		EF8805842147820E0062D9D4 /* giftBoxAwesome00010.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00010.jpg; sourceTree = "<group>"; };
+		EF8805852147820E0062D9D4 /* giftBoxAwesome00004.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00004.jpg; sourceTree = "<group>"; };
+		EF8805862147820E0062D9D4 /* giftBoxAwesome00014.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00014.jpg; sourceTree = "<group>"; };
+		EF8805872147820E0062D9D4 /* giftBoxAwesome00015.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00015.jpg; sourceTree = "<group>"; };
+		EF8805882147820E0062D9D4 /* giftBoxAwesome00001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00001.jpg; sourceTree = "<group>"; };
+		EF8805892147820E0062D9D4 /* giftBoxAwesome00017.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00017.jpg; sourceTree = "<group>"; };
+		EF88058A2147820E0062D9D4 /* giftBoxAwesome00003.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00003.jpg; sourceTree = "<group>"; };
+		EF88058B2147820E0062D9D4 /* giftBoxAwesome00002.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00002.jpg; sourceTree = "<group>"; };
+		EF88058C2147820E0062D9D4 /* giftBoxAwesome00016.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00016.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1087,85 +1286,89 @@
 		EF33CE11211C36D100560C69 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				EF33CE12211C36D100560C69 /* takeAway2.png */,
-				EF33CE13211C36D100560C69 /* uncheckbox_gray.png */,
-				EF33CE14211C36D100560C69 /* me.png */,
-				EF33CE15211C36D100560C69 /* Icon.png */,
-				EF33CE16211C36D100560C69 /* Icon-76@2x.png */,
-				EF33CE17211C36D100560C69 /* privacyPolicy.png */,
-				EF33CE18211C36D100560C69 /* iTunesArtwork */,
-				EF33CE19211C36D100560C69 /* Icon-76@3x.png */,
-				EF33CE1A211C36D100560C69 /* circle_red.png */,
-				EF33CE1B211C36D100560C69 /* Icon-Small.png */,
-				EF33CE1C211C36D100560C69 /* jummumTypeWhite.png */,
-				EF33CE1D211C36D100560C69 /* search_white.png */,
-				EF33CE1E211C36D100560C69 /* Icon-60@3x.png */,
-				EF33CE1F211C36D100560C69 /* jummumChef_lightGray.png */,
-				EF33CE20211C36D100560C69 /* Icon-Spotlight-40@3x.png */,
-				EF33CE21211C36D100560C69 /* remove light color.png */,
-				EF33CE22211C36D100560C69 /* jummumYeah.png */,
-				EF33CE23211C36D100560C69 /* profilePicGirl.png */,
-				EF33CE24211C36D100560C69 /* Icon-iPadPro@2x.png */,
-				EF33CE25211C36D100560C69 /* recommendShop.png */,
-				EF33CE26211C36D100560C69 /* Icon-76.png */,
-				EF33CE27211C36D100560C69 /* Icon-60.png */,
-				EF33CE28211C36D100560C69 /* termsOfService.png */,
-				EF33CE29211C36D100560C69 /* Icon-1024.png */,
+				EF88052C2147820E0062D9D4 /* card3 */,
+				EF88039B2146B0350062D9D4 /* orderNow.png */,
+				EF33CE3E211C36D100560C69 /* added.png */,
+				EF33CE45211C36D100560C69 /* addRemove.png */,
 				EF33CE2A211C36D100560C69 /* americanExpress.png */,
-				EF33CE2B211C36D100560C69 /* logOut.png */,
-				EF33CE2C211C36D100560C69 /* creditCard.png */,
-				EF33CE2D211C36D100560C69 /* profilePic.png */,
-				EF33CE2E211C36D100560C69 /* visa.png */,
-				EF33CE2F211C36D100560C69 /* triangle_and_om.png */,
-				EF33CE30211C36D100560C69 /* Icon-Spotlight-40.png */,
 				EF33CE31211C36D100560C69 /* basketWhite.png */,
-				EF33CE32211C36D100560C69 /* jummumLogoWithType.png */,
-				EF33CE33211C36D100560C69 /* Icon-Small-50@2x.png */,
+				EF33CE60211C36D100560C69 /* check_green.png */,
+				EF33CE5F211C36D100560C69 /* checkbox_gray.png */,
+				EF33CE44211C36D100560C69 /* chefHat_green.png */,
+				EF33CE1A211C36D100560C69 /* circle_red.png */,
+				EF33CE36211C36D100560C69 /* collapse2.png */,
+				EF33CE46211C36D100560C69 /* comment.png */,
+				EF33CE4D211C36D100560C69 /* contactUs.png */,
+				EF33CE2C211C36D100560C69 /* creditCard.png */,
+				EF33CE42211C36D100560C69 /* deleteAll3.png */,
+				EF33CE57211C36D100560C69 /* expand2.png */,
+				EF33CE55211C36D100560C69 /* gift_small.png */,
+				EF33CE3D211C36D100560C69 /* history.png */,
+				EF33CE43211C36D100560C69 /* home_icon_red.png */,
+				EF33CE3B211C36D100560C69 /* hotDeal.png */,
+				EF33CE53211C36D100560C69 /* Icon-20.png */,
+				EF33CE27211C36D100560C69 /* Icon-60.png */,
+				EF33CE38211C36D100560C69 /* Icon-60@2x.png */,
+				EF33CE1E211C36D100560C69 /* Icon-60@3x.png */,
 				EF33CE34211C36D100560C69 /* Icon-72.png */,
 				EF33CE35211C36D100560C69 /* Icon-72@2x.png */,
-				EF33CE36211C36D100560C69 /* collapse2.png */,
+				EF33CE26211C36D100560C69 /* Icon-76.png */,
+				EF33CE16211C36D100560C69 /* Icon-76@2x.png */,
+				EF33CE19211C36D100560C69 /* Icon-76@3x.png */,
+				EF33CE29211C36D100560C69 /* Icon-1024.png */,
+				EF33CE24211C36D100560C69 /* Icon-iPadPro@2x.png */,
+				EF33CE54211C36D100560C69 /* Icon-Small-50.png */,
+				EF33CE33211C36D100560C69 /* Icon-Small-50@2x.png */,
+				EF33CE1B211C36D100560C69 /* Icon-Small.png */,
+				EF33CE5C211C36D100560C69 /* Icon-Small@2x.png */,
+				EF33CE52211C36D100560C69 /* Icon-Small@3x.png */,
+				EF33CE30211C36D100560C69 /* Icon-Spotlight-40.png */,
 				EF33CE37211C36D100560C69 /* Icon-Spotlight-40@2x.png */,
-				EF33CE38211C36D100560C69 /* Icon-60@2x.png */,
-				EF33CE39211C36D100560C69 /* search.png */,
+				EF33CE20211C36D100560C69 /* Icon-Spotlight-40@3x.png */,
+				EF33CE15211C36D100560C69 /* Icon.png */,
 				EF33CE3A211C36D100560C69 /* Icon@2x.png */,
-				EF33CE3B211C36D100560C69 /* hotDeal.png */,
+				EF33CE18211C36D100560C69 /* iTunesArtwork */,
+				EF33CE5E211C36D100560C69 /* iTunesArtwork@2x */,
+				EF33CE50211C36D100560C69 /* jcb.png */,
+				EF33CE1F211C36D100560C69 /* jummumChef_lightGray.png */,
+				EF88014121430C320062D9D4 /* jummumGiftBoxNormal.png */,
+				EF88014221430C320062D9D4 /* jummumGiftBoxPop.png */,
+				EF33CE48211C36D100560C69 /* JummumLaunchBg.png */,
+				EF33CE51211C36D100560C69 /* jummumLogoCrop2.png */,
+				EF33CE32211C36D100560C69 /* jummumLogoWithType.png */,
+				EF33CE1C211C36D100560C69 /* jummumTypeWhite.png */,
+				EF33CE22211C36D100560C69 /* jummumYeah.png */,
+				EF33CE2B211C36D100560C69 /* logOut.png */,
+				EF33CE59211C36D100560C69 /* masterCard.png */,
+				EF33CE14211C36D100560C69 /* me.png */,
+				EF33CE58211C36D100560C69 /* NoImage.jpg */,
+				EF33CE17211C36D100560C69 /* privacyPolicy.png */,
+				EF33CE2D211C36D100560C69 /* profilePic.png */,
+				EF33CE23211C36D100560C69 /* profilePicGirl.png */,
+				EF33CE4F211C36D100560C69 /* QR.png */,
+				EF33CE25211C36D100560C69 /* recommendShop.png */,
+				EF33CE5D211C36D100560C69 /* refresh.png */,
+				EF33CE21211C36D100560C69 /* remove light color.png */,
+				EF33CE49211C36D100560C69 /* remove.png */,
+				EF33CE4C211C36D100560C69 /* removed.png */,
+				EF33CE1D211C36D100560C69 /* search_white.png */,
+				EF33CE39211C36D100560C69 /* search.png */,
+				EF33CE56211C36D100560C69 /* security_code_back-512.png */,
+				EF33CE5A211C36D100560C69 /* starRating.png */,
+				EF33CE4E211C36D100560C69 /* starRatingGray.png */,
+				EF33CE12211C36D100560C69 /* takeAway2.png */,
 				EF33CE3C211C36D100560C69 /* takeAwayGrayOut.png */,
-				EF33CE3D211C36D100560C69 /* history.png */,
-				EF33CE3E211C36D100560C69 /* added.png */,
-				EF33CE3F211C36D100560C69 /* triangle_pink.png */,
+				EF33CE4A211C36D100560C69 /* takeAwayNoti.png */,
+				EF33CE28211C36D100560C69 /* termsOfService.png */,
+				EF33CE2F211C36D100560C69 /* triangle_and_om.png */,
+				EF33CE4B211C36D100560C69 /* triangle_and.png */,
+				EF33CE47211C36D100560C69 /* triangle_demo.png */,
 				EF33CE40211C36D100560C69 /* triangle_dev_om.png */,
 				EF33CE41211C36D100560C69 /* triangle_dev.png */,
-				EF33CE42211C36D100560C69 /* deleteAll3.png */,
-				EF33CE43211C36D100560C69 /* home_icon_red.png */,
-				EF33CE44211C36D100560C69 /* chefHat_green.png */,
-				EF33CE45211C36D100560C69 /* addRemove.png */,
-				EF33CE46211C36D100560C69 /* comment.png */,
-				EF33CE47211C36D100560C69 /* triangle_demo.png */,
-				EF33CE48211C36D100560C69 /* JummumLaunchBg.png */,
-				EF33CE49211C36D100560C69 /* remove.png */,
-				EF33CE4A211C36D100560C69 /* takeAwayNoti.png */,
-				EF33CE4B211C36D100560C69 /* triangle_and.png */,
-				EF33CE4C211C36D100560C69 /* removed.png */,
-				EF33CE4D211C36D100560C69 /* contactUs.png */,
-				EF33CE4E211C36D100560C69 /* starRatingGray.png */,
-				EF33CE4F211C36D100560C69 /* QR.png */,
-				EF33CE50211C36D100560C69 /* jcb.png */,
-				EF33CE51211C36D100560C69 /* jummumLogoCrop2.png */,
-				EF33CE52211C36D100560C69 /* Icon-Small@3x.png */,
-				EF33CE53211C36D100560C69 /* Icon-20.png */,
-				EF33CE54211C36D100560C69 /* Icon-Small-50.png */,
-				EF33CE55211C36D100560C69 /* gift_small.png */,
-				EF33CE56211C36D100560C69 /* security_code_back-512.png */,
-				EF33CE57211C36D100560C69 /* expand2.png */,
-				EF33CE58211C36D100560C69 /* NoImage.jpg */,
-				EF33CE59211C36D100560C69 /* masterCard.png */,
-				EF33CE5A211C36D100560C69 /* starRating.png */,
+				EF33CE3F211C36D100560C69 /* triangle_pink.png */,
+				EF33CE13211C36D100560C69 /* uncheckbox_gray.png */,
+				EF33CE2E211C36D100560C69 /* visa.png */,
 				EF33CE5B211C36D100560C69 /* white.png */,
-				EF33CE5C211C36D100560C69 /* Icon-Small@2x.png */,
-				EF33CE5D211C36D100560C69 /* refresh.png */,
-				EF33CE5E211C36D100560C69 /* iTunesArtwork@2x */,
-				EF33CE5F211C36D100560C69 /* checkbox_gray.png */,
-				EF33CE60211C36D100560C69 /* check_green.png */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -1241,6 +1444,8 @@
 				EF33CE93211C36D100560C69 /* TosAndPrivacyPolicyViewController.m */,
 				EF6C7D06213529B900C335AC /* VoucherCodeListViewController.h */,
 				EF6C7D07213529B900C335AC /* VoucherCodeListViewController.m */,
+				EF8801E32143793C0062D9D4 /* LuckyDrawViewController.h */,
+				EF8801E42143793C0062D9D4 /* LuckyDrawViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1406,6 +1611,10 @@
 				EF33CEE3211C36D100560C69 /* UserPromotionUsed.m */,
 				EF33CEFA211C36D100560C69 /* UserRewardRedemptionUsed.h */,
 				EF33CEA9211C36D100560C69 /* UserRewardRedemptionUsed.m */,
+				EF8801E6214380060062D9D4 /* LuckyDrawTicket.h */,
+				EF8801E7214380060062D9D4 /* LuckyDrawTicket.m */,
+				EF8801E92143801F0062D9D4 /* SharedLuckyDrawTicket.h */,
+				EF8801EA2143801F0062D9D4 /* SharedLuckyDrawTicket.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1590,6 +1799,137 @@
 			path = font;
 			sourceTree = "<group>";
 		};
+		EF88052C2147820E0062D9D4 /* card3 */ = {
+			isa = PBXGroup;
+			children = (
+				EF88052D2147820E0062D9D4 /* excellent */,
+				EF8805452147820E0062D9D4 /* good */,
+				EF88055D2147820E0062D9D4 /* boo */,
+				EF8805752147820E0062D9D4 /* awesome */,
+			);
+			path = card3;
+			sourceTree = "<group>";
+		};
+		EF88052D2147820E0062D9D4 /* excellent */ = {
+			isa = PBXGroup;
+			children = (
+				EF88052E2147820E0062D9D4 /* giftBoxExcellent00021.jpg */,
+				EF88052F2147820E0062D9D4 /* giftBoxExcellent00009.jpg */,
+				EF8805302147820E0062D9D4 /* giftBoxExcellent00008.jpg */,
+				EF8805312147820E0062D9D4 /* giftBoxExcellent00020.jpg */,
+				EF8805322147820E0062D9D4 /* giftBoxExcellent00022.jpg */,
+				EF8805332147820E0062D9D4 /* giftBoxExcellent00023.jpg */,
+				EF8805342147820E0062D9D4 /* giftBoxExcellent00018.jpg */,
+				EF8805352147820E0062D9D4 /* giftBoxExcellent00019.jpg */,
+				EF8805362147820E0062D9D4 /* giftBoxExcellent00014.jpg */,
+				EF8805372147820E0062D9D4 /* giftBoxExcellent00001.jpg */,
+				EF8805382147820E0062D9D4 /* giftBoxExcellent00015.jpg */,
+				EF8805392147820E0062D9D4 /* giftBoxExcellent00003.jpg */,
+				EF88053A2147820E0062D9D4 /* giftBoxExcellent00017.jpg */,
+				EF88053B2147820E0062D9D4 /* giftBoxExcellent00016.jpg */,
+				EF88053C2147820E0062D9D4 /* giftBoxExcellent00002.jpg */,
+				EF88053D2147820E0062D9D4 /* giftBoxExcellent00006.jpg */,
+				EF88053E2147820E0062D9D4 /* giftBoxExcellent00012.jpg */,
+				EF88053F2147820E0062D9D4 /* giftBoxExcellent00013.jpg */,
+				EF8805402147820E0062D9D4 /* giftBoxExcellent00007.jpg */,
+				EF8805412147820E0062D9D4 /* giftBoxExcellent00011.jpg */,
+				EF8805422147820E0062D9D4 /* giftBoxExcellent00005.jpg */,
+				EF8805432147820E0062D9D4 /* giftBoxExcellent00004.jpg */,
+				EF8805442147820E0062D9D4 /* giftBoxExcellent00010.jpg */,
+			);
+			path = excellent;
+			sourceTree = "<group>";
+		};
+		EF8805452147820E0062D9D4 /* good */ = {
+			isa = PBXGroup;
+			children = (
+				EF8805462147820E0062D9D4 /* giftBoxGood00021.jpg */,
+				EF8805472147820E0062D9D4 /* giftBoxGood00009.jpg */,
+				EF8805482147820E0062D9D4 /* giftBoxGood00008.jpg */,
+				EF8805492147820E0062D9D4 /* giftBoxGood00020.jpg */,
+				EF88054A2147820E0062D9D4 /* giftBoxGood00022.jpg */,
+				EF88054B2147820E0062D9D4 /* giftBoxGood00023.jpg */,
+				EF88054C2147820E0062D9D4 /* giftBoxGood00018.jpg */,
+				EF88054D2147820E0062D9D4 /* giftBoxGood00019.jpg */,
+				EF88054E2147820E0062D9D4 /* giftBoxGood00014.jpg */,
+				EF88054F2147820E0062D9D4 /* giftBoxGood00015.jpg */,
+				EF8805502147820E0062D9D4 /* giftBoxGood00001.jpg */,
+				EF8805512147820E0062D9D4 /* giftBoxGood00017.jpg */,
+				EF8805522147820E0062D9D4 /* giftBoxGood00003.jpg */,
+				EF8805532147820E0062D9D4 /* giftBoxGood00002.jpg */,
+				EF8805542147820E0062D9D4 /* giftBoxGood00016.jpg */,
+				EF8805552147820E0062D9D4 /* giftBoxGood00012.jpg */,
+				EF8805562147820E0062D9D4 /* giftBoxGood00006.jpg */,
+				EF8805572147820E0062D9D4 /* giftBoxGood00007.jpg */,
+				EF8805582147820E0062D9D4 /* giftBoxGood00013.jpg */,
+				EF8805592147820E0062D9D4 /* giftBoxGood00005.jpg */,
+				EF88055A2147820E0062D9D4 /* giftBoxGood00011.jpg */,
+				EF88055B2147820E0062D9D4 /* giftBoxGood00010.jpg */,
+				EF88055C2147820E0062D9D4 /* giftBoxGood00004.jpg */,
+			);
+			path = good;
+			sourceTree = "<group>";
+		};
+		EF88055D2147820E0062D9D4 /* boo */ = {
+			isa = PBXGroup;
+			children = (
+				EF88055E2147820E0062D9D4 /* giftBoxBoo00006.jpg */,
+				EF88055F2147820E0062D9D4 /* giftBoxBoo00012.jpg */,
+				EF8805602147820E0062D9D4 /* giftBoxBoo00013.jpg */,
+				EF8805612147820E0062D9D4 /* giftBoxBoo00007.jpg */,
+				EF8805622147820E0062D9D4 /* giftBoxBoo00011.jpg */,
+				EF8805632147820E0062D9D4 /* giftBoxBoo00005.jpg */,
+				EF8805642147820E0062D9D4 /* giftBoxBoo00004.jpg */,
+				EF8805652147820E0062D9D4 /* giftBoxBoo00010.jpg */,
+				EF8805662147820E0062D9D4 /* giftBoxBoo00014.jpg */,
+				EF8805672147820E0062D9D4 /* giftBoxBoo00001.jpg */,
+				EF8805682147820E0062D9D4 /* giftBoxBoo00015.jpg */,
+				EF8805692147820E0062D9D4 /* giftBoxBoo00003.jpg */,
+				EF88056A2147820E0062D9D4 /* giftBoxBoo00017.jpg */,
+				EF88056B2147820E0062D9D4 /* giftBoxBoo00016.jpg */,
+				EF88056C2147820E0062D9D4 /* giftBoxBoo00002.jpg */,
+				EF88056D2147820E0062D9D4 /* giftBoxBoo00018.jpg */,
+				EF88056E2147820E0062D9D4 /* giftBoxBoo00019.jpg */,
+				EF88056F2147820E0062D9D4 /* giftBoxBoo00021.jpg */,
+				EF8805702147820E0062D9D4 /* giftBoxBoo00009.jpg */,
+				EF8805712147820E0062D9D4 /* giftBoxBoo00008.jpg */,
+				EF8805722147820E0062D9D4 /* giftBoxBoo00020.jpg */,
+				EF8805732147820E0062D9D4 /* giftBoxBoo00022.jpg */,
+				EF8805742147820E0062D9D4 /* giftBoxBoo00023.jpg */,
+			);
+			path = boo;
+			sourceTree = "<group>";
+		};
+		EF8805752147820E0062D9D4 /* awesome */ = {
+			isa = PBXGroup;
+			children = (
+				EF8805762147820E0062D9D4 /* giftBoxAwesome00018.jpg */,
+				EF8805772147820E0062D9D4 /* giftBoxAwesome00019.jpg */,
+				EF8805782147820E0062D9D4 /* giftBoxAwesome00021.jpg */,
+				EF8805792147820E0062D9D4 /* giftBoxAwesome00009.jpg */,
+				EF88057A2147820E0062D9D4 /* giftBoxAwesome00008.jpg */,
+				EF88057B2147820E0062D9D4 /* giftBoxAwesome00020.jpg */,
+				EF88057C2147820E0062D9D4 /* giftBoxAwesome00022.jpg */,
+				EF88057D2147820E0062D9D4 /* giftBoxAwesome00023.jpg */,
+				EF88057E2147820E0062D9D4 /* giftBoxAwesome00012.jpg */,
+				EF88057F2147820E0062D9D4 /* giftBoxAwesome00006.jpg */,
+				EF8805802147820E0062D9D4 /* giftBoxAwesome00007.jpg */,
+				EF8805812147820E0062D9D4 /* giftBoxAwesome00013.jpg */,
+				EF8805822147820E0062D9D4 /* giftBoxAwesome00005.jpg */,
+				EF8805832147820E0062D9D4 /* giftBoxAwesome00011.jpg */,
+				EF8805842147820E0062D9D4 /* giftBoxAwesome00010.jpg */,
+				EF8805852147820E0062D9D4 /* giftBoxAwesome00004.jpg */,
+				EF8805862147820E0062D9D4 /* giftBoxAwesome00014.jpg */,
+				EF8805872147820E0062D9D4 /* giftBoxAwesome00015.jpg */,
+				EF8805882147820E0062D9D4 /* giftBoxAwesome00001.jpg */,
+				EF8805892147820E0062D9D4 /* giftBoxAwesome00017.jpg */,
+				EF88058A2147820E0062D9D4 /* giftBoxAwesome00003.jpg */,
+				EF88058B2147820E0062D9D4 /* giftBoxAwesome00002.jpg */,
+				EF88058C2147820E0062D9D4 /* giftBoxAwesome00016.jpg */,
+			);
+			path = awesome;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1703,6 +2043,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF33D013211C36D200560C69 /* takeAwayGrayOut.png in Resources */,
+				EF8805942147820E0062D9D4 /* giftBoxExcellent00019.jpg in Resources */,
+				EF8805A42147820E0062D9D4 /* giftBoxGood00021.jpg in Resources */,
+				EF88059B2147820E0062D9D4 /* giftBoxExcellent00002.jpg in Resources */,
+				EF8805E32147820E0062D9D4 /* giftBoxAwesome00015.jpg in Resources */,
 				EF33CFF5211C36D200560C69 /* Icon-60@3x.png in Resources */,
 				EF33D014211C36D200560C69 /* history.png in Resources */,
 				EF33D030211C36D200560C69 /* masterCard.png in Resources */,
@@ -1712,9 +2056,11 @@
 				EF33D119211C36D200560C69 /* Kanit-Medium.ttf in Resources */,
 				EF33D0E7211C36D200560C69 /* Prompt-BlackItalic.ttf in Resources */,
 				EF33D02D211C36D200560C69 /* security_code_back-512.png in Resources */,
+				EF8805DA2147820E0062D9D4 /* giftBoxAwesome00012.jpg in Resources */,
 				EF33D0F0211C36D200560C69 /* Kanit-SemiBold.ttf in Resources */,
 				EF33D0A6211C36D200560C69 /* CustomTableViewCellMenu.xib in Resources */,
 				EF33D0B3211C36D200560C69 /* CustomTableViewCellLabelText.xib in Resources */,
+				EF8805BC2147820E0062D9D4 /* giftBoxBoo00012.jpg in Resources */,
 				EF33D025211C36D200560C69 /* starRatingGray.png in Resources */,
 				EF33D0D4211C36D200560C69 /* CustomTableViewCellLabel.xib in Resources */,
 				EF33D0E8211C36D200560C69 /* Kanit-ThinItalic.ttf in Resources */,
@@ -1722,14 +2068,19 @@
 				EF33D10F211C36D200560C69 /* Kanit-BlackItalic.ttf in Resources */,
 				EF33D004211C36D200560C69 /* profilePic.png in Resources */,
 				EF33D0E4211C36D200560C69 /* CustomTableViewCellRedemption.xib in Resources */,
+				EF8805E22147820E0062D9D4 /* giftBoxAwesome00014.jpg in Resources */,
 				EF33D109211C36D200560C69 /* Prompt-Regular.ttf in Resources */,
 				EF33D01D211C36D200560C69 /* comment.png in Resources */,
 				EF33D009211C36D200560C69 /* jummumLogoWithType.png in Resources */,
+				EF8805BD2147820E0062D9D4 /* giftBoxBoo00013.jpg in Resources */,
 				EF33D011211C36D200560C69 /* Icon@2x.png in Resources */,
 				EF33D0A7211C36D200560C69 /* CustomTableViewHeaderFooterButton.xib in Resources */,
+				EF8805D82147820E0062D9D4 /* giftBoxAwesome00022.jpg in Resources */,
 				EF33D033211C36D200560C69 /* Icon-Small@2x.png in Resources */,
 				EF33D0F8211C36D200560C69 /* Kanit-SemiBold.otf in Resources */,
+				EF88059A2147820E0062D9D4 /* giftBoxExcellent00016.jpg in Resources */,
 				EF5D243F212756880073F1A1 /* GoogleService-Info.plist in Resources */,
+				EF8805C62147820E0062D9D4 /* giftBoxBoo00003.jpg in Resources */,
 				EF33D017211C36D200560C69 /* triangle_dev_om.png in Resources */,
 				EF33D008211C36D200560C69 /* basketWhite.png in Resources */,
 				EF33D0F2211C36D200560C69 /* Kanit-Black.ttf in Resources */,
@@ -1739,56 +2090,89 @@
 				EF33CFDB211C36D200560C69 /* Property List.plist in Resources */,
 				EF33CFFC211C36D200560C69 /* recommendShop.png in Resources */,
 				EF33CFEF211C36D200560C69 /* iTunesArtwork in Resources */,
+				EF8805B62147820E0062D9D4 /* giftBoxGood00013.jpg in Resources */,
 				EF33D0E9211C36D200560C69 /* Prompt-ExtraLight.ttf in Resources */,
 				EF33D0EE211C36D200560C69 /* Prompt-Medium.ttf in Resources */,
 				EF33D01A211C36D200560C69 /* home_icon_red.png in Resources */,
+				EF8805A32147820E0062D9D4 /* giftBoxExcellent00010.jpg in Resources */,
 				EF33CFD6211C36D200560C69 /* iOSDeviceModelMapping.plist in Resources */,
 				EF33D02C211C36D200560C69 /* gift_small.png in Resources */,
+				EF8805C02147820E0062D9D4 /* giftBoxBoo00005.jpg in Resources */,
 				EF33D0AB211C36D200560C69 /* CustomTableViewCellRating.xib in Resources */,
 				EF33D01E211C36D200560C69 /* triangle_demo.png in Resources */,
+				EF8805BF2147820E0062D9D4 /* giftBoxBoo00011.jpg in Resources */,
 				EF33D021211C36D200560C69 /* takeAwayNoti.png in Resources */,
+				EF8805CA2147820E0062D9D4 /* giftBoxBoo00018.jpg in Resources */,
+				EF8805D02147820E0062D9D4 /* giftBoxBoo00022.jpg in Resources */,
+				EF8805A52147820E0062D9D4 /* giftBoxGood00009.jpg in Resources */,
 				EF33D110211C36D200560C69 /* Kanit-LightItalic.otf in Resources */,
 				EF33D019211C36D200560C69 /* deleteAll3.png in Resources */,
+				EF8805E82147820E0062D9D4 /* giftBoxAwesome00016.jpg in Resources */,
+				EF8805E62147820E0062D9D4 /* giftBoxAwesome00003.jpg in Resources */,
 				EF33D003211C36D200560C69 /* creditCard.png in Resources */,
+				EF8805C32147820E0062D9D4 /* giftBoxBoo00014.jpg in Resources */,
 				EF33D0FD211C36D200560C69 /* Prompt-Thin.ttf in Resources */,
+				EF8805982147820E0062D9D4 /* giftBoxExcellent00003.jpg in Resources */,
 				EF33CFEC211C36D200560C69 /* Icon.png in Resources */,
 				EF33D0EF211C36D200560C69 /* Kanit-MediumItalic.otf in Resources */,
 				EF33D01B211C36D200560C69 /* chefHat_green.png in Resources */,
+				EF8805952147820E0062D9D4 /* giftBoxExcellent00014.jpg in Resources */,
 				EF33D0EB211C36D200560C69 /* Kanit-BoldItalic.ttf in Resources */,
 				EF33D00C211C36D200560C69 /* Icon-72@2x.png in Resources */,
 				EF33CFF6211C36D200560C69 /* jummumChef_lightGray.png in Resources */,
 				EF33D103211C36D200560C69 /* Kanit-ExtraLight.otf in Resources */,
 				EF33D101211C36D200560C69 /* Kanit-ExtraBold.ttf in Resources */,
+				EF8805AF2147820E0062D9D4 /* giftBoxGood00017.jpg in Resources */,
+				EF8805932147820E0062D9D4 /* giftBoxExcellent00018.jpg in Resources */,
+				EF8805C52147820E0062D9D4 /* giftBoxBoo00015.jpg in Resources */,
 				EF33D034211C36D200560C69 /* refresh.png in Resources */,
 				EF33D027211C36D200560C69 /* jcb.png in Resources */,
 				EF33D100211C36D200560C69 /* Kanit-ExtraBoldItalic.ttf in Resources */,
 				EF33D0E6211C36D200560C69 /* Kanit-ExtraLight.ttf in Resources */,
+				EF8805962147820E0062D9D4 /* giftBoxExcellent00001.jpg in Resources */,
 				EF33D0E5211C36D200560C69 /* Prompt-ThinItalic.ttf in Resources */,
 				EF33D0ED211C36D200560C69 /* Prompt-BoldItalic.ttf in Resources */,
 				EF33D108211C36D200560C69 /* Kanit-Bold.ttf in Resources */,
+				EF8805BE2147820E0062D9D4 /* giftBoxBoo00007.jpg in Resources */,
+				EF8805CE2147820E0062D9D4 /* giftBoxBoo00008.jpg in Resources */,
 				EF33D0B5211C36D200560C69 /* CustomTableViewCellImageLabelRemove.xib in Resources */,
+				EF8805D72147820E0062D9D4 /* giftBoxAwesome00020.jpg in Resources */,
+				EF8805A62147820E0062D9D4 /* giftBoxGood00008.jpg in Resources */,
+				EF8805902147820E0062D9D4 /* giftBoxExcellent00020.jpg in Resources */,
+				EF8805CC2147820E0062D9D4 /* giftBoxBoo00021.jpg in Resources */,
+				EF8805B22147820E0062D9D4 /* giftBoxGood00016.jpg in Resources */,
 				EF33D0C3211C36D200560C69 /* CustomTableViewCellTotal.xib in Resources */,
 				EF33D0F5211C36D200560C69 /* Kanit-Italic.ttf in Resources */,
+				EF8805DE2147820E0062D9D4 /* giftBoxAwesome00005.jpg in Resources */,
 				EF33D10C211C36D200560C69 /* Kanit-Medium.otf in Resources */,
 				EF33D0B0211C36D200560C69 /* CustomTableViewCellCreditCard.xib in Resources */,
 				EF33CFFA211C36D200560C69 /* profilePicGirl.png in Resources */,
 				EF33D105211C36D200560C69 /* Prompt-Bold.ttf in Resources */,
+				EF8805B42147820E0062D9D4 /* giftBoxGood00006.jpg in Resources */,
+				EF8805A22147820E0062D9D4 /* giftBoxExcellent00004.jpg in Resources */,
 				EF33D0DF211C36D200560C69 /* CustomTableViewCellOrder.xib in Resources */,
 				EF33D0A8211C36D200560C69 /* CustomCollectionViewCellNote.xib in Resources */,
+				EF8805D52147820E0062D9D4 /* giftBoxAwesome00009.jpg in Resources */,
 				EF33D0CF211C36D200560C69 /* CustomTableViewHeaderFooterOkCancel.xib in Resources */,
 				EF33CFEA211C36D200560C69 /* uncheckbox_gray.png in Resources */,
 				EF33D0BF211C36D200560C69 /* CustomCollectionReusableView.xib in Resources */,
 				EF33D01C211C36D200560C69 /* addRemove.png in Resources */,
+				EF8805B32147820E0062D9D4 /* giftBoxGood00012.jpg in Resources */,
 				EF33D0CC211C36D200560C69 /* CustomViewVoucher.xib in Resources */,
+				EF88058E2147820E0062D9D4 /* giftBoxExcellent00009.jpg in Resources */,
 				EF33D102211C36D200560C69 /* Prompt-LightItalic.ttf in Resources */,
 				EF33D000211C36D200560C69 /* Icon-1024.png in Resources */,
+				EF88059F2147820E0062D9D4 /* giftBoxExcellent00007.jpg in Resources */,
 				EF33D0BD211C36D200560C69 /* CustomTableViewCellSearchBar.xib in Resources */,
 				EF33CFF0211C36D200560C69 /* Icon-76@3x.png in Resources */,
 				EF33D10B211C36D200560C69 /* Kanit-SemiBoldItalic.ttf in Resources */,
 				EF33D0D8211C36D200560C69 /* CustomTableViewCellNote.xib in Resources */,
+				EF8805A82147820E0062D9D4 /* giftBoxGood00022.jpg in Resources */,
 				EF33D016211C36D200560C69 /* triangle_pink.png in Resources */,
 				EF33D0D9211C36D200560C69 /* CustomTableViewCellLabelLabel.xib in Resources */,
+				EF8805DB2147820E0062D9D4 /* giftBoxAwesome00006.jpg in Resources */,
 				EF33D0C2211C36D200560C69 /* CustomTableViewCellLabelTextView.xib in Resources */,
+				EF8805C42147820E0062D9D4 /* giftBoxBoo00001.jpg in Resources */,
 				EF33D107211C36D200560C69 /* Prompt-SemiBold.ttf in Resources */,
 				EF33D106211C36D200560C69 /* Kanit-BoldItalic.otf in Resources */,
 				EF33D015211C36D200560C69 /* added.png in Resources */,
@@ -1804,12 +2188,16 @@
 				EF33D036211C36D200560C69 /* checkbox_gray.png in Resources */,
 				EF33D0AD211C36D200560C69 /* CustomTableViewCellDisputeDetail.xib in Resources */,
 				EF33D0FC211C36D200560C69 /* Kanit-Thin.ttf in Resources */,
+				EF88058D2147820E0062D9D4 /* giftBoxExcellent00021.jpg in Resources */,
 				EF33D0F1211C36D200560C69 /* Kanit-Thin.otf in Resources */,
 				EF33D114211C36D200560C69 /* Kanit-LightItalic.ttf in Resources */,
+				EF8805D12147820E0062D9D4 /* giftBoxBoo00023.jpg in Resources */,
 				EF33D0C9211C36D200560C69 /* CustomTableViewCellOrderSummary.xib in Resources */,
+				EF8805B72147820E0062D9D4 /* giftBoxGood00005.jpg in Resources */,
 				EF33D10E211C36D200560C69 /* Kanit-Light.otf in Resources */,
 				EF33D059211C36D200560C69 /* beep.mp3 in Resources */,
 				EF88004D213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.xib in Resources */,
+				EF88014421430C330062D9D4 /* jummumGiftBoxPop.png in Resources */,
 				EF33D018211C36D200560C69 /* triangle_dev.png in Resources */,
 				EF33CFED211C36D200560C69 /* Icon-76@2x.png in Resources */,
 				EF33D0F7211C36D200560C69 /* Prompt-Light.ttf in Resources */,
@@ -1818,67 +2206,114 @@
 				EF33D115211C36D200560C69 /* Prompt-ExtraBoldItalic.ttf in Resources */,
 				EF33D10D211C36D200560C69 /* Prompt-SemiBoldItalic.ttf in Resources */,
 				EF33D0DD211C36D200560C69 /* CustomTableViewCellImageText.xib in Resources */,
+				EF8805BB2147820E0062D9D4 /* giftBoxBoo00006.jpg in Resources */,
 				EF639E0D211F233E00C70A98 /* CustomTableViewCellLabelRemark.xib in Resources */,
+				EF8805A02147820E0062D9D4 /* giftBoxExcellent00011.jpg in Resources */,
 				EF33CFF4211C36D200560C69 /* search_white.png in Resources */,
 				EF33CFF1211C36D200560C69 /* circle_red.png in Resources */,
 				EF33D0C6211C36D200560C69 /* CustomTableViewCellVoucherCode.xib in Resources */,
 				EF33D116211C36D200560C69 /* Prompt-Italic.ttf in Resources */,
+				EF8805DF2147820E0062D9D4 /* giftBoxAwesome00011.jpg in Resources */,
 				EF33D02B211C36D200560C69 /* Icon-Small-50.png in Resources */,
+				EF8805E72147820E0062D9D4 /* giftBoxAwesome00002.jpg in Resources */,
+				EF8805C72147820E0062D9D4 /* giftBoxBoo00017.jpg in Resources */,
 				EF33D00E211C36D200560C69 /* Icon-Spotlight-40@2x.png in Resources */,
 				EF33D0FE211C36D200560C69 /* Kanit-Italic.otf in Resources */,
 				EF33CFFD211C36D200560C69 /* Icon-76.png in Resources */,
 				EF33CD80211C26C400560C69 /* LaunchScreen.storyboard in Resources */,
+				EF8805B02147820E0062D9D4 /* giftBoxGood00003.jpg in Resources */,
+				EF88059C2147820E0062D9D4 /* giftBoxExcellent00006.jpg in Resources */,
 				EF33D031211C36D200560C69 /* starRating.png in Resources */,
 				EF33D022211C36D200560C69 /* triangle_and.png in Resources */,
+				EF8805D62147820E0062D9D4 /* giftBoxAwesome00008.jpg in Resources */,
 				EF33D0D5211C36D200560C69 /* CustomTableViewCellProfile.xib in Resources */,
+				EF8805DD2147820E0062D9D4 /* giftBoxAwesome00013.jpg in Resources */,
 				EF33CD7D211C26C400560C69 /* Assets.xcassets in Resources */,
+				EF8805C12147820E0062D9D4 /* giftBoxBoo00004.jpg in Resources */,
 				EF33D012211C36D200560C69 /* hotDeal.png in Resources */,
 				EF33D01F211C36D200560C69 /* JummumLaunchBg.png in Resources */,
 				EF33CFDA211C36D200560C69 /* Launch Screen.storyboard in Resources */,
+				EF8805C82147820E0062D9D4 /* giftBoxBoo00016.jpg in Resources */,
+				EF8805D92147820E0062D9D4 /* giftBoxAwesome00023.jpg in Resources */,
 				EF33D02F211C36D200560C69 /* NoImage.jpg in Resources */,
 				EF639E0C211F233E00C70A98 /* CustomTableViewCellSeparatorLine.xib in Resources */,
+				EF88014321430C330062D9D4 /* jummumGiftBoxNormal.png in Resources */,
 				EF33D111211C36D200560C69 /* Kanit-ExtraLightItalic.otf in Resources */,
 				EF33D0C0211C36D200560C69 /* CustomTableViewCellText.xib in Resources */,
 				EF33D006211C36D200560C69 /* triangle_and_om.png in Resources */,
 				EF33D002211C36D200560C69 /* logOut.png in Resources */,
 				EF33CFF3211C36D200560C69 /* jummumTypeWhite.png in Resources */,
 				EF33D020211C36D200560C69 /* remove.png in Resources */,
+				EF88039C2146B0360062D9D4 /* orderNow.png in Resources */,
+				EF88058F2147820E0062D9D4 /* giftBoxExcellent00008.jpg in Resources */,
 				EF33CFD7211C36D200560C69 /* Main.storyboard in Resources */,
+				EF8805A72147820E0062D9D4 /* giftBoxGood00020.jpg in Resources */,
+				EF8805CB2147820E0062D9D4 /* giftBoxBoo00019.jpg in Resources */,
 				EF33D0CE211C36D200560C69 /* CustomTableViewCellReceiptSummary.xib in Resources */,
 				EF33D0FF211C36D200560C69 /* Kanit-Regular.otf in Resources */,
+				EF8805D32147820E0062D9D4 /* giftBoxAwesome00019.jpg in Resources */,
+				EF8805AB2147820E0062D9D4 /* giftBoxGood00019.jpg in Resources */,
+				EF8805C92147820E0062D9D4 /* giftBoxBoo00002.jpg in Resources */,
 				EF33CFF9211C36D200560C69 /* jummumYeah.png in Resources */,
+				EF8805B82147820E0062D9D4 /* giftBoxGood00011.jpg in Resources */,
 				EF33D0F4211C36D200560C69 /* Kanit-ExtraBoldItalic.otf in Resources */,
+				EF8805CD2147820E0062D9D4 /* giftBoxBoo00009.jpg in Resources */,
+				EF8805AA2147820E0062D9D4 /* giftBoxGood00018.jpg in Resources */,
 				EF33D023211C36D200560C69 /* removed.png in Resources */,
 				EF33D118211C36D200560C69 /* Kanit-ExtraLightItalic.ttf in Resources */,
 				EF33CFEE211C36D200560C69 /* privacyPolicy.png in Resources */,
 				EF33CFFF211C36D200560C69 /* termsOfService.png in Resources */,
+				EF8805AC2147820E0062D9D4 /* giftBoxGood00014.jpg in Resources */,
 				EF33D0FB211C36D200560C69 /* Prompt-ExtraBold.ttf in Resources */,
 				EF33D00B211C36D200560C69 /* Icon-72.png in Resources */,
+				EF88059E2147820E0062D9D4 /* giftBoxExcellent00013.jpg in Resources */,
+				EF8805B12147820E0062D9D4 /* giftBoxGood00002.jpg in Resources */,
 				EF33D024211C36D200560C69 /* contactUs.png in Resources */,
 				EF33D0FA211C36D200560C69 /* Kanit-Black.otf in Resources */,
 				EF33D112211C36D200560C69 /* Kanit-Light.ttf in Resources */,
+				EF8805DC2147820E0062D9D4 /* giftBoxAwesome00007.jpg in Resources */,
 				EF33D035211C36D200560C69 /* iTunesArtwork@2x in Resources */,
 				EF33D037211C36D200560C69 /* check_green.png in Resources */,
 				EF33D0BA211C36D200560C69 /* CustomTableViewCellLabelDetailLabelWithImage.xib in Resources */,
 				EF33D026211C36D200560C69 /* QR.png in Resources */,
 				EF33D005211C36D200560C69 /* visa.png in Resources */,
+				EF8805A92147820E0062D9D4 /* giftBoxGood00023.jpg in Resources */,
 				EF33CFF8211C36D200560C69 /* remove light color.png in Resources */,
+				EF8805A12147820E0062D9D4 /* giftBoxExcellent00005.jpg in Resources */,
+				EF8805B92147820E0062D9D4 /* giftBoxGood00010.jpg in Resources */,
+				EF8805E12147820E0062D9D4 /* giftBoxAwesome00004.jpg in Resources */,
+				EF8805E52147820E0062D9D4 /* giftBoxAwesome00017.jpg in Resources */,
 				EF33D00F211C36D200560C69 /* Icon-60@2x.png in Resources */,
 				EF33D0F6211C36D200560C69 /* Kanit-ExtraBold.otf in Resources */,
+				EF8805972147820E0062D9D4 /* giftBoxExcellent00015.jpg in Resources */,
 				EF33D113211C36D200560C69 /* Kanit-BlackItalic.otf in Resources */,
 				EF33D117211C36D200560C69 /* Prompt-Black.ttf in Resources */,
+				EF8805912147820E0062D9D4 /* giftBoxExcellent00022.jpg in Resources */,
+				EF8805C22147820E0062D9D4 /* giftBoxBoo00010.jpg in Resources */,
 				EF33D00D211C36D200560C69 /* collapse2.png in Resources */,
 				EF33D028211C36D200560C69 /* jummumLogoCrop2.png in Resources */,
 				EF33CFFE211C36D200560C69 /* Icon-60.png in Resources */,
+				EF8805B52147820E0062D9D4 /* giftBoxGood00007.jpg in Resources */,
 				EF33D0A9211C36D200560C69 /* CustomTableViewCellReward.xib in Resources */,
 				EF33D0A4211C36D200560C69 /* CustomTableViewCellLogo.xib in Resources */,
+				EF8805BA2147820E0062D9D4 /* giftBoxGood00004.jpg in Resources */,
+				EF8805AE2147820E0062D9D4 /* giftBoxGood00001.jpg in Resources */,
 				EF33D0AF211C36D200560C69 /* CustomTableViewCellPromoBanner.xib in Resources */,
+				EF8805CF2147820E0062D9D4 /* giftBoxBoo00020.jpg in Resources */,
 				EF33CFE9211C36D200560C69 /* takeAway2.png in Resources */,
+				EF8805D42147820E0062D9D4 /* giftBoxAwesome00021.jpg in Resources */,
 				EF33D029211C36D200560C69 /* Icon-Small@3x.png in Resources */,
+				EF88059D2147820E0062D9D4 /* giftBoxExcellent00012.jpg in Resources */,
+				EF8805AD2147820E0062D9D4 /* giftBoxGood00015.jpg in Resources */,
 				EF33D010211C36D200560C69 /* search.png in Resources */,
+				EF8805922147820E0062D9D4 /* giftBoxExcellent00023.jpg in Resources */,
 				EF33D0F3211C36D200560C69 /* Kanit-Regular.ttf in Resources */,
+				EF8805E02147820E0062D9D4 /* giftBoxAwesome00010.jpg in Resources */,
 				EF33D0EA211C36D200560C69 /* Kanit-Bold.otf in Resources */,
+				EF8805D22147820E0062D9D4 /* giftBoxAwesome00018.jpg in Resources */,
+				EF8805992147820E0062D9D4 /* giftBoxExcellent00017.jpg in Resources */,
 				EF33D0B4211C36D200560C69 /* CustomTableViewCellButton.xib in Resources */,
+				EF8805E42147820E0062D9D4 /* giftBoxAwesome00001.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2020,6 +2455,7 @@
 				EF33D0BE211C36D200560C69 /* CustomTableViewCellDisputeDetail.m in Sources */,
 				EF33D0BC211C36D200560C69 /* CustomTableViewCellText.m in Sources */,
 				EF33D074211C36D200560C69 /* SharedOrderTaking.m in Sources */,
+				EF8801E52143793C0062D9D4 /* LuckyDrawViewController.m in Sources */,
 				EF33D055211C36D200560C69 /* MenuSelectionViewController.m in Sources */,
 				EF33D08D211C36D200560C69 /* SharedPromoCode.m in Sources */,
 				EF33CFDC211C36D200560C69 /* NSData+Encryption.m in Sources */,
@@ -2082,10 +2518,12 @@
 				EF33D089211C36D200560C69 /* SharedNoteType.m in Sources */,
 				EF33D03D211C36D200560C69 /* ReceiptSummaryViewController.m in Sources */,
 				EF33D0A1211C36D200560C69 /* RewardPoint.m in Sources */,
+				EF8801E8214380060062D9D4 /* LuckyDrawTicket.m in Sources */,
 				EF33D0E1211C36D200560C69 /* CustomTableViewCellButton.m in Sources */,
 				EF33D0D1211C36D200560C69 /* CustomTableViewCellLabelText.m in Sources */,
 				EF33D05E211C36D200560C69 /* Receipt.m in Sources */,
 				EF33D05C211C36D200560C69 /* FacebookComment.m in Sources */,
+				EF8801EB2143801F0062D9D4 /* SharedLuckyDrawTicket.m in Sources */,
 				EF33D070211C36D200560C69 /* SharedCurrentCreditCard.m in Sources */,
 				EF33D04B211C36D200560C69 /* BasketViewController.m in Sources */,
 				EF33D076211C36D200560C69 /* SharedCurrentOrderTaking.m in Sources */,

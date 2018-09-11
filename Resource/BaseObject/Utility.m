@@ -577,6 +577,27 @@ extern NSString *globalBundleID;
         case urlMenuGet:
             url = @"JMMMenuGet.php";
             break;
+        case urlLuckyDrawTicketInsert:
+            url = @"JMMLuckyDrawTicketInsert.php";
+            break;
+        case urlLuckyDrawTicketUpdate:
+            url = @"JMMLuckyDrawTicketUpdate.php";
+            break;
+        case urlLuckyDrawTicketDelete:
+            url = @"JMMLuckyDrawTicketDelete.php";
+            break;
+        case urlLuckyDrawTicketInsertList:
+            url = @"JMMLuckyDrawTicketInsertList.php";
+            break;
+        case urlLuckyDrawTicketUpdateList:
+            url = @"JMMLuckyDrawTicketUpdateList.php";
+            break;
+        case urlLuckyDrawTicketDeleteList:
+            url = @"JMMLuckyDrawTicketDeleteList.php";
+            break;
+        case urlRewardRedemptionLuckyDrawGet:
+            url = @"JMMRewardRedemptionLuckyDrawGet.php";
+            break;
         default:
             break;
     }

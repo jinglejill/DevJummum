@@ -14,7 +14,30 @@
 
 @implementation Branch
 
--(Branch *)initWithDbName:(NSString *)dbName mainBranchID:(NSInteger)mainBranchID branchNo:(NSString *)branchNo name:(NSString *)name street:(NSString *)street district:(NSString *)district province:(NSString *)province postCode:(NSString *)postCode subDistrictID:(NSInteger)subDistrictID districtID:(NSInteger)districtID provinceID:(NSInteger)provinceID zipCodeID:(NSInteger)zipCodeID country:(NSString *)country map:(NSString *)map phoneNo:(NSString *)phoneNo tableNum:(NSInteger)tableNum customerNumMax:(NSInteger)customerNumMax employeePermanentNum:(NSInteger)employeePermanentNum status:(NSInteger)status takeAwayFee:(NSInteger)takeAwayFee serviceChargePercent:(float)serviceChargePercent percentVat:(float)percentVat priceIncludeVat:(NSInteger)priceIncludeVat customerApp:(NSInteger)customerApp imageUrl:(NSString *)imageUrl startDate:(NSDate *)startDate remark:(NSString *)remark deviceTokenReceiveOrder:(NSString *)deviceTokenReceiveOrder
+- (NSDictionary *)dictionary
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [self valueForKey:@"branchID"]?[self valueForKey:@"branchID"]:[NSNull null],@"branchID",
+            [self valueForKey:@"dbName"]?[self valueForKey:@"dbName"]:[NSNull null],@"dbName",
+            [self valueForKey:@"mainBranchID"]?[self valueForKey:@"mainBranchID"]:[NSNull null],@"mainBranchID",
+            [self valueForKey:@"name"]?[self valueForKey:@"name"]:[NSNull null],@"name",
+            [self valueForKey:@"phoneNo"]?[self valueForKey:@"phoneNo"]:[NSNull null],@"phoneNo",
+            [self valueForKey:@"status"]?[self valueForKey:@"status"]:[NSNull null],@"status",
+            [self valueForKey:@"takeAwayFee"]?[self valueForKey:@"takeAwayFee"]:[NSNull null],@"takeAwayFee",
+            [self valueForKey:@"serviceChargePercent"]?[self valueForKey:@"serviceChargePercent"]:[NSNull null],@"serviceChargePercent",
+            [self valueForKey:@"percentVat"]?[self valueForKey:@"percentVat"]:[NSNull null],@"percentVat",
+            [self valueForKey:@"priceIncludeVat"]?[self valueForKey:@"priceIncludeVat"]:[NSNull null],@"priceIncludeVat",
+            [self valueForKey:@"ledStatus"]?[self valueForKey:@"ledStatus"]:[NSNull null],@"ledStatus",
+            [self valueForKey:@"luckyDrawBahtSpent"]?[self valueForKey:@"luckyDrawBahtSpent"]:[NSNull null],@"luckyDrawBahtSpent",
+            [self valueForKey:@"customerApp"]?[self valueForKey:@"customerApp"]:[NSNull null],@"customerApp",
+            [self valueForKey:@"imageUrl"]?[self valueForKey:@"imageUrl"]:[NSNull null],@"imageUrl",
+            [self valueForKey:@"remark"]?[self valueForKey:@"remark"]:[NSNull null],@"remark",
+            [self valueForKey:@"modifiedUser"]?[self valueForKey:@"modifiedUser"]:[NSNull null],@"modifiedUser",
+            [Utility dateToString:[self valueForKey:@"modifiedDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"modifiedDate",
+            nil];
+}
+
+-(Branch *)initWithDbName:(NSString *)dbName mainBranchID:(NSInteger)mainBranchID name:(NSString *)name phoneNo:(NSString *)phoneNo status:(NSInteger)status takeAwayFee:(NSInteger)takeAwayFee serviceChargePercent:(float)serviceChargePercent percentVat:(float)percentVat priceIncludeVat:(NSInteger)priceIncludeVat ledStatus:(NSInteger)ledStatus luckyDrawBahtSpent:(NSInteger)luckyDrawBahtSpent customerApp:(NSInteger)customerApp imageUrl:(NSString *)imageUrl remark:(NSString *)remark
 {
     self = [super init];
     if(self)
@@ -22,32 +45,18 @@
         self.branchID = [Branch getNextID];
         self.dbName = dbName;
         self.mainBranchID = mainBranchID;
-        self.branchNo = branchNo;
         self.name = name;
-        self.street = street;
-        self.district = district;
-        self.province = province;
-        self.postCode = postCode;
-        self.subDistrictID = subDistrictID;
-        self.districtID = districtID;
-        self.provinceID = provinceID;
-        self.zipCodeID = zipCodeID;
-        self.country = country;
-        self.map = map;
         self.phoneNo = phoneNo;
-        self.tableNum = tableNum;
-        self.customerNumMax = customerNumMax;
-        self.employeePermanentNum = employeePermanentNum;
         self.status = status;
         self.takeAwayFee = takeAwayFee;
         self.serviceChargePercent = serviceChargePercent;
         self.percentVat = percentVat;
         self.priceIncludeVat = priceIncludeVat;
+        self.ledStatus = ledStatus;
+        self.luckyDrawBahtSpent = luckyDrawBahtSpent;
         self.customerApp = customerApp;
         self.imageUrl = imageUrl;
-        self.startDate = startDate;
         self.remark = remark;
-        self.deviceTokenReceiveOrder = deviceTokenReceiveOrder;
         self.modifiedUser = [Utility modifiedUser];
         self.modifiedDate = [Utility currentDateTime];
     }
@@ -129,36 +138,20 @@
         ((Branch *)copy).branchID = self.branchID;
         [copy setDbName:self.dbName];
         ((Branch *)copy).mainBranchID = self.mainBranchID;
-        [copy setBranchNo:self.branchNo];
         [copy setName:self.name];
-        [copy setStreet:self.street];
-        [copy setDistrict:self.district];
-        [copy setProvince:self.province];
-        [copy setPostCode:self.postCode];
-        ((Branch *)copy).subDistrictID = self.subDistrictID;
-        ((Branch *)copy).districtID = self.districtID;
-        ((Branch *)copy).provinceID = self.provinceID;
-        ((Branch *)copy).zipCodeID = self.zipCodeID;
-        [copy setCountry:self.country];
-        [copy setMap:self.map];
         [copy setPhoneNo:self.phoneNo];
-        ((Branch *)copy).tableNum = self.tableNum;
-        ((Branch *)copy).customerNumMax = self.customerNumMax;
-        ((Branch *)copy).employeePermanentNum = self.employeePermanentNum;
         ((Branch *)copy).status = self.status;
         ((Branch *)copy).takeAwayFee = self.takeAwayFee;
         ((Branch *)copy).serviceChargePercent = self.serviceChargePercent;
         ((Branch *)copy).percentVat = self.percentVat;
         ((Branch *)copy).priceIncludeVat = self.priceIncludeVat;
+        ((Branch *)copy).ledStatus = self.ledStatus;
+        ((Branch *)copy).luckyDrawBahtSpent = self.luckyDrawBahtSpent;
         ((Branch *)copy).customerApp = self.customerApp;
         [copy setImageUrl:self.imageUrl];
-        [copy setStartDate:self.startDate];
         [copy setRemark:self.remark];
-        [copy setDeviceTokenReceiveOrder:self.deviceTokenReceiveOrder];
         [copy setModifiedUser:[Utility modifiedUser]];
         [copy setModifiedDate:[Utility currentDateTime]];
-        
-        
     }
     
     return copy;
@@ -169,32 +162,18 @@
     if(self.branchID == editingBranch.branchID
        && [self.dbName isEqualToString:editingBranch.dbName]
        && self.mainBranchID == editingBranch.mainBranchID
-       && [self.branchNo isEqualToString:editingBranch.branchNo]
        && [self.name isEqualToString:editingBranch.name]
-       && [self.street isEqualToString:editingBranch.street]
-       && [self.district isEqualToString:editingBranch.district]
-       && [self.province isEqualToString:editingBranch.province]
-       && [self.postCode isEqualToString:editingBranch.postCode]
-       && self.subDistrictID == editingBranch.subDistrictID
-       && self.districtID == editingBranch.districtID
-       && self.provinceID == editingBranch.provinceID
-       && self.zipCodeID == editingBranch.zipCodeID
-       && [self.country isEqualToString:editingBranch.country]
-       && [self.map isEqualToString:editingBranch.map]
        && [self.phoneNo isEqualToString:editingBranch.phoneNo]
-       && self.tableNum == editingBranch.tableNum
-       && self.customerNumMax == editingBranch.customerNumMax
-       && self.employeePermanentNum == editingBranch.employeePermanentNum
        && self.status == editingBranch.status
        && self.takeAwayFee == editingBranch.takeAwayFee
        && self.serviceChargePercent == editingBranch.serviceChargePercent
        && self.percentVat == editingBranch.percentVat
        && self.priceIncludeVat == editingBranch.priceIncludeVat
+       && self.ledStatus == editingBranch.ledStatus
+       && self.luckyDrawBahtSpent == editingBranch.luckyDrawBahtSpent
        && self.customerApp == editingBranch.customerApp
        && [self.imageUrl isEqualToString:editingBranch.imageUrl]
-       && [self.startDate isEqual:editingBranch.startDate]
        && [self.remark isEqualToString:editingBranch.remark]
-       && [self.deviceTokenReceiveOrder isEqualToString:editingBranch.deviceTokenReceiveOrder]
        )
     {
         return NO;
@@ -207,53 +186,27 @@
     toBranch.branchID = fromBranch.branchID;
     toBranch.dbName = fromBranch.dbName;
     toBranch.mainBranchID = fromBranch.mainBranchID;
-    toBranch.branchNo = fromBranch.branchNo;
     toBranch.name = fromBranch.name;
-    toBranch.street = fromBranch.street;
-    toBranch.district = fromBranch.district;
-    toBranch.province = fromBranch.province;
-    toBranch.postCode = fromBranch.postCode;
-    toBranch.subDistrictID = fromBranch.subDistrictID;
-    toBranch.districtID = fromBranch.districtID;
-    toBranch.provinceID = fromBranch.provinceID;
-    toBranch.zipCodeID = fromBranch.zipCodeID;
-    toBranch.country = fromBranch.country;
-    toBranch.map = fromBranch.map;
     toBranch.phoneNo = fromBranch.phoneNo;
-    toBranch.tableNum = fromBranch.tableNum;
-    toBranch.customerNumMax = fromBranch.customerNumMax;
-    toBranch.employeePermanentNum = fromBranch.employeePermanentNum;
     toBranch.status = fromBranch.status;
     toBranch.takeAwayFee = fromBranch.takeAwayFee;
     toBranch.serviceChargePercent = fromBranch.serviceChargePercent;
     toBranch.percentVat = fromBranch.percentVat;
     toBranch.priceIncludeVat = fromBranch.priceIncludeVat;
+    toBranch.ledStatus = fromBranch.ledStatus;
+    toBranch.luckyDrawBahtSpent = fromBranch.luckyDrawBahtSpent;
     toBranch.customerApp = fromBranch.customerApp;
     toBranch.imageUrl = fromBranch.imageUrl;
-    toBranch.startDate = fromBranch.startDate;
     toBranch.remark = fromBranch.remark;
-    toBranch.deviceTokenReceiveOrder = fromBranch.deviceTokenReceiveOrder;
     toBranch.modifiedUser = [Utility modifiedUser];
     toBranch.modifiedDate = [Utility currentDateTime];
     
     return toBranch;
 }
 
-
 +(NSMutableArray *)getBranchList
 {
     return [SharedBranch sharedBranch].branchList;
-}
-
-+(NSString *)getAddress:(Branch *)branch
-{
-    NSString *strStreet = branch.street;
-    NSString *strDistrict = ![Utility isStringEmpty:branch.district]?[NSString stringWithFormat:@" เขต%@",branch.district]:@"";
-    NSString *strProvince = ![Utility isStringEmpty:branch.province]?[NSString stringWithFormat:@" %@",branch.province]:@"";
-    NSString *strPostCode = ![Utility isStringEmpty:branch.postCode]?[NSString stringWithFormat:@" %@",branch.postCode]:@"";
-    NSString *strCountry = ![Utility isStringEmpty:branch.country]?[NSString stringWithFormat:@" %@",branch.country]:@"";
-    NSString *strAddress = [NSString stringWithFormat:@"%@%@%@%@%@",strStreet,strDistrict,strProvince,strPostCode,strCountry];
-    return strAddress;
 }
 
 +(NSMutableArray *)sortList:(NSMutableArray *)branchList
