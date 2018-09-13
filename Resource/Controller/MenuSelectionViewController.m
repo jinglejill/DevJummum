@@ -121,30 +121,44 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     
     if(branch.luckyDrawBahtSpent)
     {
-        UILabel *lblSpentForLuckyDraw = [[UILabel alloc]init];
-        lblSpentForLuckyDraw.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-        lblSpentForLuckyDraw.textColor = cSystem3;
-        lblSpentForLuckyDraw.backgroundColor = [cSystem2_30 colorWithAlphaComponent:0.5];
-        lblSpentForLuckyDraw.textAlignment = NSTextAlignmentRight;
-        lblSpentForLuckyDraw.numberOfLines = 2;
+//        UILabel *lblSpentForLuckyDraw = [[UILabel alloc]init];
+//        lblSpentForLuckyDraw.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+//        lblSpentForLuckyDraw.textColor = cSystem3;
+//        lblSpentForLuckyDraw.backgroundColor = [cSystem2_30 colorWithAlphaComponent:0.5];
+//        lblSpentForLuckyDraw.textAlignment = NSTextAlignmentRight;
+//        lblSpentForLuckyDraw.numberOfLines = 2;
         
-        
+        NSString *message = [Setting getValue:@"" example:@"ลุ้นรับรางวัลพิเศษ\nเมื่อทานครบทุกๆ %ld บาท"];
         NSInteger spentAmount = branch.luckyDrawBahtSpent;
-        NSString *luckyDrawMessage = [NSString stringWithFormat:@"Get 1 lucky draw for every %ld baht\nspent at the restaurant",spentAmount];
-        lblSpentForLuckyDraw.text = luckyDrawMessage;
+        NSString *luckyDrawMessage = [NSString stringWithFormat:message,spentAmount];
+        UIButton *lblSpentForLuckyDraw = [UIButton buttonWithType:UIButtonTypeCustom];
+        [lblSpentForLuckyDraw setTitle:luckyDrawMessage forState:UIControlStateNormal];
+        [lblSpentForLuckyDraw setTitleColor:cSystem3 forState:UIControlStateNormal];
+        lblSpentForLuckyDraw.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);        
+        lblSpentForLuckyDraw.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        lblSpentForLuckyDraw.backgroundColor = [cSystem2_30 colorWithAlphaComponent:0.5];
+        lblSpentForLuckyDraw.titleLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+        lblSpentForLuckyDraw.titleLabel.numberOfLines = 2;
+        lblSpentForLuckyDraw.userInteractionEnabled = NO;
+        
+        
+//        NSString *message = [Setting getValue:@"" example:@"ลุ้นรับรางวัลพิเศษ\nเมื่อทานครบทุกๆ %ld บาท"];
+//        NSInteger spentAmount = branch.luckyDrawBahtSpent;
+//        NSString *luckyDrawMessage = [NSString stringWithFormat:message,spentAmount];
+//        lblSpentForLuckyDraw.text = luckyDrawMessage;
         [lblSpentForLuckyDraw sizeToFit];
         
         NSLog(@"btnViewBasket.frame.origin.y: %f",btnViewBasket.frame.origin.y);
         NSLog(@"self.view.frame.size.height: %f",self.view.frame.size.height);
         UIWindow *window = UIApplication.sharedApplication.keyWindow;
         CGRect frame = lblSpentForLuckyDraw.frame;
-        frame.size.width = frame.size.width+8;
-        frame.size.height = frame.size.height+8;
+//        frame.size.width = frame.size.width+8;
+//        frame.size.height = frame.size.height+8;
         frame.origin.x = self.view.frame.size.width-frame.size.width;
         frame.origin.y = self.view.frame.size.height - window.safeAreaInsets.bottom - 44 - frame.size.height;
         
         lblSpentForLuckyDraw.frame = frame;
-        [self setLabelDesign:lblSpentForLuckyDraw];
+        [self setCornerDesign:lblSpentForLuckyDraw];
         [self.view addSubview:lblSpentForLuckyDraw];
     }
     

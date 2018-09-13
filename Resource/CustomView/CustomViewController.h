@@ -48,7 +48,7 @@
 -(void)loadViewProcess;
 -(void)setShadow:(UIView *)view;
 -(void)setShadow:(UIView *)view radius:(NSInteger)radius;
--(void)setLabelDesign:(UIView *)view;
+-(void)setCornerDesign:(UIView *)view;
 -(void)setButtonDesign:(UIView *)view;
 -(void)setImageDesign:(UIView *)view;
 -(void)setTextFieldDesign:(UIView *)view;
@@ -72,5 +72,4 @@
 -(UIImage *)imageFromView:(UIView *)view;
 -(NSAttributedString *)setAttributedString:(NSString *)title text:(NSString *)text;
 -(void)dismissKeyboard;
-- (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size;
 @end

@@ -28,6 +28,10 @@
     BOOL _endOfFile;
     BOOL _logoDownloaded;
     BOOL _addGiftBox;
+    CAKeyframeAnimation *_animateHand;
+    CAKeyframeAnimation *_animateHandHide;
+    BOOL _showHand;
+    UIImageView *_imgVwHand;
 }
 @end
 
@@ -79,20 +83,14 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
     if(!_addGiftBox && numberOfGift > 0)
     {
         _addGiftBox = YES;
-        NSInteger giftWidth = 60;
+        NSInteger giftWidth = 80;
         UIImageView* animatedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-16-giftWidth, imgVwCheck.frame.origin.y, giftWidth, giftWidth)];
-//        animatedImageView.center = imgVwCheck.center;
         imgVwCheck.hidden =YES;
         
         
         UIImage *imageNormal = [UIImage imageNamed:@"jummumGiftBoxNormal.png"];
-        imageNormal = [self imageWithImage:imageNormal convertToSize:CGSizeMake(giftWidth,giftWidth)];
-        
         UIImage *imagePop = [UIImage imageNamed:@"jummumGiftBoxPop.png"];
-        imagePop = [self imageWithImage:imagePop convertToSize:CGSizeMake(giftWidth,giftWidth)];
-        
         animatedImageView.animationImages = [NSArray arrayWithObjects:imageNormal,imagePop,nil];
-        
         animatedImageView.animationDuration = 1.0f;
         animatedImageView.animationRepeatCount = 0;
         [animatedImageView startAnimating];
@@ -121,9 +119,73 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         frame.origin.x = self.view.frame.size.width-16-animatedImageView.frame.size.width-8-lblGiftNum.frame.size.width;        
         lblGiftNum.frame = frame;        
         [self.view addSubview:lblGiftNum];
+        
+
+        
+        //tap here animate
+        NSInteger handSize = 50;
+        _imgVwHand = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, handSize, handSize)];
+        _imgVwHand.center = animatedImageView.center;
+        {
+            CGRect frame = _imgVwHand.frame;
+            frame.origin.y = animatedImageView.frame.origin.y + animatedImageView.frame.size.height-20;
+            _imgVwHand.frame = frame;
+        }
+        
+        
+        //hand blink
+        NSMutableArray *imgHandAnimation = [[NSMutableArray alloc]init];
+        UIImage *handLift = [UIImage imageNamed:@"handLift.png"];
+        UIImage *handTap = [UIImage imageNamed:@"handTap.png"];
+        [imgHandAnimation addObject:(NSObject *)(handLift.CGImage)];
+        [imgHandAnimation addObject:(NSObject *)(handTap.CGImage)];
+        
+        _animateHand = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
+        _animateHand.calculationMode = kCAAnimationDiscrete;
+        _animateHand.duration = 0.5;
+        _animateHand.values = imgHandAnimation;
+        _animateHand.repeatCount = 4;
+        _animateHand.removedOnCompletion = NO;
+        _animateHand.fillMode = kCAFillModeForwards;
+        _animateHand.delegate = self;
+        [_imgVwHand.layer addAnimation:_animateHand forKey:@"animateHand"];
+        [self.view addSubview:_imgVwHand];
+        
+        
+        //hand hide
+        NSMutableArray *imgHandHideAnimation = [[NSMutableArray alloc]init];
+        UIImage *handEmpty = [UIImage imageNamed:@"handEmpty.png"];
+        [imgHandHideAnimation addObject:(NSObject *)(handEmpty.CGImage)];
+        
+        _animateHandHide = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
+        _animateHandHide.calculationMode = kCAAnimationDiscrete;
+        _animateHandHide.duration = 0.5;
+        _animateHandHide.values = imgHandHideAnimation;
+        _animateHandHide.repeatCount = 4;
+        _animateHandHide.removedOnCompletion = NO;
+        _animateHandHide.fillMode = kCAFillModeForwards;
+        _animateHandHide.delegate = self;
+        
     }
 }
 
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+{
+    if(theAnimation == [_imgVwHand.layer animationForKey:@"animateHand"])
+    {
+        if (flag)
+        {
+            [_imgVwHand.layer addAnimation:_animateHandHide forKey:@"animateHandHide"];
+        }
+    }
+    else if(theAnimation == [_imgVwHand.layer animationForKey:@"animateHandHide"])
+    {
+        if (flag)
+        {
+            [_imgVwHand.layer addAnimation:_animateHand forKey:@"animateHand"];
+        }
+    }
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];

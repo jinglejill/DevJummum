@@ -10,7 +10,7 @@
 #import "Receipt.h"
 
 
-@interface PaymentCompleteViewController : CustomViewController
+@interface PaymentCompleteViewController : CustomViewController<CAAnimationDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *btnSaveToCameraRoll;
 @property (strong, nonatomic) IBOutlet UIButton *btnOrderBuffet;
 

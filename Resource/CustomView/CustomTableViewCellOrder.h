@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *txtQuantity;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *lblMenuNameHeight;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgExpandCollapseTrailing;
 
 @property (nonatomic) NSInteger stepperValue;
 @end

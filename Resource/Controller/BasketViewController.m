@@ -359,6 +359,11 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         cell.imgMenuPic.contentMode = UIViewContentModeScaleAspectFit;
         [self setImageDesign:cell.imgMenuPic];
         
+
+        //expand collapse position
+        cell.imgExpandCollapseTrailing.constant =  self.view.frame.size.width - (cell.btnAddQuantity.frame.origin.x+cell.btnAddQuantity.frame.size.width+cell.lblTotalPrice.frame.origin.x)/2;
+
+        
         
         cell.tbvNote.tag = menu.menuID;
         cell.tbvNote.dataSource = self;

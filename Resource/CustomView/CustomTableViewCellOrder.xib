@@ -85,7 +85,7 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="expand2.png" translatesAutoresizingMaskIntoConstraints="NO" id="0dd-RO-YkQ">
-                    <rect key="frame" x="177.5" y="70" width="20" height="10"/>
+                    <rect key="frame" x="205" y="70" width="20" height="10"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="9a4-w2-Zxl"/>
                         <constraint firstAttribute="height" constant="10" id="E0g-pW-VZl"/>
@@ -113,9 +113,9 @@
             <constraints>
                 <constraint firstItem="UIw-gW-aQW" firstAttribute="leading" secondItem="Qbl-xc-Jgu" secondAttribute="trailing" constant="8" id="1Fj-Gs-gia"/>
                 <constraint firstItem="I4S-od-aTQ" firstAttribute="leading" secondItem="d5d-Oq-HFs" secondAttribute="leading" id="6tx-jb-NI8"/>
+                <constraint firstItem="Eiv-f1-Xv8" firstAttribute="trailing" secondItem="0dd-RO-YkQ" secondAttribute="trailing" constant="150" id="87c-F2-8Fj"/>
                 <constraint firstItem="UzR-ux-GyK" firstAttribute="leading" secondItem="Eiv-f1-Xv8" secondAttribute="leading" id="8ig-Wx-aqB"/>
                 <constraint firstItem="kf4-SU-U6x" firstAttribute="centerY" secondItem="UIw-gW-aQW" secondAttribute="centerY" id="9r7-Ez-xsC"/>
-                <constraint firstItem="0dd-RO-YkQ" firstAttribute="centerX" secondItem="d5d-Oq-HFs" secondAttribute="centerX" id="DMb-Bs-beD"/>
                 <constraint firstItem="Eiv-f1-Xv8" firstAttribute="bottom" secondItem="I4S-od-aTQ" secondAttribute="bottom" id="DbF-mH-0Om"/>
                 <constraint firstItem="WaS-QD-ySh" firstAttribute="leading" secondItem="kf4-SU-U6x" secondAttribute="trailing" constant="8" id="FFK-oF-zsR"/>
                 <constraint firstAttribute="trailing" secondItem="I4S-od-aTQ" secondAttribute="trailing" id="HHJ-13-BH9"/>
@@ -142,6 +142,7 @@
                 <outlet property="btnAddQuantity" destination="WaS-QD-ySh" id="pgI-ND-EMh"/>
                 <outlet property="btnDeleteQuantity" destination="UIw-gW-aQW" id="COV-Q9-Fm0"/>
                 <outlet property="imgExpandCollapse" destination="0dd-RO-YkQ" id="4gT-Od-URL"/>
+                <outlet property="imgExpandCollapseTrailing" destination="87c-F2-8Fj" id="g9j-er-l0C"/>
                 <outlet property="imgMenuPic" destination="Qbl-xc-Jgu" id="aSl-BS-TH3"/>
                 <outlet property="lblMenuName" destination="WYl-Ay-jAz" id="Bka-aj-A2b"/>
                 <outlet property="lblMenuNameHeight" destination="T8m-vF-Tqg" id="5mE-1E-UcX"/>

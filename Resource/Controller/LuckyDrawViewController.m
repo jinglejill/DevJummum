@@ -93,9 +93,9 @@
         
         _animationWaiting = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
         _animationWaiting.calculationMode = kCAAnimationDiscrete;
-        _animationWaiting.duration = 1;
+        _animationWaiting.duration = 0.5;
         _animationWaiting.values = _animationImages;
-        _animationWaiting.repeatCount = 3;
+        _animationWaiting.repeatCount = 1;
         _animationWaiting.removedOnCompletion = NO;
         _animationWaiting.fillMode = kCAFillModeForwards;
         _animationWaiting.delegate = self;
@@ -274,15 +274,15 @@
             {
                 if(!_imgVwSmallGiftBox)
                 {
-                    NSInteger giftWidth = 60;
-                    NSInteger giftYPosition = 70;
+                    NSInteger giftWidth = 80;
+                    NSInteger giftYPosition = 60;
                     _imgVwSmallGiftBox = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-16-giftWidth, giftYPosition, giftWidth, giftWidth)];
                     
                     UIImage *imageNormal = [UIImage imageNamed:@"jummumGiftBoxNormal.png"];
-                    imageNormal = [self imageWithImage:imageNormal convertToSize:CGSizeMake(giftWidth,giftWidth)];
+//                    imageNormal = [self imageWithImage:imageNormal convertToSize:CGSizeMake(giftWidth,giftWidth)];
                     
                     UIImage *imagePop = [UIImage imageNamed:@"jummumGiftBoxPop.png"];
-                    imagePop = [self imageWithImage:imagePop convertToSize:CGSizeMake(giftWidth,giftWidth)];
+//                    imagePop = [self imageWithImage:imagePop convertToSize:CGSizeMake(giftWidth,giftWidth)];
                     
                     _imgVwSmallGiftBox.animationImages = [NSArray arrayWithObjects:imageNormal,imagePop,nil];
                     _imgVwSmallGiftBox.animationDuration = 1.0f;
@@ -316,7 +316,7 @@
                 _lblGiftNum.text = [NSString stringWithFormat:@"%ld more",_numberOfGift];
                 [_lblGiftNum sizeToFit];
                 CGRect frame = _lblGiftNum.frame;
-                frame.size.width = frame.size.width+2*4;
+                frame.size.width = frame.size.width+2*5;
                 _lblGiftNum.frame = frame;
                 
                 _lblGiftNum.center = _imgVwSmallGiftBox.center;
@@ -376,8 +376,8 @@
             }
             CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
             animation.calculationMode = kCAAnimationDiscrete;
-            animation.duration = 4;//[animationImages count] / 24.0; // 24 frames per second
-            animation.values = arrImage;//_arrRankCard[_rewardRedemption.rewardRank-1];
+            animation.duration = 3;//[animationImages count] / 24.0; // 24 frames per second
+            animation.values = arrImage;
             animation.repeatCount = 1;
             animation.removedOnCompletion = NO;
             animation.fillMode = kCAFillModeForwards;
@@ -399,7 +399,6 @@
     {
         if(flag)
         {
-            
             if(_luckyDrawDownloaded)
             {
                 NSLog(@"downloadWaiting stop _luckyDrawDownloaded yes");
@@ -434,7 +433,7 @@
                 
                 CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
                 animation.calculationMode = kCAAnimationDiscrete;
-                animation.duration = 1;
+                animation.duration = 0.5;
                 animation.values = animationImages;
                 animation.repeatCount = 1;
                 animation.removedOnCompletion = NO;

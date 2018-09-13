@@ -453,6 +453,9 @@
 		EF8805E72147820E0062D9D4 /* giftBoxAwesome00002.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88058B2147820E0062D9D4 /* giftBoxAwesome00002.jpg */; };
 		EF8805E82147820E0062D9D4 /* giftBoxAwesome00016.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88058C2147820E0062D9D4 /* giftBoxAwesome00016.jpg */; };
 		EFDAFCFF2148ED2900A2596D /* MessageBoxWithDismissViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAFCFE2148ED2900A2596D /* MessageBoxWithDismissViewController.m */; };
+		EFDAFD02214A656800A2596D /* handTap.png in Resources */ = {isa = PBXBuildFile; fileRef = EFDAFD00214A656800A2596D /* handTap.png */; };
+		EFDAFD03214A656800A2596D /* handLift.png in Resources */ = {isa = PBXBuildFile; fileRef = EFDAFD01214A656800A2596D /* handLift.png */; };
+		EFDAFD0F214A73FF00A2596D /* handEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = EFDAFD0E214A73FE00A2596D /* handEmpty.png */; };
 		EFF733DE2148D87700B69712 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF733DD2148D87700B69712 /* Card.m */; };
 		EFF733E12148DD6600B69712 /* SharedCard.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF733E02148DD6600B69712 /* SharedCard.m */; };
 /* End PBXBuildFile section */
@@ -1096,6 +1099,9 @@
 		EF88058C2147820E0062D9D4 /* giftBoxAwesome00016.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00016.jpg; sourceTree = "<group>"; };
 		EFDAFCFD2148ED2900A2596D /* MessageBoxWithDismissViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageBoxWithDismissViewController.h; sourceTree = "<group>"; };
 		EFDAFCFE2148ED2900A2596D /* MessageBoxWithDismissViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageBoxWithDismissViewController.m; sourceTree = "<group>"; };
+		EFDAFD00214A656800A2596D /* handTap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handTap.png; sourceTree = "<group>"; };
+		EFDAFD01214A656800A2596D /* handLift.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handLift.png; sourceTree = "<group>"; };
+		EFDAFD0E214A73FE00A2596D /* handEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handEmpty.png; sourceTree = "<group>"; };
 		EFF733DC2148D87700B69712 /* Card.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		EFF733DD2148D87700B69712 /* Card.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		EFF733DF2148DD6600B69712 /* SharedCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedCard.h; sourceTree = "<group>"; };
@@ -1295,6 +1301,9 @@
 		EF33CE11211C36D100560C69 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				EFDAFD0E214A73FE00A2596D /* handEmpty.png */,
+				EFDAFD01214A656800A2596D /* handLift.png */,
+				EFDAFD00214A656800A2596D /* handTap.png */,
 				EF88052C2147820E0062D9D4 /* card3 */,
 				EF88039B2146B0350062D9D4 /* orderNow.png */,
 				EF33CE3E211C36D100560C69 /* added.png */,
@@ -2059,6 +2068,7 @@
 			files = (
 				EF33D013211C36D200560C69 /* takeAwayGrayOut.png in Resources */,
 				EF8805942147820E0062D9D4 /* giftBoxExcellent00019.jpg in Resources */,
+				EFDAFD02214A656800A2596D /* handTap.png in Resources */,
 				EF8805A42147820E0062D9D4 /* giftBoxGood00021.jpg in Resources */,
 				EF88059B2147820E0062D9D4 /* giftBoxExcellent00002.jpg in Resources */,
 				EF8805E32147820E0062D9D4 /* giftBoxAwesome00015.jpg in Resources */,
@@ -2096,6 +2106,7 @@
 				EF88059A2147820E0062D9D4 /* giftBoxExcellent00016.jpg in Resources */,
 				EF5D243F212756880073F1A1 /* GoogleService-Info.plist in Resources */,
 				EF8805C62147820E0062D9D4 /* giftBoxBoo00003.jpg in Resources */,
+				EFDAFD0F214A73FF00A2596D /* handEmpty.png in Resources */,
 				EF33D017211C36D200560C69 /* triangle_dev_om.png in Resources */,
 				EF33D008211C36D200560C69 /* basketWhite.png in Resources */,
 				EF33D0F2211C36D200560C69 /* Kanit-Black.ttf in Resources */,
@@ -2169,6 +2180,7 @@
 				EF33D0A8211C36D200560C69 /* CustomCollectionViewCellNote.xib in Resources */,
 				EF8805D52147820E0062D9D4 /* giftBoxAwesome00009.jpg in Resources */,
 				EF33D0CF211C36D200560C69 /* CustomTableViewHeaderFooterOkCancel.xib in Resources */,
+				EFDAFD03214A656800A2596D /* handLift.png in Resources */,
 				EF33CFEA211C36D200560C69 /* uncheckbox_gray.png in Resources */,
 				EF33D0BF211C36D200560C69 /* CustomCollectionReusableView.xib in Resources */,
 				EF33D01C211C36D200560C69 /* addRemove.png in Resources */,

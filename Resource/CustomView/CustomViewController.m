@@ -550,7 +550,7 @@ CGFloat animatedDistance;
     view.layer.masksToBounds = NO;
 }
 
--(void)setLabelDesign:(UIView *)view
+-(void)setCornerDesign:(UIView *)view
 {
     UILabel *label = (UILabel *)view;
 //    label.layer.cornerRadius = 14;
@@ -1100,15 +1100,6 @@ CGFloat animatedDistance;
 -(void)dismissKeyboard
 {
     [self.view endEditing:YES];
-}
-
-- (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size
-{
-    UIGraphicsBeginImageContext(size);
-    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    UIImage *destImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return destImage;
 }
 
 @end
