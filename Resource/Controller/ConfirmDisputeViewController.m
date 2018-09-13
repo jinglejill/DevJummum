@@ -33,20 +33,6 @@
     vwAlertHeight.constant = 80+38+38+44+lblDisputeMessage.frame.size.height;
     [self setButtonDesign:btnConfirm];
     [self setButtonDesign:btnCancel];
-    
-    
-    CGFloat red, green, blue, alpha;
-    UIColor *color = self.view.backgroundColor;
-    
-    [color getRed: &red
-            green: &green
-             blue: &blue
-            alpha: &alpha];
-    NSLog(@"red = %f. Green = %f. Blue = %f. Alpha = %f",
-          red,
-          green,
-          blue,
-          alpha);
 }
 
 - (void)viewDidLoad

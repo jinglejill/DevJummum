@@ -997,6 +997,7 @@
                         <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToRewardRedemption" unwindAction="unwindToRewardRedemption:" id="V3C-p5-Ojs"/>
                         <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToHotDealDetail" unwindAction="unwindToHotDealDetail:" id="WrD-Gg-E4H"/>
                         <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToLuckyDraw" unwindAction="unwindToLuckyDraw:" id="7xD-bH-ZqW"/>
+                        <segue destination="xaa-am-G6T" kind="show" identifier="segMessageBoxWithDismiss" id="wOX-9A-Dqb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TxL-MH-V7t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1200,7 +1201,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hsq-0z-1wX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="SfG-Pb-cig" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="6478" y="-251"/>
+            <point key="canvasLocation" x="6478" y="-201"/>
         </scene>
         <!--Note View Controller-->
         <scene sceneID="eYu-ud-cqq">
@@ -3091,7 +3092,7 @@
         <!--Confirm Dispute View Controller-->
         <scene sceneID="WYG-sA-AMC">
             <objects>
-                <viewController storyboardIdentifier="ConfirmDisputeViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="dOc-Km-btJ" customClass="ConfirmDisputeViewController" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="dOc-Km-btJ" customClass="ConfirmDisputeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nX2-iQ-fqg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3185,6 +3186,92 @@
                 <exit id="ioj-Ro-JdP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4156" y="-201.04947526236884"/>
+        </scene>
+        <!--Message Box With Dismiss View Controller-->
+        <scene sceneID="440-3F-trS">
+            <objects>
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="xaa-am-G6T" customClass="MessageBoxWithDismissViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="L0g-S0-fGy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ukz-Rc-Txt">
+                                <rect key="frame" x="67.5" y="167.5" width="240" height="332"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- กรุณากดเลือกโต๊ะเพื่อสแกน QR Code เลขโต๊ะ\n- คุณสามารถแก้ไขรายการอาหารได้โดยกดที่ปุ่ม +/-ด้านบนขวามือ" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1st-0g-NLk">
+                                        <rect key="frame" x="8" y="30" width="224" height="91"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="91" id="aNm-IA-rGj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="15"/>
+                                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lyl-aT-akW" userLabel="Btn Accept">
+                                        <rect key="frame" x="8" y="294" width="224" height="30"/>
+                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="hFY-Ul-sYO"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
+                                        <state key="normal" title="OK">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="okClicked:" destination="xaa-am-G6T" eventType="touchUpInside" id="T1v-aM-CDx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eps-hq-iwu">
+                                        <rect key="frame" x="8" y="243" width="224" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="N7m-x3-mrA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
+                                        <state key="normal" title="◻︎ Don't show it again">
+                                            <color key="titleColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="dontShowItAgain:" destination="xaa-am-G6T" eventType="touchUpInside" id="2r7-cm-Otq"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="1st-0g-NLk" secondAttribute="trailing" constant="8" id="3XG-pc-nii"/>
+                                    <constraint firstItem="1st-0g-NLk" firstAttribute="leading" secondItem="Ukz-Rc-Txt" secondAttribute="leading" constant="8" id="4ha-Cv-Ppu"/>
+                                    <constraint firstAttribute="trailing" secondItem="Eps-hq-iwu" secondAttribute="trailing" constant="8" id="5cH-it-5ca"/>
+                                    <constraint firstAttribute="trailing" secondItem="Lyl-aT-akW" secondAttribute="trailing" constant="8" id="Dxh-1s-LW4"/>
+                                    <constraint firstItem="Lyl-aT-akW" firstAttribute="leading" secondItem="Ukz-Rc-Txt" secondAttribute="leading" constant="8" id="HxG-Og-VWE"/>
+                                    <constraint firstItem="Lyl-aT-akW" firstAttribute="top" secondItem="Eps-hq-iwu" secondAttribute="bottom" constant="16" id="IQL-yB-Fbw"/>
+                                    <constraint firstAttribute="bottom" secondItem="Lyl-aT-akW" secondAttribute="bottom" constant="8" id="Pg5-1i-fJC"/>
+                                    <constraint firstAttribute="height" constant="332" id="f8p-6X-MgU"/>
+                                    <constraint firstAttribute="width" constant="240" id="iqB-Wc-JeT"/>
+                                    <constraint firstItem="Eps-hq-iwu" firstAttribute="leading" secondItem="Ukz-Rc-Txt" secondAttribute="leading" constant="8" id="mcx-Qr-nRa"/>
+                                    <constraint firstItem="1st-0g-NLk" firstAttribute="top" secondItem="Ukz-Rc-Txt" secondAttribute="top" constant="30" id="rHF-vn-Jd0"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ukz-Rc-Txt" firstAttribute="centerY" secondItem="L0g-S0-fGy" secondAttribute="centerY" id="Rg7-RE-oP2"/>
+                            <constraint firstItem="Ukz-Rc-Txt" firstAttribute="centerX" secondItem="L0g-S0-fGy" secondAttribute="centerX" id="k8l-IM-J1M"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EQI-Jg-uMq"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnDontShowItAgain" destination="Eps-hq-iwu" id="GG5-UA-VFe"/>
+                        <outlet property="btnOK" destination="Lyl-aT-akW" id="JZg-3V-Szc"/>
+                        <outlet property="lblMessage" destination="1st-0g-NLk" id="9gt-do-g0A"/>
+                        <outlet property="lblMessageHeight" destination="aNm-IA-rGj" id="7NV-cL-vTD"/>
+                        <outlet property="vwAlert" destination="Ukz-Rc-Txt" id="dVO-XE-kvP"/>
+                        <outlet property="vwAlertHeight" destination="f8p-6X-MgU" id="kuy-qz-mE9"/>
+                        <segue destination="NT6-3w-7Ua" kind="unwind" identifier="segUnwindToCreditCardAndOrderSummary" unwindAction="unwindToCreditCardAndOrderSummary:" id="hHQ-dc-28j"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qrV-qO-cck" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="NT6-3w-7Ua" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="5712.8000000000002" y="-201.04947526236884"/>
         </scene>
         <!--Dispute Form View Controller-->
         <scene sceneID="maZ-Jh-EUL">
@@ -4012,7 +4099,18 @@
                     <view key="view" contentMode="scaleToFill" id="qIP-uo-1ZU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="giftBoxBoo00001.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="yf2-j5-LDa">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yf2-j5-LDa" firstAttribute="trailing" secondItem="wZf-Ns-UB3" secondAttribute="trailing" id="Drj-Mj-FKo"/>
+                            <constraint firstAttribute="bottom" secondItem="yf2-j5-LDa" secondAttribute="bottom" id="Ds7-i1-F6P"/>
+                            <constraint firstItem="yf2-j5-LDa" firstAttribute="leading" secondItem="wZf-Ns-UB3" secondAttribute="leading" id="M4V-J8-Zun"/>
+                            <constraint firstItem="yf2-j5-LDa" firstAttribute="top" secondItem="qIP-uo-1ZU" secondAttribute="top" id="vBV-66-g5G"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="wZf-Ns-UB3"/>
                     </view>
                     <connections>
@@ -4107,6 +4205,7 @@
         <image name="check_green.png" width="128" height="128"/>
         <image name="circle_red.png" width="128" height="128"/>
         <image name="deleteAll3.png" width="242" height="263"/>
+        <image name="giftBoxBoo00001.jpg" width="1947" height="3339"/>
         <image name="gift_small.png" width="30" height="30"/>
         <image name="home_icon_red.png" width="842" height="842"/>
         <image name="hotDeal.png" width="40" height="39"/>
@@ -4123,12 +4222,12 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="aHo-2G-vPP"/>
-        <segue reference="MDz-RH-tSw"/>
+        <segue reference="DCf-pC-0Ih"/>
         <segue reference="UZ8-nN-acy"/>
         <segue reference="SMW-0E-KhF"/>
         <segue reference="SFc-rb-hIO"/>
         <segue reference="UTS-nM-B10"/>
-        <segue reference="Evt-HH-TlE"/>
+        <segue reference="C1B-oJ-Xmi"/>
         <segue reference="2Iw-Lt-h1E"/>
         <segue reference="3fp-yp-yps"/>
         <segue reference="bZ7-dw-aX2"/>

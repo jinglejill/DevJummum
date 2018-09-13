@@ -9,6 +9,7 @@
 #import "LaunchScreenViewController.h"
 #import "LogInViewController.h"
 #import "NewVersionUpdateViewController.h"
+#import "Card.h"
 
 
 @interface LaunchScreenViewController ()
@@ -69,6 +70,8 @@
             [self downloadSetting];
         }
     }
+    
+    [Card setUpCards];
 }
 
 -(void)viewDidLayoutSubviews

@@ -550,6 +550,18 @@ CGFloat animatedDistance;
     view.layer.masksToBounds = NO;
 }
 
+-(void)setLabelDesign:(UIView *)view
+{
+    UILabel *label = (UILabel *)view;
+//    label.layer.cornerRadius = 14;
+    
+    
+    CAShapeLayer * maskLayer = [CAShapeLayer layer];
+    maskLayer.path = [UIBezierPath bezierPathWithRoundedRect: label.bounds byRoundingCorners: UIRectCornerTopLeft cornerRadii: (CGSize){14.0}].CGPath;
+    
+    label.layer.mask = maskLayer;
+}
+
 -(void)setButtonDesign:(UIView *)view
 {
     UIButton *button = (UIButton *)view;

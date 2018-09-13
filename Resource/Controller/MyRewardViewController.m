@@ -249,7 +249,6 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
          {
              if (succeeded)
              {
-                 NSLog(@"succeed");
                  cell.imgVwValue.image = image;
                  [self setImageDesign:cell.imgVwValue];
              }
@@ -303,7 +302,6 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
          {
              if (succeeded)
              {
-                 NSLog(@"succeed");
                  cell.imgVwValue.image = image;
                  [self setImageDesign:cell.imgVwValue];
              }
@@ -351,7 +349,6 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
          {
              if (succeeded)
              {
-                 NSLog(@"succeed");
                  cell.imgVwValue.image = image;
                  [self setImageDesign:cell.imgVwValue];
              }

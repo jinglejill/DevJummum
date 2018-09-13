@@ -107,7 +107,6 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
          {
              if (succeeded)
              {
-                 NSLog(@"succeed");
                  cell.imgVwValue.image = image;
              }
          }];
@@ -174,7 +173,6 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
          {
              if (succeeded)
              {
-                 NSLog(@"succeed");
                  cell.imgVwValue.image = image;                 
              }
          }];

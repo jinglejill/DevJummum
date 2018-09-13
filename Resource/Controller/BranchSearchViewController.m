@@ -90,7 +90,7 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
     textField.layer.borderWidth = 1;
     textField.font = [UIFont fontWithName:@"Prompt-Regular" size:14.0f];
     [self setTextFieldDesign:textField];
-    
+    [sbText becomeFirstResponder];
     
     //cancel button in searchBar
     UIFont *font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];

@@ -46,9 +46,10 @@
 #define cSystem4_10     [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1]
 #define cSystem1_20     [UIColor colorWithRed:255/255.0 green:215/255.0 blue:218/255.0 alpha:1]
 #define cSystem1_30     [UIColor colorWithRed:255/255.0 green:196/255.0 blue:200/255.0 alpha:1]
+#define cSystem2_20     [UIColor colorWithRed:223/255.0 green:247/255.0 blue:243/255.0 alpha:1]
+#define cSystem2_30     [UIColor colorWithRed:208/255.0 green:244/255.0 blue:238/255.0 alpha:1]
+#define cRibbon     [UIColor colorWithRed:246/255.0 green:166/255.0 blue:171/255.0 alpha:1]
 
-//#define cSystem4_10     [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1]
-//#define cSystem1_20     [UIColor colorWithRed:255/255.0 green:215/255.0 blue:218/255.0 alpha:1]
 
 #define cTextFieldBorder     [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1]
 #define UIColorFromRGB(rgbValue) \

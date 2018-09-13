@@ -240,7 +240,6 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
          {
              if (succeeded)
              {
-                 NSLog(@"succeed");
                  cell.imgVwValue.image = image;
                  [self setImageDesign:cell.imgVwValue];
              }

@@ -452,6 +452,9 @@
 		EF8805E62147820E0062D9D4 /* giftBoxAwesome00003.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88058A2147820E0062D9D4 /* giftBoxAwesome00003.jpg */; };
 		EF8805E72147820E0062D9D4 /* giftBoxAwesome00002.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88058B2147820E0062D9D4 /* giftBoxAwesome00002.jpg */; };
 		EF8805E82147820E0062D9D4 /* giftBoxAwesome00016.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF88058C2147820E0062D9D4 /* giftBoxAwesome00016.jpg */; };
+		EFDAFCFF2148ED2900A2596D /* MessageBoxWithDismissViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAFCFE2148ED2900A2596D /* MessageBoxWithDismissViewController.m */; };
+		EFF733DE2148D87700B69712 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF733DD2148D87700B69712 /* Card.m */; };
+		EFF733E12148DD6600B69712 /* SharedCard.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF733E02148DD6600B69712 /* SharedCard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1091,6 +1094,12 @@
 		EF88058A2147820E0062D9D4 /* giftBoxAwesome00003.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00003.jpg; sourceTree = "<group>"; };
 		EF88058B2147820E0062D9D4 /* giftBoxAwesome00002.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00002.jpg; sourceTree = "<group>"; };
 		EF88058C2147820E0062D9D4 /* giftBoxAwesome00016.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxAwesome00016.jpg; sourceTree = "<group>"; };
+		EFDAFCFD2148ED2900A2596D /* MessageBoxWithDismissViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageBoxWithDismissViewController.h; sourceTree = "<group>"; };
+		EFDAFCFE2148ED2900A2596D /* MessageBoxWithDismissViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageBoxWithDismissViewController.m; sourceTree = "<group>"; };
+		EFF733DC2148D87700B69712 /* Card.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		EFF733DD2148D87700B69712 /* Card.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		EFF733DF2148DD6600B69712 /* SharedCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedCard.h; sourceTree = "<group>"; };
+		EFF733E02148DD6600B69712 /* SharedCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedCard.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1446,6 +1455,8 @@
 				EF6C7D07213529B900C335AC /* VoucherCodeListViewController.m */,
 				EF8801E32143793C0062D9D4 /* LuckyDrawViewController.h */,
 				EF8801E42143793C0062D9D4 /* LuckyDrawViewController.m */,
+				EFDAFCFD2148ED2900A2596D /* MessageBoxWithDismissViewController.h */,
+				EFDAFCFE2148ED2900A2596D /* MessageBoxWithDismissViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1615,6 +1626,10 @@
 				EF8801E7214380060062D9D4 /* LuckyDrawTicket.m */,
 				EF8801E92143801F0062D9D4 /* SharedLuckyDrawTicket.h */,
 				EF8801EA2143801F0062D9D4 /* SharedLuckyDrawTicket.m */,
+				EFF733DC2148D87700B69712 /* Card.h */,
+				EFF733DD2148D87700B69712 /* Card.m */,
+				EFF733DF2148DD6600B69712 /* SharedCard.h */,
+				EFF733E02148DD6600B69712 /* SharedCard.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1873,27 +1888,27 @@
 		EF88055D2147820E0062D9D4 /* boo */ = {
 			isa = PBXGroup;
 			children = (
+				EF8805672147820E0062D9D4 /* giftBoxBoo00001.jpg */,
+				EF88056C2147820E0062D9D4 /* giftBoxBoo00002.jpg */,
+				EF8805692147820E0062D9D4 /* giftBoxBoo00003.jpg */,
+				EF8805642147820E0062D9D4 /* giftBoxBoo00004.jpg */,
+				EF8805632147820E0062D9D4 /* giftBoxBoo00005.jpg */,
 				EF88055E2147820E0062D9D4 /* giftBoxBoo00006.jpg */,
+				EF8805612147820E0062D9D4 /* giftBoxBoo00007.jpg */,
+				EF8805712147820E0062D9D4 /* giftBoxBoo00008.jpg */,
+				EF8805702147820E0062D9D4 /* giftBoxBoo00009.jpg */,
+				EF8805652147820E0062D9D4 /* giftBoxBoo00010.jpg */,
+				EF8805622147820E0062D9D4 /* giftBoxBoo00011.jpg */,
 				EF88055F2147820E0062D9D4 /* giftBoxBoo00012.jpg */,
 				EF8805602147820E0062D9D4 /* giftBoxBoo00013.jpg */,
-				EF8805612147820E0062D9D4 /* giftBoxBoo00007.jpg */,
-				EF8805622147820E0062D9D4 /* giftBoxBoo00011.jpg */,
-				EF8805632147820E0062D9D4 /* giftBoxBoo00005.jpg */,
-				EF8805642147820E0062D9D4 /* giftBoxBoo00004.jpg */,
-				EF8805652147820E0062D9D4 /* giftBoxBoo00010.jpg */,
 				EF8805662147820E0062D9D4 /* giftBoxBoo00014.jpg */,
-				EF8805672147820E0062D9D4 /* giftBoxBoo00001.jpg */,
 				EF8805682147820E0062D9D4 /* giftBoxBoo00015.jpg */,
-				EF8805692147820E0062D9D4 /* giftBoxBoo00003.jpg */,
-				EF88056A2147820E0062D9D4 /* giftBoxBoo00017.jpg */,
 				EF88056B2147820E0062D9D4 /* giftBoxBoo00016.jpg */,
-				EF88056C2147820E0062D9D4 /* giftBoxBoo00002.jpg */,
+				EF88056A2147820E0062D9D4 /* giftBoxBoo00017.jpg */,
 				EF88056D2147820E0062D9D4 /* giftBoxBoo00018.jpg */,
 				EF88056E2147820E0062D9D4 /* giftBoxBoo00019.jpg */,
-				EF88056F2147820E0062D9D4 /* giftBoxBoo00021.jpg */,
-				EF8805702147820E0062D9D4 /* giftBoxBoo00009.jpg */,
-				EF8805712147820E0062D9D4 /* giftBoxBoo00008.jpg */,
 				EF8805722147820E0062D9D4 /* giftBoxBoo00020.jpg */,
+				EF88056F2147820E0062D9D4 /* giftBoxBoo00021.jpg */,
 				EF8805732147820E0062D9D4 /* giftBoxBoo00022.jpg */,
 				EF8805742147820E0062D9D4 /* giftBoxBoo00023.jpg */,
 			);
@@ -2480,6 +2495,7 @@
 				EF33D042211C36D200560C69 /* RewardRedemptionViewController.m in Sources */,
 				EF33D07C211C36D200560C69 /* LogIn.m in Sources */,
 				EF6C7D08213529B900C335AC /* VoucherCodeListViewController.m in Sources */,
+				EFF733E12148DD6600B69712 /* SharedCard.m in Sources */,
 				EF33D080211C36D200560C69 /* Note.m in Sources */,
 				EF33D0D2211C36D200560C69 /* CustomTableViewCellLabelLabel.m in Sources */,
 				EF33D038211C36D200560C69 /* ForgotPasswordViewController.m in Sources */,
@@ -2499,6 +2515,7 @@
 				EF33D0D0211C36D200560C69 /* CustomTableViewCellRating.m in Sources */,
 				EF33CFE5211C36D200560C69 /* CardNumber.swift in Sources */,
 				EF639E0B211F233E00C70A98 /* CustomTableViewCellLabelRemark.m in Sources */,
+				EFF733DE2148D87700B69712 /* Card.m in Sources */,
 				EF33CFD5211C36D200560C69 /* Utility.m in Sources */,
 				EF33D045211C36D200560C69 /* PersonalDataViewController.m in Sources */,
 				EF33D0CB211C36D200560C69 /* CustomTableViewCellRedemption.m in Sources */,
@@ -2516,6 +2533,7 @@
 				EF33D06E211C36D200560C69 /* SharedTableNo.m in Sources */,
 				EF33D05F211C36D200560C69 /* SharedSubMenuType.m in Sources */,
 				EF33D089211C36D200560C69 /* SharedNoteType.m in Sources */,
+				EFDAFCFF2148ED2900A2596D /* MessageBoxWithDismissViewController.m in Sources */,
 				EF33D03D211C36D200560C69 /* ReceiptSummaryViewController.m in Sources */,
 				EF33D0A1211C36D200560C69 /* RewardPoint.m in Sources */,
 				EF8801E8214380060062D9D4 /* LuckyDrawTicket.m in Sources */,

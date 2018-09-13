@@ -165,7 +165,6 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
          {
              if (succeeded)
              {
-                 NSLog(@"succeed");
                  cell.imgVwValue.image = image;
              }
          }];
@@ -202,8 +201,7 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
          {
              if (succeeded)
              {
-                 NSLog(@"succeed");
-                 cell.imgVwValue.image = image;                 
+                 cell.imgVwValue.image = image;
              }
          }];
         
@@ -251,7 +249,6 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
          {
              if (succeeded)
              {
-                 NSLog(@"succeed");
                  cell.imgVwValue.image = image;
              }
          }];

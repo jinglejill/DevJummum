@@ -119,30 +119,35 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     _currentMenuTypeList = [[NSMutableArray alloc]init];
     
     
-    UILabel *_voucher = [[UILabel alloc]init];
-    _voucher.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-    _voucher.textColor = cSystem4;
-    _voucher.backgroundColor = [cSystem1_20 colorWithAlphaComponent:0.5];
-    _voucher.textAlignment = NSTextAlignmentRight;
-    _voucher.numberOfLines = 2;
-
-
-    NSInteger spentAmount = branch.luckyDrawBahtSpent;
-    NSString *luckyDrawMessage = [NSString stringWithFormat:@"Get 1 lucky draw for every %ld baht\nspent at the restaurant",spentAmount];
-    _voucher.text = luckyDrawMessage;
-    [_voucher sizeToFit];
+    if(branch.luckyDrawBahtSpent)
+    {
+        UILabel *lblSpentForLuckyDraw = [[UILabel alloc]init];
+        lblSpentForLuckyDraw.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+        lblSpentForLuckyDraw.textColor = cSystem3;
+        lblSpentForLuckyDraw.backgroundColor = [cSystem2_30 colorWithAlphaComponent:0.5];
+        lblSpentForLuckyDraw.textAlignment = NSTextAlignmentRight;
+        lblSpentForLuckyDraw.numberOfLines = 2;
+        
+        
+        NSInteger spentAmount = branch.luckyDrawBahtSpent;
+        NSString *luckyDrawMessage = [NSString stringWithFormat:@"Get 1 lucky draw for every %ld baht\nspent at the restaurant",spentAmount];
+        lblSpentForLuckyDraw.text = luckyDrawMessage;
+        [lblSpentForLuckyDraw sizeToFit];
+        
+        NSLog(@"btnViewBasket.frame.origin.y: %f",btnViewBasket.frame.origin.y);
+        NSLog(@"self.view.frame.size.height: %f",self.view.frame.size.height);
+        UIWindow *window = UIApplication.sharedApplication.keyWindow;
+        CGRect frame = lblSpentForLuckyDraw.frame;
+        frame.size.width = frame.size.width+8;
+        frame.size.height = frame.size.height+8;
+        frame.origin.x = self.view.frame.size.width-frame.size.width;
+        frame.origin.y = self.view.frame.size.height - window.safeAreaInsets.bottom - 44 - frame.size.height;
+        
+        lblSpentForLuckyDraw.frame = frame;
+        [self setLabelDesign:lblSpentForLuckyDraw];
+        [self.view addSubview:lblSpentForLuckyDraw];
+    }
     
-    NSLog(@"btnViewBasket.frame.origin.y: %f",btnViewBasket.frame.origin.y);
-    NSLog(@"self.view.frame.size.height: %f",self.view.frame.size.height);
-    UIWindow *window = UIApplication.sharedApplication.keyWindow;
-    CGRect frame = _voucher.frame;
-    frame.size.width = frame.size.width+4;
-    frame.origin.x = self.view.frame.size.width-frame.size.width;
-    frame.origin.y = self.view.frame.size.height - window.safeAreaInsets.bottom - 44 - _voucher.frame.size.height;//btnViewBasket.frame.origin.y-_voucher.frame.size.height;
-    
-    _voucher.frame = frame;
-    
-    [self.view addSubview:_voucher];
     
     
     

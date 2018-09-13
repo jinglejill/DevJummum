@@ -15,20 +15,35 @@
 #import "SpecialPriceProgram.h"
 #import "OrderTaking.h"
 #import "Branch.h"
+#import "Card.h"
 
 
 @interface LuckyDrawViewController ()
 {
-    UIImageView* _animatedImageView;
-    UIImageView *_animatedImgVwGift;
+    UIImageView* _imgVwWaiting;
+    UIImageView *_imgVwGiftPrize;
+    UIImageView *_imgVwRidCloseOpen;
     RewardRedemption *_rewardRedemption;
     UILabel *_voucher;
     UIButton *_btnHome;
     UIButton *_btnOrderNow;
     UIImageView* _imgVwSmallGiftBox;
     NSInteger _numberOfGift;
-    UITapGestureRecognizer *_singleTap;
     UILabel *_lblGiftNum;
+    UITapGestureRecognizer *_tapGiftBox;
+    
+    UITapGestureRecognizer *_tapPauseResume;
+    BOOL _toggleTap;
+    UITapGestureRecognizer *_tapPauseResumeRidCloseOpen;
+    BOOL _toggleTapRidCloseOpen;
+    UITapGestureRecognizer *_tapPauseResumeDownloadWaiting;
+    BOOL _toggleTapDownloadWaiting;
+    
+    NSMutableArray *_arrRankCard;
+    BOOL _viewDidAppear;
+    BOOL _luckyDrawDownloaded;
+    CAKeyframeAnimation *_animationWaiting;
+    NSMutableArray *_animationImages;
     
 }
 @end
@@ -46,60 +61,110 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    
+    if(!_viewDidAppear)
+    {
+        _viewDidAppear = YES;
+        
+        
+        //rid close open while waiting for dbRewardRedemptionLuckyDraw
+        _imgVwWaiting = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        _imgVwWaiting.center = self.view.center;
+        
+        
+        _animationImages = [[NSMutableArray alloc]init];
+        NSInteger steps = 2;
+        for(int i=0; i<steps; i++)
+        {
+            NSString *imageName = [NSString stringWithFormat:@"giftBox%@%05d.jpg",@"Boo",(i+1)];
+            UIImage *imageRunning = [UIImage imageNamed:imageName];
+            [_animationImages addObject:(NSObject *)(imageRunning.CGImage)];
+        }
+        
+        
+        
+        _animationWaiting = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
+        _animationWaiting.calculationMode = kCAAnimationDiscrete;
+        _animationWaiting.duration = 1;
+        _animationWaiting.values = _animationImages;
+        _animationWaiting.repeatCount = 3;
+        _animationWaiting.removedOnCompletion = NO;
+        _animationWaiting.fillMode = kCAFillModeForwards;
+        _animationWaiting.delegate = self;
+        [_imgVwWaiting.layer addAnimation:_animationWaiting forKey:@"downloadWaiting"];
+        [self.view addSubview:_imgVwWaiting];
+        [self.homeModel downloadItems:dbRewardRedemptionLuckyDraw withData:receipt];
+        
+        
+        if(!_tapPauseResumeDownloadWaiting)
+        {
+            _tapPauseResumeDownloadWaiting = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetectedDownloadWaiting)];
+            _tapPauseResumeDownloadWaiting.numberOfTapsRequired = 1;
+            [_imgVwWaiting setUserInteractionEnabled:YES];
+            [_imgVwWaiting addGestureRecognizer:_tapPauseResumeDownloadWaiting];
+        }
 
-    [self.homeModel downloadItems:dbRewardRedemptionLuckyDraw withData:receipt];
-    
-    
-    
-    
-    
-    if(_animatedImageView)
-    {
-        [_animatedImageView startAnimating];
-        [self.view addSubview: _animatedImageView];
-        [self.view addSubview:_btnHome];
-    }
-    else
-    {
-        _animatedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-        _animatedImageView.center = self.view.center;
+        //btnHome
+        {
+            float btnOrderNowWidth = 60;
+            _btnHome = [UIButton buttonWithType:UIButtonTypeCustom];
+            [_btnHome setTitle:@"< Home" forState:UIControlStateNormal];
+            [_btnHome setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            _btnHome.titleLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+            _btnHome.backgroundColor = [UIColor clearColor];
+            _btnHome.contentHorizontalAlignment = NSTextAlignmentLeft;
+            _btnHome.frame = CGRectMake(16, 80-8-44, btnOrderNowWidth, 44);
+            [_btnHome addTarget:self action:@selector(unwindToHotDeal) forControlEvents:UIControlEventTouchUpInside];
+        }
+
+//        dispatch_async(dispatch_get_main_queue(),^ {
+//            _arrRankCard = [[NSMutableArray alloc]init];
+//            NSString *rankCard;
+//            for(int j=1; j<=4; j++)
+//            {
+//                switch (j) {
+//                    case 1:
+//                    rankCard = @"Excellent";
+//                    break;
+//                    case 2:
+//                    rankCard = @"Awesome";
+//                    break;
+//                    case 3:
+//                    rankCard = @"Good";
+//                    break;
+//                    case 4:
+//                    rankCard = @"Boo";
+//                    break;
+//                    default:
+//                    break;
+//                }
+//                NSMutableArray *animationImages = [[NSMutableArray alloc]init];
+//                NSInteger steps = 17;
+//                for(int i=0; i<steps; i++)
+//                {
+//                    NSString *imageName = [NSString stringWithFormat:@"giftBox%@%05d.jpg",rankCard,(i+7)];
+//                    UIImage *imageRunning = [UIImage imageNamed:imageName];
+//                    [animationImages addObject:(NSObject *)(imageRunning.CGImage)];
+//                }
+//                [_arrRankCard addObject:animationImages];
+//            }
+//        });
         
         
-        UIImage *imageExpand = [UIImage imageNamed:@"giftBoxBoo00001.jpg"];
-        imageExpand = [self imageWithImage:imageExpand convertToSize:self.view.frame.size];
-        UIImage *imageContract = [UIImage imageNamed:@"giftBoxBoo00002.jpg"];
-        imageContract = [self imageWithImage:imageContract convertToSize:self.view.frame.size];
-        _animatedImageView.animationImages = [NSArray arrayWithObjects:imageExpand,
-                                              imageContract,
-                                              nil];
-        
-        _animatedImageView.animationDuration = 1.0f;
-        _animatedImageView.animationRepeatCount = 0;
-        [_animatedImageView startAnimating];
-        [self.view addSubview: _animatedImageView];
-    }
-    
-    //btnHome
-    {
-        float btnOrderNowWidth = 60;
-        _btnHome = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_btnHome setTitle:@"< Home" forState:UIControlStateNormal];
-        [_btnHome setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        _btnHome.titleLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-        _btnHome.backgroundColor = [UIColor clearColor];
-        _btnHome.contentHorizontalAlignment = NSTextAlignmentLeft;
-        _btnHome.frame = CGRectMake(16, 80-8-44, btnOrderNowWidth, 44);
-        [_btnHome addTarget:self action:@selector(unwindToHotDeal) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
 -(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
 {
+//    return;
     HomeModel *homeModel = (HomeModel *)objHomeModel;
     if(homeModel.propCurrentDB == dbRewardRedemptionLuckyDraw)
     {
@@ -114,95 +179,9 @@
         
         NSMutableArray *luckyDrawTicketList = items[1];
         _numberOfGift = [luckyDrawTicketList count];
-        
-        
-        
-        
-        [_animatedImageView stopAnimating];
-        [_animatedImageView removeFromSuperview];
-        
-        
-        if(!_animatedImgVwGift)
-        {
-            _animatedImgVwGift = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-            _animatedImgVwGift.center = self.view.center;
-        }
-        else
-        {
-            [_animatedImgVwGift.layer removeAllAnimations];
-        }
-        
-        NSString *rankCard;
-        switch (_rewardRedemption.rewardRank) {
-            case 1:
-                rankCard = @"Excellent";
-                break;
-            case 2:
-                rankCard = @"Awesome";
-                break;
-            case 3:
-                rankCard = @"Good";
-                break;
-            case 4:
-                rankCard = @"Boo";
-                break;
-            default:
-                break;
-        }
-        NSMutableArray *animationImages = [[NSMutableArray alloc]init];
-        NSInteger steps = 23;
-        for(int i=0; i<steps; i++)
-        {
-            NSString *imageName = [NSString stringWithFormat:@"giftBox%@%05d.jpg",rankCard,(i+1)];
-            UIImage *imageRunning = [UIImage imageNamed:imageName];
-            imageRunning = [self imageWithImage:imageRunning convertToSize:self.view.frame.size];
-            [animationImages addObject:(NSObject *)(imageRunning.CGImage)];
-        }
-//        NSArray *durations = @[@"1",@"1",@"1",@"1",@"1",@"1",
-//                               @"0.5",@"0.5",@"0.5",@"0.5",
-//                               @"1",@"1",
-//                               @"1.5",@"1.5",@"1.5",
-//                               @"1",@"1",
-//                               @"0.5",@"0.5",@"0.5",@"0.5",@"0.5",@"0.5"
-//                               ];
-//        NSInteger startPeriod = 0;
-//        NSInteger previousPeriod = 0;
-//        NSInteger previousDurations = 0;
-//        NSMutableArray *startTimes = [NSMutableArray arrayWithCapacity: steps];
-//        for (int i = 0; i< steps; i++)
-//        {
-//            float currentDuration = [durations[i] floatValue];
-//            if(previousDurations != currentDuration)
-//            {
-//                startPeriod = 0;
-//                previousPeriod = i-1;
-//            }
-//
-//            if(previousPeriod>=0)
-//            {
-//                startTimes[i] = @([startTimes[previousPeriod] floatValue] + [durations[previousPeriod] floatValue] + startPeriod * currentDuration);
-//            }
-//            else
-//            {
-//                startTimes[i] = @(startPeriod * currentDuration);
-//            }
-//
-//            startPeriod++;
-//            previousDurations = currentDuration;
-//        }
-//
-        
-        CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
-        animation.calculationMode = kCAAnimationDiscrete;
-        animation.duration = 6;//[animationImages count] / 24.0; // 24 frames per second
-//        animation.keyTimes = startTimes;
-        animation.values = animationImages;
-        animation.repeatCount = 1;
-        animation.removedOnCompletion = NO;
-        animation.fillMode = kCAFillModeForwards;
-        animation.delegate = self;
-        [_animatedImgVwGift.layer addAnimation:animation forKey:@"animation"];
-        [self.view addSubview:_animatedImgVwGift];
+ 
+        _luckyDrawDownloaded = YES;
+        NSLog(@"yes");
     }
     else if(homeModel.propCurrentDB == dbMenu)
     {
@@ -234,12 +213,11 @@
             }
         }
     }
-    
 }
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
 {
-    if(theAnimation == [_animatedImgVwGift.layer animationForKey:@"contents"])
+    if(theAnimation == [_imgVwGiftPrize.layer animationForKey:@"giftPrize"])
     {
         if (flag)
         {
@@ -280,6 +258,12 @@
                     [_btnOrderNow setBackgroundImage:[UIImage imageNamed:@"orderNow.png"] forState:UIControlStateNormal];
                     _btnOrderNow.frame = CGRectMake(self.view.frame.size.width-30-btnOrderNowWidth, _voucher.frame.origin.y-btnOrderNowWidth+11, btnOrderNowWidth, btnOrderNowWidth);
                     [_btnOrderNow addTarget:self action:@selector(orderNow) forControlEvents:UIControlEventTouchUpInside];
+                    //shadow
+                    _btnOrderNow.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+                    _btnOrderNow.layer.shadowOffset = CGSizeMake(0, 1);
+                    _btnOrderNow.layer.shadowRadius = 1;
+                    _btnOrderNow.layer.shadowOpacity = 0.8f;
+                    _btnOrderNow.layer.masksToBounds = NO;
                 }
                 [self.view addSubview:_btnOrderNow];
             }
@@ -310,12 +294,12 @@
                 
                 
                 //add singleTap
-                if(!_singleTap)
+                if(!_tapGiftBox)
                 {
-                    _singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGiftBox)];
-                    _singleTap.numberOfTapsRequired = 1;
+                    _tapGiftBox = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGiftBox)];
+                    _tapGiftBox.numberOfTapsRequired = 1;
                     [_imgVwSmallGiftBox setUserInteractionEnabled:YES];
-                    [_imgVwSmallGiftBox addGestureRecognizer:_singleTap];
+                    [_imgVwSmallGiftBox addGestureRecognizer:_tapGiftBox];
                 }
                 
                 
@@ -325,7 +309,7 @@
                 {
                     _lblGiftNum = [[UILabel alloc]init];
                     _lblGiftNum.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                    _lblGiftNum.textColor = [UIColor blackColor];
+                    _lblGiftNum.textColor = [UIColor whiteColor];
                     _lblGiftNum.numberOfLines = 1;
                     _lblGiftNum.textAlignment = NSTextAlignmentCenter;
                 }
@@ -337,22 +321,207 @@
                 
                 _lblGiftNum.center = _imgVwSmallGiftBox.center;
                 CGRect frame2 = _lblGiftNum.frame;
-                frame2.origin.y = _imgVwSmallGiftBox.frame.origin.y+_imgVwSmallGiftBox.frame.size.height+8;
+                frame2.origin.y = _imgVwSmallGiftBox.frame.origin.y+_imgVwSmallGiftBox.frame.size.height+4;
                 _lblGiftNum.frame = frame2;
-                _lblGiftNum.backgroundColor = [UIColor whiteColor];
-                _lblGiftNum.layer.cornerRadius = 12;
-                _lblGiftNum.layer.masksToBounds = YES;
+                
+                //rounded corner
+                _lblGiftNum.layer.backgroundColor = cRibbon.CGColor;
+                _lblGiftNum.layer.cornerRadius = 10;
+                _lblGiftNum.layer.masksToBounds = NO;
+                
+                //shadow
+                _lblGiftNum.layer.shadowColor = [UIColor whiteColor].CGColor;
+                _lblGiftNum.layer.shadowOffset = CGSizeMake(0, 1);
+                _lblGiftNum.layer.shadowRadius = 1;
+                _lblGiftNum.layer.shadowOpacity = 0.8f;
+                _lblGiftNum.layer.masksToBounds = NO;
+
+                
                 [self.view addSubview:_lblGiftNum];
             }
         }
     }
-    else if(theAnimation == [_animatedImgVwGift.layer animationForKey:@"ridOpenClose"])
+    else if(theAnimation == [_imgVwRidCloseOpen.layer animationForKey:@"ridCloseOpen"])
+    {
+        if(flag)
+        {
+            [_imgVwRidCloseOpen removeFromSuperview];
+            
+            if(!_imgVwGiftPrize)
+            {
+                _imgVwGiftPrize = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+                _imgVwGiftPrize.center = self.view.center;
+            }
+            else
+            {
+                [_imgVwGiftPrize.layer removeAllAnimations];
+            }
+            
+            NSMutableArray *arrImage;
+            switch (_rewardRedemption.rewardRank) {
+                case 1:
+                    arrImage = [Card getExcellentCard];
+                break;
+                case 2:
+                    arrImage = [Card getAwesomeCard];
+                break;
+                case 3:
+                    arrImage = [Card getGoodCard];
+                break;
+                case 4:
+                    arrImage = [Card getBooCard];
+                break;
+                default:
+                break;
+            }
+            CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
+            animation.calculationMode = kCAAnimationDiscrete;
+            animation.duration = 4;//[animationImages count] / 24.0; // 24 frames per second
+            animation.values = arrImage;//_arrRankCard[_rewardRedemption.rewardRank-1];
+            animation.repeatCount = 1;
+            animation.removedOnCompletion = NO;
+            animation.fillMode = kCAFillModeForwards;
+            animation.delegate = self;
+            [_imgVwGiftPrize.layer addAnimation:animation forKey:@"giftPrize"];
+            [self.view addSubview:_imgVwGiftPrize];
+            
+            
+            if(!_tapPauseResume)
+            {
+                _tapPauseResume = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetectedGiftPrize)];
+                _tapPauseResume.numberOfTapsRequired = 1;
+                [_imgVwGiftPrize setUserInteractionEnabled:YES];
+                [_imgVwGiftPrize addGestureRecognizer:_tapPauseResume];
+            }
+        }
+    }
+    else if(theAnimation == [_imgVwWaiting.layer animationForKey:@"downloadWaiting"])
     {
         if(flag)
         {
             
+            if(_luckyDrawDownloaded)
+            {
+                NSLog(@"downloadWaiting stop _luckyDrawDownloaded yes");
+                _luckyDrawDownloaded = NO;
+                [_imgVwWaiting.layer removeAllAnimations];
+                [_imgVwWaiting removeFromSuperview];
+                
+                
+                
+                //rid open close
+                if(!_imgVwRidCloseOpen)
+                {
+                    _imgVwRidCloseOpen = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+                    _imgVwRidCloseOpen.center = self.view.center;
+                }
+                else
+                {
+                    [_imgVwRidCloseOpen.layer removeAllAnimations];
+                }
+                
+                
+                NSMutableArray *animationImages = [[NSMutableArray alloc]init];
+                NSInteger steps = 2;
+                for(int i=0; i<steps; i++)
+                {
+                    NSString *imageName = [NSString stringWithFormat:@"giftBox%@%05d.jpg",@"Boo",(i+1)];
+                    UIImage *imageRunning = [UIImage imageNamed:imageName];
+                    [animationImages addObject:(NSObject *)(imageRunning.CGImage)];
+                }
+                
+                
+                
+                CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
+                animation.calculationMode = kCAAnimationDiscrete;
+                animation.duration = 1;
+                animation.values = animationImages;
+                animation.repeatCount = 1;
+                animation.removedOnCompletion = NO;
+                animation.fillMode = kCAFillModeForwards;
+                animation.delegate = self;
+                [_imgVwRidCloseOpen.layer addAnimation:animation forKey:@"ridCloseOpen"];
+                [self.view addSubview:_imgVwRidCloseOpen];
+                
+                
+                if(!_tapPauseResumeRidCloseOpen)
+                {
+                    _tapPauseResumeRidCloseOpen = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetectedRidCloseOpen)];
+                    _tapPauseResumeRidCloseOpen.numberOfTapsRequired = 1;
+                    [_imgVwRidCloseOpen setUserInteractionEnabled:YES];
+                    [_imgVwRidCloseOpen addGestureRecognizer:_tapPauseResumeRidCloseOpen];
+                }
+            }
+            else
+            {
+                NSLog(@"downloadWaiting stop _luckyDrawDownloaded no");
+                [_imgVwWaiting.layer addAnimation:_animationWaiting forKey:@"downloadWaiting"];
+            }
         }
     }
+}
+
+-(void)tapDetectedGiftPrize
+{
+    NSLog(@"tapDetectedGiftPrize");
+    if(!_toggleTap)
+    {
+        CFTimeInterval pausedTime = [_imgVwGiftPrize.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+        _imgVwGiftPrize.layer.speed = 0.0;
+        _imgVwGiftPrize.layer.timeOffset = pausedTime;
+    }
+    else
+    {
+        CFTimeInterval pausedTime = [_imgVwGiftPrize.layer timeOffset];
+        _imgVwGiftPrize.layer.speed = 1.0;
+        _imgVwGiftPrize.layer.timeOffset = 0.0;
+        _imgVwGiftPrize.layer.beginTime = 0.0;
+        CFTimeInterval timeSincePause = [_imgVwGiftPrize.layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+        _imgVwGiftPrize.layer.beginTime = timeSincePause;
+    }
+    _toggleTap = !_toggleTap;
+}
+
+-(void)tapDetectedDownloadWaiting
+{
+    NSLog(@"tapDetectedDownloadWaiting");
+    if(!_toggleTapDownloadWaiting)
+    {
+        CFTimeInterval pausedTime = [_imgVwWaiting.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+        _imgVwWaiting.layer.speed = 0.0;
+        _imgVwWaiting.layer.timeOffset = pausedTime;
+    }
+    else
+    {
+        CFTimeInterval pausedTime = [_imgVwWaiting.layer timeOffset];
+        _imgVwWaiting.layer.speed = 1.0;
+        _imgVwWaiting.layer.timeOffset = 0.0;
+        _imgVwWaiting.layer.beginTime = 0.0;
+        CFTimeInterval timeSincePause = [_imgVwWaiting.layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+        _imgVwWaiting.layer.beginTime = timeSincePause;
+    }
+    _toggleTapDownloadWaiting = !_toggleTapDownloadWaiting;
+}
+
+-(void)tapDetectedRidCloseOpen
+{
+    NSLog(@"tapDetectedRidCloseOpen");
+    if(!_toggleTapRidCloseOpen)
+    {
+        CFTimeInterval pausedTime = [_imgVwRidCloseOpen.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+        _imgVwRidCloseOpen.layer.speed = 0.0;
+        _imgVwRidCloseOpen.layer.timeOffset = pausedTime;
+    }
+    else
+    {
+        CFTimeInterval pausedTime = [_imgVwRidCloseOpen.layer timeOffset];
+        _imgVwRidCloseOpen.layer.speed = 1.0;
+        _imgVwRidCloseOpen.layer.timeOffset = 0.0;
+        _imgVwRidCloseOpen.layer.beginTime = 0.0;
+        CFTimeInterval timeSincePause = [_imgVwRidCloseOpen.layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+        _imgVwRidCloseOpen.layer.beginTime = timeSincePause;
+    }
+    _toggleTapRidCloseOpen = !_toggleTapRidCloseOpen;
 }
 
 -(void)unwindToHotDeal
@@ -370,15 +539,17 @@
 -(void)tapGiftBox
 {
     [_voucher removeFromSuperview];
-    [_animatedImgVwGift removeFromSuperview];
+    [_imgVwGiftPrize removeFromSuperview];
     [_btnOrderNow removeFromSuperview];
-    
-    
-    [_imgVwSmallGiftBox stopAnimating];
+    [_btnHome removeFromSuperview];
     [_imgVwSmallGiftBox removeFromSuperview];
+    _toggleTap = NO;
     
     
-    [self viewDidAppear:NO];
+    
+    [_imgVwWaiting.layer addAnimation:_animationWaiting forKey:@"downloadWaiting"];
+    [self.view addSubview: _imgVwWaiting];
+    [self.homeModel downloadItems:dbRewardRedemptionLuckyDraw withData:receipt];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
