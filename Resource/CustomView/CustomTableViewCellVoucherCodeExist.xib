@@ -9,9 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Prompt-Regular.ttf">
-            <string>Prompt-Regular</string>
-        </array>
         <array key="Prompt-SemiBold.ttf">
             <string>Prompt-SemiBold</string>
         </array>
@@ -23,38 +20,55 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k3K-Ek-6fx">
-                    <rect key="frame" x="259" y="13" width="100" height="30"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="biB-Er-JDg">
+                    <rect key="frame" x="16" y="4" width="235" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="bXV-OT-IIw"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5u-K9-VZR">
+                    <rect key="frame" x="259" y="4" width="100" height="30"/>
                     <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="aJ2-pP-MtV"/>
-                        <constraint firstAttribute="width" constant="100" id="jY5-r4-CoL"/>
+                        <constraint firstAttribute="height" constant="30" id="HO5-Zi-iag"/>
+                        <constraint firstAttribute="width" constant="100" id="fNB-s5-m9b"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
-                    <state key="normal" title="เลือก">
+                    <state key="normal" title="ยืนยัน">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="คุณมี voucher code สำหรับร้านนี้" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WqP-HM-4Pe">
-                    <rect key="frame" x="16" y="16.5" width="235" height="23"/>
-                    <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="15"/>
-                    <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k3K-Ek-6fx">
+                    <rect key="frame" x="16" y="42" width="222" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="UkG-LM-h2n"/>
+                        <constraint firstAttribute="width" constant="222" id="rMl-sf-kwt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
+                    <state key="normal" title="คุณมี voucher code สำหรับร้านนี้">
+                        <color key="titleColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="k3K-Ek-6fx" firstAttribute="top" secondItem="fAi-wX-UyG" secondAttribute="top" constant="13" id="CXR-NL-8vR"/>
-                <constraint firstItem="k3K-Ek-6fx" firstAttribute="leading" secondItem="WqP-HM-4Pe" secondAttribute="trailing" constant="8" id="Wk9-8B-QcB"/>
-                <constraint firstItem="JOj-fg-XON" firstAttribute="trailing" secondItem="k3K-Ek-6fx" secondAttribute="trailing" constant="16" id="oqC-c8-Hz4"/>
-                <constraint firstItem="k3K-Ek-6fx" firstAttribute="centerY" secondItem="WqP-HM-4Pe" secondAttribute="centerY" id="tf4-Et-Gl2"/>
-                <constraint firstItem="WqP-HM-4Pe" firstAttribute="leading" secondItem="JOj-fg-XON" secondAttribute="leading" constant="16" id="uW7-wS-cnG"/>
+                <constraint firstItem="v5u-K9-VZR" firstAttribute="centerY" secondItem="biB-Er-JDg" secondAttribute="centerY" id="4ye-Yn-I3E"/>
+                <constraint firstItem="k3K-Ek-6fx" firstAttribute="top" secondItem="biB-Er-JDg" secondAttribute="bottom" constant="8" id="Bnc-Cb-DsY"/>
+                <constraint firstItem="v5u-K9-VZR" firstAttribute="top" secondItem="fAi-wX-UyG" secondAttribute="top" constant="4" id="Jls-T9-Aov"/>
+                <constraint firstItem="biB-Er-JDg" firstAttribute="leading" secondItem="JOj-fg-XON" secondAttribute="leading" constant="16" id="RGj-UH-4kR"/>
+                <constraint firstItem="JOj-fg-XON" firstAttribute="trailing" secondItem="v5u-K9-VZR" secondAttribute="trailing" constant="16" id="YcY-87-Bip"/>
+                <constraint firstItem="v5u-K9-VZR" firstAttribute="leading" secondItem="biB-Er-JDg" secondAttribute="trailing" constant="8" id="ao0-tw-6Ev"/>
+                <constraint firstItem="k3K-Ek-6fx" firstAttribute="leading" secondItem="JOj-fg-XON" secondAttribute="leading" constant="16" id="vGU-w0-6EA"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="JOj-fg-XON"/>
             <connections>
                 <outlet property="btnChooseVoucherCode" destination="k3K-Ek-6fx" id="hzK-Q8-vx0"/>
-                <outlet property="btnChooseVoucherCodeWidth" destination="jY5-r4-CoL" id="Mks-mi-SQs"/>
-                <outlet property="lblText" destination="WqP-HM-4Pe" id="dUH-bY-59b"/>
+                <outlet property="btnConfirm" destination="v5u-K9-VZR" id="8ko-SW-1Vx"/>
+                <outlet property="btnConfirmWidth" destination="fNB-s5-m9b" id="6JK-A5-QuZ"/>
+                <outlet property="txtVoucherCode" destination="biB-Er-JDg" id="k4b-AC-4YS"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="208.5"/>
         </view>

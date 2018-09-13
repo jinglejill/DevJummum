@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface CustomTableViewCellVoucherCodeExist : UITableViewCell
-@property (strong, nonatomic) IBOutlet UILabel *lblText;
 @property (strong, nonatomic) IBOutlet UIButton *btnChooseVoucherCode;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnChooseVoucherCodeWidth;
+@property (strong, nonatomic) IBOutlet UITextField *txtVoucherCode;
+@property (strong, nonatomic) IBOutlet UIButton *btnConfirm;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnConfirmWidth;
+
 @end

@@ -306,8 +306,10 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
                  [self setImageDesign:cell.imgVwValue];
              }
          }];
-        cell.lblCountDown.hidden = YES;
-
+        PromoCode *promoCode = _promoCodeUsedList[item];
+        cell.lblCountDown.text = [NSString stringWithFormat:@"ใช้ไปเมื่อ %@",[Utility dateToString:promoCode.modifiedDate toFormat:@"d MMM yyyy HH:mm"]];
+//        cell.lblCountDown.hidden = YES;
+        
         
         
         
@@ -359,7 +361,10 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
         }
         else
         {
-            cell.lblCountDown.text = @"00:00:00";
+            RewardPoint *rewardPoint = _rewardPointExpiredList[item];
+            NSDate *expiredDate = [Utility addSecond:rewardPoint.modifiedDate numberOfSecond:rewardRedemption.withInPeriod];
+            cell.lblCountDown.text = [NSString stringWithFormat:@"หมดอายุเมื่อ %@",[Utility dateToString:expiredDate toFormat:@"d MMM yyyy HH:mm"]];
+//            cell.lblCountDown.text = @"00:00:00";
             
         }
         

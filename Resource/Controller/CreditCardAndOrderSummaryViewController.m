@@ -45,7 +45,7 @@
 {
     CreditCard *_creditCard;
     NSMutableArray *_orderTakingList;
-    NSString *_voucherCode;
+//    NSString *_voucherCode;
     
     float _netTotal;
     float _serviceChargeValue;
@@ -251,41 +251,41 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     
 }
 
-//-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-//{
-//    if(textField.tag == 31)
-//    {
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-//    }
-//    else
-//    {
-//        [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    }
-//    return YES;
-//}
-//
-//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-//{
-//    if(textField.tag == 31)
-//    {
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
-//
-//
-//        [self.view endEditing:YES];
-//
-//        return YES;
-//    }
-//
-//    return YES;
-//}
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if(textField.tag == 31)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    }
+    else
+    {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    if(textField.tag == 31)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+
+
+        [self.view endEditing:YES];
+
+        return YES;
+    }
+
+    return YES;
+}
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-//    if(textField.tag == 31)
-//    {
-//        [self performSegueWithIdentifier:@"segVoucherCodeList" sender:self];
-//    }
-//    else
+    if(textField.tag == 31)
+    {
+        
+    }
+    else
     {
         UIView *vwInvalid = [self.view viewWithTag:textField.tag+10];
         vwInvalid.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -332,6 +332,12 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             _creditCard.ccv = [Utility trimString:textField.text];
         }
         break;
+        case 31:
+        {
+            _selectedVoucherCode = [Utility trimString:textField.text];
+//            _voucherCode = [Utility trimString:textField.text];
+        }
+            break;
         default:
         break;
     }
@@ -368,7 +374,8 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     lblNavTitle.text = title;
     NSString *message = [Setting getValue:@"123m" example:@"ใส่หมายเหตุที่ต้องการแจ้งเพิ่มเติมกับทางร้านอาหาร"];
     _strPlaceHolder = message;
-    _voucherCode = @"";
+//    _voucherCode = @"";
+    _selectedVoucherCode = @"";
     _promotionList = [[NSMutableArray alloc]init];
     _rewardRedemptionList = [[NSMutableArray alloc]init];
     
@@ -546,7 +553,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         else
         {
             float tbvTotalHeight = 26*4+44;
-            float chooseVoucherCodeHeight = [_promotionList count]+[_rewardRedemptionList count] > 0?56:0;
+            float chooseVoucherCodeHeight = [_promotionList count]+[_rewardRedemptionList count] > 0?66:38;
             float serviceChargeHeight = branch.serviceChargePercent > 0?26:0;
             tbvTotalHeightConstant.constant = tbvTotalHeight+chooseVoucherCodeHeight+serviceChargeHeight;
             
@@ -1011,10 +1018,22 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 
-                cell.btnChooseVoucherCodeWidth.constant = (self.view.frame.size.width - 16*2 - 8)/4;
+                cell.txtVoucherCode.tag = 31;
+                cell.txtVoucherCode.delegate = self;
+                cell.txtVoucherCode.text = @"";
+                [self setTextFieldDesign:cell.txtVoucherCode];
+                [cell.txtVoucherCode setInputAccessoryView:self.toolBar];
+                [cell.txtVoucherCode addTarget:self action:@selector(txtVoucherCodeChanged:) forControlEvents:UIControlEventEditingChanged];
+                
+                
+                cell.btnConfirmWidth.constant = (self.view.frame.size.width - 16*2 - 8)/2;
+                [cell.btnConfirm addTarget:self action:@selector(confirmVoucherCode) forControlEvents:UIControlEventTouchUpInside];
+                [self setButtonDesign:cell.btnConfirm];
+                
+                
                 [cell.btnChooseVoucherCode addTarget:self action:@selector(chooseVoucherCode:) forControlEvents:UIControlEventTouchUpInside];
-                [self setButtonDesign:cell.btnChooseVoucherCode];
-                cell.hidden = [_promotionList count]+[_rewardRedemptionList count]==0;
+                
+                cell.btnChooseVoucherCode.hidden = [_promotionList count]+[_rewardRedemptionList count]==0;
                 
                 return cell;
             }
@@ -1331,7 +1350,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 return 26;
                 break;
             case 1:
-                return [_promotionList count]+[_rewardRedemptionList count] > 0?56:0;
+                return [_promotionList count]+[_rewardRedemptionList count] > 0?66:38;
                 break;
             case 2:
                 return 26;
@@ -1910,6 +1929,12 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     }
 }
 
+-(void)confirmVoucherCode
+{
+//    _selectedVoucherCode = _voucherCode;
+    [self confirmVoucherCode:_selectedVoucherCode];
+}
+
 - (void)confirmVoucherCode:(NSString *)voucherCode
 {
     //เช็คว่า voucher valid มั๊ย
@@ -2004,15 +2029,19 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         }
         else
         {
+            cell.txtVoucherCode.hidden = YES;
+            cell.btnConfirm.hidden = YES;
             cell.btnChooseVoucherCode.hidden = YES;
-            cell.lblText.hidden = YES;
             
-            voucherView.hidden = NO;
+//            cell.lblText.hidden = YES;
+            
+            voucherView.hidden = NO;            
+//            voucherView.center = cell.center;
             CGRect frame = voucherView.frame;
             frame.origin.x = 0;
-            frame.origin.y = cell.btnChooseVoucherCode.frame.origin.y;
+            frame.origin.y = cell.frame.size.height/2-13;//cell.btnChooseVoucherCode.frame.origin.y;
             frame.size.width = self.view.frame.size.width;
-            frame.size.height = 32;
+            frame.size.height = 26;
             voucherView.frame = frame;
             [cell addSubview:voucherView];
             
@@ -2235,9 +2264,13 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     [voucherView removeFromSuperview];
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:1 inSection:0];
     CustomTableViewCellVoucherCodeExist *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
-    cell.lblText.hidden = NO;
-    cell.btnChooseVoucherCode.hidden = NO;
-    _voucherCode = @"";
+
+    cell.txtVoucherCode.text = @"";
+    cell.txtVoucherCode.hidden = NO;
+    cell.btnConfirm.hidden = NO;
+    cell.btnChooseVoucherCode.hidden = [_promotionList count]+[_rewardRedemptionList count]==0;
+    
+    _selectedVoucherCode = @"";
     _promotionUsed = nil;
     
 
@@ -2413,4 +2446,9 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     }
 }
 
+-(void)txtVoucherCodeChanged:(id)sender
+{
+    UITextField *txtVoucherCode = sender;
+    txtVoucherCode.text = [txtVoucherCode.text uppercaseString];
+}
 @end
