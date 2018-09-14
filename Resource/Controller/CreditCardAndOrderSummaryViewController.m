@@ -131,6 +131,9 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         VoucherCodeListViewController *vc = segue.sourceViewController;
         
         _selectedVoucherCode = vc.selectedVoucherCode;
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:1 inSection:0];
+        CustomTableViewCellVoucherCodeExist *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
+        cell.txtVoucherCode.text = _selectedVoucherCode;
         if(![Utility isStringEmpty:_selectedVoucherCode])
         {
             [self confirmVoucherCode:_selectedVoucherCode];
@@ -486,7 +489,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     // Return the number of sections.
     if([tableView isEqual:tbvData])
     {
-//        return 2;
         return 4;
     }
     else if([tableView isEqual:tbvTotal])
@@ -552,10 +554,12 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         }
         else
         {
-            float tbvTotalHeight = 26*4+44;
+            float tbvTotalHeight = 26*2+44;
             float chooseVoucherCodeHeight = [_promotionList count]+[_rewardRedemptionList count] > 0?66:38;
             float serviceChargeHeight = branch.serviceChargePercent > 0?26:0;
-            tbvTotalHeightConstant.constant = tbvTotalHeight+chooseVoucherCodeHeight+serviceChargeHeight;
+            float vatHeight = branch.percentVat > 0?26:0;
+            float netTotalHeight = branch.serviceChargePercent+branch.percentVat > 0?26:0;
+            tbvTotalHeightConstant.constant = tbvTotalHeight+chooseVoucherCodeHeight+serviceChargeHeight+vatHeight+netTotalHeight;
             
             return 6;
         }
@@ -1006,7 +1010,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 cell.lblTitle.textColor = cSystem4;
                 cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
                 cell.lblAmount.textColor = cSystem1;
-                
+                cell.hidden = NO;
                 
                 return  cell;
             }
@@ -1034,6 +1038,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 [cell.btnChooseVoucherCode addTarget:self action:@selector(chooseVoucherCode:) forControlEvents:UIControlEventTouchUpInside];
                 
                 cell.btnChooseVoucherCode.hidden = [_promotionList count]+[_rewardRedemptionList count]==0;
+
                 
                 return cell;
             }
@@ -1045,14 +1050,8 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
 
-//                NSString *strTitle = @"ยอดรวม";
                 NSString *strTitle = branch.priceIncludeVat?@"ยอดรวม (รวม Vat)":@"ยอดรวม";
                 float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
-//                if(branch.priceIncludeVat)
-//                {
-//                    totalAmount = totalAmount / ((branch.percentVat+100)*0.01);
-//                }
-                
                 NSString *strTotal = [Utility formatDecimal:totalAmount withMinFraction:2 andMaxFraction:2];
                 strTotal = [Utility addPrefixBahtSymbol:strTotal];
                 cell.lblTitle.text = strTitle;
@@ -1062,6 +1061,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 cell.lblTitle.textColor = cSystem4;
                 cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
                 cell.lblAmount.textColor = cSystem1;
+                cell.hidden = NO;
                 
 
                 return  cell;
@@ -1070,83 +1070,80 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             case 3:
             {
                 //service charge
+                CustomTableViewCellTotal *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                
+                NSString *strServiceCharge = [Utility formatDecimal:branch.serviceChargePercent withMinFraction:0 andMaxFraction:2];
+                NSString *strTitle = [NSString stringWithFormat:@"Service charge %@%%",strServiceCharge];
+                float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
+                float serviceChargeValue;
+                if(branch.priceIncludeVat)
                 {
-                    CustomTableViewCellTotal *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-
-                    NSString *strServiceCharge = [Utility formatDecimal:branch.serviceChargePercent withMinFraction:0 andMaxFraction:2];
-                    NSString *strTitle = [NSString stringWithFormat:@"Service charge %@%%",strServiceCharge];
-                    float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
-                    float serviceChargeValue;
-                    if(branch.priceIncludeVat)
-                    {
-                        totalAmount = totalAmount / ((branch.percentVat+100)*0.01);
-                        serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
-                    }
-                    else
-                    {
-                        serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
-                    }
-
-                    serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                    _serviceChargeValue = serviceChargeValue;
-                    NSString *strTotal = [Utility formatDecimal:serviceChargeValue withMinFraction:2 andMaxFraction:2];
-                    strTotal = [Utility addPrefixBahtSymbol:strTotal];
-                    cell.lblTitle.text = strTitle;
-                    cell.lblAmount.text = strTotal;
-                    cell.vwTopBorder.hidden = YES;
-                    cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                    cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                    cell.lblAmount.textColor = cSystem4;
-                    cell.hidden = branch.serviceChargePercent == 0;
-                    
-                    
-                    return  cell;
+                    totalAmount = totalAmount / ((branch.percentVat+100)*0.01);
+                    serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
                 }
+                else
+                {
+                    serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
+                }
+                
+                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+                _serviceChargeValue = serviceChargeValue;
+                NSString *strTotal = [Utility formatDecimal:serviceChargeValue withMinFraction:2 andMaxFraction:2];
+                strTotal = [Utility addPrefixBahtSymbol:strTotal];
+                cell.lblTitle.text = strTitle;
+                cell.lblAmount.text = strTotal;
+                cell.vwTopBorder.hidden = YES;
+                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+                cell.lblAmount.textColor = cSystem4;
+                cell.hidden = branch.serviceChargePercent == 0;
+                
+                
+                return  cell;
             }
                 break;
             case 4:
             {
+                //vat
+                CustomTableViewCellTotal *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                
+                NSString *strPercentVat = [Utility formatDecimal:branch.percentVat withMinFraction:0 andMaxFraction:2];
+                strPercentVat = [NSString stringWithFormat:@"Vat %@%%",strPercentVat];
+                float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
+                float serviceChargeValue;
+                float vatAmount;
+                if(branch.priceIncludeVat)
                 {
-                    //vat
-                    CustomTableViewCellTotal *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-
-                    NSString *strPercentVat = [Utility formatDecimal:branch.percentVat withMinFraction:0 andMaxFraction:2];
-                    strPercentVat = [NSString stringWithFormat:@"Vat %@%%",strPercentVat];
-                    float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
-                    float serviceChargeValue;
-                    float vatAmount;
-                    if(branch.priceIncludeVat)
-                    {
-                        totalAmount = totalAmount / ((branch.percentVat+100)*0.01);
-                        serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
-                        serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                        vatAmount = totalAmount * branch.percentVat * 0.01;
-                    }
-                    else
-                    {
-                        serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
-                        serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                        vatAmount = (totalAmount+serviceChargeValue)*branch.percentVat/100;
-                    }
-
-                    vatAmount = roundf(vatAmount*100)/100;
-                    _vatValue = vatAmount;
-                    NSString *strAmount = [Utility formatDecimal:vatAmount withMinFraction:2 andMaxFraction:2];
-                    strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                    cell.lblTitle.text = branch.percentVat==0?@"Vat":strPercentVat;
-                    cell.lblAmount.text = strAmount;
-                    cell.vwTopBorder.hidden = YES;
-                    cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                    cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                    cell.lblAmount.textColor = cSystem4;
-                    
-                    
-                    return cell;
+                    totalAmount = totalAmount / ((branch.percentVat+100)*0.01);
+                    serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
+                    serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+                    vatAmount = totalAmount * branch.percentVat * 0.01;
                 }
+                else
+                {
+                    serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
+                    serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+                    vatAmount = (totalAmount+serviceChargeValue)*branch.percentVat/100;
+                }
+                
+                vatAmount = roundf(vatAmount*100)/100;
+                _vatValue = vatAmount;
+                NSString *strAmount = [Utility formatDecimal:vatAmount withMinFraction:2 andMaxFraction:2];
+                strAmount = [Utility addPrefixBahtSymbol:strAmount];
+                cell.lblTitle.text = branch.percentVat==0?@"Vat":strPercentVat;
+                cell.lblAmount.text = strAmount;
+                cell.vwTopBorder.hidden = YES;
+                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+                cell.lblAmount.textColor = cSystem4;
+                cell.hidden = branch.percentVat == 0;
+                
+                
+                return cell;
             }
                 break;
             case 5:
@@ -1185,6 +1182,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 cell.lblTitle.textColor = cSystem4;
                 cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
                 cell.lblAmount.textColor = cSystem1;
+                cell.hidden = branch.serviceChargePercent+branch.percentVat == 0;;
                 _netTotal = netTotalAmount;
 
 
@@ -1359,10 +1357,10 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 return branch.serviceChargePercent > 0?26:0;
                 break;
             case 4:
-                return 26;
+                return branch.percentVat > 0?26:0;
                 break;
             case 5:
-                return 26;
+                return branch.serviceChargePercent + branch.percentVat > 0?26:0;
                 break;
             default:
                 break;
@@ -1411,7 +1409,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     if([tableView isEqual:tbvData])
     {
         if(indexPath.section == 2)
-//            if(indexPath.section == 2 && indexPath.row != 0)
         {
             cell.separatorInset = UIEdgeInsetsMake(0.0f, self.view.bounds.size.width, 0.0f, CGFLOAT_MAX);
         }
@@ -1931,7 +1928,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 
 -(void)confirmVoucherCode
 {
-//    _selectedVoucherCode = _voucherCode;
     [self confirmVoucherCode:_selectedVoucherCode];
 }
 
@@ -2017,7 +2013,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 }
             }
         }
-        
 
         
         
@@ -2033,13 +2028,11 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             cell.btnConfirm.hidden = YES;
             cell.btnChooseVoucherCode.hidden = YES;
             
-//            cell.lblText.hidden = YES;
             
             voucherView.hidden = NO;            
-//            voucherView.center = cell.center;
             CGRect frame = voucherView.frame;
             frame.origin.x = 0;
-            frame.origin.y = cell.frame.size.height/2-13;//cell.btnChooseVoucherCode.frame.origin.y;
+            frame.origin.y = cell.frame.size.height/2-13;
             frame.size.width = self.view.frame.size.width;
             frame.size.height = 26;
             voucherView.frame = frame;
@@ -2147,96 +2140,93 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         }
         
         
-//        if(branch.serviceChargePercent > 0)
         {
+            //service charge
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:3 inSection:0];
+            CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
+            
+            float afterDiscount = totalAmount-_discountValue;
+            float serviceChargeValue;
+            if(branch.priceIncludeVat)
             {
-                //service charge
-                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:3 inSection:0];
-                CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
-                
-                float afterDiscount = totalAmount-_discountValue;
-                float serviceChargeValue;
-                if(branch.priceIncludeVat)
-                {
-                    afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
-                    serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                }
-                else
-                {
-                    serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                }
-                
+                afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
+                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
+            }
+            else
+            {
+                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
+            }
+            
+            serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+            serviceChargeValue = branch.serviceChargePercent > 0?serviceChargeValue:0;
+            NSString *strTotal = [Utility formatDecimal:serviceChargeValue withMinFraction:2 andMaxFraction:2];
+            strTotal = [Utility addPrefixBahtSymbol:strTotal];
+            cell.lblAmount.text = strTotal;
+            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+            cell.lblAmount.textColor = cSystem4;
+        }
+        {
+            //vat
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:4 inSection:0];
+            CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
+            
+            float afterDiscount = totalAmount-_discountValue;
+            float serviceChargeValue;
+            float vatAmount;
+            if(branch.priceIncludeVat)
+            {
+                afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
+                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
                 serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                serviceChargeValue = branch.serviceChargePercent > 0?serviceChargeValue:0;
-                NSString *strTotal = [Utility formatDecimal:serviceChargeValue withMinFraction:2 andMaxFraction:2];
-                strTotal = [Utility addPrefixBahtSymbol:strTotal];
-                cell.lblAmount.text = strTotal;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblAmount.textColor = cSystem4;
+                vatAmount = afterDiscount * branch.percentVat * 0.01;
             }
+            else
             {
-                //vat
-                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:4 inSection:0];
-                CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
-                
-                float afterDiscount = totalAmount-_discountValue;
-                float serviceChargeValue;
-                float vatAmount;
-                if(branch.priceIncludeVat)
-                {
-                    afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
-                    serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                    serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                    vatAmount = afterDiscount * branch.percentVat * 0.01;
-                }
-                else
-                {
-                    serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                    serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                    vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
-                }
-                
-                vatAmount = roundf(vatAmount*100)/100;
-                NSString *strAmount = [Utility formatDecimal:vatAmount withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                cell.lblAmount.text = strAmount;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblAmount.textColor = cSystem4;
+                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
+                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+                vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
             }
+            
+            vatAmount = roundf(vatAmount*100)/100;
+            NSString *strAmount = [Utility formatDecimal:vatAmount withMinFraction:2 andMaxFraction:2];
+            strAmount = [Utility addPrefixBahtSymbol:strAmount];
+            cell.lblAmount.text = strAmount;
+            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+            cell.lblAmount.textColor = cSystem4;
+        }
+        {
+            //net total amount
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:5 inSection:0];
+            CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
+            
+            float afterDiscount = totalAmount-_discountValue;
+            float serviceChargeValue;
+            float vatAmount;
+            if(branch.priceIncludeVat)
             {
-                //net total amount
-                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:5 inSection:0];
-                CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
-                
-                float afterDiscount = totalAmount-_discountValue;
-                float serviceChargeValue;
-                float vatAmount;
-                if(branch.priceIncludeVat)
-                {
-                    afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
-                    serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                    serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                    vatAmount = afterDiscount * branch.percentVat * 0.01;
-                }
-                else
-                {
-                    serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                    serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                    vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
-                }
-                
-                vatAmount = roundf(vatAmount*100)/100;
-                _vatValue = vatAmount;
-                _serviceChargeValue = serviceChargeValue;
-                float netTotalAmount = afterDiscount+serviceChargeValue+vatAmount;
-                netTotalAmount = roundf(netTotalAmount*100)/100;
-                NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                cell.lblAmount.text = strAmount;
-                _netTotal = netTotalAmount;
+                afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
+                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
+                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+                vatAmount = afterDiscount * branch.percentVat * 0.01;
             }
+            else
+            {
+                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
+                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+                vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
+            }
+            
+            vatAmount = roundf(vatAmount*100)/100;
+            _vatValue = vatAmount;
+            _serviceChargeValue = serviceChargeValue;
+            float netTotalAmount = afterDiscount+serviceChargeValue+vatAmount;
+            netTotalAmount = roundf(netTotalAmount*100)/100;
+            NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
+            strAmount = [Utility addPrefixBahtSymbol:strAmount];
+            cell.lblAmount.text = strAmount;
+            _netTotal = netTotalAmount;
         }
     }
     else if(homeModel.propCurrentDB == dbPromotionAndRewardRedemption)
@@ -2281,6 +2271,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     _discountAmount = 0;
     _discountValue = 0;
     {
+        //after discount
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:2 inSection:0];
         CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
 
@@ -2289,160 +2280,92 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         strAfterDiscount = [Utility addPrefixBahtSymbol:strAfterDiscount];
         cell.lblAmount.text = strAfterDiscount;
     }
-    if(branch.serviceChargePercent > 0)
     {
+        //service charge
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:3 inSection:0];
+        CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
+        
+        float afterDiscount = totalAmount-_discountValue;
+        float serviceChargeValue;
+        if(branch.priceIncludeVat)
         {
-            //service charge
-            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:3 inSection:0];
-            CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
-
-            float afterDiscount = totalAmount-_discountValue;
-            float serviceChargeValue;
-            if(branch.priceIncludeVat)
-            {
-                afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-            }
-            else
-            {
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-            }
-
-            serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-            NSString *strTotal = [Utility formatDecimal:serviceChargeValue withMinFraction:2 andMaxFraction:2];
-            strTotal = [Utility addPrefixBahtSymbol:strTotal];
-            cell.lblAmount.text = strTotal;
-            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-            cell.lblAmount.textColor = cSystem4;
+            afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
+            serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
         }
+        else
         {
-            //vat
-            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:4 inSection:0];
-            CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
-
-            float afterDiscount = totalAmount-_discountValue;
-            float serviceChargeValue;
-            float vatAmount;
-            if(branch.priceIncludeVat)
-            {
-                afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                vatAmount = afterDiscount * branch.percentVat * 0.01;
-            }
-            else
-            {
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
-            }
-
-            vatAmount = roundf(vatAmount*100)/100;
-            NSString *strAmount = [Utility formatDecimal:vatAmount withMinFraction:2 andMaxFraction:2];
-            strAmount = [Utility addPrefixBahtSymbol:strAmount];
-            cell.lblAmount.text = strAmount;
-            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-            cell.lblAmount.textColor = cSystem4;
+            serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
         }
-        {
-            //net total amount
-            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:5 inSection:0];
-            CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
-
-            float afterDiscount = totalAmount-_discountValue;
-            float serviceChargeValue;
-            float vatAmount;
-            if(branch.priceIncludeVat)
-            {
-                afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                vatAmount = afterDiscount * branch.percentVat * 0.01;
-            }
-            else
-            {
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
-            }
-
-            vatAmount = roundf(vatAmount*100)/100;
-            _vatValue = vatAmount;
-            _serviceChargeValue = serviceChargeValue;
-            float netTotalAmount = afterDiscount+serviceChargeValue+vatAmount;
-            netTotalAmount = roundf(netTotalAmount*100)/100;
-            NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
-            strAmount = [Utility addPrefixBahtSymbol:strAmount];
-            cell.lblAmount.text = strAmount;
-            _netTotal = netTotalAmount;
-        }
+        
+        serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+        NSString *strTotal = [Utility formatDecimal:serviceChargeValue withMinFraction:2 andMaxFraction:2];
+        strTotal = [Utility addPrefixBahtSymbol:strTotal];
+        cell.lblAmount.text = strTotal;
+        cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+        cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+        cell.lblAmount.textColor = cSystem4;
     }
-    else
     {
+        //vat
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:4 inSection:0];
+        CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
+        
+        float afterDiscount = totalAmount-_discountValue;
+        float serviceChargeValue;
+        float vatAmount;
+        if(branch.priceIncludeVat)
         {
-            //vat
-            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:3 inSection:0];
-            CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
-
-            float afterDiscount = totalAmount-_discountValue;
-            float serviceChargeValue;
-            float vatAmount;
-            if(branch.priceIncludeVat)
-            {
-                afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                vatAmount = afterDiscount * branch.percentVat * 0.01;
-            }
-            else
-            {
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
-            }
-
-            vatAmount = roundf(vatAmount*100)/100;
-            NSString *strAmount = [Utility formatDecimal:vatAmount withMinFraction:2 andMaxFraction:2];
-            strAmount = [Utility addPrefixBahtSymbol:strAmount];
-            cell.lblAmount.text = strAmount;
-            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-            cell.lblAmount.textColor = cSystem4;
+            afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
+            serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
+            serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+            vatAmount = afterDiscount * branch.percentVat * 0.01;
         }
+        else
         {
-            //net total amount
-            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:4 inSection:0];
-            CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
-
-            float afterDiscount = totalAmount-_discountValue;
-            float serviceChargeValue;
-            float vatAmount;
-            if(branch.priceIncludeVat)
-            {
-                afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                vatAmount = afterDiscount * branch.percentVat * 0.01;
-            }
-            else
-            {
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
-            }
-
-            vatAmount = roundf(vatAmount*100)/100;
-            _vatValue = vatAmount;
-            _serviceChargeValue = serviceChargeValue;
-            float netTotalAmount = afterDiscount+serviceChargeValue+vatAmount;
-            netTotalAmount = roundf(netTotalAmount*100)/100;
-            NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
-            strAmount = [Utility addPrefixBahtSymbol:strAmount];
-            cell.lblAmount.text = strAmount;
-            _netTotal = netTotalAmount;
+            serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
+            serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+            vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
         }
+        
+        vatAmount = roundf(vatAmount*100)/100;
+        NSString *strAmount = [Utility formatDecimal:vatAmount withMinFraction:2 andMaxFraction:2];
+        strAmount = [Utility addPrefixBahtSymbol:strAmount];
+        cell.lblAmount.text = strAmount;
+        cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+        cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+        cell.lblAmount.textColor = cSystem4;
+    }
+    {
+        //net total amount
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:5 inSection:0];
+        CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
+        
+        float afterDiscount = totalAmount-_discountValue;
+        float serviceChargeValue;
+        float vatAmount;
+        if(branch.priceIncludeVat)
+        {
+            afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
+            serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
+            serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+            vatAmount = afterDiscount * branch.percentVat * 0.01;
+        }
+        else
+        {
+            serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
+            serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+            vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
+        }
+        
+        vatAmount = roundf(vatAmount*100)/100;
+        _vatValue = vatAmount;
+        _serviceChargeValue = serviceChargeValue;
+        float netTotalAmount = afterDiscount+serviceChargeValue+vatAmount;
+        netTotalAmount = roundf(netTotalAmount*100)/100;
+        NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
+        strAmount = [Utility addPrefixBahtSymbol:strAmount];
+        cell.lblAmount.text = strAmount;
+        _netTotal = netTotalAmount;
     }
 }
 

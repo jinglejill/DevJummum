@@ -134,13 +134,9 @@
 
 -(BOOL) needsUpdate
 {
-//    return YES;
-//    //test
     NSDictionary* infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString* appID = infoDictionary[@"CFBundleIdentifier"];
-    //test
-//    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.jummum.co/DEV/DEV_JUMMUM/test.php"]];
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/lookup?bundleId=%@", [Utility bundleID]]];
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/lookup?bundleId=%@", appID]];
     NSData* data = [NSData dataWithContentsOfURL:url];
     NSDictionary* lookup = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     

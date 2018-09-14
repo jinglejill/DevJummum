@@ -431,468 +431,163 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
         
         
-        if(receipt.discountValue == 0 && receipt.serviceChargePercent == 0)//3 rows
+        
+        //remark
+        if(![Utility isStringEmpty:receipt.remark])
         {
-            //remark
-            if(![Utility isStringEmpty:receipt.remark])
-            {
-                CustomTableViewCellLabelRemark *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
-                NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
-                cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
-                [cell.lblText sizeToFit];
-                cell.lblTextHeight.constant = cell.lblText.frame.size.height;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-                
-                
-                //separatorLine
-                CustomTableViewCellSeparatorLine *cell2 = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierSeparatorLine];
-                
-                UIImage *image2 = [self imageFromView:cell2];
-                [arrImage addObject:image2];
-            }
+            CustomTableViewCellLabelRemark *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
+            NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
+            cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
+            [cell.lblText sizeToFit];
+            cell.lblTextHeight.constant = cell.lblText.frame.size.height;
             
-            // 0:
+            
+            UIImage *image = [self imageFromView:cell];
+            [arrImage addObject:image];
+            
+            
+            
+            //separatorLine
+            CustomTableViewCellSeparatorLine *cell2 = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierSeparatorLine];
+            
+            UIImage *image2 = [self imageFromView:cell2];
+            [arrImage addObject:image2];
+        }
+        // 0:
+        {
+            CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+            NSString *strTitle = [NSString stringWithFormat:@"%ld รายการ",[orderTakingList count]];
+            NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList] withMinFraction:2 andMaxFraction:2];
+            strTotal = [Utility addPrefixBahtSymbol:strTotal];
+            cell.lblTitle.text = strTitle;
+            cell.lblAmount.text = strTotal;
+            cell.vwTopBorder.hidden = YES;
+            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+            cell.lblTitle.textColor = cSystem4;
+            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+            cell.lblAmount.textColor = cSystem1;
+            
+            
+            UIImage *image = [self imageFromView:cell];
+            [arrImage addObject:image];
+        }
+        // 1:
+        {
+            //discount
+            CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+            NSString *strDiscount = [Utility formatDecimal:receipt.discountAmount withMinFraction:0 andMaxFraction:2];
+            strDiscount = [NSString stringWithFormat:@"ส่วนลด %@%%",strDiscount];
+            
+            NSString *strAmount = [Utility formatDecimal:receipt.discountValue withMinFraction:2 andMaxFraction:2];
+            strAmount = [Utility addPrefixBahtSymbol:strAmount];
+            strAmount = [NSString stringWithFormat:@"-%@",strAmount];
+            
+            
+            cell.lblTitle.text = receipt.discountType==1?@"ส่วนลด":strDiscount;
+            cell.lblAmount.text = strAmount;
+            cell.vwTopBorder.hidden = YES;
+            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+            cell.lblTitle.textColor = cSystem4;
+            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+            cell.lblAmount.textColor = cSystem2;
+            
+            
+            UIImage *image = [self imageFromView:cell];
+            if(receipt.discountAmount > 0)
             {
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strTitle = [NSString stringWithFormat:@"%ld รายการ",[orderTakingList count]];
-                NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList] withMinFraction:2 andMaxFraction:2];
-                strTotal = [Utility addPrefixBahtSymbol:strTotal];
-                cell.lblTitle.text = strTitle;
-                cell.lblAmount.text = strTotal;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblAmount.textColor = cSystem1;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 1:
-            {
-                //vat
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strPercentVat = [Utility formatDecimal:receipt.vatPercent withMinFraction:0 andMaxFraction:2];
-                strPercentVat = [NSString stringWithFormat:@"Vat %@%%",strPercentVat];
-                
-                NSString *strAmount = [Utility formatDecimal:receipt.vatValue withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                
-                cell.lblTitle.text = receipt.vatPercent==0?@"Vat":strPercentVat;
-                cell.lblAmount.text = strAmount;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblAmount.textColor = cSystem4;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 2:
-            {
-                //net total
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                float netTotalAmount = receipt.cashAmount+receipt.creditCardAmount+receipt.transferAmount;
-                NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                cell.lblTitle.text = @"ยอดรวมทั้งสิ้น";
-                cell.lblAmount.text = strAmount;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblAmount.textColor = cSystem1;
-                
-                
-                UIImage *image = [self imageFromView:cell];
                 [arrImage addObject:image];
             }
             
         }
-        else if(receipt.discountValue > 0 && receipt.serviceChargePercent == 0)//5 rows
+        // 2:
         {
-            //remark
-            if(![Utility isStringEmpty:receipt.remark])
+            //after discount
+            CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+//            NSString *strTitle = @"ยอดรวม";
+            NSString *strTitle = branch.priceIncludeVat?@"ยอดรวม (รวม Vat)":@"ยอดรวม";
+            NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList]-receipt.discountValue withMinFraction:2 andMaxFraction:2];
+            strTotal = [Utility addPrefixBahtSymbol:strTotal];
+            cell.lblTitle.text = strTitle;
+            cell.lblAmount.text = strTotal;
+            cell.vwTopBorder.hidden = YES;
+            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+            cell.lblTitle.textColor = cSystem4;
+            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+            cell.lblAmount.textColor = cSystem1;
+            
+            
+            UIImage *image = [self imageFromView:cell];
+            [arrImage addObject:image];
+        }
+        // 3:
+        {
+            //service charge
+            CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+            NSString *strServiceChargePercent = [Utility formatDecimal:receipt.serviceChargePercent withMinFraction:0 andMaxFraction:2];
+            strServiceChargePercent = [NSString stringWithFormat:@"Service charge %@%%",strServiceChargePercent];
+            
+            NSString *strAmount = [Utility formatDecimal:receipt.serviceChargeValue withMinFraction:2 andMaxFraction:2];
+            strAmount = [Utility addPrefixBahtSymbol:strAmount];
+            
+            cell.lblTitle.text = strServiceChargePercent;
+            cell.lblAmount.text = strAmount;
+            cell.vwTopBorder.hidden = YES;
+            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+            cell.lblTitle.textColor = cSystem4;
+            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+            cell.lblAmount.textColor = cSystem4;
+            
+            
+            UIImage *image = [self imageFromView:cell];
+            if(branch.serviceChargePercent > 0)
             {
-                CustomTableViewCellLabelRemark *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
-                NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
-                cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
-                [cell.lblText sizeToFit];
-                cell.lblTextHeight.constant = cell.lblText.frame.size.height;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-                
-                
-                
-                //separatorLine
-                CustomTableViewCellSeparatorLine *cell2 = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierSeparatorLine];
-                
-                UIImage *image2 = [self imageFromView:cell2];
-                [arrImage addObject:image2];
-            }
-            // 0:
-            {
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strTitle = [NSString stringWithFormat:@"%ld รายการ",[orderTakingList count]];
-                NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList] withMinFraction:2 andMaxFraction:2];
-                strTotal = [Utility addPrefixBahtSymbol:strTotal];
-                cell.lblTitle.text = strTitle;
-                cell.lblAmount.text = strTotal;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblAmount.textColor = cSystem1;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 1:
-            {
-                //discount
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strDiscount = [Utility formatDecimal:receipt.discountAmount withMinFraction:0 andMaxFraction:2];
-                strDiscount = [NSString stringWithFormat:@"ส่วนลด %@%%",strDiscount];
-                
-                NSString *strAmount = [Utility formatDecimal:receipt.discountValue withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                strAmount = [NSString stringWithFormat:@"-%@",strAmount];
-                
-                cell.lblTitle.text = receipt.discountType==1?@"ส่วนลด":strDiscount;
-                cell.lblAmount.text = strAmount;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblAmount.textColor = cSystem2;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 2:
-            {
-                //after discount
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strTitle = @"ยอดรวม";
-                NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList]-receipt.discountValue withMinFraction:2 andMaxFraction:2];
-                strTotal = [Utility addPrefixBahtSymbol:strTotal];
-                cell.lblTitle.text = strTitle;
-                cell.lblAmount.text = strTotal;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblAmount.textColor = cSystem1;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 3:
-            {
-                //vat
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strPercentVat = [Utility formatDecimal:receipt.vatPercent withMinFraction:0 andMaxFraction:2];
-                strPercentVat = [NSString stringWithFormat:@"Vat %@%%",strPercentVat];
-                
-                NSString *strAmount = [Utility formatDecimal:receipt.vatValue withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                
-                cell.lblTitle.text = receipt.vatPercent==0?@"Vat":strPercentVat;
-                cell.lblAmount.text = strAmount;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblAmount.textColor = cSystem4;
-                
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 4:
-            {
-                //net total
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                float netTotalAmount = receipt.cashAmount+receipt.creditCardAmount+receipt.transferAmount;
-                NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                cell.lblTitle.text = @"ยอดรวมทั้งสิ้น";
-                cell.lblAmount.text = strAmount;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblAmount.textColor = cSystem1;
-                
-                
-                UIImage *image = [self imageFromView:cell];
                 [arrImage addObject:image];
             }
         }
-        else if(receipt.discountValue == 0 && receipt.serviceChargePercent > 0)//4 rows
+        // 4:
         {
-            //remark
-            if(![Utility isStringEmpty:receipt.remark])
+            //vat
+            CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+            NSString *strPercentVat = [Utility formatDecimal:receipt.vatPercent withMinFraction:0 andMaxFraction:2];
+            strPercentVat = [NSString stringWithFormat:@"Vat %@%%",strPercentVat];
+            
+            NSString *strAmount = [Utility formatDecimal:receipt.vatValue withMinFraction:2 andMaxFraction:2];
+            strAmount = [Utility addPrefixBahtSymbol:strAmount];
+            
+            cell.lblTitle.text = receipt.vatPercent==0?@"Vat":strPercentVat;
+            cell.lblAmount.text = strAmount;
+            cell.vwTopBorder.hidden = YES;
+            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+            cell.lblTitle.textColor = cSystem4;
+            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+            cell.lblAmount.textColor = cSystem4;
+            
+            
+            UIImage *image = [self imageFromView:cell];
+            if(branch.percentVat > 0)
             {
-                CustomTableViewCellLabelRemark *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
-                NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
-                cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
-                [cell.lblText sizeToFit];
-                cell.lblTextHeight.constant = cell.lblText.frame.size.height;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-                
-                
-                
-                //separatorLine
-                CustomTableViewCellSeparatorLine *cell2 = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierSeparatorLine];
-                
-                UIImage *image2 = [self imageFromView:cell2];
-                [arrImage addObject:image2];
-            }
-            // 0:
-            {
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strTitle = [NSString stringWithFormat:@"%ld รายการ",[orderTakingList count]];
-                NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList] withMinFraction:2 andMaxFraction:2];
-                strTotal = [Utility addPrefixBahtSymbol:strTotal];
-                cell.lblTitle.text = strTitle;
-                cell.lblAmount.text = strTotal;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblAmount.textColor = cSystem1;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 1:
-            {
-                //service charge
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strServiceChargePercent = [Utility formatDecimal:receipt.serviceChargePercent withMinFraction:0 andMaxFraction:2];
-                strServiceChargePercent = [NSString stringWithFormat:@"Service charge %@%%",strServiceChargePercent];
-                
-                NSString *strAmount = [Utility formatDecimal:receipt.serviceChargeValue withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                
-                cell.lblTitle.text = strServiceChargePercent;
-                cell.lblAmount.text = strAmount;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblAmount.textColor = cSystem4;
-                
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 2:
-            {
-                //vat
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strPercentVat = [Utility formatDecimal:receipt.vatPercent withMinFraction:0 andMaxFraction:2];
-                strPercentVat = [NSString stringWithFormat:@"Vat %@%%",strPercentVat];
-                
-                NSString *strAmount = [Utility formatDecimal:receipt.vatValue withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                
-                cell.lblTitle.text = receipt.vatPercent==0?@"Vat":strPercentVat;
-                cell.lblAmount.text = strAmount;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblAmount.textColor = cSystem4;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 3:
-            {
-                //net total
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                float netTotalAmount = receipt.cashAmount+receipt.creditCardAmount+receipt.transferAmount;
-                NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                cell.lblTitle.text = @"ยอดรวมทั้งสิ้น";
-                cell.lblAmount.text = strAmount;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblAmount.textColor = cSystem1;
-                
-                
-                
-                UIImage *image = [self imageFromView:cell];
                 [arrImage addObject:image];
             }
         }
-        else if(receipt.discountValue > 0 && receipt.serviceChargePercent > 0)//6 rows
+        // 5:
         {
-            //remark
-            if(![Utility isStringEmpty:receipt.remark])
+            //net total
+            CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+            float netTotalAmount = receipt.cashAmount+receipt.creditCardAmount+receipt.transferAmount;
+            NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
+            strAmount = [Utility addPrefixBahtSymbol:strAmount];
+            cell.lblTitle.text = @"ยอดรวมทั้งสิ้น";
+            cell.lblAmount.text = strAmount;
+            cell.vwTopBorder.hidden = YES;
+            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+            cell.lblTitle.textColor = cSystem4;
+            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+            cell.lblAmount.textColor = cSystem1;
+            
+            
+            UIImage *image = [self imageFromView:cell];
+            if(branch.serviceChargePercent+branch.percentVat > 0)
             {
-                CustomTableViewCellLabelRemark *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
-                NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
-                cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
-                [cell.lblText sizeToFit];
-                cell.lblTextHeight.constant = cell.lblText.frame.size.height;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-                
-                
-                
-                //separatorLine
-                CustomTableViewCellSeparatorLine *cell2 = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierSeparatorLine];
-                
-                UIImage *image2 = [self imageFromView:cell2];
-                [arrImage addObject:image2];
-            }
-            // 0:
-            {
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strTitle = [NSString stringWithFormat:@"%ld รายการ",[orderTakingList count]];
-                NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList] withMinFraction:2 andMaxFraction:2];
-                strTotal = [Utility addPrefixBahtSymbol:strTotal];
-                cell.lblTitle.text = strTitle;
-                cell.lblAmount.text = strTotal;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblAmount.textColor = cSystem1;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 1:
-            {
-                //discount
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strDiscount = [Utility formatDecimal:receipt.discountAmount withMinFraction:0 andMaxFraction:2];
-                strDiscount = [NSString stringWithFormat:@"ส่วนลด %@%%",strDiscount];
-                
-                NSString *strAmount = [Utility formatDecimal:receipt.discountValue withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                strAmount = [NSString stringWithFormat:@"-%@",strAmount];
-                
-                
-                cell.lblTitle.text = receipt.discountType==1?@"ส่วนลด":strDiscount;
-                cell.lblAmount.text = strAmount;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblAmount.textColor = cSystem2;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 2:
-            {
-                //after discount
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strTitle = @"ยอดรวม";
-                NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList]-receipt.discountValue withMinFraction:2 andMaxFraction:2];
-                strTotal = [Utility addPrefixBahtSymbol:strTotal];
-                cell.lblTitle.text = strTitle;
-                cell.lblAmount.text = strTotal;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblAmount.textColor = cSystem1;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 3:
-            {
-                //service charge
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strServiceChargePercent = [Utility formatDecimal:receipt.serviceChargePercent withMinFraction:0 andMaxFraction:2];
-                strServiceChargePercent = [NSString stringWithFormat:@"Service charge %@%%",strServiceChargePercent];
-                
-                NSString *strAmount = [Utility formatDecimal:receipt.serviceChargeValue withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                
-                cell.lblTitle.text = strServiceChargePercent;
-                cell.lblAmount.text = strAmount;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblAmount.textColor = cSystem4;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 4:
-            {
-                //vat
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                NSString *strPercentVat = [Utility formatDecimal:receipt.vatPercent withMinFraction:0 andMaxFraction:2];
-                strPercentVat = [NSString stringWithFormat:@"Vat %@%%",strPercentVat];
-                
-                NSString *strAmount = [Utility formatDecimal:receipt.vatValue withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                
-                cell.lblTitle.text = receipt.vatPercent==0?@"Vat":strPercentVat;
-                cell.lblAmount.text = strAmount;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                cell.lblAmount.textColor = cSystem4;
-                
-                
-                UIImage *image = [self imageFromView:cell];
-                [arrImage addObject:image];
-            }
-            // 5:
-            {
-                //net total
-                CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-                float netTotalAmount = receipt.cashAmount+receipt.creditCardAmount+receipt.transferAmount;
-                NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
-                strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                cell.lblTitle.text = @"ยอดรวมทั้งสิ้น";
-                cell.lblAmount.text = strAmount;
-                cell.vwTopBorder.hidden = YES;
-                cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblTitle.textColor = cSystem4;
-                cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-                cell.lblAmount.textColor = cSystem1;
-                
-                
-                UIImage *image = [self imageFromView:cell];
                 [arrImage addObject:image];
             }
         }

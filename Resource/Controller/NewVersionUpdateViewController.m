@@ -90,8 +90,8 @@
 - (IBAction)update:(id)sender
 {
     NSDictionary* infoDictionary = [[NSBundle mainBundle] infoDictionary];
-//    NSString* appID = infoDictionary[@"CFBundleIdentifier"];
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/lookup?bundleId=%@",[Utility bundleID]]];
+    NSString* appID = infoDictionary[@"CFBundleIdentifier"];
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/lookup?bundleId=%@",appID]];
     NSData* data = [NSData dataWithContentsOfURL:url];
     NSDictionary* lookup = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     if([lookup[@"results"] count] > 0)
