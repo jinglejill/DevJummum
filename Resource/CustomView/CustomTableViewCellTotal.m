@@ -30,5 +30,6 @@
     self.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];
     self.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];
     self.lblAmount.textColor = cSystem1;
+    self.lblAmountWidth.constant = 150;
 }
 @end

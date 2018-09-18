@@ -372,6 +372,8 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                         
                         cell.lblTitle.text = strDiscount;
                         cell.lblAmount.text = strAmount;
+                        [cell.lblAmount sizeToFit];
+                        cell.lblAmountWidth.constant = cell.lblAmount.frame.size.width;
                         cell.vwTopBorder.hidden = YES;
                         cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
                         cell.lblTitle.textColor = cSystem4;
@@ -390,7 +392,6 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                         
                         
                         
-//                        NSString *strTitle = @"ยอดรวม";
                         NSString *strTitle = branch.priceIncludeVat?@"ยอดรวม (รวม Vat)":@"ยอดรวม";
                         NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList]-receipt.discountValue withMinFraction:2 andMaxFraction:2];
                         strTotal = [Utility addPrefixBahtSymbol:strTotal];

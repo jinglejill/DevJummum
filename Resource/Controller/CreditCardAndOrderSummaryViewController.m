@@ -45,8 +45,8 @@
 {
     CreditCard *_creditCard;
     NSMutableArray *_orderTakingList;
-//    NSString *_voucherCode;
     
+    float _totalAmount;
     float _netTotal;
     float _serviceChargeValue;
     float _vatValue;
@@ -54,6 +54,8 @@
     float _discountValue;
     NSInteger _discountType;
     float _discountAmount;
+    float _shopDiscount;
+    float _jummumDiscount;
     NSInteger _promotionOrRewardRedemption;//1=promotion,2=rewardRedemption
     Receipt *_receipt;
     NSIndexPath *_currentScrollIndexPath;
@@ -1001,7 +1003,9 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 
                 NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
                 NSString *strTitle = [NSString stringWithFormat:@"%ld รายการ",[orderTakingList count]];
-                NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:_orderTakingList] withMinFraction:2 andMaxFraction:2];
+                float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
+                totalAmount = roundf(totalAmount*100)/100;
+                NSString *strTotal = [Utility formatDecimal:totalAmount withMinFraction:2 andMaxFraction:2];
                 strTotal = [Utility addPrefixBahtSymbol:strTotal];
                 cell.lblTitle.text = strTitle;
                 cell.lblAmount.text = strTotal;
@@ -1011,6 +1015,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
                 cell.lblAmount.textColor = cSystem1;
                 cell.hidden = NO;
+                _totalAmount = totalAmount;
                 
                 return  cell;
             }
@@ -1052,6 +1057,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 
                 NSString *strTitle = branch.priceIncludeVat?@"ยอดรวม (รวม Vat)":@"ยอดรวม";
                 float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
+                totalAmount = roundf(totalAmount*100)/100;
                 NSString *strTotal = [Utility formatDecimal:totalAmount withMinFraction:2 andMaxFraction:2];
                 strTotal = [Utility addPrefixBahtSymbol:strTotal];
                 cell.lblTitle.text = strTitle;
@@ -1077,6 +1083,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 NSString *strServiceCharge = [Utility formatDecimal:branch.serviceChargePercent withMinFraction:0 andMaxFraction:2];
                 NSString *strTitle = [NSString stringWithFormat:@"Service charge %@%%",strServiceCharge];
                 float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
+                totalAmount = roundf(totalAmount*100)/100;
                 float serviceChargeValue;
                 if(branch.priceIncludeVat)
                 {
@@ -1114,6 +1121,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 NSString *strPercentVat = [Utility formatDecimal:branch.percentVat withMinFraction:0 andMaxFraction:2];
                 strPercentVat = [NSString stringWithFormat:@"Vat %@%%",strPercentVat];
                 float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
+                totalAmount = roundf(totalAmount*100)/100;
                 float serviceChargeValue;
                 float vatAmount;
                 if(branch.priceIncludeVat)
@@ -1154,6 +1162,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 
 
                 float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
+                totalAmount = roundf(totalAmount*100)/100;
                 float serviceChargeValue;
                 float vatAmount;
                 if(branch.priceIncludeVat)
@@ -1581,7 +1590,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         
         
         UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-        Receipt *receipt = [[Receipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID servingPerson:0 customerType:4 openTableDate:[Utility currentDateTime] cashAmount:0 cashReceive:0 creditCardType:[self getCreditCardType:_creditCard.creditCardNo] creditCardNo:_creditCard.creditCardNo creditCardAmount:_netTotal transferDate:[Utility notIdentifiedDate] transferAmount:0 remark:_remark discountType:_discountType discountAmount:_discountAmount discountValue:_discountValue discountReason:@"" serviceChargePercent:branch.serviceChargePercent serviceChargeValue:_serviceChargeValue priceIncludeVat:branch.priceIncludeVat vatPercent:branch.percentVat vatValue:_vatValue status:2 statusRoute:@"" receiptNoID:@"" receiptNoTaxID:@"" receiptDate:[Utility currentDateTime] sendToKitchenDate:[Utility notIdentifiedDate] deliveredDate:[Utility notIdentifiedDate] mergeReceiptID:0 buffetReceiptID:buffetReceipt.receiptID voucherCode:_selectedVoucherCode];
+        Receipt *receipt = [[Receipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID servingPerson:0 customerType:4 openTableDate:[Utility currentDateTime] totalAmount:_totalAmount cashAmount:0 cashReceive:0 creditCardType:[self getCreditCardType:_creditCard.creditCardNo] creditCardNo:_creditCard.creditCardNo creditCardAmount:_netTotal transferDate:[Utility notIdentifiedDate] transferAmount:0 remark:_remark discountType:_discountType discountAmount:_discountAmount discountValue:_discountValue discountReason:@"" serviceChargePercent:branch.serviceChargePercent serviceChargeValue:_serviceChargeValue priceIncludeVat:branch.priceIncludeVat vatPercent:branch.percentVat vatValue:_vatValue status:2 statusRoute:@"" receiptNoID:@"" receiptNoTaxID:@"" receiptDate:[Utility currentDateTime] sendToKitchenDate:[Utility notIdentifiedDate] deliveredDate:[Utility notIdentifiedDate] mergeReceiptID:0 buffetReceiptID:buffetReceipt.receiptID voucherCode:_selectedVoucherCode shopDiscount:_shopDiscount jummumDiscount:_jummumDiscount];
         
         
         
@@ -1703,17 +1712,14 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                         }
                     }
                     
-                    
-                    
                     [CreditCard updatePrimaryCard:_creditCard creditCardList:creditCardList];
-                    
                 }
                 
                 
                 
                 
                 UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-                Receipt *receipt = [[Receipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID servingPerson:0 customerType:4 openTableDate:[Utility currentDateTime] cashAmount:0 cashReceive:0 creditCardType:[self getCreditCardType:_creditCard.creditCardNo] creditCardNo:_creditCard.creditCardNo creditCardAmount:_netTotal transferDate:[Utility notIdentifiedDate] transferAmount:0 remark:_remark discountType:_discountType discountAmount:_discountAmount discountValue:_discountValue discountReason:@"" serviceChargePercent:branch.serviceChargePercent serviceChargeValue:_serviceChargeValue priceIncludeVat:branch.priceIncludeVat vatPercent:branch.percentVat vatValue:_vatValue status:2 statusRoute:@"" receiptNoID:@"" receiptNoTaxID:@"" receiptDate:[Utility currentDateTime] sendToKitchenDate:[Utility notIdentifiedDate] deliveredDate:[Utility notIdentifiedDate] mergeReceiptID:0 buffetReceiptID:buffetReceipt.receiptID voucherCode:_selectedVoucherCode];
+                Receipt *receipt = [[Receipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID servingPerson:0 customerType:4 openTableDate:[Utility currentDateTime] totalAmount:_totalAmount cashAmount:0 cashReceive:0 creditCardType:[self getCreditCardType:_creditCard.creditCardNo] creditCardNo:_creditCard.creditCardNo creditCardAmount:_netTotal transferDate:[Utility notIdentifiedDate] transferAmount:0 remark:_remark discountType:_discountType discountAmount:_discountAmount discountValue:_discountValue discountReason:@"" serviceChargePercent:branch.serviceChargePercent serviceChargeValue:_serviceChargeValue priceIncludeVat:branch.priceIncludeVat vatPercent:branch.percentVat vatValue:_vatValue status:2 statusRoute:@"" receiptNoID:@"" receiptNoTaxID:@"" receiptDate:[Utility currentDateTime] sendToKitchenDate:[Utility notIdentifiedDate] deliveredDate:[Utility notIdentifiedDate] mergeReceiptID:0 buffetReceiptID:buffetReceipt.receiptID voucherCode:_selectedVoucherCode shopDiscount:_shopDiscount jummumDiscount:_jummumDiscount];
                 
                 
                 
@@ -1935,10 +1941,12 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 {
     //เช็คว่า voucher valid มั๊ย
     [self loadingOverlayView];
+    float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
+    totalAmount = roundf(totalAmount*100)/100;
     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
     self.homeModel = [[HomeModel alloc]init];
     self.homeModel.delegate = self;
-    [self.homeModel downloadItems:dbPromotion withData:@[voucherCode,userAccount,branch,@([OrderTaking getSumSpecialPrice:_orderTakingList])]];
+    [self.homeModel downloadItems:dbPromotion withData:@[voucherCode,userAccount,branch,@(totalAmount)]];
 
 }
 
@@ -1972,6 +1980,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         
         Promotion *promotion = promotionList[0];
         float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
+        totalAmount = roundf(totalAmount*100)/100;
         if(promotion.discountMenuID)
         {
             NSMutableArray *currentOrderTakingList = [OrderTaking getCurrentOrderTakingList];
@@ -2052,6 +2061,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 voucherView.lblDiscountAmount.text = [Utility formatDecimal:_discountValue withMinFraction:2 andMaxFraction:2];
                 voucherView.lblDiscountAmount.text = [Utility addPrefixBahtSymbol:voucherView.lblDiscountAmount.text];
                 voucherView.lblDiscountAmount.text = [NSString stringWithFormat:@"-%@",voucherView.lblDiscountAmount.text];
+
                 
                 
                 NSString *strTotalAmountNet = [Utility formatDecimal:totalAmount-_discountValue withMinFraction:2 andMaxFraction:2];
@@ -2124,6 +2134,48 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             Message *type = typeList[0];
             _promotionOrRewardRedemption = [type.text integerValue];
             _promotionUsed = promotion;
+            
+            
+            //check sharedDiscountAmount
+            if(promotion.discountType == 1)//baht
+            {
+                if(_discountValue < promotion.discountAmount)
+                {
+                    _shopDiscount = _discountValue*promotion.shopDiscount/(promotion.shopDiscount + promotion.jummumDiscount);
+                    _shopDiscount = roundf(_shopDiscount * 100)/100;
+                    _jummumDiscount = _discountValue - _shopDiscount;
+                }
+                else
+                {
+                    _shopDiscount = promotion.shopDiscount;
+                    _jummumDiscount = promotion.jummumDiscount;
+                }
+            }
+            else if(promotion.discountType == 2)//percent
+            {
+                _shopDiscount = _discountValue*promotion.shopDiscount*0.01;
+                _shopDiscount = roundf(_shopDiscount * 100)/100;
+                _jummumDiscount = _discountValue - _shopDiscount;
+                
+                if(promotion.sharedDiscountType == 1)//shop set maxDiscount
+                {
+                    if(_shopDiscount > promotion.sharedDiscountAmountMax)
+                    {
+                        _shopDiscount = promotion.sharedDiscountAmountMax;
+                        _shopDiscount = roundf(_shopDiscount * 100)/100;
+                        _jummumDiscount = _discountValue - _shopDiscount;
+                    }
+                }
+                else if(promotion.sharedDiscountType == 2)//jummum set maxDiscount
+                {
+                    if(_jummumDiscount > promotion.sharedDiscountAmountMax)
+                    {
+                        _jummumDiscount = promotion.sharedDiscountAmountMax;
+                        _jummumDiscount = roundf(_jummumDiscount * 100)/100;
+                        _shopDiscount = _discountValue - _jummumDiscount;
+                    }
+                }
+            }
         }
         
         
@@ -2267,9 +2319,12 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 
     //after discount, vat,service charge,net total
     float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
+    totalAmount = roundf(totalAmount*100)/100;
     _discountType = 0;
     _discountAmount = 0;
     _discountValue = 0;
+    _shopDiscount = 0;
+    _jummumDiscount = 0;
     {
         //after discount
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:2 inSection:0];

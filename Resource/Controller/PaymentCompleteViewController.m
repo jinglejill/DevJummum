@@ -503,7 +503,6 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         {
             //after discount
             CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-//            NSString *strTitle = @"ยอดรวม";
             NSString *strTitle = branch.priceIncludeVat?@"ยอดรวม (รวม Vat)":@"ยอดรวม";
             NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList]-receipt.discountValue withMinFraction:2 andMaxFraction:2];
             strTotal = [Utility addPrefixBahtSymbol:strTotal];

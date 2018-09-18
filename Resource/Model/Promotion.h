@@ -20,6 +20,10 @@
 @property (retain, nonatomic) NSString * imageUrl;
 @property (nonatomic) NSInteger discountType;
 @property (nonatomic) float discountAmount;
+@property (nonatomic) float shopDiscount;
+@property (nonatomic) float jummumDiscount;
+@property (nonatomic) NSInteger sharedDiscountType;
+@property (nonatomic) float sharedDiscountAmountMax;
 @property (nonatomic) NSInteger minimumSpending;
 @property (nonatomic) NSInteger maxDiscountAmountPerDay;
 @property (nonatomic) NSInteger allowEveryone;
@@ -37,9 +41,6 @@
 @property (retain, nonatomic) NSDate * modifiedDate;
 
 
-
-
-
 @property (nonatomic) float moreDiscountToGo;
 @property (nonatomic) NSInteger rewardRedemptionID;
 @property (nonatomic) NSInteger promoCodeID;
@@ -47,9 +48,7 @@
 @property (nonatomic) float sales;
 @property (nonatomic) BOOL selected;
 
-
--(Promotion *)initWithMainBranchID:(NSInteger)mainBranchID startDate:(NSDate *)startDate endDate:(NSDate *)endDate usingStartDate:(NSDate *)usingStartDate usingEndDate:(NSDate *)usingEndDate header:(NSString *)header subTitle:(NSString *)subTitle imageUrl:(NSString *)imageUrl discountType:(NSInteger)discountType discountAmount:(float)discountAmount minimumSpending:(NSInteger)minimumSpending maxDiscountAmountPerDay:(NSInteger)maxDiscountAmountPerDay allowEveryone:(NSInteger)allowEveryone allowDiscountForAllMenuType:(NSInteger)allowDiscountForAllMenuType discountMenuID:(NSInteger)discountMenuID noOfLimitUse:(NSInteger)noOfLimitUse noOfLimitUsePerUser:(NSInteger)noOfLimitUsePerUser noOfLimitUsePerUserPerDay:(NSInteger)noOfLimitUsePerUserPerDay voucherCode:(NSString *)voucherCode termsConditions:(NSString *)termsConditions type:(NSInteger)type orderNo:(NSInteger)orderNo status:(NSInteger)status;
-
+-(Promotion *)initWithMainBranchID:(NSInteger)mainBranchID startDate:(NSDate *)startDate endDate:(NSDate *)endDate usingStartDate:(NSDate *)usingStartDate usingEndDate:(NSDate *)usingEndDate header:(NSString *)header subTitle:(NSString *)subTitle imageUrl:(NSString *)imageUrl discountType:(NSInteger)discountType discountAmount:(float)discountAmount shopDiscount:(float)shopDiscount jummumDiscount:(float)jummumDiscount sharedDiscountType:(NSInteger)sharedDiscountType sharedDiscountAmountMax:(float)sharedDiscountAmountMax minimumSpending:(NSInteger)minimumSpending maxDiscountAmountPerDay:(NSInteger)maxDiscountAmountPerDay allowEveryone:(NSInteger)allowEveryone allowDiscountForAllMenuType:(NSInteger)allowDiscountForAllMenuType discountMenuID:(NSInteger)discountMenuID noOfLimitUse:(NSInteger)noOfLimitUse noOfLimitUsePerUser:(NSInteger)noOfLimitUsePerUser noOfLimitUsePerUserPerDay:(NSInteger)noOfLimitUsePerUserPerDay voucherCode:(NSString *)voucherCode termsConditions:(NSString *)termsConditions type:(NSInteger)type orderNo:(NSInteger)orderNo status:(NSInteger)status;
 
 
 +(NSInteger)getNextID;

@@ -16,7 +16,7 @@
 
 @implementation Promotion
 
--(Promotion *)initWithMainBranchID:(NSInteger)mainBranchID startDate:(NSDate *)startDate endDate:(NSDate *)endDate usingStartDate:(NSDate *)usingStartDate usingEndDate:(NSDate *)usingEndDate header:(NSString *)header subTitle:(NSString *)subTitle imageUrl:(NSString *)imageUrl discountType:(NSInteger)discountType discountAmount:(float)discountAmount minimumSpending:(NSInteger)minimumSpending maxDiscountAmountPerDay:(NSInteger)maxDiscountAmountPerDay allowEveryone:(NSInteger)allowEveryone allowDiscountForAllMenuType:(NSInteger)allowDiscountForAllMenuType discountMenuID:(NSInteger)discountMenuID noOfLimitUse:(NSInteger)noOfLimitUse noOfLimitUsePerUser:(NSInteger)noOfLimitUsePerUser noOfLimitUsePerUserPerDay:(NSInteger)noOfLimitUsePerUserPerDay voucherCode:(NSString *)voucherCode termsConditions:(NSString *)termsConditions type:(NSInteger)type orderNo:(NSInteger)orderNo status:(NSInteger)status
+-(Promotion *)initWithMainBranchID:(NSInteger)mainBranchID startDate:(NSDate *)startDate endDate:(NSDate *)endDate usingStartDate:(NSDate *)usingStartDate usingEndDate:(NSDate *)usingEndDate header:(NSString *)header subTitle:(NSString *)subTitle imageUrl:(NSString *)imageUrl discountType:(NSInteger)discountType discountAmount:(float)discountAmount shopDiscount:(float)shopDiscount jummumDiscount:(float)jummumDiscount sharedDiscountType:(NSInteger)sharedDiscountType sharedDiscountAmountMax:(float)sharedDiscountAmountMax minimumSpending:(NSInteger)minimumSpending maxDiscountAmountPerDay:(NSInteger)maxDiscountAmountPerDay allowEveryone:(NSInteger)allowEveryone allowDiscountForAllMenuType:(NSInteger)allowDiscountForAllMenuType discountMenuID:(NSInteger)discountMenuID noOfLimitUse:(NSInteger)noOfLimitUse noOfLimitUsePerUser:(NSInteger)noOfLimitUsePerUser noOfLimitUsePerUserPerDay:(NSInteger)noOfLimitUsePerUserPerDay voucherCode:(NSString *)voucherCode termsConditions:(NSString *)termsConditions type:(NSInteger)type orderNo:(NSInteger)orderNo status:(NSInteger)status
 {
     self = [super init];
     if(self)
@@ -32,6 +32,10 @@
         self.imageUrl = imageUrl;
         self.discountType = discountType;
         self.discountAmount = discountAmount;
+        self.shopDiscount = shopDiscount;
+        self.jummumDiscount = jummumDiscount;
+        self.sharedDiscountType = sharedDiscountType;
+        self.sharedDiscountAmountMax = sharedDiscountAmountMax;
         self.minimumSpending = minimumSpending;
         self.maxDiscountAmountPerDay = maxDiscountAmountPerDay;
         self.allowEveryone = allowEveryone;
@@ -134,6 +138,10 @@
         [copy setImageUrl:self.imageUrl];
         ((Promotion *)copy).discountType = self.discountType;
         ((Promotion *)copy).discountAmount = self.discountAmount;
+        ((Promotion *)copy).shopDiscount = self.shopDiscount;
+        ((Promotion *)copy).jummumDiscount = self.jummumDiscount;
+        ((Promotion *)copy).sharedDiscountType = self.sharedDiscountType;
+        ((Promotion *)copy).sharedDiscountAmountMax = self.sharedDiscountAmountMax;
         ((Promotion *)copy).minimumSpending = self.minimumSpending;
         ((Promotion *)copy).maxDiscountAmountPerDay = self.maxDiscountAmountPerDay;
         ((Promotion *)copy).allowEveryone = self.allowEveryone;
@@ -149,8 +157,6 @@
         ((Promotion *)copy).status = self.status;
         [copy setModifiedUser:[Utility modifiedUser]];
         [copy setModifiedDate:[Utility currentDateTime]];
-        
-        
     }
     
     return copy;
@@ -169,6 +175,10 @@
        && [self.imageUrl isEqualToString:editingPromotion.imageUrl]
        && self.discountType == editingPromotion.discountType
        && self.discountAmount == editingPromotion.discountAmount
+       && self.shopDiscount == editingPromotion.shopDiscount
+       && self.jummumDiscount == editingPromotion.jummumDiscount
+       && self.sharedDiscountType == editingPromotion.sharedDiscountType
+       && self.sharedDiscountAmountMax == editingPromotion.sharedDiscountAmountMax
        && self.minimumSpending == editingPromotion.minimumSpending
        && self.maxDiscountAmountPerDay == editingPromotion.maxDiscountAmountPerDay
        && self.allowEveryone == editingPromotion.allowEveryone
@@ -202,6 +212,10 @@
     toPromotion.imageUrl = fromPromotion.imageUrl;
     toPromotion.discountType = fromPromotion.discountType;
     toPromotion.discountAmount = fromPromotion.discountAmount;
+    toPromotion.shopDiscount = fromPromotion.shopDiscount;
+    toPromotion.jummumDiscount = fromPromotion.jummumDiscount;
+    toPromotion.sharedDiscountType = fromPromotion.sharedDiscountType;
+    toPromotion.sharedDiscountAmountMax = fromPromotion.sharedDiscountAmountMax;
     toPromotion.minimumSpending = fromPromotion.minimumSpending;
     toPromotion.maxDiscountAmountPerDay = fromPromotion.maxDiscountAmountPerDay;
     toPromotion.allowEveryone = fromPromotion.allowEveryone;

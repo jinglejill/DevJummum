@@ -14,4 +14,5 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnDelete;
 @property (strong, nonatomic) IBOutlet UILabel *lblDiscountAmount;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *lblVoucherCodeWidthConstant;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *lblDiscountAmountWidth;
 @end

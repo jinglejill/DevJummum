@@ -61,6 +61,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="lblAmount" destination="w7d-uY-WWJ" id="sSA-yx-DQN"/>
+                <outlet property="lblAmountWidth" destination="hGv-us-SCx" id="Cdu-J2-59q"/>
                 <outlet property="lblTitle" destination="xJA-nh-unc" id="hze-RW-QSy"/>
                 <outlet property="lblTitleTop" destination="6QL-la-qm4" id="OCP-Pf-YGi"/>
                 <outlet property="vwTopBorder" destination="TIa-lE-bEa" id="gjQ-gb-LEH"/>
