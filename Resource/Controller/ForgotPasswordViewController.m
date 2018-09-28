@@ -45,7 +45,7 @@
     [super viewDidLoad];
     
     
-    NSString *title = [Setting getValue:@"054t" example:@"ลืมรหัสผ่าน"];
+    NSString *title = [Language getText:@"ลืมรหัสผ่าน"];
     lblNavTitle.text = title;
     txtEmail.delegate = self;
     [txtEmail setInputAccessoryView:self.toolBar];
@@ -62,7 +62,7 @@
     
     if(![Utility validateEmailWithString:txtEmail.text])
     {
-        [self showAlert:@"" message:@"คุณใส่อีเมลไม่ถูกต้อง"];
+        [self showAlert:@"" message:[Language getText:@"คุณใส่อีเมลไม่ถูกต้อง"]];
         return;
     }
     
@@ -81,11 +81,11 @@
     NSMutableArray *userAccountList = items[0];
     if([userAccountList count]==0)
     {
-        [self showAlert:@"" message:@"ไม่มีอีเมลนี้ในระบบ"];
+        [self showAlert:@"" message:[Language getText:@"ไม่มีอีเมลนี้ในระบบ"]];
     }
     else
     {
-        [self showAlert:@"" message:@"เราได้ส่งอีเมลให้คุณแล้ว กรุณาเช็คอีเมลของคุณค่ะ (ถ้าไม่พบ กรุณาตรวจสอบใน Junk mail ค่ะ)" method:@selector(goBack:)];
+        [self showAlert:@"" message:[Language getText:@"เราได้ส่งอีเมลให้คุณแล้ว กรุณาเช็คอีเมลของคุณค่ะ (ถ้าไม่พบ กรุณาตรวจสอบใน Junk mail ค่ะ)"] method:@selector(goBack:)];
     }
 }
 

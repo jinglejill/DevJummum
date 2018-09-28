@@ -16,6 +16,7 @@
 #import "OrderTaking.h"
 #import "Branch.h"
 #import "Card.h"
+#import "DiscountGroupMenuMap.h"
 
 
 @interface LuckyDrawViewController ()
@@ -44,6 +45,7 @@
     BOOL _luckyDrawDownloaded;
     CAKeyframeAnimation *_animationWaiting;
     NSMutableArray *_animationImages;
+    NSMutableArray *_discountGroupMenuMapList;
     
 }
 @end
@@ -124,41 +126,6 @@
             _btnHome.frame = CGRectMake(16, 80-8-44, btnOrderNowWidth, 44);
             [_btnHome addTarget:self action:@selector(unwindToHotDeal) forControlEvents:UIControlEventTouchUpInside];
         }
-
-//        dispatch_async(dispatch_get_main_queue(),^ {
-//            _arrRankCard = [[NSMutableArray alloc]init];
-//            NSString *rankCard;
-//            for(int j=1; j<=4; j++)
-//            {
-//                switch (j) {
-//                    case 1:
-//                    rankCard = @"Excellent";
-//                    break;
-//                    case 2:
-//                    rankCard = @"Awesome";
-//                    break;
-//                    case 3:
-//                    rankCard = @"Good";
-//                    break;
-//                    case 4:
-//                    rankCard = @"Boo";
-//                    break;
-//                    default:
-//                    break;
-//                }
-//                NSMutableArray *animationImages = [[NSMutableArray alloc]init];
-//                NSInteger steps = 17;
-//                for(int i=0; i<steps; i++)
-//                {
-//                    NSString *imageName = [NSString stringWithFormat:@"giftBox%@%05d.jpg",rankCard,(i+7)];
-//                    UIImage *imageRunning = [UIImage imageNamed:imageName];
-//                    [animationImages addObject:(NSObject *)(imageRunning.CGImage)];
-//                }
-//                [_arrRankCard addObject:animationImages];
-//            }
-//        });
-        
-        
     }
 }
 
@@ -179,9 +146,11 @@
         
         NSMutableArray *luckyDrawTicketList = items[1];
         _numberOfGift = [luckyDrawTicketList count];
+        
+        _discountGroupMenuMapList = items[2];
+        
  
         _luckyDrawDownloaded = YES;
-        NSLog(@"yes");
     }
     else if(homeModel.propCurrentDB == dbMenu)
     {
@@ -193,21 +162,28 @@
             Message *message = messageList[0];
             if(![message.text integerValue])
             {
-                NSString *message = [Setting getValue:@"124m" example:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
+                NSString *message = [Language getText:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
                 [self showAlert:@"" message:message];
             }
             else
             {
-                Menu *menu = [Menu getMenu:_rewardRedemption.discountMenuID branchID:_rewardRedemption.mainBranchID];
-                SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:_rewardRedemption.discountMenuID branchID:_rewardRedemption.mainBranchID];
-                float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
-                
-                
-                OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:_rewardRedemption.mainBranchID customerTableID:0 menuID:_rewardRedemption.discountMenuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 noteIDListInText:@"" orderNo:0 status:1 receiptID:0];
-                
-                
+                NSMutableArray *discountGroupMenuMapList = items[6];
                 NSMutableArray *orderTakingList = [[NSMutableArray alloc]init];
-                [orderTakingList addObject:orderTaking];
+                for(int i=0; i<[discountGroupMenuMapList count]; i++)
+                {
+                    DiscountGroupMenuMap *discountGroupMenuMap = discountGroupMenuMapList[i];
+                    Menu *menu = [Menu getMenu:discountGroupMenuMap.menuID branchID:_rewardRedemption.mainBranchID];
+                    SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:discountGroupMenuMap.menuID branchID:_rewardRedemption.mainBranchID];
+                    float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
+                    
+                    
+                    for(int j=0; j<discountGroupMenuMap.quantity; j++)
+                    {
+                        OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:receipt.branchID customerTableID:0 menuID:discountGroupMenuMap.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
+                        [orderTakingList addObject:orderTaking];
+                    }
+                }
+                                
                 [OrderTaking setCurrentOrderTakingList:orderTakingList];
                 [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
             }
@@ -221,14 +197,13 @@
     {
         if (flag)
         {
-            NSLog(@"animation stop");
             if(!_voucher)
             {
                 _voucher = [[UILabel alloc]init];
                 _voucher.font = [UIFont fontWithName:@"Prompt-SemiBold" size:28];
                 _voucher.textColor = cSystem1;
                 _voucher.textAlignment = NSTextAlignmentCenter;
-                _voucher.layer.shadowColor = [UIColor whiteColor].CGColor;//[UIColor greenColor].CGColor;
+                _voucher.layer.shadowColor = [UIColor whiteColor].CGColor;
                 _voucher.layer.shadowOpacity = 0.8;
                 _voucher.layer.shadowRadius = 6;
                 _voucher.layer.shadowOffset = CGSizeZero;
@@ -249,7 +224,7 @@
             [self.view addSubview:_btnHome];
             
             
-            if(_rewardRedemption.discountMenuID)
+            if(_rewardRedemption.discountGroupMenuID)
             {
                 float btnOrderNowWidth = 60;
                 if(!_btnOrderNow)
@@ -279,11 +254,8 @@
                     _imgVwSmallGiftBox = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-16-giftWidth, giftYPosition, giftWidth, giftWidth)];
                     
                     UIImage *imageNormal = [UIImage imageNamed:@"jummumGiftBoxNormal.png"];
-//                    imageNormal = [self imageWithImage:imageNormal convertToSize:CGSizeMake(giftWidth,giftWidth)];
-                    
                     UIImage *imagePop = [UIImage imageNamed:@"jummumGiftBoxPop.png"];
-//                    imagePop = [self imageWithImage:imagePop convertToSize:CGSizeMake(giftWidth,giftWidth)];
-                    
+
                     _imgVwSmallGiftBox.animationImages = [NSArray arrayWithObjects:imageNormal,imagePop,nil];
                     _imgVwSmallGiftBox.animationDuration = 1.0f;
                     _imgVwSmallGiftBox.animationRepeatCount = 0;
@@ -401,7 +373,6 @@
         {
             if(_luckyDrawDownloaded)
             {
-                NSLog(@"downloadWaiting stop _luckyDrawDownloaded yes");
                 _luckyDrawDownloaded = NO;
                 [_imgVwWaiting.layer removeAllAnimations];
                 [_imgVwWaiting removeFromSuperview];
@@ -532,7 +503,7 @@
 {
     self.homeModel = [[HomeModel alloc]init];
     self.homeModel.delegate = self;
-    [self.homeModel downloadItems:dbMenu withData:@[@(_rewardRedemption.mainBranchID), @(_rewardRedemption.discountMenuID)]];
+    [self.homeModel downloadItems:dbMenu withData:@[@(_rewardRedemption.mainBranchID),@(_rewardRedemption.discountGroupMenuID)]];
 }
 
 -(void)tapGiftBox

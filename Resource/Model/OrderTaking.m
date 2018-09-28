@@ -31,7 +31,9 @@
             [self valueForKey:@"specialPrice"]?[self valueForKey:@"specialPrice"]:[NSNull null],@"specialPrice",
             [self valueForKey:@"price"]?[self valueForKey:@"price"]:[NSNull null],@"price",
             [self valueForKey:@"takeAway"]?[self valueForKey:@"takeAway"]:[NSNull null],@"takeAway",
+            [self valueForKey:@"takeAwayPrice"]?[self valueForKey:@"takeAwayPrice"]:[NSNull null],@"takeAwayPrice",
             [self valueForKey:@"noteIDListInText"]?[self valueForKey:@"noteIDListInText"]:[NSNull null],@"noteIDListInText",
+            [self valueForKey:@"notePrice"]?[self valueForKey:@"notePrice"]:[NSNull null],@"notePrice",
             [self valueForKey:@"orderNo"]?[self valueForKey:@"orderNo"]:[NSNull null],@"orderNo",
             [self valueForKey:@"status"]?[self valueForKey:@"status"]:[NSNull null],@"status",
             [self valueForKey:@"receiptID"]?[self valueForKey:@"receiptID"]:[NSNull null],@"receiptID",
@@ -40,7 +42,7 @@
             nil];
 }
 
--(OrderTaking *)initWithBranchID:(NSInteger)branchID customerTableID:(NSInteger)customerTableID menuID:(NSInteger)menuID quantity:(float)quantity specialPrice:(float)specialPrice price:(float)price takeAway:(NSInteger)takeAway noteIDListInText:(NSString *)noteIDListInText orderNo:(NSInteger)orderNo status:(NSInteger)status receiptID:(NSInteger)receiptID
+-(OrderTaking *)initWithBranchID:(NSInteger)branchID customerTableID:(NSInteger)customerTableID menuID:(NSInteger)menuID quantity:(float)quantity specialPrice:(float)specialPrice price:(float)price takeAway:(NSInteger)takeAway takeAwayPrice:(float)takeAwayPrice noteIDListInText:(NSString *)noteIDListInText notePrice:(float)notePrice orderNo:(NSInteger)orderNo status:(NSInteger)status receiptID:(NSInteger)receiptID
 {
     self = [super init];
     if(self)
@@ -53,7 +55,9 @@
         self.specialPrice = specialPrice;
         self.price = price;
         self.takeAway = takeAway;
+        self.takeAwayPrice = takeAwayPrice;
         self.noteIDListInText = noteIDListInText;
+        self.notePrice = notePrice;
         self.orderNo = orderNo;
         self.status = status;
         self.receiptID = receiptID;
@@ -129,6 +133,78 @@
     return nil;
 }
 
+-(id)copyWithZone:(NSZone *)zone
+{
+    id copy = [[[self class] alloc] init];
+    
+    if (copy)
+    {
+        ((OrderTaking *)copy).orderTakingID = self.orderTakingID;
+        ((OrderTaking *)copy).branchID = self.branchID;
+        ((OrderTaking *)copy).customerTableID = self.customerTableID;
+        ((OrderTaking *)copy).menuID = self.menuID;
+        ((OrderTaking *)copy).quantity = self.quantity;
+        ((OrderTaking *)copy).specialPrice = self.specialPrice;
+        ((OrderTaking *)copy).price = self.price;
+        ((OrderTaking *)copy).takeAway = self.takeAway;
+        ((OrderTaking *)copy).takeAwayPrice = self.takeAwayPrice;
+        [copy setNoteIDListInText:self.noteIDListInText];
+        ((OrderTaking *)copy).notePrice = self.notePrice;
+        ((OrderTaking *)copy).orderNo = self.orderNo;
+        ((OrderTaking *)copy).status = self.status;
+        ((OrderTaking *)copy).receiptID = self.receiptID;
+        [copy setModifiedUser:[Utility modifiedUser]];
+        [copy setModifiedDate:[Utility currentDateTime]];
+    }
+    
+    return copy;
+}
+
+-(BOOL)editOrderTaking:(OrderTaking *)editingOrderTaking
+{
+    if(self.orderTakingID == editingOrderTaking.orderTakingID
+       && self.branchID == editingOrderTaking.branchID
+       && self.customerTableID == editingOrderTaking.customerTableID
+       && self.menuID == editingOrderTaking.menuID
+       && self.quantity == editingOrderTaking.quantity
+       && self.specialPrice == editingOrderTaking.specialPrice
+       && self.price == editingOrderTaking.price
+       && self.takeAway == editingOrderTaking.takeAway
+       && self.takeAwayPrice == editingOrderTaking.takeAwayPrice
+       && [self.noteIDListInText isEqualToString:editingOrderTaking.noteIDListInText]
+       && self.notePrice == editingOrderTaking.notePrice
+       && self.orderNo == editingOrderTaking.orderNo
+       && self.status == editingOrderTaking.status
+       && self.receiptID == editingOrderTaking.receiptID
+       )
+    {
+        return NO;
+    }
+    return YES;
+}
+
++(OrderTaking *)copyFrom:(OrderTaking *)fromOrderTaking to:(OrderTaking *)toOrderTaking
+{
+    toOrderTaking.orderTakingID = fromOrderTaking.orderTakingID;
+    toOrderTaking.branchID = fromOrderTaking.branchID;
+    toOrderTaking.customerTableID = fromOrderTaking.customerTableID;
+    toOrderTaking.menuID = fromOrderTaking.menuID;
+    toOrderTaking.quantity = fromOrderTaking.quantity;
+    toOrderTaking.specialPrice = fromOrderTaking.specialPrice;
+    toOrderTaking.price = fromOrderTaking.price;
+    toOrderTaking.takeAway = fromOrderTaking.takeAway;
+    toOrderTaking.takeAwayPrice = fromOrderTaking.takeAwayPrice;
+    toOrderTaking.noteIDListInText = fromOrderTaking.noteIDListInText;
+    toOrderTaking.notePrice = fromOrderTaking.notePrice;
+    toOrderTaking.orderNo = fromOrderTaking.orderNo;
+    toOrderTaking.status = fromOrderTaking.status;
+    toOrderTaking.receiptID = fromOrderTaking.receiptID;
+    toOrderTaking.modifiedUser = [Utility modifiedUser];
+    toOrderTaking.modifiedDate = [Utility currentDateTime];
+    
+    return toOrderTaking;
+}
+
 +(OrderTaking *)getOrderTakingWithCustomerTableID:(NSInteger)customerTableID menuID:(NSInteger)menuID takeAway:(NSInteger)takeAway noteIDListInText:(NSString *)noteIDListInText status:(NSInteger)status;
 {
     NSMutableArray *dataList = [SharedOrderTaking sharedOrderTaking].orderTakingList;
@@ -201,34 +277,6 @@
         }
     }
     return sum;
-}
-
--(id)copyWithZone:(NSZone *)zone
-{
-    id copy = [[[self class] alloc] init];
-    
-    if (copy)
-    {
-        ((OrderTaking *)copy).orderTakingID = self.orderTakingID;
-        ((OrderTaking *)copy).branchID = self.branchID;
-        ((OrderTaking *)copy).customerTableID = self.customerTableID;
-        ((OrderTaking *)copy).menuID = self.menuID;
-        ((OrderTaking *)copy).quantity = self.quantity;
-        ((OrderTaking *)copy).specialPrice = self.specialPrice;
-        ((OrderTaking *)copy).price = self.price;
-        ((OrderTaking *)copy).takeAway = self.takeAway;
-        [copy setNoteIDListInText:self.noteIDListInText];
-        ((OrderTaking *)copy).orderNo = self.orderNo;
-        ((OrderTaking *)copy).status = self.status;
-        ((OrderTaking *)copy).receiptID = self.receiptID;
-        [copy setModifiedUser:[Utility modifiedUser]];
-        [copy setModifiedDate:[Utility currentDateTime]];
-        
-        
-        ((OrderTaking *)copy).menuOrderNo = self.menuOrderNo;
-    }
-    
-    return copy;
 }
 
 +(NSMutableArray *)sortOrderTakingList:(NSMutableArray *)orderTakingList
@@ -468,7 +516,7 @@
     float sum = 0;
     for(OrderTaking *item in orderTakingList)
     {
-        sum += item.quantity*item.specialPrice;
+        sum += item.quantity*(item.specialPrice+item.takeAwayPrice+item.notePrice);
     }
     return sum;
 }

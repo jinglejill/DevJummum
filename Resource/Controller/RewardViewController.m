@@ -93,7 +93,7 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Setting getValue:@"066t" example:@"แต้มสะสม/แลกของรางวัล"];
+    NSString *title = [Language getText:@"แต้มสะสม/แลกของรางวัล"];
     lblNavTitle.text = title;
     [self loadingOverlayView];
     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
@@ -147,13 +147,12 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
     
     
     if(section == 0)
-    {
-        NSString *message = [Setting getValue:@"115m" example:@"ค้นหา Reward"];
+    {        
         CustomTableViewCellSearchBar *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierSearchBar];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.sbText.delegate = self;
         cell.sbText.tag = 300;
-        cell.sbText.placeholder = message;
+        cell.sbText.placeholder = [Language getText:@"ค้นหา Reward"];
         [cell.sbText setInputAccessoryView:self.toolBar];
         UITextField *textField = [cell.sbText valueForKey:@"searchField"];
         textField.layer.borderColor = [cTextFieldBorder CGColor];
@@ -179,7 +178,7 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
 
-            cell.lblText.text = @"แต้มสะสม";
+            cell.lblText.text = [Language getText:@"แต้มสะสม"];
             cell.lblText.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];
             NSInteger point = (int)floor(_rewardPoint.point);
             NSString *strPoint = [Utility formatDecimal:point];
@@ -200,7 +199,7 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
             
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.textLabel.text = @"รางวัลของฉัน";
+            cell.textLabel.text = [Language getText:@"รางวัลของฉัน"];
             cell.textLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];
             cell.textLabel.textColor = cSystem4;
             

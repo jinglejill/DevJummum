@@ -85,9 +85,9 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Setting getValue:@"068t" example:@"แนะนำ ติชม"];
+    NSString *title = [Language getText:@"แนะนำ ติชม"];
     lblNavTitle.text = title;
-    NSString *message = [Setting getValue:@"046m" example:@"กรุณาใส่ข้อเสนอแนะ คำติชม หรือปัญหาที่พบเจอ"];
+    NSString *message = [Language getText:@"กรุณาใส่ข้อเสนอแนะ คำติชม หรือปัญหาที่พบเจอ"];
     _strPlaceHolder = message;
     
     
@@ -163,7 +163,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
         
         
         
-        NSString *message = [Setting getValue:@"047m" example:@"ข้อเสนอแนะ และคำติชม"];
+        NSString *message = [Language getText:@"ข้อเสนอแนะ และคำติชม"];
         NSString *strTitle = message;
         
         
@@ -337,7 +337,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
 {
     [self removeOverlayViews];
     
-    NSString *message = [Setting getValue:@"048m" example:@"ข้อเสนอแนะ และคำติชมได้ถูกส่งไปแล้ว ขอบคุณค่ะ"];
+    NSString *message = [Language getText:@"ข้อเสนอแนะ และคำติชมได้ถูกส่งไปแล้ว ขอบคุณค่ะ"];
     [self showAlert:@"" message:message method:@selector(unwindToMe)];
 }
 
@@ -345,29 +345,26 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
 {
     [self removeOverlayViews];
     
-    NSString *message = [Setting getValue:@"085m" example:@"ข้อเสนอแนะ และคำติชมได้ถูกส่งไปแล้ว ขอบคุณค่ะ"];
+    NSString *message = [Language getText:@"ข้อเสนอแนะ และคำติชมได้ถูกส่งไปแล้ว ขอบคุณค่ะ"];
     [self showAlert:@"" message:message method:@selector(unwindToOrderDetail)];
 }
 
 -(BOOL)validate
 {
-
+    UITextView *textView = [self.view viewWithTag:3];
+    if([textView.text isEqualToString:_strPlaceHolder])
     {
-        UITextView *textView = [self.view viewWithTag:3];
-        if([textView.text isEqualToString:_strPlaceHolder])
+        NSString *message;
+        if(rating)
         {
-            NSString *message;
-            if(rating)
-            {
-                message = [Setting getValue:@"089m" example:@"กรุณาใส่ข้อเสนอแนะ และคำติชม"];
-            }
-            else
-            {
-                message = [Setting getValue:@"049m" example:@"กรุณาใส่ข้อเสนอแนะ และคำติชม"];
-            }
-            [self blinkAlertMsg:message];
-            return NO;
+            message = [Language getText:@"กรุณาใส่ข้อเสนอแนะ และคำติชม"];
         }
+        else
+        {
+            message = [Language getText:@"กรุณาใส่ข้อเสนอแนะ และคำติชม"];
+        }
+        [self blinkAlertMsg:message];
+        return NO;
     }
     
     return YES;

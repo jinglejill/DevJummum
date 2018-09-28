@@ -10,6 +10,7 @@
 #import "LogInViewController.h"
 #import "NewVersionUpdateViewController.h"
 #import "Card.h"
+#import "Language.h"
 
 
 @interface LaunchScreenViewController ()
@@ -107,6 +108,11 @@
     NSString *message = [Setting getValue:@"002m" example:@"Pay for your order, earn and track rewards, check your balance and more, all from your mobile device"];
     lblTitle.text = title;
     lblMessage.text = message;
+    
+    
+    [Language setSupportLanguage];
+//    [[NSUserDefaults standardUserDefaults] setValue:@"TH" forKey:@"language"];
+    
 }
 
 - (void)downloadProgress:(float)percent
@@ -138,6 +144,10 @@
     NSString* appID = infoDictionary[@"CFBundleIdentifier"];
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/lookup?bundleId=%@", appID]];
     NSData* data = [NSData dataWithContentsOfURL:url];
+    if(!data)
+    {
+        return NO;
+    }
     NSDictionary* lookup = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     
     if ([lookup[@"resultCount"] integerValue] == 1)

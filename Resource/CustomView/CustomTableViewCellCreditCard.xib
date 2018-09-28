@@ -224,6 +224,9 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="imgCreditCardBrand" destination="bBV-sE-mqZ" id="xbo-xh-Llm"/>
+                <outlet property="lblCCVGuide" destination="Wwp-gt-yoJ" id="wsK-1Q-W2b"/>
+                <outlet property="lblDeleteCard" destination="rFI-Xh-dzd" id="dNv-sw-Xge"/>
+                <outlet property="lblSave" destination="bTC-Dr-VKJ" id="4MA-L3-Dp3"/>
                 <outlet property="swtSave" destination="c2o-tG-aXK" id="Rc7-LD-g2g"/>
                 <outlet property="txtCCV" destination="a7S-hu-Vk3" id="SKL-LS-Lpk"/>
                 <outlet property="txtCardNo" destination="NKs-Ci-mRj" id="5uv-Ka-Qez"/>

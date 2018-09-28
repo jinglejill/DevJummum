@@ -84,9 +84,9 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Setting getValue:@"086t" example:@"แนะนำ ติชม"];
+    NSString *title = [Language getText:@"แนะนำ ติชม"];
     lblNavTitle.text = title;
-    NSString *message = [Setting getValue:@"087m" example:@"กรุณาใส่ข้อเสนอแนะ คำติชม หรือปัญหาที่พบเจอ"];
+    NSString *message = [Language getText:@"กรุณาใส่ข้อเสนอแนะ คำติชม หรือปัญหาที่พบเจอ"];
     _strPlaceHolder = message;
     
     
@@ -161,7 +161,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
         
         
         
-        NSString *message = [Setting getValue:@"088m" example:@"ข้อเสนอแนะ และคำติชม"];
+        NSString *message = [Language getText:@"ข้อเสนอแนะ และคำติชม"];
         NSString *strTitle = message;
         
         
@@ -311,7 +311,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
 {
     [self removeOverlayViews];
     
-    NSString *message = [Setting getValue:@"085m" example:@"ข้อเสนอแนะ และคำติชมได้ถูกส่งไปแล้ว ขอบคุณค่ะ"];
+    NSString *message = [Language getText:@"ข้อเสนอแนะ และคำติชมได้ถูกส่งไปแล้ว ขอบคุณค่ะ"];
     [self showAlert:@"" message:message method:@selector(unwindToOrderDetail)];
 }
 
@@ -322,7 +322,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
         UITextView *textView = [self.view viewWithTag:3];
         if([textView.text isEqualToString:_strPlaceHolder])
         {
-            NSString *message = [Setting getValue:@"089m" example:@"กรุณาใส่ข้อเสนอแนะ และคำติชม"];
+            NSString *message = [Language getText:@"กรุณาใส่ข้อเสนอแนะ และคำติชม"];
             [self blinkAlertMsg:message];
             return NO;
         }

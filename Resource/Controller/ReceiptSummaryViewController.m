@@ -125,7 +125,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Setting getValue:@"062t" example:@"ประวัติการสั่งอาหาร"];
+    NSString *title = [Language getText:@"ประวัติการสั่งอาหาร"];
     lblNavTitle.text = title;
     tbvData.delegate = self;
     tbvData.dataSource = self;
@@ -159,7 +159,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     {
         if([_receiptList count] == 0)
         {
-            NSString *message = [Setting getValue:@"083m" example:@"คุณไม่มีประวัติการสั่งอาหาร"];
+            NSString *message = [Language getText:@"คุณไม่มีประวัติการสั่งอาหาร"];
             UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
             noDataLabel.text             = message;
             noDataLabel.textColor        = cSystem4;
@@ -206,13 +206,13 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         
-        
+        NSString *message = [Language getText:@"ร้าน %@"];
         Receipt *receipt = _receiptList[section];
         Branch *branch = [Branch getBranch:receipt.branchID];
         NSString *showBuffetOrder = receipt.buffetReceiptID?@" (Buffet)":@"";
         cell.lblReceiptNo.text = [NSString stringWithFormat:@"Order no. #%@%@", receipt.receiptNoID,showBuffetOrder];
         cell.lblReceiptDate.text = [Utility dateToString:receipt.modifiedDate toFormat:@"d MMM yy HH:mm"];
-        cell.lblBranchName.text = [NSString stringWithFormat:@"ร้าน %@",branch.name];
+        cell.lblBranchName.text = [NSString stringWithFormat:message,branch.name];
         cell.lblBranchName.textColor = cSystem1;
         
         
@@ -243,6 +243,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         cell.tbvOrderDetail.dataSource = self;
         cell.tbvOrderDetail.tag = receipt.receiptID;
         [cell.tbvOrderDetail reloadData];
+        [cell.btnOrderItAgain setTitle:[Language getText:@"สั่งซ้ำ"] forState:UIControlStateNormal];
         [cell.btnOrderItAgain addTarget:self action:@selector(orderItAgain:) forControlEvents:UIControlEventTouchUpInside];
         [self setButtonDesign:cell.btnOrderItAgain];
         
@@ -279,9 +280,10 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             //menu
             if(orderTaking.takeAway)
             {
+                NSString *message = [Language getText:@"ใส่ห่อ"];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
-                NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ใส่ห่อ" attributes:attribute];
+                NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
                 
                 NSDictionary *attribute2 = @{NSFontAttributeName: font};
                 NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
@@ -307,9 +309,10 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             NSString *strAddTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:1];
             if(![Utility isStringEmpty:strRemoveTypeNote])
             {
+                NSString *message = [Language getText:@"ไม่ใส่"];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                attrStringRemove = [[NSMutableAttributedString alloc] initWithString:@"ไม่ใส่" attributes:attribute];
+                attrStringRemove = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
                 
                 
                 UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -321,9 +324,10 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             }
             if(![Utility isStringEmpty:strAddTypeNote])
             {
+                NSString *message = [Language getText:@"เพิ่ม"];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                attrStringAdd = [[NSMutableAttributedString alloc] initWithString:@"เพิ่ม" attributes:attribute];
+                attrStringAdd = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
                 
                 
                 UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -360,9 +364,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             
             
             
-            
-            
-            float totalAmount = orderTaking.specialPrice * orderTaking.quantity;
+            float totalAmount = (orderTaking.specialPrice+orderTaking.takeAwayPrice+orderTaking.notePrice) * orderTaking.quantity;
             NSString *strTotalAmount = [Utility formatDecimal:totalAmount withMinFraction:2 andMaxFraction:2];
             cell.lblTotalAmount.text = [Utility addPrefixBahtSymbol:strTotalAmount];
             
@@ -396,7 +398,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             }
             else
             {
-                NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
+                NSString *message = [Language getText:@"หมายเหตุ: "];
                 cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
             }
             [cell.lblText sizeToFit];
@@ -414,7 +416,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             NSString *strTotalAmount = [Utility formatDecimal:receipt.cashAmount+receipt.transferAmount+receipt.creditCardAmount withMinFraction:2 andMaxFraction:2];
             strTotalAmount = [Utility addPrefixBahtSymbol:strTotalAmount];
             cell.lblAmount.text = strTotalAmount;
-            cell.lblTitle.text = @"รวมทั้งหมด";
+            cell.lblTitle.text = [Language getText:@"รวมทั้งหมด"];
             cell.lblTitleTop.constant = 8;
             cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
             cell.lblTitle.textColor = cSystem4;
@@ -487,7 +489,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             
-            NSString *title = [Setting getValue:@"127t" example:@"สั่งบุฟเฟ่ต์"];
+            NSString *title = [Language getText:@"สั่งบุฟเฟ่ต์"];
             
             
             Receipt *receipt = [Receipt getReceipt:receiptID];
@@ -532,9 +534,10 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             //menu
             if(orderTaking.takeAway)
             {
+                NSString *message = [Language getText:@"ใส่ห่อ"];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
-                NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ใส่ห่อ" attributes:attribute];
+                NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
                 
                 NSDictionary *attribute2 = @{NSFontAttributeName: font};
                 NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
@@ -560,9 +563,10 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             NSString *strAddTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:1];
             if(![Utility isStringEmpty:strRemoveTypeNote])
             {
+                NSString *message = [Language getText:@"ไม่ใส่"];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                attrStringRemove = [[NSMutableAttributedString alloc] initWithString:@"ไม่ใส่" attributes:attribute];
+                attrStringRemove = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
                 
                 
                 UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -574,9 +578,10 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             }
             if(![Utility isStringEmpty:strAddTypeNote])
             {
+                NSString *message = [Language getText:@"เพิ่ม"];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                attrStringAdd = [[NSMutableAttributedString alloc] initWithString:@"เพิ่ม" attributes:attribute];
+                attrStringAdd = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
                 
                 
                 UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -625,7 +630,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         }
         else
         {
-            NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
+            NSString *message = [Language getText:@"หมายเหตุ: "];
             cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
         }
         [cell.lblText sizeToFit];
@@ -671,9 +676,10 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             //menu
             if(orderTaking.takeAway)
             {
+                NSString *message = [Language getText:@"ใส่ห่อ"];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
-                NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ใส่ห่อ" attributes:attribute];
+                NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
                 
                 NSDictionary *attribute2 = @{NSFontAttributeName: font};
                 NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
@@ -699,9 +705,10 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             NSString *strAddTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:1];
             if(![Utility isStringEmpty:strRemoveTypeNote])
             {
+                NSString *message = [Language getText:@"ไม่ใส่"];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                attrStringRemove = [[NSMutableAttributedString alloc] initWithString:@"ไม่ใส่" attributes:attribute];
+                attrStringRemove = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
                 
                 
                 UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -713,9 +720,10 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             }
             if(![Utility isStringEmpty:strAddTypeNote])
             {
+                NSString *message = [Language getText:@"เพิ่ม"];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                attrStringAdd = [[NSMutableAttributedString alloc] initWithString:@"เพิ่ม" attributes:attribute];
+                attrStringAdd = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
                 
                 
                 UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -766,7 +774,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             }
             else
             {
-                NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
+                NSString *message = [Language getText:@"หมายเหตุ: "];
                 cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
             }
             [cell.lblText sizeToFit];
@@ -985,6 +993,5 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     
     CustomTableViewCellLabelLabel *cellTimeToCountDown = [cell.tbvOrderDetail cellForRowAtIndexPath:indexPathOrderDetail];
     cellTimeToCountDown.lblText.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", hours, minutes, seconds];
-//    [cellTimeToCountDown.lblText sizeToFit];
 }
 @end

@@ -60,6 +60,7 @@ alpha:1.0]
 
 
 
+
 enum enumMessage
 {
     skipMessage1,
@@ -476,5 +477,6 @@ enum enumUrl
 +(UIImage *)getImageFromCache:(NSString *)imageName;
 +(void)saveImageInCache:(UIImage *)image imageName:(NSString *)imageName;
 +(NSString *)formatPhoneNo:(NSString *)phoneNo;
+
 @end
 

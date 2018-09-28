@@ -12,5 +12,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblTextLabel;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *lblTextLabelHeight;
 @property (strong, nonatomic) IBOutlet UIButton *btnValue;
+@property (strong, nonatomic) IBOutlet UILabel *lblTitle;
 
 @end

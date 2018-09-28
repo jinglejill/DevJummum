@@ -14,8 +14,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblNavTitle;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segConValue;
 @property (strong, nonatomic) IBOutlet UITableView *tbvData;
-@property (strong, nonatomic) RewardPoint *rewardPoint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
+@property (strong, nonatomic) RewardPoint *rewardPoint;
 
 
 -(IBAction)unwindToMyReward:(UIStoryboardSegue *)segue;

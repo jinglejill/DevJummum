@@ -34,10 +34,14 @@
             [Utility dateToString:[self valueForKey:@"usingEndDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"usingEndDate",
             [self valueForKey:@"discountType"]?[self valueForKey:@"discountType"]:[NSNull null],@"discountType",
             [self valueForKey:@"discountAmount"]?[self valueForKey:@"discountAmount"]:[NSNull null],@"discountAmount",
+            [self valueForKey:@"shopDiscount"]?[self valueForKey:@"shopDiscount"]:[NSNull null],@"shopDiscount",
+            [self valueForKey:@"jummumDiscount"]?[self valueForKey:@"jummumDiscount"]:[NSNull null],@"jummumDiscount",
+            [self valueForKey:@"sharedDiscountType"]?[self valueForKey:@"sharedDiscountType"]:[NSNull null],@"sharedDiscountType",
+            [self valueForKey:@"sharedDiscountAmountMax"]?[self valueForKey:@"sharedDiscountAmountMax"]:[NSNull null],@"sharedDiscountAmountMax",
             [self valueForKey:@"minimumSpending"]?[self valueForKey:@"minimumSpending"]:[NSNull null],@"minimumSpending",
             [self valueForKey:@"maxDiscountAmountPerDay"]?[self valueForKey:@"maxDiscountAmountPerDay"]:[NSNull null],@"maxDiscountAmountPerDay",
             [self valueForKey:@"allowDiscountForAllMenuType"]?[self valueForKey:@"allowDiscountForAllMenuType"]:[NSNull null],@"allowDiscountForAllMenuType",
-            [self valueForKey:@"discountMenuID"]?[self valueForKey:@"discountMenuID"]:[NSNull null],@"discountMenuID",
+            [self valueForKey:@"discountGroupMenuID"]?[self valueForKey:@"discountGroupMenuID"]:[NSNull null],@"discountGroupMenuID",
             [self valueForKey:@"type"]?[self valueForKey:@"type"]:[NSNull null],@"type",
             [self valueForKey:@"rewardRank"]?[self valueForKey:@"rewardRank"]:[NSNull null],@"rewardRank",
             [self valueForKey:@"orderNo"]?[self valueForKey:@"orderNo"]:[NSNull null],@"orderNo",
@@ -47,7 +51,7 @@
             nil];
 }
 
--(RewardRedemption *)initWithMainBranchID:(NSInteger)mainBranchID startDate:(NSDate *)startDate endDate:(NSDate *)endDate header:(NSString *)header subTitle:(NSString *)subTitle imageUrl:(NSString *)imageUrl point:(NSInteger)point prefixPromoCode:(NSString *)prefixPromoCode suffixPromoCode:(NSString *)suffixPromoCode rewardLimit:(NSInteger)rewardLimit withInPeriod:(NSInteger)withInPeriod detail:(NSString *)detail termsConditions:(NSString *)termsConditions usingStartDate:(NSDate *)usingStartDate usingEndDate:(NSDate *)usingEndDate discountType:(NSInteger)discountType discountAmount:(float)discountAmount minimumSpending:(NSInteger)minimumSpending maxDiscountAmountPerDay:(NSInteger)maxDiscountAmountPerDay allowDiscountForAllMenuType:(NSInteger)allowDiscountForAllMenuType discountMenuID:(NSInteger)discountMenuID type:(NSInteger)type rewardRank:(NSInteger)rewardRank orderNo:(NSInteger)orderNo status:(NSInteger)status
+-(RewardRedemption *)initWithMainBranchID:(NSInteger)mainBranchID startDate:(NSDate *)startDate endDate:(NSDate *)endDate header:(NSString *)header subTitle:(NSString *)subTitle imageUrl:(NSString *)imageUrl point:(NSInteger)point prefixPromoCode:(NSString *)prefixPromoCode suffixPromoCode:(NSString *)suffixPromoCode rewardLimit:(NSInteger)rewardLimit withInPeriod:(NSInteger)withInPeriod detail:(NSString *)detail termsConditions:(NSString *)termsConditions usingStartDate:(NSDate *)usingStartDate usingEndDate:(NSDate *)usingEndDate discountType:(NSInteger)discountType discountAmount:(float)discountAmount shopDiscount:(float)shopDiscount jummumDiscount:(float)jummumDiscount sharedDiscountType:(NSInteger)sharedDiscountType sharedDiscountAmountMax:(float)sharedDiscountAmountMax minimumSpending:(NSInteger)minimumSpending maxDiscountAmountPerDay:(NSInteger)maxDiscountAmountPerDay allowDiscountForAllMenuType:(NSInteger)allowDiscountForAllMenuType discountGroupMenuID:(NSInteger)discountGroupMenuID type:(NSInteger)type rewardRank:(NSInteger)rewardRank orderNo:(NSInteger)orderNo status:(NSInteger)status
 {
     self = [super init];
     if(self)
@@ -70,10 +74,14 @@
         self.usingEndDate = usingEndDate;
         self.discountType = discountType;
         self.discountAmount = discountAmount;
+        self.shopDiscount = shopDiscount;
+        self.jummumDiscount = jummumDiscount;
+        self.sharedDiscountType = sharedDiscountType;
+        self.sharedDiscountAmountMax = sharedDiscountAmountMax;
         self.minimumSpending = minimumSpending;
         self.maxDiscountAmountPerDay = maxDiscountAmountPerDay;
         self.allowDiscountForAllMenuType = allowDiscountForAllMenuType;
-        self.discountMenuID = discountMenuID;
+        self.discountGroupMenuID = discountGroupMenuID;
         self.type = type;
         self.rewardRank = rewardRank;
         self.orderNo = orderNo;
@@ -174,10 +182,14 @@
         [copy setUsingEndDate:self.usingEndDate];
         ((RewardRedemption *)copy).discountType = self.discountType;
         ((RewardRedemption *)copy).discountAmount = self.discountAmount;
+        ((RewardRedemption *)copy).shopDiscount = self.shopDiscount;
+        ((RewardRedemption *)copy).jummumDiscount = self.jummumDiscount;
+        ((RewardRedemption *)copy).sharedDiscountType = self.sharedDiscountType;
+        ((RewardRedemption *)copy).sharedDiscountAmountMax = self.sharedDiscountAmountMax;
         ((RewardRedemption *)copy).minimumSpending = self.minimumSpending;
         ((RewardRedemption *)copy).maxDiscountAmountPerDay = self.maxDiscountAmountPerDay;
         ((RewardRedemption *)copy).allowDiscountForAllMenuType = self.allowDiscountForAllMenuType;
-        ((RewardRedemption *)copy).discountMenuID = self.discountMenuID;
+        ((RewardRedemption *)copy).discountGroupMenuID = self.discountGroupMenuID;
         ((RewardRedemption *)copy).type = self.type;
         ((RewardRedemption *)copy).rewardRank = self.rewardRank;
         ((RewardRedemption *)copy).orderNo = self.orderNo;
@@ -209,10 +221,14 @@
        && [self.usingEndDate isEqual:editingRewardRedemption.usingEndDate]
        && self.discountType == editingRewardRedemption.discountType
        && self.discountAmount == editingRewardRedemption.discountAmount
+       && self.shopDiscount == editingRewardRedemption.shopDiscount
+       && self.jummumDiscount == editingRewardRedemption.jummumDiscount
+       && self.sharedDiscountType == editingRewardRedemption.sharedDiscountType
+       && self.sharedDiscountAmountMax == editingRewardRedemption.sharedDiscountAmountMax
        && self.minimumSpending == editingRewardRedemption.minimumSpending
        && self.maxDiscountAmountPerDay == editingRewardRedemption.maxDiscountAmountPerDay
        && self.allowDiscountForAllMenuType == editingRewardRedemption.allowDiscountForAllMenuType
-       && self.discountMenuID == editingRewardRedemption.discountMenuID
+       && self.discountGroupMenuID == editingRewardRedemption.discountGroupMenuID
        && self.type == editingRewardRedemption.type
        && self.rewardRank == editingRewardRedemption.rewardRank
        && self.orderNo == editingRewardRedemption.orderNo
@@ -244,10 +260,14 @@
     toRewardRedemption.usingEndDate = fromRewardRedemption.usingEndDate;
     toRewardRedemption.discountType = fromRewardRedemption.discountType;
     toRewardRedemption.discountAmount = fromRewardRedemption.discountAmount;
+    toRewardRedemption.shopDiscount = fromRewardRedemption.shopDiscount;
+    toRewardRedemption.jummumDiscount = fromRewardRedemption.jummumDiscount;
+    toRewardRedemption.sharedDiscountType = fromRewardRedemption.sharedDiscountType;
+    toRewardRedemption.sharedDiscountAmountMax = fromRewardRedemption.sharedDiscountAmountMax;
     toRewardRedemption.minimumSpending = fromRewardRedemption.minimumSpending;
     toRewardRedemption.maxDiscountAmountPerDay = fromRewardRedemption.maxDiscountAmountPerDay;
     toRewardRedemption.allowDiscountForAllMenuType = fromRewardRedemption.allowDiscountForAllMenuType;
-    toRewardRedemption.discountMenuID = fromRewardRedemption.discountMenuID;
+    toRewardRedemption.discountGroupMenuID = fromRewardRedemption.discountGroupMenuID;
     toRewardRedemption.type = fromRewardRedemption.type;
     toRewardRedemption.rewardRank = fromRewardRedemption.rewardRank;
     toRewardRedemption.orderNo = fromRewardRedemption.orderNo;
@@ -257,6 +277,7 @@
     
     return toRewardRedemption;
 }
+
 
 
 +(NSMutableArray *)sort:(NSMutableArray *)rewardRedemptionList

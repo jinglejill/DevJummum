@@ -20,14 +20,18 @@
 @property (nonatomic) float percentVat;
 @property (nonatomic) NSInteger priceIncludeVat;
 @property (nonatomic) NSInteger ledStatus;
-@property (nonatomic) NSInteger luckyDrawBahtSpent;
+@property (nonatomic) NSInteger openingTimeFromMidNight;
+@property (nonatomic) NSInteger openingMinute;
 @property (nonatomic) NSInteger customerApp;
 @property (retain, nonatomic) NSString * imageUrl;
 @property (retain, nonatomic) NSString * remark;
 @property (retain, nonatomic) NSString * modifiedUser;
 @property (retain, nonatomic) NSDate * modifiedDate;
 
--(Branch *)initWithDbName:(NSString *)dbName mainBranchID:(NSInteger)mainBranchID name:(NSString *)name phoneNo:(NSString *)phoneNo status:(NSInteger)status takeAwayFee:(NSInteger)takeAwayFee serviceChargePercent:(float)serviceChargePercent percentVat:(float)percentVat priceIncludeVat:(NSInteger)priceIncludeVat ledStatus:(NSInteger)ledStatus luckyDrawBahtSpent:(NSInteger)luckyDrawBahtSpent customerApp:(NSInteger)customerApp imageUrl:(NSString *)imageUrl remark:(NSString *)remark;
+
+@property (nonatomic) float luckyDrawSpend;
+
+-(Branch *)initWithDbName:(NSString *)dbName mainBranchID:(NSInteger)mainBranchID name:(NSString *)name phoneNo:(NSString *)phoneNo status:(NSInteger)status takeAwayFee:(NSInteger)takeAwayFee serviceChargePercent:(float)serviceChargePercent percentVat:(float)percentVat priceIncludeVat:(NSInteger)priceIncludeVat ledStatus:(NSInteger)ledStatus openingTimeFromMidNight:(NSInteger)openingTimeFromMidNight openingMinute:(NSInteger)openingMinute customerApp:(NSInteger)customerApp imageUrl:(NSString *)imageUrl remark:(NSString *)remark;
 +(NSInteger)getNextID;
 +(void)addObject:(Branch *)branch;
 +(void)removeObject:(Branch *)branch;

@@ -112,7 +112,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
     if(textField.tag == 1)
     {
         DisputeReason *disputeReason = _disputeReasonList[_selectedIndexPicker];
-        textField.text = disputeReason.text;
+        textField.text = [Language langIsEN]?disputeReason.text:disputeReason.text;
         [pickerVw selectRow:_selectedIndexPicker inComponent:0 animated:NO];
     }
 }
@@ -124,7 +124,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
     
     
 
-    NSString *message = [Setting getValue:@"003m" example:@"กรุณาใส่รายละเอียดเหตุผลในการขอเงินคืน"];
+    NSString *message = [Language getText:@"กรุณาใส่รายละเอียดเหตุผลในการขอเงินคืน"];
     _strPlaceHolder = message;
     [pickerVw removeFromSuperview];
     pickerVw.delegate = self;
@@ -234,7 +234,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.backgroundColor = [UIColor whiteColor];
                 
                 
-                NSString *message = [Setting getValue:@"006m" example:@"กรุณากรอกรายละเอียดด้านล่างนี้"];
+                NSString *message = [Language getText:@"กรุณากรอกรายละเอียดด้านล่างนี้"];
                 cell.textLabel.text = message;
                 cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                 cell.textLabel.textColor = [UIColor lightGrayColor];
@@ -248,7 +248,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 
-                NSString *message = [Setting getValue:@"007m" example:@"เหตุผลในการขอเงินคืน"];
+                NSString *message = [Language getText:@"เหตุผลในการขอเงินคืน"];
                 NSString *strTitle = message;
                 
                 
@@ -270,7 +270,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 
                 
                 
-                NSString *message2 = [Setting getValue:@"008m" example:@"กรุณาเลือกเหตุผลในการขอเงินคืน"];
+                NSString *message2 = [Language getText:@"กรุณาเลือกเหตุผลในการขอเงินคืน"];
                 cell.txtValue.tag = item;
                 cell.txtValue.placeholder = message2;
                 cell.txtValue.delegate = self;
@@ -280,7 +280,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 
                 
                 DisputeReason *disputeReason = [DisputeReason getDisputeReason:_dispute.disputeReasonID];
-                cell.txtValue.text = disputeReason.text;
+                cell.txtValue.text = [Language langIsEN]?disputeReason.text:disputeReason.text;
                 cell.lblRemark.text = @"";
                 
                 
@@ -292,7 +292,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 
-                NSString *message = [Setting getValue:@"034m" example:@"กรุณาใส่เบอร์โทรติดต่อกลับ เพื่อเจ้าหน้าที่จะโทรสอบถามข้อมูลเพิ่มเติมสำหรับการโอนเงินคืนท่าน"];
+                NSString *message = [Language getText:@"กรุณาใส่เบอร์โทรติดต่อกลับ เพื่อเจ้าหน้าที่จะโทรสอบถามข้อมูลเพิ่มเติมสำหรับการโอนเงินคืนท่าน"];
                 NSString *strTitle = @"เบอร์โทร.";
                 NSString *strRemark = message;
                 
@@ -342,7 +342,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.backgroundColor = [UIColor whiteColor];
                 
                 
-                NSString *message = [Setting getValue:@"006m" example:@"กรุณากรอกรายละเอียดด้านล่างนี้"];
+                NSString *message = [Language getText:@"กรุณากรอกรายละเอียดด้านล่างนี้"];
                 cell.textLabel.text = message;
                 cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                 cell.textLabel.textColor = [UIColor lightGrayColor];
@@ -357,7 +357,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 
                 
                 
-                NSString *message = [Setting getValue:@"007m" example:@"เหตุผลในการขอเงินคืน"];
+                NSString *message = [Language getText:@"เหตุผลในการขอเงินคืน"];
                 NSString *strTitle = message;
                 
                 
@@ -379,7 +379,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 
                 
                 
-                NSString *message2 = [Setting getValue:@"008m" example:@"กรุณาเลือกเหตุผลในการขอเงินคืน"];
+                NSString *message2 = [Language getText:@"กรุณาเลือกเหตุผลในการขอเงินคืน"];
                 cell.txtValue.tag = item;
                 cell.txtValue.placeholder = message2;
                 cell.txtValue.delegate = self;
@@ -389,7 +389,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 
                 
                 DisputeReason *disputeReason = [DisputeReason getDisputeReason:_dispute.disputeReasonID];
-                cell.txtValue.text = disputeReason.text;
+                cell.txtValue.text = [Language langIsEN]?disputeReason.text:disputeReason.text;
                 cell.lblRemark.text = @"";
                 
                 
@@ -401,9 +401,10 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 
-                NSString *strTitle = @"จำนวนเงิน";
+                NSString *strTitle = [Language getText:@"จำนวนเงิน"];
+                NSString *message = [Language getText:@"จำนวนเงิน: THB 0.01 to %@"];
                 NSString *strTotalAmount = [Utility formatDecimal:[Receipt getTotalAmount:receipt] withMinFraction:2 andMaxFraction:2];
-                NSString *strRemark = [NSString stringWithFormat:@"จำนวนเงิน: THB 0.01 to %@",strTotalAmount];
+                NSString *strRemark = [NSString stringWithFormat:message,strTotalAmount];
                 
                 
                 
@@ -448,7 +449,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 
-                NSString *message = [Setting getValue:@"035m" example:@"รายละเอียดเหตุผลในการขอเงินคืน"];
+                NSString *message = [Language getText:@"รายละเอียดเหตุผลในการขอเงินคืน"];
                 NSString *strTitle = message;
                 
                 
@@ -499,8 +500,8 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 
-                NSString *message = [Setting getValue:@"036m" example:@"กรุณาใส่เบอร์โทรติดต่อกลับ เพื่อเจ้าหน้าที่จะโทรสอบถามข้อมูลเพิ่มเติมสำหรับการโอนเงินคืนท่าน"];
-                NSString *strTitle = @"เบอร์โทร.";
+                NSString *message = [Language getText:@"กรุณาใส่เบอร์โทรติดต่อกลับ เพื่อเจ้าหน้าที่จะโทรสอบถามข้อมูลเพิ่มเติมสำหรับการโอนเงินคืนท่าน"];
+                NSString *strTitle = [Language getText:@"เบอร์โทร."];;
                 NSString *strRemark = message;
                 
                 
@@ -564,7 +565,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
             else if(item == 2)
             {
                 CustomTableViewCellLabelText *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabelText];
-                NSString *message = [Setting getValue:@"037m" example:@"กรุณาใส่เบอร์โทรติดต่อกลับ เพื่อเจ้าหน้าที่จะโทรสอบถามข้อมูลเพิ่มเติมสำหรับการโอนเงินของท่านคืน"];
+                NSString *message = [Language getText:@"กรุณาใส่เบอร์โทรติดต่อกลับ เพื่อเจ้าหน้าที่จะโทรสอบถามข้อมูลเพิ่มเติมสำหรับการโอนเงินคืนท่าน"];
                 NSString *strRemark = message;
                 
                 
@@ -594,7 +595,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
             else if(item == 4)
             {
                 CustomTableViewCellLabelText *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabelText];
-                NSString *message = [Setting getValue:@"038m" example:@"กรุณาใส่เบอร์โทรติดต่อกลับ เพื่อเจ้าหน้าที่จะโทรสอบถามข้อมูลเพิ่มเติมสำหรับการโอนเงินของท่านคืน"];
+                NSString *message = [Language getText:@"กรุณาใส่เบอร์โทรติดต่อกลับ เพื่อเจ้าหน้าที่จะโทรสอบถามข้อมูลเพิ่มเติมสำหรับการโอนเงินคืนท่าน"];
                 NSString *strRemark = message;
                 
                 
@@ -681,7 +682,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
         CustomTableViewCellLabelText *cell = [tbvData cellForRowAtIndexPath:indexPath];
-        cell.txtValue.text = disputeReason.text;
+        cell.txtValue.text = [Language langIsEN]?disputeReason.text:disputeReason.text;
     }
 }
 
@@ -717,7 +718,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
     if([cell.txtValue isFirstResponder])
     {
         DisputeReason *disputeReason = _disputeReasonList[row];
-        strText = disputeReason.text;
+        strText = [Language langIsEN]?disputeReason.text:disputeReason.text;
     }
     
     return strText;
@@ -789,21 +790,21 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
     Receipt *downloadReceipt = receiptList[0];
     if(downloadReceipt.status == 5 || downloadReceipt.status == 6)
     {
-        NSString *message = [Setting getValue:@"032m" example:@"ร้านค้ากำลังปรุงอาหารให้คุณอยู่ค่ะ โปรดรอสักครู่นะคะ"];
-        NSString *message2 = [Setting getValue:@"033m" example:@"อาหารได้ส่งถึงคุณแล้วค่ะ"];
+        NSString *message = [Language getText:@"ร้านค้ากำลังปรุงอาหารให้คุณอยู่ค่ะ โปรดรอสักครู่นะคะ"];
+        NSString *message2 = [Language getText:@"อาหารได้ส่งถึงคุณแล้วค่ะ"];
         NSString *strMessage = downloadReceipt.status == 5?message:message2;
         [self showAlert:@"" message:strMessage method:@selector(goBack:)];
         [self removeOverlayViews];
     }
     else if(downloadReceipt.status == 7)
     {
-        NSString *message = [Setting getValue:@"084m" example:@"คำร้องขอเงินคืนเต็มจำนวนได้ถูกส่งไปแล้ว กรุณารอการยืนยันจากร้านค้า"];
+        NSString *message = [Language getText:@"คำร้องขอเงินคืนเต็มจำนวนได้ถูกส่งไปแล้ว กรุณารอการยืนยันจากร้านค้า"];
         [self showAlert:@"" message:message method:@selector(unwindToReceiptSummary)];
         [self removeOverlayViews];
     }
     else if(downloadReceipt.status == 8)
     {
-        NSString *message = [Setting getValue:@"009m" example:@"คำร้องขอเงินคืนได้ถูกส่งไปแล้ว กรุณารอการยืนยันจากร้านค้า"];
+        NSString *message = [Language getText:@"คำร้องขอเงินคืนได้ถูกส่งไปแล้ว กรุณารอการยืนยันจากร้านค้า"];
         [self showAlert:@"" message:message method:@selector(unwindToReceiptSummary)];
         [self removeOverlayViews];
     }
@@ -818,7 +819,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
             UITextField *textField = [self.view viewWithTag:1];
             if([Utility isStringEmpty:textField.text])
             {
-                NSString *message = [Setting getValue:@"010m" example:@"กรุณาเลือกเหตุผลที่ขอเงินคืน"];
+                NSString *message = [Language getText:@"กรุณาเลือกเหตุผลในการขอเงินคืน"];
                 [self blinkAlertMsg:message];
                 return NO;
             }
@@ -828,7 +829,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
             UITextField *textField = [self.view viewWithTag:4];
             if([Utility isStringEmpty:textField.text])
             {
-                [self blinkAlertMsg:@"กรุณาใส่เบอร์โทร"];
+                [self blinkAlertMsg:[Language getText:@"กรุณาใส่เบอร์โทร"]];
                 return NO;
             }
         }
@@ -839,7 +840,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
             UITextField *textField = [self.view viewWithTag:1];
             if([Utility isStringEmpty:textField.text])
             {
-                NSString *message = [Setting getValue:@"011m" example:@"กรุณาเลือกเหตุผลที่ขอเงินคืน"];
+                NSString *message = [Language getText:@"กรุณาเลือกเหตุผลในการขอเงินคืน"];
                 [self blinkAlertMsg:message];
                 return NO;
             }
@@ -849,15 +850,16 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
             UITextField *textField = [self.view viewWithTag:2];
             if([Utility isStringEmpty:textField.text])
             {
-                [self blinkAlertMsg:@"กรุณาใส่จำนวนเงิน"];
+                [self blinkAlertMsg:[Language getText:@"กรุณาใส่จำนวนเงิน"]];
                 return NO;
             }
             
             
+            NSString *message = [Language getText:@"กรุณาใส่จำนวนเงินระหว่าง %@"];
             float totalAmount = [Receipt getTotalAmount:receipt];
             NSString *strTotalAmount = [Utility formatDecimal:totalAmount withMinFraction:2 andMaxFraction:2];
             NSString *strRemark = [NSString stringWithFormat:@"THB 0.01 to %@",strTotalAmount];
-            NSString *strMessage = [NSString stringWithFormat:@"กรุณาใส่จำนวนเงินระหว่าง %@",strRemark];
+            NSString *strMessage = [NSString stringWithFormat:message,strRemark];
             if([Utility floatValue:textField.text] > totalAmount)
             {
                 [self blinkAlertMsg:strMessage];
@@ -869,7 +871,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
             UITextView *textView = [self.view viewWithTag:3];
             if([textView.text isEqualToString:_strPlaceHolder])
             {
-                NSString *message = [Setting getValue:@"012m" example:@"กรุณาใส่รายละเอียดเหตุผลในการขอเงินคืน"];
+                NSString *message = [Language getText:@"กรุณาใส่รายละเอียดเหตุผลในการขอเงินคืน"];
                 [self blinkAlertMsg:message];            
                 return NO;
             }
@@ -879,7 +881,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
             UITextField *textField = [self.view viewWithTag:4];
             if([Utility isStringEmpty:textField.text])
             {
-                [self blinkAlertMsg:@"กรุณาใส่เบอร์โทร"];
+                [self blinkAlertMsg:[Language getText:@"กรุณาใส่เบอร์โทร"]];
                 return NO;
             }
         }

@@ -16,6 +16,7 @@
 #import "Menu.h"
 #import "SpecialPriceProgram.h"
 #import "OrderTaking.h"
+#import "DiscountGroupMenuMap.h"
 
 
 @interface HotDealDetailViewController ()
@@ -132,11 +133,12 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         cell.lblRemarkHeight.constant = 0;
         
         
-        if(promotion.discountMenuID)
+        if(promotion.discountGroupMenuID)
         {
             cell.btnOrderNow.hidden = NO;
             cell.btnOrderNowTop.constant = 7;
             cell.btnOrderNowHeight.constant = 30;
+            [cell.btnOrderNow setTitle:[Language getText:@"สั่งเลย"] forState:UIControlStateNormal];
             [cell.btnOrderNow addTarget:self action:@selector(orderNow:) forControlEvents:UIControlEventTouchUpInside];
         }
         else
@@ -157,6 +159,7 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         
+        cell.lblTitle.text = [Language getText:@"ข้อกำหนด และเงื่อนไข"];
         cell.lblTextLabel.text = promotion.termsConditions;
         [cell.lblTextLabel sizeToFit];        
         cell.lblTextLabelHeight.constant = _expandCollapse?cell.lblTextLabel.frame.size.height:0;
@@ -211,7 +214,7 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         cell.lblRemarkHeight.constant = 0;
         
         
-        if(promotion.discountMenuID)
+        if(promotion.discountGroupMenuID)
         {
             cell.btnOrderNow.hidden = NO;
             cell.btnOrderNowTop.constant = 7;
@@ -232,6 +235,7 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         CustomTableViewCellLabel *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabel];
         
         
+        cell.lblTitle.text = [Language getText:@"ข้อกำหนด และเงื่อนไข"];
         cell.lblTextLabel.text = promotion.termsConditions;
         [cell.lblTextLabel sizeToFit];
         cell.lblTextLabelHeight.constant = cell.lblTextLabel.frame.size.height;
@@ -269,7 +273,7 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
 {
     self.homeModel = [[HomeModel alloc]init];
     self.homeModel.delegate = self;
-    [self.homeModel downloadItems:dbMenu withData:@[@(promotion.mainBranchID), @(promotion.discountMenuID)]];
+    [self.homeModel downloadItems:dbMenu withData:@[@(promotion.mainBranchID), @(promotion.discountGroupMenuID)]];
 }
 
 -(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
@@ -282,21 +286,27 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         Message *message = messageList[0];
         if(![message.text integerValue])
         {
-            NSString *message = [Setting getValue:@"124m" example:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
+            NSString *message = [Language getText:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
             [self showAlert:@"" message:message];
         }
         else
         {
-            Menu *menu = [Menu getMenu:promotion.discountMenuID branchID:promotion.mainBranchID];
-            SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:promotion.discountMenuID branchID:promotion.mainBranchID];
-            float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
-            
-            
-            OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:promotion.mainBranchID customerTableID:0 menuID:promotion.discountMenuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 noteIDListInText:@"" orderNo:0 status:1 receiptID:0];
-            
-            
+            NSMutableArray *discountGroupMenuMapList = items[6];
             NSMutableArray *orderTakingList = [[NSMutableArray alloc]init];
-            [orderTakingList addObject:orderTaking];
+            for(int i=0; i<[discountGroupMenuMapList count]; i++)
+            {
+                DiscountGroupMenuMap *discountGroupMenuMap = discountGroupMenuMapList[i];
+                Menu *menu = [Menu getMenu:discountGroupMenuMap.menuID branchID:promotion.mainBranchID];
+                SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:discountGroupMenuMap.menuID branchID:promotion.mainBranchID];
+                float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
+                
+                for(int j=0; j<discountGroupMenuMap.quantity; j++)
+                {
+                    OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:promotion.mainBranchID customerTableID:0 menuID:discountGroupMenuMap.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
+                    [orderTakingList addObject:orderTaking];
+                }
+            }
+            
             [OrderTaking setCurrentOrderTakingList:orderTakingList];
             [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
         }

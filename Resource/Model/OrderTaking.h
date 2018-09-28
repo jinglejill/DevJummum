@@ -17,13 +17,14 @@
 @property (nonatomic) float specialPrice;
 @property (nonatomic) float price;
 @property (nonatomic) NSInteger takeAway;
+@property (nonatomic) float takeAwayPrice;
 @property (retain, nonatomic) NSString * noteIDListInText;
+@property (nonatomic) float notePrice;
 @property (nonatomic) NSInteger orderNo;
 @property (nonatomic) NSInteger status;
 @property (nonatomic) NSInteger receiptID;
 @property (retain, nonatomic) NSString * modifiedUser;
 @property (retain, nonatomic) NSDate * modifiedDate;
-
 
 
 @property (nonatomic) NSInteger menuOrderNo;
@@ -32,10 +33,8 @@
 
 
 
-
-
 - (NSDictionary *)dictionary;
--(OrderTaking *)initWithBranchID:(NSInteger)branchID customerTableID:(NSInteger)customerTableID menuID:(NSInteger)menuID quantity:(float)quantity specialPrice:(float)specialPrice price:(float)price takeAway:(NSInteger)takeAway noteIDListInText:(NSString *)noteIDListInText orderNo:(NSInteger)orderNo status:(NSInteger)status receiptID:(NSInteger)receiptID;
+-(OrderTaking *)initWithBranchID:(NSInteger)branchID customerTableID:(NSInteger)customerTableID menuID:(NSInteger)menuID quantity:(float)quantity specialPrice:(float)specialPrice price:(float)price takeAway:(NSInteger)takeAway takeAwayPrice:(float)takeAwayPrice noteIDListInText:(NSString *)noteIDListInText notePrice:(float)notePrice orderNo:(NSInteger)orderNo status:(NSInteger)status receiptID:(NSInteger)receiptID;
 +(NSInteger)getNextID;
 +(void)addObject:(OrderTaking *)orderTaking;
 +(void)removeObject:(OrderTaking *)orderTaking;
@@ -51,9 +50,7 @@
 +(NSInteger)getSubTotalAmount:(NSMutableArray *)orderTakingList;
 +(NSInteger)getSubTotalAmountAllowDiscount:(NSMutableArray *)orderTakingList;
 +(NSMutableArray *)sortOrderTakingList:(NSMutableArray *)orderTakingList;
-//+(NSMutableArray *)sortOrderTakingListAndReason:(NSMutableArray *)orderTakingList;
 
-//+(NSMutableArray *)createSumUpOrderTakingGroupByNoteFromSeveralSendToKitchen:(NSMutableArray *)orderTakingList;
 +(NSMutableArray *)getOrderTakingListWithReceiptID:(NSInteger)receiptID orderTakingList:(NSMutableArray *)orderTakingList;
 +(NSMutableArray *)getOrderTakingListWithReceiptID:(NSInteger)receiptID;
 +(NSMutableArray *)getOrderTakingListWithReceiptList:(NSMutableArray *)receiptList;

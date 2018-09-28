@@ -26,7 +26,7 @@
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    lblMessage.text = @"- กรุณากดเลือกโต๊ะเพื่อสแกน QR Code เลขโต๊ะ\n- คุณสามารถแก้ไขรายการอาหารได้โดยกดที่ปุ่ม +/-ด้านบนขวามือ";
+    lblMessage.text = [Language getText:@"- กรุณากดเลือกโต๊ะเพื่อสแกน QR Code เลขโต๊ะ\n- คุณสามารถแก้ไขรายการอาหารได้โดยกดที่ปุ่ม +/-ด้านบนขวามือ"];
     [lblMessage sizeToFit];
     lblMessageHeight.constant = lblMessage.frame.size.height;
     vwAlertHeight.constant = 30+lblMessageHeight.constant+30+btnDontShowItAgain.frame.size.height+16+btnOK.frame.size.height+8;

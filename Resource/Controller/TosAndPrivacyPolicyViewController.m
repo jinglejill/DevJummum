@@ -76,23 +76,23 @@
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Setting getValue:@"064t" example:@"ข้อกำหนดและเงื่อนไขของ JUMMUM"];
+    NSString *title = [Language getText:@"ข้อกำหนดและเงื่อนไขของ JUMMUM"];
     lblNavTitle.text = title;
     if(pageType == 1)
     {
-        NSString *title = [Setting getValue:@"064t" example:@"ข้อกำหนดและเงื่อนไขของ JUMMUM"];
+        NSString *title = [Language getText:@"ข้อกำหนดและเงื่อนไขของ JUMMUM"];
         lblNavTitle.text = title;
         [self webViewLoadUrl:[Utility url:urlTermsOfService]];
     }
     else if(pageType == 2)
     {
-        NSString *title = [Setting getValue:@"078t" example:@"นโยบายความเป็นส่วนตัว"];
+        NSString *title = [Language getText:@"นโยบายความเป็นส่วนตัว"];
         lblNavTitle.text = title;
         [self webViewLoadUrl:[Utility url:urlPrivacyPolicy]];
     }
     else if(pageType == 3)
     {
-        NSString *title = [Setting getValue:@"079t" example:@"ติดต่อ JUMMUM"];
+        NSString *title = [Language getText:@"ติดต่อ JUMMUM"];
         lblNavTitle.text = title;
         [self webViewLoadUrl:[Utility url:urlContactUs]];
     }

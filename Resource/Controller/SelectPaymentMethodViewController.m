@@ -46,7 +46,7 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Setting getValue:@"077t" example:@"เลือกช่องทางชำระเงิน"];
+    NSString *title = [Language getText:@"เลือกบัตรเครดิต/เดบิต"];
     lblNavTitle.text = title;
     tbvData.delegate = self;
     tbvData.dataSource = self;
@@ -95,7 +95,7 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
         }
         
         
-        cell.textLabel.text = @"เพิ่มบัตรเครดิต/เดบิต";
+        cell.textLabel.text = [Language getText:@"เพิ่มบัตรเครดิต/เดบิต"];
         cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
         cell.textLabel.textColor = cSystem4;
         

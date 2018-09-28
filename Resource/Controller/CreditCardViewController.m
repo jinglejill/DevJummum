@@ -46,7 +46,7 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Setting getValue:@"065t" example:@"บัตรเครดิต/เดบิต"];
+    NSString *title = [Language getText:@"บัตรเครดิต/เดบิต"];
     lblNavTitle.text = title;
     tbvData.delegate = self;
     tbvData.dataSource = self;
@@ -75,7 +75,7 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
         }
     }
     
-    NSString *message = [Setting getValue:@"082m" example:@"คุณไม่ได้บันทึกบัตรเครดิต/เดบิตไว้"];
+    NSString *message = [Language getText:@"คุณไม่ได้บันทึกบัตรเครดิต/เดบิตไว้"];
     UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
     noDataLabel.text             = message;
     noDataLabel.textColor        = cSystem4;
@@ -137,6 +137,9 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
     secureCreditCardNo = [NSString stringWithFormat:@"XXXX XXXX XXXX %@",secureCreditCardNo];
     
     cell.lblValue.text = secureCreditCardNo;
+    
+    
+    [cell.btnRemove setTitle:[Language getText:@"ลบ"] forState:UIControlStateNormal];
     [cell.btnRemove addTarget:self action:@selector(removeCreditCard:) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -197,11 +200,5 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
         [[NSUserDefaults standardUserDefaults] setValue:dicCreditCard forKey:@"creditCard"];
         [tbvData reloadData];
     }
-    
-    
-    
-    
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"creditCard"];
-//    [tbvData reloadData];
 }
 @end

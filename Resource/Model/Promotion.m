@@ -16,7 +16,44 @@
 
 @implementation Promotion
 
--(Promotion *)initWithMainBranchID:(NSInteger)mainBranchID startDate:(NSDate *)startDate endDate:(NSDate *)endDate usingStartDate:(NSDate *)usingStartDate usingEndDate:(NSDate *)usingEndDate header:(NSString *)header subTitle:(NSString *)subTitle imageUrl:(NSString *)imageUrl discountType:(NSInteger)discountType discountAmount:(float)discountAmount shopDiscount:(float)shopDiscount jummumDiscount:(float)jummumDiscount sharedDiscountType:(NSInteger)sharedDiscountType sharedDiscountAmountMax:(float)sharedDiscountAmountMax minimumSpending:(NSInteger)minimumSpending maxDiscountAmountPerDay:(NSInteger)maxDiscountAmountPerDay allowEveryone:(NSInteger)allowEveryone allowDiscountForAllMenuType:(NSInteger)allowDiscountForAllMenuType discountMenuID:(NSInteger)discountMenuID noOfLimitUse:(NSInteger)noOfLimitUse noOfLimitUsePerUser:(NSInteger)noOfLimitUsePerUser noOfLimitUsePerUserPerDay:(NSInteger)noOfLimitUsePerUserPerDay voucherCode:(NSString *)voucherCode termsConditions:(NSString *)termsConditions type:(NSInteger)type orderNo:(NSInteger)orderNo status:(NSInteger)status
+- (NSDictionary *)dictionary
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [self valueForKey:@"promotionID"]?[self valueForKey:@"promotionID"]:[NSNull null],@"promotionID",
+            [self valueForKey:@"mainBranchID"]?[self valueForKey:@"mainBranchID"]:[NSNull null],@"mainBranchID",
+            [Utility dateToString:[self valueForKey:@"startDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"startDate",
+            [Utility dateToString:[self valueForKey:@"endDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"endDate",
+            [Utility dateToString:[self valueForKey:@"usingStartDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"usingStartDate",
+            [Utility dateToString:[self valueForKey:@"usingEndDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"usingEndDate",
+            [self valueForKey:@"header"]?[self valueForKey:@"header"]:[NSNull null],@"header",
+            [self valueForKey:@"subTitle"]?[self valueForKey:@"subTitle"]:[NSNull null],@"subTitle",
+            [self valueForKey:@"imageUrl"]?[self valueForKey:@"imageUrl"]:[NSNull null],@"imageUrl",
+            [self valueForKey:@"discountType"]?[self valueForKey:@"discountType"]:[NSNull null],@"discountType",
+            [self valueForKey:@"discountAmount"]?[self valueForKey:@"discountAmount"]:[NSNull null],@"discountAmount",
+            [self valueForKey:@"shopDiscount"]?[self valueForKey:@"shopDiscount"]:[NSNull null],@"shopDiscount",
+            [self valueForKey:@"jummumDiscount"]?[self valueForKey:@"jummumDiscount"]:[NSNull null],@"jummumDiscount",
+            [self valueForKey:@"sharedDiscountType"]?[self valueForKey:@"sharedDiscountType"]:[NSNull null],@"sharedDiscountType",
+            [self valueForKey:@"sharedDiscountAmountMax"]?[self valueForKey:@"sharedDiscountAmountMax"]:[NSNull null],@"sharedDiscountAmountMax",
+            [self valueForKey:@"minimumSpending"]?[self valueForKey:@"minimumSpending"]:[NSNull null],@"minimumSpending",
+            [self valueForKey:@"maxDiscountAmountPerDay"]?[self valueForKey:@"maxDiscountAmountPerDay"]:[NSNull null],@"maxDiscountAmountPerDay",
+            [self valueForKey:@"allowEveryone"]?[self valueForKey:@"allowEveryone"]:[NSNull null],@"allowEveryone",
+            [self valueForKey:@"allowDiscountForAllMenuType"]?[self valueForKey:@"allowDiscountForAllMenuType"]:[NSNull null],@"allowDiscountForAllMenuType",
+            [self valueForKey:@"discountGroupMenuID"]?[self valueForKey:@"discountGroupMenuID"]:[NSNull null],@"discountGroupMenuID",
+            [self valueForKey:@"discountMenuMaxQuantity"]?[self valueForKey:@"discountMenuMaxQuantity"]:[NSNull null],@"discountMenuMaxQuantity",
+            [self valueForKey:@"noOfLimitUse"]?[self valueForKey:@"noOfLimitUse"]:[NSNull null],@"noOfLimitUse",
+            [self valueForKey:@"noOfLimitUsePerUser"]?[self valueForKey:@"noOfLimitUsePerUser"]:[NSNull null],@"noOfLimitUsePerUser",
+            [self valueForKey:@"noOfLimitUsePerUserPerDay"]?[self valueForKey:@"noOfLimitUsePerUserPerDay"]:[NSNull null],@"noOfLimitUsePerUserPerDay",
+            [self valueForKey:@"voucherCode"]?[self valueForKey:@"voucherCode"]:[NSNull null],@"voucherCode",
+            [self valueForKey:@"termsConditions"]?[self valueForKey:@"termsConditions"]:[NSNull null],@"termsConditions",
+            [self valueForKey:@"type"]?[self valueForKey:@"type"]:[NSNull null],@"type",
+            [self valueForKey:@"orderNo"]?[self valueForKey:@"orderNo"]:[NSNull null],@"orderNo",
+            [self valueForKey:@"status"]?[self valueForKey:@"status"]:[NSNull null],@"status",
+            [self valueForKey:@"modifiedUser"]?[self valueForKey:@"modifiedUser"]:[NSNull null],@"modifiedUser",
+            [Utility dateToString:[self valueForKey:@"modifiedDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"modifiedDate",
+            nil];
+}
+
+-(Promotion *)initWithMainBranchID:(NSInteger)mainBranchID startDate:(NSDate *)startDate endDate:(NSDate *)endDate usingStartDate:(NSDate *)usingStartDate usingEndDate:(NSDate *)usingEndDate header:(NSString *)header subTitle:(NSString *)subTitle imageUrl:(NSString *)imageUrl discountType:(NSInteger)discountType discountAmount:(float)discountAmount shopDiscount:(float)shopDiscount jummumDiscount:(float)jummumDiscount sharedDiscountType:(NSInteger)sharedDiscountType sharedDiscountAmountMax:(float)sharedDiscountAmountMax minimumSpending:(NSInteger)minimumSpending maxDiscountAmountPerDay:(NSInteger)maxDiscountAmountPerDay allowEveryone:(NSInteger)allowEveryone allowDiscountForAllMenuType:(NSInteger)allowDiscountForAllMenuType discountGroupMenuID:(NSInteger)discountGroupMenuID discountMenuMaxQuantity:(NSInteger)discountMenuMaxQuantity noOfLimitUse:(NSInteger)noOfLimitUse noOfLimitUsePerUser:(NSInteger)noOfLimitUsePerUser noOfLimitUsePerUserPerDay:(NSInteger)noOfLimitUsePerUserPerDay voucherCode:(NSString *)voucherCode termsConditions:(NSString *)termsConditions type:(NSInteger)type orderNo:(NSInteger)orderNo status:(NSInteger)status
 {
     self = [super init];
     if(self)
@@ -40,7 +77,8 @@
         self.maxDiscountAmountPerDay = maxDiscountAmountPerDay;
         self.allowEveryone = allowEveryone;
         self.allowDiscountForAllMenuType = allowDiscountForAllMenuType;
-        self.discountMenuID = discountMenuID;
+        self.discountGroupMenuID = discountGroupMenuID;
+        self.discountMenuMaxQuantity = discountMenuMaxQuantity;
         self.noOfLimitUse = noOfLimitUse;
         self.noOfLimitUsePerUser = noOfLimitUsePerUser;
         self.noOfLimitUsePerUserPerDay = noOfLimitUsePerUserPerDay;
@@ -146,7 +184,8 @@
         ((Promotion *)copy).maxDiscountAmountPerDay = self.maxDiscountAmountPerDay;
         ((Promotion *)copy).allowEveryone = self.allowEveryone;
         ((Promotion *)copy).allowDiscountForAllMenuType = self.allowDiscountForAllMenuType;
-        ((Promotion *)copy).discountMenuID = self.discountMenuID;
+        ((Promotion *)copy).discountGroupMenuID = self.discountGroupMenuID;
+        ((Promotion *)copy).discountMenuMaxQuantity = self.discountMenuMaxQuantity;
         ((Promotion *)copy).noOfLimitUse = self.noOfLimitUse;
         ((Promotion *)copy).noOfLimitUsePerUser = self.noOfLimitUsePerUser;
         ((Promotion *)copy).noOfLimitUsePerUserPerDay = self.noOfLimitUsePerUserPerDay;
@@ -183,7 +222,8 @@
        && self.maxDiscountAmountPerDay == editingPromotion.maxDiscountAmountPerDay
        && self.allowEveryone == editingPromotion.allowEveryone
        && self.allowDiscountForAllMenuType == editingPromotion.allowDiscountForAllMenuType
-       && self.discountMenuID == editingPromotion.discountMenuID
+       && self.discountGroupMenuID == editingPromotion.discountGroupMenuID
+       && self.discountMenuMaxQuantity == editingPromotion.discountMenuMaxQuantity
        && self.noOfLimitUse == editingPromotion.noOfLimitUse
        && self.noOfLimitUsePerUser == editingPromotion.noOfLimitUsePerUser
        && self.noOfLimitUsePerUserPerDay == editingPromotion.noOfLimitUsePerUserPerDay
@@ -220,7 +260,8 @@
     toPromotion.maxDiscountAmountPerDay = fromPromotion.maxDiscountAmountPerDay;
     toPromotion.allowEveryone = fromPromotion.allowEveryone;
     toPromotion.allowDiscountForAllMenuType = fromPromotion.allowDiscountForAllMenuType;
-    toPromotion.discountMenuID = fromPromotion.discountMenuID;
+    toPromotion.discountGroupMenuID = fromPromotion.discountGroupMenuID;
+    toPromotion.discountMenuMaxQuantity = fromPromotion.discountMenuMaxQuantity;
     toPromotion.noOfLimitUse = fromPromotion.noOfLimitUse;
     toPromotion.noOfLimitUsePerUser = fromPromotion.noOfLimitUsePerUser;
     toPromotion.noOfLimitUsePerUserPerDay = fromPromotion.noOfLimitUsePerUserPerDay;
@@ -234,6 +275,7 @@
     
     return toPromotion;
 }
+
 
 +(NSMutableArray *)getPromotionList
 {

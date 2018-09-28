@@ -10,6 +10,8 @@
 #import "HomeModel.h"
 #import "Utility.h"
 #import "Receipt.h"
+#import "Setting.h"
+#import "Language.h"
 #import <MessageUI/MFMailComposeViewController.h>
 
 

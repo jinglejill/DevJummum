@@ -81,7 +81,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Setting getValue:@"061t" example:@"เลือกโต๊ะ"];
+    NSString *title = [Language getText:@"เลือกโต๊ะ"];
     lblNavTitle.text = title;
     tbvCustomerTable.delegate = self;
     tbvCustomerTable.dataSource = self;
@@ -138,12 +138,12 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     {
         if(section == 0)
         {
-            NSString *message = [Setting getValue:@"116m" example:@"ค้นหาเบอร์โต๊ะ"];
+            
             CustomTableViewCellSearchBar *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierSearchBar];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.sbText.delegate = self;
             cell.sbText.tag = 300;
-            cell.sbText.placeholder = message;
+            cell.sbText.placeholder = [Language getText:@"ค้นหาเบอร์โต๊ะ"];
             [cell.sbText setInputAccessoryView:self.toolBar];
             UITextField *textField = [cell.sbText valueForKey:@"searchField"];
             textField.layer.borderColor = [cTextFieldBorder CGColor];

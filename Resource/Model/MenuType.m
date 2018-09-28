@@ -14,17 +14,18 @@
 
 @implementation MenuType
 
--(MenuType *)initWithName:(NSString *)name allowDiscount:(NSInteger)allowDiscount color:(NSString *)color status:(NSInteger)status orderNo:(NSInteger)orderNo
+-(MenuType *)initWithName:(NSString *)name nameEn:(NSString *)nameEn allowDiscount:(NSInteger)allowDiscount color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status
 {
     self = [super init];
     if(self)
     {
         self.menuTypeID = [MenuType getNextID];
         self.name = name;
+        self.nameEn = nameEn;
         self.allowDiscount = allowDiscount;
         self.color = color;
-        self.status = status;
         self.orderNo = orderNo;
+        self.status = status;
         self.modifiedUser = [Utility modifiedUser];
         self.modifiedDate = [Utility currentDateTime];
     }
@@ -105,14 +106,13 @@
     {
         ((MenuType *)copy).menuTypeID = self.menuTypeID;
         [copy setName:self.name];
+        [copy setNameEn:self.nameEn];
         ((MenuType *)copy).allowDiscount = self.allowDiscount;
         [copy setColor:self.color];
-        ((MenuType *)copy).status = self.status;
         ((MenuType *)copy).orderNo = self.orderNo;
+        ((MenuType *)copy).status = self.status;
         [copy setModifiedUser:[Utility modifiedUser]];
         [copy setModifiedDate:[Utility currentDateTime]];
-        
-        
     }
     
     return copy;
@@ -122,10 +122,11 @@
 {
     if(self.menuTypeID == editingMenuType.menuTypeID
        && [self.name isEqualToString:editingMenuType.name]
+       && [self.nameEn isEqualToString:editingMenuType.nameEn]
        && self.allowDiscount == editingMenuType.allowDiscount
        && [self.color isEqualToString:editingMenuType.color]
-       && self.status == editingMenuType.status
        && self.orderNo == editingMenuType.orderNo
+       && self.status == editingMenuType.status
        )
     {
         return NO;
@@ -137,16 +138,16 @@
 {
     toMenuType.menuTypeID = fromMenuType.menuTypeID;
     toMenuType.name = fromMenuType.name;
+    toMenuType.nameEn = fromMenuType.nameEn;
     toMenuType.allowDiscount = fromMenuType.allowDiscount;
     toMenuType.color = fromMenuType.color;
-    toMenuType.status = fromMenuType.status;
     toMenuType.orderNo = fromMenuType.orderNo;
+    toMenuType.status = fromMenuType.status;
     toMenuType.modifiedUser = [Utility modifiedUser];
     toMenuType.modifiedDate = [Utility currentDateTime];
     
     return toMenuType;
 }
-
 +(void)setSharedData:(NSMutableArray *)dataList
 {
     [SharedMenuType sharedMenuType].menuTypeList = dataList;

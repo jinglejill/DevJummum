@@ -148,24 +148,7 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
     
     
     colVwNote.allowsMultipleSelection = YES;
-    
-    
-//    /////////
-//    _noteTypeList = [[NSMutableArray alloc]init];
-//    NSSet *noteTypeIDSet = [NSSet setWithArray:[noteList valueForKey:@"_noteTypeID"]];
-//    for(NSNumber *noteTypeID in noteTypeIDSet)
-//    {
-//        NoteType *noteType = [NoteType getNoteType:[noteTypeID integerValue]];
-//        NSMutableArray *noteListByNoteTypeID = [Note getNoteListWithNoteTypeID:noteType.noteTypeID noteList:noteList];
-//        NSSet *typeSet = [NSSet setWithArray:[noteListByNoteTypeID valueForKey:@"_type"]];
-//        for(NSNumber *type in typeSet)
-//        {
-//            NoteType *newNoteType = [noteType copy];
-//            newNoteType.type = [type integerValue];
-//            [_noteTypeList addObject:newNoteType];
-//        }
-//    }
-//    _noteTypeList = [NoteType sort:_noteTypeList];
+
     
     [self loadViewProcess];
 }
@@ -229,7 +212,7 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
         {
             UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:14];
             NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
-            NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"เพิ่ม" attributes:attribute];
+            NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"เพิ่ม"] attributes:attribute];
             
             
             UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:14];
@@ -245,7 +228,7 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
         }
         else//ไม่ใส่
         {
-            cell.lblNoteName.text = [NSString stringWithFormat:@"ไม่ใส่ %@",note.name];
+            cell.lblNoteName.text = [NSString stringWithFormat:[Language getText:@"ไม่ใส่ %@"],note.name];
         }
         
         NSString *strNotePrice = @"";
@@ -470,13 +453,8 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     
     
     //update ordertaking price
-    float takeAwayFee = orderTaking.takeAway?branch.takeAwayFee:0;
-    Menu *menu = [Menu getMenu:orderTaking.menuID branchID:branch.branchID];
-    SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
-    float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
     float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID];
-    orderTaking.price = menu.price+sumNotePrice+takeAwayFee;
-    orderTaking.specialPrice = specialPrice+sumNotePrice+takeAwayFee;
+    orderTaking.notePrice = sumNotePrice;
     orderTaking.modifiedUser = [Utility modifiedUser];
     orderTaking.modifiedDate = [Utility currentDateTime];
     

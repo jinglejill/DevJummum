@@ -11,10 +11,11 @@
 @interface MenuType : NSObject
 @property (nonatomic) NSInteger menuTypeID;
 @property (retain, nonatomic) NSString * name;
+@property (retain, nonatomic) NSString * nameEn;
 @property (nonatomic) NSInteger allowDiscount;
 @property (retain, nonatomic) NSString * color;
-@property (nonatomic) NSInteger status;
 @property (nonatomic) NSInteger orderNo;
+@property (nonatomic) NSInteger status;
 @property (retain, nonatomic) NSString * modifiedUser;
 @property (retain, nonatomic) NSDate * modifiedDate;
 
@@ -22,7 +23,8 @@
 @property (nonatomic) NSInteger branchID;
 
 
--(MenuType *)initWithName:(NSString *)name allowDiscount:(NSInteger)allowDiscount color:(NSString *)color status:(NSInteger)status orderNo:(NSInteger)orderNo;
+
+-(MenuType *)initWithName:(NSString *)name nameEn:(NSString *)nameEn allowDiscount:(NSInteger)allowDiscount color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status;
 +(NSInteger)getNextID;
 +(void)addObject:(MenuType *)menuType;
 +(void)removeObject:(MenuType *)menuType;

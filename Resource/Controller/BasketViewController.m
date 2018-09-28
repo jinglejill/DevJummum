@@ -121,7 +121,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
             
             for(int i=0; i<quantity-currentOrderTakingCount; i++)
             {
-                OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 noteIDListInText:@"" orderNo:0 status:1 receiptID:0];
+                OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
                 [OrderTaking addObject:orderTaking];
                 [currentOrderTakingList addObject:orderTaking];
             }
@@ -227,7 +227,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     
     
     
-    NSString *title = [Setting getValue:@"075t" example:@"สรุปรายการที่สั่ง"];
+    NSString *title = [Language getText:@"สรุปรายการที่สั่ง"];
     lblNavTitle.text = title;
     tbvOrder.delegate = self;
     tbvOrder.dataSource = self;
@@ -313,7 +313,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         
         
         
-        
+        //menu
         Menu *menu = _menuList[item];
         cell.lblMenuName.text = menu.titleThai;
         cell.lblMenuName.tag = menu.menuID;
@@ -321,7 +321,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height<21.5?21.5:cell.lblMenuName.frame.size.height;
         
         
-        
+        //quantity
         NSMutableArray *currentOrderTakingList = [OrderTaking getCurrentOrderTakingList];
         NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithMenuID:menu.menuID orderTakingList:currentOrderTakingList];
         float sumQuantity = [OrderTaking getSumQuantity:orderTakingList];
@@ -333,6 +333,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         [cell.txtQuantity setInputAccessoryView:self.toolBar];
         
         
+        //total
         float totalPrice = [OrderTaking getSumSpecialPrice:orderTakingList];
         NSString *strTotalPrice = [Utility formatDecimal:totalPrice withMinFraction:2 andMaxFraction:2];
         cell.lblTotalPrice.text = strTotalPrice;
@@ -359,9 +360,6 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         cell.imgMenuPic.contentMode = UIViewContentModeScaleAspectFit;
         [self setImageDesign:cell.imgMenuPic];
         
-
-        //expand collapse position
-        cell.imgExpandCollapseTrailing.constant =  self.view.frame.size.width - (cell.btnAddQuantity.frame.origin.x+cell.btnAddQuantity.frame.size.width+cell.lblTotalPrice.frame.origin.x)/2;
 
         
         
@@ -395,6 +393,12 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         [cell.btnDeleteQuantity addTarget:self action:@selector(stepperValueChanged:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btnAddQuantity addTarget:self action:@selector(stepperValueChanged:) forControlEvents:UIControlEventTouchUpInside];
         
+        
+        
+        //expand collapse position
+        cell.imgExpandCollapseTrailing.constant =  self.view.frame.size.width - (cell.btnAddQuantity.frame.origin.x+cell.btnAddQuantity.frame.size.width+(self.view.frame.size.width-16-cell.lblTotalPrice.frame.size.width))/2-16;
+        
+        
         return cell;
     }
     else if([tableView isEqual:tbvTotal])
@@ -408,7 +412,8 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 
-                NSString *strTitle = [NSString stringWithFormat:@"%ld รายการ",[_orderTakingList count]];
+                NSString *message = [Language getText:@"%ld รายการ"];
+                NSString *strTitle = [NSString stringWithFormat:message,[_orderTakingList count]];
                 NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:_orderTakingList] withMinFraction:2 andMaxFraction:2];
                 strTotal = [Utility addPrefixBahtSymbol:strTotal];
                 cell.lblTitle.text = strTitle;
@@ -432,8 +437,8 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         NSInteger menuID = tableView.tag;
         
         {
-            NSString *message = [Setting getValue:@"119m" example:@"เพิ่มโน้ต"];
-            NSString *message2 = [Setting getValue:@"120m" example:@"จานที่ %ld"];
+            NSString *message = [Language getText:@"เพิ่มโน้ต"];
+            NSString *message2 = [Language getText:@"จานที่ %ld"];
             CustomTableViewCellNote *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierNote];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
@@ -461,7 +466,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:@"ไม่ใส่" attributes:attribute];
+                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ไม่ใส่"] attributes:attribute];
                     
                     
                     UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -475,7 +480,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:@"เพิ่ม" attributes:attribute];
+                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"เพิ่ม"] attributes:attribute];
                     
                     
                     UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -616,7 +621,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         Menu *menu = _menuList[item];
         if(!menu.expand)
         {
-            NSString *message = [Setting getValue:@"118m" example:@"กดค้างที่ช่อง \"เพิ่มโน้ต\" เพื่อแสดงเมนูแก้ไขโน้ต"];
+            NSString *message = [Language getText:@"กดค้างที่ช่อง \"เพิ่มโน้ต\" เพื่อแสดงเมนูแก้ไขโน้ต"];
             [self blinkAlertMsg:message];
         }
         menu.expand = !menu.expand;
@@ -635,7 +640,8 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         CustomTableViewHeaderFooterButton *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifierHeaderFooterButton];
         
         
-        [footerView.btnValue setTitle:@"ยืนยันการสั่งอาหาร" forState:UIControlStateNormal];
+        NSString *message = [Language getText:@"ยืนยันการสั่งอาหาร"];
+        [footerView.btnValue setTitle:message forState:UIControlStateNormal];
         [footerView.btnValue addTarget:self action:@selector(checkOut:) forControlEvents:UIControlEventTouchUpInside];
         
         
@@ -666,7 +672,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:nil                                                            preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"ลบทั้งหมด"
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:[Language getText:@"ลบทั้งหมด"]
                                                       style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action)
                               {
                                   [OrderTaking removeCurrentOrderTakingList];
@@ -677,7 +683,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     
     [alert addAction:action1];
     
-    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"ยกเลิก"
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:[Language getText:@"ยกเลิก"]
                                                       style:UIAlertActionStyleCancel handler:^(UIAlertAction *action)
                               {
                                   
@@ -702,7 +708,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     UIFont *font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
     UIColor *color = cSystem1;
     NSDictionary *attribute = @{NSForegroundColorAttributeName:color ,NSFontAttributeName: font};
-    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ลบทั้งหมด" attributes:attribute];
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ลบทั้งหมด"] attributes:attribute];
     
     UILabel *label = [[action1 valueForKey:@"__representer"] valueForKey:@"label"];
     label.attributedText = attrString;
@@ -712,7 +718,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     UIFont *font2 = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
     UIColor *color2 = cSystem4;
     NSDictionary *attribute2 = @{NSForegroundColorAttributeName:color2 ,NSFontAttributeName: font2};
-    NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:@"ยกเลิก" attributes:attribute2];
+    NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ลบทั้งหมด"] attributes:attribute2];
     
     UILabel *label2 = [[action2 valueForKey:@"__representer"] valueForKey:@"label"];
     label2.attributedText = attrString2;
@@ -768,7 +774,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         
         
         NSMutableArray *currentOrderTakingList = [OrderTaking getCurrentOrderTakingList];
-        OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 noteIDListInText:@"" orderNo:0 status:1 receiptID:0];
+        OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
         [OrderTaking addObject:orderTaking];
         [currentOrderTakingList addObject:orderTaking];
 
@@ -802,16 +808,12 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     
     
     
-    float takeAwayFee = orderTaking.takeAway?branch.takeAwayFee:0;
-    SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
-    float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
-    float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID];
-    orderTaking.price = menu.price+sumNotePrice+takeAwayFee;
-    orderTaking.specialPrice = specialPrice+sumNotePrice+takeAwayFee;
+    orderTaking.notePrice = 0;
     orderTaking.modifiedUser = [Utility modifiedUser];
     orderTaking.modifiedDate = [Utility currentDateTime];
     
     [tbvOrder reloadData];
+    [tbvTotal reloadData];
 }
 
 - (void)deleteNoteTouchDown:(id)sender
@@ -841,7 +843,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:nil                                                            preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"คัดลอก"
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:[Language getText:@"คัดลอก"]
                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                               {
                                   Menu *menu = _menuList[tappedIP.item];
@@ -859,7 +861,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                                   UIFont *font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
                                   UIColor *color = cSystem1;
                                   NSDictionary *attribute = @{NSForegroundColorAttributeName:color ,NSFontAttributeName: font};
-                                  NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"คัดลอก" attributes:attribute];
+                                  NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"คัดลอก"] attributes:attribute];
                                   
                                   UILabel *label = [[action1 valueForKey:@"__representer"] valueForKey:@"label"];
                                   label.attributedText = attrString;
@@ -867,7 +869,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     [alert addAction:action1];
     
     
-    NSString *message4 = [Setting getValue:@"112m" example:@"วางทั้งหมด"];
+    NSString *message4 = [Language getText:@"วางทั้งหมด"];
     UIAlertAction *action4 = [UIAlertAction actionWithTitle:message4
                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                               {
@@ -896,32 +898,24 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                                           }
                                           
                                           
-                                          
-                                          
                                           //update note id list in text
                                           orderTaking.noteIDListInText = [OrderNote getNoteIDListInTextWithOrderTakingID:orderTaking.orderTakingID];
                                           
                                           
                                           //update ordertaking price
-                                          float takeAwayFee = orderTaking.takeAway?[[Setting getSettingValueWithKeyName:@"takeAwayFee"] floatValue]:0;
-                                          SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
-                                          float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
                                           float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID];
-                                          orderTaking.price = menu.price+sumNotePrice+takeAwayFee;
-                                          orderTaking.specialPrice = specialPrice+sumNotePrice+takeAwayFee;
+                                          orderTaking.notePrice = sumNotePrice;
                                           orderTaking.modifiedUser = [Utility modifiedUser];
                                           orderTaking.modifiedDate = [Utility currentDateTime];
                                       }
                                   }
                                   
                                   [tbvOrder reloadData];
-                                  
-                                  
                               }];
     [alert addAction:action4];
     
     
-    NSString *message5 = [Setting getValue:@"113m" example:@"Take away ทั้งหมด"];
+    NSString *message5 = [Language getText:@"Take away ทั้งหมด"];
     UIAlertAction *action5 = [UIAlertAction actionWithTitle:message5
                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                               {
@@ -934,25 +928,20 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                                   {
                                       orderTaking.takeAway = orderTaking.takeAway;
                                       float takeAwayFee = orderTaking.takeAway?branch.takeAwayFee:0;
-                                      SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
-                                      float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
-                                      float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID];
-                                      orderTaking.price = menu.price+sumNotePrice+takeAwayFee;
-                                      orderTaking.specialPrice = specialPrice+sumNotePrice+takeAwayFee;
+                                      orderTaking.takeAwayPrice = takeAwayFee;
                                       orderTaking.modifiedUser = [Utility modifiedUser];
                                       orderTaking.modifiedDate = [Utility currentDateTime];
                             
                                   }
+                                  
                                   [tbvOrder reloadData];
                                   [tbvTotal reloadData];
-                                  
-                                  
                               }];
     [alert addAction:action5];
     
     
     
-    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"ยกเลิก"
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:[Language getText:@"ยกเลิก"]
                                                       style:UIAlertActionStyleCancel handler:^(UIAlertAction *action)
                               {
                               }];
@@ -966,7 +955,6 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                                                        handler:^(UIAlertAction *action)
                                  {
                                  }];
-//    [action3 setValue:cSystem4 forKey:@"titleTextColor"];
     [alert addAction:action3];
     
     
@@ -989,7 +977,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     UIFont *font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
     UIColor *color = cSystem1;
     NSDictionary *attribute = @{NSForegroundColorAttributeName:color ,NSFontAttributeName: font};
-    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"คัดลอก" attributes:attribute];
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"คัดลอก"] attributes:attribute];
     
     UILabel *label = [[action1 valueForKey:@"__representer"] valueForKey:@"label"];
     label.attributedText = attrString;
@@ -1019,7 +1007,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     UIFont *font2 = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
     UIColor *color2 = cSystem4;
     NSDictionary *attribute2 = @{NSForegroundColorAttributeName:color2 ,NSFontAttributeName: font2};
-    NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:@"ยกเลิก" attributes:attribute2];
+    NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ยกเลิก"] attributes:attribute2];
     
     UILabel *label2 = [[action2 valueForKey:@"__representer"] valueForKey:@"label"];
     label2.attributedText = attrString2;
@@ -1073,19 +1061,13 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         }
         
         
-        
-        
         //update note id list in text
         orderTaking.noteIDListInText = [OrderNote getNoteIDListInTextWithOrderTakingID:orderTaking.orderTakingID];
         
         
         //update ordertaking price
-        float takeAwayFee = orderTaking.takeAway?[[Setting getSettingValueWithKeyName:@"takeAwayFee"] floatValue]:0;
-        SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
-        float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
         float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID];
-        orderTaking.price = menu.price+sumNotePrice+takeAwayFee;
-        orderTaking.specialPrice = specialPrice+sumNotePrice+takeAwayFee;
+        orderTaking.notePrice = sumNotePrice;
         orderTaking.modifiedUser = [Utility modifiedUser];
         orderTaking.modifiedDate = [Utility currentDateTime];
         
@@ -1136,14 +1118,9 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     
     
     
-    
     orderTaking.takeAway = !orderTaking.takeAway;
     float takeAwayFee = orderTaking.takeAway?branch.takeAwayFee:0;
-    SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
-    float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
-    float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID];
-    orderTaking.price = menu.price+sumNotePrice+takeAwayFee;
-    orderTaking.specialPrice = specialPrice+sumNotePrice+takeAwayFee;
+    orderTaking.takeAwayPrice = takeAwayFee;
     orderTaking.modifiedUser = [Utility modifiedUser];
     orderTaking.modifiedDate = [Utility currentDateTime];
 

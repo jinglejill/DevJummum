@@ -21,6 +21,7 @@
 @synthesize lblNavTitle;
 @synthesize webViewContainer;
 @synthesize btnAccept;
+@synthesize btnDecline;
 @synthesize btnAcceptWidthConstant;
 @synthesize btnDeclineWidthConstant;
 @synthesize username;
@@ -41,6 +42,11 @@
     
     btnAcceptWidthConstant.constant = ceilf(self.view.frame.size.width/2.0);
     btnDeclineWidthConstant.constant = ceilf(self.view.frame.size.width/2.0);
+    
+    
+    
+    [btnAccept setTitle:[Language getText:@"ยอมรับ"] forState:UIControlStateNormal];
+    [btnDecline setTitle:[Language getText:@"ปฏิเสธ"] forState:UIControlStateNormal];
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -83,7 +89,7 @@
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Setting getValue:@"055t" example:@"ข้อกำหนดและเงื่อนไขของ JUMMUM"];
+    NSString *title = [Language getText:@"ข้อกำหนดและเงื่อนไขของ JUMMUM"];
     lblNavTitle.text = title;
     [self webViewLoadUrl:[Utility url:urlTermsOfService]];
     [self addWebView:webViewContainer];

@@ -129,9 +129,9 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
 {
     [super loadView];
     
-    _meList = @[@"ประวัติการสั่งอาหาร",@"บัตรเครดิต/เดบิต",@"ข้อกำหนดและเงื่อนไข",@"นโยบายความเป็นส่วนตัว"];
+    _meList = @[[Language getText:@"ประวัติการสั่งอาหาร"],[Language getText:@"บัตรเครดิต/เดบิต"],[Language getText:@"ข้อกำหนดและเงื่อนไขของ JUMMUM"],[Language getText:@"นโยบายความเป็นส่วนตัว"]];
     _meImageList = @[@"history.png",@"creditCard.png",@"termsOfService.png",@"privacyPolicy.png"];
-    _aboutUsList = @[@"แนะนำร้านอาหาร",@"แนะนำติชม",@"ติดต่อ JUMMUM",@"Log out"];
+    _aboutUsList = @[[Language getText:@"แนะนำร้านอาหาร"],[Language getText:@"แนะนำ ติชม"],[Language getText:@"ติดต่อ JUMMUM"],@"Log out"];
     _aboutUsImageList = @[@"recommendShop.png",@"comment.png",@"contactUs.png",@"logOut.png"];
     _logOutList = @[@"Log out"];
     _logOutImageList = @[@"logOut.png"];
@@ -184,8 +184,6 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
     cell.singleTapGestureRecognizer.numberOfTapsRequired = 1;
     ////-----------
     
-    
-    NSLog(@"test tbvData y,height: %f,%f",tbvMe.frame.origin.y,tbvMe.frame.size.height);
 }
 
 
@@ -229,7 +227,7 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
             
             cell.imgVwIcon.image = [UIImage imageNamed:_meImageList[item]];
             cell.lblText.text = _meList[item];
-            cell.lblText.textColor = cSystem1;
+            cell.lblText.textColor = cSystem4;
             return cell;
         }
         else if (section == 1)
@@ -240,7 +238,7 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
             
             cell.imgVwIcon.image = [UIImage imageNamed:_aboutUsImageList[item]];
             cell.lblText.text = _aboutUsList[item];
-            cell.lblText.textColor = cSystem1;
+            cell.lblText.textColor = cSystem4;
             return cell;
         }
     }
@@ -270,7 +268,6 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
                     //                _meList = @[@"ประวัติการสั่งอาหาร",@"ข้อมูลส่วนตัว",@"แต้มสะสม",@"My Credit Cards"];
                 case 0:
                 {
-                    NSLog(@"did select receipt summary");
                     dispatch_async(dispatch_get_main_queue(),^ {
                         [self performSegueWithIdentifier:@"segReceiptSummary" sender:self];
                     });
@@ -328,13 +325,13 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
                     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"rememberPassword"];
                     
                     
-                    
+                    NSString *message = [Language getText:@"ออกจากระบบสำเร็จ"];
                     [self removeMemberData];
                     [self removeOverlayViews];
                     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
                     LogIn *logIn = [[LogIn alloc]initWithUsername:userAccount.username status:-1 deviceToken:[Utility deviceToken] model:[self deviceName]];
                     [self.homeModel insertItems:dbLogOut withData:logIn actionScreen:@"log out in Me screen"];
-                    [self showAlert:@"" message:@"ออกจากระบบสำเร็จ" method:@selector(unwindToLogIn)];
+                    [self showAlert:@"" message:message method:@selector(unwindToLogIn)];
                 }
                     break;
                 default:

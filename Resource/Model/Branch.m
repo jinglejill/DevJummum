@@ -28,7 +28,8 @@
             [self valueForKey:@"percentVat"]?[self valueForKey:@"percentVat"]:[NSNull null],@"percentVat",
             [self valueForKey:@"priceIncludeVat"]?[self valueForKey:@"priceIncludeVat"]:[NSNull null],@"priceIncludeVat",
             [self valueForKey:@"ledStatus"]?[self valueForKey:@"ledStatus"]:[NSNull null],@"ledStatus",
-            [self valueForKey:@"luckyDrawBahtSpent"]?[self valueForKey:@"luckyDrawBahtSpent"]:[NSNull null],@"luckyDrawBahtSpent",
+            [self valueForKey:@"openingTimeFromMidNight"]?[self valueForKey:@"openingTimeFromMidNight"]:[NSNull null],@"openingTimeFromMidNight",
+            [self valueForKey:@"openingMinute"]?[self valueForKey:@"openingMinute"]:[NSNull null],@"openingMinute",
             [self valueForKey:@"customerApp"]?[self valueForKey:@"customerApp"]:[NSNull null],@"customerApp",
             [self valueForKey:@"imageUrl"]?[self valueForKey:@"imageUrl"]:[NSNull null],@"imageUrl",
             [self valueForKey:@"remark"]?[self valueForKey:@"remark"]:[NSNull null],@"remark",
@@ -37,7 +38,7 @@
             nil];
 }
 
--(Branch *)initWithDbName:(NSString *)dbName mainBranchID:(NSInteger)mainBranchID name:(NSString *)name phoneNo:(NSString *)phoneNo status:(NSInteger)status takeAwayFee:(NSInteger)takeAwayFee serviceChargePercent:(float)serviceChargePercent percentVat:(float)percentVat priceIncludeVat:(NSInteger)priceIncludeVat ledStatus:(NSInteger)ledStatus luckyDrawBahtSpent:(NSInteger)luckyDrawBahtSpent customerApp:(NSInteger)customerApp imageUrl:(NSString *)imageUrl remark:(NSString *)remark
+-(Branch *)initWithDbName:(NSString *)dbName mainBranchID:(NSInteger)mainBranchID name:(NSString *)name phoneNo:(NSString *)phoneNo status:(NSInteger)status takeAwayFee:(NSInteger)takeAwayFee serviceChargePercent:(float)serviceChargePercent percentVat:(float)percentVat priceIncludeVat:(NSInteger)priceIncludeVat ledStatus:(NSInteger)ledStatus openingTimeFromMidNight:(NSInteger)openingTimeFromMidNight openingMinute:(NSInteger)openingMinute customerApp:(NSInteger)customerApp imageUrl:(NSString *)imageUrl remark:(NSString *)remark
 {
     self = [super init];
     if(self)
@@ -53,7 +54,8 @@
         self.percentVat = percentVat;
         self.priceIncludeVat = priceIncludeVat;
         self.ledStatus = ledStatus;
-        self.luckyDrawBahtSpent = luckyDrawBahtSpent;
+        self.openingTimeFromMidNight = openingTimeFromMidNight;
+        self.openingMinute = openingMinute;
         self.customerApp = customerApp;
         self.imageUrl = imageUrl;
         self.remark = remark;
@@ -146,7 +148,8 @@
         ((Branch *)copy).percentVat = self.percentVat;
         ((Branch *)copy).priceIncludeVat = self.priceIncludeVat;
         ((Branch *)copy).ledStatus = self.ledStatus;
-        ((Branch *)copy).luckyDrawBahtSpent = self.luckyDrawBahtSpent;
+        ((Branch *)copy).openingTimeFromMidNight = self.openingTimeFromMidNight;
+        ((Branch *)copy).openingMinute = self.openingMinute;
         ((Branch *)copy).customerApp = self.customerApp;
         [copy setImageUrl:self.imageUrl];
         [copy setRemark:self.remark];
@@ -170,7 +173,8 @@
        && self.percentVat == editingBranch.percentVat
        && self.priceIncludeVat == editingBranch.priceIncludeVat
        && self.ledStatus == editingBranch.ledStatus
-       && self.luckyDrawBahtSpent == editingBranch.luckyDrawBahtSpent
+       && self.openingTimeFromMidNight == editingBranch.openingTimeFromMidNight
+       && self.openingMinute == editingBranch.openingMinute
        && self.customerApp == editingBranch.customerApp
        && [self.imageUrl isEqualToString:editingBranch.imageUrl]
        && [self.remark isEqualToString:editingBranch.remark]
@@ -194,7 +198,8 @@
     toBranch.percentVat = fromBranch.percentVat;
     toBranch.priceIncludeVat = fromBranch.priceIncludeVat;
     toBranch.ledStatus = fromBranch.ledStatus;
-    toBranch.luckyDrawBahtSpent = fromBranch.luckyDrawBahtSpent;
+    toBranch.openingTimeFromMidNight = fromBranch.openingTimeFromMidNight;
+    toBranch.openingMinute = fromBranch.openingMinute;
     toBranch.customerApp = fromBranch.customerApp;
     toBranch.imageUrl = fromBranch.imageUrl;
     toBranch.remark = fromBranch.remark;

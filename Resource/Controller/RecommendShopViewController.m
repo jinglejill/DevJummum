@@ -78,9 +78,9 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Setting getValue:@"067t" example:@"แนะนำร้านอาหาร"];
+    NSString *title = [Language getText:@"แนะนำร้านอาหาร"];
     lblNavTitle.text = title;
-    NSString *message = [Setting getValue:@"050m" example:@"- แนะนำร้านอาหาร/สาขา/เบอร์โทร ที่คุณต้องการให้ JUMMUM เข้าไปติดต่อ \n- ให้เหตุผลที่คุณต้องการให้ร้านอาหารโปรดของคุณมาอยู่ในแอพ JUMMUM"];
+    NSString *message = [Language getText:@"- แนะนำร้านอาหาร/สาขา/เบอร์โทร ที่คุณต้องการให้ JUMMUM เข้าไปติดต่อ \n- ให้เหตุผลที่คุณต้องการให้ร้านอาหารโปรดของคุณมาอยู่ในแอพ JUMMUM"];
     _strPlaceHolder = message;
     tbvData.delegate = self;
     tbvData.dataSource = self;
@@ -149,7 +149,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         
-        NSString *message = [Setting getValue:@"051m" example:@"แนะนำร้านอาหาร/สาขา"];
+        NSString *message = [Language getText:@"แนะนำร้านอาหาร/สาขา"];
         NSString *strTitle = message;
         
         
@@ -296,7 +296,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
     [self removeOverlayViews];
     
     
-    NSString *message = [Setting getValue:@"052m" example:@"ขอบคุณสำหรับการแนะนำร้านครั้งนี้ค่ะ"];
+    NSString *message = [Language getText:@"ขอบคุณสำหรับการแนะนำร้านครั้งนี้ค่ะ"];
     [self showAlert:@"" message:message method:@selector(unwindToMe)];
 }
 
@@ -305,7 +305,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
     UITextView *textView = [self.view viewWithTag:3];
     if([textView.text isEqualToString:_strPlaceHolder])
     {
-        NSString *message = [Setting getValue:@"053m" example:@"กรุณาใส่ร้านอาหารที่คุณต้องการแนะนำ"];
+        NSString *message = [Language getText:@"กรุณาใส่ร้านอาหารที่คุณต้องการแนะนำ"];
         [self blinkAlertMsg:message];
         return NO;
     }

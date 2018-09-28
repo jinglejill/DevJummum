@@ -13,13 +13,14 @@
 
 @implementation DisputeReason
 
--(DisputeReason *)initWithText:(NSString *)text type:(NSInteger)type status:(NSInteger)status orderNo:(NSInteger)orderNo
+-(DisputeReason *)initWithText:(NSString *)text textEn:(NSString *)textEn type:(NSInteger)type status:(NSInteger)status orderNo:(NSInteger)orderNo
 {
     self = [super init];
     if(self)
     {
         self.disputeReasonID = [DisputeReason getNextID];
         self.text = text;
+        self.textEn = textEn;
         self.type = type;
         self.status = status;
         self.orderNo = orderNo;
@@ -103,13 +104,12 @@
     {
         ((DisputeReason *)copy).disputeReasonID = self.disputeReasonID;
         [copy setText:self.text];
+        [copy setTextEn:self.textEn];
         ((DisputeReason *)copy).type = self.type;
         ((DisputeReason *)copy).status = self.status;
         ((DisputeReason *)copy).orderNo = self.orderNo;
         [copy setModifiedUser:[Utility modifiedUser]];
         [copy setModifiedDate:[Utility currentDateTime]];
-        
-        
     }
     
     return copy;
@@ -119,6 +119,7 @@
 {
     if(self.disputeReasonID == editingDisputeReason.disputeReasonID
        && [self.text isEqualToString:editingDisputeReason.text]
+       && [self.textEn isEqualToString:editingDisputeReason.textEn]
        && self.type == editingDisputeReason.type
        && self.status == editingDisputeReason.status
        && self.orderNo == editingDisputeReason.orderNo
@@ -133,6 +134,7 @@
 {
     toDisputeReason.disputeReasonID = fromDisputeReason.disputeReasonID;
     toDisputeReason.text = fromDisputeReason.text;
+    toDisputeReason.textEn = fromDisputeReason.textEn;
     toDisputeReason.type = fromDisputeReason.type;
     toDisputeReason.status = fromDisputeReason.status;
     toDisputeReason.orderNo = fromDisputeReason.orderNo;

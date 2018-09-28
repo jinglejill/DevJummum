@@ -50,12 +50,14 @@
     float _netTotal;
     float _serviceChargeValue;
     float _vatValue;
-    Promotion *_promotionUsed;
+//    NSInteger _promotionID;
+//    NSInteger _rewardRedemptionID;
+//    NSInteger _promoCodeID;
     float _discountValue;
-    NSInteger _discountType;
-    float _discountAmount;
-    float _shopDiscount;
-    float _jummumDiscount;
+//    NSInteger _discountType;
+//    float _discountAmount;
+//    float _shopDiscount;
+//    float _jummumDiscount;
     NSInteger _promotionOrRewardRedemption;//1=promotion,2=rewardRedemption
     Receipt *_receipt;
     NSIndexPath *_currentScrollIndexPath;
@@ -102,6 +104,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 @synthesize fromHotDealDetail;
 @synthesize promotion;
 @synthesize fromLuckyDraw;
+
 
 
 -(IBAction)unwindToCreditCardAndOrderSummary:(UIStoryboardSegue *)segue
@@ -190,8 +193,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             {
                 [self performSegueWithIdentifier:@"segMessageBoxWithDismiss" sender:self];
             }
-            
-//            [self showAlert:@"" message:@"- กรุณากดเลือกโต๊ะเพื่อสแกน QR Code เลขโต๊ะ\n- คุณสามารถแก้ไขรายการอาหารได้โดยกดที่ปุ่ม +/-ด้านบนขวามือ"];
         }
     }
 }
@@ -375,11 +376,10 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     
 
     
-    NSString *title = [Setting getValue:@"076t" example:@"ยืนยันการสั่งอาหาร"];
+    NSString *title = [Language getText:@"ชำระเงิน"];
     lblNavTitle.text = title;
-    NSString *message = [Setting getValue:@"123m" example:@"ใส่หมายเหตุที่ต้องการแจ้งเพิ่มเติมกับทางร้านอาหาร"];
+    NSString *message = [Language getText:@"ใส่หมายเหตุที่ต้องการแจ้งเพิ่มเติมกับทางร้านอาหาร"];
     _strPlaceHolder = message;
-//    _voucherCode = @"";
     _selectedVoucherCode = @"";
     _promotionList = [[NSMutableArray alloc]init];
     _rewardRedemptionList = [[NSMutableArray alloc]init];
@@ -472,6 +472,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     }
 
     [[NSBundle mainBundle] loadNibNamed:@"CustomViewVoucher" owner:self options:nil];
+    [voucherView.btnDelete setTitle:[Language getText:@"ลบ"] forState:UIControlStateNormal];
     [voucherView.btnDelete addTarget:self action:@selector(deleteVoucher:) forControlEvents:UIControlEventTouchUpInside];
 
     
@@ -584,17 +585,17 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             
-            cell.lblText.text = [NSString stringWithFormat:@"ร้าน %@",branch.name];
+            cell.lblText.text = [NSString stringWithFormat:[Language getText:@"ร้าน %@"],branch.name];
             cell.lblText.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
             [cell.lblText sizeToFit];
-            
-            
             cell.lblTextWidthConstant.constant = cell.lblText.frame.size.width;
+            
+            
             if(buffetReceipt)
             {
                 CustomerTable *buffetTable = [CustomerTable getCustomerTable:buffetReceipt.customerTableID];
                 NSString *customerTableName = buffetTable.tableName;
-                cell.lblValue.text = [NSString stringWithFormat:@"เลขโต๊ะ: %@",customerTableName];
+                cell.lblValue.text = [NSString stringWithFormat:[Language getText:@"เลขโต๊ะ: %@"],customerTableName];
                 cell.lblValue.textColor = cSystem4;
             }
             else
@@ -602,12 +603,12 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 if(customerTable)
                 {
                     NSString *customerTableName = customerTable.tableName;
-                    cell.lblValue.text = [NSString stringWithFormat:@"เลขโต๊ะ: %@",customerTableName];
+                    cell.lblValue.text = [NSString stringWithFormat:[Language getText:@"เลขโต๊ะ: %@"],customerTableName];
                     cell.lblValue.textColor = cSystem4;
                 }
                 else
                 {
-                    cell.lblValue.text = @"เลือกโต๊ะ";
+                    cell.lblValue.text = [Language getText:@"เลือกโต๊ะ"];
                     cell.lblValue.textColor = cSystem2;
                 }
             }
@@ -630,7 +631,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                     
                     
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    NSString *message = [Setting getValue:@"040m" example:@"การชำระเงิน ด้วยบัตรเครดิต/เดบิต"];
+                    NSString *message = [Language getText:@"การชำระเงิน ด้วยบัตรเครดิต/เดบิต"];
                     cell.textLabel.text = message;
                     cell.textLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];
                     cell.textLabel.textColor = cSystem1;
@@ -686,6 +687,19 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                         cell.vwMonth.backgroundColor = [UIColor groupTableViewBackgroundColor];
                         cell.vwYear.backgroundColor = [UIColor groupTableViewBackgroundColor];
                         cell.vwCCV.backgroundColor = [UIColor groupTableViewBackgroundColor];
+                        
+                        
+                        
+                        cell.txtFirstName.placeholder = [Language getText:@"ชื่อ"];
+                        cell.txtLastName.placeholder = [Language getText:@"นามสกุล"];
+                        cell.txtCardNo.placeholder = [Language getText:@"หมายเลขบัตร 16 หลัก"];
+                        cell.txtMonth.placeholder = [Language getText:@"เดือนที่หมดอายุ (MM)"];
+                        cell.txtYear.placeholder = [Language getText:@"ปีที่หมดอายุ (YYYY)"];
+                        cell.txtCCV.placeholder = [Language getText:@"รหัสความปลอดภัย"];
+                        cell.lblCCVGuide.text = [Language getText:@"เลข 3 หลักที่ด้านหลังบัตรของคุณ"];
+                        cell.lblSave.text = [Language getText:@"บันทึกบัตรนี้"];
+                        cell.lblDeleteCard.text = [Language getText:@"คุณสามารถลบบัตรใบนี้ได้ที่เมนูโพรไฟล์ส่วนตัว"];
+                        
                         
                         
                         cell.txtFirstName.text = _creditCard.firstName;
@@ -803,7 +817,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                     }
                     
                     
-                    cell.textLabel.text = @"เลือกบัตรเครดิต/เดบิต";
+                    cell.textLabel.text = [Language getText:@"เลือกบัตรเครดิต/เดบิต"];
                     cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                     cell.textLabel.textColor = cSystem4;
                     cell.detailTextLabel.text = @">";
@@ -825,7 +839,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 
-                cell.lblText.text = @"สรุปรายการอาหาร";
+                cell.lblText.text = [Language getText:@"สรุปรายการอาหาร"];
                 cell.lblText.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
                 [cell.lblText sizeToFit];
                 
@@ -852,7 +866,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
-                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ใส่ห่อ" attributes:attribute];
+                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ใส่ห่อ"] attributes:attribute];
                     
                     NSDictionary *attribute2 = @{NSFontAttributeName: font};
                     NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
@@ -880,7 +894,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:@"ไม่ใส่" attributes:attribute];
+                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ไม่ใส่"] attributes:attribute];
                     
                     
                     UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -894,7 +908,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:@"เพิ่ม" attributes:attribute];
+                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"เพิ่ม"] attributes:attribute];
                     
                     
                     UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -931,7 +945,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 
                 
                 
-                float totalAmount = orderTaking.specialPrice * orderTaking.quantity;
+                float totalAmount = (orderTaking.specialPrice+orderTaking.takeAwayPrice+orderTaking.notePrice) * orderTaking.quantity;
                 NSString *strTotalAmount = [Utility formatDecimal:totalAmount withMinFraction:2 andMaxFraction:2];
                 cell.lblTotalAmount.text = [Utility addPrefixBahtSymbol:strTotalAmount];
                 
@@ -945,7 +959,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             
-            NSString *message = [Setting getValue:@"122m" example:@"หมายเหตุ"];
+            NSString *message = [Language getText:@"หมายเหตุ"];
             NSString *strTitle = message;
             
             
@@ -1002,7 +1016,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 
                 
                 NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
-                NSString *strTitle = [NSString stringWithFormat:@"%ld รายการ",[orderTakingList count]];
+                NSString *strTitle = [NSString stringWithFormat:[Language getText:@"%ld รายการ"],[orderTakingList count]];
                 float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
                 totalAmount = roundf(totalAmount*100)/100;
                 NSString *strTotal = [Utility formatDecimal:totalAmount withMinFraction:2 andMaxFraction:2];
@@ -1036,10 +1050,12 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 
                 
                 cell.btnConfirmWidth.constant = (self.view.frame.size.width - 16*2 - 8)/2;
+                [cell.btnConfirm setTitle:[Language getText:@"ยืนยัน"] forState:UIControlStateNormal];
                 [cell.btnConfirm addTarget:self action:@selector(confirmVoucherCode) forControlEvents:UIControlEventTouchUpInside];
                 [self setButtonDesign:cell.btnConfirm];
                 
                 
+                [cell.btnChooseVoucherCode setTitle:[Language getText:@"คุณมี voucher code สำหรับร้านนี้"] forState:UIControlStateNormal];
                 [cell.btnChooseVoucherCode addTarget:self action:@selector(chooseVoucherCode:) forControlEvents:UIControlEventTouchUpInside];
                 
                 cell.btnChooseVoucherCode.hidden = [_promotionList count]+[_rewardRedemptionList count]==0;
@@ -1055,7 +1071,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
 
-                NSString *strTitle = branch.priceIncludeVat?@"ยอดรวม (รวม Vat)":@"ยอดรวม";
+                NSString *strTitle = branch.priceIncludeVat?[Language getText:@"ยอดรวม (รวม Vat)"]:[Language getText:@"ยอดรวม"];
                 float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
                 totalAmount = roundf(totalAmount*100)/100;
                 NSString *strTotal = [Utility formatDecimal:totalAmount withMinFraction:2 andMaxFraction:2];
@@ -1184,7 +1200,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 netTotalAmount = roundf(netTotalAmount*100)/100;
                 NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
                 strAmount = [Utility addPrefixBahtSymbol:strAmount];
-                cell.lblTitle.text = @"ยอดรวมทั้งสิ้น";
+                cell.lblTitle.text = [Language getText:@"ยอดรวมทั้งสิ้น"];
                 cell.lblAmount.text = strAmount;
                 cell.vwTopBorder.hidden = YES;
                 cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
@@ -1262,7 +1278,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
-                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ใส่ห่อ" attributes:attribute];
+                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ใส่ห่อ"] attributes:attribute];
                     
                     NSDictionary *attribute2 = @{NSFontAttributeName: font};
                     NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
@@ -1290,7 +1306,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:@"ไม่ใส่" attributes:attribute];
+                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ไม่ใส่"] attributes:attribute];
                     
                     
                     UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -1304,7 +1320,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:@"เพิ่ม" attributes:attribute];
+                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"เพิ่ม"] attributes:attribute];
                     
                     
                     UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -1443,7 +1459,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         
         [alert addAction:action1];
         
-        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"ค้นหา"
+        UIAlertAction *action2 = [UIAlertAction actionWithTitle:[Language getText:@"ค้นหาเบอร์โต๊ะ"]
                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                                   {
                                       [self performSegueWithIdentifier:@"segCustomerTableSearch" sender:self];
@@ -1453,7 +1469,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         
         
         
-        UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"ยกเลิก"
+        UIAlertAction *action3 = [UIAlertAction actionWithTitle:[Language getText:@"ยกเลิก"]
                                                           style:UIAlertActionStyleCancel handler:^(UIAlertAction *action)
                                   {
                                   }];
@@ -1487,7 +1503,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         UIFont *font2 = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
         UIColor *color2 = cSystem1;
         NSDictionary *attribute2 = @{NSForegroundColorAttributeName:color2 ,NSFontAttributeName: font2};
-        NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:@"ค้นหา" attributes:attribute2];
+        NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ค้นหาเบอร์โต๊ะ"] attributes:attribute2];
         
         UILabel *label2 = [[action2 valueForKey:@"__representer"] valueForKey:@"label"];
         label2.attributedText = attrString2;
@@ -1496,7 +1512,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         UIFont *font3 = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
         UIColor *color3 = cSystem4;
         NSDictionary *attribute3 = @{NSForegroundColorAttributeName:color3 ,NSFontAttributeName: font3};
-        NSMutableAttributedString *attrString3 = [[NSMutableAttributedString alloc] initWithString:@"ยกเลิก" attributes:attribute3];
+        NSMutableAttributedString *attrString3 = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ยกเลิก"] attributes:attribute3];
         
         UILabel *label3 = [[action3 valueForKey:@"__representer"] valueForKey:@"label"];
         label3.attributedText = attrString3;
@@ -1542,11 +1558,11 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
         if(totalAmount == 0)
         {
-            [footerView.btnValue setTitle:@"สั่งบุฟเฟ่ต์" forState:UIControlStateNormal];
+            [footerView.btnValue setTitle:[Language getText:@"สั่งบุฟเฟ่ต์"] forState:UIControlStateNormal];
         }
         else
         {
-            [footerView.btnValue setTitle:@"ชำระเงิน" forState:UIControlStateNormal];
+            [footerView.btnValue setTitle:[Language getText:@"ชำระเงิน"] forState:UIControlStateNormal];
         }
         
         _btnPay = footerView.btnValue;
@@ -1590,7 +1606,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         
         
         UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-        Receipt *receipt = [[Receipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID servingPerson:0 customerType:4 openTableDate:[Utility currentDateTime] totalAmount:_totalAmount cashAmount:0 cashReceive:0 creditCardType:[self getCreditCardType:_creditCard.creditCardNo] creditCardNo:_creditCard.creditCardNo creditCardAmount:_netTotal transferDate:[Utility notIdentifiedDate] transferAmount:0 remark:_remark discountType:_discountType discountAmount:_discountAmount discountValue:_discountValue discountReason:@"" serviceChargePercent:branch.serviceChargePercent serviceChargeValue:_serviceChargeValue priceIncludeVat:branch.priceIncludeVat vatPercent:branch.percentVat vatValue:_vatValue status:2 statusRoute:@"" receiptNoID:@"" receiptNoTaxID:@"" receiptDate:[Utility currentDateTime] sendToKitchenDate:[Utility notIdentifiedDate] deliveredDate:[Utility notIdentifiedDate] mergeReceiptID:0 buffetReceiptID:buffetReceipt.receiptID voucherCode:_selectedVoucherCode shopDiscount:_shopDiscount jummumDiscount:_jummumDiscount];
+        Receipt *receipt = [[Receipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID servingPerson:0 customerType:4 openTableDate:[Utility currentDateTime] totalAmount:_totalAmount cashAmount:0 cashReceive:0 creditCardType:[self getCreditCardType:_creditCard.creditCardNo] creditCardNo:_creditCard.creditCardNo creditCardAmount:_netTotal transferDate:[Utility notIdentifiedDate] transferAmount:0 remark:_remark discountType:0 discountAmount:0 discountValue:_discountValue discountReason:@"" serviceChargePercent:branch.serviceChargePercent serviceChargeValue:_serviceChargeValue priceIncludeVat:branch.priceIncludeVat vatPercent:branch.percentVat vatValue:_vatValue status:2 statusRoute:@"" receiptNoID:@"" receiptNoTaxID:@"" receiptDate:[Utility currentDateTime] sendToKitchenDate:[Utility notIdentifiedDate] deliveredDate:[Utility notIdentifiedDate] mergeReceiptID:0 buffetReceiptID:buffetReceipt.receiptID voucherCode:_selectedVoucherCode shopDiscount:0 jummumDiscount:0];
         
         
         
@@ -1609,7 +1625,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         //customerTable
         if(!customerTable)
         {
-            [self blinkAlertMsg:@"กรุณาระบุเลขโต๊ะ"];
+            [self blinkAlertMsg:[Language getText:@"กรุณาระบุเลขโต๊ะ"]];
             return;
         }
         
@@ -1618,35 +1634,35 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         //credit card
         if([Utility isStringEmpty:_creditCard.firstName])
         {
-            [self blinkAlertMsg:@"กรุณาใส่ชื่อ"];
+            [self blinkAlertMsg:[Language getText:@"กรุณาระบุชื่อ"]];
             UIView *vwInvalid = [self.view viewWithTag:11];
             vwInvalid.backgroundColor = cSystem1;
             return;
         }
         if([Utility isStringEmpty:_creditCard.lastName])
         {
-            [self blinkAlertMsg:@"กรุณาใส่นามสกุล"];
+            [self blinkAlertMsg:[Language getText:@"กรุณาระบุนามสกุล"]];
             UIView *vwInvalid = [self.view viewWithTag:12];
             vwInvalid.backgroundColor = cSystem1;
             return;
         }
         if(![OMSCardNumber validate:_creditCard.creditCardNo])
         {
-            [self blinkAlertMsg:@"หมายเลขบัตรเครดิต/เดบิตไม่ถูกต้อง"];
+            [self blinkAlertMsg:[Language getText:@"หมายเลขบัตรเครดิต/เดบิตไม่ถูกต้อง"]];
             UIView *vwInvalid = [self.view viewWithTag:13];
             vwInvalid.backgroundColor = cSystem1;
             return;
         }
         if(_creditCard.month < 1 || _creditCard.month > 12)
         {
-            [self blinkAlertMsg:@"เดือนไม่ถูกต้อง กรุณาใส่เดือนระหว่าง 01 ถึง 12"];
+            [self blinkAlertMsg:[Language getText:@"เดือนไม่ถูกต้อง กรุณาใส่เดือนระหว่าง 01 ถึง 12"]];
             UIView *vwInvalid = [self.view viewWithTag:14];
             vwInvalid.backgroundColor = cSystem1;
             return;
         }
         if([[NSString stringWithFormat:@"%ld",_creditCard.year] length] < 4)
         {
-            [self blinkAlertMsg:@"ปีไม่ถูกต้อง กรุณาใส่ปีจำนวน 4 หลัก"];
+            [self blinkAlertMsg:[Language getText:@"ปีไม่ถูกต้อง กรุณาใส่ปีจำนวน 4 หลัก"]];
             UIView *vwInvalid = [self.view viewWithTag:15];
             vwInvalid.backgroundColor = cSystem1;
             return;
@@ -1655,14 +1671,14 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         NSDate *expireDate = [Utility stringToDate:strExpiredDate fromFormat:@"yyyyMMdd HH:mm:ss"];
         if(![Utility isExpiredDateValid:expireDate])
         {
-            [self blinkAlertMsg:@"บัตรใบนี้หมดอายุแล้ว"];
+            [self blinkAlertMsg:[Language getText:@"บัตรใบนี้หมดอายุแล้ว"]];
             UIView *vwInvalid = [self.view viewWithTag:15];
             vwInvalid.backgroundColor = cSystem1;
             return;
         }
         if([_creditCard.ccv length] < 3)
         {
-            [self blinkAlertMsg:@"กรุณาใส่รหัสความปลอดภัย 3 หลัก"];
+            [self blinkAlertMsg:[Language getText:@"กรุณาใส่รหัสความปลอดภัย 3 หลัก"]];
             UIView *vwInvalid = [self.view viewWithTag:16];
             vwInvalid.backgroundColor = cSystem1;
             return;
@@ -1719,7 +1735,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 
                 
                 UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-                Receipt *receipt = [[Receipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID servingPerson:0 customerType:4 openTableDate:[Utility currentDateTime] totalAmount:_totalAmount cashAmount:0 cashReceive:0 creditCardType:[self getCreditCardType:_creditCard.creditCardNo] creditCardNo:_creditCard.creditCardNo creditCardAmount:_netTotal transferDate:[Utility notIdentifiedDate] transferAmount:0 remark:_remark discountType:_discountType discountAmount:_discountAmount discountValue:_discountValue discountReason:@"" serviceChargePercent:branch.serviceChargePercent serviceChargeValue:_serviceChargeValue priceIncludeVat:branch.priceIncludeVat vatPercent:branch.percentVat vatValue:_vatValue status:2 statusRoute:@"" receiptNoID:@"" receiptNoTaxID:@"" receiptDate:[Utility currentDateTime] sendToKitchenDate:[Utility notIdentifiedDate] deliveredDate:[Utility notIdentifiedDate] mergeReceiptID:0 buffetReceiptID:buffetReceipt.receiptID voucherCode:_selectedVoucherCode shopDiscount:_shopDiscount jummumDiscount:_jummumDiscount];
+                Receipt *receipt = [[Receipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID servingPerson:0 customerType:4 openTableDate:[Utility currentDateTime] totalAmount:_totalAmount cashAmount:0 cashReceive:0 creditCardType:[self getCreditCardType:_creditCard.creditCardNo] creditCardNo:_creditCard.creditCardNo creditCardAmount:_netTotal transferDate:[Utility notIdentifiedDate] transferAmount:0 remark:_remark discountType:0 discountAmount:0 discountValue:_discountValue discountReason:@"" serviceChargePercent:branch.serviceChargePercent serviceChargeValue:_serviceChargeValue priceIncludeVat:branch.priceIncludeVat vatPercent:branch.percentVat vatValue:_vatValue status:2 statusRoute:@"" receiptNoID:@"" receiptNoTaxID:@"" receiptDate:[Utility currentDateTime] sendToKitchenDate:[Utility notIdentifiedDate] deliveredDate:[Utility notIdentifiedDate] mergeReceiptID:0 buffetReceiptID:buffetReceipt.receiptID voucherCode:_selectedVoucherCode shopDiscount:0 jummumDiscount:0];
                 
                 
                 
@@ -1732,22 +1748,22 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 
                 if(_promotionOrRewardRedemption == 1)
                 {
-                    UserPromotionUsed *userPromotionUsed = [[UserPromotionUsed alloc]initWithUserAccountID:userAccount.userAccountID promotionID:_promotionUsed.promotionID receiptID:0];
+//                    UserPromotionUsed *userPromotionUsed = [[UserPromotionUsed alloc]initWithUserAccountID:userAccount.userAccountID promotionID:_promotionID receiptID:0];
                     self.homeModel = [[HomeModel alloc]init];
                     self.homeModel.delegate = self;
-                    [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,userPromotionUsed,@(_promotionUsed.promoCodeID)] actionScreen:@"call omise checkout at server"];
+                    [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,_selectedVoucherCode] actionScreen:@"call omise checkout at server"];
                 }
                 else
                 {
-                    UserRewardRedemptionUsed *userRewardRedemptionUsed = [[UserRewardRedemptionUsed alloc]initWithUserAccountID:userAccount.userAccountID rewardRedemptionID:_promotionUsed.rewardRedemptionID receiptID:0];
+//                    UserRewardRedemptionUsed *userRewardRedemptionUsed = [[UserRewardRedemptionUsed alloc]initWithUserAccountID:userAccount.userAccountID rewardRedemptionID:_rewardRedemptionID receiptID:0];
                     self.homeModel = [[HomeModel alloc]init];
                     self.homeModel.delegate = self;
-                    [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,userRewardRedemptionUsed,@(_promotionUsed.promoCodeID)] actionScreen:@"call omise checkout at server"];
+                    [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,_selectedVoucherCode] actionScreen:@"call omise checkout at server"];
                 }
             }
             else
             {
-                NSString *message = [Setting getValue:@"041m" example:@"การจ่ายด้วยบัตรเครดิต/เดบิตขัดข้อง กรุณาติดต่อเจ้าหน้าที่ที่เกี่ยวข้อง"];
+                NSString *message = [Language getText:@"การจ่ายด้วยบัตรเครดิต/เดบิตขัดข้อง กรุณาติดต่อเจ้าหน้าที่ที่เกี่ยวข้อง"];
                 [self showAlert:@"" message:message];
             }
         }];
@@ -1939,6 +1955,11 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 
 - (void)confirmVoucherCode:(NSString *)voucherCode
 {
+    if([Utility isStringEmpty:voucherCode])
+    {
+        [self blinkAlertMsg:[Language getText:@"กรุณาระบุคูปองส่วนลด"]];
+        return;
+    }
     //เช็คว่า voucher valid มั๊ย
     [self loadingOverlayView];
     float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
@@ -1946,7 +1967,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
     self.homeModel = [[HomeModel alloc]init];
     self.homeModel.delegate = self;
-    [self.homeModel downloadItems:dbPromotion withData:@[voucherCode,userAccount,branch,@(totalAmount)]];
+    [self.homeModel downloadItemsJson:dbPromotion withData:@[voucherCode,userAccount,branch,@(totalAmount),[OrderTaking getCurrentOrderTakingList]]];
 
 }
 
@@ -1962,221 +1983,63 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     {
         [self removeOverlayViews];
         NSMutableArray *promotionList = items[0];
-        NSMutableArray *warningMsgList = items[1];
-        NSMutableArray *typeList = items[2];
+        Promotion *promotion = promotionList[0];;
+        if(![Utility isStringEmpty:promotion.error])
+        {
+            [self blinkAlertMsg:promotion.error];
+            return;
+        }
+        
+        
+        
+//        _discountType = promotion.discountType;
+//        _discountAmount = promotion.discountAmount;
+        _discountValue = promotion.discountValue;
+//        _promotionID = promotion.promotionID;
+//        _rewardRedemptionID = promotion.rewardRedemptionID;
+//        _promoCodeID = promotion.promoCodeID;
+//        _shopDiscount = promotion.shopDiscount;
+//        _jummumDiscount = promotion.jummumDiscount;
+        
+        
+        float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
+        
+        
+        //voucher code textbox cell
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:1 inSection:0];
         CustomTableViewCellVoucherCodeExist *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
         
-        
-        
-        float totalPriceGetDiscount = 0;
-        Message *warningMsg = warningMsgList[0];
-        if(![Utility isStringEmpty:warningMsg.text])
-        {
-            [self blinkAlertMsg:warningMsg.text];
-            return;
-        }
-        
-        
-        Promotion *promotion = promotionList[0];
-        float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
-        totalAmount = roundf(totalAmount*100)/100;
-        if(promotion.discountMenuID)
-        {
-            NSMutableArray *currentOrderTakingList = [OrderTaking getCurrentOrderTakingList];
-            NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithMenuID:promotion.discountMenuID orderTakingList:currentOrderTakingList];
-            if([orderTakingList count]>0)
-            {
-                if(promotion.discountType == 1)//baht
-                {
-                    totalPriceGetDiscount = promotion.discountAmount;
-                }
-                else if(promotion.discountType == 2)//percent
-                {
-                    Menu *menu = [Menu getMenu:promotion.discountMenuID branchID:promotion.mainBranchID];
-                    totalPriceGetDiscount = promotion.discountAmount*0.01*menu.price;
-                }
-            }
-            else
-            {
-                totalPriceGetDiscount = 0;
-            }
-        }
-        else
-        {
-            if(promotion.allowDiscountForAllMenuType)
-            {
-                totalPriceGetDiscount = totalAmount;
-            }
-            else
-            {
-                for(OrderTaking *item in _orderTakingList)
-                {
-                    Menu *menu = [Menu getMenu:item.menuID];
-                    MenuType *menuType = [MenuType getMenuType:menu.menuTypeID];
-                    //เช็คว่า เมนูที่สั่งได้ส่วนลดมั๊ย
-                    if(menuType.allowDiscount && (item.specialPrice == item.price))
-                    {
-                        totalPriceGetDiscount += item.quantity * item.specialPrice;
-                    }
-                }
-            }
-        }
 
+        //hide voucher textbox
+        cell.txtVoucherCode.hidden = YES;
+        cell.btnConfirm.hidden = YES;
+        cell.btnChooseVoucherCode.hidden = YES;
         
         
-        if(totalPriceGetDiscount == 0)
-        {
-            NSString *message = [Setting getValue:@"042m" example:@"โค้ดที่ใส่ไม่สามารถใช้กับเมนูที่คุณเลือก"];
-            [self blinkAlertMsg:message];
-            return;
-        }
-        else
-        {
-            cell.txtVoucherCode.hidden = YES;
-            cell.btnConfirm.hidden = YES;
-            cell.btnChooseVoucherCode.hidden = YES;
-            
-            
-            voucherView.hidden = NO;            
-            CGRect frame = voucherView.frame;
-            frame.origin.x = 0;
-            frame.origin.y = cell.frame.size.height/2-13;
-            frame.size.width = self.view.frame.size.width;
-            frame.size.height = 26;
-            voucherView.frame = frame;
-            [cell addSubview:voucherView];
-            
-            
-            if(promotion.discountMenuID)
-            {
-                _discountType = 1;
-                voucherView.lblVoucherCode.text = [NSString stringWithFormat:@"คูปองส่วนลด %@",_selectedVoucherCode];
-                [voucherView.lblVoucherCode sizeToFit];
-                voucherView.lblVoucherCodeWidthConstant.constant = voucherView.lblVoucherCode.frame.size.width;
-                _discountValue = totalPriceGetDiscount;
-                
-                
-                
-                voucherView.lblDiscountAmount.text = [Utility formatDecimal:_discountValue withMinFraction:2 andMaxFraction:2];
-                voucherView.lblDiscountAmount.text = [Utility addPrefixBahtSymbol:voucherView.lblDiscountAmount.text];
-                voucherView.lblDiscountAmount.text = [NSString stringWithFormat:@"-%@",voucherView.lblDiscountAmount.text];
-
-                
-                
-                NSString *strTotalAmountNet = [Utility formatDecimal:totalAmount-_discountValue withMinFraction:2 andMaxFraction:2];
-                {
-                    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:2 inSection:0];
-                    CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
-                    cell.lblAmount.text = [Utility addPrefixBahtSymbol:strTotalAmountNet];
-                }
-                _discountAmount = _discountValue;
-            }
-            else
-            {
-                if(promotion.discountType == 1) //baht
-                {
-                    _discountType = 1;
-                    voucherView.lblVoucherCode.text = [NSString stringWithFormat:@"คูปองส่วนลด %@",_selectedVoucherCode];
-                    [voucherView.lblVoucherCode sizeToFit];
-                    voucherView.lblVoucherCodeWidthConstant.constant = voucherView.lblVoucherCode.frame.size.width;
-                    _discountValue = totalPriceGetDiscount < promotion.discountAmount?totalPriceGetDiscount:promotion.discountAmount;
-                    if(promotion.moreDiscountToGo != -1)
-                    {
-                        _discountValue = _discountValue > promotion.moreDiscountToGo?promotion.moreDiscountToGo:_discountValue;
-                    }
-                    voucherView.lblDiscountAmount.text = [Utility formatDecimal:_discountValue withMinFraction:2 andMaxFraction:2];
-                    voucherView.lblDiscountAmount.text = [Utility addPrefixBahtSymbol:voucherView.lblDiscountAmount.text];
-                    voucherView.lblDiscountAmount.text = [NSString stringWithFormat:@"-%@",voucherView.lblDiscountAmount.text];
-                    
-                    
-                    NSString *strTotalAmountNet = [Utility formatDecimal:totalAmount-_discountValue withMinFraction:2 andMaxFraction:2];
-                    {
-                        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:2 inSection:0];
-                        CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
-                        cell.lblAmount.text = [Utility addPrefixBahtSymbol:strTotalAmountNet];
-                    }
-                    _discountAmount = _discountValue;
-                }
-                else//2 = percent
-                {
-                    _discountType = 2;
-                    _discountAmount = promotion.discountAmount;
-                    _discountValue = totalPriceGetDiscount * promotion.discountAmount * 0.01;
-                    _discountValue = floorf(_discountValue * 100) * 0.01;
-                    if(promotion.moreDiscountToGo != -1)
-                    {
-                        _discountValue = _discountValue > promotion.moreDiscountToGo?promotion.moreDiscountToGo:_discountValue;
-                    }
-                    
-                    
-                    
-                    
-                    voucherView.lblVoucherCode.text = [NSString stringWithFormat:@"คูปองส่วนลด %@",_selectedVoucherCode];
-                    [voucherView.lblVoucherCode sizeToFit];
-                    voucherView.lblVoucherCodeWidthConstant.constant = voucherView.lblVoucherCode.frame.size.width;
-                    voucherView.lblDiscountAmount.text = [Utility formatDecimal:_discountValue withMinFraction:2 andMaxFraction:2];
-                    voucherView.lblDiscountAmount.text = [Utility addPrefixBahtSymbol:voucherView.lblDiscountAmount.text];
-                    voucherView.lblDiscountAmount.text = [NSString stringWithFormat:@"-%@",voucherView.lblDiscountAmount.text];
-                    
-                    
-                    NSString *strTotalAmountNet = [Utility formatDecimal:totalAmount-_discountValue withMinFraction:2 andMaxFraction:2];
-                    {
-                        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:2 inSection:0];
-                        CustomTableViewCellTotal *cell = [tbvTotal cellForRowAtIndexPath:indexPath];
-                        cell.lblAmount.text = [Utility addPrefixBahtSymbol:strTotalAmountNet];
-                    }
-                }
-            }
-            
-            
-            
-            Message *type = typeList[0];
-            _promotionOrRewardRedemption = [type.text integerValue];
-            _promotionUsed = promotion;
-            
-            
-            //check sharedDiscountAmount
-            if(promotion.discountType == 1)//baht
-            {
-                if(_discountValue < promotion.discountAmount)
-                {
-                    _shopDiscount = _discountValue*promotion.shopDiscount/(promotion.shopDiscount + promotion.jummumDiscount);
-                    _shopDiscount = roundf(_shopDiscount * 100)/100;
-                    _jummumDiscount = _discountValue - _shopDiscount;
-                }
-                else
-                {
-                    _shopDiscount = promotion.shopDiscount;
-                    _jummumDiscount = promotion.jummumDiscount;
-                }
-            }
-            else if(promotion.discountType == 2)//percent
-            {
-                _shopDiscount = _discountValue*promotion.shopDiscount*0.01;
-                _shopDiscount = roundf(_shopDiscount * 100)/100;
-                _jummumDiscount = _discountValue - _shopDiscount;
-                
-                if(promotion.sharedDiscountType == 1)//shop set maxDiscount
-                {
-                    if(_shopDiscount > promotion.sharedDiscountAmountMax)
-                    {
-                        _shopDiscount = promotion.sharedDiscountAmountMax;
-                        _shopDiscount = roundf(_shopDiscount * 100)/100;
-                        _jummumDiscount = _discountValue - _shopDiscount;
-                    }
-                }
-                else if(promotion.sharedDiscountType == 2)//jummum set maxDiscount
-                {
-                    if(_jummumDiscount > promotion.sharedDiscountAmountMax)
-                    {
-                        _jummumDiscount = promotion.sharedDiscountAmountMax;
-                        _jummumDiscount = roundf(_jummumDiscount * 100)/100;
-                        _shopDiscount = _discountValue - _jummumDiscount;
-                    }
-                }
-            }
-        }
+        //show use voucher code
+        voucherView.hidden = NO;
+        CGRect frame = voucherView.frame;
+        frame.origin.x = 0;
+        frame.origin.y = cell.frame.size.height/2-13;
+        frame.size.width = self.view.frame.size.width;
+        frame.size.height = 26;
+        voucherView.frame = frame;
+        [cell addSubview:voucherView];
+        
+        
+        
+        //voucher code
+        voucherView.lblVoucherCode.text = [NSString stringWithFormat:[Language getText:@"คูปองส่วนลด %@"],_selectedVoucherCode];
+        [voucherView.lblVoucherCode sizeToFit];
+        voucherView.lblVoucherCodeWidthConstant.constant = voucherView.lblVoucherCode.frame.size.width;
+        
+        
+        //discount value
+        voucherView.lblDiscountAmount.text = [Utility formatDecimal:_discountValue withMinFraction:2 andMaxFraction:2];
+        voucherView.lblDiscountAmount.text = [Utility addPrefixBahtSymbol:voucherView.lblDiscountAmount.text];
+        voucherView.lblDiscountAmount.text = [NSString stringWithFormat:@"-%@",voucherView.lblDiscountAmount.text];
+        
+        
         
         
         //after discount, service charge, vat ,net total
@@ -2313,18 +2176,20 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     cell.btnChooseVoucherCode.hidden = [_promotionList count]+[_rewardRedemptionList count]==0;
     
     _selectedVoucherCode = @"";
-    _promotionUsed = nil;
+//    _promotionID = 0;
+//    _rewardRedemptionID = 0;
+//    _promoCodeID = 0;
     
 
 
     //after discount, vat,service charge,net total
     float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
     totalAmount = roundf(totalAmount*100)/100;
-    _discountType = 0;
-    _discountAmount = 0;
+//    _discountType = 0;
+//    _discountAmount = 0;
     _discountValue = 0;
-    _shopDiscount = 0;
-    _jummumDiscount = 0;
+//    _shopDiscount = 0;
+//    _jummumDiscount = 0;
     {
         //after discount
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:2 inSection:0];

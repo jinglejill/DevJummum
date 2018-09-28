@@ -10,7 +10,6 @@
 #import "TermsOfServiceViewController.h"
 #import "CustomTableViewCellText.h"
 #import "UserAccount.h"
-#import "Setting.h"
 
 
 @interface RegisterNowViewController ()
@@ -43,6 +42,9 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
     
     float topPadding = window.safeAreaInsets.top;
     topViewHeight.constant = topPadding == 0?20:topPadding;
+    
+    
+    [btnCreateAccount setTitle:[Language getText:@"สร้างบัญชี"] forState:UIControlStateNormal];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -52,7 +54,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
     {
         _userAccount = userAccount;
         [tbvData reloadData];
-        NSString *message = [Setting getValue:@"045m" example:@"คุณล็อคอินผ่าน facebook สำเร็จแล้ว กรุณาใส่วันเกิดและเบอร์โทรศัพท์ เพื่อเราจะได้สร้างบัญชีสำหรับใช้งานให้คุณ"];
+        NSString *message = [Language getText:@"คุณล็อคอินผ่าน facebook สำเร็จแล้ว กรุณาใส่วันเกิดและเบอร์โทรศัพท์ เพื่อเราจะได้สร้างบัญชีสำหรับใช้งานให้คุณ"];
         [self showAlert:@"" message:message];
     }
 }
@@ -168,7 +170,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Setting getValue:@"056t" example:@"สร้างบัญชีใหม่"];
+    NSString *title = [Language getText:@"สร้างบัญชีใหม่"];
     lblNavTitle.text = title;
     _userAccount = [[UserAccount alloc]init];
     tbvData.delegate = self;
@@ -235,7 +237,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
             {
                 cell.textValue.tag = 1;
                 cell.textValue.delegate = self;
-                cell.textValue.placeholder = @"อีเมล";
+                cell.textValue.placeholder = [Language getText:@"อีเมล"];
                 cell.textValue.text = _userAccount.email;
                 cell.textValue.enabled = NO;
                 [cell.textValue setInputAccessoryView:self.toolBar];
@@ -248,7 +250,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
             {
                 cell.textValue.tag = 3;
                 cell.textValue.delegate = self;
-                cell.textValue.placeholder = @"ชื่อ";
+                cell.textValue.placeholder = [Language getText:@"ชื่อ"];
                 cell.textValue.text = _userAccount.firstName;
                 cell.textValue.enabled = NO;
                 [cell.textValue setInputAccessoryView:self.toolBar];
@@ -261,7 +263,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
             {
                 cell.textValue.tag = 4;
                 cell.textValue.delegate = self;
-                cell.textValue.placeholder = @"นามสกุล";
+                cell.textValue.placeholder = [Language getText:@"นามสกุล"];
                 cell.textValue.text = _userAccount.lastName;
                 cell.textValue.enabled = NO;
                 [cell.textValue setInputAccessoryView:self.toolBar];
@@ -274,7 +276,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
             {
                 cell.textValue.tag = 5;
                 cell.textValue.delegate = self;
-                cell.textValue.placeholder = @"วันเกิด (optional)";
+                cell.textValue.placeholder = [Language getText:@"วันเกิด (optional)"];
                 cell.textValue.inputView = dtPicker;
                 cell.textValue.text = [Utility dateToString:_userAccount.birthDate toFormat:@"d MMM yyyy"];
                 cell.textValue.enabled = YES;
@@ -288,7 +290,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
             {
                 cell.textValue.tag = 6;
                 cell.textValue.delegate = self;
-                cell.textValue.placeholder = @"เบอร์โทร. (optional)";
+                cell.textValue.placeholder = [Language getText:@"เบอร์โทร. (optional)"];
                 cell.textValue.text = [Utility setPhoneNoFormat:_userAccount.phoneNo];
                 cell.textValue.keyboardType = UIKeyboardTypePhonePad;
                 cell.textValue.enabled = YES;
@@ -310,7 +312,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
             {
                 cell.textValue.tag = 1;
                 cell.textValue.delegate = self;
-                cell.textValue.placeholder = @"อีเมล";
+                cell.textValue.placeholder = [Language getText:@"อีเมล"];
                 cell.textValue.text = _userAccount.username;
                 cell.textValue.enabled = YES;
                 [cell.textValue setInputAccessoryView:self.toolBar];
@@ -323,7 +325,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
             {
                 cell.textValue.tag = 2;
                 cell.textValue.delegate = self;
-                cell.textValue.placeholder = @"พาสเวิร์ด";
+                cell.textValue.placeholder = [Language getText:@"พาสเวิร์ด"];
                 cell.textValue.text = _userAccount.password;
                 cell.textValue.secureTextEntry = YES;
                 cell.textValue.enabled = YES;
@@ -337,7 +339,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
             {
                 cell.textValue.tag = 3;
                 cell.textValue.delegate = self;
-                cell.textValue.placeholder = @"ชื่อ";
+                cell.textValue.placeholder = [Language getText:@"ชื่อ"];
                 cell.textValue.text = _userAccount.firstName;
                 cell.textValue.enabled = YES;
                 [cell.textValue setInputAccessoryView:self.toolBar];
@@ -350,7 +352,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
             {
                 cell.textValue.tag = 4;
                 cell.textValue.delegate = self;
-                cell.textValue.placeholder = @"นามสกุล";
+                cell.textValue.placeholder = [Language getText:@"นามสกุล"];
                 cell.textValue.text = _userAccount.lastName;
                 cell.textValue.enabled = YES;
                 [cell.textValue setInputAccessoryView:self.toolBar];
@@ -363,7 +365,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
             {
                 cell.textValue.tag = 5;
                 cell.textValue.delegate = self;
-                cell.textValue.placeholder = @"วันเกิด (optional)";
+                cell.textValue.placeholder = [Language getText:@"วันเกิด (optional)"];
                 cell.textValue.inputView = dtPicker;
                 cell.textValue.text = [Utility dateToString:_userAccount.birthDate toFormat:@"d MMM yyyy"];
                 cell.textValue.enabled = YES;
@@ -377,7 +379,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
             {
                 cell.textValue.tag = 6;
                 cell.textValue.delegate = self;
-                cell.textValue.placeholder = @"เบอร์โทร. (optional)";
+                cell.textValue.placeholder = [Language getText:@"เบอร์โทร. (optional)"];
                 cell.textValue.text = [Utility setPhoneNoFormat:_userAccount.phoneNo];
                 cell.textValue.keyboardType = UIKeyboardTypePhonePad;
                 cell.textValue.enabled = YES;
@@ -477,7 +479,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
     
     if(![Utility validateStrongPassword:_userAccount.password])
     {
-        [self showAlert:@"" message:@"พาสเวิร์ดต้องประกอบไปด้วย 1.อักษรตัวเล็กอย่างน้อย 1 ตัว\n2.อักษรตัวใหญ่อย่างน้อย 1 ตัว\n3.ตัวเลขหรืออักษรพิเศษอย่างน้อย 1 ตัว\n4.ความยาวขั้นต่ำ 8 ตัวอักษร"];
+        [self showAlert:@"" message:@"พาสเวิร์ดต้องประกอบไปด้วย\n1.อักษรตัวเล็กอย่างน้อย 1 ตัว\n2.อักษรตัวใหญ่อย่างน้อย 1 ตัว\n3.ตัวเลขหรืออักษรพิเศษอย่างน้อย 1 ตัว\n4.ความยาวขั้นต่ำ 8 ตัวอักษร"];
         return ;
     }
     

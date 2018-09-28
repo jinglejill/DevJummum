@@ -37,10 +37,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ข้อกำหนดและเงื่อนไข" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQT-oe-BRX">
-                        <rect key="frame" x="16" y="31" width="132" height="18"/>
+                        <rect key="frame" x="16" y="31" width="268" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="KRr-TE-t0e"/>
-                            <constraint firstAttribute="width" constant="132" id="xs0-kB-Q4k"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="14"/>
                         <color key="textColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -62,6 +61,7 @@
                     <constraint firstItem="HcQ-oZ-ugL" firstAttribute="centerY" secondItem="LQT-oe-BRX" secondAttribute="centerY" id="fY4-l7-HP6"/>
                     <constraint firstItem="HcQ-oZ-ugL" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="oQv-gU-8xe"/>
                     <constraint firstItem="IY7-tk-vSZ" firstAttribute="top" secondItem="LQT-oe-BRX" secondAttribute="bottom" id="srn-g8-7i0"/>
+                    <constraint firstItem="HcQ-oZ-ugL" firstAttribute="leading" secondItem="LQT-oe-BRX" secondAttribute="trailing" id="whQ-2l-aC4"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
@@ -69,6 +69,7 @@
                 <outlet property="btnValue" destination="HcQ-oZ-ugL" id="uMq-7n-Ds3"/>
                 <outlet property="lblTextLabel" destination="IY7-tk-vSZ" id="18G-I8-Hao"/>
                 <outlet property="lblTextLabelHeight" destination="S7y-vl-pU1" id="zQd-pY-cDF"/>
+                <outlet property="lblTitle" destination="LQT-oe-BRX" id="Zjx-Ni-orX"/>
             </connections>
             <point key="canvasLocation" x="34" y="189.5"/>
         </tableViewCell>

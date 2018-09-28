@@ -27,4 +27,7 @@
 @property (strong, nonatomic) IBOutlet UIView *vwYear;
 @property (strong, nonatomic) IBOutlet UIView *vwMonth;
 @property (strong, nonatomic) IBOutlet UIView *vwCCV;
+@property (strong, nonatomic) IBOutlet UILabel *lblCCVGuide;
+@property (strong, nonatomic) IBOutlet UILabel *lblSave;
+@property (strong, nonatomic) IBOutlet UILabel *lblDeleteCard;
 @end

@@ -33,6 +33,10 @@
     vwAlertHeight.constant = 80+38+38+44+lblDisputeMessage.frame.size.height;
     [self setButtonDesign:btnConfirm];
     [self setButtonDesign:btnCancel];
+    
+    
+    [btnConfirm setTitle:[Language getText:@"ใช่"] forState:UIControlStateNormal];
+    [btnCancel setTitle:[Language getText:@"ไม่"] forState:UIControlStateNormal];
 }
 
 - (void)viewDidLoad
@@ -44,13 +48,13 @@
     NSString *strMessageSubTitle;
     if(fromType == 1)
     {
-        strMessageHeader = [Setting getSettingValueWithKeyName:@"MessageHeaderCancel"];
-        strMessageSubTitle = [Setting getSettingValueWithKeyName:@"MessageSubTitleCancel"];
+        strMessageHeader = [Language getText:@"Oop!"];
+        strMessageSubTitle = [Language getText:@"คุณสามารถเรียกพนักงานเพื่อสอบถามหรือแก้ไขก่อนการยกเลิก หากคุณต้องการยกเลิก สามารถกดที่ปุ่มใช่"];
     }
     else
     {
-        strMessageHeader = [Setting getSettingValueWithKeyName:@"MessageHeaderDispute"];
-        strMessageSubTitle = [Setting getSettingValueWithKeyName:@"MessageSubTitleDispute"];
+        strMessageHeader = [Language getText:@"Oop!"];
+        strMessageSubTitle = [Language getText:@"คุณสามารถเรียกพนักงานเพื่อสอบถามหรือแก้ไขก่อนการส่งคำร้อง หากคุณต้องการส่งคำร้อง สามารถกดที่ปุ่มใช่"];
     }
     UIFont *font = [UIFont fontWithName:@"Prompt-SemiBold" size:17];
     UIColor *color = cSystem4;
@@ -120,8 +124,8 @@
         {
             receipt.status = downloadReceipt.status;
             receipt.statusRoute = downloadReceipt.statusRoute;
-            NSString *message = [Setting getValue:@"032m" example:@"ร้านค้ากำลังปรุงอาหารให้คุณอยู่ค่ะ โปรดรอสักครู่นะคะ"];
-            NSString *message2 = [Setting getValue:@"033m" example:@"อาหารได้ส่งถึงคุณแล้วค่ะ"];
+            NSString *message = [Language getText:@"ร้านค้ากำลังปรุงอาหารให้คุณอยู่ค่ะ โปรดรอสักครู่นะคะ"];
+            NSString *message2 = [Language getText:@"อาหารได้ส่งถึงคุณแล้วค่ะ"];
             NSString *strMessage = downloadReceipt.status == 5?message:message2;            
             [self showAlert:@"" message:strMessage method:@selector(noDispute:)];            
         }

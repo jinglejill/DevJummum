@@ -95,7 +95,7 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
     
     
     
-    NSString *message = [Setting getValue:@"117m" example:@"ค้นหา Deal"];
+    NSString *message = [Language getText:@"ค้นหา Deal"];
     searchBar.delegate = self;
     searchBar.placeholder = message;
     [searchBar setInputAccessoryView:self.toolBar];
@@ -343,7 +343,6 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
     // but we'll not do that any more... it made problems
     // it's better to set self.searchBarActive = YES when user typed something
     //    [self.searchBar setShowsCancelButton:YES animated:YES];
-//    UISearchBar *sbText = [self.view viewWithTag:300];
     [searchBar setShowsCancelButton:YES animated:YES];
 }
 
@@ -355,13 +354,11 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
     //    self.searchBarActive = NO;
     
     //    [self.searchBar setShowsCancelButton:NO animated:YES];
-//    UISearchBar *sbText = [self.view viewWithTag:300];
     [searchBar setShowsCancelButton:NO animated:YES];
 }
 
 -(void)cancelSearching
 {
-//    UISearchBar *sbText = [self.view viewWithTag:300];
     self.searchBarActive = NO;
     [searchBar resignFirstResponder];
     searchBar.text  = @"";

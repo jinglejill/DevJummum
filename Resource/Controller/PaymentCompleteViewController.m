@@ -53,6 +53,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 @synthesize btnOrderBuffetHeight;
 @synthesize numberOfGift;
 @synthesize imgVwCheck;
+@synthesize btnBackToHome;
 
 
 -(void)viewDidLayoutSubviews
@@ -64,21 +65,21 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
     imgVwCheckTop.constant = (self.view.frame.size.height - 63 - (559-69))/2;
     if(receipt.buffetReceiptID)
     {
-        lblTitle.text = @"สั่งบุฟเฟ่ต์สำเร็จ";
+        lblTitle.text = [Language getText:@"สั่งบุฟเฟ่ต์สำเร็จ"];
     }
     else
     {
-        lblTitle.text = @"ชำระเงินสำเร็จ";
+        lblTitle.text = [Language getText:@"ชำระเงินสำเร็จ"];
     }
     if([Receipt hasBuffetMenu:receipt.receiptID] || receipt.buffetReceiptID)
     {
         [self setButtonDesign:btnOrderBuffet];
-        [btnSaveToCameraRoll setTitle:@"บันทึกใบเสร็จ และสั่งบุฟเฟต์" forState:UIControlStateNormal];
+        [btnSaveToCameraRoll setTitle:[Language getText:@"บันทึกใบเสร็จ และสั่งบุฟเฟต์"] forState:UIControlStateNormal];
     }
     else
     {
         btnOrderBuffet.hidden = YES;
-        [btnSaveToCameraRoll setTitle:@"บันทึกใบเสร็จลงอัลบั้ม" forState:UIControlStateNormal];
+        [btnSaveToCameraRoll setTitle:[Language getText:@"บันทึกใบเสร็จลงอัลบั้ม"] forState:UIControlStateNormal];
     }
     if(!_addGiftBox && numberOfGift > 0)
     {
@@ -167,6 +168,9 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         _animateHandHide.delegate = self;
         
     }
+    
+    [btnOrderBuffet setTitle:[Language getText:@"สั่งบุฟเฟ่ต์"] forState:UIControlStateNormal];
+    [btnBackToHome setTitle:[Language getText:@"< กลับสู่เมนูหลัก"] forState:UIControlStateNormal];
 }
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
@@ -190,8 +194,8 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 {
     [super viewDidLoad];
     
-    NSString *title = [Setting getValue:@"044t" example:@"ชำระเงินสำเร็จ"];
-    NSString *message = [Setting getValue:@"044m" example:@"ขอบคุณที่ใช้บริการ ​JUMMUM"];
+    NSString *title = [Language getText:@"ชำระเงินสำเร็จ"];
+    NSString *message = [Language getText:@"ขอบคุณที่ใช้บริการ ​JUMMUM"];
     lblTitle.text = title;
     lblMessage.text = message;
     tbvData = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -254,7 +258,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
     
     {
         //shop logo
-        NSString *jummumLogo = [Setting getSettingValueWithKeyName:@"jummumLogo"];
+        NSString *jummumLogo = [Setting getSettingValueWithKeyName:@"JummumLogo"];
         CustomTableViewCellLogo *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLogo];
         [self.homeModel downloadImageWithFileName:jummumLogo type:5 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
          {
@@ -282,7 +286,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         CustomTableViewCellReceiptSummary *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierReceiptSummary];
         cell.lblReceiptNo.text = [NSString stringWithFormat:@"Order no. #%@", receipt.receiptNoID];
         cell.lblReceiptDate.text = [Utility dateToString:receipt.receiptDate toFormat:@"d MMM yy HH:mm"];
-        cell.lblBranchName.text = [NSString stringWithFormat:@"ร้าน %@",branch.name];
+        cell.lblBranchName.text = [NSString stringWithFormat:[Language getText:@"ร้าน %@"],branch.name];
         cell.lblBranchName.textColor = cSystem1;
         cell.btnOrderItAgain.hidden = YES;
         
@@ -320,7 +324,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         {
             UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
             NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
-            NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"ใส่ห่อ" attributes:attribute];
+            NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ใส่ห่อ"] attributes:attribute];
             
             NSDictionary *attribute2 = @{NSFontAttributeName: font};
             NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
@@ -348,7 +352,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         {
             UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
             NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-            attrStringRemove = [[NSMutableAttributedString alloc] initWithString:@"ไม่ใส่" attributes:attribute];
+            attrStringRemove = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ไม่ใส่"] attributes:attribute];
             
             
             UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -362,7 +366,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         {
             UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
             NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-            attrStringAdd = [[NSMutableAttributedString alloc] initWithString:@"เพิ่ม" attributes:attribute];
+            attrStringAdd = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"เพิ่ม"] attributes:attribute];
             
             
             UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -399,7 +403,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         
         
         
-        float totalAmount = orderTaking.specialPrice * orderTaking.quantity;
+        float totalAmount = (orderTaking.specialPrice+orderTaking.takeAwayPrice+orderTaking.notePrice) * orderTaking.quantity;
         NSString *strTotalAmount = [Utility formatDecimal:totalAmount withMinFraction:2 andMaxFraction:2];
         cell.lblTotalAmount.text = [Utility addPrefixBahtSymbol:strTotalAmount];
         
@@ -436,7 +440,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         if(![Utility isStringEmpty:receipt.remark])
         {
             CustomTableViewCellLabelRemark *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
-            NSString *message = [Setting getValue:@"128m" example:@"หมายเหตุ: "];
+            NSString *message = [Language getText:@"หมายเหตุ: "];
             cell.lblText.attributedText = [self setAttributedString:message text:receipt.remark];
             [cell.lblText sizeToFit];
             cell.lblTextHeight.constant = cell.lblText.frame.size.height;
@@ -456,7 +460,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         // 0:
         {
             CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-            NSString *strTitle = [NSString stringWithFormat:@"%ld รายการ",[orderTakingList count]];
+            NSString *strTitle = [NSString stringWithFormat:[Language getText:@"%ld รายการ"],[orderTakingList count]];
             NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList] withMinFraction:2 andMaxFraction:2];
             strTotal = [Utility addPrefixBahtSymbol:strTotal];
             cell.lblTitle.text = strTitle;
@@ -476,14 +480,15 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
             //discount
             CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
             NSString *strDiscount = [Utility formatDecimal:receipt.discountAmount withMinFraction:0 andMaxFraction:2];
-            strDiscount = [NSString stringWithFormat:@"ส่วนลด %@%%",strDiscount];
+            strDiscount = ![Utility isStringEmpty:receipt.voucherCode]?[NSString stringWithFormat:[Language getText:@"คูปองส่วนลด %@"],receipt.voucherCode]:strDiscount;
+            
             
             NSString *strAmount = [Utility formatDecimal:receipt.discountValue withMinFraction:2 andMaxFraction:2];
             strAmount = [Utility addPrefixBahtSymbol:strAmount];
             strAmount = [NSString stringWithFormat:@"-%@",strAmount];
             
             
-            cell.lblTitle.text = receipt.discountType==1?@"ส่วนลด":strDiscount;
+            cell.lblTitle.text = strDiscount;
             cell.lblAmount.text = strAmount;
             cell.vwTopBorder.hidden = YES;
             cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
@@ -503,7 +508,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         {
             //after discount
             CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-            NSString *strTitle = branch.priceIncludeVat?@"ยอดรวม (รวม Vat)":@"ยอดรวม";
+            NSString *strTitle = branch.priceIncludeVat?[Language getText:@"ยอดรวม (รวม Vat)"]:[Language getText:@"ยอดรวม"];
             NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList]-receipt.discountValue withMinFraction:2 andMaxFraction:2];
             strTotal = [Utility addPrefixBahtSymbol:strTotal];
             cell.lblTitle.text = strTitle;
@@ -575,7 +580,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
             float netTotalAmount = receipt.cashAmount+receipt.creditCardAmount+receipt.transferAmount;
             NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
             strAmount = [Utility addPrefixBahtSymbol:strAmount];
-            cell.lblTitle.text = @"ยอดรวมทั้งสิ้น";
+            cell.lblTitle.text = [Language getText:@"ยอดรวมทั้งสิ้น"];
             cell.lblAmount.text = strAmount;
             cell.vwTopBorder.hidden = YES;
             cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];

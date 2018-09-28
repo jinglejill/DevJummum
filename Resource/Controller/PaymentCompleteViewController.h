@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnOrderBuffetHeight;
 @property (nonatomic) NSInteger numberOfGift;
 @property (strong, nonatomic) IBOutlet UIImageView *imgVwCheck;
+@property (strong, nonatomic) IBOutlet UIButton *btnBackToHome;
 
 
 

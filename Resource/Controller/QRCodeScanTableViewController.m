@@ -77,7 +77,7 @@
     [super viewDidLoad];
     
     
-    NSString *title = [Setting getValue:@"057t" example:@"สแกน QR Code เลขโต๊ะ"];
+    NSString *title = [Language getText:@"สแกน QR Code เลขโต๊ะ"];
     lblNavTitle.text = title;
     btnBack.hidden = fromCreditCardAndOrderSummaryMenu?NO:YES;
     btnBranchSearch.hidden = !btnBack.hidden;
@@ -213,8 +213,8 @@
         NSMutableArray *customerTableList = items[1];
         if([branchList count] == 0 || [customerTableList count] == 0)
         {
-            NSLog(@"incorrect");
-            [self showAlert:@"" message:@"QR Code ไม่ถูกต้อง" method:@selector(setAlreadySegToNo)];
+            NSString *message = [Language getText:@"QR Code ไม่ถูกต้อง"];
+            [self showAlert:@"" message:message method:@selector(setAlreadySegToNo)];
         }
         else
         {

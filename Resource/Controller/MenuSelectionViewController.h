@@ -13,6 +13,7 @@
 
 
 @interface MenuSelectionViewController : CustomViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UISearchBarDelegate>
+@property (strong, nonatomic) IBOutlet UIButton *btnViewBasket;
 @property (strong, nonatomic) IBOutlet UIButton *btnBack;
 @property (strong, nonatomic) IBOutlet UILabel *lblNavTitle;
 @property (strong, nonatomic) IBOutlet UITableView *tbvMenu;
@@ -30,5 +31,5 @@
 -(IBAction)unwindToMenuSelection:(UIStoryboardSegue *)segue;
 - (IBAction)goBackHome:(id)sender;
 - (IBAction)viewBasket:(id)sender;
-@property (strong, nonatomic) IBOutlet UIButton *btnViewBasket;
+
 @end

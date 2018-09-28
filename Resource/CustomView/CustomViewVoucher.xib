@@ -37,10 +37,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRK-Xf-Fkt">
-                    <rect key="frame" x="145" y="1" width="46" height="30"/>
+                    <rect key="frame" x="145" y="1" width="57" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="UhU-p9-ycj"/>
-                        <constraint firstAttribute="width" constant="46" id="Ujv-Xp-0FF"/>
+                        <constraint firstAttribute="width" constant="57" id="Ujv-Xp-0FF"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="15"/>
                     <state key="normal" title="ลบ">

@@ -87,6 +87,9 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     
     float topPadding = window.safeAreaInsets.top;
     topViewHeight.constant = topPadding == 0?20:topPadding;
+    
+    
+    [btnViewBasket setTitle:[Language getText:@"รถเข็น"] forState:UIControlStateNormal];
 }
 
 -(void)loadView
@@ -101,7 +104,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     
   
     
-    NSString *title = [Setting getValue:@"074t" example:@"เลือกเมนู"];
+    NSString *title = [Language getText:@"เลือกเมนู"];
     lblNavTitle.text = title;
     
     
@@ -119,10 +122,10 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     _currentMenuTypeList = [[NSMutableArray alloc]init];
     
     
-    if(branch.luckyDrawBahtSpent)
+    if(branch.luckyDrawSpend)
     {        
-        NSString *message = [Setting getValue:@"" example:@"ลุ้นรับรางวัลพิเศษ\nเมื่อทานครบทุกๆ %ld บาท"];
-        NSInteger spentAmount = branch.luckyDrawBahtSpent;
+        NSString *message = [Language getText:@"ลุ้นรับรางวัลพิเศษ\nเมื่อทานครบทุกๆ %ld บาท"];
+        NSInteger spentAmount = branch.luckyDrawSpend;
         NSString *luckyDrawMessage = [NSString stringWithFormat:message,spentAmount];
         UIButton *lblSpentForLuckyDraw = [UIButton buttonWithType:UIButtonTypeCustom];
         [lblSpentForLuckyDraw setTitle:luckyDrawMessage forState:UIControlStateNormal];
@@ -138,8 +141,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
 
         [lblSpentForLuckyDraw sizeToFit];
         
-        NSLog(@"btnViewBasket.frame.origin.y: %f",btnViewBasket.frame.origin.y);
-        NSLog(@"self.view.frame.size.height: %f",self.view.frame.size.height);
+        
         UIWindow *window = UIApplication.sharedApplication.keyWindow;
         CGRect frame = lblSpentForLuckyDraw.frame;
         frame.origin.x = self.view.frame.size.width-frame.size.width;
@@ -330,6 +332,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.sbText.delegate = self;
             cell.sbText.tag = 300;
+            cell.sbText.placeholder = [Language getText:@"ค้นหาเมนู"];
             [cell.sbText setInputAccessoryView:self.toolBar];
             UITextField *textField = [cell.sbText valueForKey:@"searchField"];
             textField.layer.borderColor = [cTextFieldBorder CGColor];
@@ -482,7 +485,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
             
             
             NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
-            OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menu.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 noteIDListInText:@"" orderNo:0 status:1 receiptID:0];
+            OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menu.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
             [OrderTaking addObject:orderTaking];
             [orderTakingList addObject:orderTaking];
             
@@ -508,7 +511,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         Message *message = messageList[0];
         if(![message.text integerValue])
         {
-            NSString *message = [Setting getValue:@"124m" example:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
+            NSString *message = [Language getText:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
             [self showAlert:@"" message:message];
         }
         
@@ -529,7 +532,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         Message *message = messageList[0];
         if(![message.text integerValue])
         {
-            NSString *message = [Setting getValue:@"124m" example:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
+            NSString *message = [Language getText:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
             [self showAlert:@"" message:message];
         }
         
@@ -603,7 +606,15 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
             {
                 [button setTitleColor:cSystem4 forState:UIControlStateNormal];
             }
-            [button setTitle:menuType.name forState:UIControlStateNormal];
+            
+            if([Language langIsTH])
+            {
+                [button setTitle:menuType.name forState:UIControlStateNormal];
+            }
+            else if([Language langIsEN])
+            {
+                [button setTitle:menuType.nameEn forState:UIControlStateNormal];
+            }
             [button sizeToFit];
             [_horizontalScrollView addSubview:button];
             buttonX = 15 + buttonX+button.frame.size.width;
