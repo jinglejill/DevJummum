@@ -383,6 +383,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     _selectedVoucherCode = @"";
     _promotionList = [[NSMutableArray alloc]init];
     _rewardRedemptionList = [[NSMutableArray alloc]init];
+    _remark = @"";
     
     if(fromReceiptSummaryMenu || fromOrderDetailMenu || fromRewardRedemption || fromHotDealDetail || fromLuckyDraw)
     {
@@ -1044,6 +1045,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 cell.txtVoucherCode.tag = 31;
                 cell.txtVoucherCode.delegate = self;
                 cell.txtVoucherCode.text = @"";
+                cell.txtVoucherCode.placeholder = [Language getText:@"Voucher code"];
                 [self setTextFieldDesign:cell.txtVoucherCode];
                 [cell.txtVoucherCode setInputAccessoryView:self.toolBar];
                 [cell.txtVoucherCode addTarget:self action:@selector(txtVoucherCodeChanged:) forControlEvents:UIControlEventEditingChanged];
@@ -1104,13 +1106,8 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 if(branch.priceIncludeVat)
                 {
                     totalAmount = totalAmount / ((branch.percentVat+100)*0.01);
-                    serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
                 }
-                else
-                {
-                    serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
-                }
-                
+                serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
                 serviceChargeValue = roundf(serviceChargeValue * 100)/100;
                 _serviceChargeValue = serviceChargeValue;
                 NSString *strTotal = [Utility formatDecimal:serviceChargeValue withMinFraction:2 andMaxFraction:2];
@@ -1143,16 +1140,11 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 if(branch.priceIncludeVat)
                 {
                     totalAmount = totalAmount / ((branch.percentVat+100)*0.01);
-                    serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
-                    serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                    vatAmount = totalAmount * branch.percentVat * 0.01;
                 }
-                else
-                {
-                    serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
-                    serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                    vatAmount = (totalAmount+serviceChargeValue)*branch.percentVat/100;
-                }
+                serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
+                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+                vatAmount = (totalAmount+serviceChargeValue)*branch.percentVat/100;
+                
                 
                 vatAmount = roundf(vatAmount*100)/100;
                 _vatValue = vatAmount;
@@ -1184,18 +1176,13 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 if(branch.priceIncludeVat)
                 {
                     totalAmount = totalAmount / ((branch.percentVat+100)*0.01);
-                    serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
-                    serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                    vatAmount = totalAmount * branch.percentVat * 0.01;
                 }
-                else
-                {
-                    serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
-                    serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                    vatAmount = (totalAmount+serviceChargeValue)*branch.percentVat/100;
-                }
-
+                serviceChargeValue = branch.serviceChargePercent * totalAmount * 0.01;
+                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+                vatAmount = (totalAmount+serviceChargeValue)*branch.percentVat/100;
                 vatAmount = roundf(vatAmount*100)/100;
+                
+                
                 float netTotalAmount = totalAmount+serviceChargeValue+vatAmount;
                 netTotalAmount = roundf(netTotalAmount*100)/100;
                 NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
@@ -2092,17 +2079,10 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             if(branch.priceIncludeVat)
             {
                 afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                vatAmount = afterDiscount * branch.percentVat * 0.01;
             }
-            else
-            {
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
-            }
-            
+            serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
+            serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+            vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
             vatAmount = roundf(vatAmount*100)/100;
             NSString *strAmount = [Utility formatDecimal:vatAmount withMinFraction:2 andMaxFraction:2];
             strAmount = [Utility addPrefixBahtSymbol:strAmount];
@@ -2122,17 +2102,10 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             if(branch.priceIncludeVat)
             {
                 afterDiscount = afterDiscount / ((branch.percentVat+100)*0.01);
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                vatAmount = afterDiscount * branch.percentVat * 0.01;
             }
-            else
-            {
-                serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
-                serviceChargeValue = roundf(serviceChargeValue * 100)/100;
-                vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
-            }
-            
+            serviceChargeValue = branch.serviceChargePercent * afterDiscount * 0.01;
+            serviceChargeValue = roundf(serviceChargeValue * 100)/100;
+            vatAmount = (afterDiscount+serviceChargeValue)*branch.percentVat/100;
             vatAmount = roundf(vatAmount*100)/100;
             _vatValue = vatAmount;
             _serviceChargeValue = serviceChargeValue;

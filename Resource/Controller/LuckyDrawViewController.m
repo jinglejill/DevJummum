@@ -45,7 +45,7 @@
     BOOL _luckyDrawDownloaded;
     CAKeyframeAnimation *_animationWaiting;
     NSMutableArray *_animationImages;
-    NSMutableArray *_discountGroupMenuMapList;
+//    NSMutableArray *_discountGroupMenuMapList;
     
 }
 @end
@@ -147,7 +147,7 @@
         NSMutableArray *luckyDrawTicketList = items[1];
         _numberOfGift = [luckyDrawTicketList count];
         
-        _discountGroupMenuMapList = items[2];
+//        _discountGroupMenuMapList = items[2];
         
  
         _luckyDrawDownloaded = YES;

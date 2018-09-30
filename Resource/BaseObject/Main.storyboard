@@ -925,7 +925,6 @@
                                         </state>
                                         <connections>
                                             <action selector="addRemoveMenu:" destination="uxx-Px-8LI" eventType="touchUpInside" id="xZP-he-5Vm"/>
-                                            <action selector="deleteAll:" destination="70l-RA-GXn" eventType="touchUpInside" id="dX5-80-a5v"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ยืนยันการสั่งอาหาร" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TP8-ny-J3D">
@@ -4266,6 +4265,7 @@
         <image name="white.png" width="226" height="132"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="bhQ-mk-in8"/>
         <segue reference="aHo-2G-vPP"/>
         <segue reference="DCf-pC-0Ih"/>
         <segue reference="UZ8-nN-acy"/>

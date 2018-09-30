@@ -216,7 +216,8 @@
         break;
         case dbRewardRedemptionLuckyDraw:
         {
-            arrClassName = @[@"RewardRedemption",@"LuckyDrawTicket",@"DiscountGroupMenuMap"];
+//            arrClassName = @[@"RewardRedemption",@"LuckyDrawTicket",@"DiscountGroupMenuMap"];
+            arrClassName = @[@"RewardRedemption",@"LuckyDrawTicket"];
         }
             break;
         default:

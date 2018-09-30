@@ -162,10 +162,11 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     if(buffetReceipt)
     {
         [OrderTaking removeCurrentOrderTakingList];
-        [CreditCard removeCurrentCreditCard];
-        lblTotalQuantity.text = @"0";
-        lblTotalQuantityTop.text = @"";
-        lblTotalAmount.text = [Utility addPrefixBahtSymbol:@"0.00"];
+//        [CreditCard removeCurrentCreditCard];
+//        lblTotalQuantity.text = @"0";
+//        lblTotalQuantityTop.text = @"";
+//        lblTotalAmount.text = [Utility addPrefixBahtSymbol:@"0.00"];
+        [self updateTotalAmount];
         [btnBack setImage:nil forState:UIControlStateNormal];
         branch = [Branch getBranch:buffetReceipt.branchID];
         customerTable = [CustomerTable getCustomerTable:buffetReceipt.customerTableID];
