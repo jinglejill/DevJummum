@@ -26,6 +26,7 @@
 @interface CustomViewController ()
 {
     UILabel *_lblStatus;
+    UIActivityIndicatorView *_indicatorWaiting;
     
 }
 @end
@@ -106,6 +107,10 @@ CGFloat animatedDistance;
     waitingView.layer.cornerRadius = 8;
     
     
+    _indicatorWaiting = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _indicatorWaiting.frame = CGRectMake(self.view.bounds.size.width/2-_indicatorWaiting.frame.size.width/2,self.view.bounds.size.height/2-_indicatorWaiting.frame.size.height/2,_indicatorWaiting.frame.size.width,_indicatorWaiting.frame.size.height);
+    
+    
     addedNotiView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"added.png"]];
     addedNotiView.center = self.view.center;
     
@@ -125,8 +130,16 @@ CGFloat animatedDistance;
     lblWaiting = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-16*2, 44)];
     lblWaiting.center = self.view.center;
     CGRect frame = lblWaiting.frame;
-    frame.origin.y = frame.origin.y + indicator.frame.size.height;
+    frame.origin.y = frame.origin.y + _indicatorWaiting.frame.size.height;
     lblWaiting.frame = frame;
+    
+    {
+        _indicatorWaiting.center = self.view.center;
+        CGRect frame = _indicatorWaiting.frame;
+        frame.origin.y = frame.origin.y - _indicatorWaiting.frame.size.height/2;
+        _indicatorWaiting.frame = frame;
+    }
+    
     
     
     _lblStatus = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 250, 150)];
@@ -259,16 +272,16 @@ CGFloat animatedDistance;
 
 -(void) loadWaitingView
 {
-    [indicator startAnimating];
-    indicator.alpha = 1;
+    [_indicatorWaiting startAnimating];
+    _indicatorWaiting.alpha = 1;
     overlayView.alpha = 1;
     waitingView.alpha = 1;
     
     
-    indicator.opaque = NO;
-    indicator.backgroundColor = [UIColor clearColor];
-    [indicator setColor:[UIColor whiteColor]];
-//    indicator.layer.zPosition = 1;
+    _indicatorWaiting.opaque = NO;
+    _indicatorWaiting.backgroundColor = [UIColor clearColor];
+    [_indicatorWaiting setColor:[UIColor whiteColor]];
+//    _indicatorWaiting.layer.zPosition = 1;
     
     
     lblWaiting.text = @"Processing...";
@@ -278,10 +291,10 @@ CGFloat animatedDistance;
     lblWaiting.alpha = 1;
     
     
-    indicator.center = self.view.center;
-    CGRect frame = indicator.frame;
-    frame.origin.y = frame.origin.y - indicator.frame.size.height/2;
-    indicator.frame = frame;
+//    _indicatorWaiting.center = self.view.center;
+//    CGRect frame = _indicatorWaiting.frame;
+//    frame.origin.y = frame.origin.y - _indicatorWaiting.frame.size.height/2;
+//    _indicatorWaiting.frame = frame;
     
     
     
@@ -289,11 +302,11 @@ CGFloat animatedDistance;
     [self.view addSubview:waitingView];
     [self.view addSubview:lblWaiting];
     [self.view addSubview:overlayView];
-//    [indicator removeFromSuperview];
-//    [waitingView addSubview:indicator];
+//    [_indicatorWaiting removeFromSuperview];
+//    [waitingView addSubview:_indicatorWaiting];
     
-    [self.view addSubview:indicator];
-    [self.view bringSubviewToFront:indicator];
+    [self.view addSubview:_indicatorWaiting];
+    [self.view bringSubviewToFront:_indicatorWaiting];
 }
 
 -(void)removeWaitingView
@@ -305,15 +318,15 @@ CGFloat animatedDistance;
                          lblWaiting.alpha = 0.0;
                          waitingView.alpha = 0.0;
                          view.alpha = 0.0;
-                         indicator.alpha = 0;
+                         _indicatorWaiting.alpha = 0;
                      }
                      completion:^(BOOL finished){
                          dispatch_async(dispatch_get_main_queue(),^ {
                              [lblWaiting removeFromSuperview];
                              [waitingView removeFromSuperview];
                              [view removeFromSuperview];
-                             [indicator stopAnimating];
-                             [indicator removeFromSuperview];
+                             [_indicatorWaiting stopAnimating];
+                             [_indicatorWaiting removeFromSuperview];
                          } );
                      }
      ];

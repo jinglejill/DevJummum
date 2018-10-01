@@ -161,11 +161,13 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     [self setShadow:vwBottomShadow];
     if(buffetReceipt)
     {
-        [OrderTaking removeCurrentOrderTakingList];
+        
+//        [OrderTaking removeCurrentOrderTakingList];
 //        [CreditCard removeCurrentCreditCard];
 //        lblTotalQuantity.text = @"0";
 //        lblTotalQuantityTop.text = @"";
 //        lblTotalAmount.text = [Utility addPrefixBahtSymbol:@"0.00"];
+        [OrderTaking removeCurrentOrderTakingListBelongToMenuID0];
         [self updateTotalAmount];
         [btnBack setImage:nil forState:UIControlStateNormal];
         branch = [Branch getBranch:buffetReceipt.branchID];

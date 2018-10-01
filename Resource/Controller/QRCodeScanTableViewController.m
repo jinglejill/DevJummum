@@ -22,6 +22,7 @@
     CustomerTable *_selectedCustomerTable;
     BOOL _fromOrderItAgain;
     BOOL _alreadySeg;
+    Receipt *_buffetReceipt;
 }
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
@@ -50,6 +51,7 @@
         _selectedBranch = vc.branch;
         _selectedCustomerTable = nil;    
         _fromOrderItAgain = YES;
+        _buffetReceipt = vc.buffetReceipt;
     }
 }
 
@@ -201,6 +203,7 @@
         MenuSelectionViewController *vc = segue.destinationViewController;
         vc.branch = _selectedBranch;
         vc.customerTable = _selectedCustomerTable;
+        vc.buffetReceipt = _buffetReceipt;
     }
 }
 

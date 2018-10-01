@@ -69,6 +69,7 @@
 +(NSMutableArray *)getCurrentOrderTakingList;
 +(void)setCurrentOrderTakingList:(NSMutableArray *)orderTakingList;
 +(void)removeCurrentOrderTakingList;
++(void)removeCurrentOrderTakingListBelongToMenuID0;
 +(NSMutableArray *)createSumUpOrderTakingWithTheSameMenuAndNote:(NSMutableArray *)orderTakingList;
 +(float)getSumQuantity:(NSMutableArray *)orderTakingList;
 +(float)getSumSpecialPrice:(NSMutableArray *)orderTakingList;

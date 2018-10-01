@@ -4020,7 +4020,7 @@
                                             <constraint firstAttribute="width" constant="240" id="Sk9-5e-75M"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ชำระเงินสำเร็จ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgZ-ei-F2m">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order buffet success" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgZ-ei-F2m">
                                         <rect key="frame" x="20" y="395" width="335" height="49"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="49" id="wtt-n1-SIo"/>
@@ -4265,7 +4265,7 @@
         <image name="white.png" width="226" height="132"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bhQ-mk-in8"/>
+        <segue reference="xLp-2h-vDb"/>
         <segue reference="aHo-2G-vPP"/>
         <segue reference="DCf-pC-0Ih"/>
         <segue reference="UZ8-nN-acy"/>

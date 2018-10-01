@@ -455,6 +455,20 @@
     NSMutableArray *dataList = [SharedCurrentOrderTaking sharedCurrentOrderTaking].orderTakingList;
     [dataList removeAllObjects];
 }
+    
++(void)removeCurrentOrderTakingListBelongToMenuID0
+{
+    NSMutableArray *dataList = [SharedCurrentOrderTaking sharedCurrentOrderTaking].orderTakingList;
+    for(OrderTaking *item in dataList)
+    {
+        Menu *menu = [Menu getMenu:item.menuID branchID:item.branchID];
+        if(menu.belongToMenuID == 0)
+        {
+            [dataList removeObject:item];
+        }
+    }
+//    [dataList removeAllObjects];
+}
 
 +(NSMutableArray *)createSumUpOrderTakingWithTheSameMenuAndNote:(NSMutableArray *)orderTakingList
 {

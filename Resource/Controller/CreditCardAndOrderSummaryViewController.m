@@ -1542,8 +1542,20 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     {
         CustomTableViewHeaderFooterButton *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifierHeaderFooterButton];
         
-        float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
-        if(totalAmount == 0)
+        NSInteger showBuffetButton = 1;
+        NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+        for(OrderTaking *item in orderTakingList)
+        {
+            Menu *menu = [Menu getMenu:item.menuID branchID:item.branchID];
+            if(menu.belongToMenuID == 0 || item.specialPrice > 0)
+            {
+                showBuffetButton = 0;
+                break;
+            }
+        }
+        
+//        float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
+        if(showBuffetButton)
         {
             [footerView.btnValue setTitle:[Language getText:@"สั่งบุฟเฟ่ต์"] forState:UIControlStateNormal];
         }

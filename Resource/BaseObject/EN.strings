@@ -141,7 +141,7 @@
 "การจ่ายด้วยบัตรเครดิต/เดบิตขัดข้อง กรุณาติดต่อเจ้าหน้าที่ที่เกี่ยวข้อง" = "Problem with payment occurs. Please contact JUMMUM admin";
 "โค้ดที่ใส่ไม่สามารถใช้กับเมนูที่คุณเลือก" = "Voucher code is not valid with your selected menu(s)";
 "เพิ่มบัตรเครดิต/เดบิต" = "Add credit/debit card";
-"สั่งบุฟเฟ่ต์สำเร็จ" = "Order buffet successfully";
+"สั่งบุฟเฟ่ต์สำเร็จ" = "Order complete";
 "ชำระเงินสำเร็จ" = "Payment complete";
 "บันทึกใบเสร็จ และสั่งบุฟเฟต์" = "Save receipt & order buffet";
 "บันทึกใบเสร็จลงอัลบั้ม" = "Save receipt in camera roll";
