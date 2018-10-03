@@ -132,7 +132,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         [lblSpentForLuckyDraw setTitleColor:cSystem3 forState:UIControlStateNormal];
         lblSpentForLuckyDraw.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);        
         lblSpentForLuckyDraw.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        lblSpentForLuckyDraw.backgroundColor = [cSystem2_30 colorWithAlphaComponent:0.5];
+        lblSpentForLuckyDraw.backgroundColor = [cSystem1_30 colorWithAlphaComponent:0.5];
         lblSpentForLuckyDraw.titleLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
         lblSpentForLuckyDraw.titleLabel.numberOfLines = 2;
         lblSpentForLuckyDraw.userInteractionEnabled = NO;
@@ -161,12 +161,6 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     [self setShadow:vwBottomShadow];
     if(buffetReceipt)
     {
-        
-//        [OrderTaking removeCurrentOrderTakingList];
-//        [CreditCard removeCurrentCreditCard];
-//        lblTotalQuantity.text = @"0";
-//        lblTotalQuantityTop.text = @"";
-//        lblTotalAmount.text = [Utility addPrefixBahtSymbol:@"0.00"];
         [OrderTaking removeCurrentOrderTakingListBelongToMenuID0];
         [self updateTotalAmount];
         [btnBack setImage:nil forState:UIControlStateNormal];
@@ -397,7 +391,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
             
             
             
-            NSString *imageFileName = [Utility isStringEmpty:menu.imageUrl]?@"./Image/NoImage.jpg":[NSString stringWithFormat:@"./%@/Image/Menu/%@",branch.dbName,menu.imageUrl];
+            NSString *imageFileName = [Utility isStringEmpty:menu.imageUrl]?@"./%@/Image/NoImage.jpg":[NSString stringWithFormat:@"./%@/Image/Menu/%@",branch.dbName,menu.imageUrl];
             UIImage *image = [Utility getImageFromCache:imageFileName];
             if(image)
             {

@@ -34,6 +34,7 @@
 #import "MenuNote.h"
 #import "LuckyDrawTicket.h"
 #import "DiscountGroupMenuMap.h"
+#import "BuffetMenuMap.h"
 #import "CustomViewController.h"
 
 
@@ -113,7 +114,7 @@
             break;
         case dbMenuBelongToBuffet:
         {
-            arrClassName = @[@"Message",@"Menu",@"MenuType",@"Note",@"NoteType",@"SpecialPriceProgram",@"Receipt"];
+            arrClassName = @[@"Message",@"Menu",@"MenuType",@"Note",@"NoteType",@"SpecialPriceProgram",@"Receipt",@"BuffetMenuMap"];
         }
             break;
         case dbMenuNoteList:
@@ -1274,7 +1275,28 @@
             
             url = [NSURL URLWithString:[Utility url:urlLuckyDrawTicketInsertList]];
         }
-            break;
+        break;
+        case dbBuffetMenuMap:
+        {
+            noteDataString = [Utility getNoteDataString:data];
+            url = [NSURL URLWithString:[Utility url:urlBuffetMenuMapInsert]];
+        }
+        break;
+        case dbBuffetMenuMapList:
+        {
+            NSMutableArray *buffetMenuMapList = (NSMutableArray *)data;
+            NSInteger countBuffetMenuMap = 0;
+            
+            noteDataString = [NSString stringWithFormat:@"countBuffetMenuMap=%ld",[buffetMenuMapList count]];
+            for(BuffetMenuMap *item in buffetMenuMapList)
+            {
+                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:item withRunningNo:countBuffetMenuMap]];
+                countBuffetMenuMap++;
+            }
+            
+            url = [NSURL URLWithString:[Utility url:urlBuffetMenuMapInsertList]];
+        }
+        break;
         default:
             break;
     }
@@ -1992,7 +2014,28 @@
             
             url = [NSURL URLWithString:[Utility url:urlLuckyDrawTicketUpdateList]];
         }
-            break;
+        break;
+        case dbBuffetMenuMap:
+        {
+            noteDataString = [Utility getNoteDataString:data];
+            url = [NSURL URLWithString:[Utility url:urlBuffetMenuMapUpdate]];
+        }
+        break;
+        case dbBuffetMenuMapList:
+        {
+            NSMutableArray *buffetMenuMapList = (NSMutableArray *)data;
+            NSInteger countBuffetMenuMap = 0;
+            
+            noteDataString = [NSString stringWithFormat:@"countBuffetMenuMap=%ld",[buffetMenuMapList count]];
+            for(BuffetMenuMap *item in buffetMenuMapList)
+            {
+                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:item withRunningNo:countBuffetMenuMap]];
+                countBuffetMenuMap++;
+            }
+            
+            url = [NSURL URLWithString:[Utility url:urlBuffetMenuMapUpdateList]];
+        }
+        break;
         default:
             break;
     }
@@ -2372,7 +2415,28 @@
             
             url = [NSURL URLWithString:[Utility url:urlLuckyDrawTicketDeleteList]];
         }
-            break;
+        break;
+        case dbBuffetMenuMap:
+        {
+            noteDataString = [Utility getNoteDataString:data];
+            url = [NSURL URLWithString:[Utility url:urlBuffetMenuMapDelete]];
+        }
+        break;
+        case dbBuffetMenuMapList:
+        {
+            NSMutableArray *buffetMenuMapList = (NSMutableArray *)data;
+            NSInteger countBuffetMenuMap = 0;
+            
+            noteDataString = [NSString stringWithFormat:@"countBuffetMenuMap=%ld",[buffetMenuMapList count]];
+            for(BuffetMenuMap *item in buffetMenuMapList)
+            {
+                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:item withRunningNo:countBuffetMenuMap]];
+                countBuffetMenuMap++;
+            }
+            
+            url = [NSURL URLWithString:[Utility url:urlBuffetMenuMapDeleteList]];
+        }
+        break;
         default:
             break;
     }

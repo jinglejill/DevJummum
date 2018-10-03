@@ -10,9 +10,11 @@
 #import "MenuType.h"
 #import "SubMenuType.h"
 #import "OrderTaking.h"
+#import "BuffetMenuMap.h"
 #import "SharedMenu.h"
 #import "SharedCurrentMenu.h"
 #import "SharedMenuForBuffet.h"
+#import "SharedBuffetMenuMap.h"
 #import "Utility.h"
 #import "Receipt.h"
 
@@ -327,36 +329,36 @@
     return [filterArray mutableCopy];
 }
 
-+(NSMutableArray *)getMenuListBuffetWithReceipt:(Receipt *)receipt
-{
-    NSMutableArray *buffetMenuList = [[NSMutableArray alloc]init];
-    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
-    for(OrderTaking *item in orderTakingList)
-    {
-        Menu *menu = [Menu getMenu:item.menuID branchID:item.branchID];
-        if(menu.buffetMenu)
-        {
-            [buffetMenuList addObject:menu];
-        }
-    }
-    return buffetMenuList;
-}
+//+(NSMutableArray *)getMenuListBuffetWithReceipt:(Receipt *)receipt
+//{
+//    NSMutableArray *buffetMenuList = [[NSMutableArray alloc]init];
+//    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
+//    for(OrderTaking *item in orderTakingList)
+//    {
+//        Menu *menu = [Menu getMenu:item.menuID branchID:item.branchID];
+//        if(menu.buffetMenu)
+//        {
+//            [buffetMenuList addObject:menu];
+//        }
+//    }
+//    return buffetMenuList;
+//}
 
-+(NSMutableArray *)getMenuListBelongToBuffetWithBuffetMenuList:(NSMutableArray *)buffetMenuList
-{
-    NSMutableArray *belongToBuffetMenuList = [[NSMutableArray alloc]init];
-    for(Menu *item in buffetMenuList)
-    {
-        NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _belongToMenuID = %ld",item.branchID,item.menuID];
-        NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
-        
-        
-        [belongToBuffetMenuList addObjectsFromArray:filterArray];
-    }
-    
-    return belongToBuffetMenuList;
-}
+//+(NSMutableArray *)getMenuListBelongToBuffetWithBuffetMenuList:(NSMutableArray *)buffetMenuList
+//{
+//    NSMutableArray *belongToBuffetMenuList = [[NSMutableArray alloc]init];
+//    for(Menu *item in buffetMenuList)
+//    {
+//        NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
+//        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _belongToMenuID = %ld",item.branchID,item.menuID];
+//        NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
+//        
+//        
+//        [belongToBuffetMenuList addObjectsFromArray:filterArray];
+//    }
+//    
+//    return belongToBuffetMenuList;
+//}
 
 +(NSMutableArray *)getMenuBelongToBuffet:(Receipt *)receipt
 {
@@ -373,11 +375,18 @@
     {
         if(item.buffetMenu)
         {
-            NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _belongToMenuID = %ld and status = 1",item.branchID,item.menuID];
+            NSMutableArray *dataList = [SharedBuffetMenuMap sharedBuffetMenuMap].buffetMenuMapList;
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _buffetMenuID = %ld",item.branchID,item.menuID];
+//            NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
+//            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _belongToMenuID = %ld and status = 1",item.branchID,item.menuID];
             NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
-            
-            [menuBelongToBuffetSet addObjectsFromArray:filterArray];
+            for(BuffetMenuMap *buffetMenuMap in filterArray)
+            {
+                Menu *menu = [Menu getMenu:buffetMenuMap.menuID branchID:item.branchID];
+                [menuBelongToBuffetSet addObject:menu];
+                
+            }            
+//            [menuBelongToBuffetSet addObjectsFromArray:filterArray];
         }
     }
     

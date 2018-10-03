@@ -597,7 +597,25 @@ extern NSString *globalBundleID;
             break;
         case urlRewardRedemptionLuckyDrawGet:
             url = @"JMMRewardRedemptionLuckyDrawGet.php";
-            break;
+        break;
+        case urlBuffetMenuMapInsert:
+            url = @"JMMBuffetMenuMapInsert.php";
+        break;
+        case urlBuffetMenuMapUpdate:
+            url = @"JMMBuffetMenuMapUpdate.php";
+        break;
+        case urlBuffetMenuMapDelete:
+            url = @"JMMBuffetMenuMapDelete.php";
+        break;
+        case urlBuffetMenuMapInsertList:
+            url = @"JMMBuffetMenuMapInsertList.php";
+        break;
+        case urlBuffetMenuMapUpdateList:
+            url = @"JMMBuffetMenuMapUpdateList.php";
+        break;
+        case urlBuffetMenuMapDeleteList:
+            url = @"JMMBuffetMenuMapDeleteList.php";
+        break;
         default:
             break;
     }

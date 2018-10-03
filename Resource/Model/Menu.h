@@ -66,7 +66,7 @@
 +(void)setCurrentMenuForBuffet:(MenuForBuffet *)menuForBuffet;
 +(void)removeCurrentMenuForBuffet;
 +(NSMutableArray *)getMenuListALaCarteWithBranchID:(NSInteger)branchID;
-+(NSMutableArray *)getMenuListBuffetWithReceipt:(Receipt *)receipt;
-+(NSMutableArray *)getMenuListBelongToBuffetWithBuffetMenuList:(NSMutableArray *)buffetMenuList;
+//+(NSMutableArray *)getMenuListBuffetWithReceipt:(Receipt *)receipt;
+//+(NSMutableArray *)getMenuListBelongToBuffetWithBuffetMenuList:(NSMutableArray *)buffetMenuList;
 +(NSMutableArray *)getMenuBelongToBuffet:(Receipt *)receipt;
 @end

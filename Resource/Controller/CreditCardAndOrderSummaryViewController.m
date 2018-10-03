@@ -599,6 +599,11 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 cell.lblValue.text = [NSString stringWithFormat:[Language getText:@"เลขโต๊ะ: %@"],customerTableName];
                 cell.lblValue.textColor = cSystem4;
             }
+            else if(fromLuckyDraw)
+            {
+                cell.lblValue.text = [NSString stringWithFormat:[Language getText:@"เลขโต๊ะ: %@"],customerTable.tableName];
+                cell.lblValue.textColor = cSystem4;
+            }
             else
             {
                 if(customerTable)

@@ -194,7 +194,9 @@ enum enumDB
     dbPromotionAndRewardRedemption,
     dbLuckyDrawTicket,
     dbLuckyDrawTicketList,
-    dbRewardRedemptionLuckyDraw
+    dbRewardRedemptionLuckyDraw,
+    dbBuffetMenuMap,
+    dbBuffetMenuMapList
 
     
 };
@@ -353,7 +355,13 @@ enum enumUrl
     urlLuckyDrawTicketInsertList,
     urlLuckyDrawTicketUpdateList,
     urlLuckyDrawTicketDeleteList,
-    urlRewardRedemptionLuckyDrawGet
+    urlRewardRedemptionLuckyDrawGet,
+    urlBuffetMenuMapInsert,
+    urlBuffetMenuMapUpdate,
+    urlBuffetMenuMapDelete,
+    urlBuffetMenuMapInsertList,
+    urlBuffetMenuMapUpdateList,
+    urlBuffetMenuMapDeleteList
     
 
     

@@ -10,6 +10,8 @@
 		52A4F84CC750B28649A16B95 /* libPods-DevJummumTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAEDE7FAC9AF0CA83672BD09 /* libPods-DevJummumTests.a */; };
 		86B4DBFC37C77ACF9085B859 /* libPods-DevJummum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8E838B69045DFF0CC40CC3 /* libPods-DevJummum.a */; };
 		B0165BCE166BC4DF1EA4CB9B /* libPods-DevJummumUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2112241BB95A8B9974095B66 /* libPods-DevJummumUITests.a */; };
+		EF14CC402162310E0035A292 /* BuffetMenuMap.m in Sources */ = {isa = PBXBuildFile; fileRef = EF14CC3F2162310E0035A292 /* BuffetMenuMap.m */; };
+		EF14CC43216231320035A292 /* SharedBuffetMenuMap.m in Sources */ = {isa = PBXBuildFile; fileRef = EF14CC42216231320035A292 /* SharedBuffetMenuMap.m */; };
 		EF33CD78211C26C200560C69 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF33CD77211C26C200560C69 /* ViewController.m */; };
 		EF33CD7D211C26C400560C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF33CD7C211C26C400560C69 /* Assets.xcassets */; };
 		EF33CD80211C26C400560C69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF33CD7E211C26C400560C69 /* LaunchScreen.storyboard */; };
@@ -491,6 +493,10 @@
 		B7A4464B8DB8227082361111 /* Pods-DevJummumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevJummumTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DevJummumTests/Pods-DevJummumTests.release.xcconfig"; sourceTree = "<group>"; };
 		BAEDE7FAC9AF0CA83672BD09 /* libPods-DevJummumTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DevJummumTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA3336BB5B2635BBB728167 /* Pods-DevJummumUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevJummumUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DevJummumUITests/Pods-DevJummumUITests.release.xcconfig"; sourceTree = "<group>"; };
+		EF14CC3E2162310E0035A292 /* BuffetMenuMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuffetMenuMap.h; sourceTree = "<group>"; };
+		EF14CC3F2162310E0035A292 /* BuffetMenuMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuffetMenuMap.m; sourceTree = "<group>"; };
+		EF14CC41216231320035A292 /* SharedBuffetMenuMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedBuffetMenuMap.h; sourceTree = "<group>"; };
+		EF14CC42216231320035A292 /* SharedBuffetMenuMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedBuffetMenuMap.m; sourceTree = "<group>"; };
 		EF33CD70211C26C200560C69 /* DevJummum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevJummum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF33CD76211C26C200560C69 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EF33CD77211C26C200560C69 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -1660,6 +1666,10 @@
 				EFE2C6D8215477C0006EF563 /* DiscountGroupMenuMap.m */,
 				EFE2C6DA21548618006EF563 /* SharedDiscountGroupMenuMap.h */,
 				EFE2C6DB21548618006EF563 /* SharedDiscountGroupMenuMap.m */,
+				EF14CC3E2162310E0035A292 /* BuffetMenuMap.h */,
+				EF14CC3F2162310E0035A292 /* BuffetMenuMap.m */,
+				EF14CC41216231320035A292 /* SharedBuffetMenuMap.h */,
+				EF14CC42216231320035A292 /* SharedBuffetMenuMap.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2461,6 +2471,7 @@
 				EF33CFDD211C36D200560C69 /* NSData+AES.m in Sources */,
 				EF33D049211C36D200560C69 /* RewardDetailViewController.m in Sources */,
 				EF33D09F211C36D200560C69 /* RewardRedemption.m in Sources */,
+				EF14CC402162310E0035A292 /* BuffetMenuMap.m in Sources */,
 				EF33D0DB211C36D200560C69 /* CustomTableViewCellImageText.m in Sources */,
 				EF33D0AC211C36D200560C69 /* CustomTableViewCellProfile.m in Sources */,
 				EF33D07A211C36D200560C69 /* SharedOrderNote.m in Sources */,
@@ -2475,6 +2486,7 @@
 				EF33D03C211C36D200560C69 /* CommentRatingViewController.m in Sources */,
 				EF33CFE4211C36D200560C69 /* OmiseCard.swift in Sources */,
 				EF33D087211C36D200560C69 /* UserAccount.m in Sources */,
+				EF14CC43216231320035A292 /* SharedBuffetMenuMap.m in Sources */,
 				EF33D050211C36D200560C69 /* TosAndPrivacyPolicyViewController.m in Sources */,
 				EF33D04A211C36D200560C69 /* TermsOfServiceViewController.m in Sources */,
 				EF33D04E211C36D200560C69 /* HotDealDetailViewController.m in Sources */,

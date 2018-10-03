@@ -21,7 +21,6 @@
     Branch *_selectedBranch;
     CustomerTable *_selectedCustomerTable;
     BOOL _fromOrderItAgain;
-    BOOL _alreadySeg;
     Receipt *_buffetReceipt;
 }
 @property (nonatomic, strong) AVCaptureSession *captureSession;
@@ -40,11 +39,12 @@
 @synthesize btnBack;
 @synthesize btnBranchSearch;
 @synthesize topViewHeight;
-
+@synthesize alreadySeg;
+    
 
 -(IBAction)unwindToQRCodeScanTable:(UIStoryboardSegue *)segue
 {
-    _alreadySeg = NO;
+    alreadySeg = NO;
     if([segue.sourceViewController isMemberOfClass:[CreditCardAndOrderSummaryViewController class]])
     {
         CreditCardAndOrderSummaryViewController *vc = segue.sourceViewController;
@@ -180,7 +180,7 @@
 
 -(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection{
     
-    if (metadataObjects && [metadataObjects count] > 0 && !_alreadySeg)
+    if (metadataObjects && [metadataObjects count] > 0 && !alreadySeg)
     {
         AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
         if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode])
@@ -190,7 +190,9 @@
             NSString *decryptedMessage = [metadataObj stringValue];
 
             
-            _alreadySeg = YES;
+            alreadySeg = YES;
+//            NSLog(@"stop reading");
+//            [self stopReading];
             [self.homeModel downloadItems:dbBranchAndCustomerTableQR withData:decryptedMessage];
         }
     }
@@ -245,7 +247,7 @@
 
 -(void)setAlreadySegToNo
 {
-    _alreadySeg = NO;
+    alreadySeg = NO;
 }
 @end
 

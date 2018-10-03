@@ -340,7 +340,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         
 
         
-        NSString *imageFileName = [Utility isStringEmpty:menu.imageUrl]?@"./Image/NoImage.jpg":[NSString stringWithFormat:@"./%@/Image/Menu/%@",branch.dbName,menu.imageUrl];
+        NSString *imageFileName = [Utility isStringEmpty:menu.imageUrl]?@"./%@/Image/NoImage.jpg":[NSString stringWithFormat:@"./%@/Image/Menu/%@",branch.dbName,menu.imageUrl];
         UIImage *image = [Utility getImageFromCache:imageFileName];
         if(image)
         {

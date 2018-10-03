@@ -7,6 +7,7 @@
 //
 
 #import "MainTabBarController.h"
+#import "QRCodeScanTableViewController.h"
 
 
 @interface MainTabBarController ()
@@ -21,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
+    self.delegate = self;
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"Prompt-Regular" size:11.0f]} forState:UIControlStateNormal];
     
     self.selectedIndex = 1;
@@ -31,7 +32,20 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+    
+-(void)viewDidAppear:(BOOL)animated
+{
+    
+}
 
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    if(self.selectedIndex == 1)
+    {
+        QRCodeScanTableViewController *vc = (QRCodeScanTableViewController *)viewController;
+        vc.alreadySeg = NO;
+    }
+}
 /*
 #pragma mark - Navigation
 
