@@ -165,6 +165,10 @@
 
 +(Receipt *)getReceipt:(NSInteger)receiptID
 {
+//    if(receiptID == 0)
+//    {
+//        return nil;
+//    }
     NSMutableArray *dataList = [SharedReceipt sharedReceipt].receiptList;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_receiptID = %ld",receiptID];
     NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];

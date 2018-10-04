@@ -58,6 +58,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
 @synthesize buffetReceipt;
 @synthesize btnBack;
 @synthesize btnViewBasket;
+@synthesize fromReceiptSummaryMenu;
 
 
 -(IBAction)unwindToMenuSelection:(UIStoryboardSegue *)segue
@@ -161,9 +162,12 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     [self setShadow:vwBottomShadow];
     if(buffetReceipt)
     {
+        if(fromReceiptSummaryMenu)
+        {
+            [btnBack setImage:nil forState:UIControlStateNormal];
+        }
         [OrderTaking removeCurrentOrderTakingListBelongToMenuID0];
         [self updateTotalAmount];
-        [btnBack setImage:nil forState:UIControlStateNormal];
         branch = [Branch getBranch:buffetReceipt.branchID];
         customerTable = [CustomerTable getCustomerTable:buffetReceipt.customerTableID];
         
@@ -265,7 +269,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
 
 - (IBAction)goBackHome:(id)sender
 {
-    if(buffetReceipt)
+    if(buffetReceipt && fromReceiptSummaryMenu)
     {
         [OrderTaking removeCurrentOrderTakingList];
         [self performSegueWithIdentifier:@"segUnwindToReceiptSummary" sender:self];

@@ -12,6 +12,7 @@
 		B0165BCE166BC4DF1EA4CB9B /* libPods-DevJummumUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2112241BB95A8B9974095B66 /* libPods-DevJummumUITests.a */; };
 		EF14CC402162310E0035A292 /* BuffetMenuMap.m in Sources */ = {isa = PBXBuildFile; fileRef = EF14CC3F2162310E0035A292 /* BuffetMenuMap.m */; };
 		EF14CC43216231320035A292 /* SharedBuffetMenuMap.m in Sources */ = {isa = PBXBuildFile; fileRef = EF14CC42216231320035A292 /* SharedBuffetMenuMap.m */; };
+		EF14CDE92164D97F0035A292 /* historyTab.png in Resources */ = {isa = PBXBuildFile; fileRef = EF14CDE82164D97D0035A292 /* historyTab.png */; };
 		EF33CD78211C26C200560C69 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF33CD77211C26C200560C69 /* ViewController.m */; };
 		EF33CD7D211C26C400560C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF33CD7C211C26C400560C69 /* Assets.xcassets */; };
 		EF33CD80211C26C400560C69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF33CD7E211C26C400560C69 /* LaunchScreen.storyboard */; };
@@ -497,6 +498,7 @@
 		EF14CC3F2162310E0035A292 /* BuffetMenuMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuffetMenuMap.m; sourceTree = "<group>"; };
 		EF14CC41216231320035A292 /* SharedBuffetMenuMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedBuffetMenuMap.h; sourceTree = "<group>"; };
 		EF14CC42216231320035A292 /* SharedBuffetMenuMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedBuffetMenuMap.m; sourceTree = "<group>"; };
+		EF14CDE82164D97D0035A292 /* historyTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = historyTab.png; sourceTree = "<group>"; };
 		EF33CD70211C26C200560C69 /* DevJummum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevJummum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF33CD76211C26C200560C69 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EF33CD77211C26C200560C69 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -1320,6 +1322,7 @@
 		EF33CE11211C36D100560C69 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				EF14CDE82164D97D0035A292 /* historyTab.png */,
 				EFDAFD0E214A73FE00A2596D /* handEmpty.png */,
 				EFDAFD01214A656800A2596D /* handLift.png */,
 				EFDAFD00214A656800A2596D /* handTap.png */,
@@ -2268,6 +2271,7 @@
 				EFE2C6D3215225E4006EF563 /* EN.strings in Resources */,
 				EF33CFF1211C36D200560C69 /* circle_red.png in Resources */,
 				EF33D0C6211C36D200560C69 /* CustomTableViewCellVoucherCode.xib in Resources */,
+				EF14CDE92164D97F0035A292 /* historyTab.png in Resources */,
 				EF33D116211C36D200560C69 /* Prompt-Italic.ttf in Resources */,
 				EF8805DF2147820E0062D9D4 /* giftBoxAwesome00011.jpg in Resources */,
 				EF33D02B211C36D200560C69 /* Icon-Small-50.png in Resources */,

@@ -226,13 +226,14 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
     
 }
 
-- (IBAction)button1Clicked:(id)sender
+- (IBAction)button1Clicked:(id)sender//save receipt
 {
     //save to camera roll
     [self screenCaptureBill:receipt];
     if([Receipt hasBuffetMenu:receipt.receiptID] || receipt.buffetReceiptID)
     {
-        [self performSegueWithIdentifier:@"segUnwindToMe" sender:self];
+//        [self performSegueWithIdentifier:@"segUnwindToMe" sender:self];
+        [self performSegueWithIdentifier:@"segUnwindToReceiptSummary" sender:self];
     }
     else
     {
@@ -240,14 +241,15 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
     }
 }
 
-- (IBAction)button2Clicked:(id)sender
+- (IBAction)button2Clicked:(id)sender//go to home
 {
     [self performSegueWithIdentifier:@"segUnwindToHotDeal" sender:self];
 }
 
 - (IBAction)orderBuffet:(id)sender
 {
-    [self performSegueWithIdentifier:@"segUnwindToMe" sender:self];
+//    [self performSegueWithIdentifier:@"segUnwindToMe" sender:self];
+    [self performSegueWithIdentifier:@"segUnwindToReceiptSummary" sender:self];
 }
 
 -(void)screenCaptureBill:(Receipt *)receipt

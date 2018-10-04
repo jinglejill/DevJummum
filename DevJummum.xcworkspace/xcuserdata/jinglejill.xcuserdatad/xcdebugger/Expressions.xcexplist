@@ -3,10 +3,21 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "__47-[HomeModel insertItems:withData:actionScreen:]_block_invoke:HomeModel.m">
+         contextName = "-[BasketViewController textFieldDidEndEditing:]:BasketViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "textField.frame.origin.x">
+            </PersistentString>
+            <PersistentString
+               value = "textField.frame.origin.y">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[HomeModel URLSession:dataTask:didReceiveData:]:HomeModel.m">
+      </ContextState>
+      <ContextState
+         contextName = "__47-[HomeModel insertItems:withData:actionScreen:]_block_invoke:HomeModel.m">
       </ContextState>
       <ContextState
          contextName = "__42-[MenuSelectionViewController viewDidLoad]_block_invoke:MenuSelectionViewController.m">
@@ -37,13 +48,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[BasketViewController textFieldDidEndEditing:]:BasketViewController.m">
+         contextName = "+[Receipt getReceipt:]:Receipt.m">
          <PersistentStrings>
             <PersistentString
-               value = "textField.frame.origin.x">
+               value = "[SharedReceipt sharedReceipt].receiptList">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ReceiptSummaryViewController itemsDownloaded:manager:]:ReceiptSummaryViewController.m">
+         <PersistentStrings>
             <PersistentString
-               value = "textField.frame.origin.y">
+               value = "[SharedReceipt sharedReceipt].receiptList">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

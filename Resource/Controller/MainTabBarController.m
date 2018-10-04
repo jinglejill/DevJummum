@@ -25,7 +25,7 @@
     self.delegate = self;
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"Prompt-Regular" size:11.0f]} forState:UIControlStateNormal];
     
-    self.selectedIndex = 1;
+    self.selectedIndex = 2;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,7 +40,7 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    if(self.selectedIndex == 1)
+    if(self.selectedIndex == 2)
     {
         QRCodeScanTableViewController *vc = (QRCodeScanTableViewController *)viewController;
         vc.alreadySeg = NO;
