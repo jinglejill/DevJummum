@@ -97,7 +97,6 @@ enum enumMessage
     codeMismatch,
     passwordIncorrect,
     emailIncorrect
-    
 };
 enum enumSetting
 {
@@ -112,6 +111,14 @@ enum enumSetting
     vAdminDeviceToken,
     vAdminEmail,
     vExpiredDate
+};
+enum mainTab
+{
+    mainTabHotDeal = 0,
+    mainTabReward = 1,
+    mainTabQrScan = 2,
+    mainTabHistory = 3,
+    mainTabMe = 4
 };
 enum enumDB
 {

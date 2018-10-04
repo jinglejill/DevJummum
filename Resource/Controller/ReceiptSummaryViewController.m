@@ -10,24 +10,6 @@
 #import "OrderDetailViewController.h"
 #import "CreditCardAndOrderSummaryViewController.h"
 #import "MenuSelectionViewController.h"
-#import "CommentViewController.h"
-#import "BasketViewController.h"
-#import "BranchSearchViewController.h"
-//#import "CreditCardAndOrderSummaryViewController.h"
-#import "CreditCardViewController.h"
-#import "CustomerTableSearchViewController.h"
-#import "HotDealDetailViewController.h"
-#import "MenuSelectionViewController.h"
-#import "MyRewardViewController.h"
-#import "NoteViewController.h"
-#import "PaymentCompleteViewController.h"
-#import "PersonalDataViewController.h"
-#import "RecommendShopViewController.h"
-#import "RewardDetailViewController.h"
-#import "RewardRedemptionViewController.h"
-#import "SelectPaymentMethodViewController.h"
-#import "TosAndPrivacyPolicyViewController.h"
-#import "VoucherCodeListViewController.h"
 #import "CustomTableViewCellReceiptSummary.h"
 #import "CustomTableViewCellOrderSummary.h"
 #import "CustomTableViewCellTotal.h"
@@ -95,31 +77,6 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         NSInteger index = [Receipt getIndex:_receiptList receipt:vc.receipt];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
         [tbvData scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
-    else if([vc isKindOfClass:[CommentViewController class]] ||
-       [vc isKindOfClass:[BasketViewController class]] ||
-       [vc isKindOfClass:[BranchSearchViewController class]] ||
-       [vc isKindOfClass:[CreditCardAndOrderSummaryViewController class]] ||
-       [vc isKindOfClass:[CreditCardViewController class]] ||
-       [vc isKindOfClass:[CustomerTableSearchViewController class]] ||
-       [vc isKindOfClass:[HotDealDetailViewController class]] ||
-       [vc isKindOfClass:[MenuSelectionViewController class]] ||
-       [vc isKindOfClass:[MyRewardViewController class]] ||
-       [vc isKindOfClass:[NoteViewController class]] ||
-       [vc isKindOfClass:[PaymentCompleteViewController class]] ||
-       [vc isKindOfClass:[PersonalDataViewController class]] ||
-       [vc isKindOfClass:[RecommendShopViewController class]] ||
-       [vc isKindOfClass:[RewardDetailViewController class]] ||
-       [vc isKindOfClass:[RewardRedemptionViewController class]] ||
-       [vc isKindOfClass:[SelectPaymentMethodViewController class]] ||
-       [vc isKindOfClass:[TosAndPrivacyPolicyViewController class]] ||
-       [vc isKindOfClass:[VoucherCodeListViewController class]]
-       )
-    {
-//        CustomViewController *vc = segue.sourceViewController;
-        self.showOrderDetail = vc.showOrderDetail;
-        self.selectedReceipt = vc.selectedReceipt;
-//        [self viewDidAppear:NO];
     }
 }
 

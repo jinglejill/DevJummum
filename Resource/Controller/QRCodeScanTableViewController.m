@@ -18,10 +18,10 @@
 
 @interface QRCodeScanTableViewController ()
 {
-    Branch *_selectedBranch;
-    CustomerTable *_selectedCustomerTable;
-    BOOL _fromOrderItAgain;
-    Receipt *_buffetReceipt;
+//    Branch *selectedBranch;
+//    CustomerTable *selectedCustomerTable;
+//    BOOL fromOrderItAgain;
+//    Receipt *buffetReceipt;
 }
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
@@ -40,6 +40,10 @@
 @synthesize btnBranchSearch;
 @synthesize topViewHeight;
 @synthesize alreadySeg;
+@synthesize selectedBranch;
+@synthesize selectedCustomerTable;
+@synthesize fromOrderItAgain;
+@synthesize buffetReceipt;
     
 
 -(IBAction)unwindToQRCodeScanTable:(UIStoryboardSegue *)segue
@@ -48,10 +52,10 @@
     if([segue.sourceViewController isMemberOfClass:[CreditCardAndOrderSummaryViewController class]])
     {
         CreditCardAndOrderSummaryViewController *vc = segue.sourceViewController;
-        _selectedBranch = vc.branch;
-        _selectedCustomerTable = nil;    
-        _fromOrderItAgain = YES;
-        _buffetReceipt = vc.buffetReceipt;
+        selectedBranch = vc.branch;
+        selectedCustomerTable = nil;
+        fromOrderItAgain = YES;
+        buffetReceipt = vc.buffetReceipt;
     }
 }
 
@@ -95,9 +99,9 @@
     [super viewDidAppear:YES];
     
     
-    if(_fromOrderItAgain)
+    if(fromOrderItAgain)
     {
-        _fromOrderItAgain = NO;
+        fromOrderItAgain = NO;
         [self performSegueWithIdentifier:@"segMenuSelection" sender:self];
         return;
     }
@@ -185,14 +189,12 @@
         AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
         if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode])
         {
-            _selectedBranch = nil;
-            _selectedCustomerTable = nil;
+            selectedBranch = nil;
+            selectedCustomerTable = nil;
             NSString *decryptedMessage = [metadataObj stringValue];
 
             
             alreadySeg = YES;
-//            NSLog(@"stop reading");
-//            [self stopReading];
             [self.homeModel downloadItems:dbBranchAndCustomerTableQR withData:decryptedMessage];
         }
     }
@@ -203,9 +205,9 @@
     if([[segue identifier] isEqualToString:@"segMenuSelection"])
     {
         MenuSelectionViewController *vc = segue.destinationViewController;
-        vc.branch = _selectedBranch;
-        vc.customerTable = _selectedCustomerTable;
-        vc.buffetReceipt = _buffetReceipt;
+        vc.branch = selectedBranch;
+        vc.customerTable = selectedCustomerTable;
+        vc.buffetReceipt = buffetReceipt;
     }
 }
 
@@ -224,8 +226,8 @@
         else
         {
             [Utility updateSharedObject:items];
-            _selectedBranch = branchList[0];
-            _selectedCustomerTable = customerTableList[0];
+            selectedBranch = branchList[0];
+            selectedCustomerTable = customerTableList[0];
             if(fromCreditCardAndOrderSummaryMenu)
             {
                 customerTable = customerTableList[0];

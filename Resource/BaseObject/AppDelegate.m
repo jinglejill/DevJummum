@@ -487,7 +487,7 @@ void myExceptionHandler(NSException *exception)
 -(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
 {
     HomeModel *homeModel = (HomeModel *)objHomeModel;
-    if(homeModel.propCurrentDB == dbReceiptDisputeRating || homeModel.propCurrentDB == dbReceiptDisputeRatingAllAfterReceipt)
+    if(homeModel.propCurrentDB == dbReceiptDisputeRating || homeModel.propCurrentDB == dbReceiptDisputeRatingAllAfterReceipt)//tap at noti
     {
         //update
         NSLog(@"before updateSharedObject ");
@@ -539,13 +539,6 @@ void myExceptionHandler(NSException *exception)
             ReceiptSummaryViewController *vc = (ReceiptSummaryViewController *)currentVc;
             [vc segueToOrderDetailAuto:selectedReceipt];
         }
-//        else if([currentVc isKindOfClass:[MeViewController class]])
-//        {
-//            MeViewController *vc = (MeViewController *)currentVc;
-//            vc.selectedReceipt = selectedReceipt;
-//            vc.showOrderDetail = 1;
-//            [vc segueToReceiptSummaryAuto];
-//        }
         else if([currentVc isKindOfClass:[CommentViewController class]] ||
                 [currentVc isKindOfClass:[BasketViewController class]] ||
                 [currentVc isKindOfClass:[BranchSearchViewController class]] ||
@@ -567,20 +560,15 @@ void myExceptionHandler(NSException *exception)
         {
             currentVc.selectedReceipt = selectedReceipt;
             currentVc.showOrderDetail = 1;
-            [currentVc performSegueWithIdentifier:@"segUnwindToReceiptSummary" sender:self];
-//            [currentVc performSegueWithIdentifier:@"segUnwindToMe" sender:self];
+            [currentVc performSegueWithIdentifier:@"segUnwindToMainTabBar" sender:self];
         }
         else if([currentVc isKindOfClass:[HotDealViewController class]] || [currentVc isKindOfClass:[RewardViewController class]] || [currentVc isKindOfClass:[QRCodeScanTableViewController class]] || [currentVc isKindOfClass:[MeViewController class]])
         {
-            currentVc.tabBarController.selectedIndex = 3;//meViewController
+            currentVc.tabBarController.selectedIndex = mainTabHistory;//receiptSummary
             ReceiptSummaryViewController *vc = currentVc.tabBarController.selectedViewController;
             vc.showOrderDetail = 1;
             vc.selectedReceipt = selectedReceipt;
             [vc viewDidAppear:NO];
-//            MeViewController *vc = currentVc.tabBarController.selectedViewController;
-//            vc.selectedReceipt = selectedReceipt;
-//            vc.showOrderDetail = 1;
-//            [vc segueToReceiptSummaryAuto];
         }
     }
     else if(homeModel.propCurrentDB == dbReceiptDisputeRatingUpdateAndReload || homeModel.propCurrentDB == dbReceiptDisputeRatingAllAfterReceiptUpdateAndReload)

@@ -733,6 +733,7 @@
                         <segue destination="uX0-Uh-PuC" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="US8-C5-DSW"/>
                         <segue destination="uX0-Uh-PuC" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="m88-df-z5j"/>
                         <segue destination="uX0-Uh-PuC" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="uSo-jy-rWj"/>
+                        <segue destination="uX0-Uh-PuC" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="nFt-7b-HtZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o17-jl-gGa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -883,6 +884,7 @@
                         <segue destination="Dcg-zW-Rtj" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="g5u-cS-qYM"/>
                         <segue destination="Dcg-zW-Rtj" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="iqE-lQ-Jtj"/>
                         <segue destination="Dcg-zW-Rtj" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="oxJ-Ms-erM"/>
+                        <segue destination="Dcg-zW-Rtj" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="kM9-vO-i4q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="15h-Zo-VrG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1043,6 +1045,7 @@
                         <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToHotDealDetail" unwindAction="unwindToHotDealDetail:" id="WrD-Gg-E4H"/>
                         <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToLuckyDraw" unwindAction="unwindToLuckyDraw:" id="7xD-bH-ZqW"/>
                         <segue destination="xaa-am-G6T" kind="show" identifier="segMessageBoxWithDismiss" id="wOX-9A-Dqb"/>
+                        <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="Mf5-No-tQG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TxL-MH-V7t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1142,7 +1145,7 @@
                         <segue destination="MTK-aL-bNu" kind="unwind" identifier="segUnwindToCreditCardAndOrderSummary" unwindAction="unwindToCreditCardAndOrderSummary:" id="flj-p2-MsD"/>
                         <segue destination="MTK-aL-bNu" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="aGL-2J-5p4"/>
                         <segue destination="MTK-aL-bNu" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="nbn-an-NcP"/>
-                        <segue destination="MTK-aL-bNu" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="gtA-SS-JCz"/>
+                        <segue destination="MTK-aL-bNu" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="gtA-SS-JCz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GrZ-zL-Hxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1242,7 +1245,7 @@
                         <segue destination="SfG-Pb-cig" kind="unwind" identifier="segUnwindToCreditCardAndOrderSummary" unwindAction="unwindToCreditCardAndOrderSummary:" id="52S-yy-XJD"/>
                         <segue destination="SfG-Pb-cig" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="fLM-x8-A4u"/>
                         <segue destination="SfG-Pb-cig" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="5RQ-Kg-rSk"/>
-                        <segue destination="SfG-Pb-cig" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="4Yj-bY-i7C"/>
+                        <segue destination="SfG-Pb-cig" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="4Yj-bY-i7C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hsq-0z-1wX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1329,7 +1332,7 @@
                         <segue destination="J82-vS-oAh" kind="unwind" identifier="segUnwindToBasket" unwindAction="unwindToBasket:" id="Iiu-NG-9Sg"/>
                         <segue destination="J82-vS-oAh" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="Bya-m8-WSE"/>
                         <segue destination="J82-vS-oAh" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="Twc-SC-PPk"/>
-                        <segue destination="J82-vS-oAh" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="PaF-al-nW4"/>
+                        <segue destination="J82-vS-oAh" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="PaF-al-nW4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9GP-SR-hQV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1627,7 +1630,7 @@
                         <segue destination="796-3H-Zaf" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="zRt-aT-i1m"/>
                         <segue destination="796-3H-Zaf" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="CEs-i6-rC5"/>
                         <segue destination="uxx-Px-8LI" kind="show" identifier="segCreditCardAndOrderSummary" id="fi3-c3-4Ra"/>
-                        <segue destination="796-3H-Zaf" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="u9k-Lc-MPa"/>
+                        <segue destination="796-3H-Zaf" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="u9k-Lc-MPa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KZt-h0-xyV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1743,7 +1746,7 @@
                         <segue destination="Shl-g2-XaT" kind="unwind" identifier="segUnwindToReward" unwindAction="unwindToReward:" id="1yU-UX-TTG"/>
                         <segue destination="Shl-g2-XaT" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="IXi-4t-Y2S"/>
                         <segue destination="Shl-g2-XaT" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="ibX-n8-Lcr"/>
-                        <segue destination="Shl-g2-XaT" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="nSW-UY-uDM"/>
+                        <segue destination="Shl-g2-XaT" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="nSW-UY-uDM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QEz-lt-Na0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1945,7 +1948,7 @@
                         <segue destination="eBM-4Z-jyX" kind="show" identifier="segRewardRedemption" id="iUw-Wp-Uz3"/>
                         <segue destination="kcM-PX-wCg" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="gqO-JQ-RAU"/>
                         <segue destination="kcM-PX-wCg" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="B8H-tZ-TKb"/>
-                        <segue destination="kcM-PX-wCg" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="lXZ-M6-jmj"/>
+                        <segue destination="kcM-PX-wCg" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="lXZ-M6-jmj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3dd-4S-75z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2074,7 +2077,7 @@
                         <segue destination="WJP-AU-SZs" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="olt-7H-6t2"/>
                         <segue destination="WJP-AU-SZs" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="cPa-dq-mjb"/>
                         <segue destination="uxx-Px-8LI" kind="show" identifier="segCreditCardAndOrderSummary" id="M6r-Rs-t8m"/>
-                        <segue destination="WJP-AU-SZs" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="jYM-pL-41n"/>
+                        <segue destination="WJP-AU-SZs" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="jYM-pL-41n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pRw-SW-d2P" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2473,7 +2476,7 @@
                         <outlet property="topViewHeight" destination="SfK-GC-9sU" id="O7u-ev-tjZ"/>
                         <segue destination="ArK-WT-M6V" kind="unwind" identifier="segUnwindToMe" unwindAction="unwindToMe:" id="Oua-gb-sMj"/>
                         <segue destination="ArK-WT-M6V" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="QvD-B8-1YY"/>
-                        <segue destination="ArK-WT-M6V" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="kou-Mr-iDz"/>
+                        <segue destination="ArK-WT-M6V" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="kou-Mr-iDz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aR6-Y8-aoo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2573,7 +2576,7 @@
                         <segue destination="OXe-is-SUn" kind="unwind" identifier="segUnwindToLogIn" unwindAction="unwindToLogIn:" id="j1l-gQ-gvV"/>
                         <segue destination="OXe-is-SUn" kind="unwind" identifier="segUnwindToMe" unwindAction="unwindToMe:" id="zDt-hu-QEL"/>
                         <segue destination="OXe-is-SUn" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="kVy-9d-MOg"/>
-                        <segue destination="OXe-is-SUn" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="hRY-Sq-jJd"/>
+                        <segue destination="OXe-is-SUn" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="hRY-Sq-jJd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="amo-bW-tNy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2871,7 +2874,7 @@
                         <outlet property="topViewHeight" destination="ygm-Ed-1EC" id="bzF-AE-xJn"/>
                         <segue destination="vmU-p8-Lii" kind="unwind" identifier="segUnwindToMe" unwindAction="unwindToMe:" id="9Li-BT-3Dy"/>
                         <segue destination="vmU-p8-Lii" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="Ox3-9N-MAX"/>
-                        <segue destination="vmU-p8-Lii" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="ZJc-Fp-8Hq"/>
+                        <segue destination="vmU-p8-Lii" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="ZJc-Fp-8Hq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UdO-ZA-1Cp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3596,6 +3599,7 @@
                         <segue destination="fjC-rB-klD" kind="unwind" identifier="segUnwindToReceiptSummary" animates="NO" unwindAction="unwindToReceiptSummary:" id="Yf6-aK-9gw"/>
                         <segue destination="fjC-rB-klD" kind="unwind" identifier="segUnwindToMe" unwindAction="unwindToMe:" id="qQS-3c-u2g"/>
                         <segue destination="fjC-rB-klD" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="XdP-zH-4rd"/>
+                        <segue destination="fjC-rB-klD" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="5fB-mF-LhT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mub-XW-JHM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3733,7 +3737,7 @@
                         <segue destination="0XE-bc-6gB" kind="unwind" identifier="segUnwindToMe" unwindAction="unwindToMe:" id="T7P-w4-30B"/>
                         <segue destination="0XE-bc-6gB" kind="unwind" identifier="segUnwindToOrderDetail" unwindAction="unwindToOrderDetail:" id="lQp-cs-4g3"/>
                         <segue destination="0XE-bc-6gB" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="PkU-Fa-VRI"/>
-                        <segue destination="0XE-bc-6gB" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="0uy-5I-6fK"/>
+                        <segue destination="0XE-bc-6gB" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="0uy-5I-6fK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsp-b8-PQh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4003,7 +4007,7 @@
                         <segue destination="R9C-9E-FAD" kind="unwind" identifier="segUnwindToCreditCardAndOrderSummary" unwindAction="unwindToCreditCardAndOrderSummary:" id="NAh-Kv-JFF"/>
                         <segue destination="R9C-9E-FAD" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="ZHX-0V-B8L"/>
                         <segue destination="R9C-9E-FAD" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="vZV-CT-wlF"/>
-                        <segue destination="R9C-9E-FAD" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="ABM-1V-qFX"/>
+                        <segue destination="R9C-9E-FAD" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="ABM-1V-qFX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R2I-bE-ase" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4145,7 +4149,7 @@
                         <segue destination="6xM-VG-NIx" kind="unwind" identifier="segUnwindToMe" animates="NO" unwindAction="unwindToMe:" id="mak-e9-Kp4"/>
                         <segue destination="6xM-VG-NIx" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="nxL-v0-oRd"/>
                         <segue destination="MOe-p2-Chk" kind="show" identifier="segLuckyDraw" id="xLp-2h-vDb"/>
-                        <segue destination="6xM-VG-NIx" kind="unwind" identifier="segUnwindToReceiptSummary" unwindAction="unwindToReceiptSummary:" id="rMv-H7-d6c"/>
+                        <segue destination="6xM-VG-NIx" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="rMv-H7-d6c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nH7-CS-u0j" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4292,7 +4296,7 @@
         <segue reference="C1B-oJ-Xmi"/>
         <segue reference="iUw-Wp-Uz3"/>
         <segue reference="hjD-fg-as6"/>
-        <segue reference="M6r-Rs-t8m"/>
+        <segue reference="fi3-c3-4Ra"/>
         <segue reference="odZ-6m-Wsi"/>
         <segue reference="aNU-Zf-Wbq"/>
     </inferredMetricsTieBreakers>

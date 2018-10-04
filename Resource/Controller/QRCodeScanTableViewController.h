@@ -8,6 +8,7 @@
 
 #import "CustomViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "Branch.h"
 #import "CustomerTable.h"
 
 
@@ -20,6 +21,10 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
 @property (strong, nonatomic) IBOutlet UIButton *btnBranchSearch;
 @property (nonatomic) BOOL alreadySeg;
+@property (strong, nonatomic) Branch *selectedBranch;
+@property (strong, nonatomic) CustomerTable *selectedCustomerTable;
+@property (nonatomic) BOOL fromOrderItAgain;
+@property (strong, nonatomic) Receipt *buffetReceipt;
 
 
 
