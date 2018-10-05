@@ -44,6 +44,8 @@
     Receipt *_buffetReceipt;
     Receipt *_selectedReceipt;
     BOOL _showOrderDetail;
+    BOOL _orderBuffet;
+    BOOL _orderBuffetAfterOrderBuffet;
 }
 @end
 
@@ -62,6 +64,27 @@
         _buffetReceipt = vc.buffetReceipt;
         
         _switchToQRTab = 1;
+    }
+    else if(
+            [vc isKindOfClass:[PaymentCompleteViewController class]] && ((PaymentCompleteViewController *)vc).orderBuffet
+            )
+    {
+        PaymentCompleteViewController *vcPaymentComplete = (PaymentCompleteViewController *)vc;
+        _orderBuffet = vcPaymentComplete.orderBuffet;
+        _showOrderDetail = 0;
+        if(vcPaymentComplete.receipt.buffetReceiptID)
+        {
+            Receipt *buffetReceipt = [Receipt getReceipt:vcPaymentComplete.receipt.buffetReceiptID];
+            _selectedReceipt = buffetReceipt;
+            _orderBuffetAfterOrderBuffet = 1;
+        }
+        else
+        {
+            _selectedReceipt = vcPaymentComplete.receipt;
+        }
+        
+        
+        _switchToReceiptSummaryTab = 1;
     }
     else if([vc isKindOfClass:[CommentViewController class]] ||
                  [vc isKindOfClass:[BasketViewController class]] ||
@@ -99,6 +122,7 @@
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"Prompt-Regular" size:11.0f]} forState:UIControlStateNormal];
     
     self.selectedIndex = mainTabQrScan;
+    [self.selectedViewController viewDidAppear:NO];
 }
  
 -(void)viewDidAppear:(BOOL)animated
@@ -107,21 +131,29 @@
     {
         _switchToQRTab = 0;
         self.selectedIndex = mainTabQrScan;
-        
         QRCodeScanTableViewController *vc = (QRCodeScanTableViewController *)self.selectedViewController;
         vc.selectedBranch = _selectedBranch;
         vc.selectedCustomerTable = _selectedCustomerTable;
         vc.fromOrderItAgain = _fromOrderItAgain;
         vc.buffetReceipt = _buffetReceipt;
+        
     }
     else if(_switchToReceiptSummaryTab)
     {
         _switchToReceiptSummaryTab = 0;
         self.selectedIndex = mainTabHistory;
         
+        
         ReceiptSummaryViewController *vc = (ReceiptSummaryViewController *)self.selectedViewController;
+        vc.goToBuffetOrder = _orderBuffet;
         vc.selectedReceipt = _selectedReceipt;
         vc.showOrderDetail = _showOrderDetail;
+        
+        if(_orderBuffetAfterOrderBuffet)
+        {
+            _orderBuffetAfterOrderBuffet = 0;
+            [vc viewDidAppear:NO];
+        }
     }
 }
 

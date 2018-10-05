@@ -95,6 +95,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     [super viewDidAppear:animated];
     
     
+    [self reloadTableView];
     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
     NSDate *maxReceiptModifiedDate = [Receipt getMaxModifiedDateWithMemberID:userAccount.userAccountID];
     [self.homeModel downloadItems:dbReceiptMaxModifiedDate withData:@[userAccount, maxReceiptModifiedDate]];
@@ -623,7 +624,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         
         
         //remarkHeight
-        CustomTableViewCellReceiptSummary *receiptSummaryCell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierReceiptSummary];
+//        CustomTableViewCellReceiptSummary *receiptSummaryCell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierReceiptSummary];
         CustomTableViewCellLabelRemark *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
         if([Utility isStringEmpty:receipt.remark])
         {

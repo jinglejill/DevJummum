@@ -2897,20 +2897,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBd-8X-PPB">
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vQ-fe-np1">
-                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="Lo0-ft-Cyn"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
-                                        <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="goBack:" destination="KW5-aB-qha" eventType="touchUpInside" id="wVu-Li-6LF"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ประวัติการสั่งอาหาร" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgo-cP-uPj">
                                         <rect key="frame" x="16" y="12" width="343" height="21"/>
                                         <constraints>
@@ -2938,30 +2924,15 @@
                                     <constraint firstItem="vgo-cP-uPj" firstAttribute="leading" secondItem="pBd-8X-PPB" secondAttribute="leading" constant="16" id="GTY-Pn-V7f"/>
                                     <constraint firstAttribute="height" constant="44" id="HxA-0u-cuw"/>
                                     <constraint firstItem="MqV-1t-5Ll" firstAttribute="top" secondItem="pBd-8X-PPB" secondAttribute="top" constant="8" id="O14-ut-ziD"/>
-                                    <constraint firstItem="vgo-cP-uPj" firstAttribute="centerY" secondItem="8vQ-fe-np1" secondAttribute="centerY" id="ORs-S4-FhE"/>
-                                    <constraint firstItem="8vQ-fe-np1" firstAttribute="leading" secondItem="pBd-8X-PPB" secondAttribute="leading" id="Zio-s8-juQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="8vQ-fe-np1" secondAttribute="bottom" id="eVS-tY-jrd"/>
+                                    <constraint firstItem="vgo-cP-uPj" firstAttribute="centerY" secondItem="pBd-8X-PPB" secondAttribute="centerY" id="iMD-vS-vTN"/>
                                     <constraint firstAttribute="trailing" secondItem="vgo-cP-uPj" secondAttribute="trailing" constant="16" id="rMi-oz-Qxs"/>
-                                    <constraint firstItem="8vQ-fe-np1" firstAttribute="top" secondItem="pBd-8X-PPB" secondAttribute="top" id="xmn-kt-mtI"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eVs-He-MUX">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iho-ZB-rpI">
-                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="DQs-Cu-14Q"/>
-                                        </constraints>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="6oi-bY-ILe"/>
-                                    <constraint firstItem="Iho-ZB-rpI" firstAttribute="leading" secondItem="eVs-He-MUX" secondAttribute="leading" id="9yJ-XV-9Kt"/>
-                                    <constraint firstItem="Iho-ZB-rpI" firstAttribute="top" secondItem="eVs-He-MUX" secondAttribute="top" id="Rt5-hi-peZ"/>
-                                    <constraint firstAttribute="bottom" secondItem="Iho-ZB-rpI" secondAttribute="bottom" id="g1o-vZ-x76"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -4296,8 +4267,8 @@
         <segue reference="C1B-oJ-Xmi"/>
         <segue reference="iUw-Wp-Uz3"/>
         <segue reference="hjD-fg-as6"/>
-        <segue reference="fi3-c3-4Ra"/>
-        <segue reference="odZ-6m-Wsi"/>
+        <segue reference="jVQ-j3-veY"/>
+        <segue reference="BEB-iv-AGa"/>
         <segue reference="aNU-Zf-Wbq"/>
     </inferredMetricsTieBreakers>
 </document>

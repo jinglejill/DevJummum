@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.8744431"
+            timestampString = "560419751.521422"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "641"
-            endingLineNumber = "641"
+            startingLineNumber = "642"
+            endingLineNumber = "642"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.874716"
+            timestampString = "560419751.521737"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "474"
-            endingLineNumber = "474"
+            startingLineNumber = "475"
+            endingLineNumber = "475"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.874837"
+            timestampString = "560419751.52186"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1602"
-            endingLineNumber = "1602"
+            startingLineNumber = "1603"
+            endingLineNumber = "1603"
             landmarkName = "-pay:"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.874935"
+            timestampString = "560419751.52196"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "485"
-            endingLineNumber = "485"
+            startingLineNumber = "486"
+            endingLineNumber = "486"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.875036"
+            timestampString = "560419751.522058"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
+            startingLineNumber = "491"
+            endingLineNumber = "491"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,13 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.875138"
+            timestampString = "560419751.5221601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1006"
-            endingLineNumber = "1006"
-            landmarkName = "-populateLabelwithTime:receipt:"
-            landmarkType = "7">
+            startingLineNumber = "1001"
+            endingLineNumber = "1001">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -282,13 +280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.875249"
+            timestampString = "560419751.522252"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1009"
-            endingLineNumber = "1009"
-            landmarkName = "-populateLabelwithTime:receipt:"
-            landmarkType = "7">
+            startingLineNumber = "1001"
+            endingLineNumber = "1001">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -298,13 +294,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.87537"
+            timestampString = "560419751.522343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1016"
-            endingLineNumber = "1016"
-            landmarkName = "-populateLabelwithTime:receipt:"
-            landmarkType = "7">
+            startingLineNumber = "1001"
+            endingLineNumber = "1001">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -314,13 +308,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.875473"
+            timestampString = "560419751.522436"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1015"
-            endingLineNumber = "1015"
-            landmarkName = "-populateLabelwithTime:receipt:"
-            landmarkType = "7">
+            startingLineNumber = "1001"
+            endingLineNumber = "1001">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -473,11 +465,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.8756731"
+            timestampString = "560419751.522759"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1924"
-            endingLineNumber = "1924"
+            startingLineNumber = "1925"
+            endingLineNumber = "1925"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "7">
          </BreakpointContent>
@@ -489,7 +481,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/BaseObject/AppDelegate.m"
-            timestampString = "560350960.875778"
+            timestampString = "560415189.862131"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "158"
@@ -505,7 +497,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/BaseObject/AppDelegate.m"
-            timestampString = "560350960.875861"
+            timestampString = "560415189.862201"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "568"
@@ -521,7 +513,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/BaseObject/AppDelegate.m"
-            timestampString = "560350960.875936"
+            timestampString = "560415189.862254"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "270"
@@ -537,7 +529,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/BaseObject/AppDelegate.m"
-            timestampString = "560350960.876021"
+            timestampString = "560415189.862301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "594"
@@ -553,7 +545,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/BaseObject/AppDelegate.m"
-            timestampString = "560350960.876101"
+            timestampString = "560415189.862347"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "451"
@@ -569,7 +561,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/BaseObject/AppDelegate.m"
-            timestampString = "560350960.87617"
+            timestampString = "560415189.8623919"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "291"
@@ -777,7 +769,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/BaseObject/AppDelegate.m"
-            timestampString = "560350960.876443"
+            timestampString = "560415189.8625799"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "104"
@@ -857,11 +849,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/PaymentCompleteViewController.m"
-            timestampString = "560319346.787042"
+            timestampString = "560419751.523379"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "-viewDidLayoutSubviews"
             landmarkType = "7">
          </BreakpointContent>
@@ -873,11 +865,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.876657"
+            timestampString = "560419751.523464"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "593"
-            endingLineNumber = "593"
+            startingLineNumber = "594"
+            endingLineNumber = "594"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -889,11 +881,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.876721"
+            timestampString = "560419751.5235879"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "515"
-            endingLineNumber = "515"
+            startingLineNumber = "516"
+            endingLineNumber = "516"
             landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -905,7 +897,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/MeViewController.m"
-            timestampString = "560319346.787189"
+            timestampString = "560412268.519961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "126"
@@ -921,11 +913,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/PaymentCompleteViewController.m"
-            timestampString = "560319346.7872339"
+            timestampString = "560419751.523888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "-orderBuffet:"
             landmarkType = "7">
          </BreakpointContent>
@@ -969,11 +961,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/PaymentCompleteViewController.m"
-            timestampString = "560319346.78736"
+            timestampString = "560419751.524002"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "-button1Clicked:"
             landmarkType = "7">
          </BreakpointContent>
@@ -985,11 +977,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.8768671"
+            timestampString = "560419751.5240819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "615"
-            endingLineNumber = "615"
+            startingLineNumber = "616"
+            endingLineNumber = "616"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1001,11 +993,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.876941"
+            timestampString = "560419751.5242079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "609"
-            endingLineNumber = "609"
+            startingLineNumber = "610"
+            endingLineNumber = "610"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1017,11 +1009,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.8770159"
+            timestampString = "560419751.5242701"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "558"
-            endingLineNumber = "558"
+            startingLineNumber = "559"
+            endingLineNumber = "559"
             landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1033,11 +1025,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.877079"
+            timestampString = "560419751.524326"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1029"
-            endingLineNumber = "1029"
+            startingLineNumber = "1030"
+            endingLineNumber = "1030"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1049,11 +1041,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.877138"
+            timestampString = "560419751.52438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "465"
-            endingLineNumber = "465"
+            startingLineNumber = "466"
+            endingLineNumber = "466"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -1097,11 +1089,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.877274"
+            timestampString = "560419751.52449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1957"
-            endingLineNumber = "1957"
+            startingLineNumber = "1958"
+            endingLineNumber = "1958"
             landmarkName = "-confirmVoucherCode"
             landmarkType = "7">
          </BreakpointContent>
@@ -1209,11 +1201,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.877444"
+            timestampString = "560419751.524708"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1936"
-            endingLineNumber = "1936"
+            startingLineNumber = "1937"
+            endingLineNumber = "1937"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1225,11 +1217,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.877521"
+            timestampString = "560419751.524768"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1960"
-            endingLineNumber = "1960"
+            startingLineNumber = "1961"
+            endingLineNumber = "1961"
             landmarkName = "CreditCardAndOrderSummaryViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1241,11 +1233,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.877594"
+            timestampString = "560419751.524823"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1985"
-            endingLineNumber = "1985"
+            startingLineNumber = "1986"
+            endingLineNumber = "1986"
             landmarkName = "-itemsDownloaded:manager:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1257,11 +1249,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.87766"
+            timestampString = "560419751.524889"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "368"
-            endingLineNumber = "368"
+            startingLineNumber = "369"
+            endingLineNumber = "369"
             landmarkName = "-loadView"
             landmarkType = "7">
          </BreakpointContent>
@@ -1289,11 +1281,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.877741"
+            timestampString = "560419751.525027"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "571"
-            endingLineNumber = "571"
+            startingLineNumber = "572"
+            endingLineNumber = "572"
             landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1305,11 +1297,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.877817"
+            timestampString = "560419751.525086"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "477"
-            endingLineNumber = "477"
+            startingLineNumber = "478"
+            endingLineNumber = "478"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -1321,11 +1313,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.877876"
+            timestampString = "560419751.525138"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1941"
-            endingLineNumber = "1941"
+            startingLineNumber = "1942"
+            endingLineNumber = "1942"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1337,11 +1329,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.877941"
+            timestampString = "560419751.525188"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2128"
-            endingLineNumber = "2128"
+            startingLineNumber = "2129"
+            endingLineNumber = "2129"
             landmarkName = "-itemsDownloaded:manager:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1513,11 +1505,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.878131"
+            timestampString = "560419751.525388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1340"
-            endingLineNumber = "1340"
+            startingLineNumber = "1341"
+            endingLineNumber = "1341"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1529,11 +1521,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.878193"
+            timestampString = "560419751.525439"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1354"
-            endingLineNumber = "1354"
+            startingLineNumber = "1355"
+            endingLineNumber = "1355"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1545,11 +1537,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.878258"
+            timestampString = "560419751.525488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "639"
-            endingLineNumber = "639"
+            startingLineNumber = "640"
+            endingLineNumber = "640"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1561,11 +1553,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.878395"
+            timestampString = "560419751.525556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "644"
-            endingLineNumber = "644"
+            startingLineNumber = "645"
+            endingLineNumber = "645"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1577,11 +1569,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.8784781"
+            timestampString = "560419751.525612"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "674"
-            endingLineNumber = "674"
+            startingLineNumber = "675"
+            endingLineNumber = "675"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1641,11 +1633,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/PaymentCompleteViewController.m"
-            timestampString = "560319346.789621"
+            timestampString = "560419751.5257289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "-viewDidLayoutSubviews"
             landmarkType = "7">
          </BreakpointContent>
@@ -1657,11 +1649,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.878652"
+            timestampString = "560419751.525776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1884"
-            endingLineNumber = "1884"
+            startingLineNumber = "1885"
+            endingLineNumber = "1885"
             landmarkName = "-itemsInsertedWithReturnData:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1769,11 +1761,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.8788379"
+            timestampString = "560419751.525925"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1977"
-            endingLineNumber = "1977"
+            startingLineNumber = "1978"
+            endingLineNumber = "1978"
             landmarkName = "-confirmVoucherCode:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1785,11 +1777,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.8789001"
+            timestampString = "560419751.5259759"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2129"
-            endingLineNumber = "2129"
+            startingLineNumber = "2130"
+            endingLineNumber = "2130"
             landmarkName = "-itemsDownloaded:manager:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1801,11 +1793,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.8789589"
+            timestampString = "560419751.526023"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -1833,11 +1825,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.879039"
+            timestampString = "560419751.526093"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
+            startingLineNumber = "374"
+            endingLineNumber = "374"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -1849,11 +1841,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.8790981"
+            timestampString = "560419751.526142"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "474"
-            endingLineNumber = "474"
+            startingLineNumber = "475"
+            endingLineNumber = "475"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -1865,11 +1857,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.8791569"
+            timestampString = "560419751.526189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "482"
-            endingLineNumber = "482"
+            startingLineNumber = "483"
+            endingLineNumber = "483"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -1881,11 +1873,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.879231"
+            timestampString = "560419751.526235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1184"
-            endingLineNumber = "1184"
+            startingLineNumber = "1185"
+            endingLineNumber = "1185"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1897,11 +1889,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.879289"
+            timestampString = "560419751.526281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1170"
-            endingLineNumber = "1170"
+            startingLineNumber = "1171"
+            endingLineNumber = "1171"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2073,11 +2065,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.879529"
+            timestampString = "560419751.526693"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "560"
-            endingLineNumber = "560"
+            startingLineNumber = "561"
+            endingLineNumber = "561"
             landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2089,11 +2081,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.879627"
+            timestampString = "560419751.52676"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2047"
-            endingLineNumber = "2047"
+            startingLineNumber = "2048"
+            endingLineNumber = "2048"
             landmarkName = "-itemsDownloaded:manager:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2153,11 +2145,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.8797621"
+            timestampString = "560419751.526878"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2169,28 +2161,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.879878"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "-tableView:numberOfRowsInSection:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.879984"
+            timestampString = "560419751.526947"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "209"
             endingLineNumber = "209"
-            landmarkName = "-tableView:numberOfRowsInSection:"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2201,12 +2177,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.880106"
+            timestampString = "560419751.527011"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "900"
-            endingLineNumber = "900"
-            landmarkName = "-itemsDownloaded:manager:"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/ReceiptSummaryViewController.m"
+            timestampString = "560419751.527074"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "901"
+            endingLineNumber = "901"
+            landmarkName = "-reloadTableView"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2249,11 +2241,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/PaymentCompleteViewController.m"
-            timestampString = "560319346.794318"
+            timestampString = "560419751.527187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "408"
-            endingLineNumber = "408"
+            startingLineNumber = "413"
+            endingLineNumber = "413"
             landmarkName = "-screenCaptureBill:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2329,11 +2321,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.880352"
+            timestampString = "560419751.527319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1992"
-            endingLineNumber = "1992"
+            startingLineNumber = "1993"
+            endingLineNumber = "1993"
             landmarkName = "-itemsDownloaded:manager:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2601,11 +2593,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.880708"
+            timestampString = "560419751.52765"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1149"
-            endingLineNumber = "1149"
+            startingLineNumber = "1150"
+            endingLineNumber = "1150"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2617,11 +2609,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.8807859"
+            timestampString = "560419751.527701"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1743"
-            endingLineNumber = "1743"
+            startingLineNumber = "1744"
+            endingLineNumber = "1744"
             landmarkName = "-pay:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2633,12 +2625,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.880846"
+            timestampString = "560419751.5277489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "822"
-            endingLineNumber = "822"
-            landmarkName = "-tableView:heightForRowAtIndexPath:"
+            startingLineNumber = "823"
+            endingLineNumber = "823"
+            landmarkName = "-tableView:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2713,11 +2705,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.8810689"
+            timestampString = "560419751.527882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1631"
-            endingLineNumber = "1631"
+            startingLineNumber = "1632"
+            endingLineNumber = "1632"
             landmarkName = "-pay:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2729,11 +2721,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.88115"
+            timestampString = "560419751.527933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "638"
-            endingLineNumber = "638"
+            startingLineNumber = "639"
+            endingLineNumber = "639"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2745,7 +2737,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/BaseObject/AppDelegate.m"
-            timestampString = "560350960.881271"
+            timestampString = "560415189.8640389"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "569"
@@ -2761,12 +2753,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.881338"
+            timestampString = "560419751.528017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "954"
-            endingLineNumber = "954"
-            landmarkName = "-prepareForSegue:sender:"
+            startingLineNumber = "955"
+            endingLineNumber = "955"
+            landmarkName = "-orderBuffet:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2777,12 +2769,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.88146"
+            timestampString = "560419751.528079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "-viewDidAppear:"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "-setReceiptList"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2793,12 +2785,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.881567"
+            timestampString = "560419751.528137"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "968"
-            endingLineNumber = "968"
-            landmarkName = "-segueToOrderDetailAuto:"
+            startingLineNumber = "969"
+            endingLineNumber = "969"
+            landmarkName = "-updateTimer:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2825,12 +2817,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.881705"
+            timestampString = "560419751.528216"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "-viewDidAppear:"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "-setReceiptList"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2841,7 +2833,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/QRCodeScanTableViewController.m"
-            timestampString = "560350960.8818229"
+            timestampString = "560408367.722478"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "104"
@@ -2873,7 +2865,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/QRCodeScanTableViewController.m"
-            timestampString = "560350960.881947"
+            timestampString = "560408367.722944"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
@@ -2889,7 +2881,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/QRCodeScanTableViewController.m"
-            timestampString = "560350960.882022"
+            timestampString = "560408367.723236"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
@@ -2905,11 +2897,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.882118"
+            timestampString = "560419751.5283459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "617"
-            endingLineNumber = "617"
+            startingLineNumber = "618"
+            endingLineNumber = "618"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2921,11 +2913,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
-            timestampString = "560350960.882183"
+            timestampString = "560419751.528396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "595"
-            endingLineNumber = "595"
+            startingLineNumber = "596"
+            endingLineNumber = "596"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2937,12 +2929,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.882261"
+            timestampString = "560419751.5284441"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "949"
-            endingLineNumber = "949"
-            landmarkName = "-prepareForSegue:sender:"
+            startingLineNumber = "950"
+            endingLineNumber = "950"
+            landmarkName = "-segueToOrderDetailAuto:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2985,12 +2977,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.882368"
+            timestampString = "560419751.528543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "906"
-            endingLineNumber = "906"
-            landmarkName = "-itemsDownloaded:manager:"
+            startingLineNumber = "907"
+            endingLineNumber = "907"
+            landmarkName = "-refresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3001,11 +2993,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/ReceiptSummaryViewController.m"
-            timestampString = "560350960.882442"
+            timestampString = "560419751.528603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "890"
-            endingLineNumber = "890"
+            startingLineNumber = "891"
+            endingLineNumber = "891"
             landmarkName = "-itemsDownloaded:manager:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3016,24 +3008,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Resource/Controller/MainTabBarController.m"
-            timestampString = "560350960.88255"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "MainTabBarController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Resource/Controller/QRCodeScanTableViewController.m"
-            timestampString = "560350960.882689"
+            timestampString = "560408367.723686"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "83"
@@ -3049,11 +3025,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/Controller/MainTabBarController.m"
-            timestampString = "560350960.882755"
+            timestampString = "560419751.528687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "-unwindToMainTabBar:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3064,24 +3040,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Resource/Controller/MainTabBarController.m"
-            timestampString = "560350960.882822"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "-viewDidAppear:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Resource/BaseObject/AppDelegate.m"
-            timestampString = "560357394.982597"
+            timestampString = "560415189.864592"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "574"
@@ -3097,12 +3057,252 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Resource/BaseObject/AppDelegate.m"
-            timestampString = "560357467.25194"
+            timestampString = "560415189.864642"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "490"
             endingLineNumber = "490"
             landmarkName = "-itemsDownloaded:manager:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/MainTabBarController.m"
+            timestampString = "560419751.529144"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/QRCodeScanTableViewController.m"
+            timestampString = "560408367.724161"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
+            landmarkName = "-captureOutput:didOutputMetadataObjects:fromConnection:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/QRCodeScanTableViewController.m"
+            timestampString = "560408386.020623"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "-viewDidAppear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/MainTabBarController.m"
+            timestampString = "560419751.529477"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "-unwindToMainTabBar:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/MainTabBarController.m"
+            timestampString = "560419751.529732"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "-viewDidAppear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/ReceiptSummaryViewController.m"
+            timestampString = "560419751.5299751"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "-viewDidAppear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/ReceiptSummaryViewController.m"
+            timestampString = "560419751.530039"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "-viewDidAppear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
+            timestampString = "560419751.530099"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1883"
+            endingLineNumber = "1883"
+            landmarkName = "-itemsInsertedWithReturnData:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/ReceiptSummaryViewController.m"
+            timestampString = "560419751.530151"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/ReceiptSummaryViewController.m"
+            timestampString = "560419751.5302089"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "-viewDidAppear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/ReceiptSummaryViewController.m"
+            timestampString = "560419751.530265"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "873"
+            endingLineNumber = "873"
+            landmarkName = "-itemsDownloaded:manager:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/ReceiptSummaryViewController.m"
+            timestampString = "560419751.530328"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "-setReceiptList"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/ReceiptSummaryViewController.m"
+            timestampString = "560419751.530383"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "-viewDidAppear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/ReceiptSummaryViewController.m"
+            timestampString = "560419751.5304379"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/Controller/ReceiptSummaryViewController.m"
+            timestampString = "560419751.53049"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

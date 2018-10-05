@@ -217,6 +217,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     }
     else if(fromLuckyDraw)
     {
+        [OrderTaking removeCurrentOrderTakingList];
         [self performSegueWithIdentifier:@"segUnwindToLuckyDraw" sender:self];
     }
     else

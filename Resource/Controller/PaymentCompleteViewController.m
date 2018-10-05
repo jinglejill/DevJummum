@@ -54,7 +54,8 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 @synthesize numberOfGift;
 @synthesize imgVwCheck;
 @synthesize btnBackToHome;
-
+@synthesize orderBuffet;
+    
 
 -(void)viewDidLayoutSubviews
 {
@@ -233,7 +234,9 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
     if([Receipt hasBuffetMenu:receipt.receiptID] || receipt.buffetReceiptID)
     {
 //        [self performSegueWithIdentifier:@"segUnwindToMe" sender:self];
-        [self performSegueWithIdentifier:@"segUnwindToReceiptSummary" sender:self];
+//        [self performSegueWithIdentifier:@"segUnwindToReceiptSummary" sender:self];
+        orderBuffet = 1;
+        [self performSegueWithIdentifier:@"segUnwindToMainTabBar" sender:self];
     }
     else
     {
@@ -249,7 +252,9 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 - (IBAction)orderBuffet:(id)sender
 {
 //    [self performSegueWithIdentifier:@"segUnwindToMe" sender:self];
-    [self performSegueWithIdentifier:@"segUnwindToReceiptSummary" sender:self];
+//    [self performSegueWithIdentifier:@"segUnwindToReceiptSummary" sender:self];
+    orderBuffet = 1;
+    [self performSegueWithIdentifier:@"segUnwindToMainTabBar" sender:self];
 }
 
 -(void)screenCaptureBill:(Receipt *)receipt
