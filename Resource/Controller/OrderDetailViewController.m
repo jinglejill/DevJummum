@@ -151,17 +151,14 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
     }
     
     
-    [self.homeModel downloadItems:dbReceiptDisputeRating withData:receipt];
+    [self.homeModel downloadItems:dbReceiptDisputeRating withData:@(receipt.receiptID)];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    
-    UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-    NSDate *maxReceiptModifiedDate = [Receipt getMaxModifiedDateWithMemberID:userAccount.userAccountID];
-    [self.homeModel downloadItems:dbReceiptMaxModifiedDate withData:@[userAccount, maxReceiptModifiedDate]];
+    [self.homeModel downloadItems:dbReceiptDisputeRating withData:@(receipt.receiptID)];
 }
 
 ///tableview section
@@ -2027,15 +2024,6 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
         {
             _fromType = 1;
             [self performSegueWithIdentifier:@"segConfirmDispute" sender:self];
-        }
-    }
-    else if(homeModel.propCurrentDB == dbReceiptMaxModifiedDate)
-    {
-        NSMutableArray *receiptList = items[0];
-        if([receiptList count]>0)
-        {
-            [Utility updateSharedObject:items];
-            [self reloadTableView];
         }
     }
 }

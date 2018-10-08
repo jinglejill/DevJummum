@@ -149,8 +149,7 @@ enum enumDB
     dbReceiptOrderTakingOrderNote,
     dbOmiseCheckOut,
     dbCustomerTable,
-    dbReceiptSummary,
-    dbReceiptMaxModifiedDate,
+    dbReceiptSummaryPage,
     dbReceipt,
     dbPromotion,
     dbRewardPoint,
@@ -190,9 +189,7 @@ enum enumDB
     dbRating,
     dbRatingList,
     dbReceiptDisputeRating,
-    dbReceiptDisputeRatingAllAfterReceipt,    
     dbReceiptDisputeRatingUpdateAndReload,
-    dbReceiptDisputeRatingAllAfterReceiptUpdateAndReload,
     dbMenuNote,
     dbMenuNoteList,    
     dbMenuBelongToBuffet,
@@ -341,7 +338,6 @@ enum enumUrl
     urlRatingUpdateList,
     urlRatingDeleteList,
     urlReceiptDisputeRatingGet,
-    urlReceiptDisputeRatingAllAfterReceiptGet,
     urlMenuNoteInsert,
     urlMenuNoteUpdate,
     urlMenuNoteDelete,
@@ -368,7 +364,8 @@ enum enumUrl
     urlBuffetMenuMapDelete,
     urlBuffetMenuMapInsertList,
     urlBuffetMenuMapUpdateList,
-    urlBuffetMenuMapDeleteList
+    urlBuffetMenuMapDeleteList,
+    urlReceiptSummaryPageGetList
     
 
     

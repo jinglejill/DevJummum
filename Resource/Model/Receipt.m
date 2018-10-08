@@ -52,16 +52,20 @@
             [Utility dateToString:[self valueForKey:@"sendToKitchenDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"sendToKitchenDate",
             [Utility dateToString:[self valueForKey:@"deliveredDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"deliveredDate",
             [self valueForKey:@"mergeReceiptID"]?[self valueForKey:@"mergeReceiptID"]:[NSNull null],@"mergeReceiptID",
+            [self valueForKey:@"hasBuffetMenu"]?[self valueForKey:@"hasBuffetMenu"]:[NSNull null],@"hasBuffetMenu",
+            [self valueForKey:@"timeToOrder"]?[self valueForKey:@"timeToOrder"]:[NSNull null],@"timeToOrder",
             [self valueForKey:@"buffetReceiptID"]?[self valueForKey:@"buffetReceiptID"]:[NSNull null],@"buffetReceiptID",
             [self valueForKey:@"voucherCode"]?[self valueForKey:@"voucherCode"]:[NSNull null],@"voucherCode",
             [self valueForKey:@"shopDiscount"]?[self valueForKey:@"shopDiscount"]:[NSNull null],@"shopDiscount",
             [self valueForKey:@"jummumDiscount"]?[self valueForKey:@"jummumDiscount"]:[NSNull null],@"jummumDiscount",
+            [self valueForKey:@"transactionFeeValue"]?[self valueForKey:@"transactionFeeValue"]:[NSNull null],@"transactionFeeValue",
+            [self valueForKey:@"jummumPayValue"]?[self valueForKey:@"jummumPayValue"]:[NSNull null],@"jummumPayValue",
             [self valueForKey:@"modifiedUser"]?[self valueForKey:@"modifiedUser"]:[NSNull null],@"modifiedUser",
             [Utility dateToString:[self valueForKey:@"modifiedDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"modifiedDate",
             nil];
 }
-
--(Receipt *)initWithBranchID:(NSInteger)branchID customerTableID:(NSInteger)customerTableID memberID:(NSInteger)memberID servingPerson:(NSInteger)servingPerson customerType:(NSInteger)customerType openTableDate:(NSDate *)openTableDate totalAmount:(float)totalAmount cashAmount:(float)cashAmount cashReceive:(float)cashReceive creditCardType:(NSInteger)creditCardType creditCardNo:(NSString *)creditCardNo creditCardAmount:(float)creditCardAmount transferDate:(NSDate *)transferDate transferAmount:(float)transferAmount remark:(NSString *)remark discountType:(NSInteger)discountType discountAmount:(float)discountAmount discountValue:(float)discountValue discountReason:(NSString *)discountReason serviceChargePercent:(float)serviceChargePercent serviceChargeValue:(float)serviceChargeValue priceIncludeVat:(NSInteger)priceIncludeVat vatPercent:(float)vatPercent vatValue:(float)vatValue status:(NSInteger)status statusRoute:(NSString *)statusRoute receiptNoID:(NSString *)receiptNoID receiptNoTaxID:(NSString *)receiptNoTaxID receiptDate:(NSDate *)receiptDate sendToKitchenDate:(NSDate *)sendToKitchenDate deliveredDate:(NSDate *)deliveredDate mergeReceiptID:(NSInteger)mergeReceiptID buffetReceiptID:(NSInteger)buffetReceiptID voucherCode:(NSString *)voucherCode shopDiscount:(float)shopDiscount jummumDiscount:(float)jummumDiscount
+    
+-(Receipt *)initWithBranchID:(NSInteger)branchID customerTableID:(NSInteger)customerTableID memberID:(NSInteger)memberID servingPerson:(NSInteger)servingPerson customerType:(NSInteger)customerType openTableDate:(NSDate *)openTableDate totalAmount:(float)totalAmount cashAmount:(float)cashAmount cashReceive:(float)cashReceive creditCardType:(NSInteger)creditCardType creditCardNo:(NSString *)creditCardNo creditCardAmount:(float)creditCardAmount transferDate:(NSDate *)transferDate transferAmount:(float)transferAmount remark:(NSString *)remark discountType:(NSInteger)discountType discountAmount:(float)discountAmount discountValue:(float)discountValue discountReason:(NSString *)discountReason serviceChargePercent:(float)serviceChargePercent serviceChargeValue:(float)serviceChargeValue priceIncludeVat:(NSInteger)priceIncludeVat vatPercent:(float)vatPercent vatValue:(float)vatValue status:(NSInteger)status statusRoute:(NSString *)statusRoute receiptNoID:(NSString *)receiptNoID receiptNoTaxID:(NSString *)receiptNoTaxID receiptDate:(NSDate *)receiptDate sendToKitchenDate:(NSDate *)sendToKitchenDate deliveredDate:(NSDate *)deliveredDate mergeReceiptID:(NSInteger)mergeReceiptID hasBuffetMenu:(NSInteger)hasBuffetMenu timeToOrder:(NSInteger)timeToOrder buffetReceiptID:(NSInteger)buffetReceiptID voucherCode:(NSString *)voucherCode shopDiscount:(float)shopDiscount jummumDiscount:(float)jummumDiscount transactionFeeValue:(float)transactionFeeValue jummumPayValue:(float)jummumPayValue
 {
     self = [super init];
     if(self)
@@ -99,16 +103,20 @@
         self.sendToKitchenDate = sendToKitchenDate;
         self.deliveredDate = deliveredDate;
         self.mergeReceiptID = mergeReceiptID;
+        self.hasBuffetMenu = hasBuffetMenu;
+        self.timeToOrder = timeToOrder;
         self.buffetReceiptID = buffetReceiptID;
         self.voucherCode = voucherCode;
         self.shopDiscount = shopDiscount;
         self.jummumDiscount = jummumDiscount;
+        self.transactionFeeValue = transactionFeeValue;
+        self.jummumPayValue = jummumPayValue;
         self.modifiedUser = [Utility modifiedUser];
         self.modifiedDate = [Utility currentDateTime];
     }
     return self;
 }
-
+    
 +(NSInteger)getNextID
 {
     NSString *primaryKeyName = @"receiptID";
@@ -138,37 +146,33 @@
         }
     }
 }
-
+    
 +(void)addObject:(Receipt *)receipt
 {
     NSMutableArray *dataList = [SharedReceipt sharedReceipt].receiptList;
     [dataList addObject:receipt];
 }
-
+    
 +(void)removeObject:(Receipt *)receipt
 {
     NSMutableArray *dataList = [SharedReceipt sharedReceipt].receiptList;
     [dataList removeObject:receipt];
 }
-
+    
 +(void)addList:(NSMutableArray *)receiptList
 {
     NSMutableArray *dataList = [SharedReceipt sharedReceipt].receiptList;
     [dataList addObjectsFromArray:receiptList];
 }
-
+    
 +(void)removeList:(NSMutableArray *)receiptList
 {
     NSMutableArray *dataList = [SharedReceipt sharedReceipt].receiptList;
     [dataList removeObjectsInArray:receiptList];
 }
-
+    
 +(Receipt *)getReceipt:(NSInteger)receiptID
 {
-//    if(receiptID == 0)
-//    {
-//        return nil;
-//    }
     NSMutableArray *dataList = [SharedReceipt sharedReceipt].receiptList;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_receiptID = %ld",receiptID];
     NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
@@ -178,7 +182,7 @@
     }
     return nil;
 }
-
+    
 -(id)copyWithZone:(NSZone *)zone
 {
     id copy = [[[self class] alloc] init];
@@ -218,17 +222,21 @@
         [copy setSendToKitchenDate:self.sendToKitchenDate];
         [copy setDeliveredDate:self.deliveredDate];
         ((Receipt *)copy).mergeReceiptID = self.mergeReceiptID;
+        ((Receipt *)copy).hasBuffetMenu = self.hasBuffetMenu;
+        ((Receipt *)copy).timeToOrder = self.timeToOrder;
         ((Receipt *)copy).buffetReceiptID = self.buffetReceiptID;
         [copy setVoucherCode:self.voucherCode];
         ((Receipt *)copy).shopDiscount = self.shopDiscount;
         ((Receipt *)copy).jummumDiscount = self.jummumDiscount;
+        ((Receipt *)copy).transactionFeeValue = self.transactionFeeValue;
+        ((Receipt *)copy).jummumPayValue = self.jummumPayValue;
         [copy setModifiedUser:[Utility modifiedUser]];
         [copy setModifiedDate:[Utility currentDateTime]];
     }
     
     return copy;
 }
-
+    
 -(BOOL)editReceipt:(Receipt *)editingReceipt
 {
     if(self.receiptID == editingReceipt.receiptID
@@ -264,17 +272,21 @@
        && [self.sendToKitchenDate isEqual:editingReceipt.sendToKitchenDate]
        && [self.deliveredDate isEqual:editingReceipt.deliveredDate]
        && self.mergeReceiptID == editingReceipt.mergeReceiptID
+       && self.hasBuffetMenu == editingReceipt.hasBuffetMenu
+       && self.timeToOrder == editingReceipt.timeToOrder
        && self.buffetReceiptID == editingReceipt.buffetReceiptID
        && [self.voucherCode isEqualToString:editingReceipt.voucherCode]
        && self.shopDiscount == editingReceipt.shopDiscount
        && self.jummumDiscount == editingReceipt.jummumDiscount
+       && self.transactionFeeValue == editingReceipt.transactionFeeValue
+       && self.jummumPayValue == editingReceipt.jummumPayValue
        )
     {
         return NO;
     }
     return YES;
 }
-
+    
 +(Receipt *)copyFrom:(Receipt *)fromReceipt to:(Receipt *)toReceipt
 {
     toReceipt.receiptID = fromReceipt.receiptID;
@@ -310,15 +322,20 @@
     toReceipt.sendToKitchenDate = fromReceipt.sendToKitchenDate;
     toReceipt.deliveredDate = fromReceipt.deliveredDate;
     toReceipt.mergeReceiptID = fromReceipt.mergeReceiptID;
+    toReceipt.hasBuffetMenu = fromReceipt.hasBuffetMenu;
+    toReceipt.timeToOrder = fromReceipt.timeToOrder;
     toReceipt.buffetReceiptID = fromReceipt.buffetReceiptID;
     toReceipt.voucherCode = fromReceipt.voucherCode;
     toReceipt.shopDiscount = fromReceipt.shopDiscount;
     toReceipt.jummumDiscount = fromReceipt.jummumDiscount;
+    toReceipt.transactionFeeValue = fromReceipt.transactionFeeValue;
+    toReceipt.jummumPayValue = fromReceipt.jummumPayValue;
     toReceipt.modifiedUser = [Utility modifiedUser];
     toReceipt.modifiedDate = [Utility currentDateTime];
     
     return toReceipt;
 }
+
 
 
 +(NSMutableArray *)getReceiptListWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate statusList:(NSArray *)statusList

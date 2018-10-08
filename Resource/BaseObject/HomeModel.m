@@ -127,8 +127,7 @@
             arrClassName = @[@"CustomerTable"];
         }
             break;
-        case dbReceiptSummary:
-        case dbReceiptMaxModifiedDate:
+        case dbReceiptSummaryPage:
         {
             arrClassName = @[@"Receipt",@"CustomerTable",@"Branch",@"OrderTaking",@"Menu",@"MenuType",@"OrderNote",@"Note",@"NoteType"];
         }
@@ -177,12 +176,6 @@
             break;
         case dbReceiptDisputeRating:
         case dbReceiptDisputeRatingUpdateAndReload:
-        {
-            arrClassName = @[@"Receipt",@"Dispute",@"Rating"];
-        }
-        break;
-        case dbReceiptDisputeRatingAllAfterReceipt:
-        case dbReceiptDisputeRatingAllAfterReceiptUpdateAndReload:
         {
             arrClassName = @[@"Receipt",@"Dispute",@"Rating",@"OrderTaking",@"OrderNote",@"Menu"];
         }
@@ -308,7 +301,7 @@
                 // Ready to notify delegate that data is ready and pass back items
                 if (self.delegate)
                 {
-                    if(propCurrentDB == dbHotDeal || propCurrentDB == dbHotDealWithBranchID || propCurrentDB == dbReceiptSummary || propCurrentDB == dbReceiptMaxModifiedDate ||propCurrentDB == dbRewardPoint || propCurrentDB == dbRewardRedemptionWithBranchID || propCurrentDB == dbReceipt || propCurrentDB == dbReceiptDisputeRating || propCurrentDB == dbReceiptDisputeRatingAllAfterReceipt || propCurrentDB == dbReceiptDisputeRatingUpdateAndReload || propCurrentDB == dbReceiptDisputeRatingAllAfterReceiptUpdateAndReload || propCurrentDB == dbMenuList || propCurrentDB == dbMenuNoteList || propCurrentDB == dbBranchAndCustomerTable || propCurrentDB == dbBranchAndCustomerTableQR || propCurrentDB == dbBranchSearch || propCurrentDB == dbBranchSearchMore || propCurrentDB == dbCustomerTable || propCurrentDB == dbSettingWithKey || propCurrentDB == dbMenuBelongToBuffet || propCurrentDB == dbPromotionAndRewardRedemption || propCurrentDB == dbPromotion || propCurrentDB == dbMenu || propCurrentDB == dbRewardRedemptionLuckyDraw)
+                    if(propCurrentDB == dbHotDeal || propCurrentDB == dbHotDealWithBranchID || propCurrentDB == dbReceiptSummaryPage ||propCurrentDB == dbRewardPoint || propCurrentDB == dbRewardRedemptionWithBranchID || propCurrentDB == dbReceipt || propCurrentDB == dbReceiptDisputeRating || propCurrentDB == dbReceiptDisputeRatingUpdateAndReload || propCurrentDB == dbMenuList || propCurrentDB == dbMenuNoteList || propCurrentDB == dbBranchAndCustomerTable || propCurrentDB == dbBranchAndCustomerTableQR || propCurrentDB == dbBranchSearch || propCurrentDB == dbBranchSearchMore || propCurrentDB == dbCustomerTable || propCurrentDB == dbSettingWithKey || propCurrentDB == dbMenuBelongToBuffet || propCurrentDB == dbPromotionAndRewardRedemption || propCurrentDB == dbPromotion || propCurrentDB == dbMenu || propCurrentDB == dbRewardRedemptionLuckyDraw)
                     {
                         [self.delegate itemsDownloaded:arrItem manager:self];
                     }                    
@@ -505,16 +498,6 @@
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlMenuBelongToBuffetGetList]]];
         }
         break;
-        case dbReceiptSummary:
-        {
-            NSArray *dataList = (NSArray *)data;
-            Receipt *receipt = (Receipt *)dataList[0];
-            UserAccount *userAccount = dataList[1];
-            
-            noteDataString = [NSString stringWithFormat:@"receiptDate=%@&memberID=%ld",receipt.receiptDate,userAccount.userAccountID];
-            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlReceiptSummaryGetList]]];
-        }
-            break;
         case dbPromotion:
         {
             NSArray *dataList = (NSArray *)data;
@@ -620,17 +603,6 @@
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlRewardRedemptionWithBranchGetList]]];
         }
             break;
-        case dbReceiptMaxModifiedDate:
-        {
-            NSArray *dataList = (NSArray *)data;
-            UserAccount *userAccount = dataList[0];
-            NSDate *maxModifiedDate = dataList[1];
-            
-
-            noteDataString = [NSString stringWithFormat:@"memberID=%ld&modifiedDate=%@",userAccount.userAccountID,maxModifiedDate];
-            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlReceiptMaxModifiedDateGetList]]];
-        }
-            break;
         case dbReceiptWithModifiedDate:
         {
             Receipt *receipt = (Receipt *)data;
@@ -671,17 +643,9 @@
         case dbReceiptDisputeRating:
         case dbReceiptDisputeRatingUpdateAndReload:
         {
-            Receipt *receipt = (Receipt *)data;
-            noteDataString = [Utility getNoteDataString:receipt];
+            NSNumber *objReceipt = (NSNumber *)data;
+            noteDataString = [NSString stringWithFormat:@"receiptID=%ld",[objReceipt integerValue]];
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlReceiptDisputeRatingGet]]];
-        }
-            break;
-        case dbReceiptDisputeRatingAllAfterReceipt:
-        case dbReceiptDisputeRatingAllAfterReceiptUpdateAndReload:
-        {
-            Receipt *receipt = (Receipt *)data;
-            noteDataString = [Utility getNoteDataString:receipt];
-            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlReceiptDisputeRatingAllAfterReceiptGet]]];
         }
             break;
         case dbBranchAndCustomerTable:
@@ -749,6 +713,17 @@
         {
             noteDataString = [Utility getNoteDataString:data];
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlRewardRedemptionLuckyDrawGet]]];
+        }
+            break;
+        case dbReceiptSummaryPage:
+        {
+            NSArray *dataList = (NSArray *)data;
+            UserAccount *userAccount = dataList[0];
+            NSNumber *objPage = dataList[1];
+            NSNumber *objPerPage = dataList[2];
+            
+            noteDataString = [NSString stringWithFormat:@"memberID=%ld&page=%ld&perPage=%ld",userAccount.userAccountID,[objPage integerValue],[objPerPage integerValue]];
+            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlReceiptSummaryPageGetList]]];
         }
             break;
         default:

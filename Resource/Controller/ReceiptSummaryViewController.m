@@ -36,6 +36,9 @@
     NSMutableArray *_timeToCountDownList;
     NSMutableArray *_timerList;
     NSMutableDictionary *_dicTimer;
+    NSInteger _page;
+    NSInteger _perPage;
+    BOOL _loadData;
 }
 @end
 
@@ -56,19 +59,9 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
 -(IBAction)unwindToReceiptSummary:(UIStoryboardSegue *)segue
 {
     self.showOrderDetail = 0;
+    [tbvData reloadData];
     CustomViewController *vc = segue.sourceViewController;
-    if([vc isKindOfClass:[OrderDetailViewController class]])
-    {
-        OrderDetailViewController *vc = segue.sourceViewController;
-        [tbvData reloadData];
-        
-        
-        //get index and scroll to that index
-        NSInteger index = [Receipt getIndex:_receiptList receipt:vc.receipt];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
-        [tbvData scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
-    else if([vc isKindOfClass:[CreditCardAndOrderSummaryViewController class]] && !vc.showOrderDetail)
+    if([vc isKindOfClass:[CreditCardAndOrderSummaryViewController class]] && !vc.showOrderDetail)
     {
         CreditCardAndOrderSummaryViewController *vc = segue.sourceViewController;
         
@@ -90,17 +83,32 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     topViewHeight.constant = topPadding == 0?20:topPadding;
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [tbvData reloadData];
+    
+}
+    
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
     
-    [self reloadTableView];
-    UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-    NSDate *maxReceiptModifiedDate = [Receipt getMaxModifiedDateWithMemberID:userAccount.userAccountID];
-    [self.homeModel downloadItems:dbReceiptMaxModifiedDate withData:@[userAccount, maxReceiptModifiedDate]];
+    if(!_loadData)
+    {
+        _page = 1;
+        UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+        self.homeModel = [[HomeModel alloc]init];
+        self.homeModel.delegate = self;
+        [self.homeModel downloadItems:dbReceiptSummaryPage withData:@[userAccount,@(_page),@(_perPage)]];
+    }
+    else
+    {
+        _loadData = NO;
+    }
     
-    
+
     if(self.showOrderDetail)
     {
         self.showOrderDetail = 0;
@@ -151,7 +159,17 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     }
     
     
-    [self setReceiptList];
+    
+    [self loadingOverlayView];
+    _loadData = YES;
+    _page = 1;
+    _perPage = 10;
+    _receiptList = [[NSMutableArray alloc]init];
+    UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+    self.homeModel = [[HomeModel alloc]init];
+    self.homeModel.delegate = self;
+    [self.homeModel downloadItems:dbReceiptSummaryPage withData:@[userAccount,@(_page),@(_perPage)]];
+    
 }
 
 ///tableview section
@@ -170,6 +188,11 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             tableView.backgroundView = noDataLabel;
             tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             return 0;
+        }
+        else
+        {
+            tableView.backgroundView = nil;
+            tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         }
         return [_receiptList count];
     }
@@ -256,7 +279,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             UserAccount *userAccount = [UserAccount getCurrentUserAccount];
             self.homeModel = [[HomeModel alloc]init];
             self.homeModel.delegate = self;
-            [self.homeModel downloadItems:dbReceiptSummary withData:@[receipt,userAccount]];
+            [self.homeModel downloadItems:dbReceiptSummaryPage withData:@[userAccount,@(_page),@(_perPage)]];
         }
         
         return cell;
@@ -871,8 +894,9 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
 -(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
 {
     HomeModel *homeModel = (HomeModel *)objHomeModel;
-    if(homeModel.propCurrentDB == dbReceiptSummary)
+    if(homeModel.propCurrentDB == dbReceiptSummaryPage)
     {
+        [self removeOverlayViews];
         if([[items[0] mutableCopy] count]==0)
         {
             _lastItemReached = YES;
@@ -881,23 +905,32 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         else
         {
             [Utility updateSharedObject:items];
-            [self reloadTableView];
-        }
-    }
-    else if(homeModel.propCurrentDB == dbReceiptMaxModifiedDate)
-    {
-        NSMutableArray *receiptList = items[0];
-        if([receiptList count]>0)
-        {
-            [Utility updateSharedObject:items];
-            [self reloadTableView];
+            if(_page == 1)
+            {
+                [_receiptList removeAllObjects];
+            }
+            
+            if([items[0] count] == _perPage)
+            {
+                _page += 1;
+            }
+            
+            
+            NSInteger remaining = [_receiptList count]%_perPage;
+            for(int i=0; i<remaining; i++)
+            {
+                [_receiptList removeLastObject];
+            }
+            
+            [_receiptList addObjectsFromArray:items[0]];
+            [tbvData reloadData];
+            
         }
     }
 }
 
 -(void)reloadTableView
 {
-    [self setReceiptList];
     [tbvData reloadData];
 }
 
@@ -998,3 +1031,4 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     cellTimeToCountDown.lblText.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", hours, minutes, seconds];
 }
 @end
+

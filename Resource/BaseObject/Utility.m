@@ -553,9 +553,6 @@ extern NSString *globalBundleID;
         case urlReceiptDisputeRatingGet:
             url = @"JMMReceiptDisputeRatingGet.php";
             break;
-        case urlReceiptDisputeRatingAllAfterReceiptGet:
-            url = @"JMMReceiptDisputeRatingAllAfterReceiptGet.php";
-            break;
         case urlOpeningTimeGet:
             url = @"JMMOpeningTimeGet.php";
             break;
@@ -615,6 +612,9 @@ extern NSString *globalBundleID;
         break;
         case urlBuffetMenuMapDeleteList:
             url = @"JMMBuffetMenuMapDeleteList.php";
+        break;
+        case urlReceiptSummaryPageGetList:
+            url = @"JMMReceiptSummaryPageGetList.php";
         break;
         default:
             break;

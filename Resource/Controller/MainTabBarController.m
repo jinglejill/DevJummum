@@ -154,6 +154,11 @@
             _orderBuffetAfterOrderBuffet = 0;
             [vc viewDidAppear:NO];
         }
+        if(_showOrderDetail)
+        {
+            _showOrderDetail = 0;
+            [vc viewDidAppear:NO];
+        }
     }
 }
 
