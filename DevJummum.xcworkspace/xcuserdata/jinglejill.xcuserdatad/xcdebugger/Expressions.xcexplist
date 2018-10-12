@@ -3,21 +3,21 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[BasketViewController textFieldDidEndEditing:]:BasketViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "textField.frame.origin.x">
-            </PersistentString>
-            <PersistentString
-               value = "textField.frame.origin.y">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "__47-[HomeModel insertItems:withData:actionScreen:]_block_invoke:HomeModel.m">
       </ContextState>
       <ContextState
          contextName = "-[HomeModel URLSession:dataTask:didReceiveData:]:HomeModel.m">
       </ContextState>
       <ContextState
-         contextName = "__47-[HomeModel insertItems:withData:actionScreen:]_block_invoke:HomeModel.m">
+         contextName = "-[ReceiptSummaryViewController tableView:cellForRowAtIndexPath:]:ReceiptSummaryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "section">
+            </PersistentString>
+            <PersistentString
+               value = "item">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "__42-[MenuSelectionViewController viewDidLoad]_block_invoke:MenuSelectionViewController.m">
@@ -37,17 +37,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ReceiptSummaryViewController tableView:cellForRowAtIndexPath:]:ReceiptSummaryViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "section">
-            </PersistentString>
-            <PersistentString
-               value = "item">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "+[Receipt getReceipt:]:Receipt.m">
          <PersistentStrings>
             <PersistentString
@@ -56,10 +45,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[BasketViewController textFieldDidEndEditing:]:BasketViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "textField.frame.origin.x">
+            </PersistentString>
+            <PersistentString
+               value = "textField.frame.origin.y">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[ReceiptSummaryViewController itemsDownloaded:manager:]:ReceiptSummaryViewController.m">
          <PersistentStrings>
             <PersistentString
                value = "[SharedReceipt sharedReceipt].receiptList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ReceiptSummaryViewController tableView:heightForRowAtIndexPath:]:ReceiptSummaryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "receipt.buffetEnded">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

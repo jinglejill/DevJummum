@@ -72,7 +72,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
     {
         lblTitle.text = [Language getText:@"ชำระเงินสำเร็จ"];
     }
-    if([Receipt hasBuffetMenu:receipt.receiptID] || receipt.buffetReceiptID)
+    if(receipt.hasBuffetMenu || receipt.buffetReceiptID)
     {
         [self setButtonDesign:btnOrderBuffet];
         [btnSaveToCameraRoll setTitle:[Language getText:@"บันทึกใบเสร็จ และสั่งบุฟเฟต์"] forState:UIControlStateNormal];
@@ -231,7 +231,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 {
     //save to camera roll
     [self screenCaptureBill:receipt];
-    if([Receipt hasBuffetMenu:receipt.receiptID] || receipt.buffetReceiptID)
+    if(receipt.hasBuffetMenu || receipt.buffetReceiptID)
     {
 //        [self performSegueWithIdentifier:@"segUnwindToMe" sender:self];
 //        [self performSegueWithIdentifier:@"segUnwindToReceiptSummary" sender:self];

@@ -28,6 +28,7 @@
 @property (nonatomic,retain) UIToolbar *toolBar;
 @property (nonatomic,retain) Receipt *selectedReceipt;
 @property (nonatomic) BOOL showOrderDetail;
+@property (nonatomic) BOOL showReceiptSummary;
 
 
 -(void)setCurrentVc;

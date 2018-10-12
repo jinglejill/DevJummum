@@ -44,6 +44,7 @@
     Receipt *_buffetReceipt;
     Receipt *_selectedReceipt;
     BOOL _showOrderDetail;
+    BOOL _showReceiptSummary;
     BOOL _orderBuffet;
     BOOL _orderBuffetAfterOrderBuffet;
 }
@@ -55,7 +56,7 @@
 -(IBAction)unwindToMainTabBar:(UIStoryboardSegue *)segue
 {
     CustomViewController *vc = segue.sourceViewController;
-    if([vc isMemberOfClass:[CreditCardAndOrderSummaryViewController class]])
+    if([vc isMemberOfClass:[CreditCardAndOrderSummaryViewController class]] && ((CreditCardAndOrderSummaryViewController *)vc).addRemoveMenu)
     {
         CreditCardAndOrderSummaryViewController *vc = segue.sourceViewController;
         _selectedBranch = vc.branch;
@@ -83,6 +84,13 @@
             _selectedReceipt = vcPaymentComplete.receipt;
         }
         
+        
+        _switchToReceiptSummaryTab = 1;
+    }
+    else if(vc.showReceiptSummary)
+    {
+        _showReceiptSummary = 1;
+    
         
         _switchToReceiptSummaryTab = 1;
     }
@@ -127,6 +135,8 @@
  
 -(void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     if(_switchToQRTab)
     {
         _switchToQRTab = 0;
@@ -149,12 +159,16 @@
         vc.selectedReceipt = _selectedReceipt;
         vc.showOrderDetail = _showOrderDetail;
         
-        if(_orderBuffetAfterOrderBuffet)
+        if(_showReceiptSummary)
+        {
+            [vc reloadTableView];
+        }
+        else if(_orderBuffetAfterOrderBuffet)
         {
             _orderBuffetAfterOrderBuffet = 0;
             [vc viewDidAppear:NO];
         }
-        if(_showOrderDetail)
+        else if(_showOrderDetail)
         {
             _showOrderDetail = 0;
             [vc viewDidAppear:NO];

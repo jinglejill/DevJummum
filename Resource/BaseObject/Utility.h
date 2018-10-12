@@ -190,6 +190,7 @@ enum enumDB
     dbRatingList,
     dbReceiptDisputeRating,
     dbReceiptDisputeRatingUpdateAndReload,
+    dbReceiptBuffetEnded,
     dbMenuNote,
     dbMenuNoteList,    
     dbMenuBelongToBuffet,

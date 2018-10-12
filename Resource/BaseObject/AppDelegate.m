@@ -255,7 +255,7 @@ void myExceptionHandler(NSException *exception)
     
     NSDictionary *myAps = [userInfo objectForKey:@"aps"];
     NSString *categoryIdentifier = [myAps objectForKey:@"category"];
-    if([categoryIdentifier isEqualToString:@"updateStatus"])
+    if([categoryIdentifier isEqualToString:@"updateStatus"] || [categoryIdentifier isEqualToString:@"buffetEnded"])
     {
         NSDictionary *data = [myAps objectForKey:@"data"];
         NSNumber *receiptID = [data objectForKey:@"receiptID"];
@@ -283,6 +283,14 @@ void myExceptionHandler(NSException *exception)
         _homeModel = [[HomeModel alloc]init];
         _homeModel.delegate = self;
         [_homeModel downloadItems:dbReceiptDisputeRating withData:receiptID];
+    }
+    else if([categoryIdentifier isEqualToString:@"buffetEnded"])
+    {
+        NSDictionary *data = [myAps objectForKey:@"data"];
+        NSNumber *receiptID = [data objectForKey:@"receiptID"];
+        _homeModel = [[HomeModel alloc]init];
+        _homeModel.delegate = self;
+        [_homeModel downloadItems:dbReceiptBuffetEnded withData:receiptID];
     }
 }
 
@@ -323,7 +331,7 @@ void myExceptionHandler(NSException *exception)
    
     NSDictionary *myAps = [userInfo objectForKey:@"aps"];
     NSString *categoryIdentifier = [myAps objectForKey:@"category"];
-    if([categoryIdentifier isEqualToString:@"updateStatus"])
+    if([categoryIdentifier isEqualToString:@"updateStatus"] || [categoryIdentifier isEqualToString:@"buffetEnded"])
     {
         NSDictionary *data = [myAps objectForKey:@"data"];
         NSNumber *receiptID = [data objectForKey:@"receiptID"];
@@ -520,6 +528,69 @@ void myExceptionHandler(NSException *exception)
             vc.showOrderDetail = 1;
             vc.selectedReceipt = selectedReceipt;
             [vc viewDidAppear:NO];
+        }
+    }
+    else if(homeModel.propCurrentDB == dbReceiptBuffetEnded)//tap at noti
+    {
+        //update
+        [Utility updateSharedObject:items];
+        
+        
+        //ไม่ว่าอยู่หน้าไหน ให้ไปที่หน้า orderDetail
+        //Get current vc
+        CustomViewController *currentVc;
+        CustomViewController *parentViewController = (CustomViewController *)[[[UIApplication sharedApplication] delegate] window].rootViewController;
+        
+        while (parentViewController.presentedViewController != nil && ![parentViewController.presentedViewController isKindOfClass:[UIAlertController class]])
+        {
+            parentViewController = (CustomViewController *)parentViewController.presentedViewController;
+        }
+        if([parentViewController isKindOfClass:[UITabBarController class]])
+        {
+            currentVc = ((UITabBarController *)parentViewController).selectedViewController;
+        }
+        else
+        {
+            currentVc = parentViewController;
+        }
+        
+        
+        
+        
+        NSMutableArray *receiptList = items[0];
+        Receipt *receipt = receiptList[0];
+        if([currentVc isKindOfClass:[OrderDetailViewController class]] || [currentVc isKindOfClass:[ConfirmDisputeViewController class]] || [currentVc isKindOfClass:[DisputeFormViewController class]] || [currentVc isKindOfClass:[CommentRatingViewController class]] || [currentVc isKindOfClass:[CommentViewController class]] ||
+                [currentVc isKindOfClass:[BasketViewController class]] ||
+                [currentVc isKindOfClass:[BranchSearchViewController class]] ||
+                [currentVc isKindOfClass:[CreditCardAndOrderSummaryViewController class]] ||
+                [currentVc isKindOfClass:[CreditCardViewController class]] ||
+                [currentVc isKindOfClass:[CustomerTableSearchViewController class]] ||
+                [currentVc isKindOfClass:[HotDealDetailViewController class]] ||
+                [currentVc isKindOfClass:[MenuSelectionViewController class]] ||
+                [currentVc isKindOfClass:[MyRewardViewController class]] ||
+                [currentVc isKindOfClass:[NoteViewController class]] ||
+                [currentVc isKindOfClass:[PaymentCompleteViewController class]] ||
+                [currentVc isKindOfClass:[PersonalDataViewController class]] ||
+                [currentVc isKindOfClass:[RecommendShopViewController class]] ||
+                [currentVc isKindOfClass:[RewardDetailViewController class]] ||
+                [currentVc isKindOfClass:[RewardRedemptionViewController class]] ||
+                [currentVc isKindOfClass:[SelectPaymentMethodViewController class]] ||
+                [currentVc isKindOfClass:[TosAndPrivacyPolicyViewController class]] ||
+                [currentVc isKindOfClass:[VoucherCodeListViewController class]])
+        {
+            currentVc.showReceiptSummary = 1;
+            [currentVc performSegueWithIdentifier:@"segUnwindToMainTabBar" sender:self];
+        }
+        else if([currentVc isKindOfClass:[ReceiptSummaryViewController class]])
+        {
+            ReceiptSummaryViewController *vc = (ReceiptSummaryViewController *)currentVc;
+            [vc reloadTableView];
+        }
+        else if([currentVc isKindOfClass:[HotDealViewController class]] || [currentVc isKindOfClass:[RewardViewController class]] || [currentVc isKindOfClass:[QRCodeScanTableViewController class]] || [currentVc isKindOfClass:[MeViewController class]])
+        {
+            currentVc.tabBarController.selectedIndex = mainTabHistory;//receiptSummary
+            ReceiptSummaryViewController *vc = currentVc.tabBarController.selectedViewController;
+            [vc reloadTableView];
         }
     }
     else if(homeModel.propCurrentDB == dbReceiptDisputeRatingUpdateAndReload)//

@@ -2034,6 +2034,28 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
     [OrderTaking setCurrentOrderTakingList:orderTakingList];
     
     
+    //belong to buffet
+    if(receipt.buffetReceiptID)
+    {
+        Receipt *buffetReceipt = [Receipt getReceipt:receipt.buffetReceiptID];
+        if(buffetReceipt)
+        {
+            NSInteger timeToOrder = buffetReceipt.timeToOrder;
+            NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
+            NSInteger timeToCountDown = timeToOrder - seconds >= 0?timeToOrder - seconds:0;
+            if(timeToCountDown <= 0)
+            {
+                [self showAlert:@"" message:[Language getText:@"ขอโทษค่ะ หมดเวลาสั่งบุฟเฟ่ต์แล้วค่ะ"]];
+                return;
+            }
+        }
+        else
+        {
+            [self showAlert:@"" message:[Language getText:@"ขอโทษค่ะ หมดเวลาสั่งบุฟเฟ่ต์แล้วค่ะ"]];
+            return;
+        }
+    }
+    
     _receiptBranch = [Branch getBranch:receipt.branchID];
     [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
 }
