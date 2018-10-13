@@ -16,10 +16,11 @@
 @property (strong, nonatomic) IBOutlet UITableView *tbvData;
 @property (strong, nonatomic) IBOutlet UIDatePicker *dtPicker;
 @property (strong, nonatomic) IBOutlet UIButton *btnCreateAccount;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topButtonHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomViewHeight;
 @property (strong, nonatomic) UserAccount *userAccount;
+@property (strong, nonatomic) IBOutlet UIButton *btnBack;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnBackWidth;
 
 - (IBAction)datePickerChanged:(id)sender;
 - (IBAction)createAccount:(id)sender;

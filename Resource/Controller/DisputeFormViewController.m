@@ -61,7 +61,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
 
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
-    textView.textColor = [UIColor blackColor];
+    textView.textColor = cSystem5;
     if([textView.text isEqualToString:_strPlaceHolder])
     {
         textView.text = @"";
@@ -234,7 +234,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.backgroundColor = [UIColor whiteColor];
                 
                 
-                NSString *message = [Language getText:@"กรุณากรอกรายละเอียดด้านล่างนี้"];
+                NSString *message = [Language getText:@"กรุณาใส่รายละเอียดด้านล่างนี้"];
                 cell.textLabel.text = message;
                 cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                 cell.textLabel.textColor = [UIColor lightGrayColor];
@@ -342,7 +342,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.backgroundColor = [UIColor whiteColor];
                 
                 
-                NSString *message = [Language getText:@"กรุณากรอกรายละเอียดด้านล่างนี้"];
+                NSString *message = [Language getText:@"กรุณาใส่รายละเอียดด้านล่างนี้"];
                 cell.textLabel.text = message;
                 cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                 cell.textLabel.textColor = [UIColor lightGrayColor];
@@ -481,7 +481,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 }
                 else
                 {
-                    cell.txvValue.textColor = [UIColor blackColor];
+                    cell.txvValue.textColor = cSystem5;
                 }
                 [cell.txvValue.layer setBorderColor:[[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor]];
                 [cell.txvValue.layer setBorderWidth:0.5];

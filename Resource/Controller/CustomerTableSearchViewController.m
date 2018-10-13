@@ -270,10 +270,17 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     }
     else
     {
-        NSPredicate *resultPredicate   = [NSPredicate predicateWithFormat:@"(_tableName contains[c] %@)", searchText];
-        _filterCustomerTableList = [[_customerTableList filteredArrayUsingPredicate:resultPredicate] mutableCopy];
-    }
-    
+        NSMutableSet *searchSet = [[NSMutableSet alloc]init];
+        NSArray *arrSearchText = [searchText componentsSeparatedByString:@" "];
+        for(NSString *item in arrSearchText)
+        {
+            NSPredicate *resultPredicate   = [NSPredicate predicateWithFormat:@"(_tableName contains[c] %@)", item];
+            NSArray *filterArray = [[_customerTableList filteredArrayUsingPredicate:resultPredicate] mutableCopy];
+            [searchSet addObjectsFromArray:filterArray];
+        }
+        _filterCustomerTableList = [[searchSet allObjects]mutableCopy];
+
+    }    
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText

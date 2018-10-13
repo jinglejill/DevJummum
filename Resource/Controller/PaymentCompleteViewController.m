@@ -267,23 +267,39 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         //shop logo
         NSString *jummumLogo = [Setting getSettingValueWithKeyName:@"JummumLogo"];
         CustomTableViewCellLogo *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLogo];
-        [self.homeModel downloadImageWithFileName:jummumLogo type:5 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
-         {
-             if (succeeded)
+        
+        
+        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
+        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/%@",strPath,jummumLogo];
+        imageFileName = [Utility isStringEmpty:jummumLogo]?noImageFileName:imageFileName;
+        UIImage *image = [Utility getImageFromCache:imageFileName];
+        if(image)
+        {
+            cell.imgVwValue.image = image;
+        }
+        else
+        {
+            [self.homeModel downloadImageWithFileName:jummumLogo type:5 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
              {
-                 cell.imgVwValue.image = image;
-                 UIImage *image = [self imageFromView:cell];
-                 [arrImage insertObject:image atIndex:0];
-                 _logoDownloaded = YES;
-                 
-                 if(_logoDownloaded && _endOfFile)
+                 if (succeeded)
                  {
-                     UIImage *combineImage = [self combineImage:arrImage];
-                     UIImageWriteToSavedPhotosAlbum(combineImage, nil, nil, nil);
-                     return;
+                     [Utility saveImageInCache:image imageName:imageFileName];
+                     cell.imgVwValue.image = image;
                  }
-             }
-         }];
+             }];
+        }
+        [self setImageDesign:cell.imgVwValue];
+        UIImage *imageLogo = [self imageFromView:cell];
+        [arrImage insertObject:imageLogo atIndex:0];
+        _logoDownloaded = YES;
+
+        if(_logoDownloaded && _endOfFile)
+        {
+            UIImage *combineImage = [self combineImage:arrImage];
+            UIImageWriteToSavedPhotosAlbum(combineImage, nil, nil, nil);
+            return;
+        }
     }
     
     

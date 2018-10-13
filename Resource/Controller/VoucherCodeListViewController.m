@@ -312,13 +312,30 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
             
             
             
-            [self.homeModel downloadImageWithFileName:promotion.imageUrl type:3 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
-             {
-                 if (succeeded)
+            NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+            NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
+            NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Promotion/%@",strPath,promotion.imageUrl];
+            imageFileName = [Utility isStringEmpty:promotion.imageUrl]?noImageFileName:imageFileName;
+            UIImage *image = [Utility getImageFromCache:imageFileName];
+            if(image)
+            {
+                cell.imgVwValue.image = image;
+            }
+            else
+            {
+                [self.homeModel downloadImageWithFileName:promotion.imageUrl type:3 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
                  {
-                     cell.imgVwValue.image = image;
-                 }
-             }];
+                     if (succeeded)
+                     {
+                         [Utility saveImageInCache:image imageName:imageFileName];
+                         cell.imgVwValue.image = image;
+                     }
+                 }];
+            }
+            [self setImageDesign:cell.imgVwValue];
+            
+            
+            
             float imageWidth = cell.frame.size.width -2*16 > 375?375:cell.frame.size.width -2*16;
             cell.imgVwValueHeight.constant = imageWidth/16*9;
             cell.imgVwValue.contentMode = UIViewContentModeScaleAspectFit;
@@ -342,13 +359,27 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
             
             
             
-            [self.homeModel downloadImageWithFileName:promotion.imageUrl type:3 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
-             {
-                 if (succeeded)
+            NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+            NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
+            NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Promotion/%@",strPath,promotion.imageUrl];
+            imageFileName = [Utility isStringEmpty:promotion.imageUrl]?noImageFileName:imageFileName;
+            UIImage *image = [Utility getImageFromCache:imageFileName];
+            if(image)
+            {
+                cell.imgVwValue.image = image;
+            }
+            else
+            {
+                [self.homeModel downloadImageWithFileName:promotion.imageUrl type:3 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
                  {
-                     cell.imgVwValue.image = image;
-                 }
-             }];
+                     if (succeeded)
+                     {
+                         [Utility saveImageInCache:image imageName:imageFileName];
+                         cell.imgVwValue.image = image;
+                     }
+                 }];
+            }
+            [self setImageDesign:cell.imgVwValue];
             
             
             
@@ -378,14 +409,27 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
         
         
         Branch *branch = [Branch getBranch:rewardRedemption.mainBranchID];
-        [self.homeModel downloadImageWithFileName:branch.imageUrl type:2 branchID:branch.branchID completionBlock:^(BOOL succeeded, UIImage *image)
-         {
-             if (succeeded)
+        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
+        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Logo/%@",strPath,branch.dbName,branch.imageUrl];
+        imageFileName = [Utility isStringEmpty:branch.imageUrl]?noImageFileName:imageFileName;
+        UIImage *image = [Utility getImageFromCache:imageFileName];
+        if(image)
+        {
+            cell.imgVwValue.image = image;
+        }
+        else
+        {
+            [self.homeModel downloadImageWithFileName:branch.imageUrl type:2 branchID:branch.branchID completionBlock:^(BOOL succeeded, UIImage *image)
              {
-                 cell.imgVwValue.image = image;
-                 [self setImageDesign:cell.imgVwValue];
-             }
-         }];
+                 if (succeeded)
+                 {
+                     [Utility saveImageInCache:image imageName:imageFileName];
+                     cell.imgVwValue.image = image;
+                 }
+             }];
+        }
+        [self setImageDesign:cell.imgVwValue];
         
         
 //        cell.lblCountDownTop.constant = 0;
@@ -424,13 +468,30 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
             
             
             
-            [self.homeModel downloadImageWithFileName:promotion.imageUrl type:3 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
-             {
-                 if (succeeded)
+            NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+            NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
+            NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Promotion/%@",strPath,promotion.imageUrl];
+            imageFileName = [Utility isStringEmpty:promotion.imageUrl]?noImageFileName:imageFileName;
+            UIImage *image = [Utility getImageFromCache:imageFileName];
+            if(image)
+            {
+                cell.imgVwValue.image = image;
+            }
+            else
+            {
+                [self.homeModel downloadImageWithFileName:promotion.imageUrl type:3 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
                  {
-                     cell.imgVwValue.image = image;
-                 }
-             }];
+                     if (succeeded)
+                     {
+                         [Utility saveImageInCache:image imageName:imageFileName];
+                         cell.imgVwValue.image = image;
+                     }
+                 }];
+            }
+            [self setImageDesign:cell.imgVwValue];
+            
+            
+            
             float imageWidth = cell.frame.size.width -2*16 > 375?375:cell.frame.size.width -2*16;
             cell.imgVwValueHeight.constant = imageWidth/16*9;
             

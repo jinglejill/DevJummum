@@ -13,6 +13,11 @@
 		EF14CC402162310E0035A292 /* BuffetMenuMap.m in Sources */ = {isa = PBXBuildFile; fileRef = EF14CC3F2162310E0035A292 /* BuffetMenuMap.m */; };
 		EF14CC43216231320035A292 /* SharedBuffetMenuMap.m in Sources */ = {isa = PBXBuildFile; fileRef = EF14CC42216231320035A292 /* SharedBuffetMenuMap.m */; };
 		EF14CDE92164D97F0035A292 /* historyTab.png in Resources */ = {isa = PBXBuildFile; fileRef = EF14CDE82164D97D0035A292 /* historyTab.png */; };
+		EF1F37EC2170A52300EFB214 /* FirstInstallAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1F37EB2170A52300EFB214 /* FirstInstallAlertViewController.m */; };
+		EF1F37EF2170AEA300EFB214 /* FirstTimeInstall.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1F37EE2170AEA300EFB214 /* FirstTimeInstall.m */; };
+		EF1F37F22171104900EFB214 /* JummumRegisterBgIpad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF1F37F02171104900EFB214 /* JummumRegisterBgIpad.jpg */; };
+		EF1F37F32171104900EFB214 /* JummumRegisterBgIphoneX.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF1F37F12171104900EFB214 /* JummumRegisterBgIphoneX.jpg */; };
+		EF20D35B21705756002D14EC /* JummumRegisterBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF20D35A21705755002D14EC /* JummumRegisterBg.jpg */; };
 		EF33CD78211C26C200560C69 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF33CD77211C26C200560C69 /* ViewController.m */; };
 		EF33CD7D211C26C400560C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF33CD7C211C26C400560C69 /* Assets.xcassets */; };
 		EF33CD80211C26C400560C69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF33CD7E211C26C400560C69 /* LaunchScreen.storyboard */; };
@@ -499,6 +504,13 @@
 		EF14CC41216231320035A292 /* SharedBuffetMenuMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedBuffetMenuMap.h; sourceTree = "<group>"; };
 		EF14CC42216231320035A292 /* SharedBuffetMenuMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedBuffetMenuMap.m; sourceTree = "<group>"; };
 		EF14CDE82164D97D0035A292 /* historyTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = historyTab.png; sourceTree = "<group>"; };
+		EF1F37EA2170A52300EFB214 /* FirstInstallAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstInstallAlertViewController.h; sourceTree = "<group>"; };
+		EF1F37EB2170A52300EFB214 /* FirstInstallAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstInstallAlertViewController.m; sourceTree = "<group>"; };
+		EF1F37ED2170AEA300EFB214 /* FirstTimeInstall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstTimeInstall.h; sourceTree = "<group>"; };
+		EF1F37EE2170AEA300EFB214 /* FirstTimeInstall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstTimeInstall.m; sourceTree = "<group>"; };
+		EF1F37F02171104900EFB214 /* JummumRegisterBgIpad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = JummumRegisterBgIpad.jpg; sourceTree = "<group>"; };
+		EF1F37F12171104900EFB214 /* JummumRegisterBgIphoneX.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = JummumRegisterBgIphoneX.jpg; sourceTree = "<group>"; };
+		EF20D35A21705755002D14EC /* JummumRegisterBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = JummumRegisterBg.jpg; sourceTree = "<group>"; };
 		EF33CD70211C26C200560C69 /* DevJummum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevJummum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF33CD76211C26C200560C69 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EF33CD77211C26C200560C69 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -1322,6 +1334,9 @@
 		EF33CE11211C36D100560C69 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				EF1F37F02171104900EFB214 /* JummumRegisterBgIpad.jpg */,
+				EF1F37F12171104900EFB214 /* JummumRegisterBgIphoneX.jpg */,
+				EF20D35A21705755002D14EC /* JummumRegisterBg.jpg */,
 				EF14CDE82164D97D0035A292 /* historyTab.png */,
 				EFDAFD0E214A73FE00A2596D /* handEmpty.png */,
 				EFDAFD01214A656800A2596D /* handLift.png */,
@@ -1488,6 +1503,8 @@
 				EF33CE93211C36D100560C69 /* TosAndPrivacyPolicyViewController.m */,
 				EF6C7D06213529B900C335AC /* VoucherCodeListViewController.h */,
 				EF6C7D07213529B900C335AC /* VoucherCodeListViewController.m */,
+				EF1F37EA2170A52300EFB214 /* FirstInstallAlertViewController.h */,
+				EF1F37EB2170A52300EFB214 /* FirstInstallAlertViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1673,6 +1690,8 @@
 				EF14CC3F2162310E0035A292 /* BuffetMenuMap.m */,
 				EF14CC41216231320035A292 /* SharedBuffetMenuMap.h */,
 				EF14CC42216231320035A292 /* SharedBuffetMenuMap.m */,
+				EF1F37ED2170AEA300EFB214 /* FirstTimeInstall.h */,
+				EF1F37EE2170AEA300EFB214 /* FirstTimeInstall.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2149,6 +2168,7 @@
 				EF33CFEF211C36D200560C69 /* iTunesArtwork in Resources */,
 				EF8805B62147820E0062D9D4 /* giftBoxGood00013.jpg in Resources */,
 				EF33D0E9211C36D200560C69 /* Prompt-ExtraLight.ttf in Resources */,
+				EF20D35B21705756002D14EC /* JummumRegisterBg.jpg in Resources */,
 				EF33D0EE211C36D200560C69 /* Prompt-Medium.ttf in Resources */,
 				EF33D01A211C36D200560C69 /* home_icon_red.png in Resources */,
 				EF8805A32147820E0062D9D4 /* giftBoxExcellent00010.jpg in Resources */,
@@ -2159,12 +2179,14 @@
 				EF33D01E211C36D200560C69 /* triangle_demo.png in Resources */,
 				EF8805BF2147820E0062D9D4 /* giftBoxBoo00011.jpg in Resources */,
 				EF33D021211C36D200560C69 /* takeAwayNoti.png in Resources */,
+				EF1F37F22171104900EFB214 /* JummumRegisterBgIpad.jpg in Resources */,
 				EF8805CA2147820E0062D9D4 /* giftBoxBoo00018.jpg in Resources */,
 				EF8805D02147820E0062D9D4 /* giftBoxBoo00022.jpg in Resources */,
 				EF8805A52147820E0062D9D4 /* giftBoxGood00009.jpg in Resources */,
 				EF33D110211C36D200560C69 /* Kanit-LightItalic.otf in Resources */,
 				EF33D019211C36D200560C69 /* deleteAll3.png in Resources */,
 				EF8805E82147820E0062D9D4 /* giftBoxAwesome00016.jpg in Resources */,
+				EF1F37F32171104900EFB214 /* JummumRegisterBgIphoneX.jpg in Resources */,
 				EF8805E62147820E0062D9D4 /* giftBoxAwesome00003.jpg in Resources */,
 				EF33D003211C36D200560C69 /* creditCard.png in Resources */,
 				EF8805C32147820E0062D9D4 /* giftBoxBoo00014.jpg in Resources */,
@@ -2497,6 +2519,7 @@
 				EF33D090211C36D200560C69 /* SharedUserAccount.m in Sources */,
 				EF33D079211C36D200560C69 /* NoteType.m in Sources */,
 				EF33CFE1211C36D200560C69 /* OmiseJsonParser.swift in Sources */,
+				EF1F37EF2170AEA300EFB214 /* FirstTimeInstall.m in Sources */,
 				EF33D072211C36D200560C69 /* Shop.m in Sources */,
 				EF33D088211C36D200560C69 /* SharedShop.m in Sources */,
 				EF33CFDE211C36D200560C69 /* OmiseTokenRequest.swift in Sources */,
@@ -2551,6 +2574,7 @@
 				EF33D038211C36D200560C69 /* ForgotPasswordViewController.m in Sources */,
 				EF33D097211C36D200560C69 /* SubMenuType.m in Sources */,
 				EF33D081211C36D200560C69 /* SharedLogIn.m in Sources */,
+				EF1F37EC2170A52300EFB214 /* FirstInstallAlertViewController.m in Sources */,
 				EF33D092211C36D200560C69 /* PromoCode.m in Sources */,
 				EF33D052211C36D200560C69 /* NewVersionUpdateViewController.m in Sources */,
 				EF33D048211C36D200560C69 /* DisputeFormViewController.m in Sources */,

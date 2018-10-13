@@ -246,7 +246,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         else
         {
             _menuList = [Menu getMenuListALaCarteWithBranchID:branch.branchID];
-            _menuTypeList = [MenuType getMenuTypeListALarCarteWithBranchID:branch.branchID];
+            _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
             _menuTypeList = [MenuType sortList:_menuTypeList];
             _filterMenuList = _menuList;
             [self setData];
@@ -394,8 +394,10 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
             }
             
             
-            
-            NSString *imageFileName = [Utility isStringEmpty:menu.imageUrl]?@"./%@/Image/NoImage.jpg":[NSString stringWithFormat:@"./%@/Image/Menu/%@",branch.dbName,menu.imageUrl];
+            NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+            NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
+            NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Menu/%@",strPath,branch.dbName,menu.imageUrl];
+            imageFileName = [Utility isStringEmpty:menu.imageUrl]?noImageFileName:imageFileName;
             UIImage *image = [Utility getImageFromCache:imageFileName];
             if(image)
             {
@@ -519,7 +521,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         
         [Utility updateSharedObject:items];
         _menuList = [Menu getMenuListALaCarteWithBranchID:branch.branchID];
-        _menuTypeList = [MenuType getMenuTypeListALarCarteWithBranchID:branch.branchID];
+        _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
         _menuTypeList = [MenuType sortList:_menuTypeList];
         _filterMenuList = _menuList;
         [Menu setCurrentMenuList:_menuList];

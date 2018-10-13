@@ -96,6 +96,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     if(!_loadData)
     {
         _page = 1;
+        _lastItemReached = NO;
         UserAccount *userAccount = [UserAccount getCurrentUserAccount];
         self.homeModel = [[HomeModel alloc]init];
         self.homeModel.delegate = self;
@@ -162,6 +163,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     _loadData = YES;
     _page = 1;
     _perPage = 10;
+    _lastItemReached = NO;
     _receiptList = [[NSMutableArray alloc]init];
     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
     self.homeModel = [[HomeModel alloc]init];
@@ -896,25 +898,15 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     if(homeModel.propCurrentDB == dbReceiptSummaryPage)
     {
         [self removeOverlayViews];
-        if([[items[0] mutableCopy] count]==0)
+        [Utility updateSharedObject:items];
+
+
+        if(_page == 1)
         {
-            _lastItemReached = YES;
-            [tbvData reloadData];
+            _receiptList = items[0];
         }
         else
         {
-            [Utility updateSharedObject:items];
-            if(_page == 1)
-            {
-                [_receiptList removeAllObjects];
-            }
-            
-            if([items[0] count] == _perPage)
-            {
-                _page += 1;
-            }
-            
-            
             NSInteger remaining = [_receiptList count]%_perPage;
             for(int i=0; i<remaining; i++)
             {
@@ -922,9 +914,21 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             }
             
             [_receiptList addObjectsFromArray:items[0]];
-            [tbvData reloadData];
-            
         }
+    
+        if([items[0] count] < _perPage)
+        {
+            _lastItemReached = YES;
+        }
+        else
+        {
+            _page += 1;
+        }
+    
+    
+    
+        [tbvData reloadData];
+    
     }
 }
 

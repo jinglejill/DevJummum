@@ -22,7 +22,32 @@
 
 @implementation Menu
 
--(Menu *)initWithMenuCode:(NSString *)menuCode titleThai:(NSString *)titleThai price:(float)price menuTypeID:(NSInteger)menuTypeID subMenuTypeID:(NSInteger)subMenuTypeID subMenuType2ID:(NSInteger)subMenuType2ID subMenuType3ID:(NSInteger)subMenuType3ID buffetMenu:(NSInteger)buffetMenu belongToMenuID:(NSInteger)belongToMenuID timeToOrder:(NSInteger)timeToOrder imageUrl:(NSString *)imageUrl color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status remark:(NSString *)remark
+- (NSDictionary *)dictionary
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+        [self valueForKey:@"menuID"]?[self valueForKey:@"menuID"]:[NSNull null],@"menuID",
+        [self valueForKey:@"menuCode"]?[self valueForKey:@"menuCode"]:[NSNull null],@"menuCode",
+        [self valueForKey:@"titleThai"]?[self valueForKey:@"titleThai"]:[NSNull null],@"titleThai",
+        [self valueForKey:@"price"]?[self valueForKey:@"price"]:[NSNull null],@"price",
+        [self valueForKey:@"menuTypeID"]?[self valueForKey:@"menuTypeID"]:[NSNull null],@"menuTypeID",
+        [self valueForKey:@"subMenuTypeID"]?[self valueForKey:@"subMenuTypeID"]:[NSNull null],@"subMenuTypeID",
+        [self valueForKey:@"subMenuType2ID"]?[self valueForKey:@"subMenuType2ID"]:[NSNull null],@"subMenuType2ID",
+        [self valueForKey:@"subMenuType3ID"]?[self valueForKey:@"subMenuType3ID"]:[NSNull null],@"subMenuType3ID",
+        [self valueForKey:@"buffetMenu"]?[self valueForKey:@"buffetMenu"]:[NSNull null],@"buffetMenu",
+        [self valueForKey:@"belongToMenuID"]?[self valueForKey:@"belongToMenuID"]:[NSNull null],@"belongToMenuID",
+        [self valueForKey:@"timeToOrder"]?[self valueForKey:@"timeToOrder"]:[NSNull null],@"timeToOrder",
+        [self valueForKey:@"recommended"]?[self valueForKey:@"recommended"]:[NSNull null],@"recommended",
+        [self valueForKey:@"imageUrl"]?[self valueForKey:@"imageUrl"]:[NSNull null],@"imageUrl",
+        [self valueForKey:@"color"]?[self valueForKey:@"color"]:[NSNull null],@"color",
+        [self valueForKey:@"orderNo"]?[self valueForKey:@"orderNo"]:[NSNull null],@"orderNo",
+        [self valueForKey:@"status"]?[self valueForKey:@"status"]:[NSNull null],@"status",
+        [self valueForKey:@"remark"]?[self valueForKey:@"remark"]:[NSNull null],@"remark",
+        [self valueForKey:@"modifiedUser"]?[self valueForKey:@"modifiedUser"]:[NSNull null],@"modifiedUser",
+        [Utility dateToString:[self valueForKey:@"modifiedDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"modifiedDate",
+        nil];
+}
+
+-(Menu *)initWithMenuCode:(NSString *)menuCode titleThai:(NSString *)titleThai price:(float)price menuTypeID:(NSInteger)menuTypeID subMenuTypeID:(NSInteger)subMenuTypeID subMenuType2ID:(NSInteger)subMenuType2ID subMenuType3ID:(NSInteger)subMenuType3ID buffetMenu:(NSInteger)buffetMenu belongToMenuID:(NSInteger)belongToMenuID timeToOrder:(NSInteger)timeToOrder recommended:(NSInteger)recommended imageUrl:(NSString *)imageUrl color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status remark:(NSString *)remark
 {
     self = [super init];
     if(self)
@@ -38,6 +63,7 @@
         self.buffetMenu = buffetMenu;
         self.belongToMenuID = belongToMenuID;
         self.timeToOrder = timeToOrder;
+        self.recommended = recommended;
         self.imageUrl = imageUrl;
         self.color = color;
         self.orderNo = orderNo;
@@ -54,13 +80,13 @@
     NSString *primaryKeyName = @"menuID";
     NSString *propertyName = [NSString stringWithFormat:@"_%@",primaryKeyName];
     NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
-    
-    
+
+
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:propertyName ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
     NSArray *sortArray = [dataList sortedArrayUsingDescriptors:sortDescriptors];
     dataList = [sortArray mutableCopy];
-    
+
     if([dataList count] == 0)
     {
         return -1;
@@ -118,7 +144,7 @@
 -(id)copyWithZone:(NSZone *)zone
 {
     id copy = [[[self class] alloc] init];
-    
+
     if (copy)
     {
         ((Menu *)copy).menuID = self.menuID;
@@ -132,6 +158,7 @@
         ((Menu *)copy).buffetMenu = self.buffetMenu;
         ((Menu *)copy).belongToMenuID = self.belongToMenuID;
         ((Menu *)copy).timeToOrder = self.timeToOrder;
+        ((Menu *)copy).recommended = self.recommended;
         [copy setImageUrl:self.imageUrl];
         [copy setColor:self.color];
         ((Menu *)copy).orderNo = self.orderNo;
@@ -147,22 +174,23 @@
 -(BOOL)editMenu:(Menu *)editingMenu
 {
     if(self.menuID == editingMenu.menuID
-       && [self.menuCode isEqualToString:editingMenu.menuCode]
-       && [self.titleThai isEqualToString:editingMenu.titleThai]
-       && self.price == editingMenu.price
-       && self.menuTypeID == editingMenu.menuTypeID
-       && self.subMenuTypeID == editingMenu.subMenuTypeID
-       && self.subMenuType2ID == editingMenu.subMenuType2ID
-       && self.subMenuType3ID == editingMenu.subMenuType3ID
-       && self.buffetMenu == editingMenu.buffetMenu
-       && self.belongToMenuID == editingMenu.belongToMenuID
-       && self.timeToOrder == editingMenu.timeToOrder
-       && [self.imageUrl isEqualToString:editingMenu.imageUrl]
-       && [self.color isEqualToString:editingMenu.color]
-       && self.orderNo == editingMenu.orderNo
-       && self.status == editingMenu.status
-       && [self.remark isEqualToString:editingMenu.remark]
-       )
+    && [self.menuCode isEqualToString:editingMenu.menuCode]
+    && [self.titleThai isEqualToString:editingMenu.titleThai]
+    && self.price == editingMenu.price
+    && self.menuTypeID == editingMenu.menuTypeID
+    && self.subMenuTypeID == editingMenu.subMenuTypeID
+    && self.subMenuType2ID == editingMenu.subMenuType2ID
+    && self.subMenuType3ID == editingMenu.subMenuType3ID
+    && self.buffetMenu == editingMenu.buffetMenu
+    && self.belongToMenuID == editingMenu.belongToMenuID
+    && self.timeToOrder == editingMenu.timeToOrder
+    && self.recommended == editingMenu.recommended
+    && [self.imageUrl isEqualToString:editingMenu.imageUrl]
+    && [self.color isEqualToString:editingMenu.color]
+    && self.orderNo == editingMenu.orderNo
+    && self.status == editingMenu.status
+    && [self.remark isEqualToString:editingMenu.remark]
+    )
     {
         return NO;
     }
@@ -182,6 +210,7 @@
     toMenu.buffetMenu = fromMenu.buffetMenu;
     toMenu.belongToMenuID = fromMenu.belongToMenuID;
     toMenu.timeToOrder = fromMenu.timeToOrder;
+    toMenu.recommended = fromMenu.recommended;
     toMenu.imageUrl = fromMenu.imageUrl;
     toMenu.color = fromMenu.color;
     toMenu.orderNo = fromMenu.orderNo;
@@ -329,37 +358,6 @@
     return [filterArray mutableCopy];
 }
 
-//+(NSMutableArray *)getMenuListBuffetWithReceipt:(Receipt *)receipt
-//{
-//    NSMutableArray *buffetMenuList = [[NSMutableArray alloc]init];
-//    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
-//    for(OrderTaking *item in orderTakingList)
-//    {
-//        Menu *menu = [Menu getMenu:item.menuID branchID:item.branchID];
-//        if(menu.buffetMenu)
-//        {
-//            [buffetMenuList addObject:menu];
-//        }
-//    }
-//    return buffetMenuList;
-//}
-
-//+(NSMutableArray *)getMenuListBelongToBuffetWithBuffetMenuList:(NSMutableArray *)buffetMenuList
-//{
-//    NSMutableArray *belongToBuffetMenuList = [[NSMutableArray alloc]init];
-//    for(Menu *item in buffetMenuList)
-//    {
-//        NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
-//        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _belongToMenuID = %ld",item.branchID,item.menuID];
-//        NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
-//        
-//        
-//        [belongToBuffetMenuList addObjectsFromArray:filterArray];
-//    }
-//    
-//    return belongToBuffetMenuList;
-//}
-
 +(NSMutableArray *)getMenuBelongToBuffet:(Receipt *)receipt
 {
     NSMutableSet *menuSet = [[NSMutableSet alloc]init];
@@ -377,8 +375,7 @@
         {
             NSMutableArray *dataList = [SharedBuffetMenuMap sharedBuffetMenuMap].buffetMenuMapList;
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _buffetMenuID = %ld",item.branchID,item.menuID];
-//            NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
-//            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _belongToMenuID = %ld and status = 1",item.branchID,item.menuID];
+
             NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
             for(BuffetMenuMap *buffetMenuMap in filterArray)
             {
@@ -386,7 +383,6 @@
                 [menuBelongToBuffetSet addObject:menu];
                 
             }            
-//            [menuBelongToBuffetSet addObjectsFromArray:filterArray];
         }
     }
     

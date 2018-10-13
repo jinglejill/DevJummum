@@ -31,6 +31,7 @@
     NSMutableArray *allComments;
     BOOL _autoLogIn;
     UserAccount *_userAccount;
+    BOOL _viewDidAppear;
 }
 @end
 
@@ -273,17 +274,27 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (_faceBookLogIn)
-    {
-        // User is logged in, do work such as go to next view controller.
-        [self insertUserLoginAndUserAccount];
-    }
-    else if(_appLogIn)
-    {
-        [self logIn:nil];
-    }
     
-    [self setLanguageButton];
+    BOOL firstTimeInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstTimeInstalled"];
+    if(!_viewDidAppear && !firstTimeInstalled)
+    {
+        _viewDidAppear = YES;
+        [self performSegueWithIdentifier:@"segFirstInstallAlert" sender:self];
+    }
+    else
+    {
+        if (_faceBookLogIn)
+        {
+            // User is logged in, do work such as go to next view controller.
+            [self insertUserLoginAndUserAccount];
+        }
+        else if(_appLogIn)
+        {
+            [self logIn:nil];
+        }
+        
+        [self setLanguageButton];
+    }
 }
 
 -(void)setLanguageButton
@@ -291,14 +302,14 @@
     if([[Language getLanguage] isEqualToString:@"TH"])
     {
         [btnLangTH setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btnLangEn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnLangEn setTitleColor:cSystem5 forState:UIControlStateNormal];
         
         btnLangTH.titleLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:14];
         btnLangEn.titleLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:14];
     }
     else
     {
-        [btnLangTH setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnLangTH setTitleColor:cSystem5 forState:UIControlStateNormal];
         [btnLangEn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
         btnLangTH.titleLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:14];

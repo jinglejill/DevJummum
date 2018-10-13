@@ -129,6 +129,15 @@
     self.delegate = self;
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"Prompt-Regular" size:11.0f]} forState:UIControlStateNormal];
     
+    
+    //login already
+    BOOL firstTimeInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstTimeInstalled"];
+    if(!firstTimeInstalled)
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstTimeInstalled"];
+    }
+    
+    
     self.selectedIndex = mainTabQrScan;
     [self.selectedViewController viewDidAppear:NO];
 }

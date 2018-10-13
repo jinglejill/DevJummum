@@ -48,7 +48,22 @@
 
 - (IBAction)okClicked:(id)sender
 {
-    [[NSUserDefaults standardUserDefaults] setBool:_dontShowItAgain forKey:@"dontShowMessageMenuUpdate"];
+    if(_dontShowItAgain)
+    {
+        UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+        NSMutableDictionary *dontShowMessageMenuUpdate = [[NSUserDefaults standardUserDefaults] objectForKey:@"dontShowMessageMenuUpdate"];
+        if(!dontShowMessageMenuUpdate)
+        {
+            dontShowMessageMenuUpdate = [[NSMutableDictionary alloc]init];
+        }
+        
+        [dontShowMessageMenuUpdate setValue:@"1" forKey:userAccount.username];
+        [[NSUserDefaults standardUserDefaults] setObject:dontShowMessageMenuUpdate forKey:@"dontShowMessageMenuUpdate"];
+    }
+    
+    
+    
+//    [[NSUserDefaults standardUserDefaults] setBool:_dontShowItAgain forKey:@"dontShowMessageMenuUpdate"];
     [self performSegueWithIdentifier:@"segUnwindToCreditCardAndOrderSummary" sender:self];
 }
 

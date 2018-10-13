@@ -30,7 +30,7 @@
                             <constraint firstAttribute="height" constant="64" id="Alz-4D-FpC"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="14"/>
-                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yt-Qp-eja">
@@ -42,18 +42,13 @@
                             <fragment content="เหตุผล:">
                                 <attributes>
                                     <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <font key="NSFont" size="15" name="Thonburi-Bold"/>
                                 </attributes>
                             </fragment>
-                            <fragment content=" ">
+                            <fragment content=" ร้านค้าแจ้งว่าของหมด">
                                 <attributes>
-                                    <font key="NSFont" size="15" name="Thonburi"/>
-                                </attributes>
-                            </fragment>
-                            <fragment content="ร้านค้าแจ้งว่าของหมด">
-                                <attributes>
-                                    <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <font key="NSFont" size="15" name="Thonburi"/>
                                 </attributes>
                             </fragment>
@@ -68,18 +63,13 @@
                         <attributedString key="attributedText">
                             <fragment content="จำนวนเงินที่ขอคืน:">
                                 <attributes>
-                                    <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <font key="NSFont" size="15" name="Thonburi-Bold"/>
                                 </attributes>
                             </fragment>
-                            <fragment content=" ">
+                            <fragment content=" 100 บาท">
                                 <attributes>
-                                    <font key="NSFont" size="15" name="Thonburi"/>
-                                </attributes>
-                            </fragment>
-                            <fragment content="100 บาท">
-                                <attributes>
-                                    <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <font key="NSFont" size="15" name="Thonburi"/>
                                 </attributes>
                             </fragment>
@@ -94,19 +84,19 @@
                         <attributedString key="attributedText">
                             <fragment content="รายละเอียดการขอเงินคืน:">
                                 <attributes>
-                                    <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <font key="NSFont" size="15" name="Thonburi-Bold"/>
                                 </attributes>
                             </fragment>
                             <fragment content=" ">
                                 <attributes>
-                                    <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <font key="NSFont" metaFont="system" size="15"/>
                                 </attributes>
                             </fragment>
                             <fragment content="รออาหารนานเป็นชั่วโมงถึงมาแจ้งว่าของหมด">
                                 <attributes>
-                                    <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <font key="NSFont" size="15" name="Thonburi"/>
                                 </attributes>
                             </fragment>
@@ -121,13 +111,13 @@
                         <attributedString key="attributedText">
                             <fragment content="เบอร์โทรติดต่อ: ">
                                 <attributes>
-                                    <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <font key="NSFont" size="15" name="Thonburi-Bold"/>
                                 </attributes>
                             </fragment>
                             <fragment content="081-307-2993">
                                 <attributes>
-                                    <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <font key="NSFont" size="15" name="Thonburi"/>
                                 </attributes>
                             </fragment>

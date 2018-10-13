@@ -8,6 +8,8 @@
 
 #import "HotDealViewController.h"
 #import "HotDealDetailViewController.h"
+#import "LuckyDrawViewController.h"
+#import "PaymentCompleteViewController.h"
 #import "CustomTableViewCellPromoBanner.h"
 #import "CustomTableViewCellPromoThumbNail.h"
 #import "Promotion.h"
@@ -24,6 +26,8 @@
     
     Promotion *_promotion;
     BOOL _lastItemReached;
+    NSInteger _page;
+    NSInteger _perPage;
 }
 @property (nonatomic)        BOOL           searchBarActive;
 @end
@@ -41,6 +45,12 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
 
 -(IBAction)unwindToHotDeal:(UIStoryboardSegue *)segue
 {
+//    CustomViewController *vc = segue.sourceViewController;
+//    if([vc isKindOfClass:[LuckyDrawViewController class]] || [vc isKindOfClass:[PaymentCompleteViewController class]])
+//    {
+//        [self searchBar:searchBar textDidChange:searchBar.text];
+//    }
+    
 }
 
 -(void)viewDidLayoutSubviews
@@ -65,14 +75,8 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
 {
     [super viewDidAppear:animated];
     
-    {
-        UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-        self.homeModel = [[HomeModel alloc]init];
-        self.homeModel.delegate = self;
-        //เพิ่งสั่งอาหารร้านนี้ไปครั้งแรก ในหน้านี้ก็จะ โหลดข้อมูล hotdeal จาก db ของร้านนี้มาแสดง
-        NSInteger branchID = [Receipt getBranchIDWithMaxModifiedDateWithMemberID:userAccount.userAccountID];
-        [self.homeModel downloadItems:dbHotDealWithBranchID withData:@[userAccount,@(branchID),@([_promotionList count])]];
-    }
+    
+    [self searchBar:searchBar textDidChange:searchBar.text];
 }
 
 
@@ -86,17 +90,17 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
     lblNavTitle.text = title;
     
     
-    UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-    [self.homeModel downloadItems:dbHotDeal withData:@[userAccount,@0]];
-    
     tbvData.delegate = self;
     tbvData.dataSource = self;
 
     
     
+    _page = 1;
+    _perPage = 10;
+    _lastItemReached = NO;
+    searchBar.delegate = self;
     
     NSString *message = [Language getText:@"ค้นหา Deal"];
-    searchBar.delegate = self;
     searchBar.placeholder = message;
     [searchBar setInputAccessoryView:self.toolBar];
     UITextField *textField = [searchBar valueForKey:@"searchField"];
@@ -114,6 +118,10 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
         UINib *nib = [UINib nibWithNibName:reuseIdentifierPromoThumbNail bundle:nil];
         [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierPromoThumbNail];
     }
+    
+    
+    UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+    [self.homeModel downloadItems:dbHotDeal withData:@[searchBar.text,@(_page),@(_perPage),userAccount]];
     
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
@@ -161,13 +169,30 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
 
         
         
-        [self.homeModel downloadImageWithFileName:promotion.imageUrl type:3 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
-         {
-             if (succeeded)
+        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
+        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Promotion/%@",strPath,promotion.imageUrl];
+        imageFileName = [Utility isStringEmpty:promotion.imageUrl]?noImageFileName:imageFileName;
+        UIImage *image = [Utility getImageFromCache:imageFileName];
+        if(image)
+        {
+            cell.imgVwValue.image = image;
+        }
+        else
+        {
+            [self.homeModel downloadImageWithFileName:promotion.imageUrl type:3 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
              {
-                 cell.imgVwValue.image = image;
-             }
-         }];
+                 if (succeeded)
+                 {
+                     [Utility saveImageInCache:image imageName:imageFileName];
+                     cell.imgVwValue.image = image;
+                 }
+             }];
+        }
+        [self setImageDesign:cell.imgVwValue];
+        
+        
+        
         float imageWidth = cell.frame.size.width -2*16 > 375?375:cell.frame.size.width -2*16;
         cell.imgVwValueHeight.constant = imageWidth/16*9;
         cell.imgVwValue.contentMode = UIViewContentModeScaleAspectFit;
@@ -178,7 +203,7 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
             UserAccount *userAccount = [UserAccount getCurrentUserAccount];
             self.homeModel = [[HomeModel alloc]init];
             self.homeModel.delegate = self;
-            [self.homeModel downloadItems:dbHotDeal withData:@[userAccount,@([_promotionList count])]];
+            [self.homeModel downloadItems:dbHotDeal withData:@[searchBar.text,@(_page),@(_perPage),userAccount]];
         }
         return cell;
     }
@@ -197,13 +222,27 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
         
         
         
-        [self.homeModel downloadImageWithFileName:promotion.imageUrl type:3 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
-         {
-             if (succeeded)
+        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
+        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Promotion/%@",strPath,promotion.imageUrl];
+        imageFileName = [Utility isStringEmpty:promotion.imageUrl]?noImageFileName:imageFileName;
+        UIImage *image = [Utility getImageFromCache:imageFileName];
+        if(image)
+        {
+            cell.imgVwValue.image = image;
+        }
+        else
+        {
+            [self.homeModel downloadImageWithFileName:promotion.imageUrl type:3 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
              {
-                 cell.imgVwValue.image = image;
-             }
-         }];
+                 if (succeeded)
+                 {
+                     [Utility saveImageInCache:image imageName:imageFileName];
+                     cell.imgVwValue.image = image;
+                 }
+             }];
+        }
+        [self setImageDesign:cell.imgVwValue];
         
         
         
@@ -212,7 +251,7 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
             UserAccount *userAccount = [UserAccount getCurrentUserAccount];
             self.homeModel = [[HomeModel alloc]init];
             self.homeModel.delegate = self;
-            [self.homeModel downloadItems:dbHotDeal withData:@[userAccount,@([_promotionList count])]];
+            [self.homeModel downloadItems:dbHotDeal withData:@[searchBar.text,@(_page),@(_perPage),userAccount]];
         }
         return cell;
     }
@@ -245,13 +284,27 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
         
         
         
-        [self.homeModel downloadImageWithFileName:promotion.imageUrl type:3 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
-         {
-             if (succeeded)
+        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
+        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Promotion/%@",strPath,promotion.imageUrl];
+        imageFileName = [Utility isStringEmpty:promotion.imageUrl]?noImageFileName:imageFileName;
+        UIImage *image = [Utility getImageFromCache:imageFileName];
+        if(image)
+        {
+            cell.imgVwValue.image = image;
+        }
+        else
+        {
+            [self.homeModel downloadImageWithFileName:promotion.imageUrl type:3 branchID:0 completionBlock:^(BOOL succeeded, UIImage *image)
              {
-                 cell.imgVwValue.image = image;
-             }
-         }];
+                 if (succeeded)
+                 {
+                     [Utility saveImageInCache:image imageName:imageFileName];
+                     cell.imgVwValue.image = image;
+                 }
+             }];
+        }
+        [self setImageDesign:cell.imgVwValue];
         float imageWidth = cell.frame.size.width -2*16 > 375?375:cell.frame.size.width -2*16;
         cell.imgVwValueHeight.constant = imageWidth/16*9;        
 
@@ -291,21 +344,20 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
 }
 
 #pragma mark - search
-
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
-{
-    if([Utility isStringEmpty:searchText])
-    {
-        _filterPromotionList = _promotionList;
-        [tbvData reloadData];
-    }
-    else
-    {
-        NSPredicate *resultPredicate   = [NSPredicate predicateWithFormat:@"(_header contains[c] %@) or (_subTitle contains[c] %@) or (_termsConditions contains[c] %@)", searchText, searchText, searchText];
-        _filterPromotionList = [[_promotionList filteredArrayUsingPredicate:resultPredicate] mutableCopy];
-    }
-    
-}
+//
+//- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+//{
+//    if([Utility isStringEmpty:searchText])
+//    {
+//        _filterPromotionList = _promotionList;
+//        [tbvData reloadData];
+//    }
+//    else
+//    {
+//        NSPredicate *resultPredicate   = [NSPredicate predicateWithFormat:@"(_header contains[c] %@) or (_subTitle contains[c] %@) or (_termsConditions contains[c] %@)", searchText, searchText, searchText];
+//        _filterPromotionList = [[_promotionList filteredArrayUsingPredicate:resultPredicate] mutableCopy];
+//    }
+//}
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
@@ -314,16 +366,19 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
     {
         // search and reload data source
         self.searchBarActive = YES;
-        [self filterContentForSearchText:searchText scope:@""];
-        [tbvData reloadData];
     }
     else
     {
         // if text length == 0
         // we will consider the searchbar is not active
         self.searchBarActive = NO;
-        [self cancelSearching];
     }
+    _page = 1;
+    _lastItemReached = NO;
+    UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+    self.homeModel = [[HomeModel alloc]init];
+    self.homeModel.delegate = self;
+    [self.homeModel downloadItems:dbHotDeal withData:@[searchText,@(_page),@(_perPage),userAccount]];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -362,23 +417,41 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
     self.searchBarActive = NO;
     [searchBar resignFirstResponder];
     searchBar.text  = @"";
-    [self filterContentForSearchText:searchBar.text scope:@""];
+    [self searchBar:searchBar textDidChange:searchBar.text];
 }
 
 -(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
 {
     HomeModel *homeModel = (HomeModel *)objHomeModel;
-    if(homeModel.propCurrentDB == dbHotDeal || homeModel.propCurrentDB == dbHotDealWithBranchID)
+    if(homeModel.propCurrentDB == dbHotDeal)
     {
-        if([items[0] count] == 0 && homeModel.propCurrentDB == dbHotDeal)
+        if(_page == 1)
+        {
+            _filterPromotionList = items[0];
+        }
+        else
+        {
+            NSInteger remaining = [_filterPromotionList count]%_perPage;
+            for(int i=0; i<remaining; i++)
+            {
+                [_filterPromotionList removeLastObject];
+            }
+            
+            [_filterPromotionList addObjectsFromArray:items[0]];
+        }
+        
+        
+        if([items[0] count] < _perPage)
         {
             _lastItemReached = YES;
-            return;
         }
-
-        [Utility updateSharedObject:items];
-        _promotionList = [Promotion getPromotionList];
-        [self searchBar:searchBar textDidChange:searchBar.text];
+        else
+        {
+            _page += 1;
+        }
+        
+        
+        [tbvData reloadData];
     }
 }
 

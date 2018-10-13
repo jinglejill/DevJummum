@@ -176,19 +176,19 @@
     return [filterArray mutableCopy];
 }
 
-+(NSMutableArray * )getMenuTypeListALarCarteWithBranchID:(NSInteger)branchID
-{
-    NSMutableArray *menuTypeList = [[NSMutableArray alloc]init];
-    NSMutableArray *menuList = [Menu getMenuListALaCarteWithBranchID:branchID];
-    NSSet *menuTypeIDSet = [NSSet setWithArray:[menuList valueForKey:@"_menuTypeID"]];
-    for(NSNumber *menuTypeID in menuTypeIDSet)
-    {
-        MenuType *menuType = [MenuType getMenuType:[menuTypeID integerValue] branchID:branchID];
-        [menuTypeList addObject:menuType];
-    }
-    
-    return menuTypeList;
-}
+//+(NSMutableArray * )getMenuTypeListALarCarteWithBranchID:(NSInteger)branchID
+//{
+//    NSMutableArray *menuTypeList = [[NSMutableArray alloc]init];
+//    NSMutableArray *menuList = [Menu getMenuListALaCarteWithBranchID:branchID];
+//    NSSet *menuTypeIDSet = [NSSet setWithArray:[menuList valueForKey:@"_menuTypeID"]];
+//    for(NSNumber *menuTypeID in menuTypeIDSet)
+//    {
+//        MenuType *menuType = [MenuType getMenuType:[menuTypeID integerValue] branchID:branchID];
+//        [menuTypeList addObject:menuType];
+//    }
+//    
+//    return menuTypeList;
+//}
     
 +(MenuType *)getMenuType:(NSInteger)menuTypeID branchID:(NSInteger)branchID
 {

@@ -148,7 +148,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
-    textView.textColor = [UIColor blackColor];
+    textView.textColor = cSystem5;
     if([textView.text isEqualToString:_strPlaceHolder])
     {
         textView.text = @"";
@@ -189,10 +189,26 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         if(fromReceiptSummaryMenu || fromOrderDetailMenu || fromRewardRedemption || fromHotDealDetail || fromLuckyDraw)
         {
             _showGuideMessage = YES;
-            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"dontShowMessageMenuUpdate"])
+            NSMutableDictionary *dontShowMessageMenuUpdate = [[NSUserDefaults standardUserDefaults] objectForKey:@"dontShowMessageMenuUpdate"];
+            if(dontShowMessageMenuUpdate)
+            {
+                UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+            
+                NSString *checked = [dontShowMessageMenuUpdate valueForKey:userAccount.username];
+                if(!checked)
+                {
+                    [self performSegueWithIdentifier:@"segMessageBoxWithDismiss" sender:self];
+                }
+            }
+            else
             {
                 [self performSegueWithIdentifier:@"segMessageBoxWithDismiss" sender:self];
             }
+            
+//            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"dontShowMessageMenuUpdate"])
+//            {
+//                [self performSegueWithIdentifier:@"segMessageBoxWithDismiss" sender:self];
+//            }
         }
     }
 }
@@ -998,7 +1014,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             }
             else
             {
-                cell.txvValue.textColor = [UIColor blackColor];
+                cell.txvValue.textColor = cSystem5;
             }
             [cell.txvValue.layer setBorderColor:[[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor]];
             [cell.txvValue.layer setBorderWidth:0.5];

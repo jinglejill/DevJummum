@@ -43,7 +43,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="14"/>
                                         <state key="normal" title="EN">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="switchToEN:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qSR-HC-gBo"/>
@@ -74,7 +74,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.30980392156862746" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="v4Z-6n-Op2" secondAttribute="trailing" id="080-YY-o8e"/>
                                     <constraint firstAttribute="trailing" secondItem="M7g-KU-KjM" secondAttribute="trailing" constant="8" id="2GK-f0-ZLp"/>
@@ -132,7 +132,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
                                 <state key="normal" title="ลงทะเบียน">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="registerNow:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mgq-uY-hMZ"/>
@@ -140,7 +140,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7O-WJ-5u3">
                                 <rect key="frame" x="190.5" y="246.5" width="127" height="30"/>
-                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="IO8-F3-EPu"/>
                                 </constraints>
@@ -267,6 +267,7 @@
                         <segue destination="lJU-bQ-QXi" kind="show" identifier="segForgotPassword" id="GxO-Ln-9YF"/>
                         <segue destination="CjN-wS-0YA" kind="show" identifier="segRegisterNowFacebook" id="UTS-nM-B10"/>
                         <segue destination="1il-Jx-O5x" kind="unwind" identifier="segUnwindToLaunchScreen" unwindAction="unwindToLaunchScreen:" id="xNa-4c-8AP"/>
+                        <segue destination="zWB-UM-pst" kind="presentation" identifier="segFirstInstallAlert" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="aGC-Cu-zXn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -312,7 +313,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="8w8-WA-Jfh" firstAttribute="top" secondItem="MTK-zN-7e8" secondAttribute="top" constant="94" id="A4i-di-5Cg"/>
                                     <constraint firstItem="aaJ-ub-VBK" firstAttribute="centerX" secondItem="MTK-zN-7e8" secondAttribute="centerX" id="J1d-pQ-hue"/>
@@ -329,7 +330,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZjT-TB-zab">
                                         <rect key="frame" x="8" y="258.5" width="224" height="30"/>
-                                        <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="OQI-9A-WCQ"/>
                                         </constraints>
@@ -349,7 +350,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
                                         <state key="normal" title="Cancel">
-                                            <color key="titleColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="cancel:" destination="FCG-tI-fuZ" eventType="touchUpInside" id="VpV-dO-jDJ"/>
@@ -359,7 +360,7 @@
                                         <rect key="frame" x="8" y="66" width="224" height="136.5"/>
                                         <string key="text">A newer version of the app is available for you, please update it to continue to order your food, receive latest promotions &amp; benefits with JUMMUM.</string>
                                         <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="15"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It's time to update" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tk7-HQ-USU">
@@ -368,12 +369,12 @@
                                             <constraint firstAttribute="height" constant="34" id="257-eS-3cM"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ChV-1Z-M6l">
                                         <rect key="frame" x="8" y="220.5" width="224" height="30"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Dos-X7-dAe"/>
                                         </constraints>
@@ -441,7 +442,86 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eYe-he-Gwb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="r1i-sb-EyU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="56.799999999999997" y="840.62968515742136"/>
+            <point key="canvasLocation" x="57" y="885"/>
+        </scene>
+        <!--First Install Alert View Controller-->
+        <scene sceneID="NHO-me-jKO">
+            <objects>
+                <viewController id="zWB-UM-pst" customClass="FirstInstallAlertViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VkD-ln-itv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tPQ-zf-eTD">
+                                <rect key="frame" x="67" y="225" width="240" height="216"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can log in via facebook or tap at register now to register." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cnq-4n-XTX">
+                                        <rect key="frame" x="8" y="66" width="224" height="68.5"/>
+                                        <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="15"/>
+                                        <color key="textColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dE6-mi-UtM">
+                                        <rect key="frame" x="8" y="24" width="224" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="ghO-GT-IeQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="17"/>
+                                        <color key="textColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ojk-oG-aQi">
+                                        <rect key="frame" x="8" y="178.5" width="224" height="30"/>
+                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="gHq-8g-oWi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
+                                        <state key="normal" title="เริ่มใช้งาน">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="update:" destination="zWB-UM-pst" eventType="touchUpInside" id="n7d-x2-vq5"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Ojk-oG-aQi" secondAttribute="trailing" constant="8" id="3Yn-gw-kzO"/>
+                                    <constraint firstAttribute="trailing" secondItem="Cnq-4n-XTX" secondAttribute="trailing" constant="8" id="9SF-4N-4ga"/>
+                                    <constraint firstAttribute="trailing" secondItem="dE6-mi-UtM" secondAttribute="trailing" constant="8" id="Eeu-zS-M5M"/>
+                                    <constraint firstItem="Cnq-4n-XTX" firstAttribute="leading" secondItem="tPQ-zf-eTD" secondAttribute="leading" constant="8" id="FmK-9z-xym"/>
+                                    <constraint firstItem="Ojk-oG-aQi" firstAttribute="leading" secondItem="tPQ-zf-eTD" secondAttribute="leading" constant="8" id="H5x-CK-NXx"/>
+                                    <constraint firstItem="Cnq-4n-XTX" firstAttribute="top" secondItem="dE6-mi-UtM" secondAttribute="bottom" constant="8" id="XSH-Rd-dub"/>
+                                    <constraint firstAttribute="height" constant="216" id="Zdh-ct-PAc"/>
+                                    <constraint firstItem="dE6-mi-UtM" firstAttribute="leading" secondItem="tPQ-zf-eTD" secondAttribute="leading" constant="8" id="e5N-JI-Uyd"/>
+                                    <constraint firstItem="Ojk-oG-aQi" firstAttribute="top" secondItem="Cnq-4n-XTX" secondAttribute="bottom" constant="44" id="ef0-Hg-VrI"/>
+                                    <constraint firstAttribute="width" constant="240" id="kRO-XF-ik5"/>
+                                    <constraint firstItem="dE6-mi-UtM" firstAttribute="top" secondItem="tPQ-zf-eTD" secondAttribute="top" constant="24" id="lnM-kO-T3Q"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="tPQ-zf-eTD" firstAttribute="centerY" secondItem="VkD-ln-itv" secondAttribute="centerY" id="qTs-Eu-WDZ"/>
+                            <constraint firstItem="tPQ-zf-eTD" firstAttribute="centerX" secondItem="VkD-ln-itv" secondAttribute="centerX" id="u6m-2t-s44"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1Gk-xe-DGF"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnUpdate" destination="Ojk-oG-aQi" id="vJh-wu-HgB"/>
+                        <outlet property="lblHeader" destination="dE6-mi-UtM" id="sto-A7-9tA"/>
+                        <outlet property="lblSubtitle" destination="Cnq-4n-XTX" id="eo5-4c-Lgb"/>
+                        <outlet property="vwAlert" destination="tPQ-zf-eTD" id="tGF-Jv-EUL"/>
+                        <outlet property="vwAlertHeight" destination="Zdh-ct-PAc" id="739-1y-Y2c"/>
+                        <segue destination="oL2-B5-AjC" kind="unwind" identifier="segUnwindToLaunchScreen" unwindAction="unwindToLaunchScreen:" id="9a2-t6-DyK"/>
+                        <segue destination="oL2-B5-AjC" kind="unwind" identifier="segUnwindToLogIn" unwindAction="unwindToLogIn:" id="ye0-F9-xUJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TTV-re-9Xc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="oL2-B5-AjC" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="852" y="885"/>
         </scene>
         <!--QR Code-->
         <scene sceneID="kGO-K6-847">
@@ -480,7 +560,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q32-tE-q13">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="JLt-XL-F70"/>
                                             <constraint firstAttribute="width" constant="44" id="YGy-EB-cyy"/>
@@ -494,7 +574,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="6xX-41-EXl" secondAttribute="trailing" constant="16" id="1A3-wp-UKl"/>
                                     <constraint firstAttribute="trailing" secondItem="jlF-Ej-s0u" secondAttribute="trailing" constant="16" id="8Gd-Ev-ZTX"/>
@@ -508,7 +588,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gXl-47-lKq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="wbN-Ks-0Us"/>
                                 </constraints>
@@ -564,13 +644,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9e1-Cj-nfr">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="wuV-70-lEf"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;" image="home_icon_red.png">
-                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBackHome:" destination="oGW-Dn-caM" eventType="touchUpInside" id="7Do-Ih-fuN"/>
@@ -587,7 +667,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="9e1-Cj-nfr" secondAttribute="bottom" id="Lcc-Jz-ZcV"/>
                                     <constraint firstAttribute="height" constant="44" id="Mxp-SL-rCr"/>
@@ -609,7 +689,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SbW-hI-yGP">
                                 <rect key="frame" x="0.0" y="589" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="8zz-WW-Rna"/>
                                 </constraints>
@@ -628,7 +708,7 @@
                                     <constraint firstAttribute="height" constant="18" id="gKm-fE-Yz2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
-                                <color key="textColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle_red.png" translatesAutoresizingMaskIntoConstraints="NO" id="hYe-d8-DWH">
@@ -655,7 +735,7 @@
                                     <constraint firstAttribute="width" constant="35" id="MKt-2V-38k"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                <color key="textColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddS-bL-kEC">
@@ -663,13 +743,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZh-ab-tiq">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="Xpc-X1-xUw"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="KZh-ab-tiq" firstAttribute="leading" secondItem="ddS-bL-kEC" secondAttribute="leading" id="Adm-me-knY"/>
                                     <constraint firstAttribute="height" constant="44" id="O0D-aB-7Cc"/>
@@ -679,7 +759,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x75-VU-pbi">
                                 <rect key="frame" x="0.0" y="633" width="375" height="34"/>
-                                <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="0VX-1v-gab"/>
                                 </constraints>
@@ -758,13 +838,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpc-MH-yf5">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="DiI-C3-X0A"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="unwindToMenuSelection:" destination="70l-RA-GXn" eventType="touchUpInside" id="Po3-lf-xp3"/>
@@ -793,7 +873,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="dIP-dl-fvq" firstAttribute="centerY" secondItem="nSz-Td-y0L" secondAttribute="centerY" id="4vV-7O-XOL"/>
                                     <constraint firstItem="hpc-MH-yf5" firstAttribute="top" secondItem="nSz-Td-y0L" secondAttribute="top" id="9M6-uD-72a"/>
@@ -815,7 +895,7 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fa-kW-KtW">
                                 <rect key="frame" x="0.0" y="501" width="375" height="2"/>
-                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="1ai-GK-w8y"/>
                                 </constraints>
@@ -825,13 +905,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fE6-X9-aBb">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="BzU-0c-qW2"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="5sX-bg-Vr2"/>
                                     <constraint firstItem="fE6-X9-aBb" firstAttribute="leading" secondItem="PfQ-uS-Rdb" secondAttribute="leading" id="MgD-gl-QoS"/>
@@ -841,7 +921,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Em4-V8-utq">
                                 <rect key="frame" x="0.0" y="633" width="375" height="34"/>
-                                <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="iHc-h9-qjN"/>
                                 </constraints>
@@ -905,13 +985,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="dbi-tk-7NV">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="WdF-eW-Atz"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="uxx-Px-8LI" eventType="touchUpInside" id="c2H-gr-5cg"/>
@@ -940,7 +1020,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="dbi-tk-7NV" firstAttribute="leading" secondItem="hc3-IZ-UNQ" secondAttribute="leading" id="38E-BE-xmw"/>
                                     <constraint firstItem="6mE-gP-XeJ" firstAttribute="centerY" secondItem="hc3-IZ-UNQ" secondAttribute="centerY" id="3uJ-eX-yC4"/>
@@ -955,7 +1035,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uG2-Y9-gw3">
                                 <rect key="frame" x="0.0" y="536" width="375" height="2"/>
-                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="JOR-vy-q14"/>
                                 </constraints>
@@ -976,13 +1056,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8p9-br-1Cm">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="2zk-Jq-VAn"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="8p9-br-1Cm" secondAttribute="bottom" id="HRj-Av-5QY"/>
                                     <constraint firstItem="8p9-br-1Cm" firstAttribute="leading" secondItem="fhj-eb-4I6" secondAttribute="leading" id="fPT-YW-O8c"/>
@@ -992,7 +1072,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="txr-yR-rx6">
                                 <rect key="frame" x="0.0" y="633" width="375" height="34"/>
-                                <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="5Qq-DL-Z4D"/>
                                 </constraints>
@@ -1070,13 +1150,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="UvZ-jH-fvd">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="aBx-wY-Fx3"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="X">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="dismissViewController:" destination="XJc-Mh-huG" eventType="touchUpInside" id="u3a-pJ-uXK"/>
@@ -1092,7 +1172,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Qoz-7W-v4X" firstAttribute="centerY" secondItem="UvZ-jH-fvd" secondAttribute="centerY" id="JAx-PN-Zy5"/>
                                     <constraint firstAttribute="height" constant="44" id="JZX-Hj-gTz"/>
@@ -1108,13 +1188,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VcP-dX-6dV">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="RO2-QL-Gib"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="VcP-dX-6dV" firstAttribute="leading" secondItem="5SH-H9-kcH" secondAttribute="leading" id="1g8-c6-UeQ"/>
                                     <constraint firstAttribute="bottom" secondItem="VcP-dX-6dV" secondAttribute="bottom" id="Nyv-G3-JOz"/>
@@ -1170,13 +1250,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="rAS-bV-XJJ">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="8uG-8f-s5c"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="X">
-                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="dismissViewController:" destination="qVW-Az-F2z" eventType="touchUpInside" id="TzV-a9-4cR"/>
@@ -1192,7 +1272,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="rAS-bV-XJJ" firstAttribute="leading" secondItem="uCC-xV-N4s" secondAttribute="leading" id="0EW-x8-tfc"/>
                                     <constraint firstItem="a24-yR-sDY" firstAttribute="centerY" secondItem="rAS-bV-XJJ" secondAttribute="centerY" id="0zn-EH-w0t"/>
@@ -1208,13 +1288,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUN-me-7FS">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="Qta-th-vJf"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="uUN-me-7FS" firstAttribute="top" secondItem="SXT-h6-JXY" secondAttribute="top" id="BPf-6P-4Ky"/>
                                     <constraint firstAttribute="height" constant="44" id="Z5U-KS-uHN"/>
@@ -1283,7 +1363,7 @@
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ui-pw-Mu5">
                                 <rect key="frame" x="289" y="20" width="70" height="30"/>
-                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="HA0-5F-fLz"/>
                                     <constraint firstAttribute="width" constant="70" id="uKN-Xf-ZL6"/>
@@ -1298,7 +1378,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="048-gq-2tH">
                                 <rect key="frame" x="203" y="20" width="70" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="TpL-OP-Jxx"/>
                                     <constraint firstAttribute="width" constant="70" id="aJw-zc-P1k"/>
@@ -1373,21 +1453,21 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3O-bg-1Q6">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="D7Z-hq-gl5"/>
                                             <constraint firstAttribute="width" constant="44" id="PdK-SW-Kje"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="eyo-sE-zME" eventType="touchUpInside" id="pm3-WF-Kjr"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="PC9-d6-PcY" secondAttribute="trailing" constant="16" id="6i1-XX-dK1"/>
                                     <constraint firstItem="g3O-bg-1Q6" firstAttribute="leading" secondItem="3qI-4n-Coz" secondAttribute="leading" id="Apv-ln-f63"/>
@@ -1402,13 +1482,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSL-4t-Ip3">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="Oed-hy-tuN"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="EHF-5t-Yqb"/>
                                     <constraint firstAttribute="bottom" secondItem="gSL-4t-Ip3" secondAttribute="bottom" id="UgY-C0-Wt2"/>
@@ -1480,7 +1560,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Obh-OW-FzG" firstAttribute="leading" secondItem="gzA-R3-QMe" secondAttribute="leading" constant="16" id="MAB-HU-vST"/>
                                     <constraint firstAttribute="height" constant="44" id="jWY-or-IYj"/>
@@ -1497,7 +1577,7 @@
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xWv-WG-z3P">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="mlg-wd-2GU"/>
                                 </constraints>
@@ -1549,13 +1629,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxh-oV-i2v">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="Ajr-5e-SCq"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="vsL-9Z-0qh" eventType="touchUpInside" id="Ghn-Mc-Bsc"/>
@@ -1572,7 +1652,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="zxh-oV-i2v" firstAttribute="top" secondItem="q0B-Fc-het" secondAttribute="top" id="2qm-Uj-Cbd"/>
                                     <constraint firstAttribute="bottom" secondItem="zxh-oV-i2v" secondAttribute="bottom" id="Ndp-zo-qOt"/>
@@ -1592,13 +1672,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AkX-25-Vqk">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="cmD-Tb-dPL"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="AkX-25-Vqk" secondAttribute="bottom" id="KbT-1f-84O"/>
                                     <constraint firstItem="AkX-25-Vqk" firstAttribute="top" secondItem="Cav-ID-G2G" secondAttribute="top" id="LIt-Wq-Uz2"/>
@@ -1651,14 +1731,14 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6g4-Wt-XCi">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="mgJ-Hj-EIa"/>
                                             <constraint firstAttribute="height" constant="44" id="pvd-4v-J6I"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="mr4-bD-i7B" eventType="touchUpInside" id="g18-iS-eLY"/>
@@ -1674,7 +1754,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="dHc-zS-nNU" firstAttribute="leading" secondItem="eJp-Qv-YIv" secondAttribute="leading" constant="16" id="9e7-UD-giv"/>
                                     <constraint firstAttribute="height" constant="44" id="CYg-A4-AuW"/>
@@ -1695,7 +1775,7 @@
                                     <segment title="ใช้ไปแล้ว"/>
                                     <segment title="หมดอายุ"/>
                                 </segments>
-                                <color key="tintColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="segmentControlChanged:" destination="mr4-bD-i7B" eventType="valueChanged" id="FRP-Sr-bes"/>
                                 </connections>
@@ -1705,13 +1785,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xRS-Nf-Mbh">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="7Vy-OB-MZM"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="xRS-Nf-Mbh" secondAttribute="bottom" id="8RH-RE-0Qb"/>
                                     <constraint firstItem="xRS-Nf-Mbh" firstAttribute="leading" secondItem="n1q-Ce-DGv" secondAttribute="leading" id="P0z-d6-TDo"/>
@@ -1775,7 +1855,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Hjz-rB-69J" firstAttribute="leading" secondItem="9Sb-nk-zax" secondAttribute="leading" constant="16" id="H4h-q3-wg6"/>
                                     <constraint firstAttribute="trailing" secondItem="Hjz-rB-69J" secondAttribute="trailing" constant="16" id="fxV-Lh-4Vx"/>
@@ -1789,7 +1869,7 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2VJ-KX-D5d">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="cMV-c2-EEO"/>
                                 </constraints>
@@ -1839,14 +1919,14 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kqM-AT-ou8">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="VWS-RU-BOR"/>
                                             <constraint firstAttribute="width" constant="44" id="l8E-8i-Q7W"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="Dl7-J0-dAM" eventType="touchUpInside" id="LQu-40-HlQ"/>
@@ -1862,7 +1942,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="HbX-FM-Hbz"/>
                                     <constraint firstItem="69F-Ta-hrB" firstAttribute="leading" secondItem="jf2-nr-qLg" secondAttribute="leading" constant="16" id="OUz-rp-ebq"/>
@@ -1874,13 +1954,13 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r8C-qB-yhf">
                                 <rect key="frame" x="0.0" y="589" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="071-LV-c4G"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
                                 <state key="normal" title="รับสิทธิ์">
-                                    <color key="titleColor" red="0.0" green="0.35294117650000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.3529411764705882" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="redeemReward:" destination="Dl7-J0-dAM" eventType="touchUpInside" id="Jgz-Ad-bN6"/>
@@ -1895,13 +1975,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5K6-2Z-mGb">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="NNu-iv-FCz"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="5K6-2Z-mGb" firstAttribute="top" secondItem="qCd-Sh-GLO" secondAttribute="top" id="CVg-8E-SoD"/>
                                     <constraint firstItem="5K6-2Z-mGb" firstAttribute="leading" secondItem="qCd-Sh-GLO" secondAttribute="leading" id="L7q-7D-BnC"/>
@@ -1911,7 +1991,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gR-6d-AQX">
                                 <rect key="frame" x="0.0" y="633" width="375" height="34"/>
-                                <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="SYs-e8-LTV"/>
                                 </constraints>
@@ -1969,14 +2049,14 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1X-XG-vCf">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="U7e-fn-KjB"/>
                                             <constraint firstAttribute="width" constant="44" id="dQY-PS-Roc"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="eBM-4Z-jyX" eventType="touchUpInside" id="Non-Mr-Rc7"/>
@@ -1992,7 +2072,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="d6r-ed-fyr" secondAttribute="trailing" constant="16" id="3pu-Qg-2Px"/>
                                     <constraint firstItem="d6r-ed-fyr" firstAttribute="centerY" secondItem="8Wz-Vj-S2M" secondAttribute="centerY" id="71z-QK-FfF"/>
@@ -2008,12 +2088,12 @@
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWp-64-1Nj">
                                 <rect key="frame" x="0.0" y="589" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="0x6-Za-mpp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.35294117650000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.3529411764705882" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EuV-Z8-2z8">
@@ -2021,13 +2101,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAT-iv-bSI">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="0fu-ts-wg4"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="NAT-iv-bSI" firstAttribute="top" secondItem="EuV-Z8-2z8" secondAttribute="top" id="0uw-vi-Dsx"/>
                                     <constraint firstItem="NAT-iv-bSI" firstAttribute="leading" secondItem="EuV-Z8-2z8" secondAttribute="leading" id="LlW-f0-xR2"/>
@@ -2037,7 +2117,7 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PbW-NO-kid">
                                 <rect key="frame" x="0.0" y="633" width="375" height="34"/>
-                                <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="eZE-Rb-GCH"/>
                                 </constraints>
@@ -2098,14 +2178,14 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOc-Ja-0Yk">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="FBw-Gx-Viv"/>
                                             <constraint firstAttribute="height" constant="44" id="kzC-qM-xl2"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="lJU-bQ-QXi" eventType="touchUpInside" id="ygv-pb-Cuv"/>
@@ -2121,7 +2201,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Sjf-m4-4du" firstAttribute="centerY" secondItem="02Z-i8-e1M" secondAttribute="centerY" id="UGk-y9-X3U"/>
                                     <constraint firstItem="tOc-Ja-0Yk" firstAttribute="leading" secondItem="02Z-i8-e1M" secondAttribute="leading" id="Yzz-OJ-RzO"/>
@@ -2151,7 +2231,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="teB-Bg-9aR">
                                 <rect key="frame" x="0.0" y="589" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="xIy-g0-YgW"/>
                                 </constraints>
@@ -2165,7 +2245,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y8h-n8-eRg">
                                 <rect key="frame" x="0.0" y="633" width="375" height="34"/>
-                                <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="dBq-gJ-7oA"/>
                                 </constraints>
@@ -2175,13 +2255,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLZ-aX-GiC">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="TGv-EZ-vzy"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="JLZ-aX-GiC" secondAttribute="bottom" id="3hg-FL-nZL"/>
                                     <constraint firstItem="JLZ-aX-GiC" firstAttribute="leading" secondItem="eod-hC-Ei5" secondAttribute="leading" id="bU9-UO-wbe"/>
@@ -2241,14 +2321,14 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMh-33-4w8">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="DzU-IR-hWq"/>
                                             <constraint firstAttribute="width" constant="44" id="Ge7-J0-uHH"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="5ME-SF-6PX" eventType="touchUpInside" id="z8f-Hp-11H"/>
@@ -2264,7 +2344,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="7EQ-bG-SW2"/>
                                     <constraint firstAttribute="trailing" secondItem="ErA-rQ-g6w" secondAttribute="trailing" constant="16" id="AL8-l0-OeK"/>
@@ -2279,45 +2359,45 @@
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Btg-H7-FBu" userLabel="Btn Accept">
                                 <rect key="frame" x="186" y="589" width="189" height="44"/>
-                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="189" id="CKl-hP-SxZ"/>
                                     <constraint firstAttribute="height" constant="44" id="V9Z-ny-yIc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
                                 <state key="normal" title="ยอมรับ">
-                                    <color key="titleColor" red="0.0" green="0.35294117650000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.3529411764705882" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="acceptTos:" destination="5ME-SF-6PX" eventType="touchUpInside" id="u13-Ca-AxF"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujc-wH-KxS">
-                                <rect key="frame" x="186.5" y="596" width="2" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="2" id="Bhd-Zz-Ws2"/>
-                                    <constraint firstAttribute="height" constant="30" id="uN1-8v-HkM"/>
-                                </constraints>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iAh-es-I72">
                                 <rect key="frame" x="0.0" y="589" width="189" height="44"/>
-                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Hnk-06-2eG"/>
                                     <constraint firstAttribute="width" constant="189" id="b5T-FX-h0q"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
                                 <state key="normal" title="ปฎิเสธ">
-                                    <color key="titleColor" red="0.0" green="0.35294117650000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.3529411764705882" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="declineTos:" destination="5ME-SF-6PX" eventType="touchUpInside" id="AqO-tG-h2K"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujc-wH-KxS">
+                                <rect key="frame" x="186" y="596" width="2" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="2" id="Bhd-Zz-Ws2"/>
+                                    <constraint firstAttribute="height" constant="30" id="uN1-8v-HkM"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qLS-vi-sOf">
                                 <rect key="frame" x="0.0" y="633" width="375" height="34"/>
-                                <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="fzx-us-zlg"/>
                                 </constraints>
@@ -2327,13 +2407,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Va1-Nq-1Bu">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="LRd-Al-eel"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Va1-Nq-1Bu" firstAttribute="top" secondItem="XBP-Q9-LFl" secondAttribute="top" id="fLP-kl-E2W"/>
                                     <constraint firstItem="Va1-Nq-1Bu" firstAttribute="leading" secondItem="XBP-Q9-LFl" secondAttribute="leading" id="qPD-qY-HDS"/>
@@ -2398,14 +2478,14 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHc-Xf-Wpf">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="jmU-zE-dsP"/>
                                             <constraint firstAttribute="height" constant="44" id="pCi-ZA-dXH"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="PRf-Zh-MF3" eventType="touchUpInside" id="hSE-Sg-bcK"/>
@@ -2421,7 +2501,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="tYK-oz-zSP" secondAttribute="trailing" constant="16" id="By9-pJ-HZ5"/>
                                     <constraint firstItem="UHc-Xf-Wpf" firstAttribute="leading" secondItem="g8R-tS-bz7" secondAttribute="leading" id="KfM-Y4-CaR"/>
@@ -2440,13 +2520,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8B-wG-ozB">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="fKy-zT-9NP"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="j8B-wG-ozB" firstAttribute="leading" secondItem="kXR-B6-aO0" secondAttribute="leading" id="3zI-rM-Sgo"/>
                                     <constraint firstAttribute="bottom" secondItem="j8B-wG-ozB" secondAttribute="bottom" id="KDH-gE-6qZ"/>
@@ -2497,14 +2577,14 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJt-hM-WGU">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="Lic-Mw-qtW"/>
                                             <constraint firstAttribute="height" constant="44" id="VJj-xV-W6y"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="LpS-tA-hZf" eventType="touchUpInside" id="IZO-U3-RXJ"/>
@@ -2520,7 +2600,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="e66-od-FrZ" secondAttribute="trailing" constant="16" id="84g-bN-uBH"/>
                                     <constraint firstAttribute="height" constant="44" id="Qi7-r3-kqy"/>
@@ -2538,13 +2618,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zF7-RV-Fbt">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="D4J-cR-ERl"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="zF7-RV-Fbt" firstAttribute="leading" secondItem="XW2-DC-zQf" secondAttribute="leading" id="6Nw-6p-fsw"/>
                                     <constraint firstItem="zF7-RV-Fbt" firstAttribute="top" secondItem="XW2-DC-zQf" secondAttribute="top" id="72e-kS-i6W"/>
@@ -2594,41 +2674,14 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B6G-Az-D2H">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNh-yw-JDx">
-                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="OFq-mC-Gah"/>
-                                        </constraints>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="dNh-yw-JDx" secondAttribute="bottom" id="Eac-uJ-9Sb"/>
-                                    <constraint firstItem="dNh-yw-JDx" firstAttribute="leading" secondItem="B6G-Az-D2H" secondAttribute="leading" id="Jca-Bc-dmX"/>
-                                    <constraint firstItem="dNh-yw-JDx" firstAttribute="top" secondItem="B6G-Az-D2H" secondAttribute="top" id="Ko6-Rf-fnE"/>
                                     <constraint firstAttribute="height" constant="44" id="kdF-ob-Zz9"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iKL-RG-k0E">
-                                <rect key="frame" x="0.0" y="44" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <subviews>
-                                    <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWt-7n-zym">
-                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="XAD-1X-qkG"/>
-                                            <constraint firstAttribute="width" constant="44" id="xGS-94-fKZ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
-                                        <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="goBack:" destination="CjN-wS-0YA" eventType="touchUpInside" id="xmJ-pk-Cg0"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="สร้างบัญชีใหม่" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSQ-Cc-BHP">
                                         <rect key="frame" x="16" y="12" width="343" height="21"/>
                                         <constraints>
@@ -2639,30 +2692,27 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="TSQ-Cc-BHP" firstAttribute="leading" secondItem="iKL-RG-k0E" secondAttribute="leading" constant="16" id="70d-fX-Bj0"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="A30-Bx-3w1"/>
+                                    <constraint firstAttribute="height" constant="44" id="A30-Bx-3w1"/>
                                     <constraint firstAttribute="trailing" secondItem="TSQ-Cc-BHP" secondAttribute="trailing" constant="16" id="Fak-wu-ZJu"/>
-                                    <constraint firstItem="TSQ-Cc-BHP" firstAttribute="centerY" secondItem="MWt-7n-zym" secondAttribute="centerY" id="L20-U0-76N"/>
-                                    <constraint firstItem="MWt-7n-zym" firstAttribute="top" secondItem="iKL-RG-k0E" secondAttribute="top" id="ffV-23-yj2"/>
-                                    <constraint firstItem="MWt-7n-zym" firstAttribute="leading" secondItem="iKL-RG-k0E" secondAttribute="leading" id="v4M-c1-dpp"/>
                                     <constraint firstItem="TSQ-Cc-BHP" firstAttribute="centerY" secondItem="iKL-RG-k0E" secondAttribute="centerY" id="wci-Az-MmS"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-Ti-JuK">
-                                <rect key="frame" x="0.0" y="89" width="375" height="500"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="501"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NL8-ES-Dix">
-                                <rect key="frame" x="0.0" y="589" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="100" y="589" width="275" height="44"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="HC5-aP-G79"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
                                 <state key="normal" title="สร้าง">
-                                    <color key="titleColor" red="0.0" green="0.35294117650000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.3529411764705882" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="createAccount:" destination="CjN-wS-0YA" eventType="touchUpInside" id="B4h-75-rpO"/>
@@ -2682,9 +2732,32 @@
                             </datePicker>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Wl-mU-OxY">
                                 <rect key="frame" x="0.0" y="633" width="375" height="34"/>
-                                <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="yx5-sc-i57"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0C3-ao-OPs">
+                                <rect key="frame" x="0.0" y="589" width="100" height="44"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="0hE-rK-pM7"/>
+                                    <constraint firstAttribute="width" constant="100" id="VLP-w3-ier"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
+                                <state key="normal" title="ย้อนกลับ">
+                                    <color key="titleColor" red="0.0" green="0.3529411764705882" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="goBack:" destination="CjN-wS-0YA" eventType="touchUpInside" id="iS7-m3-6cJ"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zUA-9g-mba">
+                                <rect key="frame" x="100" y="596" width="2" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="J9q-Wc-wcs"/>
+                                    <constraint firstAttribute="width" constant="2" id="p6x-mr-AgS"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2692,28 +2765,34 @@
                         <constraints>
                             <constraint firstItem="7Wl-mU-OxY" firstAttribute="trailing" secondItem="6M5-5W-ME0" secondAttribute="trailing" id="1Q1-0K-aht"/>
                             <constraint firstItem="hlG-Gg-0ZP" firstAttribute="trailing" secondItem="6M5-5W-ME0" secondAttribute="trailing" id="8X0-JR-7e1"/>
+                            <constraint firstItem="zUA-9g-mba" firstAttribute="leading" secondItem="0C3-ao-OPs" secondAttribute="trailing" id="A5F-P5-bRS"/>
                             <constraint firstItem="7Wl-mU-OxY" firstAttribute="top" secondItem="NL8-ES-Dix" secondAttribute="bottom" id="Dm6-SH-Jjg"/>
-                            <constraint firstItem="0Ki-Ti-JuK" firstAttribute="leading" secondItem="NL8-ES-Dix" secondAttribute="leading" id="F7A-Po-zqc"/>
                             <constraint firstItem="NL8-ES-Dix" firstAttribute="top" secondItem="0Ki-Ti-JuK" secondAttribute="bottom" id="FUm-Lk-qGt"/>
                             <constraint firstItem="0Ki-Ti-JuK" firstAttribute="top" secondItem="iKL-RG-k0E" secondAttribute="bottom" id="HVI-Qi-ZMB"/>
                             <constraint firstItem="7Wl-mU-OxY" firstAttribute="leading" secondItem="6M5-5W-ME0" secondAttribute="leading" id="Hp7-r8-1Jw"/>
                             <constraint firstItem="hlG-Gg-0ZP" firstAttribute="leading" secondItem="6M5-5W-ME0" secondAttribute="leading" id="Ju1-jF-fFV"/>
+                            <constraint firstItem="zUA-9g-mba" firstAttribute="centerY" secondItem="0C3-ao-OPs" secondAttribute="centerY" id="PMO-AA-8ff"/>
                             <constraint firstItem="B6G-Az-D2H" firstAttribute="trailing" secondItem="6M5-5W-ME0" secondAttribute="trailing" id="Tzl-sQ-UM3"/>
                             <constraint firstItem="B6G-Az-D2H" firstAttribute="leading" secondItem="6M5-5W-ME0" secondAttribute="leading" id="UFx-FU-SXi"/>
                             <constraint firstItem="6M5-5W-ME0" firstAttribute="bottom" secondItem="hlG-Gg-0ZP" secondAttribute="bottom" id="V5g-Gk-nLN"/>
                             <constraint firstItem="0Ki-Ti-JuK" firstAttribute="trailing" secondItem="NL8-ES-Dix" secondAttribute="trailing" id="YCE-p1-zfc"/>
                             <constraint firstAttribute="bottom" secondItem="7Wl-mU-OxY" secondAttribute="bottom" id="Ydw-zl-64w"/>
                             <constraint firstItem="iKL-RG-k0E" firstAttribute="trailing" secondItem="6M5-5W-ME0" secondAttribute="trailing" id="bqy-1B-kfB"/>
+                            <constraint firstItem="0C3-ao-OPs" firstAttribute="leading" secondItem="6M5-5W-ME0" secondAttribute="leading" id="fVF-md-wYl"/>
                             <constraint firstItem="iKL-RG-k0E" firstAttribute="top" secondItem="B6G-Az-D2H" secondAttribute="bottom" id="h6E-Tg-rPn"/>
                             <constraint firstItem="B6G-Az-D2H" firstAttribute="top" secondItem="cM7-af-nz9" secondAttribute="top" id="oqL-dC-Sao"/>
                             <constraint firstItem="iKL-RG-k0E" firstAttribute="leading" secondItem="6M5-5W-ME0" secondAttribute="leading" id="pCV-aD-2mW"/>
                             <constraint firstItem="0Ki-Ti-JuK" firstAttribute="leading" secondItem="6M5-5W-ME0" secondAttribute="leading" id="q9f-s0-YmY"/>
+                            <constraint firstItem="NL8-ES-Dix" firstAttribute="leading" secondItem="0C3-ao-OPs" secondAttribute="trailing" id="tab-xW-LsK"/>
                             <constraint firstItem="0Ki-Ti-JuK" firstAttribute="trailing" secondItem="6M5-5W-ME0" secondAttribute="trailing" id="vDA-0M-X6D"/>
+                            <constraint firstItem="7Wl-mU-OxY" firstAttribute="top" secondItem="0C3-ao-OPs" secondAttribute="bottom" id="z1c-2v-JpK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6M5-5W-ME0"/>
                     </view>
                     <connections>
                         <outlet property="bottomViewHeight" destination="yx5-sc-i57" id="Vm9-5H-1YZ"/>
+                        <outlet property="btnBack" destination="0C3-ao-OPs" id="AZu-cw-p8n"/>
+                        <outlet property="btnBackWidth" destination="VLP-w3-ier" id="XEO-Ji-kfD"/>
                         <outlet property="btnCreateAccount" destination="NL8-ES-Dix" id="wOH-1j-gOT"/>
                         <outlet property="dtPicker" destination="hlG-Gg-0ZP" id="R3y-ao-hbC"/>
                         <outlet property="lblNavTitle" destination="TSQ-Cc-BHP" id="zj6-F6-Aze"/>
@@ -2728,7 +2807,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lxt-y7-2Bq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="CJB-7O-i1w" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="852" y="-546"/>
+            <point key="canvasLocation" x="852" y="-546.47676161919048"/>
         </scene>
         <!--Me-->
         <scene sceneID="aPE-Pa-JuW">
@@ -2744,7 +2823,7 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFm-ee-2zZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="INs-DT-XDN"/>
                                 </constraints>
@@ -2796,13 +2875,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWF-K1-sGG">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="0Bl-Lw-0fX"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="O1c-a3-Fip" eventType="touchUpInside" id="6N3-8F-KWD"/>
@@ -2818,7 +2897,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="aWF-K1-sGG" firstAttribute="leading" secondItem="zcS-DF-AXc" secondAttribute="leading" id="0Or-qL-aQY"/>
                                     <constraint firstItem="rJR-c3-AGR" firstAttribute="leading" secondItem="zcS-DF-AXc" secondAttribute="leading" constant="16" id="0gO-vM-i3l"/>
@@ -2838,13 +2917,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qa-Q7-fOQ">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="tS0-1u-yKQ"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="9qa-Q7-fOQ" secondAttribute="bottom" id="0yP-wC-X88"/>
                                     <constraint firstItem="9qa-Q7-fOQ" firstAttribute="leading" secondItem="WFD-ED-WkC" secondAttribute="leading" id="72s-l4-nvk"/>
@@ -2918,7 +2997,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="MqV-1t-5Ll" secondAttribute="trailing" constant="3" id="1eO-LV-1fY"/>
                                     <constraint firstItem="vgo-cP-uPj" firstAttribute="leading" secondItem="pBd-8X-PPB" secondAttribute="leading" constant="16" id="GTY-Pn-V7f"/>
@@ -2930,7 +3009,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eVs-He-MUX">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="6oi-bY-ILe"/>
                                 </constraints>
@@ -2983,13 +3062,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5q-vl-gqo">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="hgR-2p-ryg"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="btE-BM-gjN" eventType="touchUpInside" id="el1-IP-BNM"/>
@@ -3005,7 +3084,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="1VP-H8-NRy"/>
                                     <constraint firstItem="Vhh-RY-qMW" firstAttribute="centerY" secondItem="o5q-vl-gqo" secondAttribute="centerY" id="29G-pP-hc3"/>
@@ -3036,13 +3115,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x52-X5-9JR">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="4jf-it-gLx"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="x52-X5-9JR" firstAttribute="top" secondItem="Xib-iO-CnF" secondAttribute="top" id="97y-Bl-nKK"/>
                                     <constraint firstAttribute="height" constant="44" id="BuH-2H-J8D"/>
@@ -3052,7 +3131,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egA-cj-x4x">
                                 <rect key="frame" x="0.0" y="633" width="375" height="34"/>
-                                <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="BVs-U6-YGb"/>
                                 </constraints>
@@ -3066,7 +3145,7 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hr-of-dzi">
                                 <rect key="frame" x="0.0" y="456" width="375" height="2"/>
-                                <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="guT-eX-HXB"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="2" id="hrW-ML-aw0"/>
@@ -3149,7 +3228,7 @@
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQK-rY-1hf" userLabel="Btn Accept">
                                         <rect key="frame" x="8" y="256" width="224" height="30"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="jwr-SF-crx"/>
                                         </constraints>
@@ -3163,7 +3242,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4le-tc-doa">
                                         <rect key="frame" x="8" y="294" width="224" height="30"/>
-                                        <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="YLc-nt-LYg"/>
                                         </constraints>
@@ -3240,7 +3319,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lyl-aT-akW" userLabel="Btn Accept">
                                         <rect key="frame" x="8" y="294" width="224" height="30"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="hFY-Ul-sYO"/>
                                         </constraints>
@@ -3323,13 +3402,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KN2-jc-PrB">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="Y4j-sI-MjM"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="Ews-OR-sQr" eventType="touchUpInside" id="Kdl-h0-Azy"/>
@@ -3348,7 +3427,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="KgK-Tc-Bsb" secondAttribute="trailing" constant="16" id="4ai-MQ-RzW"/>
                                     <constraint firstItem="KgK-Tc-Bsb" firstAttribute="centerY" secondItem="KN2-jc-PrB" secondAttribute="centerY" id="96o-wH-fZx"/>
@@ -3377,13 +3456,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RkM-vF-qbn">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="HYu-uK-KjP"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="RkM-vF-qbn" firstAttribute="leading" secondItem="hTX-Fh-QNd" secondAttribute="leading" id="YhO-od-0FX"/>
                                     <constraint firstItem="RkM-vF-qbn" firstAttribute="top" secondItem="hTX-Fh-QNd" secondAttribute="top" id="aXa-gZ-idf"/>
@@ -3466,13 +3545,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6T-ta-7ua">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="KHX-VI-cDd"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="btE-BM-gjN" eventType="touchUpInside" id="IxL-jY-LFr"/>
@@ -3491,7 +3570,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="3qD-1v-K0s" secondAttribute="trailing" constant="16" id="43e-II-5h6"/>
                                     <constraint firstItem="k6T-ta-7ua" firstAttribute="leading" secondItem="dme-Y9-zqC" secondAttribute="leading" id="6AS-k2-cKO"/>
@@ -3520,13 +3599,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5P-5y-bQd">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="4Ae-6i-734"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="b5P-5y-bQd" secondAttribute="bottom" id="Dvy-Dx-cKt"/>
                                     <constraint firstAttribute="height" constant="44" id="MNt-Yz-kZm"/>
@@ -3597,13 +3676,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0DE-Nl-0T4">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="8dz-2b-MDt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="0XE-bc-6gB" eventType="touchUpInside" id="Eqa-Fk-BZ5"/>
@@ -3622,7 +3701,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="iFY-j3-yIA" firstAttribute="centerY" secondItem="0DE-Nl-0T4" secondAttribute="centerY" id="51m-W1-ka4"/>
                                     <constraint firstAttribute="trailing" secondItem="iFY-j3-yIA" secondAttribute="trailing" constant="16" id="H28-Av-DG6"/>
@@ -3643,13 +3722,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O70-sI-1cq">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="K4m-Tf-6jA"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="O70-sI-1cq" secondAttribute="bottom" id="1Mq-1T-gfH"/>
                                     <constraint firstAttribute="height" constant="44" id="BqF-z2-42S"/>
@@ -3735,13 +3814,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Vv-jb-Fzz">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="UHb-RV-5Bw"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBack:" destination="Jjx-Au-Dml" eventType="touchUpInside" id="B8A-DS-W4S"/>
@@ -3760,7 +3839,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="3Vv-jb-Fzz" firstAttribute="leading" secondItem="ECF-To-pWm" secondAttribute="leading" id="Mw5-YN-Ufn"/>
                                     <constraint firstAttribute="height" constant="44" id="e0X-ke-AZl"/>
@@ -3781,13 +3860,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-pa-h5d">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="B1G-0V-TAv"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="SPh-pa-h5d" firstAttribute="leading" secondItem="IFl-Kn-NNB" secondAttribute="leading" id="2mJ-i4-xv4"/>
                                     <constraint firstAttribute="bottom" secondItem="SPh-pa-h5d" secondAttribute="bottom" id="Lg8-Cp-TQt"/>
@@ -3861,8 +3940,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="selectedImageTintColor" red="0.0" green="0.35294117650000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.0" green="0.3529411764705882" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
                                 <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -3898,13 +3977,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBa-0D-13G">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="De1-lM-uPE"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
                                         <state key="normal" title="&lt;" image="home_icon_red.png">
-                                            <color key="titleColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="goBackHome:" destination="p51-rT-9Bj" eventType="touchUpInside" id="Wyh-BV-zLX"/>
@@ -3920,7 +3999,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="gBa-0D-13G" firstAttribute="leading" secondItem="arC-4k-Uyf" secondAttribute="leading" id="3PJ-x1-a2g"/>
                                     <constraint firstAttribute="height" constant="44" id="5BF-iI-ttN"/>
@@ -3936,13 +4015,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1A-Z2-vM7">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="5kD-dy-MlR"/>
                                         </constraints>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="W6n-Mh-OES"/>
                                     <constraint firstItem="A1A-Z2-vM7" firstAttribute="leading" secondItem="joY-EF-TbN" secondAttribute="leading" id="cce-1U-azq"/>
@@ -4045,14 +4124,14 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFJ-5e-RFy">
                                         <rect key="frame" x="20" y="509" width="335" height="38"/>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="38" id="Jef-LE-j8d"/>
                                             <constraint firstAttribute="width" constant="335" id="uai-o2-gV8"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="17"/>
                                         <state key="normal" title="บันทึกใบเสร็จลงอัลบั้ม">
-                                            <color key="titleColor" red="0.0" green="0.35294117650000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.0" green="0.3529411764705882" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="button1Clicked:" destination="6m9-ZY-XmN" eventType="touchUpInside" id="Ui4-2o-C0B"/>
@@ -4060,21 +4139,21 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHr-dr-UG7">
                                         <rect key="frame" x="20" y="555" width="335" height="38"/>
-                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.86274509803921573" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="38" id="g0J-cq-hdD"/>
                                             <constraint firstAttribute="width" constant="335" id="ytZ-3A-tLg"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="17"/>
                                         <state key="normal" title="สั่งบุฟเฟ่ต์">
-                                            <color key="titleColor" red="0.0" green="0.35294117650000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.0" green="0.3529411764705882" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="orderBuffet:" destination="6m9-ZY-XmN" eventType="touchUpInside" id="vd9-L1-U1z"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.30980392159999998" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="VHr-dr-UG7" firstAttribute="trailing" secondItem="gFJ-5e-RFy" secondAttribute="trailing" id="5mX-px-6s7"/>
                                     <constraint firstItem="NgZ-ei-F2m" firstAttribute="top" secondItem="1C2-zA-bd4" secondAttribute="bottom" constant="13" id="5zi-WH-4sr"/>
@@ -4197,7 +4276,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.23529411764705882" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.30980392156862746" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="unR-RH-0yo" firstAttribute="centerX" secondItem="f9s-17-sqZ" secondAttribute="centerX" id="8RC-AC-nXc"/>
                                     <constraint firstItem="unR-RH-0yo" firstAttribute="top" secondItem="RSA-Uc-g8P" secondAttribute="bottom" constant="54" id="HcE-2e-eje"/>
@@ -4259,16 +4338,16 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="aHo-2G-vPP"/>
-        <segue reference="DCf-pC-0Ih"/>
+        <segue reference="8cS-48-gwU"/>
         <segue reference="UZ8-nN-acy"/>
         <segue reference="SMW-0E-KhF"/>
-        <segue reference="SFc-rb-hIO"/>
-        <segue reference="oHQ-Ni-B76"/>
-        <segue reference="C1B-oJ-Xmi"/>
+        <segue reference="Q9v-Ni-Bw8"/>
+        <segue reference="UTS-nM-B10"/>
+        <segue reference="Evt-HH-TlE"/>
         <segue reference="iUw-Wp-Uz3"/>
         <segue reference="hjD-fg-as6"/>
-        <segue reference="jVQ-j3-veY"/>
-        <segue reference="BEB-iv-AGa"/>
+        <segue reference="0UA-kM-pwb"/>
+        <segue reference="wW5-0e-zXP"/>
         <segue reference="aNU-Zf-Wbq"/>
     </inferredMetricsTieBreakers>
 </document>

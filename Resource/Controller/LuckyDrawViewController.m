@@ -118,7 +118,7 @@
             float btnOrderNowWidth = 60;
             _btnHome = [UIButton buttonWithType:UIButtonTypeCustom];
             [_btnHome setTitle:@"< Home" forState:UIControlStateNormal];
-            [_btnHome setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [_btnHome setTitleColor:cSystem5 forState:UIControlStateNormal];
             _btnHome.titleLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
             _btnHome.backgroundColor = [UIColor clearColor];
             _btnHome.contentHorizontalAlignment = NSTextAlignmentLeft;

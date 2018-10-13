@@ -151,7 +151,7 @@
                         <constraint firstAttribute="width" constant="49" id="EoA-mD-03L"/>
                         <constraint firstAttribute="height" constant="31" id="Z4C-yx-cJ1"/>
                     </constraints>
-                    <color key="onTintColor" red="0.3921568627" green="0.86274509799999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="onTintColor" red="0.3921568627" green="0.86274509799999999" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </switch>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="เลข 3 หลักที่ด้านหลังบัตรของคุณ" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wwp-gt-yoJ">
                     <rect key="frame" x="16" y="177" width="343" height="36"/>

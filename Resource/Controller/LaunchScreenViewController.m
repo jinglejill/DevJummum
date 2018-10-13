@@ -73,6 +73,18 @@
     }
     
     [Card setUpCards];
+    
+    //delete image in cache
+    NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    strPath = [NSString stringWithFormat:@"%@/JMM",strPath];
+    NSError *error;
+    [Utility deleteFileInCache:strPath];
+    if(error)
+    {
+        self.homeModel = [[HomeModel alloc]init];
+        self.homeModel.delegate = self;
+        [self.homeModel insertItems:dbWriteLog withData:error.description actionScreen:@"Delete image in cache"];
+    }
 }
 
 -(void)viewDidLayoutSubviews

@@ -17,12 +17,13 @@
 
 @interface BranchSearchViewController ()
 {
-    NSMutableArray *_branchList;
     Branch *_selectedBranch;
     NSMutableArray *_filterBranchList;
     NSInteger _fromReceiptSummaryMenu;
     CustomerTable *_customerTable;
     BOOL _lastItemReached;
+    NSInteger _page;
+    NSInteger _perPage;
 }
 
 
@@ -67,15 +68,6 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
     [super viewDidAppear:animated];
 }
 
--(void)loadView
-{
-    [super loadView];
-    
-    _branchList = [Branch getBranchList];
-//    _filterBranchList = _branchList;
-    
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -86,6 +78,10 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
     lblNavTitle.text = title;
     tbvBranch.delegate = self;
     tbvBranch.dataSource = self;
+    
+    _page = 1;
+    _perPage = 10;
+    _lastItemReached = NO;
     sbText.delegate = self;
     [sbText setInputAccessoryView:self.toolBar];
     UITextField *textField = [sbText valueForKey:@"searchField"];
@@ -94,6 +90,7 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
     textField.font = [UIFont fontWithName:@"Prompt-Regular" size:14.0f];
     [self setTextFieldDesign:textField];
     [sbText becomeFirstResponder];
+    
     
     //cancel button in searchBar
     UIFont *font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];
@@ -151,14 +148,29 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
         cell.lblSpecialPrice.hidden = YES;
         cell.lblQuantity.hidden = YES;
         cell.imgTriangle.hidden = YES;
-        cell.lblMenuName.text = branch.name;        
-        [self.homeModel downloadImageWithFileName:branch.imageUrl type:2 branchID:branch.branchID completionBlock:^(BOOL succeeded, UIImage *image)
-         {
-             if (succeeded)
+        cell.lblMenuName.text = branch.name;
+        
+        
+        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
+        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Logo/%@",strPath,branch.dbName,branch.imageUrl];
+        imageFileName = [Utility isStringEmpty:branch.imageUrl]?noImageFileName:imageFileName;
+        UIImage *image = [Utility getImageFromCache:imageFileName];
+        if(image)
+        {
+            cell.imgMenuPic.image = image;
+        }
+        else
+        {
+            [self.homeModel downloadImageWithFileName:branch.imageUrl type:2 branchID:branch.branchID completionBlock:^(BOOL succeeded, UIImage *image)
              {
-                 cell.imgMenuPic.image = image;
-             }
-         }];
+                 if (succeeded)
+                 {
+                     [Utility saveImageInCache:image imageName:imageFileName];
+                     cell.imgMenuPic.image = image;
+                 }
+             }];
+        }        
         cell.imgMenuPic.contentMode = UIViewContentModeScaleAspectFit;
         [self setImageDesign:cell.imgMenuPic];
         
@@ -167,7 +179,7 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
         {
             self.homeModel = [[HomeModel alloc]init];
             self.homeModel.delegate = self;
-            [self.homeModel downloadItems:dbBranchSearchMore withData:@[sbText.text,branch]];
+            [self.homeModel downloadItems:dbBranchSearch withData:@[sbText.text,@(_page),@(_perPage)]];
         }
 
         
@@ -228,20 +240,6 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
 
 #pragma mark - search
 
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
-{
-    if([Utility isStringEmpty:searchText])
-    {
-        _filterBranchList = _branchList;
-        [tbvBranch reloadData];
-    }
-    else
-    {
-        NSPredicate *resultPredicate   = [NSPredicate predicateWithFormat:@"(_name contains[c] %@)", searchText];        
-        _filterBranchList = [[_branchList filteredArrayUsingPredicate:resultPredicate] mutableCopy];
-    }
-}
-
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     // user did type something, check our datasource for text that looks the same
@@ -249,9 +247,11 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
     {
         // search and reload data source
         self.searchBarActive = YES;
+        _page = 1;
+        _lastItemReached = NO;
         self.homeModel = [[HomeModel alloc]init];
         self.homeModel.delegate = self;
-        [self.homeModel downloadItems:dbBranchSearch withData:searchText];
+        [self.homeModel downloadItems:dbBranchSearch withData:@[searchText,@(_page),@(_perPage)]];
     }
     else
     {
@@ -303,21 +303,33 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
     HomeModel *homeModel = (HomeModel *)objHomeModel;
     if(homeModel.propCurrentDB == dbBranchSearch)
     {
-        _filterBranchList = items[0];
-        [tbvBranch reloadData];
-    }
-    else if(homeModel.propCurrentDB == dbBranchSearchMore)
-    {
-        if([items[0] count]==0)
+        if(_page == 1)
         {
-            _lastItemReached = YES;
-            [tbvBranch reloadData];
+            _filterBranchList = items[0];
         }
         else
         {
+            NSInteger remaining = [_filterBranchList count]%_perPage;
+            for(int i=0; i<remaining; i++)
+            {
+                [_filterBranchList removeLastObject];
+            }
+            
             [_filterBranchList addObjectsFromArray:items[0]];
-            [tbvBranch reloadData];
-        }  
+        }
+        
+        
+        if([items[0] count] < _perPage)
+        {
+            _lastItemReached = YES;
+        }
+        else
+        {
+            _page += 1;
+        }
+        
+        
+        [tbvBranch reloadData];
     }
 }
 @end

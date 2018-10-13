@@ -9,7 +9,7 @@
 "ลืมรหัสผ่าน" = "Forgot Password";
 "◼︎ จำฉันไว้ในระบบ" = "◼︎ Remember Me";
 "◻︎ จำฉันไว้ในระบบ" = "◻︎ Remember Me";
-"คุณล็อคอินผ่าน facebook สำเร็จแล้ว กรุณาใส่วันเกิดและเบอร์โทรศัพท์ เพื่อเราจะได้สร้างบัญชีสำหรับใช้งานให้คุณ" = "You logged in via facebook successfully. Please provide your birthday and phone no. in order to create an account for you";
+"คุณล็อคอินผ่าน facebook สำเร็จแล้ว กรุณาอัพเดตวันเกิดและเบอร์โทรศัพท์ของคุณ" = "You logged in via facebook successfully. Please update your birthday and phone no.";
 "สร้างบัญชีใหม่" = "Create Account";
 "อีเมล" = "Email";
 "ชื่อ" = "First name";
@@ -79,7 +79,7 @@
 "ร้านค้ากำลังปรุงอาหารให้คุณอยู่ค่ะ โปรดรอสักครู่นะคะ" = "The chef is cooking your dish(s). Please wait a little while";
 "อาหารได้ส่งถึงคุณแล้วค่ะ" = "You did got the food";
 "กรุณาใส่รายละเอียดเหตุผลในการขอเงินคืน" = "Please provide reason in detail that you request to open dispute";
-"กรุณากรอกรายละเอียดด้านล่างนี้" = "Please provide the information below";
+"กรุณาใส่รายละเอียดด้านล่างนี้" = "Please provide the information below";
 "เหตุผลในการขอเงินคืน" = "Reason to refund";
 "กรุณาเลือกเหตุผลในการขอเงินคืน" = "Please select the reason you want to have a refund";
 "กรุณาใส่เบอร์โทรติดต่อกลับ เพื่อเจ้าหน้าที่จะโทรสอบถามข้อมูลเพิ่มเติมสำหรับการโอนเงินคืนท่าน" = "Please provide your phone no. for JUMMUM admin to contact you";
@@ -184,3 +184,8 @@
 "กรุณาระบุคูปองส่วนลด" = "Please provide voucher code";
 "Voucher code" = "Voucher code";
 "ขอโทษค่ะ หมดเวลาสั่งบุฟเฟ่ต์แล้วค่ะ" = "Sorry, you've run out of time to order buffet";
+"ใส่ข้อมูลด้านล่าง แล้วเตรียม มั่ม มั่ม ได้เลย !!" = "Please fill in just a little detail and go jummum !!";
+"คุณสามารถ log in ผ่าน facebook หรือกดลงทะเบียนเพื่อสมัครใช้งานค่ะ" = "You can log in via facebook or tap at register now to register.";
+"ยินดีต้อนรับ" = "Welcome";
+"ย้อนกลับ" = "Back";
+"เริ่มใช้งาน" = "Let's go";

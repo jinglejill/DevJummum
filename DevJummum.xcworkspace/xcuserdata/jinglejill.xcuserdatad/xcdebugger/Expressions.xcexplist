@@ -3,12 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "__47-[HomeModel insertItems:withData:actionScreen:]_block_invoke:HomeModel.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[HomeModel URLSession:dataTask:didReceiveData:]:HomeModel.m">
-      </ContextState>
-      <ContextState
          contextName = "-[ReceiptSummaryViewController tableView:cellForRowAtIndexPath:]:ReceiptSummaryViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -20,7 +14,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__42-[MenuSelectionViewController viewDidLoad]_block_invoke:MenuSelectionViewController.m">
+         contextName = "__47-[HomeModel insertItems:withData:actionScreen:]_block_invoke:HomeModel.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[CreditCardAndOrderSummaryViewController tableView:cellForRowAtIndexPath:]:CreditCardAndOrderSummaryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.lblValue.text">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[ReceiptSummaryViewController populateLabelwithTime:receipt:]:ReceiptSummaryViewController.m">
@@ -37,10 +39,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "+[Receipt getReceipt:]:Receipt.m">
+         contextName = "-[ReceiptSummaryViewController itemsDownloaded:manager:]:ReceiptSummaryViewController.m">
          <PersistentStrings>
             <PersistentString
                value = "[SharedReceipt sharedReceipt].receiptList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HomeModel URLSession:dataTask:didReceiveData:]:HomeModel.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ReceiptSummaryViewController tableView:heightForRowAtIndexPath:]:ReceiptSummaryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "receipt.buffetEnded">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -56,20 +69,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ReceiptSummaryViewController itemsDownloaded:manager:]:ReceiptSummaryViewController.m">
+         contextName = "-[RegisterNowViewController viewDidLayoutSubviews]:RegisterNowViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "[SharedReceipt sharedReceipt].receiptList">
+               value = "[self deviceName]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ReceiptSummaryViewController tableView:heightForRowAtIndexPath:]:ReceiptSummaryViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "receipt.buffetEnded">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "__42-[MenuSelectionViewController viewDidLoad]_block_invoke:MenuSelectionViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[CreditCardAndOrderSummaryViewController tableView:numberOfRowsInSection:]:CreditCardAndOrderSummaryViewController.m">
@@ -80,10 +88,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[CreditCardAndOrderSummaryViewController tableView:cellForRowAtIndexPath:]:CreditCardAndOrderSummaryViewController.m">
+         contextName = "+[Receipt getReceipt:]:Receipt.m">
          <PersistentStrings>
             <PersistentString
-               value = "cell.lblValue.text">
+               value = "[SharedReceipt sharedReceipt].receiptList">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

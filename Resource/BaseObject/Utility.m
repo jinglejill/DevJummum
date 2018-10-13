@@ -487,12 +487,6 @@ extern NSString *globalBundleID;
         case urlBranchSearchGetList:
             url = @"JMMBranchSearchGetList.php";
             break;
-        case urlBranchSearchMoreGetList:
-            url = @"JMMBranchSearchMoreGetList.php";
-            break;
-        case urlHotDealWithBranchGetList:
-            url = @"JMMHotDealWithBranchIDGetList.php";
-            break;
         case urlRewardRedemptionWithBranchGetList:
             url = @"JMMRewardRedemptionWithBranchIDGetList.php";
             break;
@@ -1927,6 +1921,26 @@ extern NSString *globalBundleID;
     NSString *cachedFolderPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
     NSString *cachedImagePath = [cachedFolderPath stringByAppendingPathComponent:saveImageName];
     [UIImagePNGRepresentation(image) writeToFile:cachedImagePath atomically:YES];
+}
+
++(void)deleteFileInCache:(NSString *)fileName
+{
+    NSLog(@"delete filename:%@",fileName);
+    NSError *error;
+    
+    if([[NSFileManager defaultManager] isDeletableFileAtPath:fileName])
+    {
+        [[NSFileManager defaultManager]removeItemAtPath:fileName error:&error];
+        if (error)
+        {
+          // file deletion failed
+          NSLog(@"file deletion failed: %@",error.localizedDescription);
+        }
+    }
+    else
+    {
+        NSLog(@"not deletable");
+    }
 }
 
 +(NSString *)formatPhoneNo:(NSString *)phoneNo
