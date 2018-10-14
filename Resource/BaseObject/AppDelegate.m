@@ -437,6 +437,11 @@ void myExceptionHandler(NSException *exception)
         OrderDetailViewController *vc = (OrderDetailViewController *)currentVc;
         [vc reloadTableView];
     }
+    else if([currentVc isKindOfClass:[QRCodeScanTableViewController class]])
+    {
+        QRCodeScanTableViewController *vc = (QRCodeScanTableViewController *)currentVc;
+        [vc viewDidAppear:NO];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

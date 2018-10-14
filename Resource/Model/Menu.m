@@ -37,6 +37,7 @@
         [self valueForKey:@"belongToMenuID"]?[self valueForKey:@"belongToMenuID"]:[NSNull null],@"belongToMenuID",
         [self valueForKey:@"timeToOrder"]?[self valueForKey:@"timeToOrder"]:[NSNull null],@"timeToOrder",
         [self valueForKey:@"recommended"]?[self valueForKey:@"recommended"]:[NSNull null],@"recommended",
+        [self valueForKey:@"recommendedOrderNo"]?[self valueForKey:@"recommendedOrderNo"]:[NSNull null],@"recommendedOrderNo",
         [self valueForKey:@"imageUrl"]?[self valueForKey:@"imageUrl"]:[NSNull null],@"imageUrl",
         [self valueForKey:@"color"]?[self valueForKey:@"color"]:[NSNull null],@"color",
         [self valueForKey:@"orderNo"]?[self valueForKey:@"orderNo"]:[NSNull null],@"orderNo",
@@ -47,7 +48,7 @@
         nil];
 }
 
--(Menu *)initWithMenuCode:(NSString *)menuCode titleThai:(NSString *)titleThai price:(float)price menuTypeID:(NSInteger)menuTypeID subMenuTypeID:(NSInteger)subMenuTypeID subMenuType2ID:(NSInteger)subMenuType2ID subMenuType3ID:(NSInteger)subMenuType3ID buffetMenu:(NSInteger)buffetMenu belongToMenuID:(NSInteger)belongToMenuID timeToOrder:(NSInteger)timeToOrder recommended:(NSInteger)recommended imageUrl:(NSString *)imageUrl color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status remark:(NSString *)remark
+-(Menu *)initWithMenuCode:(NSString *)menuCode titleThai:(NSString *)titleThai price:(float)price menuTypeID:(NSInteger)menuTypeID subMenuTypeID:(NSInteger)subMenuTypeID subMenuType2ID:(NSInteger)subMenuType2ID subMenuType3ID:(NSInteger)subMenuType3ID buffetMenu:(NSInteger)buffetMenu belongToMenuID:(NSInteger)belongToMenuID timeToOrder:(NSInteger)timeToOrder recommended:(NSInteger)recommended recommendedOrderNo:(NSInteger)recommendedOrderNo imageUrl:(NSString *)imageUrl color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status remark:(NSString *)remark
 {
     self = [super init];
     if(self)
@@ -64,6 +65,7 @@
         self.belongToMenuID = belongToMenuID;
         self.timeToOrder = timeToOrder;
         self.recommended = recommended;
+        self.recommendedOrderNo = recommendedOrderNo;
         self.imageUrl = imageUrl;
         self.color = color;
         self.orderNo = orderNo;
@@ -159,6 +161,7 @@
         ((Menu *)copy).belongToMenuID = self.belongToMenuID;
         ((Menu *)copy).timeToOrder = self.timeToOrder;
         ((Menu *)copy).recommended = self.recommended;
+        ((Menu *)copy).recommendedOrderNo = self.recommendedOrderNo;
         [copy setImageUrl:self.imageUrl];
         [copy setColor:self.color];
         ((Menu *)copy).orderNo = self.orderNo;
@@ -185,6 +188,7 @@
     && self.belongToMenuID == editingMenu.belongToMenuID
     && self.timeToOrder == editingMenu.timeToOrder
     && self.recommended == editingMenu.recommended
+    && self.recommendedOrderNo == editingMenu.recommendedOrderNo
     && [self.imageUrl isEqualToString:editingMenu.imageUrl]
     && [self.color isEqualToString:editingMenu.color]
     && self.orderNo == editingMenu.orderNo
@@ -211,6 +215,7 @@
     toMenu.belongToMenuID = fromMenu.belongToMenuID;
     toMenu.timeToOrder = fromMenu.timeToOrder;
     toMenu.recommended = fromMenu.recommended;
+    toMenu.recommendedOrderNo = fromMenu.recommendedOrderNo;
     toMenu.imageUrl = fromMenu.imageUrl;
     toMenu.color = fromMenu.color;
     toMenu.orderNo = fromMenu.orderNo;
@@ -221,6 +226,7 @@
     
     return toMenu;
 }
+
 
 +(Menu *)getMenu:(NSInteger)menuID branchID:(NSInteger)branchID
 {
@@ -389,4 +395,22 @@
     return [[menuBelongToBuffetSet allObjects] mutableCopy];
 }
 
++(NSMutableArray *)getMenuListRecommendedWithMenuList:(NSMutableArray *)menuList
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_recommended = 1"];
+    NSArray *filterArray = [menuList filteredArrayUsingPredicate:predicate];
+    
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"_recommendedOrderNo" ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+    NSArray *sortArray = [filterArray sortedArrayUsingDescriptors:sortDescriptors];
+    
+    
+    return [sortArray mutableCopy];
+}
+
++(BOOL)hasRecommendedMenuWithMenuList:(NSMutableArray *)menuList
+{
+    return [[self getMenuListRecommendedWithMenuList:menuList] count] > 0;
+}
 @end

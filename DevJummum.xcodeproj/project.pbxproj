@@ -17,6 +17,8 @@
 		EF1F37EF2170AEA300EFB214 /* FirstTimeInstall.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1F37EE2170AEA300EFB214 /* FirstTimeInstall.m */; };
 		EF1F37F22171104900EFB214 /* JummumRegisterBgIpad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF1F37F02171104900EFB214 /* JummumRegisterBgIpad.jpg */; };
 		EF1F37F32171104900EFB214 /* JummumRegisterBgIphoneX.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF1F37F12171104900EFB214 /* JummumRegisterBgIphoneX.jpg */; };
+		EF1F37F72171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1F37F52171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.m */; };
+		EF1F37F82171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF1F37F62171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.xib */; };
 		EF20D35B21705756002D14EC /* JummumRegisterBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF20D35A21705755002D14EC /* JummumRegisterBg.jpg */; };
 		EF33CD78211C26C200560C69 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF33CD77211C26C200560C69 /* ViewController.m */; };
 		EF33CD7D211C26C400560C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF33CD7C211C26C400560C69 /* Assets.xcassets */; };
@@ -510,6 +512,9 @@
 		EF1F37EE2170AEA300EFB214 /* FirstTimeInstall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstTimeInstall.m; sourceTree = "<group>"; };
 		EF1F37F02171104900EFB214 /* JummumRegisterBgIpad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = JummumRegisterBgIpad.jpg; sourceTree = "<group>"; };
 		EF1F37F12171104900EFB214 /* JummumRegisterBgIphoneX.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = JummumRegisterBgIphoneX.jpg; sourceTree = "<group>"; };
+		EF1F37F42171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCellSquareThumbNail.h; sourceTree = "<group>"; };
+		EF1F37F52171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCellSquareThumbNail.m; sourceTree = "<group>"; };
+		EF1F37F62171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCellSquareThumbNail.xib; sourceTree = "<group>"; };
 		EF20D35A21705755002D14EC /* JummumRegisterBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = JummumRegisterBg.jpg; sourceTree = "<group>"; };
 		EF33CD70211C26C200560C69 /* DevJummum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevJummum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF33CD76211C26C200560C69 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -1808,6 +1813,9 @@
 				EF33CF76211C36D100560C69 /* CustomViewVoucher.xib */,
 				EF33CF4F211C36D100560C69 /* UILabel+FontAppearance.h */,
 				EF33CF80211C36D100560C69 /* UILabel+FontAppearance.m */,
+				EF1F37F42171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.h */,
+				EF1F37F52171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.m */,
+				EF1F37F62171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.xib */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -2278,6 +2286,7 @@
 				EF33D059211C36D200560C69 /* beep.mp3 in Resources */,
 				EF88004D213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.xib in Resources */,
 				EF88014421430C330062D9D4 /* jummumGiftBoxPop.png in Resources */,
+				EF1F37F82171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.xib in Resources */,
 				EF33D018211C36D200560C69 /* triangle_dev.png in Resources */,
 				EF33CFED211C36D200560C69 /* Icon-76@2x.png in Resources */,
 				EF33D0F7211C36D200560C69 /* Prompt-Light.ttf in Resources */,
@@ -2525,6 +2534,7 @@
 				EF33CFDE211C36D200560C69 /* OmiseTokenRequest.swift in Sources */,
 				EFE2C6C9215107FA006EF563 /* Language.m in Sources */,
 				EF33D0AE211C36D200560C69 /* CustomTableViewCellLogo.m in Sources */,
+				EF1F37F72171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.m in Sources */,
 				EF33D0B1211C36D200560C69 /* CustomTableViewCellTotal.m in Sources */,
 				EF33D04C211C36D200560C69 /* MeViewController.m in Sources */,
 				EF33D0AA211C36D200560C69 /* CustomViewController.m in Sources */,

@@ -189,7 +189,6 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
                  }
              }];
         }
-        [self setImageDesign:cell.imgVwValue];
         
         
         
@@ -242,7 +241,6 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
                  }
              }];
         }
-        [self setImageDesign:cell.imgVwValue];
         
         
         
@@ -304,7 +302,8 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
                  }
              }];
         }
-        [self setImageDesign:cell.imgVwValue];
+
+
         float imageWidth = cell.frame.size.width -2*16 > 375?375:cell.frame.size.width -2*16;
         cell.imgVwValueHeight.constant = imageWidth/16*9;        
 

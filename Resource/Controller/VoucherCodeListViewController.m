@@ -332,7 +332,6 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
                      }
                  }];
             }
-            [self setImageDesign:cell.imgVwValue];
             
             
             
@@ -379,7 +378,6 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
                      }
                  }];
             }
-            [self setImageDesign:cell.imgVwValue];
             
             
             
@@ -488,7 +486,6 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
                      }
                  }];
             }
-            [self setImageDesign:cell.imgVwValue];
             
             
             

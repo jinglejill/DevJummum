@@ -122,7 +122,6 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
                  }
              }];
         }
-        [self setImageDesign:cell.imgVwValue];
         
         
         
@@ -222,7 +221,6 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
                  }
              }];
         }
-        [self setImageDesign:cell.imgVwValue];
         
         
         

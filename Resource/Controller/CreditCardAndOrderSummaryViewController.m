@@ -1773,14 +1773,12 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 
                 if(_promotionOrRewardRedemption == 1)
                 {
-//                    UserPromotionUsed *userPromotionUsed = [[UserPromotionUsed alloc]initWithUserAccountID:userAccount.userAccountID promotionID:_promotionID receiptID:0];
                     self.homeModel = [[HomeModel alloc]init];
                     self.homeModel.delegate = self;
                     [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,_selectedVoucherCode] actionScreen:@"call omise checkout at server"];
                 }
                 else
                 {
-//                    UserRewardRedemptionUsed *userRewardRedemptionUsed = [[UserRewardRedemptionUsed alloc]initWithUserAccountID:userAccount.userAccountID rewardRedemptionID:_rewardRedemptionID receiptID:0];
                     self.homeModel = [[HomeModel alloc]init];
                     self.homeModel.delegate = self;
                     [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,_selectedVoucherCode] actionScreen:@"call omise checkout at server"];
@@ -1788,7 +1786,10 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             }
             else
             {
-                NSString *message = [Language getText:@"การจ่ายด้วยบัตรเครดิต/เดบิตขัดข้อง กรุณาติดต่อเจ้าหน้าที่ที่เกี่ยวข้อง"];
+                [self removeWaitingView];
+                btnPay.enabled = YES;
+//                NSString *message = [Language getText:@"การจ่ายด้วยบัตรเครดิต/เดบิตขัดข้อง กรุณาติดต่อเจ้าหน้าที่ที่เกี่ยวข้อง"];
+                NSString *message = [Language getText:@"กรุณาตรวจสอบข้อมูลบัตรเครดิต/เดบิต อีกครั้งค่ะ"];
                 [self showAlert:@"" message:message];
             }
         }];

@@ -12,9 +12,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblDishNo;
 @property (strong, nonatomic) IBOutlet UITextField *txtNote;
 @property (strong, nonatomic) IBOutlet UILabel *lblTotalNotePrice;
-@property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer *longPressGestureRecognizer;
-@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *doubleTapGestureRecognizer;
-@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *singleTapGestureRecognizer;
 @property (strong, nonatomic) IBOutlet UIButton *btnDelete;
 @property (strong, nonatomic) IBOutlet UIButton *btnTakeAway;
+@property (strong, nonatomic) UILongPressGestureRecognizer *longPressGestureRecognizer;
+@property (strong, nonatomic) UITapGestureRecognizer *doubleTapGestureRecognizer;
+@property (strong, nonatomic) UITapGestureRecognizer *singleTapGestureRecognizer;
 @end

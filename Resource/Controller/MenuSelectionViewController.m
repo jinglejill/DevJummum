@@ -10,6 +10,7 @@
 #import "BasketViewController.h"
 #import "CustomTableViewCellMenu.h"
 #import "CustomTableViewCellSearchBar.h"
+#import "CustomTableViewCellSquareThumbNail.h"
 #import "Menu.h"
 #import "MenuType.h"
 #import "MenuNote.h"
@@ -34,6 +35,8 @@
     NSInteger _selectedMenuTypeIndex;
     NSMutableArray *_currentMenuTypeList;
     UIScrollView *_horizontalScrollView;
+    NSMutableArray *_recommendList;
+    UIButton *_lblSpentForLuckyDraw;
 }
 
 @property (nonatomic)        BOOL           searchBarActive;
@@ -43,6 +46,7 @@
 static float const SEARCH_BAR_HEIGHT = 56;
 static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
 static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBar";
+static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSquareThumbNail";
 
 
 @synthesize lblNavTitle;
@@ -117,6 +121,10 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         UINib *nib = [UINib nibWithNibName:reuseIdentifierSearchBar bundle:nil];
         [tbvMenu registerNib:nib forCellReuseIdentifier:reuseIdentifierSearchBar];
     }
+    {
+        UINib *nib = [UINib nibWithNibName:reuseIdentifierSquareThumbNail bundle:nil];
+        [tbvMenu registerNib:nib forCellReuseIdentifier:reuseIdentifierSquareThumbNail];
+    }
 
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -128,29 +136,29 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         NSString *message = [Language getText:@"ลุ้นรับรางวัลพิเศษ\nเมื่อทานครบทุกๆ %ld บาท"];
         NSInteger spentAmount = branch.luckyDrawSpend;
         NSString *luckyDrawMessage = [NSString stringWithFormat:message,spentAmount];
-        UIButton *lblSpentForLuckyDraw = [UIButton buttonWithType:UIButtonTypeCustom];
-        [lblSpentForLuckyDraw setTitle:luckyDrawMessage forState:UIControlStateNormal];
-        [lblSpentForLuckyDraw setTitleColor:cSystem3 forState:UIControlStateNormal];
-        lblSpentForLuckyDraw.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);        
-        lblSpentForLuckyDraw.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        lblSpentForLuckyDraw.backgroundColor = [cSystem1_30 colorWithAlphaComponent:0.5];
-        lblSpentForLuckyDraw.titleLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-        lblSpentForLuckyDraw.titleLabel.numberOfLines = 2;
-        lblSpentForLuckyDraw.userInteractionEnabled = NO;
+        _lblSpentForLuckyDraw = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_lblSpentForLuckyDraw setTitle:luckyDrawMessage forState:UIControlStateNormal];
+        [_lblSpentForLuckyDraw setTitleColor:cSystem3 forState:UIControlStateNormal];
+        _lblSpentForLuckyDraw.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+        _lblSpentForLuckyDraw.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        _lblSpentForLuckyDraw.backgroundColor = [cSystem1_30 colorWithAlphaComponent:0.5];
+        _lblSpentForLuckyDraw.titleLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+        _lblSpentForLuckyDraw.titleLabel.numberOfLines = 2;
+        _lblSpentForLuckyDraw.userInteractionEnabled = NO;
         
         
 
-        [lblSpentForLuckyDraw sizeToFit];
+        [_lblSpentForLuckyDraw sizeToFit];
         
         
         UIWindow *window = UIApplication.sharedApplication.keyWindow;
-        CGRect frame = lblSpentForLuckyDraw.frame;
+        CGRect frame = _lblSpentForLuckyDraw.frame;
         frame.origin.x = self.view.frame.size.width-frame.size.width;
         frame.origin.y = self.view.frame.size.height - window.safeAreaInsets.bottom - 44 - frame.size.height;
         
-        lblSpentForLuckyDraw.frame = frame;
-        [self setCornerDesign:lblSpentForLuckyDraw];
-        [self.view addSubview:lblSpentForLuckyDraw];
+        _lblSpentForLuckyDraw.frame = frame;
+        [self setCornerDesign:_lblSpentForLuckyDraw];
+        [self.view addSubview:_lblSpentForLuckyDraw];
     }
     
     
@@ -183,7 +191,8 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
             [self.homeModel downloadItems:dbMenuBelongToBuffet withData:buffetReceipt];
         }
         else
-        {            
+        {
+//            _recommendList =
             _menuList = [Menu getMenuBelongToBuffet:buffetReceipt];
             _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
             _menuTypeList = [MenuType sortList:_menuTypeList];
@@ -309,9 +318,17 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         {
             if(_menuTypeList && [_menuTypeList count]>0)
             {
-                MenuType *menuType = _menuTypeList[_selectedMenuTypeIndex];
-                NSMutableArray *menuList = [Menu getMenuListWithMenuType:menuType.menuTypeID menuList:_filterMenuList];
-                return [menuList count];
+                NSMutableArray *menuList = [self getMenuListWithSelectedIndex:_selectedMenuTypeIndex];
+                if([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0)
+                {
+                    [_lblSpentForLuckyDraw removeFromSuperview];
+                    return ceilf([menuList count]/2.0);
+                }
+                else
+                {
+                    [self.view addSubview:_lblSpentForLuckyDraw];
+                    return [menuList count];
+                }
             }
         }
     }
@@ -353,85 +370,294 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         }
         else
         {
-            CustomTableViewCellMenu *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierMenu];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            
-            MenuType *menuType = _menuTypeList[_selectedMenuTypeIndex];
-            NSMutableArray *menuList = [Menu getMenuListWithMenuType:menuType.menuTypeID menuList:_filterMenuList];
-            Menu *menu = menuList[item];
-            cell.lblMenuName.text = menu.titleThai;
-            [cell.lblMenuName sizeToFit];
-            cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height;
-            
-            
-            
-            
-            SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
-            if(specialPriceProgram)
+            if([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0)
             {
-                NSString *strPrice = [Utility formatDecimal:menu.price withMinFraction:2 andMaxFraction:2];
-                strPrice = [NSString stringWithFormat:@"฿ %@",strPrice];
-                UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                NSDictionary *attribute = @{NSStrikethroughStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
-                NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:strPrice attributes:attribute];
-                cell.lblPrice.attributedText = attrString;
-                [cell.lblPrice sizeToFit];
+                CustomTableViewCellSquareThumbNail *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierSquareThumbNail];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            
+                NSMutableArray *menuList = [self getMenuListWithSelectedIndex:_selectedMenuTypeIndex];
+                Menu *menuLeft = menuList[item*2];
+            
+            
+            
+                //vw
+                cell.vwLeftWidth.constant = (self.view.frame.size.width - 3*8)/2;
+//                cell.vwLeftHeight.constant = cell.vwLeftWidth.constant+44;
+                cell.vwLeftHeight.constant = cell.vwLeftWidth.constant+44+30;
+                cell.vwLeft.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+                cell.vwLeft.layer.shadowOpacity = 0.8;
+                cell.vwLeft.layer.shadowRadius = 6;
+                cell.vwLeft.layer.shadowOffset = CGSizeZero;
+                cell.vwLeft.layer.masksToBounds = NO;
+//                cell.vwLeft.tag = item;
+                [cell.vwLeft addGestureRecognizer:cell.singleTapGestureRecognizerLeft];
                 
                 
-                NSString *strSpecialPrice = [Utility formatDecimal:specialPriceProgram.specialPrice withMinFraction:2 andMaxFraction:2];
-                cell.lblSpecialPrice.text = [NSString stringWithFormat:@"฿ %@",strSpecialPrice];
-            }
-            else
-            {
-                NSString *strPrice = [Utility formatDecimal:menu.price withMinFraction:2 andMaxFraction:2];
-                strPrice = [NSString stringWithFormat:@"฿ %@",strPrice];
-                UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                NSDictionary *attribute = @{NSFontAttributeName: font};
-                NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:strPrice attributes:attribute];
-                cell.lblPrice.attributedText = attrString;
-                cell.lblSpecialPrice.text = @"";
-            }
+                //gesture
+                cell.singleTapGestureRecognizerLeft.numberOfTapsRequired = 1;
+                [cell.singleTapGestureRecognizerLeft addTarget:self action:@selector(handleSingleTapLeft:)];
             
             
-            NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-            NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
-            NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Menu/%@",strPath,branch.dbName,menu.imageUrl];
-            imageFileName = [Utility isStringEmpty:menu.imageUrl]?noImageFileName:imageFileName;
-            UIImage *image = [Utility getImageFromCache:imageFileName];
-            if(image)
-            {
-                cell.imgMenuPic.image = image;
-            }
-            else
-            {
-                [self.homeModel downloadImageWithFileName:menu.imageUrl type:1 branchID:branch.branchID completionBlock:^(BOOL succeeded, UIImage *image)
-                 {
-                     if (succeeded)
+                //imgVw
+                NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+                NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
+                NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Menu/%@",strPath,branch.dbName,menuLeft.imageUrl];
+                imageFileName = [Utility isStringEmpty:menuLeft.imageUrl]?noImageFileName:imageFileName;
+                UIImage *image = [Utility getImageFromCache:imageFileName];
+                if(image)
+                {
+                    cell.imgVwLeft.image = image;
+                }
+                else
+                {
+                    [self.homeModel downloadImageWithFileName:menuLeft.imageUrl type:1 branchID:branch.branchID completionBlock:^(BOOL succeeded, UIImage *image)
                      {
-                         [Utility saveImageInCache:image imageName:imageFileName];
-                         cell.imgMenuPic.image = image;
-                     }
-                 }];
-            }
-            cell.imgMenuPic.contentMode = UIViewContentModeScaleAspectFit;
-            [self setImageDesign:cell.imgMenuPic];
+                         if (succeeded)
+                         {
+                             [Utility saveImageInCache:image imageName:imageFileName];
+                             cell.imgVwLeft.image = image;
+                         }
+                     }];
+                }
+                cell.imgVwLeft.contentMode = UIViewContentModeScaleAspectFit;
+                cell.imgVwLeftHeight.constant = cell.vwLeftWidth.constant;
             
             
-            NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
-            NSMutableArray *orderTakingListWithMenuID = [OrderTaking getOrderTakingListWithMenuID:menu.menuID orderTakingList:orderTakingList];
-            if([orderTakingListWithMenuID count]==0)
-            {
-                cell.imgTriangle.hidden = YES;
+            
+                //lbl
+                cell.lblLeft.text = menuLeft.titleThai;
+                
+                
+                //price
+                SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menuLeft.menuID branchID:branch.branchID];
+                if(specialPriceProgram)
+                {
+                    NSString *strPrice = [Utility formatDecimal:menuLeft.price withMinFraction:2 andMaxFraction:2];
+                    strPrice = [NSString stringWithFormat:@"฿ %@",strPrice];
+                    UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:14];
+                    NSDictionary *attribute = @{NSStrikethroughStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
+                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:strPrice attributes:attribute];
+                    cell.lblPriceLeft.attributedText = attrString;
+                    [cell.lblPriceLeft sizeToFit];
+                    CGRect frame = cell.lblPriceLeft.frame;
+                    frame.size.height = 18;
+                    cell.lblPriceLeft.frame = frame;
+                    
+                    
+                    NSString *strSpecialPrice = [Utility formatDecimal:specialPriceProgram.specialPrice withMinFraction:2 andMaxFraction:2];
+                    cell.lblSpecialPriceLeft.text = [NSString stringWithFormat:@"฿ %@",strSpecialPrice];
+                }
+                else
+                {
+                    NSString *strPrice = [Utility formatDecimal:menuLeft.price withMinFraction:2 andMaxFraction:2];
+                    cell.lblPriceLeft.text = [NSString stringWithFormat:@"฿ %@",strPrice];
+                    cell.lblSpecialPriceLeft.text = @"";
+                }
+                
+                
+                //triangle
+                NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+                NSMutableArray *orderTakingListWithMenuID = [OrderTaking getOrderTakingListWithMenuID:menuLeft.menuID orderTakingList:orderTakingList];
+                if([orderTakingListWithMenuID count]==0)
+                {
+                    cell.imgVwTriangleLeft.hidden = YES;
+                    cell.lblQuantityLeft.hidden = cell.imgVwTriangleLeft.hidden;
+                }
+                else
+                {
+                    cell.imgVwTriangleLeft.hidden = NO;
+                    cell.lblQuantityLeft.hidden = cell.imgVwTriangleLeft.hidden;
+                    cell.lblQuantityLeft.text = [Utility formatDecimal:[orderTakingListWithMenuID count] withMinFraction:0 andMaxFraction:0];
+                }
+            
+            
+            
+                NSInteger rightIndex = item*2+1;
+                if(rightIndex < [menuList count])
+                {
+                    Menu *menuRight = menuList[rightIndex];
+                    
+                    
+                    //vw
+                    cell.vwRight.hidden = NO;
+                    cell.vwRight.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+                    cell.vwRight.layer.shadowOpacity = 0.8;
+                    cell.vwRight.layer.shadowRadius = 6;
+                    cell.vwRight.layer.shadowOffset = CGSizeZero;
+                    cell.vwRight.layer.masksToBounds = NO;
+//                    cell.vwRight.tag = item;
+                    [cell.vwRight addGestureRecognizer:cell.singleTapGestureRecognizerRight];
+                    
+                    
+                    //gesture
+                    cell.singleTapGestureRecognizerRight.numberOfTapsRequired = 1;
+                    [cell.singleTapGestureRecognizerRight addTarget:self action:@selector(handleSingleTapRight:)];
+                    
+                    
+                    //imgVw
+                    NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+                    NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
+                    NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Menu/%@",strPath,branch.dbName,menuRight.imageUrl];
+                    imageFileName = [Utility isStringEmpty:menuRight.imageUrl]?noImageFileName:imageFileName;
+                    UIImage *image = [Utility getImageFromCache:imageFileName];
+                    if(image)
+                    {
+                        cell.imgVwRight.image = image;
+                    }
+                    else
+                    {
+                        [self.homeModel downloadImageWithFileName:menuRight.imageUrl type:1 branchID:branch.branchID completionBlock:^(BOOL succeeded, UIImage *image)
+                         {
+                             if (succeeded)
+                             {
+                                 [Utility saveImageInCache:image imageName:imageFileName];
+                                 cell.imgVwRight.image = image;
+                             }
+                         }];
+                    }
+                    cell.imgVwRight.contentMode = UIViewContentModeScaleAspectFit;
+                    cell.imgVwRightHeight.constant = cell.vwLeftWidth.constant;
+                    
+                    
+                    
+                    //lbl
+                    cell.lblRight.text = menuRight.titleThai;
+                    
+                    
+                    //price
+                    SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menuRight.menuID branchID:branch.branchID];
+                    if(specialPriceProgram)
+                    {
+                        NSString *strPrice = [Utility formatDecimal:menuRight.price withMinFraction:2 andMaxFraction:2];
+                        strPrice = [NSString stringWithFormat:@"฿ %@",strPrice];
+                        UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:14];
+                        NSDictionary *attribute = @{NSStrikethroughStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
+                        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:strPrice attributes:attribute];
+                        cell.lblPriceRight.attributedText = attrString;
+                        [cell.lblPriceRight sizeToFit];
+                        CGRect frame = cell.lblPriceRight.frame;
+                        frame.size.height = 18;
+                        cell.lblPriceRight.frame = frame;
+                        
+                        
+                        NSString *strSpecialPrice = [Utility formatDecimal:specialPriceProgram.specialPrice withMinFraction:2 andMaxFraction:2];
+                        cell.lblSpecialPriceRight.text = [NSString stringWithFormat:@"฿ %@",strSpecialPrice];
+                    }
+                    else
+                    {
+                        NSString *strPrice = [Utility formatDecimal:menuRight.price withMinFraction:2 andMaxFraction:2];
+                        cell.lblPriceRight.text = [NSString stringWithFormat:@"฿ %@",strPrice];
+                        cell.lblSpecialPriceRight.text = @"";
+                    }
+                    
+                    
+                    //triangle
+                    NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+                    NSMutableArray *orderTakingListWithMenuID = [OrderTaking getOrderTakingListWithMenuID:menuRight.menuID orderTakingList:orderTakingList];
+                    if([orderTakingListWithMenuID count]==0)
+                    {
+                        cell.imgVwTriangleRight.hidden = YES;
+                        cell.lblQuantityRight.hidden = cell.imgVwTriangleRight.hidden;
+                    }
+                    else
+                    {
+                        cell.imgVwTriangleRight.hidden = NO;
+                        cell.lblQuantityRight.hidden = cell.imgVwTriangleRight.hidden;
+                        cell.lblQuantityRight.text = [Utility formatDecimal:[orderTakingListWithMenuID count] withMinFraction:0 andMaxFraction:0];
+                    }
+                }
+                else
+                {
+                    cell.vwRight.hidden = YES;
+                }
+            
+                return cell;
+            
             }
             else
             {
-                cell.imgTriangle.hidden = NO;
-                cell.lblQuantity.text = [Utility formatDecimal:[orderTakingListWithMenuID count] withMinFraction:0 andMaxFraction:0];
+                CustomTableViewCellMenu *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierMenu];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                
+                NSMutableArray *menuList = [self getMenuListWithSelectedIndex:_selectedMenuTypeIndex];
+                Menu *menu = menuList[item];
+                cell.lblMenuName.text = menu.titleThai;
+                [cell.lblMenuName sizeToFit];
+                cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height;
+                
+                
+                
+                
+                SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
+                if(specialPriceProgram)
+                {
+                    NSString *strPrice = [Utility formatDecimal:menu.price withMinFraction:2 andMaxFraction:2];
+                    strPrice = [NSString stringWithFormat:@"฿ %@",strPrice];
+                    UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+                    NSDictionary *attribute = @{NSStrikethroughStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
+                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:strPrice attributes:attribute];
+                    cell.lblPrice.attributedText = attrString;
+                    [cell.lblPrice sizeToFit];
+                    
+                    
+                    NSString *strSpecialPrice = [Utility formatDecimal:specialPriceProgram.specialPrice withMinFraction:2 andMaxFraction:2];
+                    cell.lblSpecialPrice.text = [NSString stringWithFormat:@"฿ %@",strSpecialPrice];
+                }
+                else
+                {
+                    NSString *strPrice = [Utility formatDecimal:menu.price withMinFraction:2 andMaxFraction:2];
+                    strPrice = [NSString stringWithFormat:@"฿ %@",strPrice];
+                    UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+                    NSDictionary *attribute = @{NSFontAttributeName: font};
+                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:strPrice attributes:attribute];
+                    cell.lblPrice.attributedText = attrString;
+                    cell.lblSpecialPrice.text = @"";
+                }
+                
+                
+                NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+                NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
+                NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Menu/%@",strPath,branch.dbName,menu.imageUrl];
+                imageFileName = [Utility isStringEmpty:menu.imageUrl]?noImageFileName:imageFileName;
+                UIImage *image = [Utility getImageFromCache:imageFileName];
+                if(image)
+                {
+                    cell.imgMenuPic.image = image;
+                }
+                else
+                {
+                    [self.homeModel downloadImageWithFileName:menu.imageUrl type:1 branchID:branch.branchID completionBlock:^(BOOL succeeded, UIImage *image)
+                     {
+                         if (succeeded)
+                         {
+                             [Utility saveImageInCache:image imageName:imageFileName];
+                             cell.imgMenuPic.image = image;
+                         }
+                     }];
+                }
+                cell.imgMenuPic.contentMode = UIViewContentModeScaleAspectFit;
+                [self setImageDesign:cell.imgMenuPic];
+                
+                
+                NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+                NSMutableArray *orderTakingListWithMenuID = [OrderTaking getOrderTakingListWithMenuID:menu.menuID orderTakingList:orderTakingList];
+                if([orderTakingListWithMenuID count]==0)
+                {
+                    cell.imgTriangle.hidden = YES;
+                    cell.lblQuantity.hidden = cell.imgTriangle.hidden;
+                }
+                else
+                {
+                    cell.imgTriangle.hidden = NO;
+                    cell.lblQuantity.hidden = cell.imgTriangle.hidden;
+                    cell.lblQuantity.text = [Utility formatDecimal:[orderTakingListWithMenuID count] withMinFraction:0 andMaxFraction:0];
+                }
+                
+                
+                return cell;
             }
-            
-            
-            return cell;
         }
     }
     
@@ -447,17 +673,24 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     }
     else
     {
-        CustomTableViewCellMenu *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierMenu];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        
-        MenuType *menuType = _menuTypeList[_selectedMenuTypeIndex];
-        NSMutableArray *menuList = [Menu getMenuListWithMenuType:menuType.menuTypeID menuList:_filterMenuList];
-        Menu *menu = menuList[item];
-        cell.lblMenuName.text = menu.titleThai;
-        [cell.lblMenuName sizeToFit];
-        
-        return cell.lblMenuName.frame.size.height+46<90?90:cell.lblMenuName.frame.size.height+46;
+        if([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0)
+        {
+            return 4 + (self.view.frame.size.width - 3*8)/2 + 44 + 4 + 30;
+//            return 4 + (self.view.frame.size.width - 3*8)/2 + 44 + 4;
+        }
+        else
+        {
+            CustomTableViewCellMenu *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierMenu];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            
+            NSMutableArray *menuList = [self getMenuListWithSelectedIndex:_selectedMenuTypeIndex];
+            Menu *menu = menuList[item];
+            cell.lblMenuName.text = menu.titleThai;
+            [cell.lblMenuName sizeToFit];
+            
+            return cell.lblMenuName.frame.size.height+46<90?90:cell.lblMenuName.frame.size.height+46;
+        }
     }
     return 0;
 }
@@ -466,6 +699,13 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
 {
     cell.backgroundColor = [UIColor whiteColor];
     [cell setSeparatorInset:UIEdgeInsetsMake(16, 16, 16, 16)];
+    if(indexPath.section == 1)
+    {
+        if(_selectedMenuTypeIndex == 0)
+        {
+            cell.separatorInset = UIEdgeInsetsMake(0.0f, self.view.bounds.size.width, 0.0f, CGFLOAT_MAX);
+        }
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -479,28 +719,36 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     {
         if(section == 1)
         {
-            //add ordertaking
-            MenuType *menuType = _menuTypeList[_selectedMenuTypeIndex];
-            NSMutableArray *menuList = [Menu getMenuListWithMenuType:menuType.menuTypeID menuList:_filterMenuList];
-            Menu *menu = menuList[item];
-            SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
-            float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
-            
-            
-            NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
-            OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menu.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
-            [OrderTaking addObject:orderTaking];
-            [orderTakingList addObject:orderTaking];
-            
-            
-            
-            CustomTableViewCellMenu *cell = [tableView cellForRowAtIndexPath:indexPath];
-            NSMutableArray *orderTakingListWithMenuID = [OrderTaking getOrderTakingListWithMenuID:menu.menuID orderTakingList:orderTakingList];
-            cell.lblQuantity.text = [Utility formatDecimal:[orderTakingListWithMenuID count] withMinFraction:0 andMaxFraction:0];
-            cell.imgTriangle.hidden = [orderTakingListWithMenuID count]==0;
-
-            [self updateTotalAmount];
-            [self blinkAddedNotiView];
+            if(([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0))
+            {
+                
+            }
+            else
+            {
+                //add ordertaking
+                NSMutableArray *menuList = [self getMenuListWithSelectedIndex:_selectedMenuTypeIndex];
+                Menu *menu = menuList[item];
+                SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
+                float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
+                
+                
+                NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+                OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menu.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
+                [OrderTaking addObject:orderTaking];
+                [orderTakingList addObject:orderTaking];
+                
+                
+                
+                CustomTableViewCellMenu *cell = [tableView cellForRowAtIndexPath:indexPath];
+                NSMutableArray *orderTakingListWithMenuID = [OrderTaking getOrderTakingListWithMenuID:menu.menuID orderTakingList:orderTakingList];
+                cell.lblQuantity.text = [Utility formatDecimal:[orderTakingListWithMenuID count] withMinFraction:0 andMaxFraction:0];
+                cell.imgTriangle.hidden = [orderTakingListWithMenuID count]==0;
+                cell.lblQuantity.hidden = cell.imgTriangle.hidden;
+                
+                
+                [self updateTotalAmount];
+                [self blinkAddedNotiView];
+            }
         }
     }
 }
@@ -543,7 +791,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         [Utility updateSharedObject:items];
         _menuList = [Menu getMenuBelongToBuffet:buffetReceipt];
         _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
-        _menuTypeList = [MenuType sortList:_menuTypeList];
+        _menuTypeList = [MenuType sortList:_menuTypeList];        
         _filterMenuList = _menuList;
         
         NSMutableArray *receiptList = items[6];
@@ -561,8 +809,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     [tbvMenu reloadData];
     if([_menuTypeList count]>0)
     {
-        MenuType *menuType = _menuTypeList[_selectedMenuTypeIndex];
-        NSMutableArray *menuList = [Menu getMenuListWithMenuType:menuType.menuTypeID menuList:_filterMenuList];
+        NSMutableArray *menuList = [self getMenuListWithSelectedIndex:_selectedMenuTypeIndex];
         if([menuList count]>0)
         {
             //hide searchBar
@@ -669,8 +916,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     [tbvMenu reloadData];
     if([_menuTypeList count]>0)
     {
-        MenuType *menuType = _menuTypeList[_selectedMenuTypeIndex];
-        NSMutableArray *menuList = [Menu getMenuListWithMenuType:menuType.menuTypeID menuList:_filterMenuList];
+        NSMutableArray *menuList = [self getMenuListWithSelectedIndex:_selectedMenuTypeIndex];
         if([menuList count]>0)
         {
             [tbvMenu scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:NO];
@@ -711,10 +957,16 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     }
     else
     {
-        NSPredicate *resultPredicate   = [NSPredicate predicateWithFormat:@"(_titleThai contains[c] %@) or (_price = %f)", searchText, [Utility floatValue:searchText]];
-        _filterMenuList = [[_menuList filteredArrayUsingPredicate:resultPredicate] mutableCopy];
-    }
-    
+        NSMutableSet *searchSet = [[NSMutableSet alloc]init];
+        NSArray *arrSearchText = [searchText componentsSeparatedByString:@" "];
+        for(NSString *item in arrSearchText)
+        {
+            NSPredicate *resultPredicate   = [NSPredicate predicateWithFormat:@"(_titleThai contains[c] %@) or (_price = %f)", item, [Utility floatValue:item]];
+            NSArray *filterArray = [[_menuList filteredArrayUsingPredicate:resultPredicate] mutableCopy];
+            [searchSet addObjectsFromArray:filterArray];
+        }
+        _filterMenuList = [[searchSet allObjects]mutableCopy];
+    }    
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -775,5 +1027,92 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     sbText.text  = @"";
     [self filterContentForSearchText:sbText.text scope:@""];
     
+}
+
+-(NSMutableArray *)getMenuListWithSelectedIndex:(NSInteger)selectedIndex
+{
+    NSMutableArray *menuList;
+    MenuType *menuType = _menuTypeList[_selectedMenuTypeIndex];
+    if(_selectedMenuTypeIndex == 0)
+    {
+        menuList = [Menu getMenuListRecommendedWithMenuList:_filterMenuList];
+    }
+    else
+    {
+        menuList = [Menu getMenuListWithMenuType:menuType.menuTypeID menuList:_filterMenuList];
+    }
+    return menuList;
+}
+
+- (void)handleSingleTapLeft:(UITapGestureRecognizer *)gestureRecognizer
+{
+    CGPoint point = [gestureRecognizer locationInView:tbvMenu];
+    NSIndexPath * tappedIP = [tbvMenu indexPathForRowAtPoint:point];
+    NSInteger item = tappedIP.row;
+//    
+//    UIView *vwMenu = [gestureRecognizer.view superview];
+//    NSInteger item = vwMenu.tag;
+
+
+    //add ordertaking
+    NSMutableArray *menuList = [self getMenuListWithSelectedIndex:_selectedMenuTypeIndex];
+    Menu *menu = menuList[item*2];
+    SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
+    float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
+
+
+    NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+    OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menu.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
+    [OrderTaking addObject:orderTaking];
+    [orderTakingList addObject:orderTaking];
+
+
+    //update quantity display
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:item inSection:1];
+    CustomTableViewCellSquareThumbNail *cell = [tbvMenu cellForRowAtIndexPath:indexPath];
+    NSMutableArray *orderTakingListWithMenuID = [OrderTaking getOrderTakingListWithMenuID:menu.menuID orderTakingList:orderTakingList];
+    cell.lblQuantityLeft.text = [Utility formatDecimal:[orderTakingListWithMenuID count] withMinFraction:0 andMaxFraction:0];
+    cell.imgVwTriangleLeft.hidden = [orderTakingListWithMenuID count]==0;
+    cell.lblQuantityLeft.hidden = cell.imgVwTriangleLeft.hidden;
+
+    [self updateTotalAmount];
+    [self blinkAddedNotiView];
+}
+
+- (void)handleSingleTapRight:(UITapGestureRecognizer *)gestureRecognizer
+{
+    CGPoint point = [gestureRecognizer locationInView:tbvMenu];
+    NSIndexPath * tappedIP = [tbvMenu indexPathForRowAtPoint:point];
+    NSInteger item = tappedIP.row;
+//    CustomTableViewCellOrder *cell = [tbvOrder cellForRowAtIndexPath:tappedIP];
+    
+    
+//    UIView *vwMenu = [gestureRecognizer.view superview];
+//    NSInteger item = vwMenu.tag;
+
+
+    //add ordertaking
+    NSMutableArray *menuList = [self getMenuListWithSelectedIndex:_selectedMenuTypeIndex];
+    Menu *menu = menuList[item*2+1];
+    SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
+    float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
+
+
+    NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+    OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menu.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
+    [OrderTaking addObject:orderTaking];
+    [orderTakingList addObject:orderTaking];
+
+
+    //update quantity display
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:item inSection:1];
+    CustomTableViewCellSquareThumbNail *cell = [tbvMenu cellForRowAtIndexPath:indexPath];
+    NSMutableArray *orderTakingListWithMenuID = [OrderTaking getOrderTakingListWithMenuID:menu.menuID orderTakingList:orderTakingList];
+    cell.lblQuantityRight.text = [Utility formatDecimal:[orderTakingListWithMenuID count] withMinFraction:0 andMaxFraction:0];
+    cell.imgVwTriangleRight.hidden = [orderTakingListWithMenuID count]==0;
+    cell.lblQuantityRight.hidden = cell.imgVwTriangleRight.hidden;
+
+    [self updateTotalAmount];
+    [self blinkAddedNotiView];
 }
 @end

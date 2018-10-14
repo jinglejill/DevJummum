@@ -18,10 +18,7 @@
 
 @interface QRCodeScanTableViewController ()
 {
-//    Branch *selectedBranch;
-//    CustomerTable *selectedCustomerTable;
-//    BOOL fromOrderItAgain;
-//    Receipt *buffetReceipt;
+
 }
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
@@ -72,10 +69,10 @@
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    UIWindow *window = UIApplication.sharedApplication.keyWindow;
-    
-    float topPadding = window.safeAreaInsets.top;
-    topViewHeight.constant = topPadding == 0?20:topPadding;
+//    UIWindow *window = UIApplication.sharedApplication.keyWindow;
+//    
+//    float topPadding = window.safeAreaInsets.top;
+//    topViewHeight.constant = topPadding == 0?20:topPadding;
 }
 
 - (void)viewDidLoad
@@ -87,6 +84,7 @@
     lblNavTitle.text = title;
     btnBack.hidden = fromCreditCardAndOrderSummaryMenu?NO:YES;
     btnBranchSearch.hidden = !btnBack.hidden;
+    
     
     _captureSession = nil;
     [self loadBeepSound];
@@ -107,14 +105,18 @@
     }
     
     
-    [self startButtonClicked];
     
+    [self startButtonClicked];
     
     //Get Preview Layer connection
     AVCaptureConnection *previewLayerConnection=_videoPreviewLayer.connection;
     
     if ([previewLayerConnection isVideoOrientationSupported])
-        [previewLayerConnection setVideoOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
+    {
+        [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+    }
+//        [previewLayerConnection setVideoOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
+
 }
 
 -(void)loadBeepSound

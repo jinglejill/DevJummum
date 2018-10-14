@@ -76,6 +76,11 @@
         _viewDidAppear = YES;
         
         
+        //gift prize
+        _imgVwGiftPrize = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+                _imgVwGiftPrize.center = self.view.center;
+        
+        
         //rid close open while waiting for dbRewardRedemptionLuckyDraw
         _imgVwWaiting = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         _imgVwWaiting.center = self.view.center;
@@ -318,12 +323,12 @@
         {
             [_imgVwRidCloseOpen removeFromSuperview];
             
-            if(!_imgVwGiftPrize)
-            {
-                _imgVwGiftPrize = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-                _imgVwGiftPrize.center = self.view.center;
-            }
-            else
+//            if(!_imgVwGiftPrize)
+//            {
+//                _imgVwGiftPrize = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//                _imgVwGiftPrize.center = self.view.center;
+//            }
+//            else
             {
                 [_imgVwGiftPrize.layer removeAllAnimations];
             }
