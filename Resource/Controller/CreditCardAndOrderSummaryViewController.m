@@ -2328,7 +2328,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     txtVoucherCode.text = [txtVoucherCode.text uppercaseString];
 }
 
--(void)goToNextResponder
+-(void)goToNextResponder:(id)sender
 {
     UITextField *textField = [self.view viewWithTag:4];
     [textField becomeFirstResponder];

@@ -275,7 +275,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.txtValue.placeholder = message2;
                 cell.txtValue.delegate = self;
                 cell.txtValue.inputView = pickerVw;
-                [cell.txtValue setInputAccessoryView:self.toolBar];
+                [cell.txtValue setInputAccessoryView:self.toolBarNext];
                 [cell.txtValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 
                 
@@ -384,7 +384,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.txtValue.placeholder = message2;
                 cell.txtValue.delegate = self;
                 cell.txtValue.inputView = pickerVw;
-                [cell.txtValue setInputAccessoryView:self.toolBar];
+                [cell.txtValue setInputAccessoryView:self.toolBarNext];
                 [cell.txtValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 
                 
@@ -430,7 +430,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 cell.txtValue.placeholder = @"THB";
                 cell.txtValue.keyboardType = UIKeyboardTypeDecimalPad;
                 cell.txtValue.text = [Utility formatDecimal:_dispute.refundAmount withMinFraction:0 andMaxFraction:2];
-                [cell.txtValue setInputAccessoryView:self.toolBar];
+                [cell.txtValue setInputAccessoryView:self.toolBarNext];
                 [cell.txtValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 if(_dispute.refundAmount == 0)
                 {
@@ -489,7 +489,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 //The rounded corner part, where you specify your view's corner radius:
                 cell.txvValue.layer.cornerRadius = 5;
                 cell.txvValue.clipsToBounds = YES;
-                [cell.txvValue setInputAccessoryView:self.toolBar];
+                [cell.txvValue setInputAccessoryView:self.toolBarNext];
                 
                 
                 return cell;
@@ -962,6 +962,34 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
 {
     UITextField *txtPhoneNo = sender;
     txtPhoneNo.text = [Utility formatPhoneNo:[Utility removeDashAndSpaceAndParenthesis:txtPhoneNo.text]];
+}
+
+-(void)goToNextResponder:(id)sender
+{
+    UIView *firstResponder = [self findFirstResponder:self.view];
+    if(firstResponder)
+    {
+        NSInteger tag = firstResponder.tag;
+        if(tag == 1)
+        {
+            if(fromType == 1)
+            {
+                UITextField *textField = [self.view viewWithTag:4];
+                [textField becomeFirstResponder];
+            }
+            else if(fromType == 2)
+            {
+                UITextField *textField = [self.view viewWithTag:2];
+                [textField becomeFirstResponder];
+            }
+        }
+        else
+        {
+            NSInteger nextTag = tag + 1;
+            UITextField *textField = [self.view viewWithTag:nextTag];
+            [textField becomeFirstResponder];
+        }
+    }
 }
 
 @end

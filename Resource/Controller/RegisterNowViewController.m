@@ -665,7 +665,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
     txtPhoneNo.text = [Utility formatPhoneNo:[Utility removeDashAndSpaceAndParenthesis:txtPhoneNo.text]];
 }
 
--(void)goToNextResponder
+-(void)goToNextResponder:(id)sender
 {
     UITextField *textField = [self.view viewWithTag:6];
     [textField becomeFirstResponder];

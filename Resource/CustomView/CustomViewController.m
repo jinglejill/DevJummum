@@ -173,7 +173,7 @@ CGFloat animatedDistance;
         //toolbarNext
         toolBarNext=[[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
         [toolBarNext setTintColor:cSystem4_10];
-        UIBarButtonItem *nextBtn=[[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(goToNextResponder)];
+        UIBarButtonItem *nextBtn=[[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(goToNextResponder:)];
         nextBtn.tintColor = cSystem1;
         UIBarButtonItem *spaceNext=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         UIBarButtonItem *doneBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(dismissKeyboard)];
@@ -1130,7 +1130,7 @@ CGFloat animatedDistance;
     [self.view endEditing:YES];
 }
 
--(void)goToNextResponder
+-(void)goToNextResponder:(id)sender
 {
     
 }
