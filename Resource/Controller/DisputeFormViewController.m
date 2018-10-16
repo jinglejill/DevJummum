@@ -299,7 +299,7 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
                 
                 
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                UIColor *color = cSystem1;;
+                UIColor *color = cSystem1;
                 NSDictionary *attribute = @{NSForegroundColorAttributeName:color ,NSFontAttributeName: font};
                 NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"* " attributes:attribute];
                 
@@ -963,4 +963,5 @@ static NSString * const reuseIdentifierHeaderFooterOkCancel = @"CustomTableViewH
     UITextField *txtPhoneNo = sender;
     txtPhoneNo.text = [Utility formatPhoneNo:[Utility removeDashAndSpaceAndParenthesis:txtPhoneNo.text]];
 }
+
 @end

@@ -141,6 +141,12 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 
 -(BOOL)textFieldShouldReturn:(UITextField*)textField
 {
+    if(textField.tag == 31)
+    {
+        [textField resignFirstResponder];
+        [self confirmVoucherCode];
+    }
+    
     NSInteger nextTag = textField.tag + 1;
     // Try to find next responder
     UIResponder* nextResponder = [self.view viewWithTag:nextTag];
