@@ -36,6 +36,24 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
 @synthesize btnBackWidth;
 
 
+-(BOOL)textFieldShouldReturn:(UITextField*)textField
+{
+    NSInteger nextTag = textField.tag + 1;
+    // Try to find next responder
+    UIResponder* nextResponder = [self.view viewWithTag:nextTag];
+    if (nextResponder)
+    {
+        // Found next responder, so set it.
+        [nextResponder becomeFirstResponder];
+    }
+    else
+    {
+        // Not found, so remove keyboard.
+        [textField resignFirstResponder];
+    }
+    return NO; // We do not want UITextField to insert line-breaks.
+}
+
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -89,8 +107,8 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
     {
         _userAccount = userAccount;
         [tbvData reloadData];
-        NSString *message = [Language getText:@"คุณล็อคอินผ่าน facebook สำเร็จแล้ว กรุณาใส่วันเกิดและเบอร์โทรศัพท์ เพื่อเราจะได้สร้างบัญชีสำหรับใช้งานให้คุณ"];
-        [self showAlert:@"" message:message];
+        NSString *message = [Language getText:@"คุณล็อคอินผ่าน facebook สำเร็จแล้ว กรุณาอัพเดตวันเกิด และเบอร์โทรศัพท์ของคุณ"];
+        [self showAlert:@"" message:message method:@selector(setResponder)];
     }
 }
 
@@ -280,6 +298,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
                 [cell.textValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 cell.textValue.autocapitalizationType = UITextAutocapitalizationTypeNone;
                 cell.textValue.clearButtonMode = UITextFieldViewModeWhileEditing;
+                cell.textValue.returnKeyType = UIReturnKeyNext;
             }
                 break;
             case 1:
@@ -293,6 +312,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
                 [cell.textValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 cell.textValue.autocapitalizationType = UITextAutocapitalizationTypeWords;
                 cell.textValue.clearButtonMode = UITextFieldViewModeWhileEditing;
+                cell.textValue.returnKeyType = UIReturnKeyNext;
             }
                 break;
             case 2:
@@ -306,6 +326,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
                 [cell.textValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 cell.textValue.autocapitalizationType = UITextAutocapitalizationTypeWords;
                 cell.textValue.clearButtonMode = UITextFieldViewModeWhileEditing;
+                cell.textValue.returnKeyType = UIReturnKeyNext;
             }
                 break;
             case 3:
@@ -316,7 +337,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
                 cell.textValue.inputView = dtPicker;
                 cell.textValue.text = [Utility dateToString:_userAccount.birthDate toFormat:@"d MMM yyyy"];
                 cell.textValue.enabled = YES;
-                [cell.textValue setInputAccessoryView:self.toolBar];
+                [cell.textValue setInputAccessoryView:self.toolBarNext];
                 [cell.textValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 cell.textValue.autocapitalizationType = UITextAutocapitalizationTypeNone;
                 cell.textValue.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -355,6 +376,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
                 [cell.textValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 cell.textValue.autocapitalizationType = UITextAutocapitalizationTypeNone;
                 cell.textValue.clearButtonMode = UITextFieldViewModeWhileEditing;
+                cell.textValue.returnKeyType = UIReturnKeyNext;
             }
                 break;
             case 1:
@@ -369,6 +391,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
                 [cell.textValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 cell.textValue.autocapitalizationType = UITextAutocapitalizationTypeNone;
                 cell.textValue.clearButtonMode = UITextFieldViewModeWhileEditing;
+                cell.textValue.returnKeyType = UIReturnKeyNext;
             }
                 break;
             case 2:
@@ -382,6 +405,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
                 [cell.textValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 cell.textValue.autocapitalizationType = UITextAutocapitalizationTypeWords;
                 cell.textValue.clearButtonMode = UITextFieldViewModeWhileEditing;
+                cell.textValue.returnKeyType = UIReturnKeyNext;
             }
                 break;
             case 3:
@@ -395,6 +419,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
                 [cell.textValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 cell.textValue.autocapitalizationType = UITextAutocapitalizationTypeWords;
                 cell.textValue.clearButtonMode = UITextFieldViewModeWhileEditing;
+                cell.textValue.returnKeyType = UIReturnKeyNext;
             }
                 break;
             case 4:
@@ -405,7 +430,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
                 cell.textValue.inputView = dtPicker;
                 cell.textValue.text = [Utility dateToString:_userAccount.birthDate toFormat:@"d MMM yyyy"];
                 cell.textValue.enabled = YES;
-                [cell.textValue setInputAccessoryView:self.toolBar];
+                [cell.textValue setInputAccessoryView:self.toolBarNext];
                 [cell.textValue removeTarget:self action:nil forControlEvents:UIControlEventAllEvents];
                 cell.textValue.autocapitalizationType = UITextAutocapitalizationTypeNone;
                 cell.textValue.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -459,7 +484,7 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
     /* Create custom view to display section header... */
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.frame.size.width, 44)];
     label.font = [UIFont fontWithName:@"Prompt-SemiBold" size:14];
-    label.textColor = cSystem4;
+    label.textColor = cSystem1;
      NSString *string = [Language getText:@"ใส่ข้อมูลด้านล่าง แล้วเตรียม มั่ม มั่ม ได้เลย !!"];
     /* Section header is in 0th index... */
     [label setText:string];
@@ -640,4 +665,16 @@ static NSString * const reuseIdentifierText = @"CustomTableViewCellText";
     txtPhoneNo.text = [Utility formatPhoneNo:[Utility removeDashAndSpaceAndParenthesis:txtPhoneNo.text]];
 }
 
+-(void)goToNextResponder
+{
+    UITextField *textField = [self.view viewWithTag:6];
+    [textField becomeFirstResponder];
+}
+
+-(void)setResponder
+{
+    UITextField *textField = [self.view viewWithTag:5
+    ];
+    [textField becomeFirstResponder];
+}
 @end

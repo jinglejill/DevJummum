@@ -132,7 +132,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
     
     
     if(branch.luckyDrawSpend)
-    {        
+    {
         NSString *message = [Language getText:@"ลุ้นรับรางวัลพิเศษ\nเมื่อทานครบทุกๆ %ld บาท"];
         NSInteger spentAmount = branch.luckyDrawSpend;
         NSString *luckyDrawMessage = [NSString stringWithFormat:message,spentAmount];
@@ -174,7 +174,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         {
             [btnBack setImage:nil forState:UIControlStateNormal];
         }
-        [OrderTaking removeCurrentOrderTakingListBelongToMenuID0];
+        [OrderTaking removeCurrentOrderTakingListAlacarteMenu];
         [self updateTotalAmount];
         branch = [Branch getBranch:buffetReceipt.branchID];
         customerTable = [CustomerTable getCustomerTable:buffetReceipt.customerTableID];
@@ -775,7 +775,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         [Menu setCurrentMenuList:_menuList];
         [self setData];
         [self removeOverlayViews];
-              
+        
     }
     else if(homeModel.propCurrentDB == dbMenuBelongToBuffet)
     {
@@ -791,7 +791,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         [Utility updateSharedObject:items];
         _menuList = [Menu getMenuBelongToBuffet:buffetReceipt];
         _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
-        _menuTypeList = [MenuType sortList:_menuTypeList];        
+        _menuTypeList = [MenuType sortList:_menuTypeList];
         _filterMenuList = _menuList;
         
         NSMutableArray *receiptList = items[6];
@@ -966,7 +966,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
             [searchSet addObjectsFromArray:filterArray];
         }
         _filterMenuList = [[searchSet allObjects]mutableCopy];
-    }    
+    }
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -1032,13 +1032,13 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
 -(NSMutableArray *)getMenuListWithSelectedIndex:(NSInteger)selectedIndex
 {
     NSMutableArray *menuList;
-    MenuType *menuType = _menuTypeList[_selectedMenuTypeIndex];
-    if(_selectedMenuTypeIndex == 0)
+    if([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0)
     {
         menuList = [Menu getMenuListRecommendedWithMenuList:_filterMenuList];
     }
     else
     {
+        MenuType *menuType = _menuTypeList[_selectedMenuTypeIndex];
         menuList = [Menu getMenuListWithMenuType:menuType.menuTypeID menuList:_filterMenuList];
     }
     return menuList;
@@ -1049,9 +1049,6 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
     CGPoint point = [gestureRecognizer locationInView:tbvMenu];
     NSIndexPath * tappedIP = [tbvMenu indexPathForRowAtPoint:point];
     NSInteger item = tappedIP.row;
-//    
-//    UIView *vwMenu = [gestureRecognizer.view superview];
-//    NSInteger item = vwMenu.tag;
 
 
     //add ordertaking
@@ -1084,11 +1081,6 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
     CGPoint point = [gestureRecognizer locationInView:tbvMenu];
     NSIndexPath * tappedIP = [tbvMenu indexPathForRowAtPoint:point];
     NSInteger item = tappedIP.row;
-//    CustomTableViewCellOrder *cell = [tbvOrder cellForRowAtIndexPath:tappedIP];
-    
-    
-//    UIView *vwMenu = [gestureRecognizer.view superview];
-//    NSInteger item = vwMenu.tag;
 
 
     //add ordertaking

@@ -34,7 +34,7 @@
         [self valueForKey:@"subMenuType2ID"]?[self valueForKey:@"subMenuType2ID"]:[NSNull null],@"subMenuType2ID",
         [self valueForKey:@"subMenuType3ID"]?[self valueForKey:@"subMenuType3ID"]:[NSNull null],@"subMenuType3ID",
         [self valueForKey:@"buffetMenu"]?[self valueForKey:@"buffetMenu"]:[NSNull null],@"buffetMenu",
-        [self valueForKey:@"belongToMenuID"]?[self valueForKey:@"belongToMenuID"]:[NSNull null],@"belongToMenuID",
+        [self valueForKey:@"alacarteMenu"]?[self valueForKey:@"alacarteMenu"]:[NSNull null],@"alacarteMenu",
         [self valueForKey:@"timeToOrder"]?[self valueForKey:@"timeToOrder"]:[NSNull null],@"timeToOrder",
         [self valueForKey:@"recommended"]?[self valueForKey:@"recommended"]:[NSNull null],@"recommended",
         [self valueForKey:@"recommendedOrderNo"]?[self valueForKey:@"recommendedOrderNo"]:[NSNull null],@"recommendedOrderNo",
@@ -48,7 +48,7 @@
         nil];
 }
 
--(Menu *)initWithMenuCode:(NSString *)menuCode titleThai:(NSString *)titleThai price:(float)price menuTypeID:(NSInteger)menuTypeID subMenuTypeID:(NSInteger)subMenuTypeID subMenuType2ID:(NSInteger)subMenuType2ID subMenuType3ID:(NSInteger)subMenuType3ID buffetMenu:(NSInteger)buffetMenu belongToMenuID:(NSInteger)belongToMenuID timeToOrder:(NSInteger)timeToOrder recommended:(NSInteger)recommended recommendedOrderNo:(NSInteger)recommendedOrderNo imageUrl:(NSString *)imageUrl color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status remark:(NSString *)remark
+-(Menu *)initWithMenuCode:(NSString *)menuCode titleThai:(NSString *)titleThai price:(float)price menuTypeID:(NSInteger)menuTypeID subMenuTypeID:(NSInteger)subMenuTypeID subMenuType2ID:(NSInteger)subMenuType2ID subMenuType3ID:(NSInteger)subMenuType3ID buffetMenu:(NSInteger)buffetMenu alacarteMenu:(NSInteger)alacarteMenu timeToOrder:(NSInteger)timeToOrder recommended:(NSInteger)recommended recommendedOrderNo:(NSInteger)recommendedOrderNo imageUrl:(NSString *)imageUrl color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status remark:(NSString *)remark
 {
     self = [super init];
     if(self)
@@ -62,7 +62,7 @@
         self.subMenuType2ID = subMenuType2ID;
         self.subMenuType3ID = subMenuType3ID;
         self.buffetMenu = buffetMenu;
-        self.belongToMenuID = belongToMenuID;
+        self.alacarteMenu = alacarteMenu;
         self.timeToOrder = timeToOrder;
         self.recommended = recommended;
         self.recommendedOrderNo = recommendedOrderNo;
@@ -158,7 +158,7 @@
         ((Menu *)copy).subMenuType2ID = self.subMenuType2ID;
         ((Menu *)copy).subMenuType3ID = self.subMenuType3ID;
         ((Menu *)copy).buffetMenu = self.buffetMenu;
-        ((Menu *)copy).belongToMenuID = self.belongToMenuID;
+        ((Menu *)copy).alacarteMenu = self.alacarteMenu;
         ((Menu *)copy).timeToOrder = self.timeToOrder;
         ((Menu *)copy).recommended = self.recommended;
         ((Menu *)copy).recommendedOrderNo = self.recommendedOrderNo;
@@ -185,7 +185,7 @@
     && self.subMenuType2ID == editingMenu.subMenuType2ID
     && self.subMenuType3ID == editingMenu.subMenuType3ID
     && self.buffetMenu == editingMenu.buffetMenu
-    && self.belongToMenuID == editingMenu.belongToMenuID
+    && self.alacarteMenu == editingMenu.alacarteMenu
     && self.timeToOrder == editingMenu.timeToOrder
     && self.recommended == editingMenu.recommended
     && self.recommendedOrderNo == editingMenu.recommendedOrderNo
@@ -212,7 +212,7 @@
     toMenu.subMenuType2ID = fromMenu.subMenuType2ID;
     toMenu.subMenuType3ID = fromMenu.subMenuType3ID;
     toMenu.buffetMenu = fromMenu.buffetMenu;
-    toMenu.belongToMenuID = fromMenu.belongToMenuID;
+    toMenu.alacarteMenu = fromMenu.alacarteMenu;
     toMenu.timeToOrder = fromMenu.timeToOrder;
     toMenu.recommended = fromMenu.recommended;
     toMenu.recommendedOrderNo = fromMenu.recommendedOrderNo;
@@ -358,7 +358,7 @@
 +(NSMutableArray *)getMenuListALaCarteWithBranchID:(NSInteger)branchID
 {
     NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _belongToMenuID = 0",branchID];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _alacarteMenu = 1",branchID];
     NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
     
     return [filterArray mutableCopy];

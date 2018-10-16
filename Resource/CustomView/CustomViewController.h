@@ -26,6 +26,7 @@
 @property (nonatomic,retain) UILabel *lblAlertMsg;
 @property (nonatomic,retain) UILabel *lblWaiting;
 @property (nonatomic,retain) UIToolbar *toolBar;
+@property (nonatomic,retain) UIToolbar *toolBarNext;
 @property (nonatomic,retain) Receipt *selectedReceipt;
 @property (nonatomic) BOOL showOrderDetail;
 @property (nonatomic) BOOL showReceiptSummary;

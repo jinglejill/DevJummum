@@ -50,14 +50,7 @@
     float _netTotal;
     float _serviceChargeValue;
     float _vatValue;
-//    NSInteger _promotionID;
-//    NSInteger _rewardRedemptionID;
-//    NSInteger _promoCodeID;
     float _discountValue;
-//    NSInteger _discountType;
-//    float _discountAmount;
-//    float _shopDiscount;
-//    float _jummumDiscount;
     NSInteger _promotionOrRewardRedemption;//1=promotion,2=rewardRedemption
     Receipt *_receipt;
     NSIndexPath *_currentScrollIndexPath;
@@ -144,6 +137,24 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             [self confirmVoucherCode:_selectedVoucherCode];
         }        
     }
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField*)textField
+{
+    NSInteger nextTag = textField.tag + 1;
+    // Try to find next responder
+    UIResponder* nextResponder = [self.view viewWithTag:nextTag];
+    if (nextResponder)
+    {
+        // Found next responder, so set it.
+        [nextResponder becomeFirstResponder];
+    }
+    else
+    {
+        // Not found, so remove keyboard.
+        [textField resignFirstResponder];
+    }
+    return NO; // We do not want UITextField to insert line-breaks.
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView
@@ -698,10 +709,14 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                         
                         [cell.txtFirstName setInputAccessoryView:self.toolBar];
                         [cell.txtLastName setInputAccessoryView:self.toolBar];
-                        [cell.txtCardNo setInputAccessoryView:self.toolBar];
+                        [cell.txtCardNo setInputAccessoryView:self.toolBarNext];
                         [cell.txtMonth setInputAccessoryView:self.toolBar];
                         [cell.txtYear setInputAccessoryView:self.toolBar];
                         [cell.txtCCV setInputAccessoryView:self.toolBar];
+                        
+                        
+                        cell.txtFirstName.returnKeyType = UIReturnKeyNext;
+                        cell.txtLastName.returnKeyType = UIReturnKeyNext;
                         
                         
                         cell.vwFirstName.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -1569,7 +1584,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         for(OrderTaking *item in orderTakingList)
         {
             Menu *menu = [Menu getMenu:item.menuID branchID:item.branchID];
-            if(menu.belongToMenuID == 0 || item.specialPrice > 0)
+            if(menu.alacarteMenu == 1 || item.specialPrice > 0)
             {
                 showBuffetButton = 0;
                 break;
@@ -2305,5 +2320,11 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 {
     UITextField *txtVoucherCode = sender;
     txtVoucherCode.text = [txtVoucherCode.text uppercaseString];
+}
+
+-(void)goToNextResponder
+{
+    UITextField *textField = [self.view viewWithTag:4];
+    [textField becomeFirstResponder];
 }
 @end

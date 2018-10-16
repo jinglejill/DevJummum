@@ -456,13 +456,13 @@
     [dataList removeAllObjects];
 }
     
-+(void)removeCurrentOrderTakingListBelongToMenuID0
++(void)removeCurrentOrderTakingListAlacarteMenu
 {
     NSMutableArray *dataList = [SharedCurrentOrderTaking sharedCurrentOrderTaking].orderTakingList;
     for(OrderTaking *item in dataList)
     {
         Menu *menu = [Menu getMenu:item.menuID branchID:item.branchID];
-        if(menu.belongToMenuID == 0)
+        if(menu.alacarteMenu == 1)
         {
             [dataList removeObject:item];
         }

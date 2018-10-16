@@ -46,6 +46,7 @@ CGFloat animatedDistance;
 @synthesize lblAlertMsg;
 @synthesize lblWaiting;
 @synthesize toolBar;
+@synthesize toolBarNext;
 @synthesize selectedReceipt;
 @synthesize showOrderDetail;
 
@@ -166,6 +167,20 @@ CGFloat animatedDistance;
     doneBtn.tintColor = cSystem1;
     UIBarButtonItem *space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
+    
+    
+    {
+        //toolbarNext
+        toolBarNext=[[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+        [toolBarNext setTintColor:cSystem4_10];
+        UIBarButtonItem *nextBtn=[[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(goToNextResponder)];
+        nextBtn.tintColor = cSystem1;
+        UIBarButtonItem *spaceNext=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *doneBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(dismissKeyboard)];
+        doneBtn.tintColor = cSystem1;        
+        [toolBarNext setItems:[NSArray arrayWithObjects:spaceNext,doneBtn,nextBtn, nil]];
+    }
+    
 }
 
 -(void) blinkAddedNotiView
@@ -1115,5 +1130,9 @@ CGFloat animatedDistance;
     [self.view endEditing:YES];
 }
 
+-(void)goToNextResponder
+{
+    
+}
 @end
 
