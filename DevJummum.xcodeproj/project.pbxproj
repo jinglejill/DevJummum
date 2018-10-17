@@ -19,6 +19,11 @@
 		EF1F37F32171104900EFB214 /* JummumRegisterBgIphoneX.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF1F37F12171104900EFB214 /* JummumRegisterBgIphoneX.jpg */; };
 		EF1F37F72171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1F37F52171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.m */; };
 		EF1F37F82171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF1F37F62171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.xib */; };
+		EF1F38062176E03400EFB214 /* watermark.png in Resources */ = {isa = PBXBuildFile; fileRef = EF1F38052176E03300EFB214 /* watermark.png */; };
+		EF1F38082176E63C00EFB214 /* whiteBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = EF1F38072176E63C00EFB214 /* whiteBackground.png */; };
+		EF1F380B2176FDAA00EFB214 /* VoucherCode.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1F380A2176FDAA00EFB214 /* VoucherCode.m */; };
+		EF1F380E2176FE1B00EFB214 /* SharedVoucherCode.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1F380D2176FE1B00EFB214 /* SharedVoucherCode.m */; };
+		EF1F3810217700EB00EFB214 /* pinkBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = EF1F380F217700EB00EFB214 /* pinkBackground.png */; };
 		EF20D35B21705756002D14EC /* JummumRegisterBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF20D35A21705755002D14EC /* JummumRegisterBg.jpg */; };
 		EF33CD78211C26C200560C69 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF33CD77211C26C200560C69 /* ViewController.m */; };
 		EF33CD7D211C26C400560C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF33CD7C211C26C400560C69 /* Assets.xcassets */; };
@@ -515,6 +520,13 @@
 		EF1F37F42171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCellSquareThumbNail.h; sourceTree = "<group>"; };
 		EF1F37F52171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCellSquareThumbNail.m; sourceTree = "<group>"; };
 		EF1F37F62171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCellSquareThumbNail.xib; sourceTree = "<group>"; };
+		EF1F38052176E03300EFB214 /* watermark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watermark.png; sourceTree = "<group>"; };
+		EF1F38072176E63C00EFB214 /* whiteBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteBackground.png; sourceTree = "<group>"; };
+		EF1F38092176FDAA00EFB214 /* VoucherCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoucherCode.h; sourceTree = "<group>"; };
+		EF1F380A2176FDAA00EFB214 /* VoucherCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoucherCode.m; sourceTree = "<group>"; };
+		EF1F380C2176FE1B00EFB214 /* SharedVoucherCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedVoucherCode.h; sourceTree = "<group>"; };
+		EF1F380D2176FE1B00EFB214 /* SharedVoucherCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedVoucherCode.m; sourceTree = "<group>"; };
+		EF1F380F217700EB00EFB214 /* pinkBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinkBackground.png; sourceTree = "<group>"; };
 		EF20D35A21705755002D14EC /* JummumRegisterBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = JummumRegisterBg.jpg; sourceTree = "<group>"; };
 		EF33CD70211C26C200560C69 /* DevJummum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevJummum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF33CD76211C26C200560C69 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -1339,6 +1351,9 @@
 		EF33CE11211C36D100560C69 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				EF1F380F217700EB00EFB214 /* pinkBackground.png */,
+				EF1F38072176E63C00EFB214 /* whiteBackground.png */,
+				EF1F38052176E03300EFB214 /* watermark.png */,
 				EF1F37F02171104900EFB214 /* JummumRegisterBgIpad.jpg */,
 				EF1F37F12171104900EFB214 /* JummumRegisterBgIphoneX.jpg */,
 				EF20D35A21705755002D14EC /* JummumRegisterBg.jpg */,
@@ -1697,6 +1712,10 @@
 				EF14CC42216231320035A292 /* SharedBuffetMenuMap.m */,
 				EF1F37ED2170AEA300EFB214 /* FirstTimeInstall.h */,
 				EF1F37EE2170AEA300EFB214 /* FirstTimeInstall.m */,
+				EF1F38092176FDAA00EFB214 /* VoucherCode.h */,
+				EF1F380A2176FDAA00EFB214 /* VoucherCode.m */,
+				EF1F380C2176FE1B00EFB214 /* SharedVoucherCode.h */,
+				EF1F380D2176FE1B00EFB214 /* SharedVoucherCode.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2290,6 +2309,7 @@
 				EF33D018211C36D200560C69 /* triangle_dev.png in Resources */,
 				EF33CFED211C36D200560C69 /* Icon-76@2x.png in Resources */,
 				EF33D0F7211C36D200560C69 /* Prompt-Light.ttf in Resources */,
+				EF1F38062176E03400EFB214 /* watermark.png in Resources */,
 				EF33D0F9211C36D200560C69 /* Kanit-MediumItalic.ttf in Resources */,
 				EF33D032211C36D200560C69 /* white.png in Resources */,
 				EF33D115211C36D200560C69 /* Prompt-ExtraBoldItalic.ttf in Resources */,
@@ -2382,6 +2402,7 @@
 				EF8805912147820E0062D9D4 /* giftBoxExcellent00022.jpg in Resources */,
 				EF8805C22147820E0062D9D4 /* giftBoxBoo00010.jpg in Resources */,
 				EF33D00D211C36D200560C69 /* collapse2.png in Resources */,
+				EF1F3810217700EB00EFB214 /* pinkBackground.png in Resources */,
 				EF33D028211C36D200560C69 /* jummumLogoCrop2.png in Resources */,
 				EF33CFFE211C36D200560C69 /* Icon-60.png in Resources */,
 				EF8805B52147820E0062D9D4 /* giftBoxGood00007.jpg in Resources */,
@@ -2394,6 +2415,7 @@
 				EF33CFE9211C36D200560C69 /* takeAway2.png in Resources */,
 				EF8805D42147820E0062D9D4 /* giftBoxAwesome00021.jpg in Resources */,
 				EF33D029211C36D200560C69 /* Icon-Small@3x.png in Resources */,
+				EF1F38082176E63C00EFB214 /* whiteBackground.png in Resources */,
 				EF88059D2147820E0062D9D4 /* giftBoxExcellent00012.jpg in Resources */,
 				EF8805AD2147820E0062D9D4 /* giftBoxGood00015.jpg in Resources */,
 				EF33D010211C36D200560C69 /* search.png in Resources */,
@@ -2514,6 +2536,7 @@
 				EF33D091211C36D200560C69 /* CustomerTable.m in Sources */,
 				EF33D078211C36D200560C69 /* SharedHotDeal.m in Sources */,
 				EF33D05A211C36D200560C69 /* Pic.m in Sources */,
+				EF1F380B2176FDAA00EFB214 /* VoucherCode.m in Sources */,
 				EF33D0C5211C36D200560C69 /* CustomTableViewCellSearchBar.m in Sources */,
 				EF33D046211C36D200560C69 /* RecommendShopViewController.m in Sources */,
 				EF33D04D211C36D200560C69 /* CommentViewController.m in Sources */,
@@ -2659,6 +2682,7 @@
 				EF33D06D211C36D200560C69 /* Rating.m in Sources */,
 				EF33D095211C36D200560C69 /* SharedMenuType.m in Sources */,
 				EF33D08C211C36D200560C69 /* SharedBranch.m in Sources */,
+				EF1F380E2176FE1B00EFB214 /* SharedVoucherCode.m in Sources */,
 				EF33D0CA211C36D200560C69 /* CustomViewVoucher.m in Sources */,
 				EF33D093211C36D200560C69 /* SharedCustomerTable.m in Sources */,
 				EF33D0E0211C36D200560C69 /* CustomTableViewCellMenu.m in Sources */,

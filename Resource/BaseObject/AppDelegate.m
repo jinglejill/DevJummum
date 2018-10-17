@@ -152,7 +152,10 @@ void myExceptionHandler(NSException *exception)
         [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"exception"];
     }
     
-
+    
+    
+    
+    
     //push notification
     {
 //        [FIRApp configure];

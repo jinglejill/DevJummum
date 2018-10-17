@@ -23,7 +23,7 @@
 #import "MenuType.h"
 #import "MenuNote.h"
 #import "CreditCard.h"
-
+#import "VoucherCode.h"
 
 #import "Utility.h"
 #import "Setting.h"
@@ -679,6 +679,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                               {
                                   [OrderTaking removeCurrentOrderTakingList];
                                   [CreditCard removeCurrentCreditCard];
+                                  [VoucherCode removeCurrentVoucherCode];
                                   [tbvOrder reloadData];
                                   [tbvTotal reloadData];
                               }];

@@ -25,6 +25,7 @@
 #import "CreditCard.h"
 #import "Branch.h"
 #import "MenuForBuffet.h"
+#import "VoucherCode.h"
 
 
 @interface MenuSelectionViewController ()
@@ -229,6 +230,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
                 [Menu removeCurrentMenuList];
                 [OrderTaking removeCurrentOrderTakingList];
                 [CreditCard removeCurrentCreditCard];
+                [VoucherCode removeCurrentVoucherCode];
                 lblTotalQuantity.text = @"0";
                 lblTotalQuantityTop.text = @"";
                 lblTotalAmount.text = [Utility addPrefixBahtSymbol:@"0.00"];

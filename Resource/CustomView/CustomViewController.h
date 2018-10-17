@@ -76,4 +76,8 @@
 -(UIImage *)imageFromView:(UIView *)view;
 -(NSAttributedString *)setAttributedString:(NSString *)title text:(NSString *)text;
 -(void)dismissKeyboard;
+- (UIImage *)addWatermarkOnImage:(UIImage *)origin withImage:(UIImage *)template;
+- (UIImage *)imageByScalingProportionallyToSize:(CGSize)targetSize sourceImage:(UIImage *)sourceImage;
+- (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size;
+//-(void)screenCaptureBill:(Receipt *)receipt;
 @end

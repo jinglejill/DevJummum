@@ -961,9 +961,13 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
 
 -(void)orderItAgain:(id)sender
 {
+    
     CGPoint point = [sender convertPoint:CGPointZero toView:tbvData];
     NSIndexPath *indexPath = [tbvData indexPathForRowAtPoint:point];
     Receipt *receipt = _receiptList[indexPath.section];
+//    test
+//    [self screenCaptureBill:receipt];
+//    return;
     NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
     [OrderTaking setCurrentOrderTakingList:orderTakingList];
     _orderItAgainReceipt = receipt;

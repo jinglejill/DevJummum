@@ -41,19 +41,11 @@
 @synthesize selectedCustomerTable;
 @synthesize fromOrderItAgain;
 @synthesize buffetReceipt;
-    
+
 
 -(IBAction)unwindToQRCodeScanTable:(UIStoryboardSegue *)segue
 {
     alreadySeg = NO;
-    if([segue.sourceViewController isMemberOfClass:[CreditCardAndOrderSummaryViewController class]])
-    {
-        CreditCardAndOrderSummaryViewController *vc = segue.sourceViewController;
-        selectedBranch = vc.branch;
-        selectedCustomerTable = nil;
-        fromOrderItAgain = YES;
-        buffetReceipt = vc.buffetReceipt;
-    }
 }
 
 - (IBAction)branchSearch:(id)sender
@@ -69,10 +61,20 @@
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-//    UIWindow *window = UIApplication.sharedApplication.keyWindow;
-//    
-//    float topPadding = window.safeAreaInsets.top;
-//    topViewHeight.constant = topPadding == 0?20:topPadding;
+    UIWindow *window = UIApplication.sharedApplication.keyWindow;
+    
+    float topPadding = window.safeAreaInsets.top;
+    topViewHeight.constant = topPadding == 0?20:topPadding;
+
+    [self startButtonClicked];
+    
+    //Get Preview Layer connection
+    AVCaptureConnection *previewLayerConnection=_videoPreviewLayer.connection;
+    
+    if ([previewLayerConnection isVideoOrientationSupported])
+    {
+        [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+    }
 }
 
 - (void)viewDidLoad
@@ -105,16 +107,18 @@
     }
     
     
-    
-    [self startButtonClicked];
-    
-    //Get Preview Layer connection
-    AVCaptureConnection *previewLayerConnection=_videoPreviewLayer.connection;
-    
-    if ([previewLayerConnection isVideoOrientationSupported])
-    {
-        [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
-    }
+//    [self startButtonClicked];
+//
+//    //Get Preview Layer connection
+//    AVCaptureConnection *previewLayerConnection=_videoPreviewLayer.connection;
+//
+//    if ([previewLayerConnection isVideoOrientationSupported])
+//    {
+//        [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+//    }
+
+
+
 //        [previewLayerConnection setVideoOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
 
 }

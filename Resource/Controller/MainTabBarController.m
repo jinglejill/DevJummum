@@ -60,8 +60,8 @@
     {
         CreditCardAndOrderSummaryViewController *vc = segue.sourceViewController;
         _selectedBranch = vc.branch;
-        _selectedCustomerTable = nil;
-        _fromOrderItAgain = YES;
+        _selectedCustomerTable = vc.customerTable;
+        _fromOrderItAgain = YES; //fromReceiptSummaryMenu || fromOrderDetailMenu || fromRewardRedemption || fromHotDealDetail || fromLuckyDraw
         _buffetReceipt = vc.buffetReceipt;
         
         _switchToQRTab = 1;
@@ -155,6 +155,7 @@
         vc.selectedCustomerTable = _selectedCustomerTable;
         vc.fromOrderItAgain = _fromOrderItAgain;
         vc.buffetReceipt = _buffetReceipt;
+        [vc viewDidAppear:NO];
         
     }
     else if(_switchToReceiptSummaryTab)

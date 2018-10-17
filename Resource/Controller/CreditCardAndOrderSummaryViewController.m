@@ -39,6 +39,7 @@
 #import "Message.h"
 #import "RewardRedemption.h"
 #import "UserRewardRedemptionUsed.h"
+#import "VoucherCode.h"
 
 
 @interface CreditCardAndOrderSummaryViewController ()
@@ -206,12 +207,12 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         if(fromReceiptSummaryMenu || fromOrderDetailMenu || fromRewardRedemption || fromHotDealDetail || fromLuckyDraw)
         {
             _showGuideMessage = YES;
-            NSMutableDictionary *dontShowMessageMenuUpdate = [[NSUserDefaults standardUserDefaults] objectForKey:@"dontShowMessageMenuUpdate"];
+            NSMutableDictionary *dontShowMessageMenuUpdate = [[NSUserDefaults standardUserDefaults] objectForKey:@"MessageMenuUpdate"];
             if(dontShowMessageMenuUpdate)
             {
                 UserAccount *userAccount = [UserAccount getCurrentUserAccount];
             
-                NSString *checked = [dontShowMessageMenuUpdate valueForKey:userAccount.username];
+                NSString *checked = [dontShowMessageMenuUpdate objectForKey:userAccount.username];
                 if(!checked)
                 {
                     [self performSegueWithIdentifier:@"segMessageBoxWithDismiss" sender:self];
@@ -221,11 +222,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             {
                 [self performSegueWithIdentifier:@"segMessageBoxWithDismiss" sender:self];
             }
-            
-//            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"dontShowMessageMenuUpdate"])
-//            {
-//                [self performSegueWithIdentifier:@"segMessageBoxWithDismiss" sender:self];
-//            }
         }
     }
 }
@@ -375,7 +371,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         case 31:
         {
             _selectedVoucherCode = [Utility trimString:textField.text];
-//            _voucherCode = [Utility trimString:textField.text];
         }
             break;
         default:
@@ -414,7 +409,9 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     lblNavTitle.text = title;
     NSString *message = [Language getText:@"ใส่หมายเหตุที่ต้องการแจ้งเพิ่มเติมกับทางร้านอาหาร"];
     _strPlaceHolder = message;
-    _selectedVoucherCode = @"";
+//    _selectedVoucherCode = @"";
+    
+    
     _promotionList = [[NSMutableArray alloc]init];
     _rewardRedemptionList = [[NSMutableArray alloc]init];
     _remark = @"";
@@ -1630,7 +1627,9 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 
 - (IBAction)addRemoveMenu:(id)sender
 {
-//    [self performSegueWithIdentifier:@"segUnwindToQRScanTable" sender:self];
+    VoucherCode *voucherCode = [[VoucherCode alloc]init];
+    voucherCode.code = _selectedVoucherCode;
+    [VoucherCode setCurrentVoucherCode:voucherCode];
     addRemoveMenu = 1;
     [self performSegueWithIdentifier:@"segUnwindToMainTabBar" sender:self];
 }
@@ -1934,6 +1933,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         [self removeWaitingView];
         [OrderTaking removeCurrentOrderTakingList];
         [CreditCard removeCurrentCreditCard];
+        [VoucherCode removeCurrentVoucherCode];
         
         
         [Utility addToSharedDataList:items];
@@ -2189,10 +2189,19 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             _selectedVoucherCode = rewardRedemption.voucherCode;
             [self confirmVoucherCode:_selectedVoucherCode];
         }
-        if(fromHotDealDetail)
+        else if(fromHotDealDetail)
         {
             _selectedVoucherCode = promotion.voucherCode;
             [self confirmVoucherCode:_selectedVoucherCode];
+        }
+        else
+        {
+            VoucherCode *voucherCode = [VoucherCode getCurrentVoucherCode];
+            _selectedVoucherCode = voucherCode.code?voucherCode.code:@"";
+            if(![Utility isStringEmpty:_selectedVoucherCode])
+            {
+                [self confirmVoucherCode:_selectedVoucherCode];
+            }
         }
     }
 }
@@ -2209,20 +2218,14 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     cell.btnChooseVoucherCode.hidden = [_promotionList count]+[_rewardRedemptionList count]==0;
     
     _selectedVoucherCode = @"";
-//    _promotionID = 0;
-//    _rewardRedemptionID = 0;
-//    _promoCodeID = 0;
+
     
 
 
     //after discount, vat,service charge,net total
     float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
     totalAmount = roundf(totalAmount*100)/100;
-//    _discountType = 0;
-//    _discountAmount = 0;
     _discountValue = 0;
-//    _shopDiscount = 0;
-//    _jummumDiscount = 0;
     {
         //after discount
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:2 inSection:0];

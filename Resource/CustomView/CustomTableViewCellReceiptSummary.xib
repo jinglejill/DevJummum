@@ -70,7 +70,7 @@
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9t-Gz-Dkm">
                     <rect key="frame" x="16" y="91" width="343" height="1"/>
-                    <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="AE2-Vl-fkk"/>
                     </constraints>
@@ -102,6 +102,7 @@
                 <outlet property="lblReceiptDate" destination="rtg-O7-PPv" id="BEx-3Z-b7O"/>
                 <outlet property="lblReceiptNo" destination="fNP-Kq-HeX" id="oaq-VJ-EJq"/>
                 <outlet property="tbvOrderDetail" destination="LrP-pm-5NA" id="ssV-Hz-9R1"/>
+                <outlet property="vwSeparatorLine" destination="g9t-Gz-Dkm" id="FyL-Ys-MOY"/>
             </connections>
             <point key="canvasLocation" x="34.5" y="54.5"/>
         </view>
