@@ -18,7 +18,7 @@
 
 @interface QRCodeScanTableViewController ()
 {
-
+    BOOL _showPeekABoo;
 }
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
@@ -41,6 +41,8 @@
 @synthesize selectedCustomerTable;
 @synthesize fromOrderItAgain;
 @synthesize buffetReceipt;
+@synthesize imgPeekABoo;
+@synthesize imgPeekABooFromRight;
 
 
 -(IBAction)unwindToQRCodeScanTable:(UIStoryboardSegue *)segue
@@ -66,15 +68,20 @@
     float topPadding = window.safeAreaInsets.top;
     topViewHeight.constant = topPadding == 0?20:topPadding;
 
-    [self startButtonClicked];
+    dispatch_async(dispatch_get_main_queue(), ^
+   {
+       [self startReading];
+   });
     
+
     //Get Preview Layer connection
     AVCaptureConnection *previewLayerConnection=_videoPreviewLayer.connection;
-    
+
     if ([previewLayerConnection isVideoOrientationSupported])
     {
         [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
     }
+    NSLog(@"layout subview");
 }
 
 - (void)viewDidLoad
@@ -86,7 +93,9 @@
     lblNavTitle.text = title;
     btnBack.hidden = fromCreditCardAndOrderSummaryMenu?NO:YES;
     btnBranchSearch.hidden = !btnBack.hidden;
-    
+    imgPeekABoo.hidden = YES;
+    imgPeekABooFromRight.hidden = YES;
+    _showPeekABoo = YES;
     
     _captureSession = nil;
     [self loadBeepSound];
@@ -94,7 +103,7 @@
 
 }
 
--(void) viewDidAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
     
@@ -105,22 +114,6 @@
         [self performSegueWithIdentifier:@"segMenuSelection" sender:self];
         return;
     }
-    
-    
-//    [self startButtonClicked];
-//
-//    //Get Preview Layer connection
-//    AVCaptureConnection *previewLayerConnection=_videoPreviewLayer.connection;
-//
-//    if ([previewLayerConnection isVideoOrientationSupported])
-//    {
-//        [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
-//    }
-
-
-
-//        [previewLayerConnection setVideoOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
-
 }
 
 -(void)loadBeepSound
@@ -137,11 +130,6 @@
     else{
         [_audioPlayer prepareToPlay];
     }
-}
-
--(void)startButtonClicked
-{
-    [self startReading];
 }
 
 -(BOOL)startReading
@@ -166,7 +154,6 @@
     dispatch_queue_t dispatchQueue;
     dispatchQueue = dispatch_queue_create("myQueue", NULL);
     [captureMetadataOutput setMetadataObjectsDelegate:self queue:dispatchQueue];
-    //    [captureMetadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     [captureMetadataOutput setMetadataObjectTypes:[NSArray arrayWithObject:AVMetadataObjectTypeQRCode]];
     
     _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
@@ -176,6 +163,41 @@
     
     _captureSession.sessionPreset = AVCaptureSessionPresetPhoto;
     [_captureSession startRunning];
+    
+    
+    //peek a boo
+    imgPeekABoo.hidden = _showPeekABoo?NO:YES;
+    [_vwPreview.layer addSublayer:imgPeekABoo.layer];
+    [_vwPreview.layer addSublayer:imgPeekABooFromRight.layer];
+    
+    
+    double delayInSeconds = 2;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [UIView transitionWithView:imgPeekABoo
+                  duration:0.2
+                   options:UIViewAnimationOptionTransitionCrossDissolve
+                animations:^{
+                     imgPeekABoo.hidden = YES;
+                }
+             
+             
+                completion:^(BOOL finished) {
+                    imgPeekABooFromRight.hidden = _showPeekABoo?NO:YES;
+                     double delayInSeconds = 1;
+                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                        [UIView transitionWithView:imgPeekABooFromRight
+                              duration:0.2
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{
+                                 imgPeekABooFromRight.hidden = YES;
+                                 _showPeekABoo = NO;
+                            }
+                            completion:NULL];
+                    });
+            }];
+        });
     
     return YES;
 }
@@ -201,6 +223,7 @@
 
             
             alreadySeg = YES;
+            [self loadingOverlayView];
             [self.homeModel downloadItems:dbBranchAndCustomerTableQR withData:decryptedMessage];
         }
     }
@@ -222,6 +245,7 @@
     HomeModel *homeModel = (HomeModel *)objHomeModel;
     if(homeModel.propCurrentDB == dbBranchAndCustomerTableQR)
     {
+        [self removeOverlayViews];
         NSMutableArray *branchList = items[0];
         NSMutableArray *customerTableList = items[1];
         if([branchList count] == 0 || [customerTableList count] == 0)

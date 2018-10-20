@@ -26,6 +26,8 @@
 @property (nonatomic) BOOL fromOrderItAgain;
 @property (strong, nonatomic) Receipt *buffetReceipt;
 
+@property (strong, nonatomic) IBOutlet UIImageView *imgPeekABoo;
+@property (strong, nonatomic) IBOutlet UIImageView *imgPeekABooFromRight;
 
 
 - (IBAction)branchSearch:(id)sender;

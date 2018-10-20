@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnDontShowItAgain;
 @property (strong, nonatomic) IBOutlet UIButton *btnOK;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *lblMessageHeight;
+@property (strong, nonatomic) IBOutlet UIImageView *imgArrow;
 
 
 - (IBAction)dontShowItAgain:(id)sender;

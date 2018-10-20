@@ -412,33 +412,6 @@
     return [sortArray mutableCopy];
 }
 
-+(NSMutableArray *)separateOrder:(NSMutableArray *)orderTakingList
-{
-    NSMutableArray *separateOrderTakingList = [[NSMutableArray alloc]init];
-    for(OrderTaking *item in orderTakingList)
-    {
-        for(int i=0; i<item.quantity; i++)
-        {
-            OrderTaking *orderTaking = [item copy];
-            orderTaking.quantity = 1;
-            [separateOrderTakingList addObject:orderTaking];
-        }
-    }
-    return separateOrderTakingList;
-}
-
-//+(void)removeAllObject
-//{
-//    NSMutableArray *dataList = [SharedOrderTaking sharedOrderTaking].orderTakingList;
-//    [dataList removeAllObjects];
-//}
-//
-//+(NSMutableArray *)getOrderTakingList
-//{
-//    NSMutableArray *dataList = [SharedOrderTaking sharedOrderTaking].orderTakingList;
-//    return dataList;
-//}
-
 +(NSMutableArray *)getCurrentOrderTakingList
 {
     NSMutableArray *dataList = [SharedCurrentOrderTaking sharedCurrentOrderTaking].orderTakingList;
@@ -467,7 +440,6 @@
             [dataList removeObject:item];
         }
     }
-//    [dataList removeAllObjects];
 }
 
 +(NSMutableArray *)createSumUpOrderTakingWithTheSameMenuAndNote:(NSMutableArray *)orderTakingList

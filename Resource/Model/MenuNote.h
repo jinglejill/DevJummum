@@ -15,7 +15,7 @@
 @property (retain, nonatomic) NSString * modifiedUser;
 @property (retain, nonatomic) NSDate * modifiedDate;
 
-
+@property (nonatomic) NSInteger branchID;
 
 -(MenuNote *)initWithMenuID:(NSInteger)menuID noteID:(NSInteger)noteID;
 +(NSInteger)getNextID;
@@ -28,5 +28,5 @@
 +(MenuNote *)copyFrom:(MenuNote *)fromMenuNote to:(MenuNote *)toMenuNote;
 +(NSMutableArray *)getMenuNoteList;
 +(void)setSharedData:(NSMutableArray *)dataList;
-+(NSMutableArray *)getNoteListWithMenuID:(NSInteger)menuID;
++(NSMutableArray *)getNoteListWithMenuID:(NSInteger)menuID branchID:(NSInteger)branchID;
 @end

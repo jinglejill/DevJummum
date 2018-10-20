@@ -30,6 +30,8 @@
 
 
 @property (nonatomic) float luckyDrawSpend;
+@property (retain, nonatomic) NSString * wordAdd;
+@property (retain, nonatomic) NSString * wordNo;
 
 -(Branch *)initWithDbName:(NSString *)dbName mainBranchID:(NSInteger)mainBranchID name:(NSString *)name phoneNo:(NSString *)phoneNo status:(NSInteger)status takeAwayFee:(NSInteger)takeAwayFee serviceChargePercent:(float)serviceChargePercent percentVat:(float)percentVat priceIncludeVat:(NSInteger)priceIncludeVat ledStatus:(NSInteger)ledStatus openingTimeFromMidNight:(NSInteger)openingTimeFromMidNight openingMinute:(NSInteger)openingMinute customerApp:(NSInteger)customerApp imageUrl:(NSString *)imageUrl remark:(NSString *)remark;
 +(NSInteger)getNextID;

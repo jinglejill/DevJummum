@@ -306,6 +306,8 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         NSInteger receiptID = tableView.tag;
         NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
         orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
+        Receipt *receipt = [Receipt getReceipt:receiptID];
+        Branch *branch = [Branch getBranch:receipt.branchID];
         
         
         if(item < [orderTakingList count])
@@ -351,7 +353,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             NSString *strAddTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:1];
             if(![Utility isStringEmpty:strRemoveTypeNote])
             {
-                NSString *message = [Language getText:@"ไม่ใส่"];
+                NSString *message = [Language getText:branch.wordNo];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
                 attrStringRemove = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
@@ -366,7 +368,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             }
             if(![Utility isStringEmpty:strAddTypeNote])
             {
-                NSString *message = [Language getText:@"เพิ่ม"];
+                NSString *message = [Language getText:branch.wordAdd];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
                 attrStringAdd = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
@@ -563,6 +565,9 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         Receipt *receipt = _receiptList[indexPath.section];
         NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
         orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
+        Branch *branch = [Branch getBranch:receipt.branchID];
+        
+        
         float sumHeight = 0;
         for(int i=0; i<[orderTakingList count]; i++)
         {
@@ -607,7 +612,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             NSString *strAddTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:1];
             if(![Utility isStringEmpty:strRemoveTypeNote])
             {
-                NSString *message = [Language getText:@"ไม่ใส่"];
+                NSString *message = [Language getText:branch.wordNo];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
                 attrStringRemove = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
@@ -622,7 +627,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             }
             if(![Utility isStringEmpty:strAddTypeNote])
             {
-                NSString *message = [Language getText:@"เพิ่ม"];
+                NSString *message = [Language getText:branch.wordAdd];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
                 attrStringAdd = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
@@ -704,6 +709,9 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         NSInteger receiptID = tableView.tag;
         NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
         orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
+        Receipt *receipt = [Receipt getReceipt:receiptID];
+        Branch *branch = [Branch getBranch:receipt.branchID];
+        
         
         if(indexPath.item < [orderTakingList count])
         {
@@ -748,7 +756,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             NSString *strAddTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:1];
             if(![Utility isStringEmpty:strRemoveTypeNote])
             {
-                NSString *message = [Language getText:@"ไม่ใส่"];
+                NSString *message = [Language getText:branch.wordNo];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
                 attrStringRemove = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
@@ -763,7 +771,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             }
             if(![Utility isStringEmpty:strAddTypeNote])
             {
-                NSString *message = [Language getText:@"เพิ่ม"];
+                NSString *message = [Language getText:branch.wordAdd];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
                 attrStringAdd = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
@@ -965,11 +973,39 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     CGPoint point = [sender convertPoint:CGPointZero toView:tbvData];
     NSIndexPath *indexPath = [tbvData indexPathForRowAtPoint:point];
     Receipt *receipt = _receiptList[indexPath.section];
-//    test
-//    [self screenCaptureBill:receipt];
-//    return;
+    
+    
+    
+    
+    //copy orderTaking
     NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
-    [OrderTaking setCurrentOrderTakingList:orderTakingList];
+    NSMutableArray *copyOrderTakingList = [[NSMutableArray alloc]init];
+    NSMutableArray *copyOrderNoteList = [[NSMutableArray alloc]init];
+    for(OrderTaking *item in orderTakingList)
+    {
+        OrderTaking *orderTaking = [item copy];
+        orderTaking.orderTakingID = [OrderTaking getNextID];
+        orderTaking.receiptID = 0;
+        [copyOrderTakingList addObject:orderTaking];
+        [OrderTaking addObject:orderTaking];
+        
+        //copy orderNote
+        NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingID:item.orderTakingID];
+        for(OrderNote *item2 in orderNoteList)
+        {
+            OrderNote *orderNote = [item2 copy];
+            orderNote.orderNoteID = [OrderNote getNextID];
+            orderNote.orderTakingID = orderTaking.orderTakingID;
+            [copyOrderNoteList addObject:orderNote];
+            [OrderNote addObject:orderNote];
+        }
+    }
+    [OrderTaking setCurrentOrderTakingList:copyOrderTakingList];
+    
+    
+    
+    
+    
     _orderItAgainReceipt = receipt;
     
     //belong to buffet

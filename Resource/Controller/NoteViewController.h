@@ -12,14 +12,16 @@
 #import "Branch.h"
 
 
-@interface NoteViewController : CustomViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface NoteViewController : CustomViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionView *colVwNote;
 @property (strong, nonatomic) IBOutlet UIButton *btnConfirm;
 @property (strong, nonatomic) IBOutlet UIButton *btnCancel;
+@property (strong, nonatomic) IBOutlet UIButton *btnDeleteAll;
 @property (strong, nonatomic) NSMutableArray *noteList;
 @property (strong, nonatomic) OrderTaking *orderTaking;
 @property (strong, nonatomic) MenuSelectionViewController *vc;
 @property (strong, nonatomic) Branch *branch;
 - (IBAction)confirmNote:(id)sender;
 - (IBAction)cancelNote:(id)sender;
+- (IBAction)deleteAll:(id)sender;
 @end

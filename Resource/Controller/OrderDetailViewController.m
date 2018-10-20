@@ -1180,6 +1180,8 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
         NSInteger receiptID = tableView.tag;
         NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
         orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
+        Receipt *receipt = [Receipt getReceipt:receiptID];
+        Branch *branch = [Branch getBranch:receipt.branchID];
         
         
         if(item < [orderTakingList count])
@@ -1225,7 +1227,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
             NSString *strAddTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:1];
             if(![Utility isStringEmpty:strRemoveTypeNote])
             {
-                NSString *message = [Language getText:@"ไม่ใส่"];
+                NSString *message = [Language getText:branch.wordNo];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
                 attrStringRemove = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
@@ -1240,7 +1242,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
             }
             if(![Utility isStringEmpty:strAddTypeNote])
             {
-                NSString *message = [Language getText:@"เพิ่ม"];
+                NSString *message = [Language getText:branch.wordAdd];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
                 attrStringAdd = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
@@ -1307,6 +1309,9 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
             //load order มาโชว์
             NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
             orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
+            Branch *branch = [Branch getBranch:receipt.branchID];
+            
+            
             float sumHeight = 0;
             for(int i=0; i<[orderTakingList count]; i++)
             {
@@ -1353,7 +1358,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                 NSString *strAddTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:1];
                 if(![Utility isStringEmpty:strRemoveTypeNote])
                 {
-                    NSString *message = [Language getText:@"ไม่ใส่"];
+                    NSString *message = [Language getText:branch.wordNo];
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
                     attrStringRemove = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
@@ -1368,7 +1373,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                 }
                 if(![Utility isStringEmpty:strAddTypeNote])
                 {
-                    NSString *message = [Language getText:@"เพิ่ม"];
+                    NSString *message = [Language getText:branch.wordAdd];
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
                     attrStringAdd = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
@@ -1870,6 +1875,9 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
         NSInteger receiptID = tableView.tag;
         NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
         orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
+        Receipt *receipt = [Receipt getReceipt:receiptID];
+        Branch *branch = [Branch getBranch:receipt.branchID];
+        
         
         if(indexPath.item < [orderTakingList count])
         {
@@ -1914,7 +1922,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
             NSString *strAddTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:1];
             if(![Utility isStringEmpty:strRemoveTypeNote])
             {
-                NSString *message = [Language getText:@"ไม่ใส่"];
+                NSString *message = [Language getText:branch.wordNo];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
                 attrStringRemove = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
@@ -1929,7 +1937,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
             }
             if(![Utility isStringEmpty:strAddTypeNote])
             {
-                NSString *message = [Language getText:@"เพิ่ม"];
+                NSString *message = [Language getText:branch.wordAdd];
                 UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                 NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
                 attrStringAdd = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];

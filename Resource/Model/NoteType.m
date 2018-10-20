@@ -13,15 +13,31 @@
 
 @implementation NoteType
 
--(NoteType *)initWithName:(NSString *)name status:(NSInteger)status orderNo:(NSInteger)orderNo
+- (NSDictionary *)dictionary
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+        [self valueForKey:@"noteTypeID"]?[self valueForKey:@"noteTypeID"]:[NSNull null],@"noteTypeID",
+        [self valueForKey:@"name"]?[self valueForKey:@"name"]:[NSNull null],@"name",
+        [self valueForKey:@"nameEn"]?[self valueForKey:@"nameEn"]:[NSNull null],@"nameEn",
+        [self valueForKey:@"allowQuantity"]?[self valueForKey:@"allowQuantity"]:[NSNull null],@"allowQuantity",
+        [self valueForKey:@"orderNo"]?[self valueForKey:@"orderNo"]:[NSNull null],@"orderNo",
+        [self valueForKey:@"status"]?[self valueForKey:@"status"]:[NSNull null],@"status",
+        [self valueForKey:@"modifiedUser"]?[self valueForKey:@"modifiedUser"]:[NSNull null],@"modifiedUser",
+        [Utility dateToString:[self valueForKey:@"modifiedDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"modifiedDate",
+        nil];
+}
+
+-(NoteType *)initWithName:(NSString *)name nameEn:(NSString *)nameEn allowQuantity:(NSInteger)allowQuantity orderNo:(NSInteger)orderNo status:(NSInteger)status
 {
     self = [super init];
     if(self)
     {
         self.noteTypeID = [NoteType getNextID];
         self.name = name;
-        self.status = status;
+        self.nameEn = nameEn;
+        self.allowQuantity = allowQuantity;
         self.orderNo = orderNo;
+        self.status = status;
         self.modifiedUser = [Utility modifiedUser];
         self.modifiedDate = [Utility currentDateTime];
     }
@@ -33,13 +49,13 @@
     NSString *primaryKeyName = @"noteTypeID";
     NSString *propertyName = [NSString stringWithFormat:@"_%@",primaryKeyName];
     NSMutableArray *dataList = [SharedNoteType sharedNoteType].noteTypeList;
-    
-    
+
+
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:propertyName ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
     NSArray *sortArray = [dataList sortedArrayUsingDescriptors:sortDescriptors];
     dataList = [sortArray mutableCopy];
-    
+
     if([dataList count] == 0)
     {
         return -1;
@@ -82,10 +98,10 @@
     [dataList removeObjectsInArray:noteTypeList];
 }
 
-+(NoteType *)getNoteType:(NSInteger)noteTypeID
++(NoteType *)getNoteType:(NSInteger)noteTypeID branchID:(NSInteger)branchID
 {
     NSMutableArray *dataList = [SharedNoteType sharedNoteType].noteTypeList;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_noteTypeID = %ld",noteTypeID];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_noteTypeID = %ld and _branchID = %ld",noteTypeID,branchID];
     NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
     if([filterArray count] > 0)
     {
@@ -97,17 +113,17 @@
 -(id)copyWithZone:(NSZone *)zone
 {
     id copy = [[[self class] alloc] init];
-    
+
     if (copy)
     {
         ((NoteType *)copy).noteTypeID = self.noteTypeID;
         [copy setName:self.name];
-        ((NoteType *)copy).status = self.status;
+        [copy setNameEn:self.nameEn];
+        ((NoteType *)copy).allowQuantity = self.allowQuantity;
         ((NoteType *)copy).orderNo = self.orderNo;
+        ((NoteType *)copy).status = self.status;
         [copy setModifiedUser:[Utility modifiedUser]];
         [copy setModifiedDate:[Utility currentDateTime]];
-        
-        
     }
     
     return copy;
@@ -116,10 +132,12 @@
 -(BOOL)editNoteType:(NoteType *)editingNoteType
 {
     if(self.noteTypeID == editingNoteType.noteTypeID
-       && [self.name isEqualToString:editingNoteType.name]
-       && self.status == editingNoteType.status
-       && self.orderNo == editingNoteType.orderNo
-       )
+    && [self.name isEqualToString:editingNoteType.name]
+    && [self.nameEn isEqualToString:editingNoteType.nameEn]
+    && self.allowQuantity == editingNoteType.allowQuantity
+    && self.orderNo == editingNoteType.orderNo
+    && self.status == editingNoteType.status
+    )
     {
         return NO;
     }
@@ -130,8 +148,10 @@
 {
     toNoteType.noteTypeID = fromNoteType.noteTypeID;
     toNoteType.name = fromNoteType.name;
-    toNoteType.status = fromNoteType.status;
+    toNoteType.nameEn = fromNoteType.nameEn;
+    toNoteType.allowQuantity = fromNoteType.allowQuantity;
     toNoteType.orderNo = fromNoteType.orderNo;
+    toNoteType.status = fromNoteType.status;
     toNoteType.modifiedUser = [Utility modifiedUser];
     toNoteType.modifiedDate = [Utility currentDateTime];
     

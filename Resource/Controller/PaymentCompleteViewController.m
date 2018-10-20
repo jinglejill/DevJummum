@@ -415,7 +415,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         {
             UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
             NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-            attrStringRemove = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ไม่ใส่"] attributes:attribute];
+            attrStringRemove = [[NSMutableAttributedString alloc] initWithString:[Language getText:branch.wordNo] attributes:attribute];
 
 
             UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -429,7 +429,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         {
             UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
             NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-            attrStringAdd = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"เพิ่ม"] attributes:attribute];
+            attrStringAdd = [[NSMutableAttributedString alloc] initWithString:[Language getText:branch.wordAdd] attributes:attribute];
 
 
             UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];

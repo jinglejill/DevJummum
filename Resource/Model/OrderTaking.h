@@ -64,7 +64,6 @@
 +(NSMutableArray *)sortListByNoteIDListInText:(NSMutableArray *)orderTakingList;
 +(NSMutableArray *)sortListByModifiedDateDesc:(NSMutableArray *)orderTakingList;
 +(NSMutableArray *)sortListByOrderTakingIDDesc:(NSMutableArray *)orderTakingList;
-+(NSMutableArray *)separateOrder:(NSMutableArray *)orderTakingList;
 +(NSMutableArray *)getOrderTakingList;
 +(NSMutableArray *)getCurrentOrderTakingList;
 +(void)setCurrentOrderTakingList:(NSMutableArray *)orderTakingList;

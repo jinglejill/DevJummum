@@ -173,7 +173,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
     if([[segue identifier] isEqualToString:@"segNote"])
     {
         NoteViewController *vc = segue.destinationViewController;
-        vc.noteList = [MenuNote getNoteListWithMenuID:_orderTaking.menuID];
+        vc.noteList = [MenuNote getNoteListWithMenuID:_orderTaking.menuID branchID:branch.branchID];
         vc.orderTaking = _orderTaking;
         vc.branch = branch;
     }
@@ -440,7 +440,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         
         {
             NSString *message = [Language getText:@"เพิ่มโน้ต"];
-            NSString *message2 = [Language getText:@"จานที่ %ld"];
+            NSString *message2 = [Language getText:@"No.%ld"];
             CustomTableViewCellNote *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierNote];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
@@ -468,7 +468,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ไม่ใส่"] attributes:attribute];
+                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:[Language getText:branch.wordNo] attributes:attribute];
                     
                     
                     UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -482,7 +482,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"เพิ่ม"] attributes:attribute];
+                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:[Language getText:branch.wordAdd] attributes:attribute];
                     
                     
                     UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -516,14 +516,10 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                 cell.txtNote.attributedText = strAllNote;
                 
                 
-                float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID];
+                float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
                 NSString *strSumNotePrice = [Utility formatDecimal:sumNotePrice withMinFraction:0 andMaxFraction:0];
-                strSumNotePrice = [NSString stringWithFormat:@"+%@",strSumNotePrice];
-                cell.lblTotalNotePrice.text = strSumNotePrice;
-                if(sumNotePrice == 0)
-                {
-                    cell.lblTotalNotePrice.text = @"";
-                }
+                strSumNotePrice = sumNotePrice>0?[NSString stringWithFormat:@"+%@",strSumNotePrice]:strSumNotePrice;
+                cell.lblTotalNotePrice.text = sumNotePrice==0?@"":strSumNotePrice;                
             }
             [cell.longPressGestureRecognizer addTarget:self action:@selector(handleLongPress:)];
             [cell.txtNote addGestureRecognizer:cell.longPressGestureRecognizer];
@@ -902,11 +898,11 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                                           
                                           
                                           //update note id list in text
-                                          orderTaking.noteIDListInText = [OrderNote getNoteIDListInTextWithOrderTakingID:orderTaking.orderTakingID];
+                                          orderTaking.noteIDListInText = [OrderNote getNoteIDListInTextWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
                                           
                                           
                                           //update ordertaking price
-                                          float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID];
+                                          float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
                                           orderTaking.notePrice = sumNotePrice;
                                           orderTaking.modifiedUser = [Utility modifiedUser];
                                           orderTaking.modifiedDate = [Utility currentDateTime];
@@ -1065,11 +1061,11 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         
         
         //update note id list in text
-        orderTaking.noteIDListInText = [OrderNote getNoteIDListInTextWithOrderTakingID:orderTaking.orderTakingID];
+        orderTaking.noteIDListInText = [OrderNote getNoteIDListInTextWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
         
         
         //update ordertaking price
-        float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID];
+        float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
         orderTaking.notePrice = sumNotePrice;
         orderTaking.modifiedUser = [Utility modifiedUser];
         orderTaking.modifiedDate = [Utility currentDateTime];

@@ -52,6 +52,7 @@
 "ใส่ห่อ" = "Takeaway";
 "ไม่ใส่" = "No";
 "เพิ่ม" = "Add";
+"เลือก" = "Choose";
 "หมายเหตุ: " = "Remark: ";
 "รวมทั้งหมด" = "Net total";
 "สั่งบุฟเฟ่ต์" = "Order Buffet";
@@ -117,7 +118,7 @@
 "ลุ้นรับรางวัลพิเศษ\nเมื่อทานครบทุกๆ %ld บาท" = "Get 1 lucky draw\nwhen you spend every %ld Baht";
 "สรุปรายการที่สั่ง" = "Order Review";
 "เพิ่มโน้ต" = "Add note";
-"จานที่ %ld" = "No.%ld";
+"No.%ld" = "No.%ld";
 "กดค้างที่ช่อง \"เพิ่มโน้ต\" เพื่อแสดงเมนูแก้ไขโน้ต" = "Long press at textbox to show more options";
 "ยืนยันการสั่งอาหาร" = "Checkout";
 "ลบทั้งหมด" = "Delete all";
@@ -190,3 +191,4 @@
 "ย้อนกลับ" = "Back";
 "เริ่มใช้งาน" = "Let's go";
 "กรุณาตรวจสอบข้อมูลบัตรเครดิต/เดบิต อีกครั้งค่ะ" = "Please check your credit/debit card info";
+"ไม่มีตัวเลือกโน้ตสำหรับรายการนี้" = "No note options for this menu item";

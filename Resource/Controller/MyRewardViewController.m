@@ -111,9 +111,9 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
         [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierReward];
     }
     
+    [self loadingOverlayView];
     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
     [self.homeModel downloadItems:dbRewardPointSpent withData:userAccount];
-    [self loadingOverlayView];
     _timeToCountDownList = [[NSMutableArray alloc]init];
     _rewardPointList = [[NSMutableArray alloc]init];
     _promoCodeList = [[NSMutableArray alloc]init];
@@ -498,6 +498,7 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
     {
         if([_rewardRedemptionUsedList count] == 0)
         {
+            [self loadingOverlayView];
             UserAccount *userAccount = [UserAccount getCurrentUserAccount];
             [self.homeModel downloadItems:dbRewardPointSpentUsed withData:userAccount];
             [self loadingOverlayView];
@@ -557,6 +558,7 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
     {
         if([_rewardRedemptionExpiredList count] == 0)
         {
+            [self loadingOverlayView];
             UserAccount *userAccount = [UserAccount getCurrentUserAccount];
             [self.homeModel downloadItems:dbRewardPointSpentExpired withData:userAccount];
             [self loadingOverlayView];

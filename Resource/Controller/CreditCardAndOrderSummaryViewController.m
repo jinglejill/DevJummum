@@ -52,7 +52,6 @@
     float _serviceChargeValue;
     float _vatValue;
     float _discountValue;
-    NSInteger _promotionOrRewardRedemption;//1=promotion,2=rewardRedemption
     Receipt *_receipt;
     NSIndexPath *_currentScrollIndexPath;
     
@@ -99,6 +98,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 @synthesize promotion;
 @synthesize fromLuckyDraw;
 @synthesize addRemoveMenu;
+@synthesize receipt;//orderItAgain
 
 
 -(IBAction)unwindToCreditCardAndOrderSummary:(UIStoryboardSegue *)segue
@@ -393,7 +393,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     [super loadView];
     
     
-    _promotionOrRewardRedemption = 1;
     NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
     _orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
 }
@@ -414,7 +413,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     
     _promotionList = [[NSMutableArray alloc]init];
     _rewardRedemptionList = [[NSMutableArray alloc]init];
-    _remark = @"";
+    _remark = receipt?receipt.remark:@"";
     
     if(fromReceiptSummaryMenu || fromOrderDetailMenu || fromRewardRedemption || fromHotDealDetail || fromLuckyDraw)
     {
@@ -508,6 +507,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     [voucherView.btnDelete addTarget:self action:@selector(deleteVoucher:) forControlEvents:UIControlEventTouchUpInside];
 
     
+    [self loadingOverlayView];
     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
     self.homeModel = [[HomeModel alloc]init];
     self.homeModel.delegate = self;
@@ -935,7 +935,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ไม่ใส่"] attributes:attribute];
+                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:[Language getText:branch.wordNo] attributes:attribute];
                     
                     
                     UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -949,7 +949,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"เพิ่ม"] attributes:attribute];
+                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:[Language getText:branch.wordAdd] attributes:attribute];
                     
                     
                     UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -1333,7 +1333,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"ไม่ใส่"] attributes:attribute];
+                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:[Language getText:branch.wordNo] attributes:attribute];
                     
                     
                     UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -1347,7 +1347,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 {
                     UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
                     NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"เพิ่ม"] attributes:attribute];
+                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:[Language getText:branch.wordAdd] attributes:attribute];
                     
                     
                     UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
@@ -1791,18 +1791,10 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 
                 
                 
-                if(_promotionOrRewardRedemption == 1)
-                {
-                    self.homeModel = [[HomeModel alloc]init];
-                    self.homeModel.delegate = self;
-                    [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,_selectedVoucherCode] actionScreen:@"call omise checkout at server"];
-                }
-                else
-                {
-                    self.homeModel = [[HomeModel alloc]init];
-                    self.homeModel.delegate = self;
-                    [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,_selectedVoucherCode] actionScreen:@"call omise checkout at server"];
-                }
+                _selectedVoucherCode = _selectedVoucherCode?_selectedVoucherCode:@"";
+                self.homeModel = [[HomeModel alloc]init];
+                self.homeModel.delegate = self;
+                [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,_selectedVoucherCode] actionScreen:@"call omise checkout at server"];
             }
             else
             {
@@ -2179,6 +2171,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     }
     else if(homeModel.propCurrentDB == dbPromotionAndRewardRedemption)
     {
+        [self removeOverlayViews];
         _promotionList = [items[0] mutableCopy];
         _rewardRedemptionList = [items[1] mutableCopy];
         [tbvTotal reloadData];

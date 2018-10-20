@@ -443,7 +443,7 @@ void myExceptionHandler(NSException *exception)
     else if([currentVc isKindOfClass:[QRCodeScanTableViewController class]])
     {
         QRCodeScanTableViewController *vc = (QRCodeScanTableViewController *)currentVc;
-        [vc viewDidAppear:NO];
+        [vc viewDidLayoutSubviews];
     }
 }
 

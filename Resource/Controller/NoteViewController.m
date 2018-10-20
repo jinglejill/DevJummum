@@ -8,6 +8,7 @@
 
 #import "NoteViewController.h"
 #import "CustomCollectionViewCellNote.h"
+#import "CustomCollectionViewCellNoteWithQuantity.h"
 #import "CustomCollectionReusableView.h"
 #import "Note.h"
 #import "NoteType.h"
@@ -22,13 +23,14 @@
 @interface NoteViewController ()
 {
     NSMutableArray *_noteTypeList;
-    NSMutableArray *_currentOrderNoteList;
+    NSMutableArray *_beforeOrderNoteList;
 }
 @end
 
 @implementation NoteViewController
 static NSString * const reuseHeaderViewIdentifier = @"CustomCollectionReusableView";
 static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
+static NSString * const reuseIdentifierNoteWithQuantity = @"CustomCollectionViewCellNoteWithQuantity";
 
 
 @synthesize colVwNote;
@@ -37,6 +39,7 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
 @synthesize vc;
 @synthesize btnConfirm;
 @synthesize btnCancel;
+@synthesize btnDeleteAll;
 @synthesize branch;
 
 
@@ -46,6 +49,7 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
     
     [self setButtonDesign:btnConfirm];
     [self setButtonDesign:btnCancel];
+    [self setButtonDesign:btnDeleteAll];
 }
 
 - (void)viewDidLoad
@@ -64,6 +68,10 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
         UINib *nib = [UINib nibWithNibName:reuseIdentifierNote bundle:nil];
         [colVwNote registerNib:nib forCellWithReuseIdentifier:reuseIdentifierNote];
     }
+    {
+        UINib *nib = [UINib nibWithNibName:reuseIdentifierNoteWithQuantity bundle:nil];
+        [colVwNote registerNib:nib forCellWithReuseIdentifier:reuseIdentifierNoteWithQuantity];
+    }
     
     {
         UINib *nib = [UINib nibWithNibName:reuseHeaderViewIdentifier bundle:nil];
@@ -76,42 +84,21 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
     }
     
     
-    
-    noteList = [MenuNote getNoteListWithMenuID:orderTaking.menuID];
+    _beforeOrderNoteList = [[NSMutableArray alloc]init];
+    NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingID:orderTaking.orderTakingID];
+    for(OrderNote *item in orderNoteList)
+    {
+        OrderNote *orderNote = [item copy];
+        [_beforeOrderNoteList addObject:orderNote];
+    }
+    noteList = [MenuNote getNoteListWithMenuID:orderTaking.menuID branchID:branch.branchID];
     if([noteList count] == 0)
     {
         //download menunote
+        [self loadingOverlayView];
         self.homeModel = [[HomeModel alloc]init];
         self.homeModel.delegate = self;
-        [self.homeModel downloadItems:dbMenuNoteList withData:@[branch,@(orderTaking.menuID)] completionBlock:^(BOOL succeeded, NSMutableArray *items)
-         {
-             if (succeeded)
-             {
-                 [Utility updateSharedObject:items];
-
-                 
-                 /////////
-                 noteList = [MenuNote getNoteListWithMenuID:orderTaking.menuID];
-                 _noteTypeList = [[NSMutableArray alloc]init];
-                 NSSet *noteTypeIDSet = [NSSet setWithArray:[noteList valueForKey:@"_noteTypeID"]];
-                 for(NSNumber *noteTypeID in noteTypeIDSet)
-                 {
-                     NoteType *noteType = [NoteType getNoteType:[noteTypeID integerValue]];
-                     NSMutableArray *noteListByNoteTypeID = [Note getNoteListWithNoteTypeID:noteType.noteTypeID noteList:noteList];
-                     NSSet *typeSet = [NSSet setWithArray:[noteListByNoteTypeID valueForKey:@"_type"]];
-                     for(NSNumber *type in typeSet)
-                     {
-                         NoteType *newNoteType = [noteType copy];
-                         newNoteType.type = [type integerValue];
-                         [_noteTypeList addObject:newNoteType];
-                     }
-                 }
-                 _noteTypeList = [NoteType sort:_noteTypeList];
-                 _currentOrderNoteList = [OrderNote getOrderNoteListWithOrderTakingID:orderTaking.orderTakingID];
-                 
-                 [colVwNote reloadData];
-             }
-         }];
+        [self.homeModel downloadItems:dbMenuNoteList withData:@[branch,@(orderTaking.menuID)]];
     }
     else
     {
@@ -119,7 +106,7 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
         NSSet *noteTypeIDSet = [NSSet setWithArray:[noteList valueForKey:@"_noteTypeID"]];
         for(NSNumber *noteTypeID in noteTypeIDSet)
         {
-            NoteType *noteType = [NoteType getNoteType:[noteTypeID integerValue]];
+            NoteType *noteType = [NoteType getNoteType:[noteTypeID integerValue] branchID:branch.branchID];
             NSMutableArray *noteListByNoteTypeID = [Note getNoteListWithNoteTypeID:noteType.noteTypeID noteList:noteList];
             NSSet *typeSet = [NSSet setWithArray:[noteListByNoteTypeID valueForKey:@"_type"]];
             for(NSNumber *type in typeSet)
@@ -130,8 +117,7 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
             }
         }
         _noteTypeList = [NoteType sort:_noteTypeList];
-        _currentOrderNoteList = [OrderNote getOrderNoteListWithOrderTakingID:orderTaking.orderTakingID];
-        
+
         [colVwNote reloadData];
     }
     
@@ -162,13 +148,28 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return  [_noteTypeList count];
+    if([_noteTypeList count] == 0)
+    {
+        NSString *message = [Language getText:@"ไม่มีตัวเลือกโน้ตสำหรับรายการนี้"];
+        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, collectionView.bounds.size.width, collectionView.bounds.size.height)];
+        noDataLabel.text             = message;
+        noDataLabel.textColor        = cSystem4;
+        noDataLabel.textAlignment    = NSTextAlignmentCenter;
+        noDataLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15.0f];
+        collectionView.backgroundView = noDataLabel;
+        return 0;
+    }
+    else
+    {
+        collectionView.backgroundView = nil;
+        return  [_noteTypeList count];
+    }
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSInteger countColumn = 3;
+    NSInteger countColumn = 1;
     NoteType *noteType = _noteTypeList[section];
     NSMutableArray *noteListBySection = [Note getNoteListWithNoteTypeID:noteType.noteTypeID type:noteType.type noteList:noteList];
     
@@ -179,7 +180,8 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    CustomCollectionViewCellNote *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierNote forIndexPath:indexPath];
+    CustomCollectionViewCellNoteWithQuantity *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierNoteWithQuantity forIndexPath:indexPath];
+    cell.contentView.userInteractionEnabled = NO;
     
     
     NSInteger section = indexPath.section;
@@ -194,65 +196,105 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
     if(item < [noteListBySection count])
     {
         Note *note = noteListBySection[item];
-        OrderNote *orderNote = [OrderNote getOrderNoteWithNoteID:note.noteID orderNoteList:_currentOrderNoteList];
+        OrderNote *orderNote = [OrderNote getOrderNoteWithOrderTakingID:orderTaking.orderTakingID noteID:note.noteID];
         if(orderNote)
         {
             cell.selected = YES;
             [colVwNote selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-            [cell.btnCheckBox setImage:[UIImage imageNamed:@"checkbox_gray.png"] forState:UIControlStateNormal];
+            cell.btnDeleteQuantity.tag = 201;
+            cell.btnAddQuantity.tag = 202;
+            if(noteType.allowQuantity)
+            {
+                cell.btnDeleteQuantity.hidden = NO;
+                cell.btnAddQuantity.hidden = NO;
+                cell.txtQuantity.hidden = NO;
+            }
+            else
+            {
+                cell.btnDeleteQuantity.hidden = YES;
+                cell.btnAddQuantity.hidden = YES;
+                cell.txtQuantity.hidden = YES;
+            }
+            cell.txtQuantity.text = [Utility formatDecimal:orderNote.quantity withMinFraction:0 andMaxFraction:2];
+            cell.txtQuantity.tag = note.noteID;
+            cell.txtQuantity.delegate = self;
+            [cell.btnDeleteQuantity addTarget:self action:@selector(stepperValueChanged:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.btnAddQuantity addTarget:self action:@selector(stepperValueChanged:) forControlEvents:UIControlEventTouchUpInside];
             cell.layer.backgroundColor = [cSystem1_20 CGColor];
         }
         else
         {
             cell.selected = NO;
-            [cell.btnCheckBox setImage:[UIImage imageNamed:@"uncheckbox_gray.png"] forState:UIControlStateNormal];
+            cell.btnDeleteQuantity.tag = 201;
+            cell.btnAddQuantity.tag = 202;
+            cell.btnDeleteQuantity.hidden = YES;
+            cell.btnAddQuantity.hidden = YES;
+            cell.txtQuantity.hidden = YES;
+            cell.txtQuantity.text = @"";
+            cell.txtQuantity.tag = note.noteID;
+            cell.txtQuantity.delegate = self;
+            [cell.btnDeleteQuantity addTarget:self action:@selector(stepperValueChanged:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.btnAddQuantity addTarget:self action:@selector(stepperValueChanged:) forControlEvents:UIControlEventTouchUpInside];
             cell.layer.backgroundColor = [[UIColor clearColor]CGColor];
         }
         if(note.type == 1)//เพิ่ม
         {
             UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:14];
             NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
-            NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[Language getText:@"เพิ่ม"] attributes:attribute];
+            NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[Language getText:branch.wordAdd] attributes:attribute];
             
             
+            NSString *noteName = [Language langIsTH]?note.name:note.nameEn;
             UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:14];
             NSDictionary *attribute2 = @{NSFontAttributeName: font2};
-            NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",note.name] attributes:attribute2];
+            NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",noteName] attributes:attribute2];
             
             
             [attrString appendAttributedString:attrString2];
             
             
             cell.lblNoteName.attributedText = attrString;        
-            
+            cell.lblNoteName.tag = note.noteID;
         }
         else//ไม่ใส่
         {
-            cell.lblNoteName.text = [NSString stringWithFormat:[Language getText:@"ไม่ใส่ %@"],note.name];
+            NSString *noteName = [Language langIsTH]?note.name:note.nameEn;
+            cell.lblNoteName.text = [NSString stringWithFormat:[Language getText:@"ไม่ใส่ %@"],noteName];
+            cell.lblNoteName.tag = note.noteID;
         }
         
-        NSString *strNotePrice = @"";
-        if(note.price > 0)
-        {
-            strNotePrice = [NSString stringWithFormat:@"+%@",[Utility formatDecimal:note.price withMinFraction:0 andMaxFraction:0]];
-        }
-        else if (note.price < 0)
-        {
-            strNotePrice = [NSString stringWithFormat:@"-%@",[Utility formatDecimal:note.price withMinFraction:0 andMaxFraction:0]];
-        }
+        
+        //price
+        NSString *strNotePrice = note.price != 0?[NSString stringWithFormat:@"%@",[Utility formatDecimal:note.price withMinFraction:0 andMaxFraction:0]]:@"";
+        strNotePrice = note.price > 0?[NSString stringWithFormat:@"+%@",strNotePrice]:strNotePrice;
         cell.lblPrice.text = strNotePrice;
         cell.lblPrice.textColor = cSystem1;
         
         
-        cell.btnCheckBox.hidden = NO;
+        
+        //totalPrice
+        cell.lblTotalPrice.textColor = cSystem1;
+        cell.lblTotalPrice.text = @"";
+        if(noteType.allowQuantity && note.price != 0 && orderNote.quantity > 0)
+        {
+            NSString *strNoteTotalPrice = note.price != 0?[NSString stringWithFormat:@"%@",[Utility formatDecimal:note.price*orderNote.quantity withMinFraction:0 andMaxFraction:0]]:@"";
+            strNoteTotalPrice = note.price > 0?[NSString stringWithFormat:@"+%@",strNoteTotalPrice]:strNoteTotalPrice;
+            cell.lblTotalPrice.text = strNoteTotalPrice;
+        }
+        
+        
         cell.lblNoteName.hidden = NO;
         cell.lblPrice.hidden = NO;
+        cell.lblTotalPrice.hidden = NO;
     }
     else
     {
-        cell.btnCheckBox.hidden = YES;
+        cell.btnDeleteQuantity.hidden = YES;
+        cell.btnAddQuantity.hidden = YES;
+        cell.txtQuantity.hidden = YES;
         cell.lblNoteName.hidden = YES;
         cell.lblPrice.hidden = YES;
+        cell.lblTotalPrice.hidden = YES;
     }
     
     return cell;
@@ -273,17 +315,36 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
     }
     Note *note = noteListBySection[item];
     
-    OrderNote *orderNote = [OrderNote getOrderNoteWithNoteID:note.noteID orderNoteList:_currentOrderNoteList];
+    OrderNote *orderNote = [OrderNote getOrderNoteWithOrderTakingID:orderTaking.orderTakingID noteID:note.noteID];
     if(!orderNote)
     {
-        OrderNote *addOrderNote = [[OrderNote alloc]initWithOrderTakingID:orderTaking.orderTakingID noteID:note.noteID];
+        OrderNote *addOrderNote = [[OrderNote alloc]initWithOrderTakingID:orderTaking.orderTakingID noteID:note.noteID quantity:1];
         [OrderNote addObject:addOrderNote];
-        [_currentOrderNoteList addObject:addOrderNote];
     }
     
     
-    CustomCollectionViewCellNote *cell = (CustomCollectionViewCellNote *)[collectionView cellForItemAtIndexPath:indexPath];
-    [cell.btnCheckBox setImage:[UIImage imageNamed:@"checkbox_gray.png"] forState:UIControlStateNormal];
+
+    CustomCollectionViewCellNoteWithQuantity *cell = (CustomCollectionViewCellNoteWithQuantity *)[collectionView cellForItemAtIndexPath:indexPath];
+    if(noteType.allowQuantity)
+    {
+        cell.btnDeleteQuantity.hidden = NO;
+        cell.btnAddQuantity.hidden = NO;
+        cell.txtQuantity.hidden = NO;
+    }
+    else
+    {
+        cell.btnDeleteQuantity.hidden = YES;
+        cell.btnAddQuantity.hidden = YES;
+        cell.txtQuantity.hidden = YES;
+    }
+    cell.txtQuantity.text = @"1";
+    cell.lblTotalPrice.text = @"";
+    if(noteType.allowQuantity)
+    {
+        cell.lblTotalPrice.text = note.price>0?[Utility formatDecimal:note.price*1 withMinFraction:0 andMaxFraction:0]:@"";
+        cell.lblTotalPrice.text = note.price>0?[NSString stringWithFormat:@"+%@",cell.lblTotalPrice.text]:cell.lblTotalPrice.text;
+    }
+    
     cell.layer.backgroundColor = [cSystem1_20 CGColor];
 }
 
@@ -302,16 +363,19 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
     }
     Note *note = noteListBySection[item];
     
-    OrderNote *orderNote = [OrderNote getOrderNoteWithNoteID:note.noteID orderNoteList:_currentOrderNoteList];
+    OrderNote *orderNote = [OrderNote getOrderNoteWithOrderTakingID:orderTaking.orderTakingID noteID:note.noteID];
     if(orderNote)
     {
         [OrderNote removeObject:orderNote];
-        [_currentOrderNoteList removeObject:orderNote];
     }
     
     
-    CustomCollectionViewCellNote *cell = (CustomCollectionViewCellNote *)[collectionView cellForItemAtIndexPath:indexPath];
-    [cell.btnCheckBox setImage:[UIImage imageNamed:@"uncheckbox_gray.png"] forState:UIControlStateNormal];
+    CustomCollectionViewCellNoteWithQuantity *cell = (CustomCollectionViewCellNoteWithQuantity *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.btnDeleteQuantity.hidden = YES;
+    cell.btnAddQuantity.hidden = YES;
+    cell.txtQuantity.hidden = YES;
+    cell.txtQuantity.text = @"";
+    cell.lblTotalPrice.text = @"";
     cell.layer.backgroundColor = [[UIColor clearColor] CGColor];
 }
 
@@ -320,8 +384,8 @@ static NSString * const reuseIdentifierNote = @"CustomCollectionViewCellNote";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger countColumn = 2;
-    return CGSizeMake(floorf(collectionView.frame.size.width/countColumn), 34);
+    NSInteger countColumn = 1;
+    return CGSizeMake(floorf(collectionView.frame.size.width/countColumn), 44);
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -370,7 +434,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
         }
         
         
-        headerView.lblHeaderName.text = noteType.name;
+        headerView.lblHeaderName.text = [Language langIsTH]?noteType.name:noteType.nameEn;
         headerView.lblHeaderName.textColor = cSystem1;
         headerView.vwBottomLine.backgroundColor = [UIColor clearColor];
         
@@ -443,17 +507,38 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 - (IBAction)cancelNote:(id)sender
 {
+    NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingID:orderTaking.orderTakingID];
+    for(OrderNote *item in orderNoteList)
+    {
+        [OrderNote removeObject:item];
+    }
+    
+    for(OrderNote *item in _beforeOrderNoteList)
+    {
+        [OrderNote addObject:item];
+    }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)deleteAll:(id)sender
+{
+    NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingID:orderTaking.orderTakingID];
+    for(OrderNote *item in orderNoteList)
+    {
+        [OrderNote removeObject:item];
+    }
+    [colVwNote reloadData];
 }
 
 - (IBAction)confirmNote:(id)sender
 {
     //update note id list in text
-    orderTaking.noteIDListInText = [OrderNote getNoteIDListInTextWithOrderTakingID:orderTaking.orderTakingID];
+    orderTaking.noteIDListInText = [OrderNote getNoteIDListInTextWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
     
     
     //update ordertaking price
-    float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID];
+    float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
     orderTaking.notePrice = sumNotePrice;
     orderTaking.modifiedUser = [Utility modifiedUser];
     orderTaking.modifiedDate = [Utility currentDateTime];
@@ -483,4 +568,138 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     };
 }
 
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if(textField.tag != 0)
+    {
+
+        NSInteger noteID = textField.tag;
+        OrderNote *orderNote = [OrderNote getOrderNoteWithOrderTakingID:orderTaking.orderTakingID noteID:noteID];
+        
+
+        NSInteger quantity = [textField.text integerValue];
+        if(quantity == 0 || [Utility isStringEmpty:textField.text])
+        {
+            [OrderNote removeObject:orderNote];
+        }
+        else
+        {
+            orderNote.quantity = [textField.text integerValue];
+        }
+        
+        [colVwNote reloadData];
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+
+    if(textField.tag != 0)
+    {
+        NSString *resultingString = [textField.text stringByReplacingCharactersInRange: range withString: string];
+        
+        // The user deleting all input is perfectly acceptable.
+        if ([resultingString length] == 0) {
+            return true;
+        }
+        
+        NSInteger holder;
+        
+        NSScanner *scan = [NSScanner scannerWithString: resultingString];
+        
+        
+        
+        //fix length
+        NSUInteger oldLength = [textField.text length];
+        NSUInteger replacementLength = [string length];
+        NSUInteger rangeLength = range.length;
+        
+        NSUInteger newLength = oldLength - rangeLength + replacementLength;
+        
+        BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
+        //**********
+        
+        
+        
+        return [scan scanInteger: &holder] && [scan isAtEnd] && (newLength <= 2 || returnKey);
+    }
+    return YES;
+}
+
+-(void)stepperValueChanged:(id)sender
+{
+    UIButton *button = sender;
+    
+    CGPoint point = [sender convertPoint:CGPointZero toView:colVwNote];
+    NSIndexPath *indexPath = [colVwNote indexPathForItemAtPoint:point];
+    CustomCollectionViewCellNoteWithQuantity *cell = (CustomCollectionViewCellNoteWithQuantity *)[colVwNote cellForItemAtIndexPath:indexPath];
+    if(button.tag == 201)
+    {
+        NSInteger quantity = [cell.txtQuantity.text integerValue]-1;
+        cell.txtQuantity.text = [Utility formatDecimal:quantity withMinFraction:0 andMaxFraction:0];
+        
+        
+        //remove orderNote
+        NSInteger noteID = cell.lblNoteName.tag;
+        OrderNote *orderNote = [OrderNote getOrderNoteWithOrderTakingID:orderTaking.orderTakingID noteID:noteID];
+        if(orderNote.quantity == 1)
+        {
+            [OrderNote removeObject:orderNote];
+        }
+        else if(orderNote.quantity > 1)
+        {
+            orderNote.quantity -= 1;
+        }
+        
+        [colVwNote reloadData];
+    }
+    else if(button.tag == 202)
+    {
+        if([cell.txtQuantity.text integerValue] == 99)
+        {
+            return;
+        }
+        NSInteger quantity = [cell.txtQuantity.text integerValue]+1;
+        cell.txtQuantity.text = [Utility formatDecimal:quantity withMinFraction:0 andMaxFraction:0];
+        
+        
+        //add orderNote
+        NSInteger noteID = cell.lblNoteName.tag;
+        OrderNote *orderNote = [OrderNote getOrderNoteWithOrderTakingID:orderTaking.orderTakingID noteID:noteID];
+        orderNote.quantity += 1;
+        
+        
+        [colVwNote reloadData];
+    }
+}
+
+-(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
+{
+    HomeModel *homeModel = (HomeModel *)objHomeModel;
+    if(homeModel.propCurrentDB == dbMenuNoteList)
+    {
+        [self removeOverlayViews];
+        [Utility updateSharedObject:items];
+
+        
+         /////////
+         noteList = [MenuNote getNoteListWithMenuID:orderTaking.menuID branchID:branch.branchID];
+         _noteTypeList = [[NSMutableArray alloc]init];
+         NSSet *noteTypeIDSet = [NSSet setWithArray:[noteList valueForKey:@"_noteTypeID"]];
+         for(NSNumber *noteTypeID in noteTypeIDSet)
+         {
+             NoteType *noteType = [NoteType getNoteType:[noteTypeID integerValue] branchID:branch.branchID];
+             NSMutableArray *noteListByNoteTypeID = [Note getNoteListWithNoteTypeID:noteType.noteTypeID noteList:noteList];
+             NSSet *typeSet = [NSSet setWithArray:[noteListByNoteTypeID valueForKey:@"_type"]];
+             for(NSNumber *type in typeSet)
+             {
+                 NoteType *newNoteType = [noteType copy];
+                 newNoteType.type = [type integerValue];
+                 [_noteTypeList addObject:newNoteType];
+             }
+         }
+         _noteTypeList = [NoteType sort:_noteTypeList];
+         [colVwNote reloadData];
+    }
+}
 @end

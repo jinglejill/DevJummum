@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Prompt-Regular.ttf">
+            <string>Prompt-Regular</string>
+        </array>
+        <array key="Prompt-SemiBold.ttf">
+            <string>Prompt-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="KuV-DY-HtE" customClass="CustomCollectionViewCellNoteWithQuantity">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Edi-La-XvR">
+                    <rect key="frame" x="374" y="0.0" width="1" height="667"/>
+                    <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="T2P-Ct-wys"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IVd-UU-2Bj">
+                    <rect key="frame" x="16" y="2" width="30" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="cAU-Kj-SyQ"/>
+                        <constraint firstAttribute="height" constant="40" id="qbk-GF-3Av"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <state key="normal" title="-">
+                        <color key="titleColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="99" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b67-W6-lFm">
+                    <rect key="frame" x="54" y="12" width="17" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="hA4-gx-QrS"/>
+                        <constraint firstAttribute="width" constant="17" id="nmg-uU-z9B"/>
+                    </constraints>
+                    <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="13"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ux-9s-huh">
+                    <rect key="frame" x="79" y="2" width="30" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="FST-KF-6hR"/>
+                        <constraint firstAttribute="height" constant="40" id="mfx-p7-Vv6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <state key="normal" title="+">
+                        <color key="titleColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="รสมิ้นต์" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="NMy-N4-fNr">
+                    <rect key="frame" x="117" y="13" width="155" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="ry7-JC-gMg"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="14"/>
+                    <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+20" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5m-bI-suc">
+                    <rect key="frame" x="280" y="13.5" width="35" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="56c-aL-coq"/>
+                        <constraint firstAttribute="width" constant="35" id="r5E-ea-mWn"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="14"/>
+                    <color key="textColor" red="0.30196078430000001" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+200" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rxB-4J-5so">
+                    <rect key="frame" x="323" y="13.5" width="35" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="B2W-DM-pM3"/>
+                        <constraint firstAttribute="width" constant="35" id="knV-M0-UFP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="14"/>
+                    <color key="textColor" red="0.30196078430000001" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="rxB-4J-5so" firstAttribute="leading" secondItem="i5m-bI-suc" secondAttribute="trailing" constant="8" id="05f-Or-9hn"/>
+                <constraint firstItem="IVd-UU-2Bj" firstAttribute="leading" secondItem="UNg-X7-SGy" secondAttribute="leading" constant="16" id="3kQ-DA-lPS"/>
+                <constraint firstItem="i5m-bI-suc" firstAttribute="centerY" secondItem="IVd-UU-2Bj" secondAttribute="centerY" id="A61-F7-57Q"/>
+                <constraint firstItem="b67-W6-lFm" firstAttribute="centerY" secondItem="IVd-UU-2Bj" secondAttribute="centerY" id="A9B-GA-mox"/>
+                <constraint firstItem="i5m-bI-suc" firstAttribute="leading" secondItem="NMy-N4-fNr" secondAttribute="trailing" constant="8" id="BBg-UP-cnW"/>
+                <constraint firstItem="rxB-4J-5so" firstAttribute="centerY" secondItem="IVd-UU-2Bj" secondAttribute="centerY" id="CZS-JU-UQX"/>
+                <constraint firstItem="6ux-9s-huh" firstAttribute="centerY" secondItem="IVd-UU-2Bj" secondAttribute="centerY" id="F2l-w5-Bu3"/>
+                <constraint firstItem="6ux-9s-huh" firstAttribute="leading" secondItem="b67-W6-lFm" secondAttribute="trailing" constant="8" id="HiH-N4-pdX"/>
+                <constraint firstItem="IVd-UU-2Bj" firstAttribute="top" secondItem="KuV-DY-HtE" secondAttribute="top" constant="2" id="In7-n1-uCG"/>
+                <constraint firstItem="b67-W6-lFm" firstAttribute="leading" secondItem="IVd-UU-2Bj" secondAttribute="trailing" constant="8" id="Jkb-16-7v9"/>
+                <constraint firstItem="Edi-La-XvR" firstAttribute="top" secondItem="KuV-DY-HtE" secondAttribute="top" id="c7E-Fw-VS2"/>
+                <constraint firstAttribute="bottom" secondItem="Edi-La-XvR" secondAttribute="bottom" id="lL2-6z-do0"/>
+                <constraint firstItem="NMy-N4-fNr" firstAttribute="centerY" secondItem="IVd-UU-2Bj" secondAttribute="centerY" id="m2a-49-kdN"/>
+                <constraint firstAttribute="trailing" secondItem="Edi-La-XvR" secondAttribute="trailing" id="o7u-w8-Fnu"/>
+                <constraint firstItem="Edi-La-XvR" firstAttribute="leading" secondItem="rxB-4J-5so" secondAttribute="trailing" constant="16" id="oL4-MV-skX"/>
+                <constraint firstItem="NMy-N4-fNr" firstAttribute="leading" secondItem="6ux-9s-huh" secondAttribute="trailing" constant="8" id="zp9-Nr-Goq"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="UNg-X7-SGy"/>
+            <connections>
+                <outlet property="btnAddQuantity" destination="6ux-9s-huh" id="4xe-sw-AMg"/>
+                <outlet property="btnDeleteQuantity" destination="IVd-UU-2Bj" id="KiV-W7-hD4"/>
+                <outlet property="lblNoteName" destination="NMy-N4-fNr" id="yDh-0j-FwE"/>
+                <outlet property="lblPrice" destination="i5m-bI-suc" id="km4-UU-KJs"/>
+                <outlet property="lblTotalPrice" destination="rxB-4J-5so" id="XE5-ZN-hW3"/>
+                <outlet property="txtQuantity" destination="b67-W6-lFm" id="VJl-1S-3AL"/>
+            </connections>
+            <point key="canvasLocation" x="38.5" y="33.5"/>
+        </view>
+    </objects>
+</document>

@@ -714,6 +714,16 @@
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlReceiptSummaryPageGetList]]];
         }
             break;
+         case dbMenuNoteList:
+        {
+            NSArray *dataList = (NSArray *)data;
+            Branch *branch = dataList[0];
+            NSNumber *objMenuID = dataList[1];
+            
+            noteDataString = [NSString stringWithFormat:@"branchID=%ld&menuID=%ld",branch.branchID,[objMenuID integerValue]];
+            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlMenuNoteGetList]]];
+        }
+            break;
         default:
             break;
     }
@@ -2692,16 +2702,7 @@
     NSString *noteDataString = @"";
     switch (currentDB)
     {
-        case dbMenuNoteList:
-        {
-            NSArray *dataList = (NSArray *)data;
-            Branch *branch = dataList[0];
-            NSNumber *objMenuID = dataList[1];
-            
-            noteDataString = [NSString stringWithFormat:@"branchID=%ld&menuID=%ld",branch.branchID,[objMenuID integerValue]];
-            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlMenuNoteGetList]]];
-        }
-            break;
+       
     }
     
     noteDataString = [NSString stringWithFormat:@"%@&modifiedDeviceToken=%@&modifiedUser=%@&lang=%@",noteDataString,[Utility deviceToken],[Utility modifiedUser],[Language getLanguage]];
@@ -2729,9 +2730,9 @@
                 NSArray *arrClassName;
                 switch (currentDB)
                 {
-                    case dbMenuNoteList:
-                        arrClassName = @[@"MenuNote"];
-                        break;
+//                    case dbMenuNoteList:
+//                        arrClassName = @[@"MenuNote"];
+//                        break;
                 }
                 
                 

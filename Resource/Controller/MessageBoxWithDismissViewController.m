@@ -11,6 +11,7 @@
 @interface MessageBoxWithDismissViewController ()
 {
     BOOL _dontShowItAgain;
+    NSInteger _countAnim;
 }
 @end
 
@@ -21,6 +22,7 @@
 @synthesize vwAlert;
 @synthesize btnOK;
 @synthesize btnDontShowItAgain;
+@synthesize imgArrow;
 
 
 -(void)viewDidLayoutSubviews
@@ -44,6 +46,44 @@
 
     vwAlert.layer.cornerRadius = 10;
     vwAlert.layer.masksToBounds = YES;
+    
+    [self startAnim];
+//    [self blinkForever:imgArrow];
+//    imgArrow.animationImages = @[[UIImage imageNamed:@"twirlArrow.png"],[UIImage imageNamed:@"twirlArrowBlank.png"]];
+//    imgArrow.animationDuration = 1;
+//    imgArrow.animationRepeatCount = INFINITY;
+}
+
+
+
+- (void)startAnim
+{
+    NSInteger maxBlind = 4;
+
+    CGFloat animDuration = 0.5f;
+    [UIView animateWithDuration:animDuration
+                     animations:^{
+                         imgArrow.alpha = 0.f;
+                     } completion:^(BOOL finished) {
+                         [UIView animateWithDuration:animDuration
+                                          animations:^{
+                                              imgArrow.alpha = 1.f;
+                                          } completion:^(BOOL finished) {
+                                              if (_countAnim < maxBlind){
+                                                  [self startAnim];
+                                                  _countAnim++;
+                                              }
+                                          }];
+                     }];
+}
+
+-(void)blinkForever:(UIView*)view
+{
+    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionAutoreverse|UIViewAnimationOptionRepeat animations:^{
+
+        view.alpha = 0.0;
+
+    } completion:nil];
 }
 
 - (IBAction)okClicked:(id)sender

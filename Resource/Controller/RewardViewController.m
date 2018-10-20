@@ -461,6 +461,9 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
         // we will consider the searchbar is not active
         self.searchBarActive = NO;
     }
+    
+    
+    [self loadingOverlayView];
     _page = 1;
     _lastItemReached = NO;
     UserAccount *userAccount = [UserAccount getCurrentUserAccount];

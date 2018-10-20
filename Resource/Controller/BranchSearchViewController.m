@@ -249,6 +249,7 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
         self.searchBarActive = YES;
         _page = 1;
         _lastItemReached = NO;
+        [self loadingOverlayView];
         self.homeModel = [[HomeModel alloc]init];
         self.homeModel.delegate = self;
         [self.homeModel downloadItems:dbBranchSearch withData:@[searchText,@(_page),@(_perPage)]];
@@ -303,6 +304,7 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
     HomeModel *homeModel = (HomeModel *)objHomeModel;
     if(homeModel.propCurrentDB == dbBranchSearch)
     {
+        [self removeOverlayViews];
         if(_page == 1)
         {
             _filterBranchList = items[0];

@@ -120,6 +120,7 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
     }
     
     
+    [self loadingOverlayView];
     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
     [self.homeModel downloadItems:dbHotDeal withData:@[searchBar.text,@(_page),@(_perPage),userAccount]];
     
@@ -343,20 +344,6 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
 }
 
 #pragma mark - search
-//
-//- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
-//{
-//    if([Utility isStringEmpty:searchText])
-//    {
-//        _filterPromotionList = _promotionList;
-//        [tbvData reloadData];
-//    }
-//    else
-//    {
-//        NSPredicate *resultPredicate   = [NSPredicate predicateWithFormat:@"(_header contains[c] %@) or (_subTitle contains[c] %@) or (_termsConditions contains[c] %@)", searchText, searchText, searchText];
-//        _filterPromotionList = [[_promotionList filteredArrayUsingPredicate:resultPredicate] mutableCopy];
-//    }
-//}
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
@@ -424,6 +411,7 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
     HomeModel *homeModel = (HomeModel *)objHomeModel;
     if(homeModel.propCurrentDB == dbHotDeal)
     {
+        [self removeOverlayViews];
         if(_page == 1)
         {
             _filterPromotionList = items[0];

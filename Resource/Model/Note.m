@@ -13,18 +13,35 @@
 
 @implementation Note
 
--(Note *)initWithName:(NSString *)name price:(float)price noteTypeID:(NSInteger)noteTypeID type:(NSInteger)type status:(NSInteger)status orderNo:(NSInteger)orderNo
+- (NSDictionary *)dictionary
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+        [self valueForKey:@"noteID"]?[self valueForKey:@"noteID"]:[NSNull null],@"noteID",
+        [self valueForKey:@"name"]?[self valueForKey:@"name"]:[NSNull null],@"name",
+        [self valueForKey:@"nameEn"]?[self valueForKey:@"nameEn"]:[NSNull null],@"nameEn",
+        [self valueForKey:@"price"]?[self valueForKey:@"price"]:[NSNull null],@"price",
+        [self valueForKey:@"noteTypeID"]?[self valueForKey:@"noteTypeID"]:[NSNull null],@"noteTypeID",
+        [self valueForKey:@"type"]?[self valueForKey:@"type"]:[NSNull null],@"type",
+        [self valueForKey:@"orderNo"]?[self valueForKey:@"orderNo"]:[NSNull null],@"orderNo",
+        [self valueForKey:@"status"]?[self valueForKey:@"status"]:[NSNull null],@"status",
+        [self valueForKey:@"modifiedUser"]?[self valueForKey:@"modifiedUser"]:[NSNull null],@"modifiedUser",
+        [Utility dateToString:[self valueForKey:@"modifiedDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"modifiedDate",
+        nil];
+}
+
+-(Note *)initWithName:(NSString *)name nameEn:(NSString *)nameEn price:(float)price noteTypeID:(NSInteger)noteTypeID type:(NSInteger)type orderNo:(NSInteger)orderNo status:(NSInteger)status
 {
     self = [super init];
     if(self)
     {
         self.noteID = [Note getNextID];
         self.name = name;
+        self.nameEn = nameEn;
         self.price = price;
         self.noteTypeID = noteTypeID;
         self.type = type;
-        self.status = status;
         self.orderNo = orderNo;
+        self.status = status;
         self.modifiedUser = [Utility modifiedUser];
         self.modifiedDate = [Utility currentDateTime];
     }
@@ -36,13 +53,13 @@
     NSString *primaryKeyName = @"noteID";
     NSString *propertyName = [NSString stringWithFormat:@"_%@",primaryKeyName];
     NSMutableArray *dataList = [SharedNote sharedNote].noteList;
-    
-    
+
+
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:propertyName ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
     NSArray *sortArray = [dataList sortedArrayUsingDescriptors:sortDescriptors];
     dataList = [sortArray mutableCopy];
-    
+
     if([dataList count] == 0)
     {
         return -1;
@@ -100,20 +117,19 @@
 -(id)copyWithZone:(NSZone *)zone
 {
     id copy = [[[self class] alloc] init];
-    
+
     if (copy)
     {
         ((Note *)copy).noteID = self.noteID;
         [copy setName:self.name];
+        [copy setNameEn:self.nameEn];
         ((Note *)copy).price = self.price;
         ((Note *)copy).noteTypeID = self.noteTypeID;
         ((Note *)copy).type = self.type;
-        ((Note *)copy).status = self.status;
         ((Note *)copy).orderNo = self.orderNo;
+        ((Note *)copy).status = self.status;
         [copy setModifiedUser:[Utility modifiedUser]];
         [copy setModifiedDate:[Utility currentDateTime]];
-        
-        
     }
     
     return copy;
@@ -122,13 +138,14 @@
 -(BOOL)editNote:(Note *)editingNote
 {
     if(self.noteID == editingNote.noteID
-       && [self.name isEqualToString:editingNote.name]
-       && self.price == editingNote.price
-       && self.noteTypeID == editingNote.noteTypeID
-       && self.type == editingNote.type
-       && self.status == editingNote.status
-       && self.orderNo == editingNote.orderNo
-       )
+    && [self.name isEqualToString:editingNote.name]
+    && [self.nameEn isEqualToString:editingNote.nameEn]
+    && self.price == editingNote.price
+    && self.noteTypeID == editingNote.noteTypeID
+    && self.type == editingNote.type
+    && self.orderNo == editingNote.orderNo
+    && self.status == editingNote.status
+    )
     {
         return NO;
     }
@@ -139,11 +156,12 @@
 {
     toNote.noteID = fromNote.noteID;
     toNote.name = fromNote.name;
+    toNote.nameEn = fromNote.nameEn;
     toNote.price = fromNote.price;
     toNote.noteTypeID = fromNote.noteTypeID;
     toNote.type = fromNote.type;
-    toNote.status = fromNote.status;
     toNote.orderNo = fromNote.orderNo;
+    toNote.status = fromNote.status;
     toNote.modifiedUser = [Utility modifiedUser];
     toNote.modifiedDate = [Utility currentDateTime];
     

@@ -75,6 +75,7 @@
     
     
     //check require to update now or allow to update later
+    [self loadingOverlayView];
     NSString *strKey = [NSString stringWithFormat:@"UpdateVersion%@",appStoreVersion];
     Setting *setting = [[Setting alloc]initWithKeyName:strKey value:@"" type:0 remark:@""];
     [self.homeModel downloadItems:dbSettingWithKey withData:setting];
@@ -146,6 +147,7 @@
     HomeModel *homeModel = (HomeModel *)objHomeModel;
     if(homeModel.propCurrentDB == dbSettingWithKey)
     {
+        [self removeOverlayViews];
         [Utility updateSharedObject:items];
         
         NSString *strKey = [NSString stringWithFormat:@"UpdateVersion%@",appStoreVersion];

@@ -45,9 +45,9 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k3K-Ek-6fx">
-                    <rect key="frame" x="16" y="42" width="343" height="20"/>
+                    <rect key="frame" x="16" y="34" width="343" height="36"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="UkG-LM-h2n"/>
+                        <constraint firstAttribute="height" constant="36" id="UkG-LM-h2n"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
                     <state key="normal" title="คุณมี voucher code สำหรับร้านนี้">
@@ -58,7 +58,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="v5u-K9-VZR" firstAttribute="centerY" secondItem="biB-Er-JDg" secondAttribute="centerY" id="4ye-Yn-I3E"/>
-                <constraint firstItem="k3K-Ek-6fx" firstAttribute="top" secondItem="biB-Er-JDg" secondAttribute="bottom" constant="8" id="Bnc-Cb-DsY"/>
+                <constraint firstItem="k3K-Ek-6fx" firstAttribute="top" secondItem="biB-Er-JDg" secondAttribute="bottom" id="Bnc-Cb-DsY"/>
                 <constraint firstItem="v5u-K9-VZR" firstAttribute="top" secondItem="fAi-wX-UyG" secondAttribute="top" constant="4" id="Jls-T9-Aov"/>
                 <constraint firstItem="biB-Er-JDg" firstAttribute="leading" secondItem="JOj-fg-XON" secondAttribute="leading" constant="16" id="RGj-UH-4kR"/>
                 <constraint firstItem="JOj-fg-XON" firstAttribute="trailing" secondItem="k3K-Ek-6fx" secondAttribute="trailing" constant="16" id="UTE-br-jtP"/>

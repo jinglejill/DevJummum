@@ -964,7 +964,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         for(NSString *item in arrSearchText)
         {
             NSPredicate *resultPredicate   = [NSPredicate predicateWithFormat:@"(_titleThai contains[c] %@) or (_price = %f)", item, [Utility floatValue:item]];
-            NSArray *filterArray = [[_menuList filteredArrayUsingPredicate:resultPredicate] mutableCopy];
+            NSArray *filterArray = [[_menuList filteredArrayUsingPredicate:resultPredicate] copy];
             [searchSet addObjectsFromArray:filterArray];
         }
         _filterMenuList = [[searchSet allObjects]mutableCopy];

@@ -96,9 +96,8 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         [tbvCustomerTable registerNib:nib forCellReuseIdentifier:reuseIdentifierSearchBar];
     }
     
-    
-    [self.homeModel downloadItems:dbCustomerTable withData:branch];
-    
+
+    [self.homeModel downloadItems:dbCustomerTable withData:branch];    
 }
 
 ///tableview section

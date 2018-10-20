@@ -146,17 +146,17 @@
     [SharedMenuNote sharedMenuNote].menuNoteList = dataList;
 }
 
-+(NSMutableArray *)getNoteListWithMenuID:(NSInteger)menuID
++(NSMutableArray *)getNoteListWithMenuID:(NSInteger)menuID branchID:(NSInteger)branchID
 {
     NSMutableArray *dataList = [SharedMenuNote sharedMenuNote].menuNoteList;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_menuID = %ld",menuID];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_menuID = %ld and _branchID = %ld",menuID,branchID];
     NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
     
     
     NSMutableArray *noteList = [[NSMutableArray alloc]init];
     for(MenuNote *item in filterArray)
     {
-        Note *note = [Note getNote:item.noteID];
+        Note *note = [Note getNote:item.noteID branchID:branchID];
         [noteList addObject:note];
     }
     
