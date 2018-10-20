@@ -15,7 +15,7 @@
 #import "Receipt.h"
 #import "MenuType.h"
 #import "SubMenuType.h"
-//#import "OrderCancelDiscount.h"
+
 
 
 @implementation OrderTaking
@@ -289,10 +289,6 @@
         item.subMenuOrderNo = subMenuType.orderNo;
         MenuType *menuType = [MenuType getMenuType:menu.menuTypeID];
         item.menuTypeOrderNo = menuType.orderNo;
-        
-        
-//        OrderCancelDiscount *orderCancelDiscount = [OrderCancelDiscount getOrderCancelDiscount:item.orderTakingID];
-//        item.cancelDiscountReason = orderCancelDiscount?orderCancelDiscount.reason:@"";
     }
     
     
@@ -304,7 +300,6 @@
     NSSortDescriptor *sortDescriptor4 = [[NSSortDescriptor alloc] initWithKey:@"_menuOrderNo" ascending:YES];
     NSSortDescriptor *sortDescriptor5 = [[NSSortDescriptor alloc] initWithKey:@"_noteIDListInText" ascending:YES];
     NSSortDescriptor *sortDescriptor6 = [[NSSortDescriptor alloc] initWithKey:@"_specialPrice" ascending:NO];
-//    NSSortDescriptor *sortDescriptor7 = [[NSSortDescriptor alloc] initWithKey:@"_cancelDiscountReason" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor,sortDescriptor2,sortDescriptor3_0,sortDescriptor3,sortDescriptor4,sortDescriptor5,sortDescriptor6,nil];
     NSArray *sortArray = [orderTakingList sortedArrayUsingDescriptors:sortDescriptors];
     

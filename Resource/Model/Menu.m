@@ -258,10 +258,6 @@
         item.subMenuOrderNo = subMenuType.orderNo;
         MenuType *menuType = [MenuType getMenuType:item.menuTypeID];
         item.menuOrderNo = menuType.orderNo;
-        
-        
-        //        OrderCancelDiscount *orderCancelDiscount = [OrderCancelDiscount getOrderCancelDiscount:item.orderTakingID];
-        //        item.cancelDiscountReason = orderCancelDiscount?orderCancelDiscount.reason:@"";
     }
     
     
