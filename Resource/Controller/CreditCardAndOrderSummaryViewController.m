@@ -2029,18 +2029,8 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             return;
         }
         
-        
-        
-//        _discountType = promotion.discountType;
-//        _discountAmount = promotion.discountAmount;
+
         _discountValue = promotion.discountValue;
-//        _promotionID = promotion.promotionID;
-//        _rewardRedemptionID = promotion.rewardRedemptionID;
-//        _promoCodeID = promotion.promoCodeID;
-//        _shopDiscount = promotion.shopDiscount;
-//        _jummumDiscount = promotion.jummumDiscount;
-        
-        
         float totalAmount = [OrderTaking getSumSpecialPrice:_orderTakingList];
         
         

@@ -110,7 +110,8 @@
 "แต้มคงเหลือ" = "Remaining points";
 "ออกจากระบบสำเร็จ" = "Log out successfully";
 "สแกน QR Code เลขโต๊ะ" = "Scan QR Code - table no.";
-"QR Code ไม่ถูกต้อง" = "Incorrect QR code";
+"QR Code เลขโต๊ะไม่ถูกต้อง" = "This is not a QR code for table no.";
+"QR Code สำหรับร่วมสั่งอาหารไม่ถูกต้อง" = "Incorrect QR code for joining to order";
 "เลือกร้าน" = "Choose restaurant";
 "เลือกโต๊ะ" = "Choose table no.";
 "ค้นหาเบอร์โต๊ะ" = "Search table no.";
@@ -192,3 +193,7 @@
 "เริ่มใช้งาน" = "Let's go";
 "กรุณาตรวจสอบข้อมูลบัตรเครดิต/เดบิต อีกครั้งค่ะ" = "Please check your credit/debit card info";
 "ไม่มีตัวเลือกโน้ตสำหรับรายการนี้" = "No note options for this menu item";
+"QR Code สำหรับสั่งบุฟเฟ่ต์" = "QR Code for Buffet Order";
+"สแกน QR Code เพื่อร่วมสั่งอาหาร" = "Scan QR Code to join ordering";
+"รายการอาหารของเพื่อน" = "My friends' order";
+"คุณไม่มีประวัติรายการอาหารของเพื่อน" = "No order history of your friends";

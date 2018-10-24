@@ -12,7 +12,6 @@
 #import "Utility.h"
 #import "Branch.h"
 #import "CustomerTable.h"
-#import "Setting.h"
 #import "Message.h"
 
 
@@ -68,6 +67,9 @@
     float topPadding = window.safeAreaInsets.top;
     topViewHeight.constant = topPadding == 0?20:topPadding;
 
+
+    _showPeekABoo = YES;
+    [self stopReading];    
     dispatch_async(dispatch_get_main_queue(), ^
    {
        [self startReading];
@@ -81,7 +83,6 @@
     {
         [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
     }
-    NSLog(@"layout subview");
 }
 
 - (void)viewDidLoad
@@ -99,7 +100,7 @@
     
     _captureSession = nil;
     [self loadBeepSound];
-    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)]];
+//    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)]];
 
 }
 
@@ -165,39 +166,39 @@
     [_captureSession startRunning];
     
     
-    //peek a boo
-    imgPeekABoo.hidden = _showPeekABoo?NO:YES;
-    [_vwPreview.layer addSublayer:imgPeekABoo.layer];
-    [_vwPreview.layer addSublayer:imgPeekABooFromRight.layer];
-    
-    
-    double delayInSeconds = 2;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [UIView transitionWithView:imgPeekABoo
-                  duration:0.2
-                   options:UIViewAnimationOptionTransitionCrossDissolve
-                animations:^{
-                     imgPeekABoo.hidden = YES;
-                }
-             
-             
-                completion:^(BOOL finished) {
-                    imgPeekABooFromRight.hidden = _showPeekABoo?NO:YES;
-                     double delayInSeconds = 1;
-                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                        [UIView transitionWithView:imgPeekABooFromRight
-                              duration:0.2
-                               options:UIViewAnimationOptionTransitionCrossDissolve
-                            animations:^{
-                                 imgPeekABooFromRight.hidden = YES;
-                                 _showPeekABoo = NO;
-                            }
-                            completion:NULL];
-                    });
-            }];
-        });
+//    //peek a boo
+//    imgPeekABoo.hidden = _showPeekABoo?NO:YES;
+//    [_vwPreview.layer addSublayer:imgPeekABoo.layer];
+//    [_vwPreview.layer addSublayer:imgPeekABooFromRight.layer];
+//    
+//    
+//    double delayInSeconds = 2;
+//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//            [UIView transitionWithView:imgPeekABoo
+//                  duration:0.2
+//                   options:UIViewAnimationOptionTransitionCrossDissolve
+//                animations:^{
+//                     imgPeekABoo.hidden = YES;
+//                }
+//             
+//             
+//                completion:^(BOOL finished) {
+//                    imgPeekABooFromRight.hidden = _showPeekABoo?NO:YES;
+//                     double delayInSeconds = 1;
+//                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//                        [UIView transitionWithView:imgPeekABooFromRight
+//                              duration:0.2
+//                               options:UIViewAnimationOptionTransitionCrossDissolve
+//                            animations:^{
+//                                 imgPeekABooFromRight.hidden = YES;
+//                                 _showPeekABoo = NO;
+//                            }
+//                            completion:NULL];
+//                    });
+//            }];
+//        });
     
     return YES;
 }
@@ -250,7 +251,7 @@
         NSMutableArray *customerTableList = items[1];
         if([branchList count] == 0 || [customerTableList count] == 0)
         {
-            NSString *message = [Language getText:@"QR Code ไม่ถูกต้อง"];
+            NSString *message = [Language getText:@"QR Code เลขโต๊ะไม่ถูกต้อง"];
             [self showAlert:@"" message:message method:@selector(setAlreadySegToNo)];
         }
         else

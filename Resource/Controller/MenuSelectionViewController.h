@@ -27,6 +27,7 @@
 @property (strong, nonatomic) CustomerTable *customerTable;
 @property (strong, nonatomic) Receipt *buffetReceipt;
 @property (nonatomic) NSInteger fromReceiptSummaryMenu;
+@property (nonatomic) NSInteger fromJoinOrderMenu;
 
 
 -(IBAction)unwindToMenuSelection:(UIStoryboardSegue *)segue;

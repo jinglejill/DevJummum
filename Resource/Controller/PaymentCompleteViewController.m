@@ -338,15 +338,45 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         CustomTableViewCellReceiptSummary *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierReceiptSummary];
         cell.backgroundColor = [UIColor clearColor];
         cell.tbvOrderDetail.backgroundColor = [UIColor clearColor];
-        cell.lblReceiptNo.text = [NSString stringWithFormat:@"Order no. #%@", receipt.receiptNoID];
+        
+        
+        //order no.
+        UIColor *color = cSystem4;
+        NSDictionary *attribute = @{NSForegroundColorAttributeName:color};
+        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Order no. #%@",receipt.receiptNoID] attributes:attribute];
+    
+    
+        UIColor *color2 = cSystem2;
+        NSDictionary *attribute2 = @{NSForegroundColorAttributeName:color2};
+        NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:@" (Buffet)" attributes:attribute2];
+        if(receipt.buffetReceiptID)
+        {
+            [attrString appendAttributedString:attrString2];
+        }
+        cell.lblReceiptNo.attributedText = attrString;
+        [cell.lblReceiptNo sizeToFit];
+        {
+            CGRect frame = cell.lblReceiptNo.frame;
+            frame.size.height = 17;
+            cell.lblReceiptNo.frame = frame;
+        }
+        cell.btnShareOrder.hidden = YES;
+    
+    
+            
+        
+        //date and branch name
         cell.lblReceiptDate.text = [Utility dateToString:receipt.receiptDate toFormat:@"d MMM yy HH:mm"];
         cell.lblBranchName.text = [NSString stringWithFormat:[Language getText:@"ร้าน %@"],branch.name];
         cell.lblBranchName.textColor = cSystem1;
         cell.btnOrderItAgain.hidden = YES;
 
-        CGRect frame = cell.frame;
-        frame.size.height = 71;
-        cell.frame = frame;
+        {
+            CGRect frame = cell.frame;
+            frame.size.height = 71;
+            cell.frame = frame;
+        }
+
 
         UIImage *image = [self imageFromView:cell];
         [arrImage addObject:image];

@@ -9,7 +9,6 @@
 #import "PersonalDataViewController.h"
 #import "CustomTableViewCellLabelLabel.h"
 #import "UserAccount.h"
-#import "Setting.h"
 
 
 @interface PersonalDataViewController ()

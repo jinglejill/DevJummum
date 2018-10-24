@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnForgotPassword;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgVwValueHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *lblLogInTop;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *lblLogInBottom;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnRememberMeWidth;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *lblOrBottom;
 @property (strong, nonatomic) IBOutlet UILabel *lblPipe;
@@ -33,6 +34,7 @@
 - (IBAction)logIn:(id)sender;
 - (IBAction)registerNow:(id)sender;
 - (IBAction)forgotPassword:(id)sender;
+
 
 
 -(IBAction)unwindToLogIn:(UIStoryboardSegue *)segue;

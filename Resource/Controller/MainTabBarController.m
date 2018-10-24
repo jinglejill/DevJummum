@@ -192,6 +192,7 @@
     {
         QRCodeScanTableViewController *vc = (QRCodeScanTableViewController *)viewController;
         vc.alreadySeg = NO;
+        [vc viewDidLayoutSubviews];
     }
 }
 /*

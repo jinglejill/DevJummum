@@ -547,9 +547,6 @@ extern NSString *globalBundleID;
         case urlReceiptDisputeRatingGet:
             url = @"JMMReceiptDisputeRatingGet.php";
             break;
-        case urlOpeningTimeGet:
-            url = @"JMMOpeningTimeGet.php";
-            break;
         case urlOpeningTimeMenuBelongToBuffetGet:
             url = @"JMMOpeningTimeMenuBelongToBuffetGet.php";
             break;
@@ -588,28 +585,37 @@ extern NSString *globalBundleID;
             break;
         case urlRewardRedemptionLuckyDrawGet:
             url = @"JMMRewardRedemptionLuckyDrawGet.php";
-        break;
+            break;
         case urlBuffetMenuMapInsert:
             url = @"JMMBuffetMenuMapInsert.php";
-        break;
+            break;
         case urlBuffetMenuMapUpdate:
             url = @"JMMBuffetMenuMapUpdate.php";
-        break;
+            break;
         case urlBuffetMenuMapDelete:
             url = @"JMMBuffetMenuMapDelete.php";
-        break;
+            break;
         case urlBuffetMenuMapInsertList:
             url = @"JMMBuffetMenuMapInsertList.php";
-        break;
+            break;
         case urlBuffetMenuMapUpdateList:
             url = @"JMMBuffetMenuMapUpdateList.php";
-        break;
+            break;
         case urlBuffetMenuMapDeleteList:
             url = @"JMMBuffetMenuMapDeleteList.php";
-        break;
+            break;
         case urlReceiptSummaryPageGetList:
             url = @"JMMReceiptSummaryPageGetList.php";
-        break;
+            break;
+        case urlShareOrderQrGet:
+            url = @"JMMShareOrderQrGet.php";
+            break;
+        case urlJoinOrderScanQrGet:
+            url = @"JMMJoinOrderScanQrGet.php";
+            break;
+        case urlOrderJoiningPageGetList:
+            url = @"JMMOrderJoiningPageGetList.php";
+            break;
         default:
             break;
     }

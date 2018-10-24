@@ -64,6 +64,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
 @synthesize btnBack;
 @synthesize btnViewBasket;
 @synthesize fromReceiptSummaryMenu;
+@synthesize fromJoinOrderMenu;
 
 
 -(IBAction)unwindToMenuSelection:(UIStoryboardSegue *)segue
@@ -171,7 +172,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
     [self setShadow:vwBottomShadow];
     if(buffetReceipt)
     {
-        if(fromReceiptSummaryMenu)
+        if(fromReceiptSummaryMenu || fromJoinOrderMenu)
         {
             [btnBack setImage:nil forState:UIControlStateNormal];
         }
@@ -284,6 +285,11 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
     {
         [OrderTaking removeCurrentOrderTakingList];
         [self performSegueWithIdentifier:@"segUnwindToReceiptSummary" sender:self];
+    }
+    else if(buffetReceipt && fromJoinOrderMenu)
+    {
+        [OrderTaking removeCurrentOrderTakingList];
+        [self performSegueWithIdentifier:@"segUnwindToJoinOrder" sender:self];
     }
     else
     {

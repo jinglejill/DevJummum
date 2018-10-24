@@ -21,5 +21,6 @@
 - (IBAction)unwindToReceiptSummary:(UIStoryboardSegue *)segue;
 - (void)reloadTableView;
 - (void)segueToOrderDetailAuto:(Receipt *)receipt;
+- (IBAction)joinOrder:(id)sender;
 
 @end

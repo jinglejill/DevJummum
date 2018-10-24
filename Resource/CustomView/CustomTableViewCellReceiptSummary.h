@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *tbvOrderDetail;
 @property (strong, nonatomic) IBOutlet UIButton *btnOrderItAgain;
 @property (strong, nonatomic) IBOutlet UIView *vwSeparatorLine;
+@property (strong, nonatomic) IBOutlet UIButton *btnShareOrder;
 
 @end

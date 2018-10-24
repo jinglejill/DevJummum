@@ -167,7 +167,6 @@ enum enumDB
     dbHotDealWithBranchID,
     dbRewardRedemption,
     dbRewardRedemptionList,
-    dbRewardRedemptionWithBranchID,
     dbPromoCode,
     dbPromoCodeList,
     dbUserRewardRedemptionUsed,
@@ -201,7 +200,10 @@ enum enumDB
     dbLuckyDrawTicketList,
     dbRewardRedemptionLuckyDraw,
     dbBuffetMenuMap,
-    dbBuffetMenuMapList
+    dbBuffetMenuMapList,
+    dbShareOrderQr,
+    dbJoinOrderScanQr,
+    dbOrderJoining
 
     
 };
@@ -344,7 +346,6 @@ enum enumUrl
     urlMenuNoteInsertList,
     urlMenuNoteUpdateList,
     urlMenuNoteDeleteList,
-    urlOpeningTimeGet,
     urlOpeningTimeMenuBelongToBuffetGet,
     urlContactUs,
     urlMenuBelongToBuffetGetList,
@@ -365,7 +366,10 @@ enum enumUrl
     urlBuffetMenuMapInsertList,
     urlBuffetMenuMapUpdateList,
     urlBuffetMenuMapDeleteList,
-    urlReceiptSummaryPageGetList
+    urlReceiptSummaryPageGetList,
+    urlShareOrderQrGet,
+    urlJoinOrderScanQrGet,
+    urlOrderJoiningPageGetList
     
 
     

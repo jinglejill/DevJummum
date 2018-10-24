@@ -256,7 +256,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             
-            //(buffet)
+            //order no.
             UIColor *color = cSystem4;
             NSDictionary *attribute = @{NSForegroundColorAttributeName:color};
             NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Order no. #%@",receipt.receiptNoID] attributes:attribute];
@@ -269,12 +269,18 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
             {
                 [attrString appendAttributedString:attrString2];
             }
-            
-            NSString *message = [Language getText:@"ร้าน %@"];
-            Branch *branch = [Branch getBranch:receipt.branchID];
             cell.lblReceiptNo.attributedText = attrString;
+            [cell.lblReceiptNo sizeToFit];
+            CGRect frame = cell.lblReceiptNo.frame;
+            frame.size.height = 17;
+            cell.lblReceiptNo.frame = frame;
+            cell.btnShareOrder.hidden = YES;
+            
+            
+            //date and branch name
+            Branch *branch = [Branch getBranch:receipt.branchID];
             cell.lblReceiptDate.text = [Utility dateToString:receipt.modifiedDate toFormat:@"d MMM yy HH:mm"];
-            cell.lblBranchName.text = [NSString stringWithFormat:message,branch.name];
+            cell.lblBranchName.text = [NSString stringWithFormat:[Language getText:@"ร้าน %@"],branch.name];
             cell.lblBranchName.textColor = cSystem1;
             
             

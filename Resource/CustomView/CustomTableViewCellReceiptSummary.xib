@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="บิลเลขที่ 000001" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNP-Kq-HeX">
-                    <rect key="frame" x="16" y="36" width="225" height="17"/>
+                    <rect key="frame" x="16" y="36" width="104.5" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="Kfi-o6-iFD"/>
                     </constraints>
@@ -75,12 +75,21 @@
                         <constraint firstAttribute="height" constant="1" id="AE2-Vl-fkk"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVE-fa-a1g">
+                    <rect key="frame" x="128" y="29" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="HdN-sz-m5E"/>
+                        <constraint firstAttribute="width" constant="30" id="jJp-Bn-Dld"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="QR.png"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="8KU-CG-XN7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="A42-10-HTF"/>
                 <constraint firstItem="pRB-X6-wwb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="9" id="C74-jo-Wxa"/>
                 <constraint firstItem="LrP-pm-5NA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="CgO-Bc-SEf"/>
+                <constraint firstItem="YVE-fa-a1g" firstAttribute="centerY" secondItem="fNP-Kq-HeX" secondAttribute="centerY" id="GGH-vE-AxV"/>
                 <constraint firstItem="LrP-pm-5NA" firstAttribute="top" secondItem="8KU-CG-XN7" secondAttribute="bottom" constant="8" id="PaV-PG-VR8"/>
                 <constraint firstItem="fNP-Kq-HeX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="RQe-tv-R4F"/>
                 <constraint firstItem="g9t-Gz-Dkm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="RUW-Ez-9US"/>
@@ -91,13 +100,14 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pRB-X6-wwb" secondAttribute="trailing" constant="16" id="mD4-bD-hWT"/>
                 <constraint firstItem="fNP-Kq-HeX" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="ncl-3c-Y8E"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rtg-O7-PPv" secondAttribute="trailing" constant="16" id="pct-8J-2fZ"/>
-                <constraint firstItem="pRB-X6-wwb" firstAttribute="leading" secondItem="fNP-Kq-HeX" secondAttribute="trailing" constant="8" id="qDv-Yy-YTH"/>
+                <constraint firstItem="YVE-fa-a1g" firstAttribute="leading" secondItem="fNP-Kq-HeX" secondAttribute="trailing" constant="8" id="skQ-K0-wDl"/>
                 <constraint firstItem="g9t-Gz-Dkm" firstAttribute="top" secondItem="8KU-CG-XN7" secondAttribute="bottom" constant="8" id="wIq-Ut-xmt"/>
                 <constraint firstItem="LrP-pm-5NA" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="z49-Bz-laR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="btnOrderItAgain" destination="pRB-X6-wwb" id="6t8-n6-ZdK"/>
+                <outlet property="btnShareOrder" destination="YVE-fa-a1g" id="aVR-70-PLo"/>
                 <outlet property="lblBranchName" destination="8KU-CG-XN7" id="5No-db-lvk"/>
                 <outlet property="lblReceiptDate" destination="rtg-O7-PPv" id="BEx-3Z-b7O"/>
                 <outlet property="lblReceiptNo" destination="fNP-Kq-HeX" id="oaq-VJ-EJq"/>
@@ -107,4 +117,7 @@
             <point key="canvasLocation" x="34.5" y="54.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="QR.png" width="30" height="30"/>
+    </resources>
 </document>

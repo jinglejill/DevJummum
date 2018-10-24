@@ -39,10 +39,10 @@
                     <color key="textColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ฟรี น้ำเก๊กฮวยอบควันเทียน มูลค่า 45 บาท" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mb2-D4-TFW">
-                    <rect key="frame" x="94" y="37" width="265" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ฟรี น้ำเก๊กฮวยอบควันเทียน มูลค่า 45 บาท ฟรี น้ำเก๊กฮวยอบควันเทียน มูลค่า 45 บาท" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mb2-D4-TFW">
+                    <rect key="frame" x="94" y="37" width="265" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="17" id="4LY-MJ-HLc"/>
+                        <constraint firstAttribute="height" constant="44" id="4LY-MJ-HLc"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="13"/>
                     <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
