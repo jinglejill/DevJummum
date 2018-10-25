@@ -117,8 +117,14 @@ static NSString * const reuseIdentifierNoteWithQuantity = @"CustomCollectionView
             }
         }
         _noteTypeList = [NoteType sort:_noteTypeList];
-
         [colVwNote reloadData];
+        
+        
+        
+        //download menunote
+        self.homeModel = [[HomeModel alloc]init];
+        self.homeModel.delegate = self;
+        [self.homeModel downloadItems:dbMenuNoteList withData:@[branch,@(orderTaking.menuID)]];
     }
     
 
@@ -679,27 +685,45 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     if(homeModel.propCurrentDB == dbMenuNoteList)
     {
         [self removeOverlayViews];
-        [Utility updateSharedObject:items];
-
+//        [Utility updateSharedObject:items];
+        [Utility updateSharedDataList:items[0]];
         
-         /////////
-         noteList = [MenuNote getNoteListWithMenuID:orderTaking.menuID branchID:branch.branchID];
-         _noteTypeList = [[NSMutableArray alloc]init];
-         NSSet *noteTypeIDSet = [NSSet setWithArray:[noteList valueForKey:@"_noteTypeID"]];
-         for(NSNumber *noteTypeID in noteTypeIDSet)
-         {
-             NoteType *noteType = [NoteType getNoteType:[noteTypeID integerValue] branchID:branch.branchID];
-             NSMutableArray *noteListByNoteTypeID = [Note getNoteListWithNoteTypeID:noteType.noteTypeID noteList:noteList];
-             NSSet *typeSet = [NSSet setWithArray:[noteListByNoteTypeID valueForKey:@"_type"]];
-             for(NSNumber *type in typeSet)
-             {
-                 NoteType *newNoteType = [noteType copy];
-                 newNoteType.type = [type integerValue];
-                 [_noteTypeList addObject:newNoteType];
-             }
-         }
-         _noteTypeList = [NoteType sort:_noteTypeList];
-         [colVwNote reloadData];
+        
+        /////////
+        noteList = [MenuNote getNoteListWithMenuID:orderTaking.menuID branchID:branch.branchID];
+        _noteTypeList = [[NSMutableArray alloc]init];
+        NSSet *noteTypeIDSet = [NSSet setWithArray:[noteList valueForKey:@"_noteTypeID"]];
+        for(NSNumber *noteTypeID in noteTypeIDSet)
+        {
+            NoteType *noteType = [NoteType getNoteType:[noteTypeID integerValue] branchID:branch.branchID];
+            NSMutableArray *noteListByNoteTypeID = [Note getNoteListWithNoteTypeID:noteType.noteTypeID noteList:noteList];
+            NSSet *typeSet = [NSSet setWithArray:[noteListByNoteTypeID valueForKey:@"_type"]];
+            for(NSNumber *type in typeSet)
+            {
+                NoteType *newNoteType = [noteType copy];
+                newNoteType.type = [type integerValue];
+                [_noteTypeList addObject:newNoteType];
+            }
+        }
+        _noteTypeList = [NoteType sort:_noteTypeList];
+        
+        
+        
+        //remove note not in current note
+        NSMutableArray *removeOrderNoteList = [[NSMutableArray alloc]init];
+        NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingID:orderTaking.orderTakingID];
+        for(OrderNote *item in orderNoteList)
+        {
+            MenuNote *menuNote = [MenuNote getMenuNote:orderTaking.menuID noteID:item.noteID branchID:branch.branchID];
+            if(!menuNote)
+            {
+                [removeOrderNoteList addObject:item];
+            }
+        }
+        [OrderNote removeList:removeOrderNoteList];
+
+
+        [colVwNote reloadData];
     }
 }
 @end

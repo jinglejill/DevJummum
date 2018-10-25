@@ -676,6 +676,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                                   [OrderTaking removeCurrentOrderTakingList];
                                   [CreditCard removeCurrentCreditCard];
                                   [VoucherCode removeCurrentVoucherCode];
+                                  [SaveReceipt removeCurrentSaveReceipt];
                                   [tbvOrder reloadData];
                                   [tbvTotal reloadData];
                               }];
@@ -1097,8 +1098,12 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
 }
 
 -(void)checkOut:(id)sender
-{    
-    [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
+{
+    NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+    if([orderTakingList count] != 0)
+    {
+        [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
+    }    
 }
 
 -(void)takeAway:(id)sender

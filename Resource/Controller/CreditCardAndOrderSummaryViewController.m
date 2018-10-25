@@ -12,6 +12,7 @@
 #import "QRCodeScanTableViewController.h"
 #import "CustomerTableSearchViewController.h"
 #import "VoucherCodeListViewController.h"
+#import "ShareMenuToOrderViewController.h"
 #import "CustomTableViewCellCreditCard.h"
 #import "CustomTableViewCellImageLabelRemove.h"
 #import "CustomTableViewCellOrderSummary.h"
@@ -40,6 +41,9 @@
 #import "RewardRedemption.h"
 #import "UserRewardRedemptionUsed.h"
 #import "VoucherCode.h"
+#import "SaveReceipt.h"
+#import "SaveOrderTaking.h"
+#import "SaveOrderNote.h"
 
 
 @interface CreditCardAndOrderSummaryViewController ()
@@ -99,6 +103,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 @synthesize fromLuckyDraw;
 @synthesize addRemoveMenu;
 @synthesize receipt;//orderItAgain
+@synthesize btnShareMenuToOrder;
 
 
 -(IBAction)unwindToCreditCardAndOrderSummary:(UIStoryboardSegue *)segue
@@ -408,7 +413,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     lblNavTitle.text = title;
     NSString *message = [Language getText:@"ใส่หมายเหตุที่ต้องการแจ้งเพิ่มเติมกับทางร้านอาหาร"];
     _strPlaceHolder = message;
-//    _selectedVoucherCode = @"";
+
     
     
     _promotionList = [[NSMutableArray alloc]init];
@@ -1926,6 +1931,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         [OrderTaking removeCurrentOrderTakingList];
         [CreditCard removeCurrentCreditCard];
         [VoucherCode removeCurrentVoucherCode];
+        [SaveReceipt removeCurrentSaveReceipt];
         
         
         [Utility addToSharedDataList:items];
@@ -1984,6 +1990,20 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         VoucherCodeListViewController *vc = segue.destinationViewController;
         vc.promotionList = _promotionList;
         vc.rewardRedemptionList = _rewardRedemptionList;
+    }
+    else if([[segue identifier] isEqualToString:@"segShareMenuToOrder"])
+    {
+        ShareMenuToOrderViewController *vc = segue.destinationViewController;
+        UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+        SaveReceipt *saveReceipt = [[SaveReceipt alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID memberID:userAccount.userAccountID remark:_remark status:0 buffetReceiptID:buffetReceipt.receiptID voucherCode:_selectedVoucherCode];
+        NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+        NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingList:orderTakingList];
+        orderTakingList = [OrderTaking updateStatus:0 orderTakingList:orderTakingList];
+        
+        
+        vc.saveReceipt = saveReceipt;
+        vc.saveOrderTakingList = [SaveOrderTaking createSaveOrderTakingList:orderTakingList];
+        vc.saveOrderNoteList = [SaveOrderNote createSaveOrderNoteList:orderNoteList];
     }
 }
 
@@ -2181,6 +2201,13 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         {
             VoucherCode *voucherCode = [VoucherCode getCurrentVoucherCode];
             _selectedVoucherCode = voucherCode.code?voucherCode.code:@"";
+            if([Utility isStringEmpty:_selectedVoucherCode])
+            {
+                SaveReceipt *saveReceipt = [SaveReceipt getCurrentSaveReceipt];
+                _selectedVoucherCode = saveReceipt && ![Utility isStringEmpty:saveReceipt.voucherCode]?saveReceipt.voucherCode:@"";
+                _remark = saveReceipt?saveReceipt.remark:@"";
+                [SaveReceipt removeCurrentSaveReceipt];
+            }
             if(![Utility isStringEmpty:_selectedVoucherCode])
             {
                 [self confirmVoucherCode:_selectedVoucherCode];
@@ -2318,5 +2345,10 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 {
     UITextField *textField = [self.view viewWithTag:4];
     [textField becomeFirstResponder];
+}
+
+- (IBAction)shareMenuToOrder:(id)sender
+{
+    [self performSegueWithIdentifier:@"segShareMenuToOrder" sender:self];
 }
 @end

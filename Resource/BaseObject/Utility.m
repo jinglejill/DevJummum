@@ -607,14 +607,20 @@ extern NSString *globalBundleID;
         case urlReceiptSummaryPageGetList:
             url = @"JMMReceiptSummaryPageGetList.php";
             break;
-        case urlShareOrderQrGet:
-            url = @"JMMShareOrderQrGet.php";
+        case urlOrderJoiningShareQrGet:
+            url = @"JMMOrderJoiningShareQrGet.php";
             break;
-        case urlJoinOrderScanQrGet:
-            url = @"JMMJoinOrderScanQrGet.php";
+        case urlOrderJoiningScanQrInsert:
+            url = @"JMMOrderJoiningScanQrInsert.php";
             break;
         case urlOrderJoiningPageGetList:
             url = @"JMMOrderJoiningPageGetList.php";
+            break;
+        case urlSaveOrderInsertList:
+            url = @"JMMSaveOrderInsertList.php";
+            break;
+        case urlOrderItAgainGetList:
+            url = @"JMMOrderItAgainGetList.php";
             break;
         default:
             break;
@@ -1746,6 +1752,32 @@ extern NSString *globalBundleID;
     }
 }
 
++ (void)updateSharedDataList:(NSMutableArray *)itemList
+{
+    if([itemList count] > 0)
+    {
+        NSObject *object = itemList[0];
+        Class classDB = [object class];
+        NSString *className = NSStringFromClass(classDB);
+        Class class = NSClassFromString([NSString stringWithFormat:@"Shared%@",className]);
+        SEL selector = NSSelectorFromString([NSString stringWithFormat:@"shared%@",className]);
+        SEL selectorList = NSSelectorFromString([NSString stringWithFormat:@"%@List",[Utility makeFirstLetterLowerCase:className]]);
+        NSMutableArray *dataList = [[class performSelector:selector] performSelector:selectorList];
+        
+        
+        NSArray *filterArray;
+        if ([object respondsToSelector:NSSelectorFromString(@"branchID")])
+        {
+            NSNumber *objBranchID = [object valueForKey:@"branchID"];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"branchID = %ld",[objBranchID integerValue]];
+            filterArray = [dataList filteredArrayUsingPredicate:predicate];
+            
+            [dataList removeObjectsInArray:filterArray];
+            [dataList addObjectsFromArray:itemList];
+        }
+    }
+}
+
 + (void)addUpdateObject:(NSObject *)object
 {
     Class classDB = [object class];
@@ -1781,108 +1813,6 @@ extern NSString *globalBundleID;
         [dataList addObject:object];
     }
     else
-    {
-        NSObject *filterObject = filterArray[0];
-        NSDate *dateObject = [object valueForKey:@"modifiedDate"];
-        NSDate *dateFilterObject = [filterObject valueForKey:@"modifiedDate"];
-        NSComparisonResult result = [dateFilterObject compare:dateObject];
-        if(result == NSOrderedAscending)
-        {
-            //update
-            unsigned int propertyCount = 0;
-            objc_property_t * properties = class_copyPropertyList([object class], &propertyCount);
-            
-            for (unsigned int i = 0; i < propertyCount; ++i)
-            {
-                objc_property_t property = properties[i];
-                const char * name = property_getName(property);
-                NSString *key = [NSString stringWithUTF8String:name];
-                
-                
-                [filterObject setValue:[object valueForKey:key] forKey:key];
-            }
-        }
-    }
-}
-
-+(BOOL)updateDataList:(NSArray *)itemList dataList:(NSMutableArray *)dataList
-{
-    BOOL update = 0;
-    for(NSObject *object in itemList)
-    {
-        Class classDB = [object class];
-        NSString *className = NSStringFromClass(classDB);
-        
-        
-        NSString *propertyName = [NSString stringWithFormat:@"%@ID",[Utility makeFirstLetterLowerCase:className]];
-        NSString *propertyNamePredicate = [NSString stringWithFormat:@"_%@",propertyName];
-        NSInteger value = [[object valueForKey:propertyName] integerValue];
-        
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = %ld",propertyNamePredicate,value];
-        NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
-        
-        
-        
-        if([filterArray count]==0)
-        {
-            update = 1;
-            [dataList addObject:object];
-        }
-        else
-        {
-            NSObject *filterObject = filterArray[0];
-            NSDate *dateObject = [object valueForKey:@"modifiedDate"];
-            NSDate *dateFilterObject = [filterObject valueForKey:@"modifiedDate"];
-            NSComparisonResult result = [dateFilterObject compare:dateObject];
-            if(result == NSOrderedAscending)
-            {
-                //update
-                update = 1;
-                unsigned int propertyCount = 0;
-                objc_property_t * properties = class_copyPropertyList([object class], &propertyCount);
-                
-                for (unsigned int i = 0; i < propertyCount; ++i)
-                {
-                    objc_property_t property = properties[i];
-                    const char * name = property_getName(property);
-                    NSString *key = [NSString stringWithUTF8String:name];
-                    
-                    
-                    [filterObject setValue:[object valueForKey:key] forKey:key];
-                }
-            }
-        }
-    }
-    return update;
-}
-
-+ (void)addUpdateObject:(NSObject *)object dataList:(NSMutableArray *)dataList
-{
-    
-}
-
-+(void)updateItemIfModify:(NSObject *)object
-{
-    Class classDB = [object class];
-    NSString *className = NSStringFromClass(classDB);
-    Class class = NSClassFromString([NSString stringWithFormat:@"Shared%@",className]);
-    SEL selector = NSSelectorFromString([NSString stringWithFormat:@"shared%@",className]);
-    SEL selectorList = NSSelectorFromString([NSString stringWithFormat:@"%@List",[Utility makeFirstLetterLowerCase:className]]);
-    NSMutableArray *dataList = [[class performSelector:selector] performSelector:selectorList];
-    
-    
-    NSString *propertyName = [NSString stringWithFormat:@"%@ID",[Utility makeFirstLetterLowerCase:className]];
-    NSString *propertyNamePredicate = [NSString stringWithFormat:@"_%@",propertyName];
-    NSInteger value = [[object valueForKey:propertyName] integerValue];
-    
-    
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = %ld",propertyNamePredicate,value];
-    NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
-    
-    
-    if([filterArray count]>0)
     {
         NSObject *filterObject = filterArray[0];
         NSDate *dateObject = [object valueForKey:@"modifiedDate"];

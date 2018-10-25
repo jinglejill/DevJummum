@@ -36,5 +36,4 @@
 +(NSMutableArray *)getOrderNoteListWithOrderTakingList:(NSMutableArray *)orderTakingList;
 +(void)removeAllObjects;
 +(NSMutableArray *)getOrderNoteList;
-
 @end

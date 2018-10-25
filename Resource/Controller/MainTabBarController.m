@@ -28,6 +28,7 @@
 #import "TosAndPrivacyPolicyViewController.h"
 #import "VoucherCodeListViewController.h"
 #import "ReceiptSummaryViewController.h"
+#import "OrderDetailViewController.h"
 #import "Branch.h"
 #import "CustomerTable.h"
 #import "Receipt.h"
@@ -41,12 +42,14 @@
     Branch *_selectedBranch;
     CustomerTable *_selectedCustomerTable;
     BOOL _fromOrderItAgain;
+    BOOL _fromOrderNow;
     Receipt *_buffetReceipt;
     Receipt *_selectedReceipt;
     BOOL _showOrderDetail;
     BOOL _showReceiptSummary;
     BOOL _orderBuffet;
     BOOL _orderBuffetAfterOrderBuffet;
+    Receipt *_orderItAgainReceipt;
 }
 @end
 
@@ -61,14 +64,12 @@
         CreditCardAndOrderSummaryViewController *vc = segue.sourceViewController;
         _selectedBranch = vc.branch;
         _selectedCustomerTable = vc.customerTable;
-        _fromOrderItAgain = YES; //fromReceiptSummaryMenu || fromOrderDetailMenu || fromRewardRedemption || fromHotDealDetail || fromLuckyDraw
+        _fromOrderNow = YES; // fromRewardRedemption || fromHotDealDetail || fromLuckyDraw
         _buffetReceipt = vc.buffetReceipt;
         
         _switchToQRTab = 1;
     }
-    else if(
-            [vc isKindOfClass:[PaymentCompleteViewController class]] && ((PaymentCompleteViewController *)vc).orderBuffet
-            )
+    else if([vc isKindOfClass:[PaymentCompleteViewController class]] && ((PaymentCompleteViewController *)vc).orderBuffet)
     {
         PaymentCompleteViewController *vcPaymentComplete = (PaymentCompleteViewController *)vc;
         _orderBuffet = vcPaymentComplete.orderBuffet;
@@ -86,6 +87,16 @@
         
         
         _switchToReceiptSummaryTab = 1;
+    }
+    else if(([vc isMemberOfClass:[ReceiptSummaryViewController class]] && ((ReceiptSummaryViewController *)vc).orderItAgainReceipt) || ([vc isMemberOfClass:[OrderDetailViewController class]] && ((OrderDetailViewController *)vc).orderItAgainReceipt))
+    {
+        ReceiptSummaryViewController *receiptSummaryVc = (ReceiptSummaryViewController *)vc;
+        _orderItAgainReceipt = receiptSummaryVc.orderItAgainReceipt;
+        receiptSummaryVc.orderItAgainReceipt = nil;
+        
+        _fromOrderItAgain = YES;
+        _switchToQRTab = 1;
+        [self viewDidAppear:NO];
     }
     else if(vc.showReceiptSummary)
     {
@@ -149,13 +160,25 @@
     if(_switchToQRTab)
     {
         _switchToQRTab = 0;
-        self.selectedIndex = mainTabQrScan;
-        QRCodeScanTableViewController *vc = (QRCodeScanTableViewController *)self.selectedViewController;
-        vc.selectedBranch = _selectedBranch;
-        vc.selectedCustomerTable = _selectedCustomerTable;
-        vc.fromOrderItAgain = _fromOrderItAgain;
-        vc.buffetReceipt = _buffetReceipt;
-        [vc viewDidAppear:NO];
+        if(_fromOrderItAgain)
+        {
+            self.selectedIndex = mainTabQrScan;
+            QRCodeScanTableViewController *vc = (QRCodeScanTableViewController *)self.selectedViewController;
+            vc.orderItAgainReceipt = _orderItAgainReceipt;
+            vc.fromOrderItAgain = _fromOrderItAgain;
+            [vc viewDidAppear:NO];
+        }
+        else if(_fromOrderNow)
+        {
+            self.selectedIndex = mainTabQrScan;
+            QRCodeScanTableViewController *vc = (QRCodeScanTableViewController *)self.selectedViewController;
+            vc.selectedBranch = _selectedBranch;
+            vc.selectedCustomerTable = _selectedCustomerTable;
+            vc.fromOrderNow = _fromOrderNow;
+            vc.buffetReceipt = _buffetReceipt;
+            [vc viewDidAppear:NO];
+        }
+        
         
     }
     else if(_switchToReceiptSummaryTab)

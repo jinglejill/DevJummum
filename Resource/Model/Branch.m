@@ -223,18 +223,4 @@
     return [sortArray mutableCopy];    
 }
 
-+(Branch *)getBranchWithMaxModifiedDate
-{
-    NSMutableArray *dataList = [SharedBranch sharedBranch].branchList;
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"_modifiedDate" ascending:NO];
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-    NSArray *sortArray = [dataList sortedArrayUsingDescriptors:sortDescriptors];
-    
-    if([sortArray count] > 0)
-    {
-        return sortArray[0];        
-    }
-    
-    return nil;
-}
 @end

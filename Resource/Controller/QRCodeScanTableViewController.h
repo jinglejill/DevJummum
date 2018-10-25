@@ -23,8 +23,10 @@
 @property (nonatomic) BOOL alreadySeg;
 @property (strong, nonatomic) Branch *selectedBranch;
 @property (strong, nonatomic) CustomerTable *selectedCustomerTable;
+@property (nonatomic) BOOL fromOrderNow;
 @property (nonatomic) BOOL fromOrderItAgain;
 @property (strong, nonatomic) Receipt *buffetReceipt;
+@property (strong, nonatomic) Receipt *orderItAgainReceipt;
 
 @property (strong, nonatomic) IBOutlet UIImageView *imgPeekABoo;
 @property (strong, nonatomic) IBOutlet UIImageView *imgPeekABooFromRight;

@@ -675,26 +675,6 @@
     return 0;
 }
 
-+(NSInteger)getBranchIDWithMaxModifiedDateWithMemberID:(NSInteger)memberID
-{
-    NSMutableArray *dataList = [SharedReceipt sharedReceipt].receiptList;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_memberID = %ld",memberID];
-    NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
-    
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"_modifiedDate" ascending:NO];
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-    NSArray *sortArray = [filterArray sortedArrayUsingDescriptors:sortDescriptors];
-    
-    if([sortArray count] > 0)
-    {
-        Receipt *receipt = sortArray[0];
-        return receipt.branchID;
-    }
-    
-    return 0;
-}
-
 +(NSInteger)getIndex:(NSMutableArray *)receiptList receipt:(Receipt *)receipt
 {
     NSInteger i;

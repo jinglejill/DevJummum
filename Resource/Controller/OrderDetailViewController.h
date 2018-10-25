@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tbvData;
 @property (strong, nonatomic) IBOutlet UITableView *tbvRating;
 @property (strong, nonatomic) Receipt *receipt;
+@property (strong, nonatomic) Receipt *orderItAgainReceipt;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomButtonHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tbvRatingHeight;

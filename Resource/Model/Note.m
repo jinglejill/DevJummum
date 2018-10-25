@@ -227,5 +227,24 @@
     return nil;
 }
 
-
+//+(NSString *)getNoteIDListInText:(NSString *)noteIDListInText branchID:(NSInteger)branchID
+//{
+//    NSString *currentNoteIDListInText = @"";
+//    if(![Utility isStringEmpty:noteIDListInText])
+//    {
+//        NSArray *arrNoteID = [noteIDListInText componentsSeparatedByString:@","];
+//        for(NSNumber *objNoteID in arrNoteID)
+//        {
+//            Note *note = [Note getNote:[objNoteID integerValue] branchID:branchID];
+//            if(note)
+//            {
+//                currentNoteIDListInText = [NSString stringWithFormat:@"%@,%ld",currentNoteIDListInText,[objNoteID integerValue]];
+//            }
+//        }
+//        
+//        NSRange needleRange = NSMakeRange(1,[currentNoteIDListInText length]-1);
+//        return [currentNoteIDListInText substringWithRange:needleRange];
+//    }
+//    return @"";
+//}
 @end

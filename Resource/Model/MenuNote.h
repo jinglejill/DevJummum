@@ -29,4 +29,5 @@
 +(NSMutableArray *)getMenuNoteList;
 +(void)setSharedData:(NSMutableArray *)dataList;
 +(NSMutableArray *)getNoteListWithMenuID:(NSInteger)menuID branchID:(NSInteger)branchID;
++(MenuNote *)getMenuNote:(NSInteger)menuID noteID:(NSInteger)noteID branchID:(NSInteger)branchID;
 @end

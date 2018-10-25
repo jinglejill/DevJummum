@@ -32,7 +32,6 @@
     Branch *_receiptBranch;
     NSInteger _selectedReceiptID;
     Receipt *_selectedReceipt;
-    Receipt *_orderItAgainReceipt;
     NSMutableDictionary *_dicTimer;
     NSInteger _page;
     NSInteger _perPage;
@@ -53,6 +52,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
 @synthesize lblNavTitle;
 @synthesize tbvData;
 @synthesize topViewHeight;
+@synthesize orderItAgainReceipt;
 
 
 -(IBAction)unwindToReceiptSummary:(UIStoryboardSegue *)segue
@@ -973,42 +973,10 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     
     
     
-    
-    //copy orderTaking
-    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
-    NSMutableArray *copyOrderTakingList = [[NSMutableArray alloc]init];
-    NSMutableArray *copyOrderNoteList = [[NSMutableArray alloc]init];
-    for(OrderTaking *item in orderTakingList)
-    {
-        OrderTaking *orderTaking = [item copy];
-        orderTaking.orderTakingID = [OrderTaking getNextID];
-        orderTaking.receiptID = 0;
-        [copyOrderTakingList addObject:orderTaking];
-        [OrderTaking addObject:orderTaking];
-        
-        //copy orderNote
-        NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingID:item.orderTakingID];
-        for(OrderNote *item2 in orderNoteList)
-        {
-            OrderNote *orderNote = [item2 copy];
-            orderNote.orderNoteID = [OrderNote getNextID];
-            orderNote.orderTakingID = orderTaking.orderTakingID;
-            [copyOrderNoteList addObject:orderNote];
-            [OrderNote addObject:orderNote];
-        }
-    }
-    [OrderTaking setCurrentOrderTakingList:copyOrderTakingList];
-    
-    
-    
-    
-    
-    _orderItAgainReceipt = receipt;
-    
     //belong to buffet
-    if(_orderItAgainReceipt.buffetReceiptID)
+    if(receipt.buffetReceiptID)
     {
-        Receipt *buffetReceipt = [Receipt getReceipt:_orderItAgainReceipt.buffetReceiptID];
+        Receipt *buffetReceipt = [Receipt getReceipt:receipt.buffetReceiptID];
         if(buffetReceipt)
         {
             NSInteger timeToOrder = buffetReceipt.timeToOrder;
@@ -1028,23 +996,46 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     }
     
     
-    _receiptBranch = [Branch getBranch:receipt.branchID];
-    [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
+    [OrderTaking removeCurrentOrderTakingList];
+    orderItAgainReceipt = receipt;
+    [self performSegueWithIdentifier:@"segUnwindToMainTabBar" sender:self];
+    
+    
+    
+//    //copy orderTaking
+//    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
+//    NSMutableArray *copyOrderTakingList = [[NSMutableArray alloc]init];
+//    NSMutableArray *copyOrderNoteList = [[NSMutableArray alloc]init];
+//    for(OrderTaking *item in orderTakingList)
+//    {
+//        OrderTaking *orderTaking = [item copy];
+//        orderTaking.orderTakingID = [OrderTaking getNextID];
+//        orderTaking.receiptID = 0;
+//        [copyOrderTakingList addObject:orderTaking];
+//        [OrderTaking addObject:orderTaking];
+//
+//        //copy orderNote
+//        NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingID:item.orderTakingID];
+//        for(OrderNote *item2 in orderNoteList)
+//        {
+//            OrderNote *orderNote = [item2 copy];
+//            orderNote.orderNoteID = [OrderNote getNextID];
+//            orderNote.orderTakingID = orderTaking.orderTakingID;
+//            [copyOrderNoteList addObject:orderNote];
+//            [OrderNote addObject:orderNote];
+//        }
+//    }
+//    [OrderTaking setCurrentOrderTakingList:copyOrderTakingList];
+//
+//
+//
+//    _receiptBranch = [Branch getBranch:receipt.branchID];
+//    [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([[segue identifier] isEqualToString:@"segCreditCardAndOrderSummary"])
-    {
-        CreditCardAndOrderSummaryViewController *vc = segue.destinationViewController;
-        vc.branch = _receiptBranch;
-        vc.customerTable = nil;
-        vc.fromReceiptSummaryMenu = 1;
-        vc.receipt = _orderItAgainReceipt;
-        Receipt *buffetReceipt = [Receipt getReceipt:_orderItAgainReceipt.buffetReceiptID];
-        vc.buffetReceipt = buffetReceipt;
-    }
-    else if([[segue identifier] isEqualToString:@"segOrderDetail"] || [[segue identifier] isEqualToString:@"segOrderDetailNoAnimate"])
+    if([[segue identifier] isEqualToString:@"segOrderDetail"] || [[segue identifier] isEqualToString:@"segOrderDetailNoAnimate"])
     {
         OrderDetailViewController *vc = segue.destinationViewController;
         vc.receipt = _selectedReceipt;

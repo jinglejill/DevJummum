@@ -26,6 +26,9 @@
 #import "Branch.h"
 #import "MenuForBuffet.h"
 #import "VoucherCode.h"
+#import "SaveOrderTaking.h"
+#import "SaveOrderNote.h"
+#import "OrderNote.h"
 
 
 @interface MenuSelectionViewController ()
@@ -65,6 +68,9 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
 @synthesize btnViewBasket;
 @synthesize fromReceiptSummaryMenu;
 @synthesize fromJoinOrderMenu;
+@synthesize saveReceipt;
+@synthesize saveOrderTakingList;
+@synthesize saveOrderNoteList;
 
 
 -(IBAction)unwindToMenuSelection:(UIStoryboardSegue *)segue
@@ -72,7 +78,6 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
     [self.view endEditing:true];
     [tbvMenu reloadData];
     [self updateTotalAmount];
-    
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -170,6 +175,13 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
     tbvMenu.delegate = self;
     tbvMenu.dataSource = self;
     [self setShadow:vwBottomShadow];
+    
+    
+    if(saveReceipt)
+    {
+        buffetReceipt = [Receipt getReceipt:saveReceipt.buffetReceiptID];
+        [SaveReceipt setCurrentSaveReceipt:saveReceipt];
+    }
     if(buffetReceipt)
     {
         if(fromReceiptSummaryMenu || fromJoinOrderMenu)
@@ -194,7 +206,6 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         }
         else
         {
-//            _recommendList =
             _menuList = [Menu getMenuBelongToBuffet:buffetReceipt];
             _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
             _menuTypeList = [MenuType sortList:_menuTypeList];
@@ -232,6 +243,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
                 [OrderTaking removeCurrentOrderTakingList];
                 [CreditCard removeCurrentCreditCard];
                 [VoucherCode removeCurrentVoucherCode];
+//                [SaveReceipt removeCurrentSaveReceipt];
                 lblTotalQuantity.text = @"0";
                 lblTotalQuantityTop.text = @"";
                 lblTotalAmount.text = [Utility addPrefixBahtSymbol:@"0.00"];
@@ -775,12 +787,81 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         }
         
         
-        [Utility updateSharedObject:items];
+        for(int i=1; i<=5; i++)
+        {
+            [Utility updateSharedDataList:items[i]];
+        }
+//        [Utility updateSharedObject:items];
         _menuList = [Menu getMenuListALaCarteWithBranchID:branch.branchID];
         _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
         _menuTypeList = [MenuType sortList:_menuTypeList];
         _filterMenuList = _menuList;
         [Menu setCurrentMenuList:_menuList];
+        
+        
+        
+        //remove orderTaking that not in the current menu now
+        NSMutableArray *removeOrderTakingList = [[NSMutableArray alloc]init];
+        NSMutableArray *currenOrderTakingList = [OrderTaking getCurrentOrderTakingList];
+        for(OrderTaking *item in currenOrderTakingList)
+        {
+            Menu *menu = [Menu getMenu:item.menuID branchID:branch.branchID];
+            if(!menu)
+            {
+                [removeOrderTakingList addObject:item];
+            }
+        }
+        [currenOrderTakingList removeObjectsInArray:removeOrderTakingList];
+        
+        
+        
+        //saveReceipt
+        if(saveReceipt)
+        {
+            //add ordertaking
+            for(SaveOrderTaking *item in saveOrderTakingList)
+            {
+                Menu *menu = [Menu getMenu:item.menuID branchID:branch.branchID];
+                if(menu)
+                {
+                    SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
+                    float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
+                
+                    
+                    float takeAwayPrice = item.takeAway?branch.takeAwayFee:0.0;
+                    NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+                    OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menu.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:item.takeAway takeAwayPrice:takeAwayPrice noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
+                    [OrderTaking addObject:orderTaking];
+                    [orderTakingList addObject:orderTaking];
+                    
+                    
+                    
+                    //add orderNote
+                    NSMutableArray *saveOrderNoteListForOrderTaking = [SaveOrderNote getOrderNoteListWithSaveOrderTakingID:item.saveOrderTakingID];
+                    for(SaveOrderNote *saveOrderNote in saveOrderNoteListForOrderTaking)
+                    {
+                        Note *note = [Note getNote:saveOrderNote.noteID branchID:branch.branchID];
+                        if(note)
+                        {
+                            OrderNote *addOrderNote = [[OrderNote alloc]initWithOrderTakingID:orderTaking.orderTakingID noteID:note.noteID quantity:saveOrderNote.quantity];
+                            [OrderNote addObject:addOrderNote];
+                        }
+                    }
+                    
+                    
+                    //update note id list in text
+                    orderTaking.noteIDListInText = [OrderNote getNoteIDListInTextWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
+                    
+                    
+                    //update ordertaking price
+                    float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
+                    orderTaking.notePrice = sumNotePrice;
+                }
+            }            
+        }
+        
+        
+        
         [self setData];
         [self removeOverlayViews];
         
@@ -796,16 +877,86 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         }
         
         
-        [Utility updateSharedObject:items];
+        for(int i=1; i<=6; i++)
+        {
+            [Utility updateSharedDataList:items[i]];
+        }
+        [Utility updateSharedObject:@[items[7]]];
+        
+        
         _menuList = [Menu getMenuBelongToBuffet:buffetReceipt];
         _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
         _menuTypeList = [MenuType sortList:_menuTypeList];
         _filterMenuList = _menuList;
         
-        NSMutableArray *receiptList = items[6];
+        
+        NSMutableArray *receiptList = items[7];
         Receipt *receipt = receiptList[0];
         MenuForBuffet *menuForBuffet = [[MenuForBuffet alloc]initWithReceiptID:receipt.receiptID menuList:_menuList];
         [Menu setCurrentMenuForBuffet:menuForBuffet];
+        
+        
+        
+        //remove orderTaking that not in the current menu now
+        NSMutableArray *removeOrderTakingList = [[NSMutableArray alloc]init];
+        NSMutableArray *currenOrderTakingList = [OrderTaking getCurrentOrderTakingList];
+        for(OrderTaking *item in currenOrderTakingList)
+        {
+            Menu *menu = [Menu getMenu:item.menuID branchID:branch.branchID];
+            if(!menu)
+            {
+                [removeOrderTakingList addObject:item];
+            }
+        }
+        [currenOrderTakingList removeObjectsInArray:removeOrderTakingList];
+        
+        
+        
+        //saveReceipt
+        if(saveReceipt)
+        {
+            //add ordertaking
+            for(SaveOrderTaking *item in saveOrderTakingList)
+            {
+                Menu *menu = [Menu getMenu:item.menuID branchID:branch.branchID];
+                if(menu)
+                {
+                    SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:menu.menuID branchID:branch.branchID];
+                    float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
+                
+                    
+                    float takeAwayPrice = item.takeAway?branch.takeAwayFee:0.0;
+                    NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+                    OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menu.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:item.takeAway takeAwayPrice:takeAwayPrice noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
+                    [OrderTaking addObject:orderTaking];
+                    [orderTakingList addObject:orderTaking];
+                    
+                    
+                    
+                    //add orderNote
+                    for(SaveOrderNote *item in saveOrderNoteList)
+                    {
+                        Note *note = [Note getNote:item.noteID branchID:branch.branchID];
+                        if(note)
+                        {
+                            OrderNote *addOrderNote = [[OrderNote alloc]initWithOrderTakingID:orderTaking.orderTakingID noteID:note.noteID quantity:item.quantity];
+                            [OrderNote addObject:addOrderNote];
+                        }                        
+                    }
+                    
+                    
+                    //update note id list in text
+                    orderTaking.noteIDListInText = [OrderNote getNoteIDListInTextWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
+                    
+                    
+                    //update ordertaking price
+                    float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
+                    orderTaking.notePrice = sumNotePrice;
+                }
+            }
+        }
+        
+        
         [self setData];
         [self removeOverlayViews];
     }
@@ -815,6 +966,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
 {
     [self createHorizontalScroll];
     [tbvMenu reloadData];
+    [self updateTotalAmount];
     if([_menuTypeList count]>0)
     {
         NSMutableArray *menuList = [self getMenuListWithSelectedIndex:_selectedMenuTypeIndex];

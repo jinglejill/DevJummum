@@ -533,10 +533,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHC-bF-lj9">
-                                <rect key="frame" x="16" y="104" width="343" height="498"/>
+                                <rect key="frame" x="16" y="104" width="343" height="547"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peekABoo.png" translatesAutoresizingMaskIntoConstraints="NO" id="V6s-DW-T8i">
-                                        <rect key="frame" x="0.0" y="235" width="240" height="240"/>
+                                        <rect key="frame" x="0.0" y="284" width="240" height="240"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="240" id="97e-Ub-zJT"/>
                                             <constraint firstAttribute="width" constant="240" id="zPS-9e-ttU"/>
@@ -1026,7 +1026,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mE-gP-XeJ">
-                                        <rect key="frame" x="340" y="6" width="28" height="31"/>
+                                        <rect key="frame" x="302" y="7" width="28" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="28" id="qva-a7-hSE"/>
                                             <constraint firstAttribute="height" constant="31" id="s6g-8I-hao"/>
@@ -1047,18 +1047,31 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3o3-rr-Zaw">
+                                        <rect key="frame" x="343" y="10.5" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="vUR-EY-wbA"/>
+                                            <constraint firstAttribute="height" constant="24" id="wec-N6-fF1"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="QR-white.png"/>
+                                        <connections>
+                                            <action selector="shareMenuToOrder:" destination="uxx-Px-8LI" eventType="touchUpInside" id="v5S-5f-RzR"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="6mE-gP-XeJ" firstAttribute="centerY" secondItem="TP8-ny-J3D" secondAttribute="centerY" id="0Kq-0S-fbj"/>
                                     <constraint firstItem="dbi-tk-7NV" firstAttribute="leading" secondItem="hc3-IZ-UNQ" secondAttribute="leading" id="38E-BE-xmw"/>
-                                    <constraint firstItem="6mE-gP-XeJ" firstAttribute="centerY" secondItem="hc3-IZ-UNQ" secondAttribute="centerY" id="3uJ-eX-yC4"/>
                                     <constraint firstItem="dbi-tk-7NV" firstAttribute="top" secondItem="hc3-IZ-UNQ" secondAttribute="top" id="CkQ-Md-bar"/>
+                                    <constraint firstItem="3o3-rr-Zaw" firstAttribute="centerY" secondItem="TP8-ny-J3D" secondAttribute="centerY" id="Hu1-Ce-dwC"/>
+                                    <constraint firstItem="3o3-rr-Zaw" firstAttribute="leading" secondItem="6mE-gP-XeJ" secondAttribute="trailing" constant="13" id="Jei-UD-lOG"/>
+                                    <constraint firstAttribute="trailing" secondItem="3o3-rr-Zaw" secondAttribute="trailing" constant="8" id="WJX-Is-XvZ"/>
                                     <constraint firstAttribute="height" constant="44" id="Zau-A9-1Go"/>
                                     <constraint firstAttribute="trailing" secondItem="TP8-ny-J3D" secondAttribute="trailing" constant="16" id="oja-aA-F6H"/>
                                     <constraint firstItem="TP8-ny-J3D" firstAttribute="centerY" secondItem="hc3-IZ-UNQ" secondAttribute="centerY" id="owM-CR-QvS"/>
                                     <constraint firstAttribute="bottom" secondItem="dbi-tk-7NV" secondAttribute="bottom" id="tyb-NM-IaF"/>
                                     <constraint firstItem="TP8-ny-J3D" firstAttribute="leading" secondItem="hc3-IZ-UNQ" secondAttribute="leading" constant="16" id="vtN-tV-3OP"/>
-                                    <constraint firstAttribute="trailing" secondItem="6mE-gP-XeJ" secondAttribute="trailing" constant="7" id="w0v-Rs-5hp"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uG2-Y9-gw3">
@@ -1133,6 +1146,7 @@
                     <connections>
                         <outlet property="bottomButtonHeight" destination="5Qq-DL-Z4D" id="FuG-xh-rWE"/>
                         <outlet property="btnAddRemoveMenu" destination="6mE-gP-XeJ" id="p9k-K0-eZG"/>
+                        <outlet property="btnShareMenuToOrder" destination="3o3-rr-Zaw" id="mye-3x-fyS"/>
                         <outlet property="lblNavTitle" destination="TP8-ny-J3D" id="eAu-Yy-ISc"/>
                         <outlet property="tbvData" destination="RAl-zk-N3f" id="Lvb-Kq-5Od"/>
                         <outlet property="tbvTotal" destination="sks-LX-zTb" id="Rck-i9-BFR"/>
@@ -1154,6 +1168,7 @@
                         <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToLuckyDraw" unwindAction="unwindToLuckyDraw:" id="7xD-bH-ZqW"/>
                         <segue destination="xaa-am-G6T" kind="show" identifier="segMessageBoxWithDismiss" id="wOX-9A-Dqb"/>
                         <segue destination="pEA-cg-oFG" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="Mf5-No-tQG"/>
+                        <segue destination="Kbk-fa-pPx" kind="show" identifier="segShareMenuToOrder" id="x1s-c0-NdY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TxL-MH-V7t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3096,7 +3111,6 @@
                         <outlet property="lblNavTitle" destination="JRS-lf-8eC" id="iiX-En-Qth"/>
                         <outlet property="tbvData" destination="YDQ-XK-RHc" id="drk-Uh-I0H"/>
                         <outlet property="topViewHeight" destination="RzN-3u-z8S" id="Quk-6J-j01"/>
-                        <segue destination="MhB-Ky-zT0" kind="unwind" identifier="segUnwindToMe" unwindAction="unwindToMe:" id="6Qy-qi-lIG"/>
                         <segue destination="MhB-Ky-zT0" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="Gsg-1W-cFf"/>
                         <segue destination="MhB-Ky-zT0" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="qGV-ah-vpT"/>
                         <segue destination="MhB-Ky-zT0" kind="unwind" unwindAction="unwindToMainTabBar:" id="P0t-Fk-qEy"/>
@@ -3106,6 +3120,108 @@
                 <exit id="MhB-Ky-zT0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2678" y="-2606"/>
+        </scene>
+        <!--Share Menu To Order View Controller-->
+        <scene sceneID="mhS-BG-Zsh">
+            <objects>
+                <viewController id="Kbk-fa-pPx" customClass="ShareMenuToOrderViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RKO-m3-U41">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMP-Ox-h9q">
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Anb-kL-OvO">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="5eD-HO-lYx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="20"/>
+                                        <state key="normal" title="&lt;">
+                                            <color key="titleColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goBack:" destination="Kbk-fa-pPx" eventType="touchUpInside" id="QE8-eR-SaV"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QR Code รายการอาหารที่ต้องการสั่ง" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vup-lO-n4W">
+                                        <rect key="frame" x="16" y="12" width="343" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="kAu-nh-fjI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Anb-kL-OvO" firstAttribute="top" secondItem="XMP-Ox-h9q" secondAttribute="top" id="0e5-0X-NaJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="vup-lO-n4W" secondAttribute="trailing" constant="16" id="3Qs-Ia-HuR"/>
+                                    <constraint firstItem="vup-lO-n4W" firstAttribute="leading" secondItem="XMP-Ox-h9q" secondAttribute="leading" constant="16" id="AKz-Ug-vGP"/>
+                                    <constraint firstAttribute="height" constant="44" id="G6B-Ev-MJB"/>
+                                    <constraint firstAttribute="bottom" secondItem="Anb-kL-OvO" secondAttribute="bottom" id="IBi-xb-nCw"/>
+                                    <constraint firstItem="vup-lO-n4W" firstAttribute="centerY" secondItem="Anb-kL-OvO" secondAttribute="centerY" id="Ifh-ha-Ark"/>
+                                    <constraint firstItem="Anb-kL-OvO" firstAttribute="leading" secondItem="XMP-Ox-h9q" secondAttribute="leading" id="n8S-ez-Le7"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UzZ-Ox-t84">
+                                <rect key="frame" x="0.0" y="88" width="375" height="579"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujq-rr-MAW">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXF-xM-gDB">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="c14-XG-BrL"/>
+                                        </constraints>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="QXF-xM-gDB" secondAttribute="bottom" id="NkB-h2-73Q"/>
+                                    <constraint firstItem="QXF-xM-gDB" firstAttribute="top" secondItem="ujq-rr-MAW" secondAttribute="top" id="Qpt-PJ-v9t"/>
+                                    <constraint firstAttribute="height" constant="44" id="jzF-kK-HLN"/>
+                                    <constraint firstItem="QXF-xM-gDB" firstAttribute="leading" secondItem="ujq-rr-MAW" secondAttribute="leading" id="kqT-X5-Ma0"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ujq-rr-MAW" firstAttribute="top" secondItem="RKO-m3-U41" secondAttribute="top" id="35A-2s-1dH"/>
+                            <constraint firstItem="XMP-Ox-h9q" firstAttribute="top" secondItem="ujq-rr-MAW" secondAttribute="bottom" id="9A0-Lc-FC4"/>
+                            <constraint firstItem="ujq-rr-MAW" firstAttribute="trailing" secondItem="aN8-de-3jb" secondAttribute="trailing" id="UM2-wU-90C"/>
+                            <constraint firstItem="XMP-Ox-h9q" firstAttribute="leading" secondItem="aN8-de-3jb" secondAttribute="leading" id="UfM-Uu-yFt"/>
+                            <constraint firstItem="UzZ-Ox-t84" firstAttribute="top" secondItem="XMP-Ox-h9q" secondAttribute="bottom" id="W9G-FI-yzi"/>
+                            <constraint firstItem="UzZ-Ox-t84" firstAttribute="trailing" secondItem="aN8-de-3jb" secondAttribute="trailing" id="aTv-SC-PDs"/>
+                            <constraint firstItem="XMP-Ox-h9q" firstAttribute="trailing" secondItem="aN8-de-3jb" secondAttribute="trailing" id="arU-bj-X0D"/>
+                            <constraint firstItem="ujq-rr-MAW" firstAttribute="leading" secondItem="aN8-de-3jb" secondAttribute="leading" id="ca1-JS-8tk"/>
+                            <constraint firstItem="UzZ-Ox-t84" firstAttribute="leading" secondItem="aN8-de-3jb" secondAttribute="leading" id="fwN-tY-boo"/>
+                            <constraint firstAttribute="bottom" secondItem="UzZ-Ox-t84" secondAttribute="bottom" id="qVx-9S-Ou9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aN8-de-3jb"/>
+                    </view>
+                    <connections>
+                        <outlet property="lblNavTitle" destination="vup-lO-n4W" id="E4z-7b-Lps"/>
+                        <outlet property="tbvData" destination="UzZ-Ox-t84" id="bro-Ro-6qg"/>
+                        <outlet property="topViewHeight" destination="jzF-kK-HLN" id="fce-fd-tdO"/>
+                        <segue destination="lGb-yE-vFQ" kind="unwind" identifier="segUnwindToMe" unwindAction="unwindToMe:" id="zEj-c9-Hvq"/>
+                        <segue destination="lGb-yE-vFQ" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="Uv4-Vq-8Ip"/>
+                        <segue destination="lGb-yE-vFQ" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="KO2-vu-SPm"/>
+                        <segue destination="lGb-yE-vFQ" kind="unwind" unwindAction="unwindToMainTabBar:" id="kcg-73-Kek"/>
+                        <segue destination="lGb-yE-vFQ" kind="unwind" unwindAction="unwindToBasket:" id="LbM-hk-JdN"/>
+                        <segue destination="lGb-yE-vFQ" kind="unwind" identifier="segUnwindToCreditCardAndOrderSummary" unwindAction="unwindToCreditCardAndOrderSummary:" id="asX-nB-SrR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fgj-Ci-BPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="lGb-yE-vFQ" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="6593" y="-2307"/>
         </scene>
         <!--Join Order View Controller-->
         <scene sceneID="hfS-Hd-pZU">
@@ -3209,7 +3325,6 @@
                         <outlet property="lblNavTitle" destination="TWB-rE-ejd" id="JPj-EH-GzW"/>
                         <outlet property="tbvData" destination="8iq-bO-qx7" id="Uj8-2H-wBs"/>
                         <outlet property="topViewHeight" destination="5Ad-Cx-HVX" id="zoD-oB-DiH"/>
-                        <segue destination="9De-KT-d32" kind="unwind" identifier="segUnwindToMe" unwindAction="unwindToMe:" id="mUB-jA-ve5"/>
                         <segue destination="9De-KT-d32" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="Ba1-SY-la2"/>
                         <segue destination="9De-KT-d32" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="1WI-yI-Kdd"/>
                         <segue destination="Mhn-hp-2iR" kind="show" identifier="segScanToJoin" id="dz7-dK-fcf"/>
@@ -3310,7 +3425,6 @@
                         <outlet property="lblNavTitle" destination="YUF-gu-cLi" id="AtJ-6X-k8X"/>
                         <outlet property="topViewHeight" destination="xov-GF-V1t" id="FV0-J1-MY0"/>
                         <outlet property="vwPreview" destination="h5I-y4-acv" id="8l7-0y-UA1"/>
-                        <segue destination="u7s-He-Wd5" kind="unwind" identifier="segUnwindToMe" unwindAction="unwindToMe:" id="sbl-eg-8cf"/>
                         <segue destination="u7s-He-Wd5" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="wWR-ei-Drw"/>
                         <segue destination="u7s-He-Wd5" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="ipW-qZ-sH2"/>
                         <segue destination="u7s-He-Wd5" kind="unwind" identifier="segUnwindToJoinOrder" unwindAction="unwindToJoinOrder:" id="LC4-rM-QAu"/>
@@ -3417,6 +3531,7 @@
                         <segue destination="btE-BM-gjN" kind="show" identifier="segOrderDetailNoAnimate" animates="NO" id="SMW-0E-KhF"/>
                         <segue destination="saL-h3-CWW" kind="show" identifier="segShareOrderQr" id="bYJ-aP-a2m"/>
                         <segue destination="AI3-XU-sFj" kind="show" identifier="segJoinOrder" id="muh-Dy-0zw"/>
+                        <segue destination="4WA-Zl-OI4" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="Po4-BC-0ZR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Se-Dr-KSv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3567,6 +3682,7 @@
                         <segue destination="rbx-xH-qlj" kind="show" identifier="segCommentRatingView" id="UZ8-nN-acy"/>
                         <segue destination="uxx-Px-8LI" kind="show" identifier="segCreditCardAndOrderSummary" id="0UA-kM-pwb"/>
                         <segue destination="8Ok-4Q-dTd" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="6Rh-Pn-ZUA"/>
+                        <segue destination="8Ok-4Q-dTd" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="j0z-bE-1Hx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NSK-5i-aen" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4699,6 +4815,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="QR-white.png" width="30" height="30"/>
         <image name="QRTab.png" width="30" height="29"/>
         <image name="addRemove.png" width="842" height="842"/>
         <image name="basketWhite.png" width="842" height="842"/>
@@ -4736,8 +4853,8 @@
         <segue reference="C1B-oJ-Xmi"/>
         <segue reference="iUw-Wp-Uz3"/>
         <segue reference="3fp-yp-yps"/>
-        <segue reference="jVQ-j3-veY"/>
-        <segue reference="wW5-0e-zXP"/>
-        <segue reference="ADg-WN-6Rq"/>
+        <segue reference="0UA-kM-pwb"/>
+        <segue reference="iuD-G9-3D3"/>
+        <segue reference="aNU-Zf-Wbq"/>
     </inferredMetricsTieBreakers>
 </document>

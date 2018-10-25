@@ -59,6 +59,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
 @synthesize topViewHeight;
 @synthesize bottomButtonHeight;
 @synthesize tbvRatingHeight;
+@synthesize orderItAgainReceipt;
 
 
 -(IBAction)unwindToOrderDetail:(UIStoryboardSegue *)segue
@@ -2056,10 +2057,6 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
 
 -(void)orderItAgain:(id)sender
 {
-    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
-    [OrderTaking setCurrentOrderTakingList:orderTakingList];
-    
-    
     //belong to buffet
     if(receipt.buffetReceiptID)
     {
@@ -2082,8 +2079,19 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
         }
     }
     
-    _receiptBranch = [Branch getBranch:receipt.branchID];
-    [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
+    
+    [OrderTaking removeCurrentOrderTakingList];
+    orderItAgainReceipt = receipt;
+    [self performSegueWithIdentifier:@"segUnwindToMainTabBar" sender:self];
+    
+    
+//    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
+//    [OrderTaking setCurrentOrderTakingList:orderTakingList];
+//
+    
+    
+//    _receiptBranch = [Branch getBranch:receipt.branchID];
+//    [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
 }
 
 - (IBAction)goBack:(id)sender

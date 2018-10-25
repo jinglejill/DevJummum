@@ -361,6 +361,7 @@
 		EF6C7CFD21318CAA00C335AC /* SharedMenuForBuffet.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6C7CFA21318CAA00C335AC /* SharedMenuForBuffet.m */; };
 		EF6C7CFE21318CAA00C335AC /* MenuForBuffet.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6C7CFC21318CAA00C335AC /* MenuForBuffet.m */; };
 		EF6C7D08213529B900C335AC /* VoucherCodeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6C7D07213529B900C335AC /* VoucherCodeListViewController.m */; };
+		EF7E94932181DE3E0009B945 /* SharedCurrentSaveReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7E94922181DE3E0009B945 /* SharedCurrentSaveReceipt.m */; };
 		EF88004D213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF88004A213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.xib */; };
 		EF88004E213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.m in Sources */ = {isa = PBXBuildFile; fileRef = EF88004C213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.m */; };
 		EF88014321430C330062D9D4 /* jummumGiftBoxNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = EF88014121430C320062D9D4 /* jummumGiftBoxNormal.png */; };
@@ -466,19 +467,26 @@
 		EF9480732179EA73007CA270 /* peekABoo.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9480722179EA72007CA270 /* peekABoo.png */; };
 		EF948075217A0FE8007CA270 /* peekABooFromRight.png in Resources */ = {isa = PBXBuildFile; fileRef = EF948074217A0FE7007CA270 /* peekABooFromRight.png */; };
 		EF948077217AD231007CA270 /* twirlArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = EF948076217AD22F007CA270 /* twirlArrow.png */; };
-		EF948079217AD4F7007CA270 /* twirlArrowBlank.png in Resources */ = {isa = PBXBuildFile; fileRef = EF948078217AD4F6007CA270 /* twirlArrowBlank.png */; };
 		EF94808A217F09CD007CA270 /* joinOrdering.png in Resources */ = {isa = PBXBuildFile; fileRef = EF948089217F09CB007CA270 /* joinOrdering.png */; };
 		EF94808D217F16B4007CA270 /* ShareOrderQrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF94808C217F16B4007CA270 /* ShareOrderQrViewController.m */; };
 		EF948090217F22D7007CA270 /* EncryptedMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = EF94808F217F22D7007CA270 /* EncryptedMessage.m */; };
 		EF948094217F333F007CA270 /* CustomTableViewCellImageLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF948092217F333F007CA270 /* CustomTableViewCellImageLabel.m */; };
 		EF948095217F333F007CA270 /* CustomTableViewCellImageLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF948093217F333F007CA270 /* CustomTableViewCellImageLabel.xib */; };
-		EF948097217F3665007CA270 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = EF948096217F3664007CA270 /* loading.png */; };
 		EF9480992180238B007CA270 /* scanQr.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9480982180238A007CA270 /* scanQr.png */; };
 		EF94809C21802521007CA270 /* JoinOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF94809B21802521007CA270 /* JoinOrderViewController.m */; };
 		EF94809F21802688007CA270 /* ScanToJoinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF94809E21802688007CA270 /* ScanToJoinViewController.m */; };
 		EF9480A2218030ED007CA270 /* OrderJoining.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9480A1218030ED007CA270 /* OrderJoining.m */; };
 		EF9480A52180324E007CA270 /* SharedOrderJoining.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9480A42180324E007CA270 /* SharedOrderJoining.m */; };
 		EF9480A721806DD4007CA270 /* QRTab.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9480A621806DD4007CA270 /* QRTab.png */; };
+		EF9480A921807008007CA270 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9480A821807006007CA270 /* share.png */; };
+		EF9480AB21807286007CA270 /* QR-white.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9480AA21807284007CA270 /* QR-white.png */; };
+		EF9480AE218073F8007CA270 /* ShareMenuToOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9480AD218073F8007CA270 /* ShareMenuToOrderViewController.m */; };
+		EF9480B12180B8BD007CA270 /* SaveReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9480B02180B8BD007CA270 /* SaveReceipt.m */; };
+		EF9480B42180B8F8007CA270 /* SharedSaveReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9480B32180B8F8007CA270 /* SharedSaveReceipt.m */; };
+		EF9480B72180B926007CA270 /* SaveOrderTaking.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9480B62180B926007CA270 /* SaveOrderTaking.m */; };
+		EF9480BA2180B931007CA270 /* SharedSaveOrderTaking.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9480B92180B931007CA270 /* SharedSaveOrderTaking.m */; };
+		EF9480BD2180B982007CA270 /* SaveOrderNote.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9480BC2180B982007CA270 /* SaveOrderNote.m */; };
+		EF9480C02180B98E007CA270 /* SharedSaveOrderNote.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9480BF2180B98E007CA270 /* SharedSaveOrderNote.m */; };
 		EFDAFCFF2148ED2900A2596D /* MessageBoxWithDismissViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAFCFE2148ED2900A2596D /* MessageBoxWithDismissViewController.m */; };
 		EFDAFD02214A656800A2596D /* handTap.png in Resources */ = {isa = PBXBuildFile; fileRef = EFDAFD00214A656800A2596D /* handTap.png */; };
 		EFDAFD03214A656800A2596D /* handLift.png in Resources */ = {isa = PBXBuildFile; fileRef = EFDAFD01214A656800A2596D /* handLift.png */; };
@@ -1040,6 +1048,8 @@
 		EF6C7CFC21318CAA00C335AC /* MenuForBuffet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuForBuffet.m; sourceTree = "<group>"; };
 		EF6C7D06213529B900C335AC /* VoucherCodeListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoucherCodeListViewController.h; sourceTree = "<group>"; };
 		EF6C7D07213529B900C335AC /* VoucherCodeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoucherCodeListViewController.m; sourceTree = "<group>"; };
+		EF7E94912181DE3E0009B945 /* SharedCurrentSaveReceipt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedCurrentSaveReceipt.h; sourceTree = "<group>"; };
+		EF7E94922181DE3E0009B945 /* SharedCurrentSaveReceipt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedCurrentSaveReceipt.m; sourceTree = "<group>"; };
 		EF88004A213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCellVoucherCodeExist.xib; sourceTree = "<group>"; };
 		EF88004B213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCellVoucherCodeExist.h; sourceTree = "<group>"; };
 		EF88004C213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCellVoucherCodeExist.m; sourceTree = "<group>"; };
@@ -1150,7 +1160,6 @@
 		EF9480722179EA72007CA270 /* peekABoo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = peekABoo.png; sourceTree = "<group>"; };
 		EF948074217A0FE7007CA270 /* peekABooFromRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = peekABooFromRight.png; sourceTree = "<group>"; };
 		EF948076217AD22F007CA270 /* twirlArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twirlArrow.png; sourceTree = "<group>"; };
-		EF948078217AD4F6007CA270 /* twirlArrowBlank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twirlArrowBlank.png; sourceTree = "<group>"; };
 		EF948089217F09CB007CA270 /* joinOrdering.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joinOrdering.png; sourceTree = "<group>"; };
 		EF94808B217F16B4007CA270 /* ShareOrderQrViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareOrderQrViewController.h; sourceTree = "<group>"; };
 		EF94808C217F16B4007CA270 /* ShareOrderQrViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareOrderQrViewController.m; sourceTree = "<group>"; };
@@ -1159,7 +1168,6 @@
 		EF948091217F333F007CA270 /* CustomTableViewCellImageLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCellImageLabel.h; sourceTree = "<group>"; };
 		EF948092217F333F007CA270 /* CustomTableViewCellImageLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCellImageLabel.m; sourceTree = "<group>"; };
 		EF948093217F333F007CA270 /* CustomTableViewCellImageLabel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCellImageLabel.xib; sourceTree = "<group>"; };
-		EF948096217F3664007CA270 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
 		EF9480982180238A007CA270 /* scanQr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanQr.png; sourceTree = "<group>"; };
 		EF94809A21802521007CA270 /* JoinOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinOrderViewController.h; sourceTree = "<group>"; };
 		EF94809B21802521007CA270 /* JoinOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JoinOrderViewController.m; sourceTree = "<group>"; };
@@ -1170,6 +1178,22 @@
 		EF9480A32180324E007CA270 /* SharedOrderJoining.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedOrderJoining.h; sourceTree = "<group>"; };
 		EF9480A42180324E007CA270 /* SharedOrderJoining.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedOrderJoining.m; sourceTree = "<group>"; };
 		EF9480A621806DD4007CA270 /* QRTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QRTab.png; sourceTree = "<group>"; };
+		EF9480A821807006007CA270 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
+		EF9480AA21807284007CA270 /* QR-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QR-white.png"; sourceTree = "<group>"; };
+		EF9480AC218073F8007CA270 /* ShareMenuToOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareMenuToOrderViewController.h; sourceTree = "<group>"; };
+		EF9480AD218073F8007CA270 /* ShareMenuToOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareMenuToOrderViewController.m; sourceTree = "<group>"; };
+		EF9480AF2180B8BD007CA270 /* SaveReceipt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveReceipt.h; sourceTree = "<group>"; };
+		EF9480B02180B8BD007CA270 /* SaveReceipt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveReceipt.m; sourceTree = "<group>"; };
+		EF9480B22180B8F8007CA270 /* SharedSaveReceipt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedSaveReceipt.h; sourceTree = "<group>"; };
+		EF9480B32180B8F8007CA270 /* SharedSaveReceipt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedSaveReceipt.m; sourceTree = "<group>"; };
+		EF9480B52180B926007CA270 /* SaveOrderTaking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveOrderTaking.h; sourceTree = "<group>"; };
+		EF9480B62180B926007CA270 /* SaveOrderTaking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveOrderTaking.m; sourceTree = "<group>"; };
+		EF9480B82180B931007CA270 /* SharedSaveOrderTaking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedSaveOrderTaking.h; sourceTree = "<group>"; };
+		EF9480B92180B931007CA270 /* SharedSaveOrderTaking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedSaveOrderTaking.m; sourceTree = "<group>"; };
+		EF9480BB2180B982007CA270 /* SaveOrderNote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveOrderNote.h; sourceTree = "<group>"; };
+		EF9480BC2180B982007CA270 /* SaveOrderNote.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveOrderNote.m; sourceTree = "<group>"; };
+		EF9480BE2180B98E007CA270 /* SharedSaveOrderNote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedSaveOrderNote.h; sourceTree = "<group>"; };
+		EF9480BF2180B98E007CA270 /* SharedSaveOrderNote.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedSaveOrderNote.m; sourceTree = "<group>"; };
 		EFDAFCFD2148ED2900A2596D /* MessageBoxWithDismissViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageBoxWithDismissViewController.h; sourceTree = "<group>"; };
 		EFDAFCFE2148ED2900A2596D /* MessageBoxWithDismissViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageBoxWithDismissViewController.m; sourceTree = "<group>"; };
 		EFDAFD00214A656800A2596D /* handTap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handTap.png; sourceTree = "<group>"; };
@@ -1386,11 +1410,11 @@
 		EF33CE11211C36D100560C69 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				EF9480AA21807284007CA270 /* QR-white.png */,
+				EF9480A821807006007CA270 /* share.png */,
 				EF9480A621806DD4007CA270 /* QRTab.png */,
 				EF9480982180238A007CA270 /* scanQr.png */,
-				EF948096217F3664007CA270 /* loading.png */,
 				EF948089217F09CB007CA270 /* joinOrdering.png */,
-				EF948078217AD4F6007CA270 /* twirlArrowBlank.png */,
 				EF948076217AD22F007CA270 /* twirlArrow.png */,
 				EF948074217A0FE7007CA270 /* peekABooFromRight.png */,
 				EF9480722179EA72007CA270 /* peekABoo.png */,
@@ -1571,6 +1595,8 @@
 				EF94809B21802521007CA270 /* JoinOrderViewController.m */,
 				EF94809D21802688007CA270 /* ScanToJoinViewController.h */,
 				EF94809E21802688007CA270 /* ScanToJoinViewController.m */,
+				EF9480AC218073F8007CA270 /* ShareMenuToOrderViewController.h */,
+				EF9480AD218073F8007CA270 /* ShareMenuToOrderViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1766,6 +1792,20 @@
 				EF9480A1218030ED007CA270 /* OrderJoining.m */,
 				EF9480A32180324E007CA270 /* SharedOrderJoining.h */,
 				EF9480A42180324E007CA270 /* SharedOrderJoining.m */,
+				EF9480AF2180B8BD007CA270 /* SaveReceipt.h */,
+				EF9480B02180B8BD007CA270 /* SaveReceipt.m */,
+				EF9480B22180B8F8007CA270 /* SharedSaveReceipt.h */,
+				EF9480B32180B8F8007CA270 /* SharedSaveReceipt.m */,
+				EF9480B52180B926007CA270 /* SaveOrderTaking.h */,
+				EF9480B62180B926007CA270 /* SaveOrderTaking.m */,
+				EF9480B82180B931007CA270 /* SharedSaveOrderTaking.h */,
+				EF9480B92180B931007CA270 /* SharedSaveOrderTaking.m */,
+				EF9480BB2180B982007CA270 /* SaveOrderNote.h */,
+				EF9480BC2180B982007CA270 /* SaveOrderNote.m */,
+				EF9480BE2180B98E007CA270 /* SharedSaveOrderNote.h */,
+				EF9480BF2180B98E007CA270 /* SharedSaveOrderNote.m */,
+				EF7E94912181DE3E0009B945 /* SharedCurrentSaveReceipt.h */,
+				EF7E94922181DE3E0009B945 /* SharedCurrentSaveReceipt.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2209,6 +2249,7 @@
 				EF9480992180238B007CA270 /* scanQr.png in Resources */,
 				EF33D014211C36D200560C69 /* history.png in Resources */,
 				EF33D030211C36D200560C69 /* masterCard.png in Resources */,
+				EF9480AB21807286007CA270 /* QR-white.png in Resources */,
 				EF33CFF7211C36D200560C69 /* Icon-Spotlight-40@3x.png in Resources */,
 				EF33D0C1211C36D200560C69 /* CustomTableViewCellPromoThumbNail.xib in Resources */,
 				EF33D00A211C36D200560C69 /* Icon-Small-50@2x.png in Resources */,
@@ -2242,7 +2283,6 @@
 				EF5D243F212756880073F1A1 /* GoogleService-Info.plist in Resources */,
 				EF8805C62147820E0062D9D4 /* giftBoxBoo00003.jpg in Resources */,
 				EFDAFD0F214A73FF00A2596D /* handEmpty.png in Resources */,
-				EF948097217F3665007CA270 /* loading.png in Resources */,
 				EF33D017211C36D200560C69 /* triangle_dev_om.png in Resources */,
 				EF33D008211C36D200560C69 /* basketWhite.png in Resources */,
 				EF33D0F2211C36D200560C69 /* Kanit-Black.ttf in Resources */,
@@ -2253,7 +2293,6 @@
 				EF33CFFC211C36D200560C69 /* recommendShop.png in Resources */,
 				EF33CFEF211C36D200560C69 /* iTunesArtwork in Resources */,
 				EF8805B62147820E0062D9D4 /* giftBoxGood00013.jpg in Resources */,
-				EF948079217AD4F7007CA270 /* twirlArrowBlank.png in Resources */,
 				EF33D0E9211C36D200560C69 /* Prompt-ExtraLight.ttf in Resources */,
 				EF33D0EE211C36D200560C69 /* Prompt-Medium.ttf in Resources */,
 				EF33D01A211C36D200560C69 /* home_icon_red.png in Resources */,
@@ -2454,6 +2493,7 @@
 				EF33CFF8211C36D200560C69 /* remove light color.png in Resources */,
 				EF8805A12147820E0062D9D4 /* giftBoxExcellent00005.jpg in Resources */,
 				EF8805B92147820E0062D9D4 /* giftBoxGood00010.jpg in Resources */,
+				EF9480A921807008007CA270 /* share.png in Resources */,
 				EF8805E12147820E0062D9D4 /* giftBoxAwesome00004.jpg in Resources */,
 				EF8805E52147820E0062D9D4 /* giftBoxAwesome00017.jpg in Resources */,
 				EF33D00F211C36D200560C69 /* Icon-60@2x.png in Resources */,
@@ -2617,6 +2657,8 @@
 				EF33D072211C36D200560C69 /* Shop.m in Sources */,
 				EF33D088211C36D200560C69 /* SharedShop.m in Sources */,
 				EF33CFDE211C36D200560C69 /* OmiseTokenRequest.swift in Sources */,
+				EF9480BD2180B982007CA270 /* SaveOrderNote.m in Sources */,
+				EF9480BA2180B931007CA270 /* SharedSaveOrderTaking.m in Sources */,
 				EFE2C6C9215107FA006EF563 /* Language.m in Sources */,
 				EF33D0AE211C36D200560C69 /* CustomTableViewCellLogo.m in Sources */,
 				EF1F37F72171D32A00EFB214 /* CustomTableViewCellSquareThumbNail.m in Sources */,
@@ -2633,6 +2675,7 @@
 				EF33D07B211C36D200560C69 /* SpecialPriceProgram.m in Sources */,
 				EF33D0CD211C36D200560C69 /* CustomTableViewCellReceiptSummary.m in Sources */,
 				EF33D063211C36D200560C69 /* SharedRewardPoint.m in Sources */,
+				EF9480B12180B8BD007CA270 /* SaveReceipt.m in Sources */,
 				EF33D047211C36D200560C69 /* MainTabBarController.m in Sources */,
 				EF33D0BE211C36D200560C69 /* CustomTableViewCellDisputeDetail.m in Sources */,
 				EF33D0BC211C36D200560C69 /* CustomTableViewCellText.m in Sources */,
@@ -2650,6 +2693,7 @@
 				EF33D053211C36D200560C69 /* RewardViewController.m in Sources */,
 				EF33D0DC211C36D200560C69 /* CustomCollectionReusableView.m in Sources */,
 				EF33CFE3211C36D200560C69 /* CardBrand.swift in Sources */,
+				EF9480B42180B8F8007CA270 /* SharedSaveReceipt.m in Sources */,
 				EF33D0A2211C36D200560C69 /* Message.m in Sources */,
 				EF33D0B2211C36D200560C69 /* CustomTableViewCellOrder.m in Sources */,
 				EF33D03A211C36D200560C69 /* LaunchScreenViewController.m in Sources */,
@@ -2667,6 +2711,7 @@
 				EF948070217826AF007CA270 /* CustomCollectionViewCellNoteWithQuantity.m in Sources */,
 				EFF733E12148DD6600B69712 /* SharedCard.m in Sources */,
 				EF33D080211C36D200560C69 /* Note.m in Sources */,
+				EF9480B72180B926007CA270 /* SaveOrderTaking.m in Sources */,
 				EF33D0D2211C36D200560C69 /* CustomTableViewCellLabelLabel.m in Sources */,
 				EF33D038211C36D200560C69 /* ForgotPasswordViewController.m in Sources */,
 				EF33D097211C36D200560C69 /* SubMenuType.m in Sources */,
@@ -2705,6 +2750,7 @@
 				EF33D06E211C36D200560C69 /* SharedTableNo.m in Sources */,
 				EF33D05F211C36D200560C69 /* SharedSubMenuType.m in Sources */,
 				EF33D089211C36D200560C69 /* SharedNoteType.m in Sources */,
+				EF9480AE218073F8007CA270 /* ShareMenuToOrderViewController.m in Sources */,
 				EFDAFCFF2148ED2900A2596D /* MessageBoxWithDismissViewController.m in Sources */,
 				EF33D03D211C36D200560C69 /* ReceiptSummaryViewController.m in Sources */,
 				EF33D0A1211C36D200560C69 /* RewardPoint.m in Sources */,
@@ -2722,6 +2768,7 @@
 				EF33D04B211C36D200560C69 /* BasketViewController.m in Sources */,
 				EF33D076211C36D200560C69 /* SharedCurrentOrderTaking.m in Sources */,
 				EF33D0E3211C36D200560C69 /* CustomTableViewCellReward.m in Sources */,
+				EF9480C02180B98E007CA270 /* SharedSaveOrderNote.m in Sources */,
 				EF33D051211C36D200560C69 /* RegisterNowViewController.m in Sources */,
 				EF33D086211C36D200560C69 /* SharedRewardRedemption.m in Sources */,
 				EF33D083211C36D200560C69 /* TableNo.m in Sources */,
@@ -2759,6 +2806,7 @@
 				EF33D044211C36D200560C69 /* BranchSearchViewController.m in Sources */,
 				EF33D061211C36D200560C69 /* SharedMenu.m in Sources */,
 				EF948094217F333F007CA270 /* CustomTableViewCellImageLabel.m in Sources */,
+				EF7E94932181DE3E0009B945 /* SharedCurrentSaveReceipt.m in Sources */,
 				EF33D08E211C36D200560C69 /* Branch.m in Sources */,
 				EF33D066211C36D200560C69 /* SharedUserRewardRedemptionUsed.m in Sources */,
 				EF33D06F211C36D200560C69 /* OrderNote.m in Sources */,

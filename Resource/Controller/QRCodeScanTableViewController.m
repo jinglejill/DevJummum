@@ -8,16 +8,25 @@
 
 #import "QRCodeScanTableViewController.h"
 #import "MenuSelectionViewController.h"
-#import "CreditCardAndOrderSummaryViewController.h"
+//#import "CreditCardAndOrderSummaryViewController.h"
 #import "Utility.h"
 #import "Branch.h"
 #import "CustomerTable.h"
 #import "Message.h"
+#import "SaveReceipt.h"
+#import "SaveOrderTaking.h"
+#import "SaveOrderNote.h"
+#import "OrderTaking.h"
+#import "OrderNote.h"
+
 
 
 @interface QRCodeScanTableViewController ()
 {
     BOOL _showPeekABoo;
+    SaveReceipt *_saveReceipt;
+    NSMutableArray *_saveOrderTakingList;
+    NSMutableArray *_saveOrderNoteList;
 }
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
@@ -38,7 +47,9 @@
 @synthesize alreadySeg;
 @synthesize selectedBranch;
 @synthesize selectedCustomerTable;
+@synthesize fromOrderNow;
 @synthesize fromOrderItAgain;
+@synthesize orderItAgainReceipt;
 @synthesize buffetReceipt;
 @synthesize imgPeekABoo;
 @synthesize imgPeekABooFromRight;
@@ -109,11 +120,17 @@
     [super viewDidAppear:YES];
     
     
-    if(fromOrderItAgain)
+    if(fromOrderNow)
     {
-        fromOrderItAgain = NO;
+        fromOrderNow = NO;
         [self performSegueWithIdentifier:@"segMenuSelection" sender:self];
         return;
+    }
+    else if(fromOrderItAgain)
+    {
+        fromOrderItAgain = NO;
+        [self loadingOverlayView];
+        [self.homeModel downloadItems:dbOrderItAgain withData:orderItAgainReceipt];
     }
 }
 
@@ -238,13 +255,16 @@
         vc.branch = selectedBranch;
         vc.customerTable = selectedCustomerTable;
         vc.buffetReceipt = buffetReceipt;
+        vc.saveReceipt = _saveReceipt;
+        vc.saveOrderTakingList = _saveOrderTakingList;
+        vc.saveOrderNoteList = _saveOrderNoteList;
     }
 }
 
 -(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
 {
     HomeModel *homeModel = (HomeModel *)objHomeModel;
-    if(homeModel.propCurrentDB == dbBranchAndCustomerTableQR)
+    if(homeModel.propCurrentDB == dbBranchAndCustomerTableQR || homeModel.propCurrentDB == dbOrderItAgain)
     {
         [self removeOverlayViews];
         NSMutableArray *branchList = items[0];
@@ -259,19 +279,28 @@
             [Utility updateSharedObject:items];
             selectedBranch = branchList[0];
             selectedCustomerTable = customerTableList[0];
+            
+            if([items count] > 2)
+            {
+                NSMutableArray *saveReceiptList = items[2];
+                _saveReceipt = saveReceiptList[0];
+                _saveOrderTakingList = items[3];
+                _saveOrderNoteList = items[4];
+            }
+            
             if(fromCreditCardAndOrderSummaryMenu)
             {
                 customerTable = customerTableList[0];
                 dispatch_async(dispatch_get_main_queue(), ^
                {
-                   [self performSegueWithIdentifier:@"segUnwindToCreditCardAndOrderSummary" sender:self];
+                    [self performSegueWithIdentifier:@"segUnwindToCreditCardAndOrderSummary" sender:self];
                });
             }
             else
             {
                 dispatch_async(dispatch_get_main_queue(), ^
                {
-                  [self performSegueWithIdentifier:@"segMenuSelection" sender:self];
+                    [self performSegueWithIdentifier:@"segMenuSelection" sender:self];
                });
             }
         }

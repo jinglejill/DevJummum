@@ -37,10 +37,13 @@
 #import "RewardViewController.h"
 #import "QRCodeScanTableViewController.h"
 #import "HotDealViewController.h"
+#import "ShareOrderQrViewController.h"
+#import "JoinOrderViewController.h"
+#import "ScanToJoinViewController.h"
+#import "ShareMenuToOrderViewController.h"
 #import "HomeModel.h"
 #import "Utility.h"
 #import "Receipt.h"
-//#import "PushSync.h"
 #import "SharedCurrentUserAccount.h"
 #import <objc/runtime.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -513,6 +516,7 @@ void myExceptionHandler(NSException *exception)
                 [currentVc isKindOfClass:[CreditCardViewController class]] ||
                 [currentVc isKindOfClass:[CustomerTableSearchViewController class]] ||
                 [currentVc isKindOfClass:[HotDealDetailViewController class]] ||
+                [currentVc isKindOfClass:[JoinOrderViewController class]] ||
                 [currentVc isKindOfClass:[MenuSelectionViewController class]] ||
                 [currentVc isKindOfClass:[MyRewardViewController class]] ||
                 [currentVc isKindOfClass:[NoteViewController class]] ||
@@ -521,7 +525,10 @@ void myExceptionHandler(NSException *exception)
                 [currentVc isKindOfClass:[RecommendShopViewController class]] ||
                 [currentVc isKindOfClass:[RewardDetailViewController class]] ||
                 [currentVc isKindOfClass:[RewardRedemptionViewController class]] ||
+                [currentVc isKindOfClass:[ScanToJoinViewController class]] ||
                 [currentVc isKindOfClass:[SelectPaymentMethodViewController class]] ||
+                [currentVc isKindOfClass:[ShareOrderQrViewController class]] ||
+                [currentVc isKindOfClass:[ShareMenuToOrderViewController class]] ||
                 [currentVc isKindOfClass:[TosAndPrivacyPolicyViewController class]] ||
                 [currentVc isKindOfClass:[VoucherCodeListViewController class]])
         {
@@ -574,6 +581,7 @@ void myExceptionHandler(NSException *exception)
                 [currentVc isKindOfClass:[CreditCardViewController class]] ||
                 [currentVc isKindOfClass:[CustomerTableSearchViewController class]] ||
                 [currentVc isKindOfClass:[HotDealDetailViewController class]] ||
+                [currentVc isKindOfClass:[JoinOrderViewController class]] ||
                 [currentVc isKindOfClass:[MenuSelectionViewController class]] ||
                 [currentVc isKindOfClass:[MyRewardViewController class]] ||
                 [currentVc isKindOfClass:[NoteViewController class]] ||
@@ -582,7 +590,10 @@ void myExceptionHandler(NSException *exception)
                 [currentVc isKindOfClass:[RecommendShopViewController class]] ||
                 [currentVc isKindOfClass:[RewardDetailViewController class]] ||
                 [currentVc isKindOfClass:[RewardRedemptionViewController class]] ||
+                [currentVc isKindOfClass:[ScanToJoinViewController class]] ||
                 [currentVc isKindOfClass:[SelectPaymentMethodViewController class]] ||
+                [currentVc isKindOfClass:[ShareMenuToOrderViewController class]] ||
+                [currentVc isKindOfClass:[ShareOrderQrViewController class]] ||
                 [currentVc isKindOfClass:[TosAndPrivacyPolicyViewController class]] ||
                 [currentVc isKindOfClass:[VoucherCodeListViewController class]])
         {

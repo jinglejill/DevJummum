@@ -164,4 +164,16 @@
     return noteList;
 }
 
++(MenuNote *)getMenuNote:(NSInteger)menuID noteID:(NSInteger)noteID branchID:(NSInteger)branchID;
+{
+    NSMutableArray *dataList = [SharedMenuNote sharedMenuNote].menuNoteList;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_menuID = %ld and _noteID = %ld and _branchID = %ld",menuID,noteID,branchID];
+    NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
+    
+    if([filterArray count] > 0)
+    {
+        return filterArray[0];
+    }
+    return nil;
+}
 @end

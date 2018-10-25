@@ -229,16 +229,7 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
         cell.lblSubTitle.text = rewardRedemption.subTitle;
         [cell.lblSubTitle sizeToFit];
         
-//        if(70-8-cell.lblHeaderHeight.constant < 0)
-//        {
-//            NSLog(@"< 0");
-//            cell.lblSubTitleHeight.constant = 0;
-//        }
-//        else
-//        {
-//            NSLog(@">= 0 ,%f",70-8-cell.lblHeaderHeight.constant);
-//            cell.lblSubTitleHeight.constant = 70-8-cell.lblHeaderHeight.constant;
-//        }
+
         cell.lblSubTitleHeight.constant = 70-8-cell.lblHeaderHeight.constant<0?0:70-8-cell.lblHeaderHeight.constant;
         NSLog(@"left space: %f",70-8-cell.lblHeaderHeight.constant);
         NSLog(@"cell.lblHeaderHeight.constant: %f",cell.lblHeaderHeight.constant);

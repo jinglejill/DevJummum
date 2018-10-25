@@ -362,6 +362,7 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
                 {
                     OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:rewardRedemption.mainBranchID customerTableID:0 menuID:discountGroupMenuMap.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
                     [orderTakingList addObject:orderTaking];
+                    [OrderTaking addObject:orderTaking];
                 }
             }
             

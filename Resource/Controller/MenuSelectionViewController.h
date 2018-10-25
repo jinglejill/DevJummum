@@ -10,6 +10,7 @@
 #import "Branch.h"
 #import "CustomerTable.h"
 #import "Receipt.h"
+#import "SaveReceipt.h"
 
 
 @interface MenuSelectionViewController : CustomViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UISearchBarDelegate>
@@ -26,6 +27,9 @@
 @property (strong, nonatomic) Branch *branch;
 @property (strong, nonatomic) CustomerTable *customerTable;
 @property (strong, nonatomic) Receipt *buffetReceipt;
+@property (strong, nonatomic) SaveReceipt *saveReceipt;
+@property (strong, nonatomic) NSMutableArray *saveOrderTakingList;
+@property (strong, nonatomic) NSMutableArray *saveOrderNoteList;
 @property (nonatomic) NSInteger fromReceiptSummaryMenu;
 @property (nonatomic) NSInteger fromJoinOrderMenu;
 

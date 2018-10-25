@@ -140,25 +140,21 @@
             _alreadyDetect = YES;
             UserAccount *userAccount = [UserAccount getCurrentUserAccount];
             [self loadingOverlayView];
-            [self.homeModel downloadItems:dbJoinOrderScanQr withData:@[decryptedMessage,@(userAccount.userAccountID)]];
+            [self.homeModel insertItems:dbOrderJoiningScanQr withData:@[decryptedMessage,@(userAccount.userAccountID)] actionScreen:@"insert order joining in scan to join screen"];
         }
     }
 }
 
--(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
+-(void)itemsInsertedWithReturnData:(NSArray *)items
 {
-    HomeModel *homeModel = (HomeModel *)objHomeModel;
-    if(homeModel.propCurrentDB == dbJoinOrderScanQr)
+    NSMutableArray *orderJoiningList = items[0];
+    if([orderJoiningList count] > 0)
     {
-        NSMutableArray *orderJoiningList = items[0];
-        if([orderJoiningList count] > 0)
-        {
-            [self goBack:nil];
-        }
-        else
-        {
-            [self showAlert:@"" message:[Language getText:@"QR Code สำหรับร่วมสั่งอาหารไม่ถูกต้อง"] method:@selector(setAlreadyDetectToNo)];
-        }
+        [self goBack:nil];
+    }
+    else
+    {
+        [self showAlert:@"" message:[Language getText:@"QR Code สำหรับร่วมสั่งอาหารไม่ถูกต้อง"] method:@selector(setAlreadyDetectToNo)];
     }
 }
 

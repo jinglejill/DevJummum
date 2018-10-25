@@ -1,32 +1,32 @@
 //
-//  ShareOrderQrViewController.m
+//  ShareMenuToOrderViewController.m
 //  DevJummum
 //
-//  Created by Thidaporn Kijkamjai on 23/10/2561 BE.
+//  Created by Thidaporn Kijkamjai on 24/10/2561 BE.
 //  Copyright © 2561 Jummum Tech. All rights reserved.
 //
 
-#import "ShareOrderQrViewController.h"
+#import "ShareMenuToOrderViewController.h"
 #import "CustomTableViewCellImageLabel.h"
 #import "EncryptedMessage.h"
 
 
-@interface ShareOrderQrViewController ()
+@interface ShareMenuToOrderViewController ()
 {
     EncryptedMessage *_encryptedMessage;
-    NSTimer *timer;
-    NSInteger _timeToCountDown;
 }
 @end
 
-@implementation ShareOrderQrViewController
+@implementation ShareMenuToOrderViewController
 static NSString * const reuseIdentifierImageLabel = @"CustomTableViewCellImageLabel";
 
 
 @synthesize lblNavTitle;
 @synthesize tbvData;
 @synthesize topViewHeight;
-@synthesize shareOrderReceiptID;
+@synthesize saveReceipt;
+@synthesize saveOrderTakingList;
+@synthesize saveOrderNoteList;
 
 
 -(void)viewDidLayoutSubviews
@@ -45,7 +45,7 @@ static NSString * const reuseIdentifierImageLabel = @"CustomTableViewCellImageLa
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Language getText:@"QR Code สำหรับสั่งบุฟเฟ่ต์"];
+    NSString *title = [Language getText:@"QR Code รายการอาหารที่ต้องการสั่ง"];
     lblNavTitle.text = title;
     tbvData.dataSource = self;
     tbvData.delegate = self;
@@ -57,16 +57,17 @@ static NSString * const reuseIdentifierImageLabel = @"CustomTableViewCellImageLa
         [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierImageLabel];
     }
     
+    
     [self loadingOverlayView];
     self.homeModel = [[HomeModel alloc]init];
     self.homeModel.delegate = self;
-    [self.homeModel downloadItems:dbOrderJoiningShareQr withData:@(shareOrderReceiptID)];
+    [self.homeModel insertItemsJson:dbSaveOrder withData:@[saveReceipt,saveOrderTakingList,saveOrderNoteList] actionScreen:@"share menu to order"];
+    
 }
 
 - (IBAction)goBack:(id)sender
 {
-    self.showReceiptSummary = 1;
-    [self performSegueWithIdentifier:@"segUnwindToMainTabBar" sender:self];
+    [self performSegueWithIdentifier:@"segUnwindToCreditCardAndOrderSummary" sender:self];
 }
 
 ///tableview section
@@ -79,39 +80,29 @@ static NSString * const reuseIdentifierImageLabel = @"CustomTableViewCellImageLa
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     
-    
     return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     CustomTableViewCellImageLabel *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierImageLabel];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     
     if(_encryptedMessage)
     {
-        cell.imgValue.image = [self generateQRCodeWithString:_encryptedMessage.encryptedMessage scale:5];
-        
-        
-        _timeToCountDown = 5*60;
-        [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
-        timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer:) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+        cell.imgValue.image = [self generateQRCodeWithString:_encryptedMessage.encryptedMessage scale:5];        
     }
-    else
-    {
-//        cell.imgValue.image = [UIImage imageNamed:@"loading.png"];
-        cell.lblText.text = @"00:00:00";
-    }
+    
+    
+    cell.lblText.text = @"";
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 200;
+    return 180;
 }
 
 - (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath
@@ -131,40 +122,12 @@ static NSString * const reuseIdentifierImageLabel = @"CustomTableViewCellImageLa
     
 }
 
--(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
+-(void)itemsInsertedWithReturnData:(NSArray *)items
 {
-    HomeModel *homeModel = (HomeModel *)objHomeModel;
-    if(homeModel.propCurrentDB == dbOrderJoiningShareQr)
-    {
-        [self removeOverlayViews];
-        NSMutableArray *encryptedMessageList = items[0];
-        _encryptedMessage = encryptedMessageList[0];
-        [tbvData reloadData];
-    }
+    [self removeOverlayViews];
+    NSMutableArray *encryptedMessageList = items[0];
+    _encryptedMessage = encryptedMessageList[0];
+    [tbvData reloadData];
 }
 
--(void)updateTimer:(NSTimer *)timer {
-    _timeToCountDown -= 1;
-    _timeToCountDown = _timeToCountDown<0?0:_timeToCountDown;
-    [self populateLabelwithTime:_timeToCountDown];
-    if(_timeToCountDown == 0)
-    {
-        [timer invalidate];
-    }
-}
-
-- (void)populateLabelwithTime:(NSInteger)seconds
-{
-    
-    NSInteger minutes = seconds / 60;
-    NSInteger hours = minutes / 60;
-    
-    seconds -= minutes * 60;
-    minutes -= hours * 60;
-
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    CustomTableViewCellImageLabel *cell = [tbvData cellForRowAtIndexPath:indexPath];
-    cell.lblText.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", hours, minutes, seconds];
-}
 @end

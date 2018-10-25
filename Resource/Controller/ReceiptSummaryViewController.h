@@ -15,9 +15,11 @@
 @property (strong, nonatomic) IBOutlet UITableView *tbvData;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
 @property (nonatomic) BOOL goToBuffetOrder;
+@property (strong, nonatomic) Receipt *orderItAgainReceipt;
 
 - (IBAction)goBack:(id)sender;
 - (IBAction)refresh:(id)sender;
+- (IBAction)shareOrder:(id)sender;
 - (IBAction)unwindToReceiptSummary:(UIStoryboardSegue *)segue;
 - (void)reloadTableView;
 - (void)segueToOrderDetailAuto:(Receipt *)receipt;

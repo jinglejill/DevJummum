@@ -341,4 +341,5 @@
 {
     return [SharedOrderNote sharedOrderNote].orderNoteList;
 }
+
 @end

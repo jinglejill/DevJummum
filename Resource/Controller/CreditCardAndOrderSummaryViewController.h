@@ -14,6 +14,7 @@
 #import "Receipt.h"
 #import "RewardRedemption.h"
 #import "Promotion.h"
+#import "SaveReceipt.h"
 
 
 @interface CreditCardAndOrderSummaryViewController : CustomViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITextViewDelegate,UIPopoverPresentationControllerDelegate>
@@ -40,4 +41,7 @@
 - (IBAction)addRemoveMenu:(id)sender;
 - (IBAction)goBack:(id)sender;
 -(IBAction)unwindToCreditCardAndOrderSummary:(UIStoryboardSegue *)segue;
+- (IBAction)shareMenuToOrder:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *btnShareMenuToOrder;
+
 @end
