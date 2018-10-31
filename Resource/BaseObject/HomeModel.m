@@ -761,7 +761,7 @@
             NSString *strVoucherCode = dataList[0];
             UserAccount *userAccount = dataList[1];
             Branch *branch = dataList[2];
-            float totalAmount = [dataList[3] floatValue];
+            float sumSpecialPrice = [dataList[3] floatValue];
             NSMutableArray *orderTakingList = dataList[4];
             
             
@@ -778,7 +778,7 @@
             [dicData setValue:strVoucherCode forKey:@"voucherCode"];
             [dicData setValue:@(userAccount.userAccountID) forKey:@"userAccountID"];
             [dicData setValue:@(branch.branchID) forKey:@"branchID"];
-            [dicData setValue:@(totalAmount) forKey:@"totalAmount"];
+            [dicData setValue:@(sumSpecialPrice) forKey:@"sumSpecialPrice"];
             
             
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlPromotionGetList]]];

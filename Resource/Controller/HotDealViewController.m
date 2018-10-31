@@ -100,7 +100,7 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
     _lastItemReached = NO;
     searchBar.delegate = self;
     
-    NSString *message = [Language getText:@"ค้นหา Deal"];
+    NSString *message = [Language getText:@"ค้นหาโปรโมชั่นร้าน"];
     searchBar.placeholder = message;
     [searchBar setInputAccessoryView:self.toolBar];
     UITextField *textField = [searchBar valueForKey:@"searchField"];

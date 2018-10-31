@@ -19,6 +19,8 @@
 
 
 @property (nonatomic) NSInteger menuOrder;
+@property (nonatomic) NSInteger branchID;
+
 
 -(SpecialPriceProgram *)initWithMenuID:(NSInteger)menuID startDate:(NSDate *)startDate endDate:(NSDate *)endDate specialPrice:(float)specialPrice;
 +(NSInteger)getNextID;

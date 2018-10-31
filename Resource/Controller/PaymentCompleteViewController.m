@@ -10,6 +10,7 @@
 #import "LuckyDrawViewController.h"
 #import "CustomTableViewCellLogo.h"
 #import "CustomTableViewCellReceiptSummary.h"
+#import "CustomTableViewCellReceiptHeader.h"
 #import "CustomTableViewCellOrderSummary.h"
 #import "CustomTableViewCellTotal.h"
 #import "CustomTableViewCellLabelRemark.h"
@@ -38,6 +39,7 @@
 @implementation PaymentCompleteViewController
 static NSString * const reuseIdentifierLogo = @"CustomTableViewCellLogo";
 static NSString * const reuseIdentifierReceiptSummary = @"CustomTableViewCellReceiptSummary";
+static NSString * const reuseIdentifierReceiptHeader = @"CustomTableViewCellReceiptHeader";
 static NSString * const reuseIdentifierOrderSummary = @"CustomTableViewCellOrderSummary";
 static NSString * const reuseIdentifierTotal = @"CustomTableViewCellTotal";
 static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelRemark";
@@ -209,6 +211,10 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierReceiptSummary];
     }
     {
+        UINib *nib = [UINib nibWithNibName:reuseIdentifierReceiptHeader bundle:nil];
+        [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierReceiptHeader];
+    }
+    {
         UINib *nib = [UINib nibWithNibName:reuseIdentifierOrderSummary bundle:nil];
         [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierOrderSummary];
     }
@@ -334,18 +340,29 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 
 
     {
-        //order header
-        CustomTableViewCellReceiptSummary *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierReceiptSummary];
-        cell.backgroundColor = [UIColor clearColor];
-        cell.tbvOrderDetail.backgroundColor = [UIColor clearColor];
-        
-        
+        //space after logo
+        UITableViewCell *cell =  [tbvData dequeueReusableCellWithIdentifier:@"cell"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        }
+        CGRect frame = cell.frame;
+        frame.size.height = 20;
+        cell.frame = frame;
+
+        UIImage *image = [self imageFromView:cell];
+        [arrImage addObject:image];
+    }
+
+    {
+        //order header order no.
+        CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+    
         //order no.
         UIColor *color = cSystem4;
         NSDictionary *attribute = @{NSForegroundColorAttributeName:color};
         NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Order no. #%@",receipt.receiptNoID] attributes:attribute];
-    
-    
+
+
         UIColor *color2 = cSystem2;
         NSDictionary *attribute2 = @{NSForegroundColorAttributeName:color2};
         NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:@" (Buffet)" attributes:attribute2];
@@ -353,35 +370,41 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         {
             [attrString appendAttributedString:attrString2];
         }
-        cell.lblReceiptNo.attributedText = attrString;
-        [cell.lblReceiptNo sizeToFit];
+        cell.lblTitle.attributedText = attrString;
+        [cell.lblTitle sizeToFit];
         {
-            CGRect frame = cell.lblReceiptNo.frame;
-            frame.size.height = 17;
-            cell.lblReceiptNo.frame = frame;
+            CGRect frame = cell.lblTitle.frame;
+            frame.size.height = 18;
+            cell.lblTitle.frame = frame;
         }
-        cell.btnShareOrder.hidden = YES;
-    
-    
-            
-        
-        //date and branch name
-        cell.lblReceiptDate.text = [Utility dateToString:receipt.receiptDate toFormat:@"d MMM yy HH:mm"];
-        cell.lblBranchName.text = [NSString stringWithFormat:[Language getText:@"ร้าน %@"],branch.name];
-        cell.lblBranchName.textColor = cSystem1;
-        cell.btnOrderItAgain.hidden = YES;
-
-        {
-            CGRect frame = cell.frame;
-            frame.size.height = 71;
-            cell.frame = frame;
-        }
+        cell.lblAmount.hidden = YES;
+        cell.vwTopBorder.hidden = YES;
+        cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:14];
+        cell.lblTitle.textColor = cSystem4;
+        cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+        cell.lblAmount.textColor = cSystem4;
 
 
         UIImage *image = [self imageFromView:cell];
         [arrImage addObject:image];
     }
+    
+    {
+        //order header branch name and date
+        CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+    
+        cell.lblTitle.text = [NSString stringWithFormat:[Language getText:@"ร้าน %@"],branch.name];
+        cell.lblAmount.text = [Utility dateToString:receipt.receiptDate toFormat:@"d MMM yy HH:mm"];
+        cell.vwTopBorder.hidden = YES;
+        cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+        cell.lblTitle.textColor = cSystem1;
+        cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:13];
+        cell.lblAmount.textColor = cSystem4;
 
+
+        UIImage *image = [self imageFromView:cell];
+        [arrImage addObject:image];
+    }
 
     //separatorLine
     if([Utility isStringEmpty:receipt.remark])
@@ -554,7 +577,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         {
             CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
             NSString *strTitle = [NSString stringWithFormat:[Language getText:@"%ld รายการ"],[orderTakingList count]];
-            NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList] withMinFraction:2 andMaxFraction:2];
+            NSString *strTotal = [Utility formatDecimal:receipt.totalAmount withMinFraction:2 andMaxFraction:2];
             strTotal = [Utility addPrefixBahtSymbol:strTotal];
             cell.lblTitle.text = strTitle;
             cell.lblAmount.text = strTotal;
@@ -567,6 +590,32 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 
             UIImage *image = [self imageFromView:cell];
             [arrImage addObject:image];
+        }
+        {
+            //specialPriceDiscount
+            CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+
+
+            NSString *strAmount = [Utility formatDecimal:receipt.specialPriceDiscount withMinFraction:2 andMaxFraction:2];
+            strAmount = [Utility addPrefixBahtSymbol:strAmount];
+            strAmount = [NSString stringWithFormat:@"-%@",strAmount];
+
+
+            cell.lblTitle.text = [Language getText:@"ส่วนลด"];;
+            cell.lblAmount.text = strAmount;
+            cell.vwTopBorder.hidden = YES;
+            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+            cell.lblTitle.textColor = cSystem4;
+            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+            cell.lblAmount.textColor = cSystem2;
+
+
+            UIImage *image = [self imageFromView:cell];
+            if(receipt.discountAmount > 0)
+            {
+                [arrImage addObject:image];
+            }
+
         }
         // 1:
         {
@@ -688,7 +737,29 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
                 [arrImage addObject:image];
             }
         }
+        
+        {
+            //before vat
+            CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+            
+            NSString *strAmount = [Utility formatDecimal:receipt.beforeVat withMinFraction:2 andMaxFraction:2];
+            strAmount = [Utility addPrefixBahtSymbol:strAmount];
 
+            cell.lblTitle.text = [Language getText:@"ราคารวมก่อน Vat"];
+            cell.lblAmount.text = strAmount;
+            cell.vwTopBorder.hidden = YES;
+            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+            cell.lblTitle.textColor = cSystem4;
+            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+            cell.lblAmount.textColor = cSystem4;
+
+
+            UIImage *image = [self imageFromView:cell];
+            if(branch.serviceChargePercent > 0 && branch.percentVat > 0)
+            {
+                [arrImage addObject:image];
+            }
+        }
 
 
         {

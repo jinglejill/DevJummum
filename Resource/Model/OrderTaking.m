@@ -492,6 +492,16 @@
     return sum;
 }
 
++(float)getSumPrice:(NSMutableArray *)orderTakingList
+{
+    float sum = 0;
+    for(OrderTaking *item in orderTakingList)
+    {
+        sum += item.quantity*(item.price+item.takeAwayPrice+item.notePrice);
+    }
+    return sum;
+}
+
 +(float)getSumSpecialPrice:(NSMutableArray *)orderTakingList
 {
     float sum = 0;
@@ -501,6 +511,17 @@
     }
     return sum;
 }
+
++(float)getSumSpecialPriceDiscount:(NSMutableArray *)orderTakingList
+{
+    float sum = 0;
+    for(OrderTaking *item in orderTakingList)
+    {
+        sum += item.quantity*(item.price - item.specialPrice);
+    }
+    return sum;
+}
+
 
 +(NSMutableArray *)updateStatus:(NSInteger)status orderTakingList:(NSMutableArray *)orderTakingList
 {

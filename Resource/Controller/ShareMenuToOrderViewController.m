@@ -95,14 +95,14 @@ static NSString * const reuseIdentifierImageLabel = @"CustomTableViewCellImageLa
     }
     
     
-    cell.lblText.text = @"";
+    cell.lblText.text = [Utility dateToString:[Utility currentDateTime] toFormat:@"d MMM yy HH:mm"];
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 180;
+    return 224;
 }
 
 - (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath

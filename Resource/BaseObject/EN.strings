@@ -93,7 +93,7 @@
 "กรุณาใส่เบอร์โทร" = "Please provide your phone no.";
 "กรุณาใส่จำนวนเงิน" = "Please provide the refund amount";
 "กรุณาใส่จำนวนเงินระหว่าง %@" = "Please provide your refund amount between %@";
-"ค้นหา Deal" = "Search deal";
+"ค้นหาโปรโมชั่นร้าน" = "Search deal";
 "ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ" = "Self-order service is unavailable";
 "แต้มสะสม/แลกของรางวัล" = "Member points/Reward redemption";
 "ค้นหา Reward" = "Search reward";
@@ -198,3 +198,5 @@
 "รายการอาหารของเพื่อน" = "My friends' order";
 "คุณไม่มีประวัติรายการอาหารของเพื่อน" = "No order history of your friends";
 "QR Code รายการอาหารที่ต้องการสั่ง" = "QR Code of menu to order";
+"ส่วนลด" = "Discount";
+"ราคารวมก่อน Vat" = "Before vat";

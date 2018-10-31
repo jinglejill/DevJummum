@@ -362,6 +362,8 @@
 		EF6C7CFE21318CAA00C335AC /* MenuForBuffet.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6C7CFC21318CAA00C335AC /* MenuForBuffet.m */; };
 		EF6C7D08213529B900C335AC /* VoucherCodeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6C7D07213529B900C335AC /* VoucherCodeListViewController.m */; };
 		EF7E94932181DE3E0009B945 /* SharedCurrentSaveReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7E94922181DE3E0009B945 /* SharedCurrentSaveReceipt.m */; };
+		EF7E9497218592470009B945 /* CustomTableViewCellReceiptHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7E9495218592470009B945 /* CustomTableViewCellReceiptHeader.m */; };
+		EF7E9498218592470009B945 /* CustomTableViewCellReceiptHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF7E9496218592470009B945 /* CustomTableViewCellReceiptHeader.xib */; };
 		EF88004D213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF88004A213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.xib */; };
 		EF88004E213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.m in Sources */ = {isa = PBXBuildFile; fileRef = EF88004C213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.m */; };
 		EF88014321430C330062D9D4 /* jummumGiftBoxNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = EF88014121430C320062D9D4 /* jummumGiftBoxNormal.png */; };
@@ -1050,6 +1052,9 @@
 		EF6C7D07213529B900C335AC /* VoucherCodeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoucherCodeListViewController.m; sourceTree = "<group>"; };
 		EF7E94912181DE3E0009B945 /* SharedCurrentSaveReceipt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedCurrentSaveReceipt.h; sourceTree = "<group>"; };
 		EF7E94922181DE3E0009B945 /* SharedCurrentSaveReceipt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedCurrentSaveReceipt.m; sourceTree = "<group>"; };
+		EF7E9494218592470009B945 /* CustomTableViewCellReceiptHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCellReceiptHeader.h; sourceTree = "<group>"; };
+		EF7E9495218592470009B945 /* CustomTableViewCellReceiptHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCellReceiptHeader.m; sourceTree = "<group>"; };
+		EF7E9496218592470009B945 /* CustomTableViewCellReceiptHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCellReceiptHeader.xib; sourceTree = "<group>"; };
 		EF88004A213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCellVoucherCodeExist.xib; sourceTree = "<group>"; };
 		EF88004B213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCellVoucherCodeExist.h; sourceTree = "<group>"; };
 		EF88004C213636AA0062D9D4 /* CustomTableViewCellVoucherCodeExist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCellVoucherCodeExist.m; sourceTree = "<group>"; };
@@ -1882,6 +1887,9 @@
 				EF33CF3D211C36D100560C69 /* CustomTableViewCellReceiptSummary.h */,
 				EF33CF77211C36D100560C69 /* CustomTableViewCellReceiptSummary.m */,
 				EF33CF78211C36D100560C69 /* CustomTableViewCellReceiptSummary.xib */,
+				EF7E9494218592470009B945 /* CustomTableViewCellReceiptHeader.h */,
+				EF7E9495218592470009B945 /* CustomTableViewCellReceiptHeader.m */,
+				EF7E9496218592470009B945 /* CustomTableViewCellReceiptHeader.xib */,
 				EF33CF3E211C36D100560C69 /* CustomTableViewCellRedemption.h */,
 				EF33CF75211C36D100560C69 /* CustomTableViewCellRedemption.m */,
 				EF33CF9D211C36D100560C69 /* CustomTableViewCellRedemption.xib */,
@@ -2343,6 +2351,7 @@
 				EF8805A62147820E0062D9D4 /* giftBoxGood00008.jpg in Resources */,
 				EF8805902147820E0062D9D4 /* giftBoxExcellent00020.jpg in Resources */,
 				EF8805CC2147820E0062D9D4 /* giftBoxBoo00021.jpg in Resources */,
+				EF7E9498218592470009B945 /* CustomTableViewCellReceiptHeader.xib in Resources */,
 				EF8805B22147820E0062D9D4 /* giftBoxGood00016.jpg in Resources */,
 				EF33D0C3211C36D200560C69 /* CustomTableViewCellTotal.xib in Resources */,
 				EF33D0F5211C36D200560C69 /* Kanit-Italic.ttf in Resources */,
@@ -2633,6 +2642,7 @@
 				EF33D09F211C36D200560C69 /* RewardRedemption.m in Sources */,
 				EF14CC402162310E0035A292 /* BuffetMenuMap.m in Sources */,
 				EF33D0DB211C36D200560C69 /* CustomTableViewCellImageText.m in Sources */,
+				EF7E9497218592470009B945 /* CustomTableViewCellReceiptHeader.m in Sources */,
 				EF33D0AC211C36D200560C69 /* CustomTableViewCellProfile.m in Sources */,
 				EF33D07A211C36D200560C69 /* SharedOrderNote.m in Sources */,
 				EF33D062211C36D200560C69 /* MenuType.m in Sources */,

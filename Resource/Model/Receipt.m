@@ -35,6 +35,7 @@
         [Utility dateToString:[self valueForKey:@"transferDate"] toFormat:@"yyyy-MM-dd HH:mm:ss"],@"transferDate",
         [self valueForKey:@"transferAmount"]?[self valueForKey:@"transferAmount"]:[NSNull null],@"transferAmount",
         [self valueForKey:@"remark"]?[self valueForKey:@"remark"]:[NSNull null],@"remark",
+        [self valueForKey:@"specialPriceDiscount"]?[self valueForKey:@"specialPriceDiscount"]:[NSNull null],@"specialPriceDiscount",
         [self valueForKey:@"discountType"]?[self valueForKey:@"discountType"]:[NSNull null],@"discountType",
         [self valueForKey:@"discountAmount"]?[self valueForKey:@"discountAmount"]:[NSNull null],@"discountAmount",
         [self valueForKey:@"discountValue"]?[self valueForKey:@"discountValue"]:[NSNull null],@"discountValue",
@@ -44,6 +45,7 @@
         [self valueForKey:@"priceIncludeVat"]?[self valueForKey:@"priceIncludeVat"]:[NSNull null],@"priceIncludeVat",
         [self valueForKey:@"vatPercent"]?[self valueForKey:@"vatPercent"]:[NSNull null],@"vatPercent",
         [self valueForKey:@"vatValue"]?[self valueForKey:@"vatValue"]:[NSNull null],@"vatValue",
+        [self valueForKey:@"beforeVat"]?[self valueForKey:@"beforeVat"]:[NSNull null],@"beforeVat",
         [self valueForKey:@"status"]?[self valueForKey:@"status"]:[NSNull null],@"status",
         [self valueForKey:@"statusRoute"]?[self valueForKey:@"statusRoute"]:[NSNull null],@"statusRoute",
         [self valueForKey:@"receiptNoID"]?[self valueForKey:@"receiptNoID"]:[NSNull null],@"receiptNoID",
@@ -67,7 +69,7 @@
         nil];
 }
 
--(Receipt *)initWithBranchID:(NSInteger)branchID customerTableID:(NSInteger)customerTableID memberID:(NSInteger)memberID servingPerson:(NSInteger)servingPerson customerType:(NSInteger)customerType openTableDate:(NSDate *)openTableDate totalAmount:(float)totalAmount cashAmount:(float)cashAmount cashReceive:(float)cashReceive creditCardType:(NSInteger)creditCardType creditCardNo:(NSString *)creditCardNo creditCardAmount:(float)creditCardAmount transferDate:(NSDate *)transferDate transferAmount:(float)transferAmount remark:(NSString *)remark discountType:(NSInteger)discountType discountAmount:(float)discountAmount discountValue:(float)discountValue discountReason:(NSString *)discountReason serviceChargePercent:(float)serviceChargePercent serviceChargeValue:(float)serviceChargeValue priceIncludeVat:(NSInteger)priceIncludeVat vatPercent:(float)vatPercent vatValue:(float)vatValue status:(NSInteger)status statusRoute:(NSString *)statusRoute receiptNoID:(NSString *)receiptNoID receiptNoTaxID:(NSString *)receiptNoTaxID receiptDate:(NSDate *)receiptDate sendToKitchenDate:(NSDate *)sendToKitchenDate deliveredDate:(NSDate *)deliveredDate mergeReceiptID:(NSInteger)mergeReceiptID hasBuffetMenu:(NSInteger)hasBuffetMenu timeToOrder:(NSInteger)timeToOrder buffetEnded:(NSInteger)buffetEnded buffetEndedDate:(NSDate *)buffetEndedDate buffetReceiptID:(NSInteger)buffetReceiptID voucherCode:(NSString *)voucherCode shopDiscount:(float)shopDiscount jummumDiscount:(float)jummumDiscount transactionFeeValue:(float)transactionFeeValue jummumPayValue:(float)jummumPayValue
+-(Receipt *)initWithBranchID:(NSInteger)branchID customerTableID:(NSInteger)customerTableID memberID:(NSInteger)memberID servingPerson:(NSInteger)servingPerson customerType:(NSInteger)customerType openTableDate:(NSDate *)openTableDate totalAmount:(float)totalAmount cashAmount:(float)cashAmount cashReceive:(float)cashReceive creditCardType:(NSInteger)creditCardType creditCardNo:(NSString *)creditCardNo creditCardAmount:(float)creditCardAmount transferDate:(NSDate *)transferDate transferAmount:(float)transferAmount remark:(NSString *)remark specialPriceDiscount:(float)specialPriceDiscount discountType:(NSInteger)discountType discountAmount:(float)discountAmount discountValue:(float)discountValue discountReason:(NSString *)discountReason serviceChargePercent:(float)serviceChargePercent serviceChargeValue:(float)serviceChargeValue priceIncludeVat:(NSInteger)priceIncludeVat vatPercent:(float)vatPercent vatValue:(float)vatValue beforeVat:(float)beforeVat status:(NSInteger)status statusRoute:(NSString *)statusRoute receiptNoID:(NSString *)receiptNoID receiptNoTaxID:(NSString *)receiptNoTaxID receiptDate:(NSDate *)receiptDate sendToKitchenDate:(NSDate *)sendToKitchenDate deliveredDate:(NSDate *)deliveredDate mergeReceiptID:(NSInteger)mergeReceiptID hasBuffetMenu:(NSInteger)hasBuffetMenu timeToOrder:(NSInteger)timeToOrder buffetEnded:(NSInteger)buffetEnded buffetEndedDate:(NSDate *)buffetEndedDate buffetReceiptID:(NSInteger)buffetReceiptID voucherCode:(NSString *)voucherCode shopDiscount:(float)shopDiscount jummumDiscount:(float)jummumDiscount transactionFeeValue:(float)transactionFeeValue jummumPayValue:(float)jummumPayValue
 {
     self = [super init];
     if(self)
@@ -88,6 +90,7 @@
         self.transferDate = transferDate;
         self.transferAmount = transferAmount;
         self.remark = remark;
+        self.specialPriceDiscount = specialPriceDiscount;
         self.discountType = discountType;
         self.discountAmount = discountAmount;
         self.discountValue = discountValue;
@@ -97,6 +100,7 @@
         self.priceIncludeVat = priceIncludeVat;
         self.vatPercent = vatPercent;
         self.vatValue = vatValue;
+        self.beforeVat = beforeVat;
         self.status = status;
         self.statusRoute = statusRoute;
         self.receiptNoID = receiptNoID;
@@ -209,6 +213,7 @@
         [copy setTransferDate:self.transferDate];
         ((Receipt *)copy).transferAmount = self.transferAmount;
         [copy setRemark:self.remark];
+        ((Receipt *)copy).specialPriceDiscount = self.specialPriceDiscount;
         ((Receipt *)copy).discountType = self.discountType;
         ((Receipt *)copy).discountAmount = self.discountAmount;
         ((Receipt *)copy).discountValue = self.discountValue;
@@ -218,6 +223,7 @@
         ((Receipt *)copy).priceIncludeVat = self.priceIncludeVat;
         ((Receipt *)copy).vatPercent = self.vatPercent;
         ((Receipt *)copy).vatValue = self.vatValue;
+        ((Receipt *)copy).beforeVat = self.beforeVat;
         ((Receipt *)copy).status = self.status;
         [copy setStatusRoute:self.statusRoute];
         [copy setReceiptNoID:self.receiptNoID];
@@ -261,6 +267,7 @@
     && [self.transferDate isEqual:editingReceipt.transferDate]
     && self.transferAmount == editingReceipt.transferAmount
     && [self.remark isEqualToString:editingReceipt.remark]
+    && self.specialPriceDiscount == editingReceipt.specialPriceDiscount
     && self.discountType == editingReceipt.discountType
     && self.discountAmount == editingReceipt.discountAmount
     && self.discountValue == editingReceipt.discountValue
@@ -270,6 +277,7 @@
     && self.priceIncludeVat == editingReceipt.priceIncludeVat
     && self.vatPercent == editingReceipt.vatPercent
     && self.vatValue == editingReceipt.vatValue
+    && self.beforeVat == editingReceipt.beforeVat
     && self.status == editingReceipt.status
     && [self.statusRoute isEqualToString:editingReceipt.statusRoute]
     && [self.receiptNoID isEqualToString:editingReceipt.receiptNoID]
@@ -313,6 +321,7 @@
     toReceipt.transferDate = fromReceipt.transferDate;
     toReceipt.transferAmount = fromReceipt.transferAmount;
     toReceipt.remark = fromReceipt.remark;
+    toReceipt.specialPriceDiscount = fromReceipt.specialPriceDiscount;
     toReceipt.discountType = fromReceipt.discountType;
     toReceipt.discountAmount = fromReceipt.discountAmount;
     toReceipt.discountValue = fromReceipt.discountValue;
@@ -322,6 +331,7 @@
     toReceipt.priceIncludeVat = fromReceipt.priceIncludeVat;
     toReceipt.vatPercent = fromReceipt.vatPercent;
     toReceipt.vatValue = fromReceipt.vatValue;
+    toReceipt.beforeVat = fromReceipt.beforeVat;
     toReceipt.status = fromReceipt.status;
     toReceipt.statusRoute = fromReceipt.statusRoute;
     toReceipt.receiptNoID = fromReceipt.receiptNoID;
