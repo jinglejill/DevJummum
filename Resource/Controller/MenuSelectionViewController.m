@@ -884,7 +884,8 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         [Utility updateSharedObject:@[items[7]]];
         
         
-        _menuList = [Menu getMenuBelongToBuffet:buffetReceipt];
+//        _menuList = [Menu getMenuBelongToBuffet:buffetReceipt];
+        _menuList = items[1];
         _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
         _menuTypeList = [MenuType sortList:_menuTypeList];
         _filterMenuList = _menuList;

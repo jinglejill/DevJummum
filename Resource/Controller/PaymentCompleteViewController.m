@@ -754,8 +754,8 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
             cell.lblAmount.textColor = cSystem4;
 
 
-            UIImage *image = [self imageFromView:cell];
-            if(branch.serviceChargePercent > 0 && branch.percentVat > 0)
+            UIImage *image = [self imageFromView:cell];            
+            if((branch.serviceChargePercent>0 && branch.percentVat>0) || (branch.serviceChargePercent == 0 && branch.percentVat>0 && branch.priceIncludeVat))
             {
                 [arrImage addObject:image];
             }

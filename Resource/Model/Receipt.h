@@ -87,7 +87,6 @@
 +(NSString *)getStrStatus:(Receipt *)receipt;
 +(UIColor *)getStatusColor:(Receipt *)receipt;
 +(NSInteger)getStateBeforeLast:(Receipt *)receipt;
-+(NSInteger)getIndex:(NSMutableArray *)receiptList receipt:(Receipt *)receipt;
 +(NSInteger)getPriorStatus:(Receipt *)receipt;
 +(BOOL)hasBuffetMenu:(NSInteger)receiptID;
 +(NSInteger)getTimeToOrder:(NSInteger)receiptID;

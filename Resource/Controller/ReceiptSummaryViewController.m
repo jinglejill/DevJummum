@@ -178,7 +178,8 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     }
     else
     {
-        return 1;
+//        return 1;
+        return 5;
     }
 }
 
@@ -191,11 +192,21 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     }
     else
     {
-        NSInteger receiptID = tableView.tag;
-        NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
-        orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
+        if(section == 0)
+        {
+            NSInteger receiptID = tableView.tag;
+            NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
+            orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
+            
+    //        return [orderTakingList count]+4;
+            return [orderTakingList count];
+        }
+        else if(section == 1 || section == 2 || section == 3 || section == 4)
+        {
+            return 1;
+        }
         
-        return [orderTakingList count]+4;
+        return 0;
     }
 }
 
@@ -301,137 +312,140 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     else
     {
         NSInteger receiptID = tableView.tag;
-        NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
-        orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
-        Receipt *receipt = [Receipt getReceipt:receiptID];
-        Branch *branch = [Branch getBranch:receipt.branchID];
-        
-        
-        if(item < [orderTakingList count])
+        if(section == 0)
         {
-            CustomTableViewCellOrderSummary *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierOrderSummary];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
+            orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
+            Receipt *receipt = [Receipt getReceipt:receiptID];
+            Branch *branch = [Branch getBranch:receipt.branchID];
             
             
-            OrderTaking *orderTaking = orderTakingList[item];
-            Menu *menu = [Menu getMenu:orderTaking.menuID branchID:orderTaking.branchID];
-            cell.lblQuantity.text = [Utility formatDecimal:orderTaking.quantity withMinFraction:0 andMaxFraction:0];
-            
-            
-            //menu
-            if(orderTaking.takeAway)
+            if(item < [orderTakingList count])
             {
-                NSString *message = [Language getText:@"ใส่ห่อ"];
-                UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
-                NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
-                
-                NSDictionary *attribute2 = @{NSFontAttributeName: font};
-                NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
+                CustomTableViewCellOrderSummary *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierOrderSummary];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 
-                [attrString appendAttributedString:attrString2];
-                cell.lblMenuName.attributedText = attrString;
-            }
-            else
-            {
-                cell.lblMenuName.text = menu.titleThai;
-            }
-            [cell.lblMenuName sizeToFit];
-            cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height>46?46:cell.lblMenuName.frame.size.height;
-            
-            
-            
-            //note
-            NSMutableAttributedString *strAllNote;
-            NSMutableAttributedString *attrStringRemove;
-            NSMutableAttributedString *attrStringAdd;
-            NSString *strRemoveTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:-1];
-            NSString *strAddTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:1];
-            if(![Utility isStringEmpty:strRemoveTypeNote])
-            {
-                NSString *message = [Language getText:branch.wordNo];
-                UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
-                NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                attrStringRemove = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
+                OrderTaking *orderTaking = orderTakingList[item];
+                Menu *menu = [Menu getMenu:orderTaking.menuID branchID:orderTaking.branchID];
+                cell.lblQuantity.text = [Utility formatDecimal:orderTaking.quantity withMinFraction:0 andMaxFraction:0];
                 
                 
-                UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
-                NSDictionary *attribute2 = @{NSFontAttributeName: font2};
-                NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",strRemoveTypeNote] attributes:attribute2];
-                
-                
-                [attrStringRemove appendAttributedString:attrString2];
-            }
-            if(![Utility isStringEmpty:strAddTypeNote])
-            {
-                NSString *message = [Language getText:branch.wordAdd];
-                UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
-                NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                attrStringAdd = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
-                
-                
-                UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
-                NSDictionary *attribute2 = @{NSFontAttributeName: font2};
-                NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",strAddTypeNote] attributes:attribute2];
-                
-                
-                [attrStringAdd appendAttributedString:attrString2];
-            }
-            if(![Utility isStringEmpty:strRemoveTypeNote])
-            {
-                strAllNote = attrStringRemove;
-                if(![Utility isStringEmpty:strAddTypeNote])
+                //menu
+                if(orderTaking.takeAway)
                 {
-                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"\n" attributes:nil];
-                    [strAllNote appendAttributedString:attrString];
-                    [strAllNote appendAttributedString:attrStringAdd];
-                }
-            }
-            else
-            {
-                if(![Utility isStringEmpty:strAddTypeNote])
-                {
-                    strAllNote = attrStringAdd;
+                    NSString *message = [Language getText:@"ใส่ห่อ"];
+                    UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+                    NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
+                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
+                    
+                    NSDictionary *attribute2 = @{NSFontAttributeName: font};
+                    NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
+                    
+                    
+                    [attrString appendAttributedString:attrString2];
+                    cell.lblMenuName.attributedText = attrString;
                 }
                 else
                 {
-                    strAllNote = [[NSMutableAttributedString alloc]init];
+                    cell.lblMenuName.text = menu.titleThai;
                 }
-            }
-            cell.lblNote.attributedText = strAllNote;
-            [cell.lblNote sizeToFit];
-            cell.lblNoteHeight.constant = cell.lblNote.frame.size.height>40?40:cell.lblNote.frame.size.height;
-            
-            
-            
-            float totalAmount = (orderTaking.specialPrice+orderTaking.takeAwayPrice+orderTaking.notePrice) * orderTaking.quantity;
-            NSString *strTotalAmount = [Utility formatDecimal:totalAmount withMinFraction:2 andMaxFraction:2];
-            cell.lblTotalAmount.text = [Utility addPrefixBahtSymbol:strTotalAmount];
-            
-            
-            
-            if(receiptID == _selectedReceiptID)
-            {
-                cell.backgroundColor = mSelectionStyleGray;
-                if(item == [orderTakingList count]-1)
+                [cell.lblMenuName sizeToFit];
+                cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height>46?46:cell.lblMenuName.frame.size.height;
+                
+                
+                
+                //note
+                NSMutableAttributedString *strAllNote;
+                NSMutableAttributedString *attrStringRemove;
+                NSMutableAttributedString *attrStringAdd;
+                NSString *strRemoveTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:-1];
+                NSString *strAddTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:1];
+                if(![Utility isStringEmpty:strRemoveTypeNote])
                 {
-                    _selectedReceiptID = 0;
+                    NSString *message = [Language getText:branch.wordNo];
+                    UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
+                    NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
+                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
+                    
+                    
+                    UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
+                    NSDictionary *attribute2 = @{NSFontAttributeName: font2};
+                    NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",strRemoveTypeNote] attributes:attribute2];
+                    
+                    
+                    [attrStringRemove appendAttributedString:attrString2];
                 }
+                if(![Utility isStringEmpty:strAddTypeNote])
+                {
+                    NSString *message = [Language getText:branch.wordAdd];
+                    UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
+                    NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
+                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
+                    
+                    
+                    UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
+                    NSDictionary *attribute2 = @{NSFontAttributeName: font2};
+                    NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",strAddTypeNote] attributes:attribute2];
+                    
+                    
+                    [attrStringAdd appendAttributedString:attrString2];
+                }
+                if(![Utility isStringEmpty:strRemoveTypeNote])
+                {
+                    strAllNote = attrStringRemove;
+                    if(![Utility isStringEmpty:strAddTypeNote])
+                    {
+                        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"\n" attributes:nil];
+                        [strAllNote appendAttributedString:attrString];
+                        [strAllNote appendAttributedString:attrStringAdd];
+                    }
+                }
+                else
+                {
+                    if(![Utility isStringEmpty:strAddTypeNote])
+                    {
+                        strAllNote = attrStringAdd;
+                    }
+                    else
+                    {
+                        strAllNote = [[NSMutableAttributedString alloc]init];
+                    }
+                }
+                cell.lblNote.attributedText = strAllNote;
+                [cell.lblNote sizeToFit];
+                cell.lblNoteHeight.constant = cell.lblNote.frame.size.height>40?40:cell.lblNote.frame.size.height;
+                
+                
+                
+                float totalAmount = (orderTaking.specialPrice+orderTaking.takeAwayPrice+orderTaking.notePrice) * orderTaking.quantity;
+                NSString *strTotalAmount = [Utility formatDecimal:totalAmount withMinFraction:2 andMaxFraction:2];
+                cell.lblTotalAmount.text = [Utility addPrefixBahtSymbol:strTotalAmount];
+                
+                
+                
+                if(receiptID == _selectedReceiptID)
+                {
+                    cell.backgroundColor = mSelectionStyleGray;
+                    if(item == [orderTakingList count]-1)
+                    {
+                        _selectedReceiptID = 0;
+                    }
+                }
+                else
+                {
+                    cell.backgroundColor = [UIColor whiteColor];
+                }
+                
+                return cell;
             }
-            else
-            {
-                cell.backgroundColor = [UIColor whiteColor];
-            }
-            
-            return cell;
         }
-        else if(item == [orderTakingList count])
+        else if(section == 1)
         {
             CustomTableViewCellLabelRemark *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            
+        
+        
             Receipt *receipt = [Receipt getReceipt:receiptID];
             if([Utility isStringEmpty:receipt.remark])
             {
@@ -444,15 +458,15 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             }
             [cell.lblText sizeToFit];
             cell.lblTextHeight.constant = cell.lblText.frame.size.height;
-            
+        
             return cell;
         }
-        else if(item == [orderTakingList count]+1)
+        else if(section == 2)
         {
             CustomTableViewCellTotal *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            
+        
+        
             Receipt *receipt = [Receipt getReceipt:receiptID];
             NSString *strTotalAmount = [Utility formatDecimal:receipt.cashAmount+receipt.transferAmount+receipt.creditCardAmount withMinFraction:2 andMaxFraction:2];
             strTotalAmount = [Utility addPrefixBahtSymbol:strTotalAmount];
@@ -463,34 +477,34 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             cell.lblTitle.textColor = cSystem4;
             cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
             cell.lblAmount.textColor = cSystem1;
-            
-            
-            
+        
+        
+        
             return cell;
         }
-        else if(item == [orderTakingList count]+2)
+        else if(section == 3)
         {
             CustomTableViewCellLabelLabel *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabelLabel];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            
+        
+        
             Receipt *receipt = [Receipt getReceipt:receiptID];
             NSString *strStatus = [Receipt getStrStatus:receipt];
             UIColor *color = cSystem2;
-            
-            
-            
+        
+        
+        
             UIFont *font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
             NSDictionary *attribute = @{NSForegroundColorAttributeName:color ,NSFontAttributeName: font};
             NSMutableAttributedString *attrStringStatus = [[NSMutableAttributedString alloc] initWithString:strStatus attributes:attribute];
-            
-            
+        
+        
             UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:15];
             UIColor *color2 = cSystem4;
             NSDictionary *attribute2 = @{NSForegroundColorAttributeName:color2 ,NSFontAttributeName: font2};
             NSMutableAttributedString *attrStringStatusLabel = [[NSMutableAttributedString alloc] initWithString:@"Status: " attributes:attribute2];
-            
-            
+        
+        
             [attrStringStatusLabel appendAttributedString:attrStringStatus];
             cell.lblValue.attributedText = attrStringStatusLabel;
             if(receipt.hasBuffetMenu)
@@ -521,20 +535,18 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
                 cell.lblText.text = @"";
             }
             cell.lblTextWidthConstant.constant = 70;
-            
         
-            
+        
+        
             return cell;
         }
-        else if(item == [orderTakingList count]+3)
+        else if(section == 4)
         {
             CustomTableViewCellButton *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierButton];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            
+        
+        
             NSString *title = [Language getText:@"สั่งบุฟเฟ่ต์"];
-            
-            
             Receipt *receipt = [Receipt getReceipt:receiptID];
             NSInteger timeToOrder = receipt.timeToOrder;
             NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
@@ -545,8 +557,8 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             [cell.btnValue setTitle:title forState:UIControlStateNormal];
             [cell.btnValue addTarget:self action:@selector(orderBuffet:) forControlEvents:UIControlEventTouchUpInside];
             [self setButtonDesign:cell.btnValue];
-            
-            
+        
+        
             return cell;
         }
     }
@@ -556,6 +568,8 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSInteger section = indexPath.section;
+    
     if([tableView isEqual:tbvData])
     {
         //load order มาโชว์
@@ -700,120 +714,123 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     }
     else
     {
-        
-        //load order มาโชว์
         NSInteger receiptID = tableView.tag;
-        NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
-        orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
-        Receipt *receipt = [Receipt getReceipt:receiptID];
-        Branch *branch = [Branch getBranch:receipt.branchID];
         
-        
-        if(indexPath.item < [orderTakingList count])
+        if(section == 0)
         {
-            CustomTableViewCellOrderSummary *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierOrderSummary];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            //load order มาโชว์
+            NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
+            orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
+            Receipt *receipt = [Receipt getReceipt:receiptID];
+            Branch *branch = [Branch getBranch:receipt.branchID];
             
             
-            OrderTaking *orderTaking = orderTakingList[indexPath.item];
-            Menu *menu = [Menu getMenu:orderTaking.menuID branchID:orderTaking.branchID];
-            cell.lblQuantity.text = [Utility formatDecimal:orderTaking.quantity withMinFraction:0 andMaxFraction:0];
-            
-            
-            //menu
-            if(orderTaking.takeAway)
+            if(indexPath.item < [orderTakingList count])
             {
-                NSString *message = [Language getText:@"ใส่ห่อ"];
-                UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
-                NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
-                
-                NSDictionary *attribute2 = @{NSFontAttributeName: font};
-                NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
+                CustomTableViewCellOrderSummary *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierOrderSummary];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 
-                [attrString appendAttributedString:attrString2];
-                cell.lblMenuName.attributedText = attrString;
-            }
-            else
-            {
-                cell.lblMenuName.text = menu.titleThai;
-            }
-            [cell.lblMenuName sizeToFit];
-            cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height>46?46:cell.lblMenuName.frame.size.height;
-            
-            
-            
-            //note
-            NSMutableAttributedString *strAllNote;
-            NSMutableAttributedString *attrStringRemove;
-            NSMutableAttributedString *attrStringAdd;
-            NSString *strRemoveTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:-1];
-            NSString *strAddTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:1];
-            if(![Utility isStringEmpty:strRemoveTypeNote])
-            {
-                NSString *message = [Language getText:branch.wordNo];
-                UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
-                NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                attrStringRemove = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
+                OrderTaking *orderTaking = orderTakingList[indexPath.item];
+                Menu *menu = [Menu getMenu:orderTaking.menuID branchID:orderTaking.branchID];
+                cell.lblQuantity.text = [Utility formatDecimal:orderTaking.quantity withMinFraction:0 andMaxFraction:0];
                 
                 
-                UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
-                NSDictionary *attribute2 = @{NSFontAttributeName: font2};
-                NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",strRemoveTypeNote] attributes:attribute2];
-                
-                
-                [attrStringRemove appendAttributedString:attrString2];
-            }
-            if(![Utility isStringEmpty:strAddTypeNote])
-            {
-                NSString *message = [Language getText:branch.wordAdd];
-                UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
-                NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
-                attrStringAdd = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
-                
-                
-                UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
-                NSDictionary *attribute2 = @{NSFontAttributeName: font2};
-                NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",strAddTypeNote] attributes:attribute2];
-                
-                
-                [attrStringAdd appendAttributedString:attrString2];
-            }
-            if(![Utility isStringEmpty:strRemoveTypeNote])
-            {
-                strAllNote = attrStringRemove;
-                if(![Utility isStringEmpty:strAddTypeNote])
+                //menu
+                if(orderTaking.takeAway)
                 {
-                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"\n" attributes:nil];
-                    [strAllNote appendAttributedString:attrString];
-                    [strAllNote appendAttributedString:attrStringAdd];
-                }
-            }
-            else
-            {
-                if(![Utility isStringEmpty:strAddTypeNote])
-                {
-                    strAllNote = attrStringAdd;
+                    NSString *message = [Language getText:@"ใส่ห่อ"];
+                    UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+                    NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle), NSFontAttributeName: font};
+                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
+                    
+                    NSDictionary *attribute2 = @{NSFontAttributeName: font};
+                    NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",menu.titleThai] attributes:attribute2];
+                    
+                    
+                    [attrString appendAttributedString:attrString2];
+                    cell.lblMenuName.attributedText = attrString;
                 }
                 else
                 {
-                    strAllNote = [[NSMutableAttributedString alloc]init];
+                    cell.lblMenuName.text = menu.titleThai;
                 }
+                [cell.lblMenuName sizeToFit];
+                cell.lblMenuNameHeight.constant = cell.lblMenuName.frame.size.height>46?46:cell.lblMenuName.frame.size.height;
+                
+                
+                
+                //note
+                NSMutableAttributedString *strAllNote;
+                NSMutableAttributedString *attrStringRemove;
+                NSMutableAttributedString *attrStringAdd;
+                NSString *strRemoveTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:-1];
+                NSString *strAddTypeNote = [OrderNote getNoteNameListInTextWithOrderTakingID:orderTaking.orderTakingID noteType:1];
+                if(![Utility isStringEmpty:strRemoveTypeNote])
+                {
+                    NSString *message = [Language getText:branch.wordNo];
+                    UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
+                    NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
+                    attrStringRemove = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
+                    
+                    
+                    UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
+                    NSDictionary *attribute2 = @{NSFontAttributeName: font2};
+                    NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",strRemoveTypeNote] attributes:attribute2];
+                    
+                    
+                    [attrStringRemove appendAttributedString:attrString2];
+                }
+                if(![Utility isStringEmpty:strAddTypeNote])
+                {
+                    NSString *message = [Language getText:branch.wordAdd];
+                    UIFont *font = [UIFont fontWithName:@"Prompt-Regular" size:11];
+                    NSDictionary *attribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),NSFontAttributeName: font};
+                    attrStringAdd = [[NSMutableAttributedString alloc] initWithString:message attributes:attribute];
+                    
+                    
+                    UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:11];
+                    NSDictionary *attribute2 = @{NSFontAttributeName: font2};
+                    NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",strAddTypeNote] attributes:attribute2];
+                    
+                    
+                    [attrStringAdd appendAttributedString:attrString2];
+                }
+                if(![Utility isStringEmpty:strRemoveTypeNote])
+                {
+                    strAllNote = attrStringRemove;
+                    if(![Utility isStringEmpty:strAddTypeNote])
+                    {
+                        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"\n" attributes:nil];
+                        [strAllNote appendAttributedString:attrString];
+                        [strAllNote appendAttributedString:attrStringAdd];
+                    }
+                }
+                else
+                {
+                    if(![Utility isStringEmpty:strAddTypeNote])
+                    {
+                        strAllNote = attrStringAdd;
+                    }
+                    else
+                    {
+                        strAllNote = [[NSMutableAttributedString alloc]init];
+                    }
+                }
+                cell.lblNote.attributedText = strAllNote;
+                [cell.lblNote sizeToFit];
+                cell.lblNoteHeight.constant = cell.lblNote.frame.size.height>40?40:cell.lblNote.frame.size.height;
+                
+                float height = 8+cell.lblMenuNameHeight.constant+2+cell.lblNoteHeight.constant+8;
+                return height;
+                
             }
-            cell.lblNote.attributedText = strAllNote;
-            [cell.lblNote sizeToFit];
-            cell.lblNoteHeight.constant = cell.lblNote.frame.size.height>40?40:cell.lblNote.frame.size.height;
-            
-            float height = 8+cell.lblMenuNameHeight.constant+2+cell.lblNoteHeight.constant+8;
-            return height;
-            
         }
-        else if(indexPath.item == [orderTakingList count])
+        else if(section == 1)
         {
             CustomTableViewCellLabelRemark *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
-            
-            
+        
+        
             Receipt *receipt = [Receipt getReceipt:receiptID];
             if([Utility isStringEmpty:receipt.remark])
             {
@@ -826,7 +843,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             }
             [cell.lblText sizeToFit];
             cell.lblTextHeight.constant = cell.lblText.frame.size.height;
-            
+        
             if([Utility isStringEmpty:receipt.remark])
             {
                 return 0;
@@ -839,19 +856,20 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
                 return remarkHeight;
             }
         }
-        else if(indexPath.item == [orderTakingList count]+1)
+        else if(section == 2)
         {
             return 34;
         }
-        else if(indexPath.item == [orderTakingList count]+2)
+        else if(section == 3)
         {
             return 34;
         }
-        else if(indexPath.item == [orderTakingList count]+3)
+        else if(section == 4)
         {
+            NSInteger receiptID = tableView.tag;
             Receipt *receipt = [Receipt getReceipt:receiptID];
             if(receipt.hasBuffetMenu)
-            {                
+            {
                 NSInteger timeToOrder = receipt.timeToOrder;
                 NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
                 NSInteger timeToCountDown = timeToOrder - seconds >= 0?timeToOrder - seconds:0;
@@ -1000,37 +1018,6 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     orderItAgainReceipt = receipt;
     [self performSegueWithIdentifier:@"segUnwindToMainTabBar" sender:self];
     
-    
-    
-//    //copy orderTaking
-//    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
-//    NSMutableArray *copyOrderTakingList = [[NSMutableArray alloc]init];
-//    NSMutableArray *copyOrderNoteList = [[NSMutableArray alloc]init];
-//    for(OrderTaking *item in orderTakingList)
-//    {
-//        OrderTaking *orderTaking = [item copy];
-//        orderTaking.orderTakingID = [OrderTaking getNextID];
-//        orderTaking.receiptID = 0;
-//        [copyOrderTakingList addObject:orderTaking];
-//        [OrderTaking addObject:orderTaking];
-//
-//        //copy orderNote
-//        NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingID:item.orderTakingID];
-//        for(OrderNote *item2 in orderNoteList)
-//        {
-//            OrderNote *orderNote = [item2 copy];
-//            orderNote.orderNoteID = [OrderNote getNextID];
-//            orderNote.orderTakingID = orderTaking.orderTakingID;
-//            [copyOrderNoteList addObject:orderNote];
-//            [OrderNote addObject:orderNote];
-//        }
-//    }
-//    [OrderTaking setCurrentOrderTakingList:copyOrderTakingList];
-//
-//
-//
-//    _receiptBranch = [Branch getBranch:receipt.branchID];
-//    [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -1098,16 +1085,12 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     minutes -= hours * 60;
     
     
-    NSInteger index = [Receipt getIndex:_receiptList receipt:receipt];
+    NSInteger index = [_receiptList indexOfObject:receipt];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
     CustomTableViewCellReceiptSummary *cell = [tbvData cellForRowAtIndexPath:indexPath];
     
-    
-    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
-    orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
-    NSIndexPath *indexPathOrderDetail = [NSIndexPath indexPathForRow:[orderTakingList count]+2 inSection:0];
-    
-    
+
+    NSIndexPath *indexPathOrderDetail = [NSIndexPath indexPathForRow:0 inSection:3];
     CustomTableViewCellLabelLabel *cellTimeToCountDown = [cell.tbvOrderDetail cellForRowAtIndexPath:indexPathOrderDetail];
     cellTimeToCountDown.lblText.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", hours, minutes, seconds];
 }

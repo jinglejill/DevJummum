@@ -11,5 +11,6 @@
 @interface CustomTableViewCellImageLabel : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *imgValue;
 @property (strong, nonatomic) IBOutlet UILabel *lblText;
+@property (strong, nonatomic) IBOutlet UILabel *lblBranchName;
 
 @end

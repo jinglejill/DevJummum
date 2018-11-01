@@ -528,7 +528,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                         cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                         cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                         cell.lblAmount.textColor = cSystem4;
-                        cell.hidden = branch.serviceChargePercent == 0 || branch.percentVat == 0;
+                        cell.hidden = !((branch.serviceChargePercent>0 && branch.percentVat>0) || (branch.serviceChargePercent == 0 && branch.percentVat>0 && branch.priceIncludeVat));
                         
                         return cell;
                     }

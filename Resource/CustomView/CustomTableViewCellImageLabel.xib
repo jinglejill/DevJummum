@@ -13,6 +13,9 @@
         <array key="Prompt-Regular.ttf">
             <string>Prompt-Regular</string>
         </array>
+        <array key="Prompt-SemiBold.ttf">
+            <string>Prompt-SemiBold</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -25,36 +28,49 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sbd-rg-Iwg">
-                        <rect key="frame" x="96" y="65" width="128" height="128"/>
+                        <rect key="frame" x="96" y="64" width="128" height="128"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="128" id="3af-ZK-SoP"/>
                             <constraint firstAttribute="height" constant="128" id="O9y-Zq-2r0"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ang-Jt-a27">
-                        <rect key="frame" x="32" y="31" width="256" height="18"/>
+                        <rect key="frame" x="166" y="31" width="138" height="17"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="18" id="cx3-aD-eda"/>
+                            <constraint firstAttribute="width" constant="138" id="FXK-Ev-spP"/>
+                            <constraint firstAttribute="height" constant="17" id="cx3-aD-eda"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="13"/>
                         <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E12-Z8-okA">
+                        <rect key="frame" x="16" y="30.5" width="134" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="IS2-2p-VXe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
+                        <color key="textColor" red="1" green="0.23529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Ang-Jt-a27" firstAttribute="leading" secondItem="E12-Z8-okA" secondAttribute="trailing" constant="16" id="Awv-Dd-B1b"/>
+                    <constraint firstItem="Ang-Jt-a27" firstAttribute="centerY" secondItem="E12-Z8-okA" secondAttribute="centerY" id="DGf-vi-e4r"/>
                     <constraint firstItem="Sbd-rg-Iwg" firstAttribute="top" secondItem="Ang-Jt-a27" secondAttribute="bottom" constant="16" id="N6S-h6-6UY"/>
                     <constraint firstItem="Ang-Jt-a27" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="20" id="VqF-Xa-RK5"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Ang-Jt-a27" secondAttribute="trailing" constant="16" id="i2V-3C-tO2"/>
-                    <constraint firstItem="Ang-Jt-a27" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="iOv-5G-tnR"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Ang-Jt-a27" secondAttribute="trailing" id="cMc-OM-bso"/>
                     <constraint firstItem="Sbd-rg-Iwg" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="oHY-hf-UYj"/>
+                    <constraint firstItem="E12-Z8-okA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="z21-vR-09A"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="imgValue" destination="Sbd-rg-Iwg" id="IPk-Na-Nc4"/>
+                <outlet property="lblBranchName" destination="E12-Z8-okA" id="D2S-Hj-d2M"/>
                 <outlet property="lblText" destination="Ang-Jt-a27" id="AoH-9s-3n7"/>
             </connections>
-            <point key="canvasLocation" x="34" y="141.5"/>
+            <point key="canvasLocation" x="34" y="141"/>
         </tableViewCell>
     </objects>
 </document>

@@ -9,6 +9,7 @@
 #import "ShareOrderQrViewController.h"
 #import "CustomTableViewCellImageLabel.h"
 #import "EncryptedMessage.h"
+#import "Branch.h"
 
 
 @interface ShareOrderQrViewController ()
@@ -105,6 +106,11 @@ static NSString * const reuseIdentifierImageLabel = @"CustomTableViewCellImageLa
 //        cell.imgValue.image = [UIImage imageNamed:@"loading.png"];
         cell.lblText.text = @"00:00:00";
     }
+    Receipt *receipt = [Receipt getReceipt:shareOrderReceiptID];
+    Branch *branch = [Branch getBranch:receipt.branchID];
+    cell.lblBranchName.text = branch?[NSString stringWithFormat:[Language getText:@"ร้าน %@"],branch.name]:@"";
+    
+    
     
     return cell;
 }

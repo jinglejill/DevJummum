@@ -603,7 +603,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             float serviceChargeHeight = branch.serviceChargePercent > 0?26:0;
             float vatHeight = branch.percentVat > 0?26:0;
             float netTotalHeight = branch.serviceChargePercent+branch.percentVat > 0?26:0;
-            float beforeVatHeight = branch.serviceChargePercent>0 && branch.percentVat>0?26:0;
+            float beforeVatHeight = (branch.serviceChargePercent>0 && branch.percentVat>0) || (branch.serviceChargePercent == 0 && branch.percentVat>0 && branch.priceIncludeVat)?26:0;
             tbvTotalHeightConstant.constant = tbvTotalHeight+sumSpecialPriceDiscountHeight+chooseVoucherCodeHeight+serviceChargeHeight+vatHeight+netTotalHeight+beforeVatHeight;
             
             return 8;
@@ -1305,7 +1305,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                 cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                 cell.lblAmount.textColor = cSystem4;
-                cell.hidden = branch.serviceChargePercent == 0 || branch.percentVat == 0;
+                cell.hidden = !((branch.serviceChargePercent>0 && branch.percentVat>0) || (branch.serviceChargePercent == 0 && branch.percentVat>0 && branch.priceIncludeVat));
                 
                 
                 return cell;
@@ -1491,7 +1491,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 return branch.serviceChargePercent + branch.percentVat > 0?26:0;
                 break;
             case 7:
-                return branch.serviceChargePercent>0 && branch.percentVat>0?26:0;
+                return (branch.serviceChargePercent>0 && branch.percentVat>0) || (branch.serviceChargePercent == 0 && branch.percentVat>0 && branch.priceIncludeVat)?26:0;
             default:
                 break;
         }

@@ -685,20 +685,6 @@
     return 0;
 }
 
-+(NSInteger)getIndex:(NSMutableArray *)receiptList receipt:(Receipt *)receipt
-{
-    NSInteger i;
-    for(i=0; i<[receiptList count]; i++)
-    {
-        Receipt *item = receiptList[i];
-        if(item.receiptID == receipt.receiptID)
-        {
-            return i;
-        }
-    }
-    return 0;
-}
-
 +(NSInteger)getPriorStatus:(Receipt *)receipt
 {
     NSArray *arrStatus = [receipt.statusRoute componentsSeparatedByString: @","];

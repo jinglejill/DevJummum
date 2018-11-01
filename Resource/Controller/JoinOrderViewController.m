@@ -953,7 +953,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     minutes -= hours * 60;
     
     
-    NSInteger index = [Receipt getIndex:_receiptList receipt:receipt];
+    NSInteger index = [_receiptList indexOfObject:receipt];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
     CustomTableViewCellReceiptSummary *cell = [tbvData cellForRowAtIndexPath:indexPath];
     
