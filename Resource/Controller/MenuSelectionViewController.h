@@ -32,6 +32,7 @@
 @property (strong, nonatomic) NSMutableArray *saveOrderNoteList;
 @property (nonatomic) NSInteger fromReceiptSummaryMenu;
 @property (nonatomic) NSInteger fromJoinOrderMenu;
+@property (nonatomic) NSInteger fromOrderItAgain;
 
 
 -(IBAction)unwindToMenuSelection:(UIStoryboardSegue *)segue;

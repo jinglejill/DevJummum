@@ -128,7 +128,7 @@
     }
     else if(fromOrderItAgain)
     {
-        fromOrderItAgain = NO;
+//        fromOrderItAgain = NO;
         [self loadingOverlayView];
         [self.homeModel downloadItems:dbOrderItAgain withData:orderItAgainReceipt];
     }
@@ -249,7 +249,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([[segue identifier] isEqualToString:@"segMenuSelection"])
+    if([[segue identifier] isEqualToString:@"segMenuSelection"] || [[segue identifier] isEqualToString:@"segMenuSelectionNoAnimate"])
     {
         MenuSelectionViewController *vc = segue.destinationViewController;
         vc.branch = selectedBranch;
@@ -258,6 +258,8 @@
         vc.saveReceipt = _saveReceipt;
         vc.saveOrderTakingList = _saveOrderTakingList;
         vc.saveOrderNoteList = _saveOrderNoteList;
+        vc.fromOrderItAgain = fromOrderItAgain;
+        fromOrderItAgain = NO;
     }
 }
 
@@ -278,7 +280,8 @@
         {
             [Utility updateSharedObject:items];
             selectedBranch = branchList[0];
-            selectedCustomerTable = customerTableList[0];
+            
+            
             
             if([items count] > 2)
             {
@@ -298,10 +301,22 @@
             }
             else
             {
-                dispatch_async(dispatch_get_main_queue(), ^
-               {
-                    [self performSegueWithIdentifier:@"segMenuSelection" sender:self];
-               });
+                if(fromOrderItAgain)
+                {
+                    selectedCustomerTable = nil;
+                    dispatch_async(dispatch_get_main_queue(), ^
+                   {
+                        [self performSegueWithIdentifier:@"segMenuSelectionNoAnimate" sender:self];
+                   });
+                }
+                else
+                {
+                    selectedCustomerTable = customerTableList[0];
+                    dispatch_async(dispatch_get_main_queue(), ^
+                   {
+                        [self performSegueWithIdentifier:@"segMenuSelection" sender:self];
+                   });
+                }
             }
         }
     }

@@ -647,6 +647,7 @@
                         <segue destination="w8g-Xt-JeV" kind="unwind" identifier="segUnwindToCreditCardAndOrderSummary" unwindAction="unwindToCreditCardAndOrderSummary:" id="33Z-0W-onv"/>
                         <segue destination="eyo-sE-zME" kind="show" identifier="segBranchSearch" id="Gzz-jw-JAP"/>
                         <segue destination="w8g-Xt-JeV" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="67j-UB-BHc"/>
+                        <segue destination="oGW-Dn-caM" kind="show" identifier="segMenuSelectionNoAnimate" animates="NO" id="lWr-Il-EsI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rSi-8h-xet" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -842,6 +843,7 @@
                         <segue destination="uX0-Uh-PuC" kind="unwind" identifier="segUnwindToLaunchScreen" animates="NO" unwindAction="unwindToLaunchScreen:" id="uSo-jy-rWj"/>
                         <segue destination="uX0-Uh-PuC" kind="unwind" identifier="segUnwindToMainTabBar" unwindAction="unwindToMainTabBar:" id="nFt-7b-HtZ"/>
                         <segue destination="uX0-Uh-PuC" kind="unwind" identifier="segUnwindToJoinOrder" unwindAction="unwindToJoinOrder:" id="ZYz-B0-9hC"/>
+                        <segue destination="70l-RA-GXn" kind="show" identifier="segViewBasketNoAnimate" animates="NO" id="OAF-dr-auG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o17-jl-gGa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4854,7 +4856,8 @@
         <segue reference="iUw-Wp-Uz3"/>
         <segue reference="3fp-yp-yps"/>
         <segue reference="0UA-kM-pwb"/>
-        <segue reference="iuD-G9-3D3"/>
+        <segue reference="OAF-dr-auG"/>
+        <segue reference="lWr-Il-EsI"/>
         <segue reference="aNU-Zf-Wbq"/>
     </inferredMetricsTieBreakers>
 </document>

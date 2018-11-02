@@ -71,6 +71,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
 @synthesize saveReceipt;
 @synthesize saveOrderTakingList;
 @synthesize saveOrderNoteList;
+@synthesize fromOrderItAgain;
 
 
 -(IBAction)unwindToMenuSelection:(UIStoryboardSegue *)segue
@@ -82,7 +83,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([[segue identifier] isEqualToString:@"segViewBasket"])
+    if([[segue identifier] isEqualToString:@"segViewBasket"] || [[segue identifier] isEqualToString:@"segViewBasketNoAnimate"])
     {
         BasketViewController *vc = segue.destinationViewController;
         vc.branch = branch;
@@ -861,10 +862,14 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         }
         
         
-        
         [self setData];
         [self removeOverlayViews];
         
+//        if(fromOrderItAgain)
+//        {
+//            fromOrderItAgain = NO;
+//            [self performSegueWithIdentifier:@"segViewBasketNoAnimate" sender:self];
+//        }
     }
     else if(homeModel.propCurrentDB == dbMenuBelongToBuffet)
     {
@@ -957,9 +962,14 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
             }
         }
         
-        
         [self setData];
         [self removeOverlayViews];
+        
+//        if(fromOrderItAgain)
+//        {
+//            fromOrderItAgain = NO;
+//            [self performSegueWithIdentifier:@"segViewBasketNoAnimate" sender:self];
+//        }
     }
 }
 

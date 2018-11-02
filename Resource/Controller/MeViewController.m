@@ -366,15 +366,7 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
         vc.selectedReceipt = self.selectedReceipt;
         vc.goToBuffetOrder = _goToBuffetOrder;
     }
-//    else if([[segue identifier] isEqualToString:@"segReceiptSummaryNoAnimate"])
-//    {
-//        ReceiptSummaryViewController *vc = segue.destinationViewController;
-//        vc.showOrderDetail = self.showOrderDetail;
-//        vc.selectedReceipt = self.selectedReceipt;
-//        vc.goToBuffetOrder = _goToBuffetOrder;
-//        self.showOrderDetail = 0;
-//        _goToBuffetOrder = 0;
-//    }
+
 }
 
 -(void)unwindToLogIn
@@ -387,8 +379,4 @@ static NSString * const reuseIdentifierProfile = @"CustomTableViewCellProfile";
     [self performSegueWithIdentifier:@"segPersonalData" sender:self];
 }
 
-//-(void)segueToReceiptSummaryAuto
-//{
-//    [self performSegueWithIdentifier:@"segReceiptSummaryNoAnimate" sender:self];
-//}
 @end
