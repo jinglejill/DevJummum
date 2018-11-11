@@ -200,3 +200,5 @@
 "QR Code รายการอาหารที่ต้องการสั่ง" = "QR Code of menu to order";
 "ส่วนลด" = "Discount";
 "ราคารวมก่อน Vat" = "Before vat";
+"(คุณไม่ได้รับสิทธิ์ลุ้นรางวัลในครั้งนี้)" = "(No lucky draw in this order)";
+"(คุณจะได้สิทธิ์ลุ้นรางวัล %ld ครั้ง)" =  "(You will get %ld lucky draw ticket(s))";

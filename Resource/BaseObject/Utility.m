@@ -1752,30 +1752,18 @@ extern NSString *globalBundleID;
     }
 }
 
-+ (void)updateSharedDataList:(NSMutableArray *)itemList
++ (void)updateSharedDataList:(NSMutableArray *)itemList className:(NSString *)className branchID:(NSInteger)branchID
 {
-    if([itemList count] > 0)
-    {
-        NSObject *object = itemList[0];
-        Class classDB = [object class];
-        NSString *className = NSStringFromClass(classDB);
-        Class class = NSClassFromString([NSString stringWithFormat:@"Shared%@",className]);
-        SEL selector = NSSelectorFromString([NSString stringWithFormat:@"shared%@",className]);
-        SEL selectorList = NSSelectorFromString([NSString stringWithFormat:@"%@List",[Utility makeFirstLetterLowerCase:className]]);
-        NSMutableArray *dataList = [[class performSelector:selector] performSelector:selectorList];
-        
-        
-        NSArray *filterArray;
-        if ([object respondsToSelector:NSSelectorFromString(@"branchID")])
-        {
-            NSNumber *objBranchID = [object valueForKey:@"branchID"];
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"branchID = %ld",[objBranchID integerValue]];
-            filterArray = [dataList filteredArrayUsingPredicate:predicate];
-            
-            [dataList removeObjectsInArray:filterArray];
-            [dataList addObjectsFromArray:itemList];
-        }
-    }
+    Class class = NSClassFromString([NSString stringWithFormat:@"Shared%@",className]);
+    SEL selector = NSSelectorFromString([NSString stringWithFormat:@"shared%@",className]);
+    SEL selectorList = NSSelectorFromString([NSString stringWithFormat:@"%@List",[Utility makeFirstLetterLowerCase:className]]);
+    NSMutableArray *dataList = [[class performSelector:selector] performSelector:selectorList];
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"branchID = %ld",branchID];
+    NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
+
+    [dataList removeObjectsInArray:filterArray];
+    [dataList addObjectsFromArray:itemList];
 }
 
 + (void)addUpdateObject:(NSObject *)object

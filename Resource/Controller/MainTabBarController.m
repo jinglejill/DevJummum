@@ -50,6 +50,7 @@
     BOOL _orderBuffet;
     BOOL _orderBuffetAfterOrderBuffet;
     Receipt *_orderItAgainReceipt;
+    BOOL _switchToHotDealTab;
 }
 @end
 
@@ -88,11 +89,16 @@
         
         _switchToReceiptSummaryTab = 1;
     }
+    else if([vc isKindOfClass:[PaymentCompleteViewController class]] && ((PaymentCompleteViewController *)vc).goToHotDeal)
+    {
+        _switchToHotDealTab = 1;
+    }
     else if(([vc isMemberOfClass:[ReceiptSummaryViewController class]] && ((ReceiptSummaryViewController *)vc).orderItAgainReceipt) || ([vc isMemberOfClass:[OrderDetailViewController class]] && ((OrderDetailViewController *)vc).orderItAgainReceipt))
     {
         ReceiptSummaryViewController *receiptSummaryVc = (ReceiptSummaryViewController *)vc;
         _orderItAgainReceipt = receiptSummaryVc.orderItAgainReceipt;
         receiptSummaryVc.orderItAgainReceipt = nil;
+        
         
         _fromOrderItAgain = YES;
         _switchToQRTab = 1;
@@ -101,8 +107,6 @@
     else if(vc.showReceiptSummary)
     {
         _showReceiptSummary = 1;
-    
-        
         _switchToReceiptSummaryTab = 1;
     }
     else if([vc isKindOfClass:[CommentViewController class]] ||
@@ -206,6 +210,11 @@
             _showOrderDetail = 0;
             [vc viewDidAppear:NO];
         }
+    }
+    else if(_switchToHotDealTab)
+    {
+        _switchToHotDealTab = 0;
+        self.selectedIndex = mainTabHotDeal;
     }
 }
 

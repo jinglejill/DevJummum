@@ -41,6 +41,8 @@
     UIScrollView *_horizontalScrollView;
     NSMutableArray *_recommendList;
     UIButton *_lblSpentForLuckyDraw;
+    NSInteger _luckyDrawSpend;
+    BOOL _viewDidLoad;
 }
 
 @property (nonatomic)        BOOL           searchBarActive;
@@ -139,44 +141,19 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
     _currentMenuTypeList = [[NSMutableArray alloc]init];
     
     
-    if(branch.luckyDrawSpend)
-    {
-        NSString *message = [Language getText:@"ลุ้นรับรางวัลพิเศษ\nเมื่อทานครบทุกๆ %ld บาท"];
-        NSInteger spentAmount = branch.luckyDrawSpend;
-        NSString *luckyDrawMessage = [NSString stringWithFormat:message,spentAmount];
-        _lblSpentForLuckyDraw = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_lblSpentForLuckyDraw setTitle:luckyDrawMessage forState:UIControlStateNormal];
-        [_lblSpentForLuckyDraw setTitleColor:cSystem3 forState:UIControlStateNormal];
-        _lblSpentForLuckyDraw.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
-        _lblSpentForLuckyDraw.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        _lblSpentForLuckyDraw.backgroundColor = [cSystem1_30 colorWithAlphaComponent:0.5];
-        _lblSpentForLuckyDraw.titleLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-        _lblSpentForLuckyDraw.titleLabel.numberOfLines = 2;
-        _lblSpentForLuckyDraw.userInteractionEnabled = NO;
-        
-        
-
-        [_lblSpentForLuckyDraw sizeToFit];
-        
-        
-        UIWindow *window = UIApplication.sharedApplication.keyWindow;
-        CGRect frame = _lblSpentForLuckyDraw.frame;
-        frame.origin.x = self.view.frame.size.width-frame.size.width;
-        frame.origin.y = self.view.frame.size.height - window.safeAreaInsets.bottom - 44 - frame.size.height;
-        
-        _lblSpentForLuckyDraw.frame = frame;
-        [self setCornerDesign:_lblSpentForLuckyDraw];
-        [self.view addSubview:_lblSpentForLuckyDraw];
-    }
-    
-    
+    //luckyDrawSpend
+    _lblSpentForLuckyDraw = [UIButton buttonWithType:UIButtonTypeCustom];
     
     
     
     tbvMenu.delegate = self;
     tbvMenu.dataSource = self;
     [self setShadow:vwBottomShadow];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
     if(saveReceipt)
     {
@@ -207,7 +184,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         }
         else
         {
-            _menuList = [Menu getMenuBelongToBuffet:buffetReceipt];
+            _menuList = menuForBuffet.menuList;//[Menu getMenuBelongToBuffet:buffetReceipt];
             _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
             _menuTypeList = [MenuType sortList:_menuTypeList];
             _filterMenuList = _menuList;
@@ -234,7 +211,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
                 lblTotalQuantityTop.text = lblTotalQuantity.text;
                 
                 
-                NSString *strTotal = [Utility formatDecimal:[OrderTaking getSubTotalAmount:orderTakingList] withMinFraction:2 andMaxFraction:2];
+                NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList] withMinFraction:2 andMaxFraction:2];
                 strTotal = [Utility addPrefixBahtSymbol:strTotal];
                 lblTotalAmount.text = strTotal;
             }
@@ -285,11 +262,6 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
             [self.homeModel downloadItems:dbMenuList withData:branch];
         }
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
 }
 
 - (IBAction)goBackHome:(id)sender
@@ -787,11 +759,19 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
             [self showAlert:@"" message:message];
         }
         
+        NSMutableArray *settingList = items[4];
+        Setting *setting = settingList[0];
+        branch.luckyDrawSpend = [setting.value integerValue];
+        [self setLuckyDrawMessage:[setting.value integerValue]];
         
-        for(int i=1; i<=5; i++)
+        
+        
+        NSArray *arrClassName = @[@"Menu",@"MenuType",@"SpecialPriceProgram"];
+        for(int i=1; i<=3; i++)
         {
-            [Utility updateSharedDataList:items[i]];
+            [Utility updateSharedDataList:items[i] className:arrClassName[i-1] branchID:branch.branchID];
         }
+        
 //        [Utility updateSharedObject:items];
         _menuList = [Menu getMenuListALaCarteWithBranchID:branch.branchID];
         _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
@@ -858,18 +838,17 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
                     float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
                     orderTaking.notePrice = sumNotePrice;
                 }
-            }            
+            }
+            
+            saveReceipt = nil;
+            saveOrderTakingList = nil;
+            saveOrderNoteList = nil;
         }
         
         
         [self setData];
         [self removeOverlayViews];
-        
-//        if(fromOrderItAgain)
-//        {
-//            fromOrderItAgain = NO;
-//            [self performSegueWithIdentifier:@"segViewBasketNoAnimate" sender:self];
-//        }
+
     }
     else if(homeModel.propCurrentDB == dbMenuBelongToBuffet)
     {
@@ -882,21 +861,21 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         }
         
         
-        for(int i=1; i<=6; i++)
+        NSArray *arrClassName = @[@"Menu",@"MenuType",@"SpecialPriceProgram",@"BuffetMenuMap"];
+        for(int i=1; i<=4; i++)
         {
-            [Utility updateSharedDataList:items[i]];
+            [Utility updateSharedDataList:items[i] className:arrClassName[i-1] branchID:branch.branchID];
         }
-        [Utility updateSharedObject:@[items[7]]];
+        [Utility updateSharedObject:@[items[5]]];
         
         
-//        _menuList = [Menu getMenuBelongToBuffet:buffetReceipt];
         _menuList = items[1];
         _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
         _menuTypeList = [MenuType sortList:_menuTypeList];
         _filterMenuList = _menuList;
         
         
-        NSMutableArray *receiptList = items[7];
+        NSMutableArray *receiptList = items[5];
         Receipt *receipt = receiptList[0];
         MenuForBuffet *menuForBuffet = [[MenuForBuffet alloc]initWithReceiptID:receipt.receiptID menuList:_menuList];
         [Menu setCurrentMenuForBuffet:menuForBuffet];
@@ -960,16 +939,15 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
                     orderTaking.notePrice = sumNotePrice;
                 }
             }
+            
+            saveReceipt = nil;
+            saveOrderTakingList = nil;
+            saveOrderNoteList = nil;
         }
         
         [self setData];
         [self removeOverlayViews];
         
-//        if(fromOrderItAgain)
-//        {
-//            fromOrderItAgain = NO;
-//            [self performSegueWithIdentifier:@"segViewBasketNoAnimate" sender:self];
-//        }
     }
 }
 
@@ -980,20 +958,20 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
     [self updateTotalAmount];
     if([_menuTypeList count]>0)
     {
-        NSMutableArray *menuList = [self getMenuListWithSelectedIndex:_selectedMenuTypeIndex];
-        if([menuList count]>0)
+        if(!_viewDidLoad)
         {
-            //hide searchBar
-            [tbvMenu scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            NSMutableArray *menuList = [self getMenuListWithSelectedIndex:_selectedMenuTypeIndex];
+            if([menuList count]>0)
+            {
+                //hide searchBar
+                [tbvMenu scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            }
+            else
+            {
+                [tbvMenu scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            }
+            _viewDidLoad = 1;
         }
-        else
-        {
-            [tbvMenu scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-        }
-    }
-    else
-    {
-        [tbvMenu scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     }
 }
 
@@ -1019,7 +997,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
             MenuType *menuType = _menuTypeList[i];
             UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(buttonX, 0, 100, 44)];
             button.titleLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
-            if(i==0)
+            if(i==_selectedMenuTypeIndex)
             {
                 [button setTitleColor:cSystem1 forState:UIControlStateNormal];
             }
@@ -1049,7 +1027,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
             UIView *highlightBottomBorder = [[UIView alloc]initWithFrame:frame];
             highlightBottomBorder.backgroundColor = cSystem2;
             highlightBottomBorder.tag = i+1+100;
-            highlightBottomBorder.hidden = i!=0;
+            highlightBottomBorder.hidden = i!=_selectedMenuTypeIndex;
             [_horizontalScrollView addSubview:highlightBottomBorder];
         }
         
@@ -1110,7 +1088,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
     lblTotalQuantityTop.text = [orderTakingList count]==0?@"":[NSString stringWithFormat:@"%ld",[orderTakingList count]];
     
     
-    NSString *strTotal = [Utility formatDecimal:[OrderTaking getSubTotalAmount:orderTakingList] withMinFraction:2 andMaxFraction:2];
+    NSString *strTotal = [Utility formatDecimal:[OrderTaking getSumSpecialPrice:orderTakingList] withMinFraction:2 andMaxFraction:2];
     strTotal = [Utility addPrefixBahtSymbol:strTotal];
     lblTotalAmount.text = strTotal;
 }
@@ -1277,5 +1255,40 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
 
     [self updateTotalAmount];
     [self blinkAddedNotiView];
+}
+
+-(void)setLuckyDrawMessage:(NSInteger)luckyDrawSpend
+{
+    if(luckyDrawSpend)
+    {
+        NSString *message = [Language getText:@"ลุ้นรับรางวัลพิเศษ\nเมื่อทานครบทุกๆ %ld บาท"];
+        NSInteger spentAmount = luckyDrawSpend;
+        NSString *luckyDrawMessage = [NSString stringWithFormat:message,spentAmount];
+        [_lblSpentForLuckyDraw setTitle:luckyDrawMessage forState:UIControlStateNormal];
+        
+        
+        [_lblSpentForLuckyDraw setTitleColor:cSystem3 forState:UIControlStateNormal];
+        _lblSpentForLuckyDraw.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+        _lblSpentForLuckyDraw.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        _lblSpentForLuckyDraw.backgroundColor = [cSystem1_30 colorWithAlphaComponent:0.5];
+        _lblSpentForLuckyDraw.titleLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+        _lblSpentForLuckyDraw.titleLabel.numberOfLines = 2;
+        _lblSpentForLuckyDraw.userInteractionEnabled = NO;
+        [_lblSpentForLuckyDraw sizeToFit];
+        
+        
+        UIWindow *window = UIApplication.sharedApplication.keyWindow;
+        CGRect frame = _lblSpentForLuckyDraw.frame;
+        frame.origin.x = self.view.frame.size.width-frame.size.width;
+        frame.origin.y = self.view.frame.size.height - window.safeAreaInsets.bottom - 44 - frame.size.height;
+        
+        _lblSpentForLuckyDraw.frame = frame;
+        [self setCornerDesign:_lblSpentForLuckyDraw];
+        [self.view addSubview:_lblSpentForLuckyDraw];
+    }
+    else
+    {
+        [_lblSpentForLuckyDraw removeFromSuperview];
+    }
 }
 @end

@@ -64,4 +64,5 @@
 +(NSMutableArray *)sort:(NSMutableArray *)rewardRedemptionList;
 +(NSMutableArray *)getRewardRedemptionList;
 +(void)removeAllObjects;
++(NSInteger)getIndexOfObject:(RewardRedemption *)rewardRedemption rewardRedemptionList:(NSMutableArray *)rewardRedemptionList;
 @end

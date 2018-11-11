@@ -4718,7 +4718,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="giftBoxBoo00001.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="yf2-j5-LDa">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="giftBoxBackground.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="yf2-j5-LDa">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
@@ -4824,7 +4824,7 @@
         <image name="check_green.png" width="128" height="128"/>
         <image name="circle_red.png" width="128" height="128"/>
         <image name="deleteAll3.png" width="242" height="263"/>
-        <image name="giftBoxBoo00001.jpg" width="1947" height="3339"/>
+        <image name="giftBoxBackground.jpg" width="1947" height="3339"/>
         <image name="gift_small.png" width="30" height="30"/>
         <image name="historyTab.png" width="30" height="30"/>
         <image name="home_icon_red.png" width="842" height="842"/>
@@ -4855,7 +4855,7 @@
         <segue reference="C1B-oJ-Xmi"/>
         <segue reference="iUw-Wp-Uz3"/>
         <segue reference="3fp-yp-yps"/>
-        <segue reference="0UA-kM-pwb"/>
+        <segue reference="bZ7-dw-aX2"/>
         <segue reference="OAF-dr-auG"/>
         <segue reference="lWr-Il-EsI"/>
         <segue reference="aNU-Zf-Wbq"/>

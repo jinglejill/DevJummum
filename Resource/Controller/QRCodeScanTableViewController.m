@@ -80,7 +80,7 @@
 
 
     _showPeekABoo = YES;
-    [self stopReading];    
+//    [self stopReading];    
     dispatch_async(dispatch_get_main_queue(), ^
    {
        [self startReading];

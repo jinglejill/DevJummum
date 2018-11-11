@@ -90,4 +90,5 @@
 +(NSInteger)getPriorStatus:(Receipt *)receipt;
 +(BOOL)hasBuffetMenu:(NSInteger)receiptID;
 +(NSInteger)getTimeToOrder:(NSInteger)receiptID;
++(NSInteger)getIndexOfObject:(Receipt *)receipt receiptList:(NSMutableArray *)receiptList;
 @end

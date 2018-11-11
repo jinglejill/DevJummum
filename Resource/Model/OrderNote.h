@@ -27,6 +27,7 @@
 +(OrderNote *)getOrderNoteWithOrderTakingID:(NSInteger)orderTakingID noteID:(NSInteger)noteID;
 +(NSMutableArray *)getNoteListWithOrderTakingID:(NSInteger)orderTakingID branchID:(NSInteger)branchID;
 +(NSMutableArray *)getOrderNoteListWithOrderTakingID:(NSInteger)orderTakingID;
++(NSMutableArray *)getOrderNoteListWithOrderTakingID:(NSInteger)orderTakingID orderNoteList:(NSMutableArray *)orderNoteList;
 +(NSMutableArray *)getOrderNoteListWithCustomerTableID:(NSInteger)customerTableID;
 +(NSString *)getNoteNameListInTextWithOrderTakingID:(NSInteger)orderTakingID noteType:(NSInteger)noteType;
 +(NSString *)getNoteIDListInTextWithOrderTakingID:(NSInteger)orderTakingID branchID:(NSInteger)branchID;

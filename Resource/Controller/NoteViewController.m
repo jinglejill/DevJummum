@@ -102,20 +102,7 @@ static NSString * const reuseIdentifierNoteWithQuantity = @"CustomCollectionView
     }
     else
     {
-        _noteTypeList = [[NSMutableArray alloc]init];
-        NSSet *noteTypeIDSet = [NSSet setWithArray:[noteList valueForKey:@"_noteTypeID"]];
-        for(NSNumber *noteTypeID in noteTypeIDSet)
-        {
-            NoteType *noteType = [NoteType getNoteType:[noteTypeID integerValue] branchID:branch.branchID];
-            NSMutableArray *noteListByNoteTypeID = [Note getNoteListWithNoteTypeID:noteType.noteTypeID noteList:noteList];
-            NSSet *typeSet = [NSSet setWithArray:[noteListByNoteTypeID valueForKey:@"_type"]];
-            for(NSNumber *type in typeSet)
-            {
-                NoteType *newNoteType = [noteType copy];
-                newNoteType.type = [type integerValue];
-                [_noteTypeList addObject:newNoteType];
-            }
-        }
+        _noteTypeList = [NoteType getNoteTypeListWithNoteList:noteList branchID:branch.branchID];
         _noteTypeList = [NoteType sort:_noteTypeList];
         [colVwNote reloadData];
         
@@ -686,25 +673,18 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     {
         [self removeOverlayViews];
 //        [Utility updateSharedObject:items];
-        [Utility updateSharedDataList:items[0]];
+
+        NSArray *arrClassName = @[@"MenuNote",@"Note",@"NoteType"];
+        for(int i=0; i<=2; i++)
+        {
+            [Utility updateSharedDataList:items[i] className:arrClassName[i] branchID:branch.branchID];
+        }
+        
         
         
         /////////
         noteList = [MenuNote getNoteListWithMenuID:orderTaking.menuID branchID:branch.branchID];
-        _noteTypeList = [[NSMutableArray alloc]init];
-        NSSet *noteTypeIDSet = [NSSet setWithArray:[noteList valueForKey:@"_noteTypeID"]];
-        for(NSNumber *noteTypeID in noteTypeIDSet)
-        {
-            NoteType *noteType = [NoteType getNoteType:[noteTypeID integerValue] branchID:branch.branchID];
-            NSMutableArray *noteListByNoteTypeID = [Note getNoteListWithNoteTypeID:noteType.noteTypeID noteList:noteList];
-            NSSet *typeSet = [NSSet setWithArray:[noteListByNoteTypeID valueForKey:@"_type"]];
-            for(NSNumber *type in typeSet)
-            {
-                NoteType *newNoteType = [noteType copy];
-                newNoteType.type = [type integerValue];
-                [_noteTypeList addObject:newNoteType];
-            }
-        }
+        _noteTypeList = [NoteType getNoteTypeListWithNoteList:noteList branchID:branch.branchID];
         _noteTypeList = [NoteType sort:_noteTypeList];
         
         

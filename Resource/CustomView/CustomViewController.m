@@ -1195,7 +1195,6 @@ CGFloat animatedDistance;
 
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, [UIScreen mainScreen].scale);
     [origin drawInRect:CGRectMake(0.0, 0.0, width, height)];
-//    [template drawInRect:CGRectMake(0.0, 0.0, width, height)];
     [template drawInRect:CGRectMake((width-template.size.width)/2, (height-template.size.height)/2, template.size.width, template.size.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -1270,6 +1269,29 @@ CGFloat animatedDistance;
     UIImage *destImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return destImage;
+}
+
+- (UIImage *)cropImageByImage:(UIImage *)img toRect:(CGRect)rect
+{
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    // translated rectangle for drawing sub image
+    CGRect drawRect = CGRectMake(-rect.origin.x, -rect.origin.y, img.size.width, img.size.height);
+
+    // clip to the bounds of the image context
+    // not strictly necessary as it will get clipped anyway?
+    CGContextClipToRect(context, CGRectMake(0, 0, rect.size.width, rect.size.height));
+
+    // draw image
+    [img drawInRect:drawRect];
+
+    // grab image
+    UIImage* subImage = UIGraphicsGetImageFromCurrentImageContext();
+
+    UIGraphicsEndImageContext();
+
+    return subImage;
 }
 
 @end

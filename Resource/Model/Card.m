@@ -40,7 +40,7 @@
         NSInteger steps = 17;
         for(int i=0; i<steps; i++)
         {
-            NSString *imageName = [NSString stringWithFormat:@"giftBox%@%05d.jpg",rankCard,(i+7)];
+            NSString *imageName = [NSString stringWithFormat:@"giftBox%@%05d.png",rankCard,(i+7)];
             UIImage *imageRunning = [UIImage imageNamed:imageName];
             [animationImages addObject:(NSObject *)(imageRunning.CGImage)];
         }

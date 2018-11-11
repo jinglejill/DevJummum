@@ -79,5 +79,5 @@
 - (UIImage *)addWatermarkOnImage:(UIImage *)origin withImage:(UIImage *)template;
 - (UIImage *)imageByScalingProportionallyToSize:(CGSize)targetSize sourceImage:(UIImage *)sourceImage;
 - (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size;
-//-(void)screenCaptureBill:(Receipt *)receipt;
+- (UIImage *)cropImageByImage:(UIImage *)imageToCrop toRect:(CGRect)rect;
 @end

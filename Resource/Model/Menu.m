@@ -31,8 +31,6 @@
         [self valueForKey:@"price"]?[self valueForKey:@"price"]:[NSNull null],@"price",
         [self valueForKey:@"menuTypeID"]?[self valueForKey:@"menuTypeID"]:[NSNull null],@"menuTypeID",
         [self valueForKey:@"subMenuTypeID"]?[self valueForKey:@"subMenuTypeID"]:[NSNull null],@"subMenuTypeID",
-        [self valueForKey:@"subMenuType2ID"]?[self valueForKey:@"subMenuType2ID"]:[NSNull null],@"subMenuType2ID",
-        [self valueForKey:@"subMenuType3ID"]?[self valueForKey:@"subMenuType3ID"]:[NSNull null],@"subMenuType3ID",
         [self valueForKey:@"buffetMenu"]?[self valueForKey:@"buffetMenu"]:[NSNull null],@"buffetMenu",
         [self valueForKey:@"alacarteMenu"]?[self valueForKey:@"alacarteMenu"]:[NSNull null],@"alacarteMenu",
         [self valueForKey:@"timeToOrder"]?[self valueForKey:@"timeToOrder"]:[NSNull null],@"timeToOrder",
@@ -48,7 +46,7 @@
         nil];
 }
 
--(Menu *)initWithMenuCode:(NSString *)menuCode titleThai:(NSString *)titleThai price:(float)price menuTypeID:(NSInteger)menuTypeID subMenuTypeID:(NSInteger)subMenuTypeID subMenuType2ID:(NSInteger)subMenuType2ID subMenuType3ID:(NSInteger)subMenuType3ID buffetMenu:(NSInteger)buffetMenu alacarteMenu:(NSInteger)alacarteMenu timeToOrder:(NSInteger)timeToOrder recommended:(NSInteger)recommended recommendedOrderNo:(NSInteger)recommendedOrderNo imageUrl:(NSString *)imageUrl color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status remark:(NSString *)remark
+-(Menu *)initWithMenuCode:(NSString *)menuCode titleThai:(NSString *)titleThai price:(float)price menuTypeID:(NSInteger)menuTypeID subMenuTypeID:(NSInteger)subMenuTypeID buffetMenu:(NSInteger)buffetMenu alacarteMenu:(NSInteger)alacarteMenu timeToOrder:(NSInteger)timeToOrder recommended:(NSInteger)recommended recommendedOrderNo:(NSInteger)recommendedOrderNo imageUrl:(NSString *)imageUrl color:(NSString *)color orderNo:(NSInteger)orderNo status:(NSInteger)status remark:(NSString *)remark
 {
     self = [super init];
     if(self)
@@ -59,8 +57,6 @@
         self.price = price;
         self.menuTypeID = menuTypeID;
         self.subMenuTypeID = subMenuTypeID;
-        self.subMenuType2ID = subMenuType2ID;
-        self.subMenuType3ID = subMenuType3ID;
         self.buffetMenu = buffetMenu;
         self.alacarteMenu = alacarteMenu;
         self.timeToOrder = timeToOrder;
@@ -155,8 +151,6 @@
         ((Menu *)copy).price = self.price;
         ((Menu *)copy).menuTypeID = self.menuTypeID;
         ((Menu *)copy).subMenuTypeID = self.subMenuTypeID;
-        ((Menu *)copy).subMenuType2ID = self.subMenuType2ID;
-        ((Menu *)copy).subMenuType3ID = self.subMenuType3ID;
         ((Menu *)copy).buffetMenu = self.buffetMenu;
         ((Menu *)copy).alacarteMenu = self.alacarteMenu;
         ((Menu *)copy).timeToOrder = self.timeToOrder;
@@ -182,8 +176,6 @@
     && self.price == editingMenu.price
     && self.menuTypeID == editingMenu.menuTypeID
     && self.subMenuTypeID == editingMenu.subMenuTypeID
-    && self.subMenuType2ID == editingMenu.subMenuType2ID
-    && self.subMenuType3ID == editingMenu.subMenuType3ID
     && self.buffetMenu == editingMenu.buffetMenu
     && self.alacarteMenu == editingMenu.alacarteMenu
     && self.timeToOrder == editingMenu.timeToOrder
@@ -209,8 +201,6 @@
     toMenu.price = fromMenu.price;
     toMenu.menuTypeID = fromMenu.menuTypeID;
     toMenu.subMenuTypeID = fromMenu.subMenuTypeID;
-    toMenu.subMenuType2ID = fromMenu.subMenuType2ID;
-    toMenu.subMenuType3ID = fromMenu.subMenuType3ID;
     toMenu.buffetMenu = fromMenu.buffetMenu;
     toMenu.alacarteMenu = fromMenu.alacarteMenu;
     toMenu.timeToOrder = fromMenu.timeToOrder;
@@ -226,7 +216,6 @@
     
     return toMenu;
 }
-
 
 +(Menu *)getMenu:(NSInteger)menuID branchID:(NSInteger)branchID
 {

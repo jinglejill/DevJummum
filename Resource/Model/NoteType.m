@@ -9,6 +9,7 @@
 #import "NoteType.h"
 #import "SharedNoteType.h"
 #import "Utility.h"
+#import "Note.h"
 
 
 @implementation NoteType
@@ -176,5 +177,22 @@
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor,sortDescriptor2, nil];
     NSArray *sortArray = [noteTypeList sortedArrayUsingDescriptors:sortDescriptors];
     return [sortArray mutableCopy];
+}
+
++(NSMutableArray *)getNoteTypeListWithNoteList:(NSMutableArray *)noteList branchID:(NSInteger)branchID
+{
+    NSSet *noteTypeIDSet = [NSSet setWithArray:[noteList valueForKey:@"_noteTypeID"]];
+    
+    NSMutableArray *noteTypeList = [[NSMutableArray alloc]init];
+    NSMutableArray *dataList = [SharedNoteType sharedNoteType].noteTypeList;
+    for(NSNumber *item in noteTypeIDSet)
+    {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_noteTypeID = %ld and _branchID = %ld",[item integerValue],branchID];
+        NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
+        [noteTypeList addObjectsFromArray:filterArray];
+    }
+    
+    return noteTypeList;
+    
 }
 @end

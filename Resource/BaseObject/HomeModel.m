@@ -111,19 +111,23 @@
         }
             break;
         case dbMenu:
+        {
+            arrClassName = @[@"Message",@"Menu",@"SpecialPriceProgram",@"DiscountGroupMenuMap"];
+        }
+            break;
         case dbMenuList:
         {
-            arrClassName = @[@"Message",@"Menu",@"MenuType",@"Note",@"NoteType",@"SpecialPriceProgram",@"DiscountGroupMenuMap"];
+            arrClassName = @[@"Message",@"Menu",@"MenuType",@"SpecialPriceProgram",@"Setting"];
         }
             break;
         case dbMenuBelongToBuffet:
         {
-            arrClassName = @[@"Message",@"Menu",@"MenuType",@"Note",@"NoteType",@"SpecialPriceProgram",@"BuffetMenuMap",@"Receipt"];
+            arrClassName = @[@"Message",@"Menu",@"MenuType",@"SpecialPriceProgram",@"BuffetMenuMap",@"Receipt"];
         }
             break;
         case dbMenuNoteList:
         {
-            arrClassName = @[@"MenuNote"];
+            arrClassName = @[@"MenuNote",@"Note",@"NoteType"];
         }
             break;
         case dbCustomerTable:
@@ -134,7 +138,7 @@
         case dbReceiptSummaryPage:
         case dbOrderJoining:
         {
-            arrClassName = @[@"Receipt",@"CustomerTable",@"Branch",@"OrderTaking",@"Menu",@"MenuType",@"OrderNote",@"Note",@"NoteType"];
+            arrClassName = @[@"Receipt",@"CustomerTable",@"Branch",@"OrderTaking",@"Menu",@"OrderNote",@"Note"];
         }
             break;        
         case dbPromotion:
@@ -1377,22 +1381,23 @@
                 //alertMsg
                 if(self.delegate)
                 {
-                    if(propCurrentDBInsert == dbOmiseCheckOut)
-                    {
-                        NSString *msg = json[@"msg"];
-                        NSMutableArray *dataList = [[NSMutableArray alloc]init];
-                        NSMutableArray *messgeList = [[NSMutableArray alloc]init];
-                        Message *message = [[Message alloc]init];
-                        message.text = msg;
-                        [messgeList addObject:message];
-                        [dataList addObject:messgeList];
-                        [self.delegate itemsInsertedWithReturnData:dataList];
-                        NSLog(@"msg: %@", msg);
-                    }
-                    else
+//                    if(propCurrentDBInsert == dbOmiseCheckOut)
+//                    {
+//                        NSString *msg = json[@"msg"];
+//                        NSMutableArray *dataList = [[NSMutableArray alloc]init];
+//                        NSMutableArray *messgeList = [[NSMutableArray alloc]init];
+//                        Message *message = [[Message alloc]init];
+//                        message.text = msg;
+//                        [messgeList addObject:message];
+//                        [dataList addObject:messgeList];
+//                        [self.delegate itemsInsertedWithReturnData:dataList];
+//                        NSLog(@"msg: %@", msg);
+//                    }
+//                    else
                     {
                         NSString *msg = json[@"msg"];
                         [self.delegate alertMsg:msg];
+                        [(CustomViewController *)self.delegate removeOverlayViews];
                         NSLog(@"status: %@", status);
                         NSLog(@"msg: %@", msg);
                     }
@@ -1446,6 +1451,7 @@
             NSMutableArray *orderTakingList = dataList[3];
             NSMutableArray *orderNoteList = dataList[4];
             NSString *voucherCode = dataList[5];
+            NSInteger luckyDrawSpend = [dataList[6] integerValue];
             
             NSDictionary *dicData = [receipt dictionary];
             NSMutableArray *arrOrderTaking = [[NSMutableArray alloc]init];
@@ -1469,6 +1475,8 @@
             [mutDicData setValue:arrOrderTaking forKey:@"orderTaking"];
             [mutDicData setValue:arrOrderNote forKey:@"orderNote"];
             [mutDicData setValue:voucherCode forKey:@"voucherCode"];
+            [mutDicData setValue:@(luckyDrawSpend) forKey:@"luckyDrawSpend"];
+            
             
             NSError *error;
             jsonData = [NSJSONSerialization dataWithJSONObject:mutDicData options:0 error:&error];
@@ -1629,25 +1637,37 @@
                         //alertMsg
                         if(self.delegate)
                         {
-                            if(propCurrentDBInsert == dbOmiseCheckOut)
+                            NSArray *arrClassName;
+                            NSMutableArray *mutItems;
+                            NSString *msg = json[@"msg"];
+                            NSArray *dataJson = json[@"dataJson"];
+                            NSString *strTableName = json[@"tableName"];
+                        
+                            if([strTableName isEqualToString:@"Order"])
                             {
-                                NSString *msg = json[@"msg"];
-                                NSMutableArray *dataList = [[NSMutableArray alloc]init];
-                                NSMutableArray *messgeList = [[NSMutableArray alloc]init];
-                                Message *message = [[Message alloc]init];
-                                message.text = msg;
-                                [messgeList addObject:message];
-                                [dataList addObject:messgeList];
-                                [self.delegate itemsInsertedWithReturnData:dataList];
-                                NSLog(@"msg: %@", msg);
+                                arrClassName = @[@"OrderTaking",@"OrderNote",@"Setting"];
                             }
-                            else
+                            else if([strTableName isEqualToString:@"OrderBelongToBuffet"])
                             {
-                                NSString *msg = json[@"msg"];
-                                [self.delegate alertMsg:msg];
-                                NSLog(@"status: %@", status);
-                                NSLog(@"msg: %@", msg);
+                                arrClassName = @[@"OrderTaking",@"OrderNote"];
                             }
+                            
+                            //data
+                            NSArray *items = [Utility jsonToArray:dataJson arrClassName:arrClassName];
+                            mutItems = [items mutableCopy];
+                            
+                        
+                            //message
+                            NSMutableArray *messgeList = [[NSMutableArray alloc]init];
+                            Message *message = [[Message alloc]init];
+                            message.text = msg;
+                            [messgeList addObject:message];
+                        
+                        
+                            [mutItems insertObject:messgeList atIndex:0];
+                            [self.delegate itemsInsertedWithReturnData:mutItems];
+                            NSLog(@"msg: %@", msg);
+                        
                         }
                     }
                     else if([status isEqual:@"3"])

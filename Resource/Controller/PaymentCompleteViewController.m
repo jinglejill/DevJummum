@@ -57,7 +57,8 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 @synthesize imgVwCheck;
 @synthesize btnBackToHome;
 @synthesize orderBuffet;
-    
+@synthesize goToHotDeal;
+
 
 -(void)viewDidLayoutSubviews
 {
@@ -230,7 +231,6 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         UINib *nib = [UINib nibWithNibName:reuseIdentifierSeparatorLine bundle:nil];
         [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierSeparatorLine];
     }
-    
 }
 
 - (IBAction)button1Clicked:(id)sender//save receipt
@@ -244,13 +244,15 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
     }
     else
     {
-        [self performSegueWithIdentifier:@"segUnwindToHotDeal" sender:self];
+        goToHotDeal = 1;
+        [self performSegueWithIdentifier:@"segUnwindToMainTabBar" sender:self];
     }
 }
 
 - (IBAction)button2Clicked:(id)sender//go to home
 {
-    [self performSegueWithIdentifier:@"segUnwindToHotDeal" sender:self];
+    goToHotDeal = 1;
+    [self performSegueWithIdentifier:@"segUnwindToMainTabBar" sender:self];
 }
 
 - (IBAction)orderBuffet:(id)sender
@@ -269,7 +271,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         //shop logo
         NSString *jummumLogo = [Setting getSettingValueWithKeyName:@"JummumLogo"];
         CustomTableViewCellLogo *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLogo];
-//        cell.backgroundColor = [UIColor clearColor];
+
 
         NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
         NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
@@ -287,13 +289,22 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
             {
                 UIImage *combineImage = [self combineImage:arrImage];
                 UIImage *pinkBackground = [UIImage imageNamed:@"pinkBackground.png"];
-                UIImage *whiteBackground = [UIImage imageNamed:@"whiteBackground.png"];
-                UIImage *watermark = [UIImage imageNamed:@"watermark.png"];
+                UIImage *watermark = [UIImage imageNamed:@"jummumWatermark.jpg"];
                 pinkBackground = [self imageWithImage:pinkBackground convertToSize:CGSizeMake(combineImage.size.width+combineImage.size.width*0.02*2, combineImage.size.height+combineImage.size.width*0.02*2)];
-                whiteBackground = [self imageWithImage:whiteBackground convertToSize:combineImage.size];
-                watermark = [self imageByScalingProportionallyToSize:combineImage.size sourceImage:watermark];
+
+                watermark = [self imageByScalingProportionallyToSize:CGSizeMake(combineImage.size.width, combineImage.size.width/watermark.size.width*watermark.size.height) sourceImage:watermark];
+                if(watermark.size.height < combineImage.size.height)
+                {
+                    NSMutableArray *arrWaterMark = [[NSMutableArray alloc]init];
+                    for(int i=0; i<combineImage.size.height/watermark.size.height+1; i++)
+                    {
+                        [arrWaterMark addObject:watermark];
+                    }
+                    watermark = [self combineImage:arrWaterMark];
+                }
+                watermark = [self cropImageByImage:watermark toRect:CGRectMake(0, 0, combineImage.size.width, combineImage.size.height)];
                 
-                pinkBackground = [self addWatermarkOnImage:pinkBackground withImage:whiteBackground];
+
                 pinkBackground = [self addWatermarkOnImage:pinkBackground withImage:watermark];
                 combineImage = [self addWatermarkOnImage:pinkBackground withImage:combineImage];
 
@@ -312,19 +323,28 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
                     cell.imgVwValue.image = image;
                     [self setImageDesign:cell.imgVwValue];
                     UIImage *imageLogo = [self imageFromView:cell];
+                    
                     [arrImage insertObject:imageLogo atIndex:0];
                     _logoDownloaded = YES;
                     if(_logoDownloaded && _endOfFile)
                     {
                         UIImage *combineImage = [self combineImage:arrImage];
                         UIImage *pinkBackground = [UIImage imageNamed:@"pinkBackground.png"];
-                        UIImage *whiteBackground = [UIImage imageNamed:@"whiteBackground.png"];
-                        UIImage *watermark = [UIImage imageNamed:@"watermark.png"];
+                        UIImage *watermark = [UIImage imageNamed:@"jummumWatermark.jpg"];
                         pinkBackground = [self imageWithImage:pinkBackground convertToSize:CGSizeMake(combineImage.size.width+combineImage.size.width*0.02*2, combineImage.size.height+combineImage.size.width*0.02*2)];
-                        whiteBackground = [self imageWithImage:whiteBackground convertToSize:combineImage.size];
-                        watermark = [self imageByScalingProportionallyToSize:combineImage.size sourceImage:watermark];
+                        watermark = [self imageByScalingProportionallyToSize:CGSizeMake(combineImage.size.width, combineImage.size.width/watermark.size.width*watermark.size.height) sourceImage:watermark];
+                        if(watermark.size.height < combineImage.size.height)
+                        {
+                            NSMutableArray *arrWaterMark = [[NSMutableArray alloc]init];
+                            for(int i=0; i<combineImage.size.height/watermark.size.height+1; i++)
+                            {
+                                [arrWaterMark addObject:watermark];
+                            }
+                            watermark = [self combineImage:arrWaterMark];
+                        }
+                        watermark = [self cropImageByImage:watermark toRect:CGRectMake(0, 0, combineImage.size.width, combineImage.size.height)];
                         
-                        pinkBackground = [self addWatermarkOnImage:pinkBackground withImage:whiteBackground];
+                
                         pinkBackground = [self addWatermarkOnImage:pinkBackground withImage:watermark];
                         combineImage = [self addWatermarkOnImage:pinkBackground withImage:combineImage];
 
@@ -784,13 +804,21 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
     {
         UIImage *combineImage = [self combineImage:arrImage];
         UIImage *pinkBackground = [UIImage imageNamed:@"pinkBackground.png"];
-        UIImage *whiteBackground = [UIImage imageNamed:@"whiteBackground.png"];
-        UIImage *watermark = [UIImage imageNamed:@"watermark.png"];
+        UIImage *watermark = [UIImage imageNamed:@"jummumWatermark.jpg"];
         pinkBackground = [self imageWithImage:pinkBackground convertToSize:CGSizeMake(combineImage.size.width+combineImage.size.width*0.02*2, combineImage.size.height+combineImage.size.width*0.02*2)];
-        whiteBackground = [self imageWithImage:whiteBackground convertToSize:combineImage.size];
-        watermark = [self imageByScalingProportionallyToSize:combineImage.size sourceImage:watermark];
+        watermark = [self imageByScalingProportionallyToSize:CGSizeMake(combineImage.size.width, combineImage.size.width/watermark.size.width*watermark.size.height) sourceImage:watermark];
+        if(watermark.size.height < combineImage.size.height)
+        {
+            NSMutableArray *arrWaterMark = [[NSMutableArray alloc]init];
+            for(int i=0; i<combineImage.size.height/watermark.size.height+1; i++)
+            {
+                [arrWaterMark addObject:watermark];
+            }
+            watermark = [self combineImage:arrWaterMark];
+        }
+        watermark = [self cropImageByImage:watermark toRect:CGRectMake(0, 0, combineImage.size.width, combineImage.size.height)];
         
-        pinkBackground = [self addWatermarkOnImage:pinkBackground withImage:whiteBackground];
+
         pinkBackground = [self addWatermarkOnImage:pinkBackground withImage:watermark];
         combineImage = [self addWatermarkOnImage:pinkBackground withImage:combineImage];
 

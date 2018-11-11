@@ -489,7 +489,7 @@ enum enumUrl
 +(BOOL)validateStrongPassword:(NSString *)password;
 +(void)addToSharedDataList:(NSArray *)items;
 +(NSString *)hideCreditCardNo:(NSString *)creditCardNo;
-+ (void)updateSharedDataList:(NSMutableArray *)itemList;
++ (void)updateSharedDataList:(NSMutableArray *)itemList className:(NSString *)className branchID:(NSInteger)branchID;
 +(void)updateSharedObject:(NSArray *)arrOfObjectList;
 + (void)addUpdateObject:(NSObject *)object;
 +(UIImage *)getImageFromCache:(NSString *)imageName;

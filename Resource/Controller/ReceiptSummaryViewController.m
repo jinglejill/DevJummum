@@ -533,6 +533,8 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             else
             {
                 cell.lblText.text = @"";
+                cell.lblText.hidden = YES;
+                
             }
             cell.lblTextWidthConstant.constant = 70;
         
@@ -965,10 +967,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             _page += 1;
         }
     
-    
-    
         [tbvData reloadData];
-    
     }
 }
 
@@ -1085,7 +1084,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     minutes -= hours * 60;
     
     
-    NSInteger index = [_receiptList indexOfObject:receipt];
+    NSInteger index = [Receipt getIndexOfObject:receipt receiptList:_receiptList];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
     CustomTableViewCellReceiptSummary *cell = [tbvData cellForRowAtIndexPath:indexPath];
     
@@ -1093,6 +1092,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     NSIndexPath *indexPathOrderDetail = [NSIndexPath indexPathForRow:0 inSection:3];
     CustomTableViewCellLabelLabel *cellTimeToCountDown = [cell.tbvOrderDetail cellForRowAtIndexPath:indexPathOrderDetail];
     cellTimeToCountDown.lblText.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", hours, minutes, seconds];
+    cellTimeToCountDown.lblText.hidden = NO;
 }
 
 -(void)shareOrderQr:(id)sender

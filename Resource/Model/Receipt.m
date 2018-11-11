@@ -725,4 +725,16 @@
     return timeToOrder;
 }
 
++(NSInteger)getIndexOfObject:(Receipt *)receipt receiptList:(NSMutableArray *)receiptList
+{
+    for(int i=0; i<[receiptList count]; i++)
+    {
+        Receipt *item = receiptList[i];
+        if(item.receiptID == receipt.receiptID)
+        {
+            return i;
+        }
+    }
+    return 0;
+}
 @end

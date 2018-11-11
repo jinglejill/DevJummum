@@ -19,8 +19,9 @@
 @property (retain, nonatomic) NSDate * modifiedDate;
 
 @property (nonatomic) NSInteger branchID;
-
 @property (nonatomic) NSInteger type;
+
+
 -(NoteType *)initWithName:(NSString *)name nameEn:(NSString *)nameEn allowQuantity:(NSInteger)allowQuantity orderNo:(NSInteger)orderNo status:(NSInteger)status;
 +(NSInteger)getNextID;
 +(void)addObject:(NoteType *)noteType;
@@ -33,4 +34,5 @@
 +(void)setSharedData:(NSMutableArray *)dataList;
 +(NSMutableArray *)getNoteTypeList;
 +(NSMutableArray *)sort:(NSMutableArray *)noteTypeList;
++(NSMutableArray *)getNoteTypeListWithNoteList:(NSMutableArray *)noteList branchID:(NSInteger)branchID;
 @end

@@ -395,11 +395,12 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     topViewHeight.constant = topPadding == 0?20:topPadding;
 }
 
--(void)loadView
+//-(void)loadView
+//{
+//    [super loadView];
+//}
+-(void)setOrder
 {
-    [super loadView];
-    
-    
     NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
     _orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
 }
@@ -513,7 +514,10 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     [voucherView.btnDelete setTitle:[Language getText:@"ลบ"] forState:UIControlStateNormal];
     [voucherView.btnDelete addTarget:self action:@selector(deleteVoucher:) forControlEvents:UIControlEventTouchUpInside];
 
+
+
     
+    [self setOrder];
     [self loadingOverlayView];
     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
     self.homeModel = [[HomeModel alloc]init];
@@ -597,7 +601,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         else
         {
             float sumSpecialPriceDiscount = [OrderTaking getSumSpecialPriceDiscount:_orderTakingList];
-            float tbvTotalHeight = 26*2+44;
+            float tbvTotalHeight = 26*3+44;
             float sumSpecialPriceDiscountHeight = sumSpecialPriceDiscount == 0?0:26;
             float chooseVoucherCodeHeight = [_promotionList count]+[_rewardRedemptionList count] > 0?66:38;
             float serviceChargeHeight = branch.serviceChargePercent > 0?26:0;
@@ -606,7 +610,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             float beforeVatHeight = (branch.serviceChargePercent>0 && branch.percentVat>0) || (branch.serviceChargePercent == 0 && branch.percentVat>0 && branch.priceIncludeVat)?26:0;
             tbvTotalHeightConstant.constant = tbvTotalHeight+sumSpecialPriceDiscountHeight+chooseVoucherCodeHeight+serviceChargeHeight+vatHeight+netTotalHeight+beforeVatHeight;
             
-            return 8;
+            return 9;
         }
     }
     
@@ -1278,6 +1282,30 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             }
                 break;
                 case 7:
+                {
+                    CustomTableViewCellTotal *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    
+                    NSInteger luckyDrawCount = _netTotal/branch.luckyDrawSpend;
+                    if(luckyDrawCount)
+                    {
+                        cell.lblTitle.text = [NSString stringWithFormat:[Language getText:@"(คุณจะได้สิทธิ์ลุ้นรางวัล %ld ครั้ง)"], luckyDrawCount];
+                    }
+                    else
+                    {
+                        cell.lblTitle.text = [Language getText:@"(คุณไม่ได้รับสิทธิ์ลุ้นรางวัลในครั้งนี้)"];
+                    }
+                    cell.vwTopBorder.hidden = YES;
+                    cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+                    cell.lblTitle.textColor = cSystem2;
+                    cell.lblAmount.text = @"";
+                    cell.lblAmountWidth.constant = 0;
+                    cell.hidden = NO;
+                    
+                    return cell;
+                }
+                break;
+                case 8:
             {
                 //before vat
                 CustomTableViewCellTotal *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
@@ -1491,6 +1519,9 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 return branch.serviceChargePercent + branch.percentVat > 0?26:0;
                 break;
             case 7:
+                return 26;
+                break;
+            case 8:
                 return (branch.serviceChargePercent>0 && branch.percentVat>0) || (branch.serviceChargePercent == 0 && branch.percentVat>0 && branch.priceIncludeVat)?26:0;
             default:
                 break;
@@ -1827,6 +1858,10 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             {
                 NSLog(@"%@",[token tokenId]);
                 
+//                //test
+//                [self removeWaitingView];
+//                btnPay.enabled = YES;
+//                return ;
                 
                 
                 
@@ -1872,7 +1907,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 _selectedVoucherCode = _selectedVoucherCode?_selectedVoucherCode:@"";
                 self.homeModel = [[HomeModel alloc]init];
                 self.homeModel.delegate = self;
-                [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,_selectedVoucherCode] actionScreen:@"call omise checkout at server"];
+                [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],@(_netTotal*100),receipt,orderTakingList,orderNoteList,_selectedVoucherCode,@(branch.luckyDrawSpend)] actionScreen:@"call omise checkout at server"];
             }
             else
             {
@@ -1990,13 +2025,62 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 
 -(void)itemsInsertedWithReturnData:(NSArray *)items
 {
-    if([items count] == 1)
+    NSMutableArray *dataList = items[0];
+    NSObject *object  = dataList[0];
+    if([object isKindOfClass:[Message class]])
+//    if([items count] == 1)
     {
         [self removeWaitingView];
         _btnPay.enabled = YES;
         NSMutableArray *messageList = items[0];
         Message *message = messageList[0];
         [self showAlert:@"" message:message.text];
+        
+        if([items count]>1)
+        {
+            [OrderTaking removeCurrentOrderTakingList];
+            
+            
+            //update orderTaking and OrderNote
+            NSMutableArray *orderTakingListUpdateNew = [[NSMutableArray alloc]init];
+            NSMutableArray *orderTakingListUpdate = items[1];
+            NSMutableArray *orderNoteListUpdate = items[2];
+            for(OrderTaking *item in orderTakingListUpdate)
+            {
+                OrderTaking *orderTaking = [item copy];
+                orderTaking.orderTakingID = [OrderTaking getNextID];
+                [OrderTaking addObject:orderTaking];
+                [orderTakingListUpdateNew addObject:orderTaking];
+                
+                
+                
+                NSMutableArray *orderNoteListForOrderTakingID = [OrderNote getOrderNoteListWithOrderTakingID:item.orderTakingID orderNoteList:orderNoteListUpdate];
+                
+                for(OrderNote *item2 in orderNoteListForOrderTakingID)
+                {
+                    OrderNote *orderNote = [item2 copy];
+                    orderNote.orderNoteID = [OrderNote getNextID];
+                    orderNote.orderTakingID = orderTaking.orderTakingID;
+                    [OrderNote addObject:orderNote];
+                }
+            }
+            [OrderTaking setCurrentOrderTakingList:orderTakingListUpdateNew];
+            
+            
+            
+            //luckyDrawSpend
+            if([items count]>3)
+            {
+                NSMutableArray *settingList = items[3];
+                Setting *setting = settingList[0];
+                branch.luckyDrawSpend = [setting.value integerValue];
+            }
+            
+            
+            [self setOrder];
+            [tbvData reloadData];
+            [tbvTotal reloadData];
+        }
     }
     else
     {
@@ -2011,7 +2095,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         NSMutableArray *receiptList = items[0];
         Receipt *receipt = receiptList[0];
         _receipt = receipt;
-        if([items  count] == 4)
+        if([items  count] == 4)//omiseCheckout->count==4
         {
             NSMutableArray *luckyDrawTicketList = items[3];
             _numberOfGift = [luckyDrawTicketList count];
@@ -2283,6 +2367,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         [tbvTotal reloadData];
         
         
+        //ถ้ามี voucher code ก็ให้ ส่ง voucher code ไปเช็ค
         if(fromRewardRedemption || fromLuckyDraw)
         {
             _selectedVoucherCode = rewardRedemption.voucherCode;

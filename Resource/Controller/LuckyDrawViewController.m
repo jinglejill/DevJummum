@@ -77,20 +77,30 @@
         
         
         //gift prize
-        _imgVwGiftPrize = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-                _imgVwGiftPrize.center = self.view.center;
+        _imgVwGiftPrize = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.height*0.75/530*300, self.view.frame.size.height*0.75)];
+        _imgVwGiftPrize.center = self.view.center;
+        {
+            CGRect frame = _imgVwGiftPrize.frame;
+            frame.origin.y = 0;
+            _imgVwGiftPrize.frame = frame;
+        }
         
         
         //rid close open while waiting for dbRewardRedemptionLuckyDraw
-        _imgVwWaiting = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        _imgVwWaiting = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.height*0.75/530*300, self.view.frame.size.height*0.75)];
         _imgVwWaiting.center = self.view.center;
+        {
+            CGRect frame = _imgVwWaiting.frame;
+            frame.origin.y = 0;
+            _imgVwWaiting.frame = frame;
+        }
         
         
         _animationImages = [[NSMutableArray alloc]init];
         NSInteger steps = 2;
         for(int i=0; i<steps; i++)
         {
-            NSString *imageName = [NSString stringWithFormat:@"giftBox%@%05d.jpg",@"Boo",(i+1)];
+            NSString *imageName = [NSString stringWithFormat:@"giftBox%@%05d.png",@"Boo",(i+1)];
             UIImage *imageRunning = [UIImage imageNamed:imageName];
             [_animationImages addObject:(NSObject *)(imageRunning.CGImage)];
         }
@@ -158,9 +168,6 @@
     }
     else if(homeModel.propCurrentDB == dbMenu)
     {
-        HomeModel *homeModel = (HomeModel *)objHomeModel;
-        if(homeModel.propCurrentDB == dbMenu)
-        {
             [Utility updateSharedObject:items];
             NSMutableArray *messageList = [items[0] mutableCopy];
             Message *message = messageList[0];
@@ -171,7 +178,7 @@
             }
             else
             {
-                NSMutableArray *discountGroupMenuMapList = items[6];
+                NSMutableArray *discountGroupMenuMapList = items[3];
                 NSMutableArray *orderTakingList = [[NSMutableArray alloc]init];
                 for(int i=0; i<[discountGroupMenuMapList count]; i++)
                 {
@@ -188,12 +195,11 @@
                         [OrderTaking addObject:orderTaking];
                     }
                 }
-                                
+                
                 [OrderTaking setCurrentOrderTakingList:orderTakingList];
                 [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
             }
         }
-    }
 }
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
@@ -387,8 +393,13 @@
                 //rid open close
                 if(!_imgVwRidCloseOpen)
                 {
-                    _imgVwRidCloseOpen = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+                    _imgVwRidCloseOpen = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.height*0.75/530*300, self.view.frame.size.height*0.75)];
                     _imgVwRidCloseOpen.center = self.view.center;
+                    {
+                        CGRect frame = _imgVwRidCloseOpen.frame;
+                        frame.origin.y = 0;
+                        _imgVwRidCloseOpen.frame = frame;
+                    }
                 }
                 else
                 {
@@ -400,7 +411,7 @@
                 NSInteger steps = 2;
                 for(int i=0; i<steps; i++)
                 {
-                    NSString *imageName = [NSString stringWithFormat:@"giftBox%@%05d.jpg",@"Boo",(i+1)];
+                    NSString *imageName = [NSString stringWithFormat:@"giftBox%@%05d.png",@"Boo",(i+1)];
                     UIImage *imageRunning = [UIImage imageNamed:imageName];
                     [animationImages addObject:(NSObject *)(imageRunning.CGImage)];
                 }
@@ -518,6 +529,7 @@
     [_btnOrderNow removeFromSuperview];
     [_btnHome removeFromSuperview];
     [_imgVwSmallGiftBox removeFromSuperview];
+    [_lblGiftNum removeFromSuperview];
     _toggleTap = NO;
     
     

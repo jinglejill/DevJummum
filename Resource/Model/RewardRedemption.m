@@ -306,5 +306,18 @@
     NSMutableArray *dataList = [SharedRewardRedemption sharedRewardRedemption].rewardRedemptionList;
     [dataList removeAllObjects];
 }
+
++(NSInteger)getIndexOfObject:(RewardRedemption *)rewardRedemption rewardRedemptionList:(NSMutableArray *)rewardRedemptionList
+{
+    for(int i=0; i<[rewardRedemptionList count]; i++)
+    {
+        RewardRedemption *item = rewardRedemptionList[i];
+        if(item.rewardRedemptionID == rewardRedemption.rewardRedemptionID)
+        {
+            return i;
+        }
+    }
+    return 0;
+}
 @end
 

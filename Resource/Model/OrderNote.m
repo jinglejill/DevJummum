@@ -197,6 +197,14 @@
     return [filterArray mutableCopy];
 }
 
++(NSMutableArray *)getOrderNoteListWithOrderTakingID:(NSInteger)orderTakingID orderNoteList:(NSMutableArray *)orderNoteList
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_orderTakingID = %ld",orderTakingID];
+    NSArray *filterArray = [orderNoteList filteredArrayUsingPredicate:predicate];
+    
+    return [filterArray mutableCopy];
+}
+
 +(NSMutableArray *)getOrderNoteListWithCustomerTableID:(NSInteger)customerTableID
 {
     NSMutableArray *orderNoteList = [[NSMutableArray alloc]init];

@@ -323,7 +323,7 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         }
         else
         {
-            NSMutableArray *discountGroupMenuMapList = items[6];
+            NSMutableArray *discountGroupMenuMapList = items[3];
             NSMutableArray *orderTakingList = [[NSMutableArray alloc]init];
             for(int i=0; i<[discountGroupMenuMapList count]; i++)
             {

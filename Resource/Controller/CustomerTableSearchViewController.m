@@ -449,8 +449,10 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
 -(void)setData
 {
     _customerTableList = [CustomerTable getCustomerTableListWithBranchID:branch.branchID];
-    _customerTableList = [CustomerTable getCustomerTableListWithType:1 status:1 customerTableList:_customerTableList];
-    _customerTableZoneList = [CustomerTable getCustomerTableZoneListWithType:1 status:1 customerTableList:_customerTableList];
+//    _customerTableList = [CustomerTable getCustomerTableListWithType:1 status:1 customerTableList:_customerTableList];
+//    _customerTableZoneList = [CustomerTable getCustomerTableZoneListWithType:1 status:1 customerTableList:_customerTableList];
+    _customerTableZoneList = [CustomerTable getCustomerTableZoneListWithCustomerTableList:_customerTableList];
+
     
     _filterCustomerTableList = _customerTableList;
     
