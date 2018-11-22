@@ -290,7 +290,8 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
                 UIImage *combineImage = [self combineImage:arrImage];
                 UIImage *pinkBackground = [UIImage imageNamed:@"pinkBackground.png"];
                 UIImage *watermark = [UIImage imageNamed:@"jummumWatermark.jpg"];
-                pinkBackground = [self imageWithImage:pinkBackground convertToSize:CGSizeMake(combineImage.size.width+combineImage.size.width*0.02*2, combineImage.size.height+combineImage.size.width*0.02*2)];
+//                pinkBackground = [self imageWithImage:pinkBackground convertToSize:CGSizeMake(combineImage.size.width+combineImage.size.width*0.02*2, combineImage.size.height+combineImage.size.width*0.02*2)];
+                pinkBackground = [self imageWithImage:pinkBackground convertToSize:combineImage.size];
 
                 watermark = [self imageByScalingProportionallyToSize:CGSizeMake(combineImage.size.width, combineImage.size.width/watermark.size.width*watermark.size.height) sourceImage:watermark];
                 if(watermark.size.height < combineImage.size.height)
@@ -331,7 +332,8 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
                         UIImage *combineImage = [self combineImage:arrImage];
                         UIImage *pinkBackground = [UIImage imageNamed:@"pinkBackground.png"];
                         UIImage *watermark = [UIImage imageNamed:@"jummumWatermark.jpg"];
-                        pinkBackground = [self imageWithImage:pinkBackground convertToSize:CGSizeMake(combineImage.size.width+combineImage.size.width*0.02*2, combineImage.size.height+combineImage.size.width*0.02*2)];
+//                        pinkBackground = [self imageWithImage:pinkBackground convertToSize:CGSizeMake(combineImage.size.width+combineImage.size.width*0.02*2, combineImage.size.height+combineImage.size.width*0.02*2)];
+                        pinkBackground = [self imageWithImage:pinkBackground convertToSize:combineImage.size];
                         watermark = [self imageByScalingProportionallyToSize:CGSizeMake(combineImage.size.width, combineImage.size.width/watermark.size.width*watermark.size.height) sourceImage:watermark];
                         if(watermark.size.height < combineImage.size.height)
                         {
@@ -833,7 +835,8 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         UIImage *combineImage = [self combineImage:arrImage];
         UIImage *pinkBackground = [UIImage imageNamed:@"pinkBackground.png"];
         UIImage *watermark = [UIImage imageNamed:@"jummumWatermark.jpg"];
-        pinkBackground = [self imageWithImage:pinkBackground convertToSize:CGSizeMake(combineImage.size.width+combineImage.size.width*0.02*2, combineImage.size.height+combineImage.size.width*0.02*2)];
+//        pinkBackground = [self imageWithImage:pinkBackground convertToSize:CGSizeMake(combineImage.size.width+combineImage.size.width*0.02*2, combineImage.size.height+combineImage.size.width*0.02*2)];
+        pinkBackground = [self imageWithImage:pinkBackground convertToSize:combineImage.size];
         watermark = [self imageByScalingProportionallyToSize:CGSizeMake(combineImage.size.width, combineImage.size.width/watermark.size.width*watermark.size.height) sourceImage:watermark];
         if(watermark.size.height < combineImage.size.height)
         {
