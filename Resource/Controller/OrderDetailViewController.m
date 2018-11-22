@@ -2082,20 +2082,6 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
 - (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath
 {
     cell.separatorInset = UIEdgeInsetsMake(0.0f, self.view.bounds.size.width, 0.0f, CGFLOAT_MAX);
-//    if([tableView isEqual:tbvData])
-//    {
-//        if([Utility isStringEmpty:receipt.remark] && indexPath.section == 0 && indexPath.row == 0)
-//        {
-//            [cell setSeparatorInset:UIEdgeInsetsMake(16, 16, 16, 16)];
-//        }
-//        else if(![Utility isStringEmpty:receipt.remark])
-//        {
-//            if(indexPath.section == 1 && indexPath.row == 0)
-//            {
-//                [cell setSeparatorInset:UIEdgeInsetsMake(16, 16, 16, 16)];
-//            }
-//        }
-//    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

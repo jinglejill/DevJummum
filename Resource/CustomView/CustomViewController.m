@@ -286,7 +286,7 @@ CGFloat animatedDistance;
     [lblAlertMsg sizeToFit];
     CGRect frame = lblAlertMsg.frame;
 //    frame.size.height = frame.size.height < 44?44:frame.size.height;
-    frame.size.height = frame.size.height + 2*8;
+    frame.size.height = frame.size.height + 2*11;
     frame.size.width = self.view.frame.size.width-16*2;
     lblAlertMsg.frame = frame;
     lblAlertMsg.center = self.view.center;
