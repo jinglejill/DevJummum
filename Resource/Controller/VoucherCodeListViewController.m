@@ -15,9 +15,14 @@
 #import "RewardRedemption.h"
 #import "Branch.h"
 #import "Time.h"
+#import "UserAccount.h"
 
 
 @interface VoucherCodeListViewController ()
+{
+    NSMutableArray *_promotionList;
+    NSMutableArray *_rewardRedemptionList;
+}
 @end
 
 @implementation VoucherCodeListViewController
@@ -29,8 +34,9 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
 @synthesize lblNavTitle;
 @synthesize tbvData;
 @synthesize topViewHeight;
-@synthesize promotionList;
-@synthesize rewardRedemptionList;
+@synthesize branch;
+//@synthesize promotionList;
+//@synthesize rewardRedemptionList;
 @synthesize selectedVoucherCode;
 
 
@@ -70,13 +76,24 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
     }
     
     
+    [self loadingOverlayView];
+    UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+    self.homeModel = [[HomeModel alloc]init];
+    self.homeModel.delegate = self;
+    [self.homeModel downloadItems:dbPromotionAndRewardRedemption withData:@[branch,userAccount]];
+}
 
-    for(int i=0; i<[rewardRedemptionList count]; i++)
+-(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
+{
+    [self removeOverlayViews];
+    _promotionList = items[0];
+    _rewardRedemptionList = items[1];
+    for(int i=0; i<[_rewardRedemptionList count]; i++)
     {
         //timeToCountDown กับ UsingEndDate เช็คทั้งสอง ว่า อันไหนหมดก่อนกัน เช็คพร้อมกันใช้ timer อันเดียว
         //พอเวลาหมดก็ invalidate แล้ว remove rewardRedemption
         //หาก withInPeriod = 0 ไม่ต้อง countDown ให้เช็ค usingEndDate อย่างเดียว
-        RewardRedemption *rewardRedemption = rewardRedemptionList[i];
+        RewardRedemption *rewardRedemption = _rewardRedemptionList[i];
         if(rewardRedemption.withInPeriod == 0)
         {
             NSTimeInterval seconds2 = [[Utility setEndOfTheDay:rewardRedemption.usingEndDate] timeIntervalSinceDate:[Utility currentDateTime]];
@@ -107,6 +124,7 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
             [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
         }
     }
+    [tbvData reloadData];
 }
 
 -(void)updateTimer:(NSTimer *)timer
@@ -125,7 +143,7 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
     if(time.countDown == 0)
     {
         [timer invalidate];
-        [rewardRedemptionList removeObject:rewardRedemptionSelected];
+        [_rewardRedemptionList removeObject:rewardRedemptionSelected];
         [tbvData reloadData];
     }
 }
@@ -133,7 +151,7 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
 -(void)updateTimer2:(NSTimer *)timer
 {
     RewardRedemption *rewardRedemptionSelected = timer.userInfo;
-    [rewardRedemptionList removeObject:rewardRedemptionSelected];
+    [_rewardRedemptionList removeObject:rewardRedemptionSelected];
     [tbvData reloadData];
 }
 
@@ -147,7 +165,7 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
 
 
 
-    NSInteger index = [RewardRedemption getIndexOfObject:rewardRedemptionSelected rewardRedemptionList:rewardRedemptionList];
+    NSInteger index = [RewardRedemption getIndexOfObject:rewardRedemptionSelected rewardRedemptionList:_rewardRedemptionList];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:1];
     CustomTableViewCellReward *cell = [tbvData cellForRowAtIndexPath:indexPath];
     cell.lblCountDown.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", hours, minutes, seconds];
@@ -165,11 +183,11 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
     // Return the number of rows in the section.
     if(section == 0)
     {
-        return [promotionList count];
+        return [_promotionList count];
     }
     else if(section == 1)
     {
-        return [rewardRedemptionList count];
+        return [_rewardRedemptionList count];
     }
     return 0;
 }
@@ -182,7 +200,7 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
     
     if(section == 0)
     {
-        Promotion *promotion = promotionList[item];
+        Promotion *promotion = _promotionList[item];
         if(promotion.type == 0)
         {
             CustomTableViewCellPromoBanner *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierPromoBanner];
@@ -278,7 +296,7 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
         CustomTableViewCellReward *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierReward];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        RewardRedemption *rewardRedemption = rewardRedemptionList[item];
+        RewardRedemption *rewardRedemption = _rewardRedemptionList[item];
         cell.lblHeader.text = rewardRedemption.header;
         [cell.lblHeader sizeToFit];
         cell.lblHeaderHeight.constant = cell.lblHeader.frame.size.height>70?70:cell.lblHeader.frame.size.height;
@@ -340,7 +358,7 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
     
     if(section == 0)
     {
-        Promotion *promotion = promotionList[item];
+        Promotion *promotion = _promotionList[item];
         if(promotion.type == 0)
         {
             CustomTableViewCellPromoBanner *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierPromoBanner];
@@ -412,12 +430,12 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
     NSInteger item = indexPath.item;
     if(section == 0)
     {
-        Promotion *promotion = promotionList[item];
+        Promotion *promotion = _promotionList[item];
         selectedVoucherCode = promotion.voucherCode;
     }
     else if(section == 1)
     {
-        RewardRedemption *rewardRedemption = rewardRedemptionList[item];
+        RewardRedemption *rewardRedemption = _rewardRedemptionList[item];
         selectedVoucherCode = rewardRedemption.voucherCode;
     }
     [self dismissViewController:nil];

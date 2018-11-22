@@ -41,8 +41,6 @@
 +(void)addList:(NSMutableArray *)orderTakingList;
 +(void)removeList:(NSMutableArray *)orderTakingList;
 +(OrderTaking *)getOrderTaking:(NSInteger)orderTakingID;
-
-+(OrderTaking *)getOrderTakingWithCustomerTableID:(NSInteger)customerTableID menuID:(NSInteger)menuID takeAway:(NSInteger)takeAway noteIDListInText:(NSString *)noteIDListInText status:(NSInteger)status;
 +(NSMutableArray *)getOrderTakingListWithStatus:(NSInteger)status orderTakingList:(NSMutableArray *)orderTakingList;
 +(NSMutableArray *)getOrderTakingListWithCustomerTableID:(NSInteger)customerTableID status:(NSInteger)status;
 +(NSMutableArray *)getOrderTakingListWithCustomerTableID:(NSInteger)customerTableID statusList:(NSArray *)statusList;

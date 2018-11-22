@@ -27,6 +27,8 @@
 @property (nonatomic) BOOL fromOrderItAgain;
 @property (strong, nonatomic) Receipt *buffetReceipt;
 @property (strong, nonatomic) Receipt *orderItAgainReceipt;
+@property (nonatomic) NSInteger goToMenuSelection;
+
 
 @property (strong, nonatomic) IBOutlet UIImageView *imgPeekABoo;
 @property (strong, nonatomic) IBOutlet UIImageView *imgPeekABooFromRight;

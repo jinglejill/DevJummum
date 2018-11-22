@@ -22,6 +22,9 @@
             <PersistentString
                value = "cell.lblValue.text">
             </PersistentString>
+            <PersistentString
+               value = "cell.frame.size.height">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -37,6 +40,9 @@
                value = "cellTimeToCountDown">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:]:OrderTaking.m">
       </ContextState>
       <ContextState
          contextName = "-[ReceiptSummaryViewController itemsDownloaded:manager:]:ReceiptSummaryViewController.m">

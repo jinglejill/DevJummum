@@ -39,6 +39,7 @@
 #import "SaveReceipt.h"
 #import "SaveOrderTaking.h"
 #import "SaveOrderNote.h"
+#import "CreditCardAndOrderSummary.h"
 #import "CustomViewController.h"
 
 
@@ -143,7 +144,7 @@
             break;        
         case dbPromotion:
         {
-            arrClassName = @[@"Promotion",@"Message",@"Message"];
+            arrClassName = @[@"Message",@"Message",@"OrderTaking",@"OrderNote",@"Promotion",@"CreditCardAndOrderSummary"];
         }
             break;
         case dbPromotionAndRewardRedemption:
@@ -163,7 +164,7 @@
             break;
         case dbHotDeal:
         {
-            arrClassName = @[@"Promotion"];
+            arrClassName = @[@"Promotion",@"Branch"];
         }
             break;
         case dbRewardPointSpent:
@@ -761,12 +762,13 @@
     {
         case dbPromotion:
         {
+//@[voucherCode,userAccount,branch,orderTakingList,orderNoteList]
             NSArray *dataList = (NSArray *)data;
             NSString *strVoucherCode = dataList[0];
             UserAccount *userAccount = dataList[1];
             Branch *branch = dataList[2];
-            float sumSpecialPrice = [dataList[3] floatValue];
-            NSMutableArray *orderTakingList = dataList[4];
+            NSMutableArray *orderTakingList = dataList[3];
+            NSMutableArray *orderNoteList = dataList[4];
             
             
             dicData = [[NSMutableDictionary alloc]init];
@@ -778,11 +780,19 @@
                 [arrOrderTaking addObject:dicOrderTaking];
             }
             
+            NSMutableArray *arrOrderNote = [[NSMutableArray alloc]init];
+            for(int i=0; i<[orderNoteList count]; i++)
+            {
+                OrderNote *orderNote = orderNoteList[i];
+                NSDictionary *dicOrderNote = [orderNote dictionary];
+                [arrOrderNote addObject:dicOrderNote];
+            }
+            
             [dicData setValue:arrOrderTaking forKey:@"orderTaking"];
+            [dicData setValue:arrOrderNote forKey:@"orderNote"];
             [dicData setValue:strVoucherCode forKey:@"voucherCode"];
             [dicData setValue:@(userAccount.userAccountID) forKey:@"userAccountID"];
             [dicData setValue:@(branch.branchID) forKey:@"branchID"];
-            [dicData setValue:@(sumSpecialPrice) forKey:@"sumSpecialPrice"];
             
             
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlPromotionGetList]]];
@@ -1381,26 +1391,11 @@
                 //alertMsg
                 if(self.delegate)
                 {
-//                    if(propCurrentDBInsert == dbOmiseCheckOut)
-//                    {
-//                        NSString *msg = json[@"msg"];
-//                        NSMutableArray *dataList = [[NSMutableArray alloc]init];
-//                        NSMutableArray *messgeList = [[NSMutableArray alloc]init];
-//                        Message *message = [[Message alloc]init];
-//                        message.text = msg;
-//                        [messgeList addObject:message];
-//                        [dataList addObject:messgeList];
-//                        [self.delegate itemsInsertedWithReturnData:dataList];
-//                        NSLog(@"msg: %@", msg);
-//                    }
-//                    else
-                    {
-                        NSString *msg = json[@"msg"];
-                        [self.delegate alertMsg:msg];
-                        [(CustomViewController *)self.delegate removeOverlayViews];
-                        NSLog(@"status: %@", status);
-                        NSLog(@"msg: %@", msg);
-                    }
+                    NSString *msg = json[@"msg"];
+                    [self.delegate alertMsg:msg];
+                    [(CustomViewController *)self.delegate removeOverlayViews];
+                    NSLog(@"status: %@", status);
+                    NSLog(@"msg: %@", msg);
                 }
             }
             else if([status isEqual:@"3"])
@@ -1444,15 +1439,15 @@
     {
         case dbOmiseCheckOut:
         {
+//            @[[token tokenId],receipt,orderTakingList,orderNoteList,_selectedVoucherCode]
             NSArray *dataList = (NSArray *)data;
             NSString *omiseToken = dataList[0];
-            NSInteger amount = [dataList[1] integerValue];
-            Receipt *receipt = dataList[2];
-            NSMutableArray *orderTakingList = dataList[3];
-            NSMutableArray *orderNoteList = dataList[4];
-            NSString *voucherCode = dataList[5];
-            NSInteger luckyDrawSpend = [dataList[6] integerValue];
-            
+            Receipt *receipt = dataList[1];
+            NSMutableArray *orderTakingList = dataList[2];
+            NSMutableArray *orderNoteList = dataList[3];
+            NSString *voucherCode = dataList[4];
+
+
             NSDictionary *dicData = [receipt dictionary];
             NSMutableArray *arrOrderTaking = [[NSMutableArray alloc]init];
             for(int i=0; i<[orderTakingList count]; i++)
@@ -1471,11 +1466,9 @@
 
             NSMutableArray *mutDicData = [dicData mutableCopy];
             [mutDicData setValue:omiseToken forKey:@"omiseToken"];
-            [mutDicData setValue:@(amount) forKey:@"amount"];
             [mutDicData setValue:arrOrderTaking forKey:@"orderTaking"];
             [mutDicData setValue:arrOrderNote forKey:@"orderNote"];
             [mutDicData setValue:voucherCode forKey:@"voucherCode"];
-            [mutDicData setValue:@(luckyDrawSpend) forKey:@"luckyDrawSpend"];
             
             
             NSError *error;
@@ -1607,7 +1600,8 @@
                             NSArray *arrClassName;
                             if([strTableName isEqualToString:@"OmiseCheckOut"])
                             {
-                                arrClassName = @[@"Receipt",@"OrderTaking",@"OrderNote",@"LuckyDrawTicket"];
+                                arrClassName = @[@"Message",@"Message",@"OrderTaking",@"OrderNote",@"Promotion",@"CreditCardAndOrderSummary",@"Message",@"Receipt",@"OrderTaking",@"OrderNote",@"LuckyDrawTicket"];
+//                                arrClassName = @[@"Receipt",@"OrderTaking",@"OrderNote",@"LuckyDrawTicket"];
                             }
                             else if([strTableName isEqualToString:@"BuffetOrder"])
                             {

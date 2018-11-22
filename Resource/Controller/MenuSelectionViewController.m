@@ -29,6 +29,7 @@
 #import "SaveOrderTaking.h"
 #import "SaveOrderNote.h"
 #import "OrderNote.h"
+#import "MenuForAlacarte.h"
 
 
 @interface MenuSelectionViewController ()
@@ -73,7 +74,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
 @synthesize saveReceipt;
 @synthesize saveOrderTakingList;
 @synthesize saveOrderNoteList;
-@synthesize fromOrderItAgain;
+//@synthesize fromOrderItAgain;
 
 
 -(IBAction)unwindToMenuSelection:(UIStoryboardSegue *)segue
@@ -121,7 +122,9 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
     
     NSString *title = [Language getText:@"เลือกเมนู"];
     lblNavTitle.text = title;
-    
+    lblTotalQuantityTop.text = @"0";
+    lblTotalQuantity.text = @"0";
+    lblTotalAmount.text = @"฿ 0.00";
     
     {
         UINib *nib = [UINib nibWithNibName:reuseIdentifierMenu bundle:nil];
@@ -184,10 +187,12 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         }
         else
         {
-            _menuList = menuForBuffet.menuList;//[Menu getMenuBelongToBuffet:buffetReceipt];
-            _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
-            _menuTypeList = [MenuType sortList:_menuTypeList];
+            _menuList = menuForBuffet.menuList;
+            _menuTypeList = menuForBuffet.menuTypeList;
             _filterMenuList = _menuList;
+//            _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
+//            _menuTypeList = [MenuType sortList:_menuTypeList];
+//            _filterMenuList = _menuList;
             [self setData];
             
             
@@ -220,8 +225,11 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
                 [Menu removeCurrentMenuList];
                 [OrderTaking removeCurrentOrderTakingList];
                 [CreditCard removeCurrentCreditCard];
-                [VoucherCode removeCurrentVoucherCode];
-//                [SaveReceipt removeCurrentSaveReceipt];
+                SaveReceipt *saveReceipt = [SaveReceipt getCurrentSaveReceipt];
+                if(!saveReceipt.saveReceiptID)
+                {
+                    [SaveReceipt removeCurrentSaveReceipt];
+                }
                 lblTotalQuantity.text = @"0";
                 lblTotalQuantityTop.text = @"";
                 lblTotalAmount.text = [Utility addPrefixBahtSymbol:@"0.00"];
@@ -237,8 +245,10 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         
         
         
-        _menuList = [Menu getCurrentMenuList];
-        if([_menuList count] == 0)
+//        _menuList = [Menu getCurrentMenuList];
+        MenuForAlacarte *menuForAlacarte = [Menu getCurrentMenuList];
+//        if([_menuList count] == 0)
+        if([menuForAlacarte.menuList count] == 0 || menuForAlacarte.branchID != branch.branchID)
         {
             [self loadingOverlayView];
             self.homeModel = [[HomeModel alloc]init];
@@ -247,9 +257,12 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         }
         else
         {
-            _menuList = [Menu getMenuListALaCarteWithBranchID:branch.branchID];
-            _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
-            _menuTypeList = [MenuType sortList:_menuTypeList];
+//            _menuList = [Menu getMenuListALaCarteWithBranchID:branch.branchID];
+//            _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
+//            _menuTypeList = [MenuType sortList:_menuTypeList];
+//            _filterMenuList = _menuList;
+            _menuList = menuForAlacarte.menuList;
+            _menuTypeList = menuForAlacarte.menuTypeList;
             _filterMenuList = _menuList;
             [self setData];
             
@@ -773,11 +786,17 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         }
         
 //        [Utility updateSharedObject:items];
-        _menuList = [Menu getMenuListALaCarteWithBranchID:branch.branchID];
-        _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
-        _menuTypeList = [MenuType sortList:_menuTypeList];
+//        _menuList = [Menu getMenuListALaCarteWithBranchID:branch.branchID];
+//        _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
+//        _menuTypeList = [MenuType sortList:_menuTypeList];
+//        _filterMenuList = _menuList;
+//        [Menu setCurrentMenuList:_menuList];
+        _menuList = items[1];
+        _menuTypeList = items[2];
         _filterMenuList = _menuList;
-        [Menu setCurrentMenuList:_menuList];
+        
+        MenuForAlacarte *menuForAlacarte = [[MenuForAlacarte alloc]initWithBranchID:branch.branchID menuList:_menuList menuTypeList:_menuTypeList];
+        [Menu setCurrentMenuList:menuForAlacarte];
         
         
         
@@ -870,14 +889,16 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         
         
         _menuList = items[1];
-        _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
-        _menuTypeList = [MenuType sortList:_menuTypeList];
+        _menuTypeList = items[2];
         _filterMenuList = _menuList;
+//        _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
+//        _menuTypeList = [MenuType sortList:_menuTypeList];
+//        _filterMenuList = _menuList;
         
         
         NSMutableArray *receiptList = items[5];
         Receipt *receipt = receiptList[0];
-        MenuForBuffet *menuForBuffet = [[MenuForBuffet alloc]initWithReceiptID:receipt.receiptID menuList:_menuList];
+        MenuForBuffet *menuForBuffet = [[MenuForBuffet alloc]initWithReceiptID:receipt.receiptID menuList:_menuList menuTypeList:_menuTypeList];
         [Menu setCurrentMenuForBuffet:menuForBuffet];
         
         

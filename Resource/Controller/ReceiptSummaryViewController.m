@@ -468,7 +468,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         
         
             Receipt *receipt = [Receipt getReceipt:receiptID];
-            NSString *strTotalAmount = [Utility formatDecimal:receipt.cashAmount+receipt.transferAmount+receipt.creditCardAmount withMinFraction:2 andMaxFraction:2];
+            NSString *strTotalAmount = [Utility formatDecimal:receipt.netTotal withMinFraction:2 andMaxFraction:2];
             strTotalAmount = [Utility addPrefixBahtSymbol:strTotalAmount];
             cell.lblAmount.text = strTotalAmount;
             cell.lblTitle.text = [Language getText:@"รวมทั้งหมด"];
@@ -477,7 +477,8 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             cell.lblTitle.textColor = cSystem4;
             cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
             cell.lblAmount.textColor = cSystem1;
-        
+            cell.vwTopBorder.hidden = NO;
+            cell.vwBottomBorder.hidden = NO;
         
         
             return cell;
@@ -886,28 +887,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
 
 - (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath
 {
-    if([tableView isEqual:tbvData])
-    {
-        [cell setSeparatorInset:UIEdgeInsetsMake(16, 16, 16, 16)];
-    }
-    else
-    {
-        NSInteger receiptID = tableView.tag;
-        NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
-        orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
-        Receipt *receipt = [Receipt getReceipt:receiptID];
-        cell.separatorInset = UIEdgeInsetsMake(0.0f, self.view.bounds.size.width, 0.0f, CGFLOAT_MAX);
-        if([Utility isStringEmpty:receipt.remark] && indexPath.item == [orderTakingList count]-1)
-        {
-            [cell setSeparatorInset:UIEdgeInsetsMake(16, 16, 16, 16)];
-        }
-        
-        
-        if(indexPath.item == [orderTakingList count] || indexPath.item == [orderTakingList count]+1)
-        {
-            [cell setSeparatorInset:UIEdgeInsetsMake(16, 16, 16, 16)];
-        }        
-    }
+    cell.separatorInset = UIEdgeInsetsMake(0.0f, self.view.bounds.size.width, 0.0f, CGFLOAT_MAX);
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

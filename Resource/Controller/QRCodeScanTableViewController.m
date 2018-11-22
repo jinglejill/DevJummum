@@ -18,6 +18,7 @@
 #import "SaveOrderNote.h"
 #import "OrderTaking.h"
 #import "OrderNote.h"
+#import "CreditCard.h"
 
 
 
@@ -53,6 +54,7 @@
 @synthesize buffetReceipt;
 @synthesize imgPeekABoo;
 @synthesize imgPeekABooFromRight;
+@synthesize goToMenuSelection;
 
 
 -(IBAction)unwindToQRCodeScanTable:(UIStoryboardSegue *)segue
@@ -131,6 +133,11 @@
 //        fromOrderItAgain = NO;
         [self loadingOverlayView];
         [self.homeModel downloadItems:dbOrderItAgain withData:orderItAgainReceipt];
+    }
+    else if(goToMenuSelection)
+    {
+        goToMenuSelection = 0;
+        [self performSegueWithIdentifier:@"segMenuSelectionNoAnimate" sender:self];
     }
 }
 
@@ -258,8 +265,8 @@
         vc.saveReceipt = _saveReceipt;
         vc.saveOrderTakingList = _saveOrderTakingList;
         vc.saveOrderNoteList = _saveOrderNoteList;
-        vc.fromOrderItAgain = fromOrderItAgain;
-        fromOrderItAgain = NO;
+//        vc.fromOrderItAgain = fromOrderItAgain;
+//        fromOrderItAgain = NO;
     }
 }
 
@@ -285,6 +292,10 @@
             
             if([items count] > 2)
             {
+                [OrderTaking removeCurrentOrderTakingList];
+                [CreditCard removeCurrentCreditCard];
+                [SaveReceipt removeCurrentSaveReceipt];
+                
                 NSMutableArray *saveReceiptList = items[2];
                 _saveReceipt = saveReceiptList[0];
                 _saveOrderTakingList = items[3];
@@ -303,6 +314,7 @@
             {
                 if(fromOrderItAgain)
                 {
+                    fromOrderItAgain = NO;
                     selectedCustomerTable = nil;
                     dispatch_async(dispatch_get_main_queue(), ^
                    {

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Receipt.h"
 #import "MenuForBuffet.h"
+#import "MenuForAlacarte.h"
 
 
 @interface Menu : NSObject
@@ -56,8 +57,8 @@
 +(NSMutableArray *)getMenuListWithOrderTakingList:(NSMutableArray *)orderTakingList;
 +(NSMutableArray *)getMenuListWithBranchID:(NSInteger)branchID;
 +(NSMutableArray *)setBranchID:(NSInteger)branchID menuList:(NSMutableArray *)menuList;
-+(NSMutableArray *)getCurrentMenuList;
-+(void)setCurrentMenuList:(NSMutableArray *)menuList;
++(MenuForAlacarte *)getCurrentMenuList;
++(void)setCurrentMenuList:(MenuForAlacarte *)menuForAlacarte;
 +(void)removeCurrentMenuList;
 +(MenuForBuffet *)getCurrentMenuForBuffet;
 +(void)setCurrentMenuForBuffet:(MenuForBuffet *)menuForBuffet;

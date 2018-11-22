@@ -412,6 +412,7 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
     if(homeModel.propCurrentDB == dbHotDeal)
     {
         [self removeOverlayViews];
+        [Utility updateSharedObject:items];
         if(_page == 1)
         {
             _filterPromotionList = items[0];

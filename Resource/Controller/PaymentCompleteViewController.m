@@ -398,7 +398,6 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
             cell.lblTitle.frame = frame;
         }
         cell.lblAmount.hidden = YES;
-        cell.vwTopBorder.hidden = YES;
         cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:14];
         cell.lblTitle.textColor = cSystem4;
         cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
@@ -415,7 +414,6 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
     
         cell.lblTitle.text = [NSString stringWithFormat:[Language getText:@"ร้าน %@"],branch.name];
         cell.lblAmount.text = [Utility dateToString:receipt.receiptDate toFormat:@"d MMM yy HH:mm"];
-        cell.vwTopBorder.hidden = YES;
         cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
         cell.lblTitle.textColor = cSystem1;
         cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:13];
@@ -601,7 +599,6 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
             strTotal = [Utility addPrefixBahtSymbol:strTotal];
             cell.lblTitle.text = strTitle;
             cell.lblAmount.text = strTotal;
-            cell.vwTopBorder.hidden = YES;
             cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
             cell.lblTitle.textColor = cSystem4;
             cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
@@ -623,7 +620,6 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 
             cell.lblTitle.text = [Language getText:@"ส่วนลด"];;
             cell.lblAmount.text = strAmount;
-            cell.vwTopBorder.hidden = YES;
             cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
             cell.lblTitle.textColor = cSystem4;
             cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
@@ -631,18 +627,36 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 
 
             UIImage *image = [self imageFromView:cell];
-            if(receipt.discountAmount > 0)
+            if(receipt.discountValue > 0)
             {
                 [arrImage addObject:image];
             }
+        }
+        {
+            //DiscountProgram1
+            CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+            
+            NSString *strDiscountProgramValue = [Utility formatDecimal:receipt.discountProgramValue withMinFraction:2 andMaxFraction:2];
+            strDiscountProgramValue = [Utility addPrefixBahtSymbol:strDiscountProgramValue];
+            strDiscountProgramValue = [NSString stringWithFormat:@"-%@",strDiscountProgramValue];
+            cell.lblTitle.text = receipt.discountProgramTitle;
+            cell.lblAmount.text = strDiscountProgramValue;
+            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+            cell.lblTitle.textColor = cSystem4;
+            cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
+            cell.lblAmount.textColor = cSystem2;
 
+            UIImage *image = [self imageFromView:cell];
+            if(receipt.discountProgramValue > 0)
+            {
+                [arrImage addObject:image];
+            }
         }
         // 1:
         {
             //discount
             CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-            NSString *strDiscount = [Utility formatDecimal:receipt.discountAmount withMinFraction:0 andMaxFraction:2];
-            strDiscount = ![Utility isStringEmpty:receipt.voucherCode]?[NSString stringWithFormat:[Language getText:@"คูปองส่วนลด %@"],receipt.voucherCode]:strDiscount;
+            NSString *strDiscount = ![Utility isStringEmpty:receipt.voucherCode]?[NSString stringWithFormat:[Language getText:@"คูปองส่วนลด %@"],receipt.voucherCode]:@"";
 
 
             NSString *strAmount = [Utility formatDecimal:receipt.discountValue withMinFraction:2 andMaxFraction:2];
@@ -652,7 +666,6 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 
             cell.lblTitle.text = strDiscount;
             cell.lblAmount.text = strAmount;
-            cell.vwTopBorder.hidden = YES;
             cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
             cell.lblTitle.textColor = cSystem4;
             cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
@@ -660,7 +673,7 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 
 
             UIImage *image = [self imageFromView:cell];
-            if(receipt.discountAmount > 0)
+            if(receipt.discountValue > 0)
             {
                 [arrImage addObject:image];
             }
@@ -675,7 +688,6 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
             strTotal = [Utility addPrefixBahtSymbol:strTotal];
             cell.lblTitle.text = strTitle;
             cell.lblAmount.text = strTotal;
-            cell.vwTopBorder.hidden = YES;
             cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
             cell.lblTitle.textColor = cSystem4;
             cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
@@ -697,7 +709,6 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 
             cell.lblTitle.text = strServiceChargePercent;
             cell.lblAmount.text = strAmount;
-            cell.vwTopBorder.hidden = YES;
             cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
             cell.lblTitle.textColor = cSystem4;
             cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
@@ -722,7 +733,6 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 
             cell.lblTitle.text = receipt.vatPercent==0?@"Vat":strPercentVat;
             cell.lblAmount.text = strAmount;
-            cell.vwTopBorder.hidden = YES;
             cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
             cell.lblTitle.textColor = cSystem4;
             cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
@@ -739,12 +749,11 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         {
             //net total
             CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
-            float netTotalAmount = receipt.cashAmount+receipt.creditCardAmount+receipt.transferAmount;
+            float netTotalAmount = receipt.netTotal;
             NSString *strAmount = [Utility formatDecimal:netTotalAmount withMinFraction:2 andMaxFraction:2];
             strAmount = [Utility addPrefixBahtSymbol:strAmount];
             cell.lblTitle.text = [Language getText:@"ยอดรวมทั้งสิ้น"];
             cell.lblAmount.text = strAmount;
-            cell.vwTopBorder.hidden = YES;
             cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
             cell.lblTitle.textColor = cSystem4;
             cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
@@ -759,6 +768,27 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         }
         
         {
+            //luckyDrawCount
+            CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
+
+            NSInteger luckyDrawCount = receipt.luckyDrawCount;
+            if(luckyDrawCount)
+            {
+                cell.lblTitle.text = [NSString stringWithFormat:[Language getText:@"(คุณจะได้สิทธิ์ลุ้นรางวัล %ld ครั้ง)"], luckyDrawCount];
+            }
+            else
+            {
+                cell.lblTitle.text = [Language getText:@"(คุณไม่ได้รับสิทธิ์ลุ้นรางวัลในครั้งนี้)"];
+            }
+            cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+            cell.lblTitle.textColor = cSystem2;
+            cell.lblAmount.text = @"";
+            cell.lblAmountWidth.constant = 0;
+            UIImage *image = [self imageFromView:cell];
+            [arrImage addObject:image];
+        }
+        
+        {
             //before vat
             CustomTableViewCellTotal *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierTotal];
             
@@ -767,7 +797,6 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
 
             cell.lblTitle.text = [Language getText:@"ราคารวมก่อน Vat"];
             cell.lblAmount.text = strAmount;
-            cell.vwTopBorder.hidden = YES;
             cell.lblTitle.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
             cell.lblTitle.textColor = cSystem4;
             cell.lblAmount.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
@@ -780,7 +809,6 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
                 [arrImage addObject:image];
             }
         }
-
 
         {
             //space at the end

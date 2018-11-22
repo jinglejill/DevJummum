@@ -9,14 +9,14 @@
 #import "SharedCurrentMenu.h"
 
 @implementation SharedCurrentMenu
-@synthesize menuList;
+@synthesize menuForAlacarte;
 
 +(SharedCurrentMenu *)SharedCurrentMenu {
     static dispatch_once_t pred;
     static SharedCurrentMenu *shared = nil;
     dispatch_once(&pred, ^{
         shared = [[SharedCurrentMenu alloc] init];
-        shared.menuList = [[NSMutableArray alloc]init];
+        shared.menuForAlacarte = [[MenuForAlacarte alloc]init];
     });
     return shared;
 }

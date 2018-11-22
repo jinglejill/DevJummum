@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MenuForAlacarte.h"
 
 @interface SharedCurrentMenu : NSObject
-@property (retain, nonatomic) NSMutableArray *menuList;
+@property (retain, nonatomic) MenuForAlacarte *menuForAlacarte;
 
 + (SharedCurrentMenu *)SharedCurrentMenu;
 @end

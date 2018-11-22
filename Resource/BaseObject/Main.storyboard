@@ -4734,6 +4734,7 @@
                     <connections>
                         <segue destination="aSy-Ex-xPa" kind="unwind" identifier="segUnwindToHotDeal" unwindAction="unwindToHotDeal:" id="wln-Nn-c5S"/>
                         <segue destination="uxx-Px-8LI" kind="show" identifier="segCreditCardAndOrderSummary" id="bZ7-dw-aX2"/>
+                        <segue destination="aSy-Ex-xPa" kind="unwind" identifier="segUnwindToMenuSelection" unwindAction="unwindToMenuSelection:" id="uuo-9l-Nse"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C6x-ll-QSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4855,7 +4856,7 @@
         <segue reference="C1B-oJ-Xmi"/>
         <segue reference="iUw-Wp-Uz3"/>
         <segue reference="3fp-yp-yps"/>
-        <segue reference="bZ7-dw-aX2"/>
+        <segue reference="fi3-c3-4Ra"/>
         <segue reference="OAF-dr-auG"/>
         <segue reference="lWr-Il-EsI"/>
         <segue reference="aNU-Zf-Wbq"/>

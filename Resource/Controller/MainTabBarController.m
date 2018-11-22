@@ -47,6 +47,7 @@
     Receipt *_selectedReceipt;
     BOOL _showOrderDetail;
     BOOL _showReceiptSummary;
+    BOOL _showMenuSelection;
     BOOL _orderBuffet;
     BOOL _orderBuffetAfterOrderBuffet;
     Receipt *_orderItAgainReceipt;
@@ -108,6 +109,24 @@
     {
         _showReceiptSummary = 1;
         _switchToReceiptSummaryTab = 1;
+    }
+    else if([vc isKindOfClass:[HotDealDetailViewController class]] && ((HotDealDetailViewController *)vc).goToMenuSelection)
+    {
+        HotDealDetailViewController *hotDealDetailVc = (HotDealDetailViewController *)vc;
+        hotDealDetailVc.goToMenuSelection = 0;
+
+        _selectedBranch = hotDealDetailVc.branch;
+        _showMenuSelection = 1;
+        _switchToQRTab = 1;
+    }
+    else if([vc isKindOfClass:[RewardRedemptionViewController class]] && ((RewardRedemptionViewController *)vc).goToMenuSelection)
+    {
+        RewardRedemptionViewController *rewardRedemptionVc = (RewardRedemptionViewController *)vc;
+        rewardRedemptionVc.goToMenuSelection = 0;
+
+        _selectedBranch = rewardRedemptionVc.branch;
+        _showMenuSelection = 1;
+        _switchToQRTab = 1;
     }
     else if([vc isKindOfClass:[CommentViewController class]] ||
                  [vc isKindOfClass:[BasketViewController class]] ||
@@ -182,8 +201,16 @@
             vc.buffetReceipt = _buffetReceipt;
             [vc viewDidAppear:NO];
         }
-        
-        
+        else if(_showMenuSelection)
+        {
+            _showMenuSelection = 0;
+            
+            self.selectedIndex = mainTabQrScan;
+            QRCodeScanTableViewController *vc = (QRCodeScanTableViewController *)self.selectedViewController;
+            vc.selectedBranch = _selectedBranch;
+            vc.goToMenuSelection = 1;
+            [vc viewDidAppear:NO];
+        }        
     }
     else if(_switchToReceiptSummaryTab)
     {

@@ -17,6 +17,7 @@
 #import "SharedBuffetMenuMap.h"
 #import "Utility.h"
 #import "Receipt.h"
+#import "MenuForAlacarte.h"
 
 
 
@@ -306,21 +307,38 @@
     return menuList;
 }
 
-+(NSMutableArray *)getCurrentMenuList
+//+(NSMutableArray *)getCurrentMenuList
+//{
+//    NSMutableArray *dataList = [SharedCurrentMenu SharedCurrentMenu].menuList;
+//    return dataList;
+//}
+
+//+(void)setCurrentMenuList:(NSMutableArray *)menuList
+//{
+//    [SharedCurrentMenu SharedCurrentMenu].menuList = menuList;
+//}
+
+//+(void)removeCurrentMenuList
+//{
+//    NSMutableArray *dataList = [SharedCurrentMenu SharedCurrentMenu].menuList;
+//    [dataList removeAllObjects];
+//}
+
++(MenuForAlacarte *)getCurrentMenuList
 {
-    NSMutableArray *dataList = [SharedCurrentMenu SharedCurrentMenu].menuList;
-    return dataList;
+    MenuForAlacarte *menuForAlarcarte = [SharedCurrentMenu SharedCurrentMenu].menuForAlacarte;
+    return menuForAlarcarte;
 }
 
-+(void)setCurrentMenuList:(NSMutableArray *)menuList
++(void)setCurrentMenuList:(MenuForAlacarte *)menuForAlacarte
 {
-    [SharedCurrentMenu SharedCurrentMenu].menuList = menuList;
+    [SharedCurrentMenu SharedCurrentMenu].menuForAlacarte = menuForAlacarte;
 }
 
 +(void)removeCurrentMenuList
 {
-    NSMutableArray *dataList = [SharedCurrentMenu SharedCurrentMenu].menuList;
-    [dataList removeAllObjects];
+    MenuForAlacarte *menuForAlarcarte = [SharedCurrentMenu SharedCurrentMenu].menuForAlacarte;
+    menuForAlarcarte = nil;
 }
 
 +(MenuForBuffet *)getCurrentMenuForBuffet

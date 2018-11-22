@@ -144,6 +144,7 @@ CGFloat animatedDistance;
     
     lblAlertMsg = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-16*2, 44)];
     lblAlertMsg.center = self.view.center;
+    lblAlertMsg.numberOfLines = 0;
     
     
     lblWaiting = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-16*2, 44)];
@@ -282,6 +283,14 @@ CGFloat animatedDistance;
 -(void) blinkAlertMsg:(NSString *)alertMsg
 {
     lblAlertMsg.text = alertMsg;
+    [lblAlertMsg sizeToFit];
+    CGRect frame = lblAlertMsg.frame;
+//    frame.size.height = frame.size.height < 44?44:frame.size.height;
+    frame.size.height = frame.size.height + 2*8;
+    frame.size.width = self.view.frame.size.width-16*2;
+    lblAlertMsg.frame = frame;
+    lblAlertMsg.center = self.view.center;
+    
     lblAlertMsg.backgroundColor = cSystem4;
     lblAlertMsg.textColor = [UIColor whiteColor];
     lblAlertMsg.textAlignment = NSTextAlignmentCenter;
@@ -440,6 +449,7 @@ CGFloat animatedDistance;
 
 - (void)itemsFail
 {
+    [self removeWaitingView];
     [self removeOverlayViews];
     NSString *title = [Utility getErrorOccurTitle];
     NSString *message = [Utility getErrorOccurMessage];
@@ -1084,7 +1094,6 @@ CGFloat animatedDistance;
     [OrderNote removeAllObjects];
     [OrderTaking removeCurrentOrderTakingList];
     [CreditCard removeCurrentCreditCard];
-    [VoucherCode removeCurrentVoucherCode];
     [SaveReceipt removeCurrentSaveReceipt];
     [Promotion removeAllObjects];
     [RewardRedemption removeAllObjects];

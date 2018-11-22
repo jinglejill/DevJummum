@@ -9,13 +9,14 @@
 #import "MenuForBuffet.h"
 
 @implementation MenuForBuffet
--(MenuForBuffet *)initWithReceiptID:(NSInteger)receiptID menuList:(NSMutableArray *)menuList
+-(MenuForBuffet *)initWithReceiptID:(NSInteger)receiptID menuList:(NSMutableArray *)menuList menuTypeList:(NSMutableArray *)menuTypeList
 {
     self = [super init];
     if(self)
     {
         self.receiptID = receiptID;
-        self.menuList = menuList;        
+        self.menuList = menuList;
+        self.menuTypeList = menuTypeList;
     }
     return self;
 }

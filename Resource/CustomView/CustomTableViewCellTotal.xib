@@ -40,21 +40,31 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TIa-lE-bEa">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <rect key="frame" x="16" y="0.0" width="343" height="0.5"/>
+                    <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="zY0-NK-IId"/>
+                        <constraint firstAttribute="height" constant="0.5" id="zY0-NK-IId"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWi-eD-aV3">
+                    <rect key="frame" x="16" y="25" width="343" height="0.5"/>
+                    <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="ezq-qv-H88"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
                 <constraint firstItem="xJA-nh-unc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="6QL-la-qm4"/>
                 <constraint firstItem="TIa-lE-bEa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6Uu-Ba-7Lx"/>
-                <constraint firstAttribute="trailing" secondItem="TIa-lE-bEa" secondAttribute="trailing" id="UNQ-2b-rrT"/>
-                <constraint firstItem="TIa-lE-bEa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="V9O-Cg-O4v"/>
+                <constraint firstItem="XWi-eD-aV3" firstAttribute="trailing" secondItem="TIa-lE-bEa" secondAttribute="trailing" id="9PQ-3n-zaF"/>
+                <constraint firstItem="xJA-nh-unc" firstAttribute="leading" secondItem="TIa-lE-bEa" secondAttribute="leading" id="FWa-sx-wKe"/>
                 <constraint firstItem="xJA-nh-unc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="W8I-bA-oVf"/>
+                <constraint firstItem="w7d-uY-WWJ" firstAttribute="trailing" secondItem="TIa-lE-bEa" secondAttribute="trailing" id="a9N-Kp-QbB"/>
                 <constraint firstItem="w7d-uY-WWJ" firstAttribute="leading" secondItem="xJA-nh-unc" secondAttribute="trailing" constant="8" id="p4x-ki-VPJ"/>
+                <constraint firstItem="XWi-eD-aV3" firstAttribute="leading" secondItem="TIa-lE-bEa" secondAttribute="leading" id="ptk-S1-sBO"/>
                 <constraint firstItem="w7d-uY-WWJ" firstAttribute="top" secondItem="xJA-nh-unc" secondAttribute="top" id="sCI-Vw-DXp"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="XWi-eD-aV3" secondAttribute="bottom" id="wI9-xu-x7g"/>
                 <constraint firstAttribute="trailing" secondItem="w7d-uY-WWJ" secondAttribute="trailing" constant="16" id="yAf-IK-NTd"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -64,9 +74,10 @@
                 <outlet property="lblAmountWidth" destination="hGv-us-SCx" id="Cdu-J2-59q"/>
                 <outlet property="lblTitle" destination="xJA-nh-unc" id="hze-RW-QSy"/>
                 <outlet property="lblTitleTop" destination="6QL-la-qm4" id="OCP-Pf-YGi"/>
+                <outlet property="vwBottomBorder" destination="XWi-eD-aV3" id="87P-qN-4Z5"/>
                 <outlet property="vwTopBorder" destination="TIa-lE-bEa" id="gjQ-gb-LEH"/>
             </connections>
-            <point key="canvasLocation" x="33.5" y="167.5"/>
+            <point key="canvasLocation" x="33.5" y="167"/>
         </view>
     </objects>
 </document>

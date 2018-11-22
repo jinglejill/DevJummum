@@ -420,7 +420,6 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                 strTotal = [Utility addPrefixBahtSymbol:strTotal];
                 cell.lblTitle.text = strTitle;
                 cell.lblAmount.text = strTotal;
-                cell.vwTopBorder.hidden = YES;
                 cell.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
                 cell.lblTitle.textColor = cSystem4;
                 cell.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
@@ -675,7 +674,6 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                               {
                                   [OrderTaking removeCurrentOrderTakingList];
                                   [CreditCard removeCurrentCreditCard];
-                                  [VoucherCode removeCurrentVoucherCode];
                                   [SaveReceipt removeCurrentSaveReceipt];
                                   [tbvOrder reloadData];
                                   [tbvTotal reloadData];
@@ -899,11 +897,10 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                                           
                                           
                                           //update note id list in text
-                                          orderTaking.noteIDListInText = _copyOrderTaking.noteIDListInText;//[OrderNote getNoteIDListInTextWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
+                                          orderTaking.noteIDListInText = _copyOrderTaking.noteIDListInText;
                                           
                                           
                                           //update ordertaking price
-//                                          float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
                                           orderTaking.notePrice = _copyOrderTaking.notePrice;// sumNotePrice;
                                           orderTaking.modifiedUser = [Utility modifiedUser];
                                           orderTaking.modifiedDate = [Utility currentDateTime];
@@ -1062,11 +1059,10 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         
         
         //update note id list in text
-        orderTaking.noteIDListInText = _copyOrderTaking.noteIDListInText;//[OrderNote getNoteIDListInTextWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
+        orderTaking.noteIDListInText = _copyOrderTaking.noteIDListInText;
         
         
         //update ordertaking price
-//        float sumNotePrice = [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
         orderTaking.notePrice = _copyOrderTaking.notePrice;//sumNotePrice;
         orderTaking.modifiedUser = [Utility modifiedUser];
         orderTaking.modifiedDate = [Utility currentDateTime];

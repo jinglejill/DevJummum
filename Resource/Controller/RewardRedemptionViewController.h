@@ -10,6 +10,7 @@
 #import "RewardPoint.h"
 #import "RewardRedemption.h"
 #import "PromoCode.h"
+#import "Branch.h"
 
 
 @interface RewardRedemptionViewController : CustomViewController<UITableViewDelegate,UITableViewDataSource>
@@ -23,6 +24,9 @@
 @property (nonatomic) NSInteger fromMenuMyReward;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelHeight;
+@property (nonatomic) BOOL goToMenuSelection;
+@property (strong, nonatomic) Branch *branch;
+
 
 - (IBAction)goBack:(id)sender;
 -(IBAction)unwindToRewardRedemption:(UIStoryboardSegue *)segue;

@@ -9,7 +9,7 @@
 #import "CustomViewController.h"
 #import "Branch.h"
 #import "CustomerTable.h"
-#import "CustomViewVoucher.h"
+//#import "CustomViewVoucher.h"
 #import "Promotion.h"
 #import "Receipt.h"
 #import "RewardRedemption.h"
@@ -22,7 +22,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tbvData;
 @property (strong, nonatomic) IBOutlet UITableView *tbvTotal;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tbvTotalHeightConstant;
-@property (strong, nonatomic) IBOutlet CustomViewVoucher *voucherView;
+//@property (strong, nonatomic) IBOutlet CustomViewVoucher *voucherView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomButtonHeight;
 @property (strong, nonatomic) IBOutlet UIButton *btnAddRemoveMenu;

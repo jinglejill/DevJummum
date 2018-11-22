@@ -11,5 +11,6 @@
 @interface MenuForBuffet : NSObject
 @property (nonatomic) NSInteger receiptID;
 @property (retain, nonatomic) NSMutableArray *menuList;
--(MenuForBuffet *)initWithReceiptID:(NSInteger)receiptID menuList:(NSMutableArray *)menuList;
+@property (retain, nonatomic) NSMutableArray *menuTypeList;
+-(MenuForBuffet *)initWithReceiptID:(NSInteger)receiptID menuList:(NSMutableArray *)menuList menuTypeList:(NSMutableArray *)menuTypeList;
 @end

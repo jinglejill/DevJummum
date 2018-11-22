@@ -23,13 +23,15 @@
     // Configure the view for the selected state
 }
 
-- (void)prepareForReuse {
+- (void)prepareForReuse
+{
     [super prepareForReuse];
-    //    NSLog(@"reuse");
     
     self.lblTitle.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];
     self.lblAmount.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];
     self.lblAmount.textColor = cSystem1;
     self.lblAmountWidth.constant = 150;
+    self.vwTopBorder.hidden = YES;
+    self.vwBottomBorder.hidden = YES;
 }
 @end

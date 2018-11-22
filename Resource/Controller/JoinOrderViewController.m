@@ -432,7 +432,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             
             
             Receipt *receipt = [Receipt getReceipt:receiptID];
-            NSString *strTotalAmount = [Utility formatDecimal:receipt.cashAmount+receipt.transferAmount+receipt.creditCardAmount withMinFraction:2 andMaxFraction:2];
+            NSString *strTotalAmount = [Utility formatDecimal:receipt.netTotal withMinFraction:2 andMaxFraction:2];
             strTotalAmount = [Utility addPrefixBahtSymbol:strTotalAmount];
             cell.lblAmount.text = strTotalAmount;
             cell.lblTitle.text = [Language getText:@"รวมทั้งหมด"];
@@ -844,47 +844,11 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
 
 - (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath
 {
-    if([tableView isEqual:tbvData])
-    {
-        [cell setSeparatorInset:UIEdgeInsetsMake(16, 16, 16, 16)];
-    }
-    else
-    {
-        NSInteger receiptID = tableView.tag;
-        NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
-        orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
-        Receipt *receipt = [Receipt getReceipt:receiptID];
-        cell.separatorInset = UIEdgeInsetsMake(0.0f, self.view.bounds.size.width, 0.0f, CGFLOAT_MAX);
-        if([Utility isStringEmpty:receipt.remark] && indexPath.item == [orderTakingList count]-1)
-        {
-            [cell setSeparatorInset:UIEdgeInsetsMake(16, 16, 16, 16)];
-        }
-        
-        
-        if(indexPath.item == [orderTakingList count] || indexPath.item == [orderTakingList count]+1)
-        {
-            [cell setSeparatorInset:UIEdgeInsetsMake(16, 16, 16, 16)];
-        }
-    }
+    cell.separatorInset = UIEdgeInsetsMake(0.0f, self.view.bounds.size.width, 0.0f, CGFLOAT_MAX);
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if(![tableView isEqual:tbvData])
-//    {
-//
-//        _selectedReceiptID = tableView.tag;
-//        _selectedReceipt = [Receipt getReceipt:_selectedReceiptID];
-//        [tableView reloadData];
-//
-//
-//        double delayInSeconds = 0.3;
-//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-//        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//            [self performSegueWithIdentifier:@"segOrderDetail" sender:self];
-//        });
-//
-//    }
 }
 
 -(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel

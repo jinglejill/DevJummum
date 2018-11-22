@@ -48,10 +48,7 @@
     vwAlert.layer.masksToBounds = YES;
     
     [self startAnim];
-//    [self blinkForever:imgArrow];
-//    imgArrow.animationImages = @[[UIImage imageNamed:@"twirlArrow.png"],[UIImage imageNamed:@"twirlArrowBlank.png"]];
-//    imgArrow.animationDuration = 1;
-//    imgArrow.animationRepeatCount = INFINITY;
+
 }
 
 

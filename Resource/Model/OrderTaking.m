@@ -205,18 +205,6 @@
     return toOrderTaking;
 }
 
-+(OrderTaking *)getOrderTakingWithCustomerTableID:(NSInteger)customerTableID menuID:(NSInteger)menuID takeAway:(NSInteger)takeAway noteIDListInText:(NSString *)noteIDListInText status:(NSInteger)status;
-{
-    NSMutableArray *dataList = [SharedOrderTaking sharedOrderTaking].orderTakingList;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_customerTableID = %ld and _menuID = %ld and _takeAway = %ld and _noteIDListInText = %@ and _status = %ld",customerTableID,menuID,takeAway,noteIDListInText,status];
-    NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
-    if([filterArray count] > 0)
-    {
-        return filterArray[0];
-    }
-    return nil;
-}
-
 +(NSMutableArray *)getOrderTakingListWithStatus:(NSInteger)status orderTakingList:(NSMutableArray *)orderTakingList
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_status = %ld",status];
