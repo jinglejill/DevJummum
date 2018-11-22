@@ -170,7 +170,7 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
         _promoCode = promoCode.code;
         
         
-        if(rewardRedemption.discountGroupMenuID)
+        if(rewardRedemption.mainBranchID)
         {
             cell.btnCopy.hidden = NO;
             [cell.btnCopy setTitle:[Language getText:@"สั่งเลย"] forState:UIControlStateNormal];
@@ -350,7 +350,7 @@ static NSString * const reuseIdentifierLabelDetailLabelWithImage = @"CustomTable
         else
         {
             NSMutableArray *discountGroupMenuMapList = items[3];
-            if([discountGroupMenuMapList count]>0)
+            if(rewardRedemption.discountGroupMenuID && [discountGroupMenuMapList count]>0)
             {
                 NSMutableArray *orderTakingList = [[NSMutableArray alloc]init];
                 for(int i=0; i<[discountGroupMenuMapList count]; i++)

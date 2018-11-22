@@ -977,7 +977,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         if(buffetReceipt)
         {
             NSInteger timeToOrder = buffetReceipt.timeToOrder;
-            NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
+            NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:buffetReceipt.receiptDate];
             NSInteger timeToCountDown = timeToOrder - seconds >= 0?timeToOrder - seconds:0;
             if(timeToCountDown <= 0)
             {

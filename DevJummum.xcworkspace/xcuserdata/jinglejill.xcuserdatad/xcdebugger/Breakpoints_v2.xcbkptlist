@@ -1656,22 +1656,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Resource/Controller/LuckyDrawViewController.m"
-            timestampString = "564484181.93325"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
-            landmarkName = "-animationDidStop:finished:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Resource/Controller/CreditCardAndOrderSummaryViewController.m"
             timestampString = "564484181.933321"
             startingColumnNumber = "9223372036854775807"

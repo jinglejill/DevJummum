@@ -179,7 +179,7 @@
             else
             {
                 NSMutableArray *discountGroupMenuMapList = items[3];
-                if([discountGroupMenuMapList count]>0)
+                if(_rewardRedemption.discountGroupMenuID && [discountGroupMenuMapList count]>0)
                 {
                     NSMutableArray *orderTakingList = [[NSMutableArray alloc]init];
                     for(int i=0; i<[discountGroupMenuMapList count]; i++)
@@ -242,7 +242,7 @@
             [self.view addSubview:_btnHome];
             
             
-//            if(_rewardRedemption.discountGroupMenuID)
+            if(_rewardRedemption.mainBranchID)
             {
                 float btnOrderNowWidth = 60;
                 if(!_btnOrderNow)

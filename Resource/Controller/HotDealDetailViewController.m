@@ -150,7 +150,7 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         cell.lblRemarkHeight.constant = 0;
         
         
-        if(promotion.discountGroupMenuID)
+        if(promotion.mainBranchID)
         {
             cell.btnOrderNow.hidden = NO;
             cell.btnOrderNowTop.constant = 7;
@@ -325,7 +325,7 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         else
         {
             NSMutableArray *discountGroupMenuMapList = items[3];
-            if([discountGroupMenuMapList count]>0)
+            if(promotion.discountGroupMenuID && [discountGroupMenuMapList count]>0)
             {
                 NSMutableArray *orderTakingList = [[NSMutableArray alloc]init];
                 for(int i=0; i<[discountGroupMenuMapList count]; i++)
