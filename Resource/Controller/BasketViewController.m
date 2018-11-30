@@ -121,7 +121,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
             
             for(int i=0; i<quantity-currentOrderTakingCount; i++)
             {
-                OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
+                OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 discountProgramValue:0 discountValue:0 orderNo:0 status:1 receiptID:0];
                 [OrderTaking addObject:orderTaking];
                 [currentOrderTakingList addObject:orderTaking];
             }
@@ -772,7 +772,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         
         
         NSMutableArray *currentOrderTakingList = [OrderTaking getCurrentOrderTakingList];
-        OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
+        OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:branch.branchID customerTableID:customerTable.customerTableID menuID:menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 discountProgramValue:0 discountValue:0 orderNo:0 status:1 receiptID:0];
         [OrderTaking addObject:orderTaking];
         [currentOrderTakingList addObject:orderTaking];
 

@@ -123,7 +123,7 @@
             break;
         case dbMenuBelongToBuffet:
         {
-            arrClassName = @[@"Message",@"Menu",@"MenuType",@"SpecialPriceProgram",@"BuffetMenuMap",@"Receipt"];
+            arrClassName = @[@"Message",@"Menu",@"MenuType",@"SpecialPriceProgram",@"Receipt"];
         }
             break;
         case dbMenuNoteList:
@@ -955,30 +955,7 @@
             
             url = [NSURL URLWithString:[Utility url:urlOmiseCheckOut]];
         }
-            break;
-        case dbBuffetOrder:
-        {
-            NSArray *dataList = (NSArray *)data;
-            Receipt *receipt = dataList[0];
-            NSMutableArray *orderTakingList = dataList[1];
-            NSMutableArray *orderNoteList = dataList[2];
-            
-                        
-            noteDataString = [NSString stringWithFormat:@"countOtOrderTaking=%ld&countOnOrderNote=%ld",(unsigned long)[orderTakingList count],[orderNoteList count]];
-            noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:receipt]];
-            for(int i=0; i<[orderTakingList count]; i++)
-            {
-                OrderTaking *orderTaking = orderTakingList[i];
-                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:orderTaking withPrefix:@"ot" runningNo:i]];
-            }
-            for(int i=0; i<[orderNoteList count]; i++)
-            {
-                OrderNote *orderNote = orderNoteList[i];
-                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:orderNote withPrefix:@"on" runningNo:i]];
-            }
-            url = [NSURL URLWithString:[Utility url:urlBuffetOrderInsertList]];
-        }
-            break;
+            break;        
         case dbUserAccountValidate:
         {
             NSArray *dataList = (NSArray *)data;
@@ -1475,40 +1452,6 @@
             jsonData = [NSJSONSerialization dataWithJSONObject:mutDicData options:0 error:&error];
             
             url = [NSURL URLWithString:[Utility url:urlOmiseCheckOut]];
-        }
-            break;
-            case dbBuffetOrder:
-        {
-            NSArray *dataList = (NSArray *)data;
-            Receipt *receipt = dataList[0];
-            NSMutableArray *orderTakingList = dataList[1];
-            NSMutableArray *orderNoteList = dataList[2];            
-            
-            
-            NSDictionary *dicData = [receipt dictionary];
-            NSMutableArray *arrOrderTaking = [[NSMutableArray alloc]init];
-            for(int i=0; i<[orderTakingList count]; i++)
-            {
-                OrderTaking *orderTaking = orderTakingList[i];
-                NSDictionary *dicOrderTaking = [orderTaking dictionary];
-                [arrOrderTaking addObject:dicOrderTaking];
-            }
-            NSMutableArray *arrOrderNote = [[NSMutableArray alloc]init];
-            for(int i=0; i<[orderNoteList count]; i++)
-            {
-                OrderNote *orderNote = orderNoteList[i];
-                NSDictionary *dicOrderNote = [orderNote dictionary];
-                [arrOrderNote addObject:dicOrderNote];
-            }
-            
-            NSMutableArray *mutDicData = [dicData mutableCopy];
-            [mutDicData setValue:arrOrderTaking forKey:@"orderTaking"];
-            [mutDicData setValue:arrOrderNote forKey:@"orderNote"];
-            NSError *error;
-            jsonData = [NSJSONSerialization dataWithJSONObject:mutDicData options:0 error:&error];
-            
-            
-            url = [NSURL URLWithString:[Utility url:urlBuffetOrderInsertList]];
         }
             break;
         case dbSaveOrder:
@@ -2721,6 +2664,11 @@
         }
         else
         {
+//            //test*****
+//            UIImage *image = [[UIImage alloc] initWithData:dataRaw];
+//            completionBlock(YES,image);
+//            return ;
+//            //******
             NSDictionary *json = [NSJSONSerialization
                                   JSONObjectWithData:dataRaw
                                   options:kNilOptions error:&error];

@@ -358,46 +358,6 @@
     menuForBuffet = nil;
 }
 
-+(NSMutableArray *)getMenuListALaCarteWithBranchID:(NSInteger)branchID
-{
-    NSMutableArray *dataList = [SharedMenu sharedMenu].menuList;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _alacarteMenu = 1",branchID];
-    NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
-    
-    return [filterArray mutableCopy];
-}
-
-+(NSMutableArray *)getMenuBelongToBuffet:(Receipt *)receipt
-{
-    NSMutableSet *menuSet = [[NSMutableSet alloc]init];
-    NSMutableSet *menuBelongToBuffetSet = [[NSMutableSet alloc]init];
-    NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
-    for(OrderTaking *item in orderTakingList)
-    {
-        Menu *menu = [Menu getMenu:item.menuID branchID:item.branchID];
-        [menuSet addObject:menu];
-    }
-    
-    for(Menu *item in menuSet)
-    {
-        if(item.buffetMenu)
-        {
-            NSMutableArray *dataList = [SharedBuffetMenuMap sharedBuffetMenuMap].buffetMenuMapList;
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_branchID = %ld and _buffetMenuID = %ld",item.branchID,item.menuID];
-
-            NSArray *filterArray = [dataList filteredArrayUsingPredicate:predicate];
-            for(BuffetMenuMap *buffetMenuMap in filterArray)
-            {
-                Menu *menu = [Menu getMenu:buffetMenuMap.menuID branchID:item.branchID];
-                [menuBelongToBuffetSet addObject:menu];
-                
-            }            
-        }
-    }
-    
-    return [[menuBelongToBuffetSet allObjects] mutableCopy];
-}
-
 +(NSMutableArray *)getMenuListRecommendedWithMenuList:(NSMutableArray *)menuList
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_recommended = 1"];

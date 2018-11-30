@@ -192,7 +192,6 @@ enum enumDB
     dbMenuNote,
     dbMenuNoteList,    
     dbMenuBelongToBuffet,
-    dbBuffetOrder,
     dbSettingWithKey,
     dbPromotionAndRewardRedemption,
     dbLuckyDrawTicket,

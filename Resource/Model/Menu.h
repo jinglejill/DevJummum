@@ -63,8 +63,6 @@
 +(MenuForBuffet *)getCurrentMenuForBuffet;
 +(void)setCurrentMenuForBuffet:(MenuForBuffet *)menuForBuffet;
 +(void)removeCurrentMenuForBuffet;
-+(NSMutableArray *)getMenuListALaCarteWithBranchID:(NSInteger)branchID;
-+(NSMutableArray *)getMenuBelongToBuffet:(Receipt *)receipt;
 +(NSMutableArray *)getMenuListRecommendedWithMenuList:(NSMutableArray *)menuList;
 +(BOOL)hasRecommendedMenuWithMenuList:(NSMutableArray *)menuList;
 @end

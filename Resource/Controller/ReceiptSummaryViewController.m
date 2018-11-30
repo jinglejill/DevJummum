@@ -198,7 +198,6 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
             orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
             
-    //        return [orderTakingList count]+4;
             return [orderTakingList count];
         }
         else if(section == 1 || section == 2 || section == 3 || section == 4)
@@ -251,7 +250,8 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         NSInteger timeToOrder = receipt.timeToOrder;
         NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
         NSInteger timeToCountDown = timeToOrder - seconds >= 0?timeToOrder - seconds:0;
-        cell.btnShareOrder.hidden = !(receipt.hasBuffetMenu && timeToCountDown && !receipt.buffetEnded);
+        BOOL receiptStatusValid = receipt.status == 2 || receipt.status == 5 || receipt.status == 6;
+        cell.btnShareOrder.hidden = !(receiptStatusValid && receipt.hasBuffetMenu && timeToCountDown && !receipt.buffetEnded);
         cell.btnShareOrder.tag = receipt.receiptID;
         [cell.btnShareOrder addTarget:self action:@selector(shareOrderQr:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -508,7 +508,14 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         
             [attrStringStatusLabel appendAttributedString:attrStringStatus];
             cell.lblValue.attributedText = attrStringStatusLabel;
-            if(receipt.hasBuffetMenu)
+
+
+            NSInteger timeToOrder = receipt.timeToOrder;
+            NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
+            NSInteger timeToCountDown = timeToOrder - seconds >= 0?timeToOrder - seconds:0;
+            BOOL receiptStatusValid = receipt.status == 2 || receipt.status == 5 || receipt.status == 6;
+            BOOL showBuffetButtonSection = (receiptStatusValid && receipt.hasBuffetMenu && timeToCountDown && !receipt.buffetEnded);
+            if(showBuffetButtonSection)
             {
                 NSInteger timeToOrder = receipt.timeToOrder;
                 NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
@@ -536,6 +543,11 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
                 cell.lblText.text = @"";
                 cell.lblText.hidden = YES;
                 
+                NSTimer *timer = [_dicTimer objectForKey:[NSString stringWithFormat:@"%ld",receiptID]];
+                if(timer)
+                {
+                    [timer invalidate];
+                }                
             }
             cell.lblTextWidthConstant.constant = 70;
         
@@ -555,7 +567,8 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
             NSInteger timeToCountDown = timeToOrder - seconds >= 0?timeToOrder - seconds:0;
             cell.btnValue.tag = receiptID;
-            cell.btnValue.hidden = !(receipt.hasBuffetMenu && timeToCountDown && !receipt.buffetEnded);
+            BOOL receiptStatusValid = receipt.status == 2 || receipt.status == 5 || receipt.status == 6;
+            cell.btnValue.hidden = !(receiptStatusValid && receipt.hasBuffetMenu && timeToCountDown && !receipt.buffetEnded);
             cell.btnValue.backgroundColor = cSystem1;
             [cell.btnValue setTitle:title forState:UIControlStateNormal];
             [cell.btnValue addTarget:self action:@selector(orderBuffet:) forControlEvents:UIControlEventTouchUpInside];
@@ -702,15 +715,12 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         float remarkHeight = [Utility isStringEmpty:receipt.remark]?0:4+cell.lblTextHeight.constant+4;
         
         
-        
-        float btnBuffetHeight = 0;
-        if(receipt.hasBuffetMenu)
-        {
-            NSInteger timeToOrder = receipt.timeToOrder;
-            NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
-            NSInteger timeToCountDown = timeToOrder - seconds >= 0?timeToOrder - seconds:0;
-            btnBuffetHeight = timeToCountDown && !receipt.buffetEnded ?44:0;
-        }        
+        NSInteger timeToOrder = receipt.timeToOrder;
+        NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
+        NSInteger timeToCountDown = timeToOrder - seconds >= 0?timeToOrder - seconds:0;
+        BOOL receiptStatusValid = receipt.status == 2 || receipt.status == 5 || receipt.status == 6;
+        BOOL showBuffetButtonSection = (receiptStatusValid && receipt.hasBuffetMenu && timeToCountDown && !receipt.buffetEnded);
+        float btnBuffetHeight = showBuffetButtonSection ?44:0;
     
         
         return sumHeight+83+remarkHeight+34+34+btnBuffetHeight;//+37;
@@ -871,14 +881,14 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         {
             NSInteger receiptID = tableView.tag;
             Receipt *receipt = [Receipt getReceipt:receiptID];
-            if(receipt.hasBuffetMenu)
-            {
-                NSInteger timeToOrder = receipt.timeToOrder;
-                NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
-                NSInteger timeToCountDown = timeToOrder - seconds >= 0?timeToOrder - seconds:0;
-                return timeToCountDown && !receipt.buffetEnded ?44:0;
-            }
-            return 0;
+            NSInteger timeToOrder = receipt.timeToOrder;
+            NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
+            NSInteger timeToCountDown = timeToOrder - seconds >= 0?timeToOrder - seconds:0;
+            BOOL receiptStatusValid = receipt.status == 2 || receipt.status == 5 || receipt.status == 6;
+            BOOL showBuffetButtonSection = (receiptStatusValid && receipt.hasBuffetMenu && timeToCountDown && !receipt.buffetEnded);
+            float btnBuffetHeight = showBuffetButtonSection ?44:0;
+            
+            return btnBuffetHeight;
         }
     }
     

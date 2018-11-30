@@ -409,8 +409,7 @@ static NSString * const reuseIdentifierLabelRemark = @"CustomTableViewCellLabelR
                     
                     
                     NSString *message = [Language getText:@"คูปองส่วนลด %@"];
-                    NSString *strDiscount = [Utility formatDecimal:receipt.discountValue withMinFraction:0 andMaxFraction:2];
-                    strDiscount = ![Utility isStringEmpty:receipt.voucherCode]?[NSString stringWithFormat:message,receipt.voucherCode]:strDiscount;
+                    NSString *strDiscount = [NSString stringWithFormat:message,receipt.voucherCode];
                     
                     
                     NSString *strAmount = [Utility formatDecimal:receipt.discountValue withMinFraction:2 andMaxFraction:2];

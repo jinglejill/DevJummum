@@ -337,7 +337,7 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
                     
                     for(int j=0; j<discountGroupMenuMap.quantity; j++)
                     {
-                        OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:promotion.mainBranchID customerTableID:0 menuID:discountGroupMenuMap.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 orderNo:0 status:1 receiptID:0];
+                        OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:promotion.mainBranchID customerTableID:0 menuID:discountGroupMenuMap.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 discountProgramValue:0 discountValue:0 orderNo:0 status:1 receiptID:0];
                         [orderTakingList addObject:orderTaking];
                         [OrderTaking addObject:orderTaking];
                     }
