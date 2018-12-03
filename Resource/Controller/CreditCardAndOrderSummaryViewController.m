@@ -13,11 +13,11 @@
 #import "CustomerTableSearchViewController.h"
 #import "VoucherCodeListViewController.h"
 #import "ShareMenuToOrderViewController.h"
+#import "ShowQRToPayViewController.h"
 #import "CustomTableViewCellCreditCard.h"
 #import "CustomTableViewCellImageLabelRemove.h"
 #import "CustomTableViewCellOrderSummary.h"
 #import "CustomTableViewCellTotal.h"
-//#import "CustomTableViewCellVoucherCode.h"
 #import "CustomTableViewCellVoucherCodeExist.h"
 #import "CustomTableViewCellApplyVoucherCode.h"
 #import "CustomTableViewHeaderFooterButton.h"
@@ -64,6 +64,7 @@
     NSString *_selectedVoucherCode;
     BOOL _showGuideMessage;
     NSInteger _numberOfGift;
+    NSInteger _paymentMethod; //0=not set,1=transfer,2=credit card
     
 
     CreditCardAndOrderSummary *_orderSummary;
@@ -75,7 +76,6 @@ static NSString * const reuseIdentifierCredit = @"CustomTableViewCellCreditCard"
 static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellImageLabelRemove";
 static NSString * const reuseIdentifierOrderSummary = @"CustomTableViewCellOrderSummary";
 static NSString * const reuseIdentifierTotal = @"CustomTableViewCellTotal";
-//static NSString * const reuseIdentifierVoucherCode = @"CustomTableViewCellVoucherCode";
 static NSString * const reuseIdentifierVoucherCodeExist = @"CustomTableViewCellVoucherCodeExist";
 static NSString * const reuseIdentifierApplyVoucherCode = @"CustomTableViewCellApplyVoucherCode";
 static NSString * const reuseIdentifierHeaderFooterButton = @"CustomTableViewHeaderFooterButton";
@@ -86,7 +86,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 
 @synthesize lblNavTitle;
 @synthesize tbvData;
-//@synthesize voucherView;
 @synthesize branch;
 @synthesize customerTable;
 @synthesize tbvTotal;
@@ -112,8 +111,10 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     if([segue.sourceViewController isMemberOfClass:[SelectPaymentMethodViewController class]])
     {
         SelectPaymentMethodViewController *vc = segue.sourceViewController;
+        _paymentMethod = vc.paymentMethod;
         _creditCard = vc.creditCard;
-        if(_creditCard.primaryCard)
+        
+        if(_paymentMethod == 2 && _creditCard.primaryCard)
         {
             _creditCard.saveCard = 1;
         }
@@ -433,11 +434,19 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         btnAddRemoveMenu.hidden = YES;
     }
     
+    //check last payment method
+    NSMutableDictionary *dicPaymentMethod = [[[NSUserDefaults standardUserDefaults] objectForKey:@"paymentMethod"] mutableCopy];
+    if(dicPaymentMethod)
+    {
+        UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+        NSNumber *objPaymentMethod = [dicPaymentMethod objectForKey:userAccount.username];
+        _paymentMethod = objPaymentMethod?[objPaymentMethod integerValue]:0;
+    }
     
     
     //set credit card
     _creditCard = [CreditCard getCurrentCreditCard];
-    if(!_creditCard)
+    if(!_creditCard || [Utility isStringEmpty:_creditCard.creditCardNo])
     {
         UserAccount *userAccount = [UserAccount getCurrentUserAccount];
         NSMutableDictionary *dicCreditCard = [[[NSUserDefaults standardUserDefaults] objectForKey:@"creditCard"] mutableCopy];
@@ -448,19 +457,13 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             {
                 _creditCard = [CreditCard getPrimaryCard:creditCardList];
             }
-            else
-            {
-                _creditCard = [[CreditCard alloc]init];
-                _creditCard.saveCard = 1;
-            }
-        }
-        else
-        {
-            _creditCard = [[CreditCard alloc]init];
-            _creditCard.saveCard = 1;
         }
     }
-    
+    if(!_creditCard || [Utility isStringEmpty:_creditCard.creditCardNo])
+    {
+        _creditCard = [[CreditCard alloc]init];
+        _creditCard.saveCard = 1;
+    }
     
     tbvData.delegate = self;
     tbvData.dataSource = self;
@@ -508,10 +511,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         [tbvTotal registerNib:nib forCellReuseIdentifier:reuseIdentifierApplyVoucherCode];
     }
 
-//    [[NSBundle mainBundle] loadNibNamed:@"CustomViewVoucher" owner:self options:nil];
-//    [voucherView.btnDelete setTitle:[Language getText:@"ลบ"] forState:UIControlStateNormal];
-//    [voucherView.btnDelete addTarget:self action:@selector(deleteVoucher:) forControlEvents:UIControlEventTouchUpInside];
-
 
     [self setOrder];
     [self loadingOverlayView];
@@ -533,7 +532,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     }
     
     
-    
     NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
     NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingList:orderTakingList];
     
@@ -541,7 +539,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     self.homeModel = [[HomeModel alloc]init];
     self.homeModel.delegate = self;
     [self.homeModel downloadItemsJson:dbPromotion withData:@[_selectedVoucherCode,userAccount,branch,orderTakingList,orderNoteList]];
-
 
 
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
@@ -579,24 +576,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             }
             else
             {
-                NSInteger selectCreditCard = 0;//has card saved
-                UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-                NSMutableDictionary *dicCreditCard = [[[NSUserDefaults standardUserDefaults] objectForKey:@"creditCard"] mutableCopy];
-                if(dicCreditCard)
-                {
-                    NSMutableArray *creditCardList = [dicCreditCard objectForKey:userAccount.username];
-                    if(creditCardList && [creditCardList count] > 0)
-                    {
-                        selectCreditCard = 1;
-                    }
-                }
-                
-                if(!_creditCard.primaryCard && selectCreditCard)
-                {
-                    return 3;
-                }
-                
-                return 2;
+                return 3;
             }
         }
         else if(section == 2)
@@ -619,7 +599,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         {
             if(_orderSummary)
             {
-                
                 float totalAmountHeight = _orderSummary.showTotalAmount?26:0;
                 float sumSpecialPriceDiscountHeight = _orderSummary.showSpecialPriceDiscount?26:0;
                 float discountProgramHeight = _orderSummary.showDiscountProgram?26:0;
@@ -695,7 +674,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
             cell.lblValue.hidden = NO;
             
             
-            
             return  cell;
         }
         else if(section == 1)
@@ -711,7 +689,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                     
                     
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    NSString *message = [Language getText:@"การชำระเงิน ด้วยบัตรเครดิต/เดบิต"];
+                    NSString *message = [Language getText:@"วิธีการชำระเงิน"];
                     cell.textLabel.text = message;
                     cell.textLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15.0f];
                     cell.textLabel.textColor = cSystem1;
@@ -722,7 +700,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                     break;
                 case 1:
                 {
-                    if(!_creditCard.primaryCard)
+                    if(_paymentMethod == 2 && !_creditCard.primaryCard)
                     {
                         CustomTableViewCellCreditCard *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierCredit];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -846,7 +824,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                         
                         return cell;
                     }
-                    else
+                    else if(_paymentMethod == 2 && _creditCard.primaryCard)
                     {
                         CustomTableViewCellImageLabelRemove *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierImageLabelRemove];
                         NSInteger cardBrand = [OMSCardNumber brandForPan:_creditCard.creditCardNo];
@@ -882,14 +860,40 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                         cell.lblValue.text = strCreditCardNo;
                         cell.lblValue.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                         
+                        cell.btnRemove.hidden = YES;
+                        [cell.btnRemove setTitle:@"" forState:UIControlStateNormal];
                         
                         
-                        
-                        [cell.btnRemove setTitle:@">" forState:UIControlStateNormal];
-                        [cell.btnRemove addTarget:self action:@selector(addCreditCard:) forControlEvents:UIControlEventTouchUpInside];
                         return cell;
                     }
-                    
+                    else if(_paymentMethod == 1)//transfer
+                    {
+                        UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"cell"];
+                        if (!cell) {
+                            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+                        }
+                        
+                        
+                        cell.textLabel.text = [Language getText:@"โอนเงิน"];
+                        cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+                        cell.textLabel.textColor = cSystem4;
+                        return cell;
+                    }
+                    else
+                    {
+                        UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"cellValue1"];
+                        if (!cell)
+                        {
+                            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cellValue1"];
+                        }
+                        
+                        cell.textLabel.text = @"";                        
+                        cell.textLabel.textColor = cSystem4;
+                        cell.detailTextLabel.text = @"";
+                        cell.detailTextLabel.textColor = cSystem4;
+                        
+                        return cell;
+                    }
                 }
                     break;
                 case 2:
@@ -900,14 +904,11 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cellValue1"];
                     }
                     
-                    
-                    cell.textLabel.text = [Language getText:@"เลือกบัตรเครดิต/เดบิต"];
+                    cell.textLabel.text = [Language getText:@"เลือกวิธีการชำระเงิน"];
                     cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
                     cell.textLabel.textColor = cSystem4;
                     cell.detailTextLabel.text = @">";
-                    cell.detailTextLabel.textColor = cSystem4;
-                    
-                    
+                    cell.detailTextLabel.textColor = cSystem1;
                     
                     return cell;
                 }
@@ -1404,25 +1405,27 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         }
         else if(section == 1)
         {
-            if(item == 0)
+            if(item == 0 || item == 2)
             {
                 return 44;
             }
             else if(item == 1)
             {
-                if(!_creditCard.primaryCard)
+                if(_paymentMethod == 2 && !_creditCard.primaryCard)
                 {
                     return 272;
+                }
+                else if(_paymentMethod == 0)
+                {
+                    return 0;
                 }
                 else
                 {
                     return 44;
                 }
             }
-            else
-            {
-                return 44;
-            }
+            
+            return 0;
         }
         else if(section == 2)
         {
@@ -1698,34 +1701,31 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         UILabel *label3 = [[action3 valueForKey:@"__representer"] valueForKey:@"label"];
         label3.attributedText = attrString3;
     }
-    else if(section == 1 && item == 1)
-    {
-        if(_creditCard.primaryCard)
-        {
-            [self performSegueWithIdentifier:@"segSelectPaymentMethod" sender:self];
-        }
-    }
     else if(section == 1 && item == 2)
     {
-        UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-        NSMutableDictionary *dicCreditCard = [[[NSUserDefaults standardUserDefaults] objectForKey:@"creditCard"] mutableCopy];
-        NSMutableArray *creditCardList;
-        if(!dicCreditCard)
+        if(_paymentMethod == 2)
         {
-            dicCreditCard = [[NSMutableDictionary alloc]init];
-            creditCardList = [[NSMutableArray alloc]init];
-        }
-        else
-        {
-            creditCardList = [dicCreditCard objectForKey:userAccount.username];
-            creditCardList = [creditCardList mutableCopy];
-            if(!creditCardList)
+            UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+            NSMutableDictionary *dicCreditCard = [[[NSUserDefaults standardUserDefaults] objectForKey:@"creditCard"] mutableCopy];
+            NSMutableArray *creditCardList;
+            if(!dicCreditCard)
             {
+                dicCreditCard = [[NSMutableDictionary alloc]init];
                 creditCardList = [[NSMutableArray alloc]init];
             }
+            else
+            {
+                creditCardList = [dicCreditCard objectForKey:userAccount.username];
+                creditCardList = [creditCardList mutableCopy];
+                if(!creditCardList)
+                {
+                    creditCardList = [[NSMutableArray alloc]init];
+                }
+            }
+            
+            [CreditCard clearPrimaryCard:_creditCard creditCardList:creditCardList];
         }
         
-        [CreditCard clearPrimaryCard:_creditCard creditCardList:creditCardList];
         [self performSegueWithIdentifier:@"segSelectPaymentMethod" sender:self];
     }
 }
@@ -1780,22 +1780,48 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
 
 - (void)pay:(id)sender
 {
-    
     //validate
     [self.view endEditing:YES];
     
 
-    if(_orderSummary.showPayBuffetButton == 2)
+    //payment method
+    if(!_paymentMethod)
     {
+        [self blinkAlertMsg:[Language getText:@"กรุณาเลือกวิธีชำระเงิน"]];
+        return;
+    }
+    
+    
+    if(_orderSummary.showPayBuffetButton == 2 || _paymentMethod == 1)//buffet or pay by transfer
+    {
+        UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+        
+        
+        //save payment method to nsdefault
+        if(_orderSummary.showPayBuffetButton == 1 && _paymentMethod == 1)
+        {
+            NSMutableDictionary *dicPaymentMethod = [[[NSUserDefaults standardUserDefaults] objectForKey:@"paymentMethod"] mutableCopy];
+            if(!dicPaymentMethod)
+            {
+                dicPaymentMethod = [[NSMutableDictionary alloc]init];
+            }
+            [dicPaymentMethod setValue:@"1" forKey:userAccount.username];
+            [[NSUserDefaults standardUserDefaults] setObject:dicPaymentMethod forKey:@"paymentMethod"];
+        }
+        
+        
+        
+        
         UIButton *btnPay = (UIButton *)sender;
         btnPay.enabled = NO;
         [self loadWaitingView];
 
-        UserAccount *userAccount = [UserAccount getCurrentUserAccount];
+
         Receipt *receipt = [[Receipt alloc]init];
         receipt.branchID = branch.branchID;
         receipt.customerTableID = customerTable.customerTableID;
         receipt.memberID = userAccount.userAccountID;
+        receipt.paymentMethod = _paymentMethod;
         receipt.creditCardType = [self getCreditCardType:_creditCard.creditCardNo];
         receipt.creditCardNo = _creditCard.creditCardNo;
         receipt.remark = _remark;
@@ -1812,13 +1838,12 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingList:orderTakingList];
 
 
-
         _selectedVoucherCode = _selectedVoucherCode?_selectedVoucherCode:@"";
         self.homeModel = [[HomeModel alloc]init];
         self.homeModel.delegate = self;
         [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[@"",receipt,orderTakingList,orderNoteList,@""] actionScreen:@"call omise checkout at server"];
     }
-    else if(_orderSummary.showPayBuffetButton == 1)
+    else if(_orderSummary.showPayBuffetButton == 1)//pay by credit card
     {
         //customerTable
         if(!customerTable)
@@ -1828,145 +1853,156 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         }
         
         
-        
-        //credit card
-        if([Utility isStringEmpty:_creditCard.firstName])
+        if(_paymentMethod == 2)//credit card
         {
-            [self blinkAlertMsg:[Language getText:@"กรุณาระบุชื่อ"]];
-            UIView *vwInvalid = [self.view viewWithTag:11];
-            vwInvalid.backgroundColor = cSystem1;
-            return;
-        }
-        if([Utility isStringEmpty:_creditCard.lastName])
-        {
-            [self blinkAlertMsg:[Language getText:@"กรุณาระบุนามสกุล"]];
-            UIView *vwInvalid = [self.view viewWithTag:12];
-            vwInvalid.backgroundColor = cSystem1;
-            return;
-        }
-        if(![OMSCardNumber validate:_creditCard.creditCardNo])
-        {
-            [self blinkAlertMsg:[Language getText:@"หมายเลขบัตรเครดิต/เดบิตไม่ถูกต้อง"]];
-            UIView *vwInvalid = [self.view viewWithTag:13];
-            vwInvalid.backgroundColor = cSystem1;
-            return;
-        }
-        if(_creditCard.month < 1 || _creditCard.month > 12)
-        {
-            [self blinkAlertMsg:[Language getText:@"เดือนไม่ถูกต้อง กรุณาใส่เดือนระหว่าง 01 ถึง 12"]];
-            UIView *vwInvalid = [self.view viewWithTag:14];
-            vwInvalid.backgroundColor = cSystem1;
-            return;
-        }
-        if([[NSString stringWithFormat:@"%ld",_creditCard.year] length] < 4)
-        {
-            [self blinkAlertMsg:[Language getText:@"ปีไม่ถูกต้อง กรุณาใส่ปีจำนวน 4 หลัก"]];
-            UIView *vwInvalid = [self.view viewWithTag:15];
-            vwInvalid.backgroundColor = cSystem1;
-            return;
-        }
-        NSString *strExpiredDate = [NSString stringWithFormat:@"%04ld%02ld01 00:00:00",_creditCard.year,_creditCard.month];
-        NSDate *expireDate = [Utility stringToDate:strExpiredDate fromFormat:@"yyyyMMdd HH:mm:ss"];
-        if(![Utility isExpiredDateValid:expireDate])
-        {
-            [self blinkAlertMsg:[Language getText:@"บัตรใบนี้หมดอายุแล้ว"]];
-            UIView *vwInvalid = [self.view viewWithTag:15];
-            vwInvalid.backgroundColor = cSystem1;
-            return;
-        }
-        if([_creditCard.ccv length] < 3)
-        {
-            [self blinkAlertMsg:[Language getText:@"กรุณาใส่รหัสความปลอดภัย 3 หลัก"]];
-            UIView *vwInvalid = [self.view viewWithTag:16];
-            vwInvalid.backgroundColor = cSystem1;
-            return;
-        }
-        
-        
-        UIButton *btnPay = (UIButton *)sender;
-        btnPay.enabled = NO;
-        [self loadWaitingView];
-        
-        
-        NSString *strCreditCardName = [NSString stringWithFormat:@"%@ %@",_creditCard.firstName,_creditCard.lastName];
-        OMSTokenRequest *request = [[OMSTokenRequest alloc]initWithName:strCreditCardName number:_creditCard.creditCardNo expirationMonth:_creditCard.month expirationYear:_creditCard.year securityCode:_creditCard.ccv city:@"" postalCode:@""];
-        
-        
-        NSString *publicKey = [Setting getSettingValueWithKeyName:@"PublicKey"];
-        OMSSDKClient *client = [[OMSSDKClient alloc]initWithPublicKey:publicKey];
-        [client sendRequest:request callback:^(OMSToken * _Nullable token, NSError * _Nullable error) {
-            //
-            if(!error)
+            //credit card
+            if([Utility isStringEmpty:_creditCard.firstName])
             {
-                NSLog(@"%@",[token tokenId]);
-                
-                
-                //update nsuserdefault _creditcard
-                if(_creditCard.saveCard)
+                [self blinkAlertMsg:[Language getText:@"กรุณาระบุชื่อ"]];
+                UIView *vwInvalid = [self.view viewWithTag:11];
+                vwInvalid.backgroundColor = cSystem1;
+                return;
+            }
+            if([Utility isStringEmpty:_creditCard.lastName])
+            {
+                [self blinkAlertMsg:[Language getText:@"กรุณาระบุนามสกุล"]];
+                UIView *vwInvalid = [self.view viewWithTag:12];
+                vwInvalid.backgroundColor = cSystem1;
+                return;
+            }
+            if(![OMSCardNumber validate:_creditCard.creditCardNo])
+            {
+                [self blinkAlertMsg:[Language getText:@"หมายเลขบัตรเครดิต/เดบิตไม่ถูกต้อง"]];
+                UIView *vwInvalid = [self.view viewWithTag:13];
+                vwInvalid.backgroundColor = cSystem1;
+                return;
+            }
+            if(_creditCard.month < 1 || _creditCard.month > 12)
+            {
+                [self blinkAlertMsg:[Language getText:@"เดือนไม่ถูกต้อง กรุณาใส่เดือนระหว่าง 01 ถึง 12"]];
+                UIView *vwInvalid = [self.view viewWithTag:14];
+                vwInvalid.backgroundColor = cSystem1;
+                return;
+            }
+            if([[NSString stringWithFormat:@"%ld",_creditCard.year] length] < 4)
+            {
+                [self blinkAlertMsg:[Language getText:@"ปีไม่ถูกต้อง กรุณาใส่ปีจำนวน 4 หลัก"]];
+                UIView *vwInvalid = [self.view viewWithTag:15];
+                vwInvalid.backgroundColor = cSystem1;
+                return;
+            }
+            NSString *strExpiredDate = [NSString stringWithFormat:@"%04ld%02ld01 00:00:00",_creditCard.year,_creditCard.month];
+            NSDate *expireDate = [Utility stringToDate:strExpiredDate fromFormat:@"yyyyMMdd HH:mm:ss"];
+            if(![Utility isExpiredDateValid:expireDate])
+            {
+                [self blinkAlertMsg:[Language getText:@"บัตรใบนี้หมดอายุแล้ว"]];
+                UIView *vwInvalid = [self.view viewWithTag:15];
+                vwInvalid.backgroundColor = cSystem1;
+                return;
+            }
+            if([_creditCard.ccv length] < 3)
+            {
+                [self blinkAlertMsg:[Language getText:@"กรุณาใส่รหัสความปลอดภัย 3 หลัก"]];
+                UIView *vwInvalid = [self.view viewWithTag:16];
+                vwInvalid.backgroundColor = cSystem1;
+                return;
+            }
+            
+            
+            UIButton *btnPay = (UIButton *)sender;
+            btnPay.enabled = NO;
+            [self loadWaitingView];
+            
+            
+            NSString *strCreditCardName = [NSString stringWithFormat:@"%@ %@",_creditCard.firstName,_creditCard.lastName];
+            OMSTokenRequest *request = [[OMSTokenRequest alloc]initWithName:strCreditCardName number:_creditCard.creditCardNo expirationMonth:_creditCard.month expirationYear:_creditCard.year securityCode:_creditCard.ccv city:@"" postalCode:@""];
+            
+            
+            NSString *publicKey = [Setting getSettingValueWithKeyName:@"PublicKey"];
+            OMSSDKClient *client = [[OMSSDKClient alloc]initWithPublicKey:publicKey];
+            [client sendRequest:request callback:^(OMSToken * _Nullable token, NSError * _Nullable error) {
+                //
+                if(!error)
                 {
+                    NSLog(@"%@",[token tokenId]);
+                    
+                    
+                    //update nsuserdefault _creditcard
                     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-                    NSMutableDictionary *dicCreditCard = [[[NSUserDefaults standardUserDefaults] objectForKey:@"creditCard"] mutableCopy];
-                    NSMutableArray *creditCardList;
-                    if(!dicCreditCard)
+                    if(_creditCard.saveCard)
                     {
-                        dicCreditCard = [[NSMutableDictionary alloc]init];
-                        creditCardList = [[NSMutableArray alloc]init];
-                    }
-                    else
-                    {
-                        creditCardList = [dicCreditCard objectForKey:userAccount.username];
-                        creditCardList = [creditCardList mutableCopy];
-                        if(!creditCardList)
+                        NSMutableDictionary *dicCreditCard = [[[NSUserDefaults standardUserDefaults] objectForKey:@"creditCard"] mutableCopy];
+                        NSMutableArray *creditCardList;
+                        if(!dicCreditCard)
                         {
+                            dicCreditCard = [[NSMutableDictionary alloc]init];
                             creditCardList = [[NSMutableArray alloc]init];
                         }
+                        else
+                        {
+                            creditCardList = [dicCreditCard objectForKey:userAccount.username];
+                            creditCardList = [creditCardList mutableCopy];
+                            if(!creditCardList)
+                            {
+                                creditCardList = [[NSMutableArray alloc]init];
+                            }
+                        }
+                        
+                        [CreditCard updatePrimaryCard:_creditCard creditCardList:creditCardList];
+                    }
+
+                    //save payment method to nsdefault
+                    {
+                        NSMutableDictionary *dicPaymentMethod = [[[NSUserDefaults standardUserDefaults] objectForKey:@"paymentMethod"] mutableCopy];
+                        if(!dicPaymentMethod)
+                        {
+                            dicPaymentMethod = [[NSMutableDictionary alloc]init];
+                        }
+                        [dicPaymentMethod setValue:@"2" forKey:userAccount.username];
+                        [[NSUserDefaults standardUserDefaults] setObject:dicPaymentMethod forKey:@"paymentMethod"];
                     }
                     
-                    [CreditCard updatePrimaryCard:_creditCard creditCardList:creditCardList];
+                    
+                    
+                    
+                    //receipt info
+                    Receipt *receipt = [[Receipt alloc]init];
+                    receipt.branchID = branch.branchID;
+                    receipt.customerTableID = customerTable.customerTableID;
+                    receipt.memberID = userAccount.userAccountID;
+                    receipt.paymentMethod = _paymentMethod;
+                    receipt.creditCardType = [self getCreditCardType:_creditCard.creditCardNo];
+                    receipt.creditCardNo = _creditCard.creditCardNo;
+                    receipt.remark = _remark;
+                    receipt.status = 2;
+                    receipt.receiptDate = [Utility currentDateTime];
+                    receipt.buffetReceiptID = buffetReceipt.receiptID;
+                    receipt.voucherCode = _selectedVoucherCode;
+                    receipt.modifiedUser = [Utility modifiedUser];
+                    receipt.modifiedDate = [Utility currentDateTime];
+                    
+                    
+                    //paymentmethod,discount,receiptno
+                    NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
+                    NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingList:orderTakingList];
+                    
+                
+                    _selectedVoucherCode = _selectedVoucherCode?_selectedVoucherCode:@"";
+                    self.homeModel = [[HomeModel alloc]init];
+                    self.homeModel.delegate = self;
+                    [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],receipt,orderTakingList,orderNoteList,_selectedVoucherCode] actionScreen:@"call omise checkout at server"];
                 }
-                
-                
-                
-                
-                
-                UserAccount *userAccount = [UserAccount getCurrentUserAccount];
-                Receipt *receipt = [[Receipt alloc]init];
-                receipt.branchID = branch.branchID;
-                receipt.customerTableID = customerTable.customerTableID;
-                receipt.memberID = userAccount.userAccountID;
-                receipt.creditCardType = [self getCreditCardType:_creditCard.creditCardNo];
-                receipt.creditCardNo = _creditCard.creditCardNo;
-                receipt.remark = _remark;
-                receipt.status = 2;
-                receipt.receiptDate = [Utility currentDateTime];
-                receipt.buffetReceiptID = buffetReceipt.receiptID;
-                receipt.voucherCode = _selectedVoucherCode;
-                receipt.modifiedUser = [Utility modifiedUser];
-                receipt.modifiedDate = [Utility currentDateTime];
-                
-                
-                //paymentmethod,discount,receiptno
-                NSMutableArray *orderTakingList = [OrderTaking getCurrentOrderTakingList];
-                NSMutableArray *orderNoteList = [OrderNote getOrderNoteListWithOrderTakingList:orderTakingList];
-                
-                
-                
-                _selectedVoucherCode = _selectedVoucherCode?_selectedVoucherCode:@"";
-                self.homeModel = [[HomeModel alloc]init];
-                self.homeModel.delegate = self;
-                [self.homeModel insertItemsJson:dbOmiseCheckOut withData:@[[token tokenId],receipt,orderTakingList,orderNoteList,_selectedVoucherCode] actionScreen:@"call omise checkout at server"];
-                
-            }
-            else
-            {
-                UIButton *btnPay = (UIButton *)sender;
-                btnPay.enabled = YES;
-                [self removeWaitingView];                
-                
-                NSString *message = [Language getText:@"กรุณาตรวจสอบข้อมูลบัตรเครดิต/เดบิต อีกครั้งค่ะ"];
-                [self showAlert:@"" message:message];
-            }
-        }];
+                else
+                {
+                    UIButton *btnPay = (UIButton *)sender;
+                    btnPay.enabled = YES;
+                    [self removeWaitingView];
+                    
+                    NSString *message = [Language getText:@"กรุณาตรวจสอบข้อมูลบัตรเครดิต/เดบิต อีกครั้งค่ะ"];
+                    [self showAlert:@"" message:message];
+                }
+            }];
+        }
     }
 }
 
@@ -2113,7 +2149,6 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 [orderTakingListUpdateNew addObject:orderTaking];
                 
                 
-                
                 NSMutableArray *orderNoteListForOrderTakingID = [OrderNote getOrderNoteListWithOrderTakingID:item.orderTakingID orderNoteList:orderNoteListUpdate];
                 
                 for(OrderNote *item2 in orderNoteListForOrderTakingID)
@@ -2181,12 +2216,20 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         NSMutableArray *receiptList = items[7];
         Receipt *receipt = receiptList[0];
         _receipt = receipt;
+        
         if([items count] > 10)
         {
             NSMutableArray *luckyDrawTicketList = items[10];
             _numberOfGift = [luckyDrawTicketList count];
         }
-        [self performSegueWithIdentifier:@"segPaymentComplete" sender:self];
+        if(receipt.status == 1)
+        {
+            [self performSegueWithIdentifier:@"segShowQRToPay" sender:self];
+        }
+        else if(receipt.status == 2)
+        {
+            [self performSegueWithIdentifier:@"segPaymentComplete" sender:self];
+        }
     }
 }
 
@@ -2208,6 +2251,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
     {
         SelectPaymentMethodViewController *vc = segue.destinationViewController;
         vc.creditCard = _creditCard;
+        vc.paymentMethod = _paymentMethod;
     }
     else if([[segue identifier] isEqualToString:@"segQRCodeScanTable"])
     {
@@ -2245,6 +2289,11 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         vc.saveReceipt = saveReceipt;
         vc.saveOrderTakingList = [SaveOrderTaking createSaveOrderTakingList:orderTakingList];
         vc.saveOrderNoteList = [SaveOrderNote createSaveOrderNoteList:orderNoteList];
+    }
+    else if([[segue identifier] isEqualToString:@"segShowQRToPay"])
+    {
+        ShowQRToPayViewController *vc = segue.destinationViewController;
+        vc.receipt = _receipt;
     }
 }
 

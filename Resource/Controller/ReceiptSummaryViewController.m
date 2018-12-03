@@ -11,6 +11,7 @@
 #import "CreditCardAndOrderSummaryViewController.h"
 #import "MenuSelectionViewController.h"
 #import "ShareOrderQrViewController.h"
+#import "ShowQRToPayViewController.h"
 #import "CustomTableViewCellReceiptSummary.h"
 #import "CustomTableViewCellOrderSummary.h"
 #import "CustomTableViewCellTotal.h"
@@ -178,8 +179,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     }
     else
     {
-//        return 1;
-        return 5;
+        return 6;
     }
 }
 
@@ -194,13 +194,15 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     {
         if(section == 0)
         {
-            NSInteger receiptID = tableView.tag;
-            NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
+//            NSInteger receiptID = tableView.tag;
+            NSInteger receiptIndex = tableView.tag;
+            Receipt *receipt = _receiptList[receiptIndex];
+            NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
             orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
             
             return [orderTakingList count];
         }
-        else if(section == 1 || section == 2 || section == 3 || section == 4)
+        else if(section == 1 || section == 2 || section == 3 || section == 4 || section == 5)
         {
             return 1;
         }
@@ -221,9 +223,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         
-        
         Receipt *receipt = _receiptList[section];
-        
         
         //order no.
         UIColor *color = cSystem4;
@@ -244,7 +244,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         frame.size.height = 17;
         cell.lblReceiptNo.frame = frame;
        
-       
+    
         
         //show qr for share buffet order
         NSInteger timeToOrder = receipt.timeToOrder;
@@ -256,15 +256,11 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         [cell.btnShareOrder addTarget:self action:@selector(shareOrderQr:) forControlEvents:UIControlEventTouchUpInside];
         
         
-        
         //date and branch name
         Branch *branch = [Branch getBranch:receipt.branchID];
         cell.lblReceiptDate.text = [Utility dateToString:receipt.modifiedDate toFormat:@"d MMM yy HH:mm"];
         cell.lblBranchName.text = [NSString stringWithFormat:[Language getText:@"ร้าน %@"],branch.name];
         cell.lblBranchName.textColor = cSystem1;
-        
-        
-        
         
         
         {
@@ -291,14 +287,13 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         
         cell.tbvOrderDetail.delegate = self;
         cell.tbvOrderDetail.dataSource = self;
-        cell.tbvOrderDetail.tag = receipt.receiptID;
+        cell.tbvOrderDetail.tag = section;//receipt.receiptID;
         [cell.tbvOrderDetail reloadData];
         [cell.btnOrderItAgain setTitle:[Language getText:@"สั่งซ้ำ"] forState:UIControlStateNormal];
         [cell.btnOrderItAgain addTarget:self action:@selector(orderItAgain:) forControlEvents:UIControlEventTouchUpInside];
         [self setButtonDesign:cell.btnOrderItAgain];
         
         
-
         if (!_lastItemReached && section == [_receiptList count]-1)
         {
             UserAccount *userAccount = [UserAccount getCurrentUserAccount];
@@ -311,12 +306,13 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     }
     else
     {
-        NSInteger receiptID = tableView.tag;
+//        NSInteger receiptID = tableView.tag;
+        NSInteger receiptIndex = tableView.tag;
+        Receipt *receipt = _receiptList[receiptIndex];
         if(section == 0)
         {
-            NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
+            NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
             orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
-            Receipt *receipt = [Receipt getReceipt:receiptID];
             Branch *branch = [Branch getBranch:receipt.branchID];
             
             
@@ -424,7 +420,7 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
                 
                 
                 
-                if(receiptID == _selectedReceiptID)
+                if(receipt.receiptID == _selectedReceiptID)
                 {
                     cell.backgroundColor = mSelectionStyleGray;
                     if(item == [orderTakingList count]-1)
@@ -446,7 +442,6 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         
-            Receipt *receipt = [Receipt getReceipt:receiptID];
             if([Utility isStringEmpty:receipt.remark])
             {
                 cell.lblText.attributedText = [self setAttributedString:@"" text:receipt.remark];
@@ -467,7 +462,6 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         
-            Receipt *receipt = [Receipt getReceipt:receiptID];
             NSString *strTotalAmount = [Utility formatDecimal:receipt.netTotal withMinFraction:2 andMaxFraction:2];
             strTotalAmount = [Utility addPrefixBahtSymbol:strTotalAmount];
             cell.lblAmount.text = strTotalAmount;
@@ -489,17 +483,14 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         
-            Receipt *receipt = [Receipt getReceipt:receiptID];
             NSString *strStatus = [Receipt getStrStatus:receipt];
             UIColor *color = cSystem2;
         
-        
-        
+
             UIFont *font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
             NSDictionary *attribute = @{NSForegroundColorAttributeName:color ,NSFontAttributeName: font};
             NSMutableAttributedString *attrStringStatus = [[NSMutableAttributedString alloc] initWithString:strStatus attributes:attribute];
-        
-        
+ 
             UIFont *font2 = [UIFont fontWithName:@"Prompt-Regular" size:15];
             UIColor *color2 = cSystem4;
             NSDictionary *attribute2 = @{NSForegroundColorAttributeName:color2 ,NSFontAttributeName: font2};
@@ -527,13 +518,13 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
                 }
                 else
                 {
-                    if(![_dicTimer objectForKey:[NSString stringWithFormat:@"%ld",receiptID]])
+                    if(![_dicTimer objectForKey:[NSString stringWithFormat:@"%ld",receipt.receiptID]])
                     {
                         [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
                         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer:) userInfo:receipt repeats:YES];
                         [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
                         [self populateLabelwithTime:timeToCountDown receipt:receipt];
-                        [_dicTimer setValue:timer forKey:[NSString stringWithFormat:@"%ld",receiptID]];
+                        [_dicTimer setValue:timer forKey:[NSString stringWithFormat:@"%ld",receipt.receiptID]];
                     }
                     cell.lblText.hidden = NO;
                 }
@@ -543,14 +534,13 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
                 cell.lblText.text = @"";
                 cell.lblText.hidden = YES;
                 
-                NSTimer *timer = [_dicTimer objectForKey:[NSString stringWithFormat:@"%ld",receiptID]];
+                NSTimer *timer = [_dicTimer objectForKey:[NSString stringWithFormat:@"%ld",receipt.receiptID]];
                 if(timer)
                 {
                     [timer invalidate];
                 }                
             }
             cell.lblTextWidthConstant.constant = 70;
-        
         
         
             return cell;
@@ -562,16 +552,32 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         
         
             NSString *title = [Language getText:@"สั่งบุฟเฟ่ต์"];
-            Receipt *receipt = [Receipt getReceipt:receiptID];
             NSInteger timeToOrder = receipt.timeToOrder;
             NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
             NSInteger timeToCountDown = timeToOrder - seconds >= 0?timeToOrder - seconds:0;
-            cell.btnValue.tag = receiptID;
+            cell.btnValue.tag = receiptIndex;
             BOOL receiptStatusValid = receipt.status == 2 || receipt.status == 5 || receipt.status == 6;
             cell.btnValue.hidden = !(receiptStatusValid && receipt.hasBuffetMenu && timeToCountDown && !receipt.buffetEnded);
             cell.btnValue.backgroundColor = cSystem1;
             [cell.btnValue setTitle:title forState:UIControlStateNormal];
             [cell.btnValue addTarget:self action:@selector(orderBuffet:) forControlEvents:UIControlEventTouchUpInside];
+            [self setButtonDesign:cell.btnValue];
+        
+        
+            return cell;
+        }
+        else if(section == 5)
+        {
+            CustomTableViewCellButton *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierButton];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+            
+            NSString *title = [Language getText:@"ชำระเงิน"];
+            cell.btnValue.tag = receiptIndex;
+            cell.btnValue.hidden = !(receipt.status == 1);
+            cell.btnValue.backgroundColor = cSystem1;
+            [cell.btnValue setTitle:title forState:UIControlStateNormal];
+            [cell.btnValue addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
             [self setButtonDesign:cell.btnValue];
         
         
@@ -721,20 +727,20 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         BOOL receiptStatusValid = receipt.status == 2 || receipt.status == 5 || receipt.status == 6;
         BOOL showBuffetButtonSection = (receiptStatusValid && receipt.hasBuffetMenu && timeToCountDown && !receipt.buffetEnded);
         float btnBuffetHeight = showBuffetButtonSection ?44:0;
-    
+        float btnPayHeight = receipt.status == 1?44:0;
         
-        return sumHeight+83+remarkHeight+34+34+btnBuffetHeight;//+37;
+        return sumHeight+83+remarkHeight+34+34+btnBuffetHeight+btnPayHeight;//+37;
     }
     else
     {
-        NSInteger receiptID = tableView.tag;
-        
+//        NSInteger receiptID = tableView.tag;
+        NSInteger receiptIndex = tableView.tag;
+        Receipt *receipt = _receiptList[receiptIndex];
         if(section == 0)
         {
             //load order มาโชว์
-            NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receiptID];
+            NSMutableArray *orderTakingList = [OrderTaking getOrderTakingListWithReceiptID:receipt.receiptID];
             orderTakingList = [OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:orderTakingList];
-            Receipt *receipt = [Receipt getReceipt:receiptID];
             Branch *branch = [Branch getBranch:receipt.branchID];
             
             
@@ -844,7 +850,6 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             CustomTableViewCellLabelRemark *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierLabelRemark];
         
         
-            Receipt *receipt = [Receipt getReceipt:receiptID];
             if([Utility isStringEmpty:receipt.remark])
             {
                 cell.lblText.attributedText = [self setAttributedString:@"" text:receipt.remark];
@@ -879,8 +884,6 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         }
         else if(section == 4)
         {
-            NSInteger receiptID = tableView.tag;
-            Receipt *receipt = [Receipt getReceipt:receiptID];
             NSInteger timeToOrder = receipt.timeToOrder;
             NSTimeInterval seconds = [[Utility currentDateTime] timeIntervalSinceDate:receipt.receiptDate];
             NSInteger timeToCountDown = timeToOrder - seconds >= 0?timeToOrder - seconds:0;
@@ -889,6 +892,11 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
             float btnBuffetHeight = showBuffetButtonSection ?44:0;
             
             return btnBuffetHeight;
+        }
+        else if(section == 5)
+        {
+            float height = receipt.status == 1?44:0;
+            return height;
         }
     }
     
@@ -905,8 +913,11 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     if(![tableView isEqual:tbvData])
     {
         
-        _selectedReceiptID = tableView.tag;
-        _selectedReceipt = [Receipt getReceipt:_selectedReceiptID];
+//        _selectedReceiptID = tableView.tag;
+        NSInteger receiptIndex = tableView.tag;
+        Receipt *receipt = _receiptList[receiptIndex];
+        _selectedReceiptID = receipt.receiptID;
+        _selectedReceipt = receipt;
         [tableView reloadData];
         
         
@@ -973,17 +984,15 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
 
 -(void)orderItAgain:(id)sender
 {
-    
     CGPoint point = [sender convertPoint:CGPointZero toView:tbvData];
     NSIndexPath *indexPath = [tbvData indexPathForRowAtPoint:point];
     Receipt *receipt = _receiptList[indexPath.section];
-    
-    
-    
+
+
     //belong to buffet
     if(receipt.buffetReceiptID)
     {
-        Receipt *buffetReceipt = [Receipt getReceipt:receipt.buffetReceiptID];
+        Receipt *buffetReceipt = [Receipt getReceipt:receipt.buffetReceiptID receiptList:_receiptList];
         if(buffetReceipt)
         {
             NSInteger timeToOrder = buffetReceipt.timeToOrder;
@@ -1028,6 +1037,12 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
         ShareOrderQrViewController *vc = segue.destinationViewController;
         vc.shareOrderReceiptID = _shareOrderReceiptID;
     }
+    else if([[segue identifier] isEqualToString:@"segShowQRToPay"])
+    {
+        ShowQRToPayViewController *vc = segue.destinationViewController;
+        vc.receipt = _selectedReceipt;
+        vc.fromReceiptSummary = 1;
+    }
 }
 
 -(void)segueToOrderDetailAuto:(Receipt *)receipt
@@ -1044,7 +1059,8 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
 -(void)orderBuffet:(id)sender
 {
     UIButton *btnValue = sender;
-    _selectedReceipt = [Receipt getReceipt:btnValue.tag];
+//    _selectedReceipt = [Receipt getReceipt:btnValue.tag];
+    _selectedReceipt = _receiptList[btnValue.tag];
     [self performSegueWithIdentifier:@"segMenuSelection" sender:self];
 }
 
@@ -1090,6 +1106,14 @@ static NSString * const reuseIdentifierButton = @"CustomTableViewCellButton";
     UIButton *shareOrder = (UIButton *)sender;
     _shareOrderReceiptID = shareOrder.tag;
     [self performSegueWithIdentifier:@"segShareOrderQr" sender:self];
+}
+
+-(void)pay:(id)sender
+{
+    UIButton *btnPay = (UIButton *)sender;
+//    _selectedReceipt = [Receipt getReceipt:btnPay.tag];
+    _selectedReceipt = _receiptList[btnPay.tag];
+    [self performSegueWithIdentifier:@"segShowQRToPay" sender:self];
 }
 @end
 

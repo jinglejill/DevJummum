@@ -59,7 +59,7 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
     
     
     
-    NSString *title = [Setting getValue:@"060t" example:@"Hot Deal"];
+    NSString *title = [Language getText:@"Hot Deal"];
     lblNavTitle.text = title;
     _expandCollapse = 1;
     tbvData.delegate = self;

@@ -28,6 +28,7 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
 @synthesize tbvData;
 @synthesize creditCard;
 @synthesize topViewHeight;
+@synthesize paymentMethod;
 
 
 -(void)viewDidLayoutSubviews
@@ -46,7 +47,7 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Language getText:@"เลือกบัตรเครดิต/เดบิต"];
+    NSString *title = [Language getText:@"เลือกวิธีชำระเงิน"];
     lblNavTitle.text = title;
     tbvData.delegate = self;
     tbvData.dataSource = self;
@@ -56,7 +57,6 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
         UINib *nib = [UINib nibWithNibName:reuseIdentifierImageLabelRemove bundle:nil];
         [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierImageLabelRemove];
     }
-    
     
     
     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
@@ -69,16 +69,19 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    
-    
-    
-    
-    return  [_creditCardList count]+1;
+    if(section == 0)
+    {
+        return  [_creditCardList count]+1;
+    }
+    else
+    {
+        return 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,71 +89,90 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
     NSInteger section = indexPath.section;
     NSInteger item = indexPath.item;
     
-    
-    if(item == [_creditCardList count])
+    if(section == 0)
     {
-        UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"cell"];
-        if (!cell) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        }
-        
-        
-        cell.textLabel.text = [Language getText:@"เพิ่มบัตรเครดิต/เดบิต"];
-        cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-        cell.textLabel.textColor = cSystem4;
-        
-        return cell;
-    }
-    else
-    {
-        NSData *encodedObject = _creditCardList[item];
-        CreditCard *creditCard = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
-        CustomTableViewCellImageLabelRemove *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierImageLabelRemove];
-        NSInteger cardBrand = [OMSCardNumber brandForPan:creditCard.creditCardNo];
-        switch (cardBrand)
+        if(item == [_creditCardList count])
         {
-            case OMSCardBrandJCB:
-            {
-                cell.imageView.image = [UIImage imageNamed:@"jcb.png"];
+            UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"cell"];
+            if (!cell) {
+                cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
             }
-            break;
-            case OMSCardBrandAMEX:
-            {
-                cell.imageView.image = [UIImage imageNamed:@"americanExpress.png"];
-            }
-            break;
-            case OMSCardBrandVisa:
-            {
-                cell.imageView.image = [UIImage imageNamed:@"visa.png"];
-            }
-            break;
-            case OMSCardBrandMasterCard:
-            {
-                cell.imageView.image = [UIImage imageNamed:@"masterCard.png"];
-            }
-            break;
-            default:
-            break;
-        }
-        
-        
-        
-        NSString *strCreditCardNo = [Utility hideCreditCardNo:creditCard.creditCardNo];
-        cell.lblValue.text = strCreditCardNo;
-        cell.lblValue.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-        
-        
-        
-        if(creditCard.primaryCard)
-        {
-            [cell.btnRemove setTitle:@"✓" forState:UIControlStateNormal];
+            
+            
+            cell.textLabel.text = [Language getText:@"เพิ่มบัตรเครดิต/เดบิต"];
+            cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+            cell.textLabel.textColor = cSystem4;
+            
+            return cell;
         }
         else
         {
+            NSData *encodedObject = _creditCardList[item];
+            CreditCard *creditCard = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+            CustomTableViewCellImageLabelRemove *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierImageLabelRemove];
+            NSInteger cardBrand = [OMSCardNumber brandForPan:creditCard.creditCardNo];
+            switch (cardBrand)
+            {
+                case OMSCardBrandJCB:
+                {
+                    cell.imageView.image = [UIImage imageNamed:@"jcb.png"];
+                }
+                break;
+                case OMSCardBrandAMEX:
+                {
+                    cell.imageView.image = [UIImage imageNamed:@"americanExpress.png"];
+                }
+                break;
+                case OMSCardBrandVisa:
+                {
+                    cell.imageView.image = [UIImage imageNamed:@"visa.png"];
+                }
+                break;
+                case OMSCardBrandMasterCard:
+                {
+                    cell.imageView.image = [UIImage imageNamed:@"masterCard.png"];
+                }
+                break;
+                default:
+                break;
+            }
+            
+            
+            
+            NSString *strCreditCardNo = [Utility hideCreditCardNo:creditCard.creditCardNo];
+            cell.lblValue.text = strCreditCardNo;
+            cell.lblValue.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+            
+            
+            cell.btnRemove.hidden = YES;
             [cell.btnRemove setTitle:@"" forState:UIControlStateNormal];
+            if(paymentMethod == 2 && creditCard.primaryCard)
+            {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }
+            else
+            {             
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            
+            
+            return cell;
         }
+    }
+    else if(section == 1)//transfer
+    {
+        UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"cellValue1"];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cellValue1"];
+        }
+
+        cell.textLabel.text = [Language getText:@"โอนเงิน"];
+        cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
+        cell.textLabel.textColor = cSystem4;
+        cell.accessoryType = paymentMethod == 1?UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
         
-        
+
         return cell;
     }
     
@@ -171,20 +193,30 @@ static NSString * const reuseIdentifierImageLabelRemove = @"CustomTableViewCellI
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSInteger section = indexPath.section;
     NSInteger item = indexPath.item;
-    if(item == [_creditCardList count])
+    if(section == 0)
     {
-        creditCard = [[CreditCard alloc]init];
-        creditCard.saveCard = 1;
-        [self performSegueWithIdentifier:@"segUnwindToCreditCardAndOrderSummary" sender:self];
+        paymentMethod = 2;
+        if(item == [_creditCardList count])
+        {
+            creditCard = [[CreditCard alloc]init];
+            creditCard.saveCard = 1;
+            [self performSegueWithIdentifier:@"segUnwindToCreditCardAndOrderSummary" sender:self];
+        }
+        else
+        {
+            NSData *encodedObject = _creditCardList[item];
+            creditCard = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+            creditCard.primaryCard = 1;
+            [CreditCard updatePrimaryCard:creditCard creditCardList:_creditCardList];
+            
+            [self performSegueWithIdentifier:@"segUnwindToCreditCardAndOrderSummary" sender:self];
+        }
     }
-    else
+    else if(section == 1)
     {
-        NSData *encodedObject = _creditCardList[item];
-        creditCard = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
-        creditCard.primaryCard = 1;
-        [CreditCard updatePrimaryCard:creditCard creditCardList:_creditCardList];
-        
+        paymentMethod = 1;
         [self performSegueWithIdentifier:@"segUnwindToCreditCardAndOrderSummary" sender:self];
     }
 }

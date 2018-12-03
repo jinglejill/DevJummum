@@ -86,7 +86,7 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
     // Do any additional setup after loading the view.
     
     
-    NSString *title = [Setting getValue:@"059t" example:@"Hot Deal"];
+    NSString *title = [Language getText:@"Hot Deal"];
     lblNavTitle.text = title;
     
     

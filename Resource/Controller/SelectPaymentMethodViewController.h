@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tbvData;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
 @property (strong, nonatomic) CreditCard *creditCard;
+@property (nonatomic) NSInteger paymentMethod;
 - (IBAction)dismissViewController:(id)sender;
 
 @end

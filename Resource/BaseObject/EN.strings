@@ -129,11 +129,9 @@
 "ชำระเงิน" = "Pay";
 "ใส่หมายเหตุที่ต้องการแจ้งเพิ่มเติมกับทางร้านอาหาร" = "Provide remark to restaurant (if any)";
 "เลขโต๊ะ: %@" = "Table no. %@";
-"การชำระเงิน ด้วยบัตรเครดิต/เดบิต" = "Payment by credit/debit card";
-"เลือกบัตรเครดิต/เดบิต" = "Choose credit/debit card";
+"เลือกวิธีชำระเงิน" = "Choose payment method";
 "สรุปรายการอาหาร" = "Order summary";
 "หมายเหตุ" = "Remark";
-"ชำระเงิน" = "Pay";
 "กรุณาระบุเลขโต๊ะ" = "Please provide table no.";
 "หมายเลขบัตรเครดิต/เดบิตไม่ถูกต้อง" = "Incorrect credit/debit card no.";
 "เดือนไม่ถูกต้อง กรุณาใส่เดือนระหว่าง 01 ถึง 12" = "Invalid month. (ex. 00 - 12)";
@@ -202,3 +200,11 @@
 "ราคารวมก่อน Vat" = "Before vat";
 "(คุณไม่ได้รับสิทธิ์ลุ้นรางวัลในครั้งนี้)" = "(No lucky draw in this order)";
 "(คุณจะได้สิทธิ์ลุ้นรางวัล %ld ครั้ง)" =  "(You will get %ld lucky draw ticket(s))";
+"วิธีการชำระเงิน" = "Payment Method";
+"โอนเงิน" = "Mobile banking";
+"เลือกวิธีการชำระเงิน" = "Choose payment method";
+​"สแกน QR เพื่อโอนเงิน" = ​"Scan QR code to pay";
+​"Hot Deal" = ​"Hot Deal";
+"บันทึก QR Code ลงอัลบั้ม" = "Save QR code to camera roll";
+"รอชำระเงิน" = "Wait for payment";
+"กรุณาเลือกวิธีชำระเงิน" = "Please choose payment method";

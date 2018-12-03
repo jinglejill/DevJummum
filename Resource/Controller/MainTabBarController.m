@@ -29,6 +29,7 @@
 #import "VoucherCodeListViewController.h"
 #import "ReceiptSummaryViewController.h"
 #import "OrderDetailViewController.h"
+#import "ShowQRToPayViewController.h"
 #import "Branch.h"
 #import "CustomerTable.h"
 #import "Receipt.h"
@@ -91,6 +92,10 @@
         _switchToReceiptSummaryTab = 1;
     }
     else if([vc isKindOfClass:[PaymentCompleteViewController class]] && ((PaymentCompleteViewController *)vc).goToHotDeal)
+    {
+        _switchToHotDealTab = 1;
+    }
+    else if([vc isKindOfClass:[ShowQRToPayViewController class]] && ((ShowQRToPayViewController *)vc).goToHotDeal)
     {
         _switchToHotDealTab = 1;
     }

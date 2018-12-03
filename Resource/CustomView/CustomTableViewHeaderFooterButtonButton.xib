@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Prompt-SemiBold.ttf">
+            <string>Prompt-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomTableViewHeaderFooterButtonButton">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WvE-hE-9ZP">
+                    <rect key="frame" x="16" y="11" width="343" height="38"/>
+                    <color key="backgroundColor" red="0.3921568627" green="0.86274509799999999" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="HOU-qe-Hw2"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="17"/>
+                    <state key="normal" title="บันทึก QR Code ลงอัลบั้ม">
+                        <color key="titleColor" red="0.0" green="0.35294117650000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BmW-b8-2wi">
+                    <rect key="frame" x="16" y="57" width="343" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="FwK-yq-0jK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="15"/>
+                    <state key="normal" title="&lt; กลับสู่เมนูหลัก">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="BmW-b8-2wi" firstAttribute="top" secondItem="WvE-hE-9ZP" secondAttribute="bottom" constant="8" id="E7b-mS-yDY"/>
+                <constraint firstItem="BmW-b8-2wi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Ikr-3e-laT"/>
+                <constraint firstItem="WvE-hE-9ZP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="NAL-D2-Wgq"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="WvE-hE-9ZP" secondAttribute="trailing" constant="16" id="Qqq-sI-sll"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="BmW-b8-2wi" secondAttribute="trailing" constant="16" id="SOi-L1-svc"/>
+                <constraint firstItem="WvE-hE-9ZP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="11" id="ulz-LE-lKW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="btnHome" destination="BmW-b8-2wi" id="xIA-rv-GdT"/>
+                <outlet property="btnSave" destination="WvE-hE-9ZP" id="tPU-ez-dwj"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+    </objects>
+</document>

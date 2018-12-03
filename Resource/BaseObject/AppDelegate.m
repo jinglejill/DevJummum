@@ -41,6 +41,7 @@
 #import "JoinOrderViewController.h"
 #import "ScanToJoinViewController.h"
 #import "ShareMenuToOrderViewController.h"
+#import "ShowQRToPayViewController.h"
 #import "HomeModel.h"
 #import "Utility.h"
 #import "Receipt.h"
@@ -250,24 +251,32 @@ void myExceptionHandler(NSException *exception)
     }
     
     
-    if([currentVc isKindOfClass:[ReceiptSummaryViewController class]] || [currentVc isKindOfClass:[OrderDetailViewController class]])
-    {
-    }
-    else
-    {
-        completionHandler(UNNotificationPresentationOptionAlert);
-    }
+
     
     
     NSDictionary *myAps = [userInfo objectForKey:@"aps"];
     NSString *categoryIdentifier = [myAps objectForKey:@"category"];
     if([categoryIdentifier isEqualToString:@"updateStatus"] || [categoryIdentifier isEqualToString:@"buffetEnded"])
     {
+        if([currentVc isKindOfClass:[ReceiptSummaryViewController class]] || [currentVc isKindOfClass:[OrderDetailViewController class]])
+        {
+        }
+        else
+        {
+            completionHandler(UNNotificationPresentationOptionAlert);
+        }
+        
+        
         NSDictionary *data = [myAps objectForKey:@"data"];
         NSNumber *receiptID = [data objectForKey:@"receiptID"];
         _homeModel = [[HomeModel alloc]init];
         _homeModel.delegate = self;
         [_homeModel downloadItems:dbReceiptDisputeRatingUpdateAndReload withData:receiptID];
+    }
+    else if([categoryIdentifier isEqualToString:@"gbpQR"])
+    {
+        ShowQRToPayViewController *vc = (ShowQRToPayViewController *)currentVc;
+        [vc reloadVc];
     }
     //////////////////
 }
@@ -447,6 +456,11 @@ void myExceptionHandler(NSException *exception)
     {
         QRCodeScanTableViewController *vc = (QRCodeScanTableViewController *)currentVc;
         [vc viewDidLayoutSubviews];
+    }
+    else if([currentVc isKindOfClass:[ShowQRToPayViewController class]])
+    {
+        ShowQRToPayViewController *vc = (ShowQRToPayViewController *)currentVc;
+        [vc reloadVc];
     }
 }
 

@@ -152,6 +152,7 @@ enum enumDB
     dbCustomerTable,
     dbReceiptSummaryPage,
     dbReceipt,
+    dbReceiptAndLuckyDraw,
     dbPromotion,
     dbRewardPoint,
     dbRewardPointList,
@@ -176,7 +177,6 @@ enum enumDB
     dbDispute,
     dbDisputeList,
     dbDisputeCancel,
-    dbReceiptWithModifiedDate,
     dbBranch,
     dbBranchAndCustomerTableQR,
     dbBranchSearch,
@@ -215,13 +215,12 @@ enum enumUrl
     urlUploadPhoto,
     urlDownloadPhoto,
     urlDownloadFile,
-    urlUserAccountDeviceTokenUpdate,
+    urlQRToPayDownload,
     urlLogInUserAccountInsert,
     urlLogInInsert,
     urlLogOutInsert,
     urlPushSyncSync,
     urlPushSyncUpdateByDeviceToken,
-    urlDeviceInsert,
     urlPushSyncUpdateTimeSynced,
     urlWriteLog,
     urlMenuInsert,
@@ -371,7 +370,8 @@ enum enumUrl
     urlOrderJoiningScanQrInsert,
     urlOrderJoiningPageGetList,
     urlSaveOrderInsertList,
-    urlOrderItAgainGetList
+    urlOrderItAgainGetList,
+    urlReceiptAndLuckyDrawGetList
     
 
     

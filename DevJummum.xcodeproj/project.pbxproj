@@ -359,6 +359,12 @@
 		EF33D118211C36D200560C69 /* Kanit-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF33CFD2211C36D100560C69 /* Kanit-ExtraLightItalic.ttf */; };
 		EF33D119211C36D200560C69 /* Kanit-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF33CFD3211C36D100560C69 /* Kanit-Medium.ttf */; };
 		EF33D11A211C36D200560C69 /* Kanit-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF33CFD4211C36D100560C69 /* Kanit-SemiBoldItalic.otf */; };
+		EF5C546321B3A82B0022FE83 /* ShowQRToPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5C546221B3A82B0022FE83 /* ShowQRToPayViewController.m */; };
+		EF5C546721B3D56E0022FE83 /* CustomTableViewCellQRToPay.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5C546521B3D56E0022FE83 /* CustomTableViewCellQRToPay.m */; };
+		EF5C546821B3D56E0022FE83 /* CustomTableViewCellQRToPay.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5C546621B3D56E0022FE83 /* CustomTableViewCellQRToPay.xib */; };
+		EF5C546D21B3DE180022FE83 /* CustomTableViewHeaderFooterButtonButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5C546C21B3DE180022FE83 /* CustomTableViewHeaderFooterButtonButton.xib */; };
+		EF5C547021B3DE320022FE83 /* CustomTableViewHeaderFooterButtonButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5C546F21B3DE320022FE83 /* CustomTableViewHeaderFooterButtonButton.m */; };
+		EF5C547321B3E8420022FE83 /* GBPrimeQr.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5C547221B3E8420022FE83 /* GBPrimeQr.m */; };
 		EF5D243F212756880073F1A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF5D243E212756870073F1A1 /* GoogleService-Info.plist */; };
 		EF639E0A211F233E00C70A98 /* CustomTableViewCellSeparatorLine.m in Sources */ = {isa = PBXBuildFile; fileRef = EF639E04211F233D00C70A98 /* CustomTableViewCellSeparatorLine.m */; };
 		EF639E0B211F233E00C70A98 /* CustomTableViewCellLabelRemark.m in Sources */ = {isa = PBXBuildFile; fileRef = EF639E06211F233D00C70A98 /* CustomTableViewCellLabelRemark.m */; };
@@ -1058,6 +1064,16 @@
 		EF33CFD2211C36D100560C69 /* Kanit-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		EF33CFD3211C36D100560C69 /* Kanit-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-Medium.ttf"; sourceTree = "<group>"; };
 		EF33CFD4211C36D100560C69 /* Kanit-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-SemiBoldItalic.otf"; sourceTree = "<group>"; };
+		EF5C546121B3A82B0022FE83 /* ShowQRToPayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowQRToPayViewController.h; sourceTree = "<group>"; };
+		EF5C546221B3A82B0022FE83 /* ShowQRToPayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowQRToPayViewController.m; sourceTree = "<group>"; };
+		EF5C546421B3D56E0022FE83 /* CustomTableViewCellQRToPay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCellQRToPay.h; sourceTree = "<group>"; };
+		EF5C546521B3D56E0022FE83 /* CustomTableViewCellQRToPay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCellQRToPay.m; sourceTree = "<group>"; };
+		EF5C546621B3D56E0022FE83 /* CustomTableViewCellQRToPay.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCellQRToPay.xib; sourceTree = "<group>"; };
+		EF5C546C21B3DE180022FE83 /* CustomTableViewHeaderFooterButtonButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewHeaderFooterButtonButton.xib; sourceTree = "<group>"; };
+		EF5C546E21B3DE320022FE83 /* CustomTableViewHeaderFooterButtonButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTableViewHeaderFooterButtonButton.h; sourceTree = "<group>"; };
+		EF5C546F21B3DE320022FE83 /* CustomTableViewHeaderFooterButtonButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewHeaderFooterButtonButton.m; sourceTree = "<group>"; };
+		EF5C547121B3E8420022FE83 /* GBPrimeQr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GBPrimeQr.h; sourceTree = "<group>"; };
+		EF5C547221B3E8420022FE83 /* GBPrimeQr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GBPrimeQr.m; sourceTree = "<group>"; };
 		EF5D243E212756870073F1A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EF639E04211F233D00C70A98 /* CustomTableViewCellSeparatorLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCellSeparatorLine.m; sourceTree = "<group>"; };
 		EF639E05211F233D00C70A98 /* CustomTableViewCellSeparatorLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCellSeparatorLine.h; sourceTree = "<group>"; };
@@ -1630,6 +1646,8 @@
 				EF94809E21802688007CA270 /* ScanToJoinViewController.m */,
 				EF9480AC218073F8007CA270 /* ShareMenuToOrderViewController.h */,
 				EF9480AD218073F8007CA270 /* ShareMenuToOrderViewController.m */,
+				EF5C546121B3A82B0022FE83 /* ShowQRToPayViewController.h */,
+				EF5C546221B3A82B0022FE83 /* ShowQRToPayViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1849,6 +1867,8 @@
 				EF33CEA9211C36D100560C69 /* UserRewardRedemptionUsed.m */,
 				EF1F38092176FDAA00EFB214 /* VoucherCode.h */,
 				EF1F380A2176FDAA00EFB214 /* VoucherCode.m */,
+				EF5C547121B3E8420022FE83 /* GBPrimeQr.h */,
+				EF5C547221B3E8420022FE83 /* GBPrimeQr.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1980,6 +2000,12 @@
 				EF948091217F333F007CA270 /* CustomTableViewCellImageLabel.h */,
 				EF948092217F333F007CA270 /* CustomTableViewCellImageLabel.m */,
 				EF948093217F333F007CA270 /* CustomTableViewCellImageLabel.xib */,
+				EF5C546421B3D56E0022FE83 /* CustomTableViewCellQRToPay.h */,
+				EF5C546521B3D56E0022FE83 /* CustomTableViewCellQRToPay.m */,
+				EF5C546621B3D56E0022FE83 /* CustomTableViewCellQRToPay.xib */,
+				EF5C546E21B3DE320022FE83 /* CustomTableViewHeaderFooterButtonButton.h */,
+				EF5C546F21B3DE320022FE83 /* CustomTableViewHeaderFooterButtonButton.m */,
+				EF5C546C21B3DE180022FE83 /* CustomTableViewHeaderFooterButtonButton.xib */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -2315,6 +2341,7 @@
 				EF33D0F0211C36D200560C69 /* Kanit-SemiBold.ttf in Resources */,
 				EF33D0A6211C36D200560C69 /* CustomTableViewCellMenu.xib in Resources */,
 				EF33D0B3211C36D200560C69 /* CustomTableViewCellLabelText.xib in Resources */,
+				EF5C546D21B3DE180022FE83 /* CustomTableViewHeaderFooterButtonButton.xib in Resources */,
 				EF713EE12195652900117F42 /* giftBoxAwesome00017.png in Resources */,
 				EF33D025211C36D200560C69 /* starRatingGray.png in Resources */,
 				EF33D0D4211C36D200560C69 /* CustomTableViewCellLabel.xib in Resources */,
@@ -2584,6 +2611,7 @@
 				EF713EBB2195652900117F42 /* giftBoxBoo00011.png in Resources */,
 				EF33D0F3211C36D200560C69 /* Kanit-Regular.ttf in Resources */,
 				EF33D0EA211C36D200560C69 /* Kanit-Bold.otf in Resources */,
+				EF5C546821B3D56E0022FE83 /* CustomTableViewCellQRToPay.xib in Resources */,
 				EF33D0B4211C36D200560C69 /* CustomTableViewCellButton.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2685,6 +2713,7 @@
 				EF33D041211C36D200560C69 /* SelectPaymentMethodViewController.m in Sources */,
 				EF33D0D6211C36D200560C69 /* CustomTableViewCellRewardDetail.m in Sources */,
 				EF134681219D256D0035B6D4 /* DiscountProgram.m in Sources */,
+				EF5C546321B3A82B0022FE83 /* ShowQRToPayViewController.m in Sources */,
 				EF33CFDD211C36D200560C69 /* NSData+AES.m in Sources */,
 				EF33D049211C36D200560C69 /* RewardDetailViewController.m in Sources */,
 				EF33D09F211C36D200560C69 /* RewardRedemption.m in Sources */,
@@ -2730,6 +2759,7 @@
 				EF33D05D211C36D200560C69 /* SharedRecommendShop.m in Sources */,
 				EF33D07F211C36D200560C69 /* UserPromotionUsed.m in Sources */,
 				EF33CFE7211C36D200560C69 /* OmiseError.swift in Sources */,
+				EF5C547021B3DE320022FE83 /* CustomTableViewHeaderFooterButtonButton.m in Sources */,
 				EF33D068211C36D200560C69 /* SharedReceipt.m in Sources */,
 				EF33D07B211C36D200560C69 /* SpecialPriceProgram.m in Sources */,
 				EF33D0CD211C36D200560C69 /* CustomTableViewCellReceiptSummary.m in Sources */,
@@ -2741,6 +2771,7 @@
 				EF33D074211C36D200560C69 /* SharedOrderTaking.m in Sources */,
 				EF8801E52143793C0062D9D4 /* LuckyDrawViewController.m in Sources */,
 				EF94809F21802688007CA270 /* ScanToJoinViewController.m in Sources */,
+				EF5C546721B3D56E0022FE83 /* CustomTableViewCellQRToPay.m in Sources */,
 				EF33D055211C36D200560C69 /* MenuSelectionViewController.m in Sources */,
 				EF33D08D211C36D200560C69 /* SharedPromoCode.m in Sources */,
 				EF33CFDC211C36D200560C69 /* NSData+Encryption.m in Sources */,
@@ -2865,6 +2896,7 @@
 				EF33D0E0211C36D200560C69 /* CustomTableViewCellMenu.m in Sources */,
 				EF33CFD9211C36D200560C69 /* AppDelegate.m in Sources */,
 				EF33D0DE211C36D200560C69 /* CustomTableViewCellPromoBanner.m in Sources */,
+				EF5C547321B3E8420022FE83 /* GBPrimeQr.m in Sources */,
 				EF33D044211C36D200560C69 /* BranchSearchViewController.m in Sources */,
 				EF33D061211C36D200560C69 /* SharedMenu.m in Sources */,
 				EF948094217F333F007CA270 /* CustomTableViewCellImageLabel.m in Sources */,

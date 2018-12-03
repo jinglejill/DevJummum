@@ -40,6 +40,7 @@
 #import "SaveOrderTaking.h"
 #import "SaveOrderNote.h"
 #import "CreditCardAndOrderSummary.h"
+#import "GBPrimeQr.h"
 #import "CustomViewController.h"
 
 
@@ -226,6 +227,11 @@
             arrClassName = @[@"EncryptedMessage"];
         }
             break;
+        case dbReceiptAndLuckyDraw:
+        {
+            arrClassName = @[@"Receipt", @"LuckyDrawTicket"];
+        }
+            break;
         default:
             break;
     }
@@ -315,7 +321,7 @@
                 // Ready to notify delegate that data is ready and pass back items
                 if (self.delegate)
                 {
-                    if(propCurrentDB == dbHotDeal || propCurrentDB == dbReceiptSummaryPage || propCurrentDB == dbOrderJoining ||propCurrentDB == dbRewardPoint || propCurrentDB == dbReceipt || propCurrentDB == dbReceiptDisputeRating || propCurrentDB == dbReceiptDisputeRatingUpdateAndReload || propCurrentDB == dbReceiptBuffetEnded || propCurrentDB == dbMenuList || propCurrentDB == dbMenuNoteList || propCurrentDB == dbBranchAndCustomerTableQR || propCurrentDB == dbBranchSearch || propCurrentDB == dbCustomerTable || propCurrentDB == dbSettingWithKey || propCurrentDB == dbMenuBelongToBuffet || propCurrentDB == dbPromotionAndRewardRedemption || propCurrentDB == dbPromotion || propCurrentDB == dbMenu || propCurrentDB == dbRewardRedemptionLuckyDraw || propCurrentDB == dbOrderJoiningShareQr || propCurrentDB == dbOrderItAgain)
+                    if(propCurrentDB == dbHotDeal || propCurrentDB == dbReceiptSummaryPage || propCurrentDB == dbOrderJoining ||propCurrentDB == dbRewardPoint || propCurrentDB == dbReceipt || propCurrentDB == dbReceiptDisputeRating || propCurrentDB == dbReceiptDisputeRatingUpdateAndReload || propCurrentDB == dbReceiptBuffetEnded || propCurrentDB == dbMenuList || propCurrentDB == dbMenuNoteList || propCurrentDB == dbBranchAndCustomerTableQR || propCurrentDB == dbBranchSearch || propCurrentDB == dbCustomerTable || propCurrentDB == dbSettingWithKey || propCurrentDB == dbMenuBelongToBuffet || propCurrentDB == dbPromotionAndRewardRedemption || propCurrentDB == dbPromotion || propCurrentDB == dbMenu || propCurrentDB == dbRewardRedemptionLuckyDraw || propCurrentDB == dbOrderJoiningShareQr || propCurrentDB == dbOrderItAgain || propCurrentDB == dbReceiptAndLuckyDraw)
                     {
                         [self.delegate itemsDownloaded:arrItem manager:self];
                     }                    
@@ -588,14 +594,6 @@
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlHotDealGetList]]];
         }
             break;
-        case dbReceiptWithModifiedDate:
-        {
-            Receipt *receipt = (Receipt *)data;
-            
-            noteDataString = [Utility getNoteDataString:receipt];
-            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlReceiptWithModifiedDateGet]]];
-        }
-            break;
         case dbReceipt:
         {
             Receipt *receipt = (Receipt *)data;
@@ -733,6 +731,12 @@
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlOrderItAgainGetList]]];
         }
             break;
+        case dbReceiptAndLuckyDraw:
+        {
+            noteDataString = [Utility getNoteDataString:data];
+            url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlReceiptAndLuckyDrawGetList]]];
+        }
+            break;
         default:
             break;
     }
@@ -839,11 +843,6 @@
             url = [NSURL URLWithString:[Utility url:urlWriteLog]];
         }
             break;
-        case dbDevice:
-        {
-            noteDataString = [Utility getNoteDataString:data];
-            url = [NSURL URLWithString:[Utility url:urlDeviceInsert]];
-        }
         case dbLogIn:
         {
             noteDataString = [Utility getNoteDataString:data];
@@ -924,38 +923,6 @@
             url = [NSURL URLWithString:[Utility url:urlMenuPicInsertList]];
         }
             break;
-        case dbOmiseCheckOut:
-        {
-            NSArray *dataList = (NSArray *)data;
-            NSString *omiseToken = dataList[0];
-            NSInteger amount = [dataList[1] integerValue];
-            Receipt *receipt = dataList[2];
-            NSMutableArray *orderTakingList = dataList[3];
-            NSMutableArray *orderNoteList = dataList[4];
-            NSObject *userPromotionOrRewardRedemptionUsed = dataList[5];
-            NSNumber *objPromoCodeID = dataList[6];
-            NSInteger type = [userPromotionOrRewardRedemptionUsed isMemberOfClass:[UserPromotionUsed class]]?1:2;
-            
-            
-            noteDataString = [NSString stringWithFormat:@"omiseToken=%@&amount=%ld&type=%ld&promoCodeID=%ld",omiseToken,(long)amount,type,[objPromoCodeID integerValue]];
-            noteDataString = [NSString stringWithFormat:@"%@&countOtOrderTaking=%ld&countOnOrderNote=%ld",noteDataString,(unsigned long)[orderTakingList count],[orderNoteList count]];
-            noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:receipt]];
-            noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:userPromotionOrRewardRedemptionUsed withPrefix:@"pr"]];
-            for(int i=0; i<[orderTakingList count]; i++)
-            {
-                OrderTaking *orderTaking = orderTakingList[i];
-                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:orderTaking withPrefix:@"ot" runningNo:i]];
-            }
-            for(int i=0; i<[orderNoteList count]; i++)
-            {
-                OrderNote *orderNote = orderNoteList[i];
-                noteDataString = [NSString stringWithFormat:@"%@&%@",noteDataString,[Utility getNoteDataString:orderNote withPrefix:@"on" runningNo:i]];
-            }
-            
-            
-            url = [NSURL URLWithString:[Utility url:urlOmiseCheckOut]];
-        }
-            break;        
         case dbUserAccountValidate:
         {
             NSArray *dataList = (NSArray *)data;
@@ -1502,8 +1469,7 @@
     [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [urlRequest setHTTPMethod:@"POST"];
     [urlRequest setHTTPBody:jsonData];
-    //    [urlRequest setHTTPBody:[noteDataString dataUsingEncoding:NSUTF8StringEncoding]];
-    
+
     
     NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *dataRaw, NSURLResponse *header, NSError *error) {
         
@@ -1544,7 +1510,6 @@
                             if([strTableName isEqualToString:@"OmiseCheckOut"])
                             {
                                 arrClassName = @[@"Message",@"Message",@"OrderTaking",@"OrderNote",@"Promotion",@"CreditCardAndOrderSummary",@"Message",@"Receipt",@"OrderTaking",@"OrderNote",@"LuckyDrawTicket"];
-//                                arrClassName = @[@"Receipt",@"OrderTaking",@"OrderNote",@"LuckyDrawTicket"];
                             }
                             else if([strTableName isEqualToString:@"BuffetOrder"])
                             {
@@ -2664,11 +2629,6 @@
         }
         else
         {
-//            //test*****
-//            UIImage *image = [[UIImage alloc] initWithData:dataRaw];
-//            completionBlock(YES,image);
-//            return ;
-//            //******
             NSDictionary *json = [NSJSONSerialization
                                   JSONObjectWithData:dataRaw
                                   options:kNilOptions error:&error];
@@ -2695,6 +2655,35 @@
                     completionBlock(NO,nil);
                 }
             }
+        }
+    }];
+    
+    [dataTask resume];
+}
+
+- (void)downloadQRToPay:(NSObject *)data completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+{
+    GBPrimeQr *gbPrimeQr = (GBPrimeQr *)data;
+    NSString *noteDataString = [Utility getNoteDataString:gbPrimeQr];
+    NSURL * url = [NSURL URLWithString:gbPrimeQr.postUrl];
+    
+    
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    
+    NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setHTTPBody:[noteDataString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *dataRaw, NSURLResponse *header, NSError *error) {
+        if(error)
+        {
+            completionBlock(NO,nil);
+        }
+        else
+        {
+            UIImage *image = [[UIImage alloc] initWithData:dataRaw];
+            completionBlock(YES,image);
         }
     }];
     

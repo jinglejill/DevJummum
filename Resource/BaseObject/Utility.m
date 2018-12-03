@@ -169,17 +169,11 @@ extern NSString *globalBundleID;
         case urlDownloadFile:
             url = @"downloadFile.php";
             break;
-        case urlUserAccountDeviceTokenUpdate:
-            url = @"FFDUserAccountDeviceTokenUpdate.php";
-            break;
         case urlPushSyncSync:
             url = @"JMMPushSyncSync.php";
             break;
         case urlPushSyncUpdateByDeviceToken:
             url = @"JMMPushSyncUpdateByDeviceToken.php";
-            break;
-        case urlDeviceInsert:
-            url = @"FFDDeviceInsert.php";
             break;
         case urlPushSyncUpdateTimeSynced:
             url = @"JMMPushSyncUpdateTimeSynced.php";
@@ -621,6 +615,9 @@ extern NSString *globalBundleID;
             break;
         case urlOrderItAgainGetList:
             url = @"JMMOrderItAgainGetList.php";
+            break;
+        case urlReceiptAndLuckyDrawGetList:
+            url = @"JMMReceiptAndLuckyDrawGetList.php";
             break;
         default:
             break;
