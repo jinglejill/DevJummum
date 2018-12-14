@@ -95,7 +95,7 @@
         }
         
         [dontShowMessageMenuUpdate setValue:@"1" forKey:userAccount.username];
-        [[NSUserDefaults standardUserDefaults] setObject:dontShowMessageMenuUpdate forKey:@"MessageMenuUpdate"];
+        [[NSUserDefaults standardUserDefaults] setObject:[dontShowMessageMenuUpdate copy] forKey:@"MessageMenuUpdate"];
     }
     
     

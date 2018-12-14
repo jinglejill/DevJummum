@@ -26,7 +26,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1704</string>
+	<string>1764</string>
 	<key>FacebookAppID</key>
 	<string>226950481297974</string>
 	<key>FacebookDisplayName</key>
@@ -48,7 +48,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Use to scan QR code at the restaurant</string>
+	<string>Use to scan QR Code at the restaurant</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Save receipt to camera roll</string>
 	<key>NSPhotoLibraryUsageDescription</key>

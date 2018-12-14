@@ -402,9 +402,8 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
             
             
                 //imgVw
-                NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-                NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
-                NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Menu/%@",strPath,branch.dbName,menuLeft.imageUrl];
+                NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/NoImage.jpg",branch.dbName];
+                NSString *imageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/Menu/%@",branch.dbName,menuLeft.imageUrl];
                 imageFileName = [Utility isStringEmpty:menuLeft.imageUrl]?noImageFileName:imageFileName;
                 UIImage *image = [Utility getImageFromCache:imageFileName];
                 if(image)
@@ -498,9 +497,8 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
                     
                     
                     //imgVw
-                    NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-                    NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
-                    NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Menu/%@",strPath,branch.dbName,menuRight.imageUrl];
+                    NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/NoImage.jpg",branch.dbName];
+                    NSString *imageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/Menu/%@",branch.dbName,menuRight.imageUrl];
                     imageFileName = [Utility isStringEmpty:menuRight.imageUrl]?noImageFileName:imageFileName;
                     UIImage *image = [Utility getImageFromCache:imageFileName];
                     if(image)
@@ -619,9 +617,8 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
                 }
                 
                 
-                NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-                NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
-                NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Menu/%@",strPath,branch.dbName,menu.imageUrl];
+                NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/NoImage.jpg",branch.dbName];
+                NSString *imageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/Menu/%@",branch.dbName,menu.imageUrl];
                 imageFileName = [Utility isStringEmpty:menu.imageUrl]?noImageFileName:imageFileName;
                 UIImage *image = [Utility getImageFromCache:imageFileName];
                 if(image)

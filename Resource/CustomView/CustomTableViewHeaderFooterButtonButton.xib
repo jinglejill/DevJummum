@@ -27,7 +27,7 @@
                         <constraint firstAttribute="height" constant="38" id="HOU-qe-Hw2"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Prompt-SemiBold" family="Prompt" pointSize="17"/>
-                    <state key="normal" title="บันทึก QR Code ลงอัลบั้ม">
+                    <state key="normal" title="แชร์ QR">
                         <color key="titleColor" red="0.0" green="0.35294117650000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>

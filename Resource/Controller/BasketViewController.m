@@ -339,9 +339,9 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
         cell.lblTotalPrice.text = strTotalPrice;
         
 
-        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
-        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Menu/%@",strPath,branch.dbName,menu.imageUrl];
+        
+        NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/NoImage.jpg",branch.dbName];
+        NSString *imageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/Menu/%@",branch.dbName,menu.imageUrl];
         imageFileName = [Utility isStringEmpty:menu.imageUrl]?noImageFileName:imageFileName;
         UIImage *image = [Utility getImageFromCache:imageFileName];
         if(image)
@@ -852,7 +852,6 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                                       CGPoint point = [gestureRecognizer locationInView:cell.tbvNote];
                                       NSIndexPath * tappedIP = [cell.tbvNote indexPathForRowAtPoint:point];
                                       _copyOrderTaking = orderTakingList[_sourceCopyItem];
-//                                      _copyOrderTaking = orderTakingList[tappedIP.item];
                                   }
                                   
                                   

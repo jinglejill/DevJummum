@@ -219,9 +219,8 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
             
             
             
-            NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-            NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
-            NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Promotion/%@",strPath,promotion.imageUrl];
+            NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/Image/NoImage.jpg"];
+            NSString *imageFileName = [NSString stringWithFormat:@"/JMM/Image/Promotion/%@",promotion.imageUrl];
             imageFileName = [Utility isStringEmpty:promotion.imageUrl]?noImageFileName:imageFileName;
             UIImage *image = [Utility getImageFromCache:imageFileName];
             if(image)
@@ -265,9 +264,8 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
             
             
             
-            NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-            NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
-            NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Promotion/%@",strPath,promotion.imageUrl];
+            NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/Image/NoImage.jpg"];
+            NSString *imageFileName = [NSString stringWithFormat:@"/JMM/Image/Promotion/%@",promotion.imageUrl];
             imageFileName = [Utility isStringEmpty:promotion.imageUrl]?noImageFileName:imageFileName;
             UIImage *image = [Utility getImageFromCache:imageFileName];
             if(image)
@@ -314,9 +312,8 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
         
         
         Branch *branch = [Branch getBranch:rewardRedemption.mainBranchID];
-        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
-        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Logo/%@",strPath,branch.dbName,branch.imageUrl];
+        NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/NoImage.jpg",branch.dbName];
+        NSString *imageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/Logo/%@",branch.dbName,branch.imageUrl];
         imageFileName = [Utility isStringEmpty:branch.imageUrl]?noImageFileName:imageFileName;
         UIImage *image = [Utility getImageFromCache:imageFileName];
         if(image)
@@ -376,9 +373,8 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
             
             
             
-            NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-            NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
-            NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Promotion/%@",strPath,promotion.imageUrl];
+            NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/Image/NoImage.jpg"];
+            NSString *imageFileName = [NSString stringWithFormat:@"/JMM/Image/Promotion/%@",promotion.imageUrl];
             imageFileName = [Utility isStringEmpty:promotion.imageUrl]?noImageFileName:imageFileName;
             UIImage *image = [Utility getImageFromCache:imageFileName];
             if(image)

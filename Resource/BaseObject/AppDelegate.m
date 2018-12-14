@@ -249,7 +249,7 @@ void myExceptionHandler(NSException *exception)
     {
         currentVc = parentViewController;
     }
-    
+    //*****
     
 
     
@@ -354,7 +354,28 @@ void myExceptionHandler(NSException *exception)
         _homeModel.delegate = self;
         [_homeModel downloadItems:dbReceiptDisputeRatingUpdateAndReload withData:receiptID];
     }
+    else if([categoryIdentifier isEqualToString:@"gbpQR"])
+    {
+        //Get current vc
+        CustomViewController *currentVc;
+        CustomViewController *parentViewController = (CustomViewController *)[[[UIApplication sharedApplication] delegate] window].rootViewController;
 
+        while (parentViewController.presentedViewController != nil && ![parentViewController.presentedViewController isKindOfClass:[UIAlertController class]])
+        {
+            parentViewController = (CustomViewController *)parentViewController.presentedViewController;
+        }
+        if([parentViewController isKindOfClass:[UITabBarController class]])
+        {
+            currentVc = ((UITabBarController *)parentViewController).selectedViewController;
+        }
+        else
+        {
+            currentVc = parentViewController;
+        }
+        //*****
+        ShowQRToPayViewController *vc = (ShowQRToPayViewController *)currentVc;
+        [vc reloadVc];
+    }
 
     completionHandler(UIBackgroundFetchResultNewData);
     

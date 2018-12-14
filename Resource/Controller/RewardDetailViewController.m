@@ -106,9 +106,8 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         
     
         
-        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
-        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Reward/%@",strPath,rewardRedemption.imageUrl];
+        NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/Image/NoImage.jpg"];
+        NSString *imageFileName = [NSString stringWithFormat:@"/JMM/Image/Reward/%@",rewardRedemption.imageUrl];
         imageFileName = [Utility isStringEmpty:rewardRedemption.imageUrl]?noImageFileName:imageFileName;
         UIImage *image = [Utility getImageFromCache:imageFileName];
         if(image)
@@ -189,9 +188,8 @@ static NSString * const reuseIdentifierLabel = @"CustomTableViewCellLabel";
         
         
         
-        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
-        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Reward/%@",strPath,rewardRedemption.imageUrl];
+        NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/Image/NoImage.jpg"];
+        NSString *imageFileName = [NSString stringWithFormat:@"/JMM/Image/Reward/%@",rewardRedemption.imageUrl];
         imageFileName = [Utility isStringEmpty:rewardRedemption.imageUrl]?noImageFileName:imageFileName;
         UIImage *image = [Utility getImageFromCache:imageFileName];
         if(image)

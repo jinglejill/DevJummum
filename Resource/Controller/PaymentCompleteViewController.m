@@ -273,9 +273,8 @@ static NSString * const reuseIdentifierSeparatorLine = @"CustomTableViewCellSepa
         CustomTableViewCellLogo *cell = [tbvData dequeueReusableCellWithIdentifier:reuseIdentifierLogo];
 
 
-        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
-        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/%@",strPath,jummumLogo];
+        NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/Image/NoImage.jpg"];
+        NSString *imageFileName = [NSString stringWithFormat:@"/JMM/Image/%@",jummumLogo];
         imageFileName = [Utility isStringEmpty:jummumLogo]?noImageFileName:imageFileName;
         UIImage *image = [Utility getImageFromCache:imageFileName];
         if(image)

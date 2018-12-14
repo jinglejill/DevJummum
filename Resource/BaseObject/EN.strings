@@ -203,8 +203,10 @@
 "วิธีการชำระเงิน" = "Payment Method";
 "โอนเงิน" = "Mobile banking";
 "เลือกวิธีการชำระเงิน" = "Choose payment method";
-​"สแกน QR เพื่อโอนเงิน" = ​"Scan QR code to pay";
-​"Hot Deal" = ​"Hot Deal";
-"บันทึก QR Code ลงอัลบั้ม" = "Save QR code to camera roll";
+"สแกน QR เพื่อโอนเงิน" = "Scan QR Code to pay";
+"แชร์ QR" = "Share QR Code to friend";
 "รอชำระเงิน" = "Wait for payment";
 "กรุณาเลือกวิธีชำระเงิน" = "Please choose payment method";
+"QR Code ได้ถูกบันทึกลงในเครื่องเรียบร้อยแล้ว" = "QR Code has been successfully saved";
+"ไม่สามารถสร้าง QR ได้ กรุณาลองใหม่อีกครั้งค่ะ" = "No QR Code generated, please try again";
+​​"Hot Deal" = ​"Hot Deal";

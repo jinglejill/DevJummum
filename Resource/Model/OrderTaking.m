@@ -215,7 +215,6 @@
     return toOrderTaking;
 }
 
-
 +(NSMutableArray *)getOrderTakingListWithStatus:(NSInteger)status orderTakingList:(NSMutableArray *)orderTakingList
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_status = %ld",status];

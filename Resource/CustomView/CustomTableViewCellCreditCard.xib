@@ -127,10 +127,9 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="บันทึกบัตรนี้" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTC-Dr-VKJ">
-                    <rect key="frame" x="16" y="229" width="70" height="17"/>
+                    <rect key="frame" x="16" y="229" width="286" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="Nvi-5m-VTo"/>
-                        <constraint firstAttribute="width" constant="70" id="OV1-Mt-oxZ"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Prompt-Regular" family="Prompt" pointSize="14"/>
                     <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -184,6 +183,7 @@
                 <constraint firstItem="bBV-sE-mqZ" firstAttribute="leading" secondItem="NKs-Ci-mRj" secondAttribute="trailing" constant="8" id="APT-H4-Sbt"/>
                 <constraint firstItem="ZMg-oB-bfY" firstAttribute="leading" secondItem="JBu-qk-xne" secondAttribute="trailing" constant="16" id="Bmd-Sf-0cI"/>
                 <constraint firstItem="lgt-pY-aea" firstAttribute="top" secondItem="hzE-SK-V1z" secondAttribute="bottom" id="C3V-Ms-s3u"/>
+                <constraint firstItem="c2o-tG-aXK" firstAttribute="leading" secondItem="bTC-Dr-VKJ" secondAttribute="trailing" constant="8" id="CA1-Ml-4rO"/>
                 <constraint firstItem="6o3-7t-fMB" firstAttribute="top" secondItem="w0V-99-hys" secondAttribute="bottom" constant="13" id="CmO-ca-Al0"/>
                 <constraint firstItem="bTC-Dr-VKJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="KG4-9X-GFx"/>
                 <constraint firstItem="hbb-I8-8bW" firstAttribute="leading" secondItem="JBu-qk-xne" secondAttribute="leading" id="KGl-lx-ySD"/>

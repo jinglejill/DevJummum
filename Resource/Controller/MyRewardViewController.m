@@ -241,9 +241,8 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
         
         
         Branch *branch = [Branch getBranch:rewardRedemption.mainBranchID];
-        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
-        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Logo/%@",strPath,branch.dbName,branch.imageUrl];
+        NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/NoImage.jpg",branch.dbName];
+        NSString *imageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/Logo/%@",branch.dbName,branch.imageUrl];
         imageFileName = [Utility isStringEmpty:branch.imageUrl]?noImageFileName:imageFileName;
         UIImage *image = [Utility getImageFromCache:imageFileName];
         if(image)
@@ -308,9 +307,8 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
         
         
         Branch *branch = [Branch getBranch:rewardRedemption.mainBranchID];
-        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
-        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Logo/%@",strPath,branch.dbName,branch.imageUrl];
+        NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/NoImage.jpg",branch.dbName];
+        NSString *imageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/Logo/%@",branch.dbName,branch.imageUrl];
         imageFileName = [Utility isStringEmpty:branch.imageUrl]?noImageFileName:imageFileName;
         UIImage *image = [Utility getImageFromCache:imageFileName];
         if(image)
@@ -372,9 +370,8 @@ static NSString * const reuseIdentifierReward = @"CustomTableViewCellReward";
         
         
         Branch *branch = [Branch getBranch:rewardRedemption.mainBranchID];
-        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
-        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Logo/%@",strPath,branch.dbName,branch.imageUrl];
+        NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/NoImage.jpg",branch.dbName];
+        NSString *imageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/Logo/%@",branch.dbName,branch.imageUrl];
         imageFileName = [Utility isStringEmpty:branch.imageUrl]?noImageFileName:imageFileName;
         UIImage *image = [Utility getImageFromCache:imageFileName];
         if(image)

@@ -145,7 +145,6 @@
 
 -(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
 {
-//    return;
     HomeModel *homeModel = (HomeModel *)objHomeModel;
     if(homeModel.propCurrentDB == dbRewardRedemptionLuckyDraw)
     {
@@ -161,52 +160,54 @@
         NSMutableArray *luckyDrawTicketList = items[1];
         _numberOfGift = [luckyDrawTicketList count];
         
-//        _discountGroupMenuMapList = items[2];
-        
  
         _luckyDrawDownloaded = YES;
     }
     else if(homeModel.propCurrentDB == dbMenu)
     {
-            [Utility updateSharedObject:items];
-            NSMutableArray *messageList = [items[0] mutableCopy];
-            Message *message = messageList[0];
-            if(![message.text integerValue])
+        [Utility updateSharedObject:items];
+        NSMutableArray *messageList = [items[0] mutableCopy];
+        Message *message = messageList[0];
+        if(![message.text integerValue])
+        {
+            NSString *message = [Language getText:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
+            [self showAlert:@"" message:message];
+        }
+        else
+        {
+            NSMutableArray *discountGroupMenuMapList = items[3];
+            if(_rewardRedemption.discountGroupMenuID && [discountGroupMenuMapList count]>0)
             {
-                NSString *message = [Language getText:@"ทางร้านไม่ได้เปิดระบบการสั่งอาหารด้วยตนเองตอนนี้ ขออภัยในความไม่สะดวกค่ะ"];
-                [self showAlert:@"" message:message];
+                NSMutableArray *orderTakingList = [[NSMutableArray alloc]init];
+                for(int i=0; i<[discountGroupMenuMapList count]; i++)
+                {
+                    DiscountGroupMenuMap *discountGroupMenuMap = discountGroupMenuMapList[i];
+                    Menu *menu = [Menu getMenu:discountGroupMenuMap.menuID branchID:_rewardRedemption.mainBranchID];
+                    SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:discountGroupMenuMap.menuID branchID:_rewardRedemption.mainBranchID];
+                    float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
+                    
+                    
+                    for(int j=0; j<discountGroupMenuMap.quantity; j++)
+                    {
+                        OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:receipt.branchID customerTableID:0 menuID:discountGroupMenuMap.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 discountProgramValue:0 discountValue:0 orderNo:0 status:1 receiptID:0];
+                        [orderTakingList addObject:orderTaking];
+                        [OrderTaking addObject:orderTaking];
+                    }
+                }
+                
+                [OrderTaking setCurrentOrderTakingList:orderTakingList];
+                [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
             }
             else
             {
-                NSMutableArray *discountGroupMenuMapList = items[3];
-                if(_rewardRedemption.discountGroupMenuID && [discountGroupMenuMapList count]>0)
-                {
-                    NSMutableArray *orderTakingList = [[NSMutableArray alloc]init];
-                    for(int i=0; i<[discountGroupMenuMapList count]; i++)
-                    {
-                        DiscountGroupMenuMap *discountGroupMenuMap = discountGroupMenuMapList[i];
-                        Menu *menu = [Menu getMenu:discountGroupMenuMap.menuID branchID:_rewardRedemption.mainBranchID];
-                        SpecialPriceProgram *specialPriceProgram = [SpecialPriceProgram getSpecialPriceProgramTodayWithMenuID:discountGroupMenuMap.menuID branchID:_rewardRedemption.mainBranchID];
-                        float specialPrice = specialPriceProgram?specialPriceProgram.specialPrice:menu.price;
-                        
-                        
-                        for(int j=0; j<discountGroupMenuMap.quantity; j++)
-                        {
-                            OrderTaking *orderTaking = [[OrderTaking alloc]initWithBranchID:receipt.branchID customerTableID:0 menuID:discountGroupMenuMap.menuID quantity:1 specialPrice:specialPrice price:menu.price takeAway:0 takeAwayPrice:0 noteIDListInText:@"" notePrice:0 discountProgramValue:0 discountValue:0 orderNo:0 status:1 receiptID:0];
-                            [orderTakingList addObject:orderTaking];
-                            [OrderTaking addObject:orderTaking];
-                        }
-                    }
-                    
-                    [OrderTaking setCurrentOrderTakingList:orderTakingList];
-                    [self performSegueWithIdentifier:@"segCreditCardAndOrderSummary" sender:self];
-                }
-                else
-                {
-                    [self performSegueWithIdentifier:@"segUnwindToMenuSelection" sender:self];
-                }
+                SaveReceipt *saveReceipt = [[SaveReceipt alloc]init];
+                saveReceipt.voucherCode = _rewardRedemption.voucherCode;
+                [SaveReceipt setCurrentSaveReceipt:saveReceipt];
+                
+                [self performSegueWithIdentifier:@"segUnwindToMenuSelection" sender:self];
             }
         }
+    }
 }
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag

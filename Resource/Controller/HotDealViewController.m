@@ -170,9 +170,8 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
 
         
         
-        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
-        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Promotion/%@",strPath,promotion.imageUrl];
+        NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/Image/NoImage.jpg"];
+        NSString *imageFileName = [NSString stringWithFormat:@"/JMM/Image/Promotion/%@",promotion.imageUrl];
         imageFileName = [Utility isStringEmpty:promotion.imageUrl]?noImageFileName:imageFileName;
         UIImage *image = [Utility getImageFromCache:imageFileName];
         if(image)
@@ -222,9 +221,8 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
         
         
         
-        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
-        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Promotion/%@",strPath,promotion.imageUrl];
+        NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/Image/NoImage.jpg"];
+        NSString *imageFileName = [NSString stringWithFormat:@"/JMM/Image/Promotion/%@",promotion.imageUrl];
         imageFileName = [Utility isStringEmpty:promotion.imageUrl]?noImageFileName:imageFileName;
         UIImage *image = [Utility getImageFromCache:imageFileName];
         if(image)
@@ -282,10 +280,9 @@ static NSString * const reuseIdentifierPromoThumbNail = @"CustomTableViewCellPro
         cell.lblSubTitleHeight.constant = cell.lblSubTitle.frame.size.height>37?37:cell.lblSubTitle.frame.size.height;
         
         
-        
-        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/Image/NoImage.jpg",strPath];
-        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/Image/Promotion/%@",strPath,promotion.imageUrl];
+    
+        NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/Image/NoImage.jpg"];
+        NSString *imageFileName = [NSString stringWithFormat:@"/JMM/Image/Promotion/%@",promotion.imageUrl];
         imageFileName = [Utility isStringEmpty:promotion.imageUrl]?noImageFileName:imageFileName;
         UIImage *image = [Utility getImageFromCache:imageFileName];
         if(image)

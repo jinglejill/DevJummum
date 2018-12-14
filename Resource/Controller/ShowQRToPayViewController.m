@@ -9,21 +9,19 @@
 #import "ShowQRToPayViewController.h"
 #import "PaymentCompleteViewController.h"
 #import "CustomTableViewCellQRToPay.h"
-//#import "CustomTableViewHeaderFooterButton.h"
 #import "CustomTableViewHeaderFooterButtonButton.h"
 #import "GBPrimeQr.h"
 
 
 @interface ShowQRToPayViewController ()
 {
-    UIImage *_imgQRToPay;
     NSInteger _numberOfGift;
+    UIImage *_imgQRToPay;
 }
 @end
 
 @implementation ShowQRToPayViewController
 static NSString * const reuseIdentifierQRToPay = @"CustomTableViewCellQRToPay";
-//static NSString * const reuseIdentifierHeaderFooterButton = @"CustomTableViewHeaderFooterButton";
 static NSString * const reuseIdentifierHeaderFooterButtonButton = @"CustomTableViewHeaderFooterButtonButton";
 @synthesize lblNavTitle;
 @synthesize tbvData;
@@ -72,10 +70,6 @@ static NSString * const reuseIdentifierHeaderFooterButtonButton = @"CustomTableV
         UINib *nib = [UINib nibWithNibName:reuseIdentifierQRToPay bundle:nil];
         [tbvData registerNib:nib forCellReuseIdentifier:reuseIdentifierQRToPay];
     }
-//    {
-//        UINib *nib = [UINib nibWithNibName:reuseIdentifierHeaderFooterButton bundle:nil];
-//        [tbvData registerNib:nib forHeaderFooterViewReuseIdentifier:reuseIdentifierHeaderFooterButton];
-//    }
     {
         UINib *nib = [UINib nibWithNibName:reuseIdentifierHeaderFooterButtonButton bundle:nil];
         [tbvData registerNib:nib forHeaderFooterViewReuseIdentifier:reuseIdentifierHeaderFooterButtonButton];
@@ -124,7 +118,7 @@ static NSString * const reuseIdentifierHeaderFooterButtonButton = @"CustomTableV
     GBPrimeQr *gbPrimeQR = [[GBPrimeQr alloc]init];
     gbPrimeQR.postUrl = GBPrimeQRPostUrl;
     gbPrimeQR.token = GBPrimeQRToken;
-    gbPrimeQR.amount = 1.07;//test receipt.netTotal;
+    gbPrimeQR.amount = receipt.netTotal;
     gbPrimeQR.referenceNo = [NSString stringWithFormat:@"%@%@",strCurrentDate,receipt.receiptNoID];
     gbPrimeQR.payType = @"F";
     gbPrimeQR.responseUrl = responseUrl;
@@ -147,6 +141,12 @@ static NSString * const reuseIdentifierHeaderFooterButtonButton = @"CustomTableV
              cell.imgVwQRToPay.image = image;
              
              _imgQRToPay = image;
+             //save to camera roll and display message
+             UIImageWriteToSavedPhotosAlbum(image, self, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), nil);
+         }
+         else
+         {
+            [self blinkAlertMsg:[Language getText:@"ไม่สามารถสร้าง QR ได้ กรุณาลองใหม่อีกครั้งค่ะ"]];
          }
      }];
      return cell;
@@ -181,8 +181,8 @@ static NSString * const reuseIdentifierHeaderFooterButtonButton = @"CustomTableV
         CustomTableViewHeaderFooterButtonButton *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifierHeaderFooterButtonButton];
     
         footerView.layer.backgroundColor = cSystem1.CGColor;
-        [footerView.btnSave setTitle:[Language getText:@"บันทึก QR Code ลงอัลบั้ม"] forState:UIControlStateNormal];
-        [footerView.btnSave addTarget:self action:@selector(saveToCameraRoll:) forControlEvents:UIControlEventTouchUpInside];
+        [footerView.btnSave setTitle:[Language getText:@"แชร์ QR"] forState:UIControlStateNormal];
+        [footerView.btnSave addTarget:self action:@selector(shareQR:) forControlEvents:UIControlEventTouchUpInside];
         CGRect frame = footerView.btnSave.frame;
         frame.origin.x = 16;
         frame.size.width = self.view.frame.size.width - 16*2;
@@ -228,11 +228,6 @@ static NSString * const reuseIdentifierHeaderFooterButtonButton = @"CustomTableV
     }
 }
 
--(void)saveToCameraRoll:(id)sender
-{
-    UIImageWriteToSavedPhotosAlbum(_imgQRToPay, nil, nil, nil);
-}
-
 -(void)backToHome:(id)sender
 {
     [self performSegueWithIdentifier:@"segUnwindToMainTabBar" sender:self];
@@ -271,5 +266,30 @@ static NSString * const reuseIdentifierHeaderFooterButtonButton = @"CustomTableV
     self.homeModel = [[HomeModel alloc]init];
     self.homeModel.delegate = self;
     [self.homeModel downloadItems:dbReceiptAndLuckyDraw withData:receipt];
+}
+
+- (void)thisImage:(UIImage *)image hasBeenSavedInPhotoAlbumWithError:(NSError *)error usingContextInfo:(void*)ctxInfo {
+    if (error)
+    {
+        // Do anything needed to handle the error or display it to the user
+    }
+    else
+    {
+        // .... do anything you want here to handle
+        // .... when the image has been saved in the photo album
+        [self blinkAlertMsg:[Language getText:@"QR Code ได้ถูกบันทึกลงในเครื่องเรียบร้อยแล้ว"]];
+    }
+}
+
+-(void)shareQR:(id)sender
+{
+    NSArray *activityItems = @[_imgQRToPay];
+    UIActivityViewController *activityViewControntroller = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    activityViewControntroller.excludedActivityTypes = @[];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        activityViewControntroller.popoverPresentationController.sourceView = self.view;
+        activityViewControntroller.popoverPresentationController.sourceRect = CGRectMake(self.view.bounds.size.width/2, self.view.bounds.size.height/4, 0, 0);
+    }
+    [self presentViewController:activityViewControntroller animated:true completion:nil];
 }
 @end

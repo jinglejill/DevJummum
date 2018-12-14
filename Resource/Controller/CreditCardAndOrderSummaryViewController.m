@@ -905,8 +905,8 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                     }
                     
                     cell.textLabel.text = [Language getText:@"เลือกวิธีการชำระเงิน"];
-                    cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:15];
-                    cell.textLabel.textColor = cSystem4;
+                    cell.textLabel.font = [UIFont fontWithName:@"Prompt-Regular" size:13];
+                    cell.textLabel.textColor = cSystem1;
                     cell.detailTextLabel.text = @">";
                     cell.detailTextLabel.textColor = cSystem1;
                     
@@ -1635,7 +1635,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                                                                        message:nil                                                            preferredStyle:UIAlertControllerStyleActionSheet];
         
         
-        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"QR code"
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"QR Code"
                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                                   {
                                       [self performSegueWithIdentifier:@"segQRCodeScanTable" sender:self];
@@ -1677,7 +1677,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         UIFont *font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
         UIColor *color = cSystem1;
         NSDictionary *attribute = @{NSForegroundColorAttributeName:color ,NSFontAttributeName: font};
-        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"QR code" attributes:attribute];
+        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"QR Code" attributes:attribute];
         
         UILabel *label = [[action1 valueForKey:@"__representer"] valueForKey:@"label"];
         label.attributedText = attrString;
@@ -1806,7 +1806,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 dicPaymentMethod = [[NSMutableDictionary alloc]init];
             }
             [dicPaymentMethod setValue:@"1" forKey:userAccount.username];
-            [[NSUserDefaults standardUserDefaults] setObject:dicPaymentMethod forKey:@"paymentMethod"];
+            [[NSUserDefaults standardUserDefaults] setObject:[dicPaymentMethod copy] forKey:@"paymentMethod"];
         }
         
         
@@ -1925,7 +1925,9 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 if(!error)
                 {
                     NSLog(@"%@",[token tokenId]);
-                    
+//                    btnPay.enabled = YES;
+//                    [self removeWaitingView];
+//                    return;
                     
                     //update nsuserdefault _creditcard
                     UserAccount *userAccount = [UserAccount getCurrentUserAccount];
@@ -1959,7 +1961,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                             dicPaymentMethod = [[NSMutableDictionary alloc]init];
                         }
                         [dicPaymentMethod setValue:@"2" forKey:userAccount.username];
-                        [[NSUserDefaults standardUserDefaults] setObject:dicPaymentMethod forKey:@"paymentMethod"];
+                        [[NSUserDefaults standardUserDefaults] setObject:[dicPaymentMethod copy] forKey:@"paymentMethod"];
                     }
                     
                     
@@ -2199,7 +2201,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
         Message *message = messageList[0];
         if(![Utility isStringEmpty:message.text])
         {
-            [self blinkAlertMsg:alertMsg];
+            [self blinkAlertMsg:message.text];
             return;
         }
         

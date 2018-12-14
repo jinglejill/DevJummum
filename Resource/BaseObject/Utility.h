@@ -491,6 +491,7 @@ enum enumUrl
 + (void)updateSharedDataList:(NSMutableArray *)itemList className:(NSString *)className branchID:(NSInteger)branchID;
 +(void)updateSharedObject:(NSArray *)arrOfObjectList;
 + (void)addUpdateObject:(NSObject *)object;
++(void)createCacheFoler:(NSString *)folderName;
 +(UIImage *)getImageFromCache:(NSString *)imageName;
 +(void)saveImageInCache:(UIImage *)image imageName:(NSString *)imageName;
 +(void)deleteFileInCache:(NSString *)fileName;

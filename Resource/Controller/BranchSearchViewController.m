@@ -151,9 +151,8 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
         cell.lblMenuName.text = branch.name;
         
         
-        NSString *strPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *noImageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/NoImage.jpg",strPath,branch.dbName];
-        NSString *imageFileName = [NSString stringWithFormat:@"%@/JMM/%@/Image/Logo/%@",strPath,branch.dbName,branch.imageUrl];
+        NSString *noImageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/NoImage.jpg",branch.dbName];
+        NSString *imageFileName = [NSString stringWithFormat:@"/JMM/%@/Image/Logo/%@",branch.dbName,branch.imageUrl];
         imageFileName = [Utility isStringEmpty:branch.imageUrl]?noImageFileName:imageFileName;
         UIImage *image = [Utility getImageFromCache:imageFileName];
         if(image)
@@ -214,6 +213,16 @@ static NSString * const reuseIdentifierMenu = @"CustomTableViewCellMenu";
         _selectedBranch = branch;
         
         
+        NSString *strDbNameFolder = [NSString stringWithFormat:@"/JMM/%@",branch.dbName];
+        NSString *strDbNameImageFolder = [NSString stringWithFormat:@"/JMM/%@/Image",branch.dbName];
+        NSString *strDbNameImageLogoFolder = [NSString stringWithFormat:@"/JMM/%@/Image/Logo",branch.dbName];
+        NSString *strDbNameImageMenuFolder = [NSString stringWithFormat:@"/JMM/%@/Image/Menu",branch.dbName];
+        [Utility createCacheFoler:strDbNameFolder];
+        [Utility createCacheFoler:strDbNameImageFolder];
+        [Utility createCacheFoler:strDbNameImageLogoFolder];
+        [Utility createCacheFoler:strDbNameImageMenuFolder];
+    
+    
         NSMutableArray *branchList = [[NSMutableArray alloc]init];
         [branchList addObject:branch];
         NSMutableArray *dataList = [[NSMutableArray alloc]init];
