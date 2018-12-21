@@ -11,7 +11,9 @@
 #import "CustomTableViewCellMenu.h"
 #import "CustomTableViewCellSearchBar.h"
 #import "CustomerTable.h"
+#import "Zone.h"
 #import "Setting.h"
+
 
 
 @interface CustomerTableSearchViewController ()
@@ -118,8 +120,8 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         }
         else
         {
-            NSString *zone = _customerTableZoneList[_selectedZoneIndex];
-            NSMutableArray *customerTableList = [CustomerTable getCustomerTableListWithZone:zone customerTableList:_filterCustomerTableList];
+            Zone *zone = _customerTableZoneList[_selectedZoneIndex];
+            NSMutableArray *customerTableList = [CustomerTable getCustomerTableListWithZone:zone.name customerTableList:_filterCustomerTableList];
             return [customerTableList count];
         }
     }
@@ -168,8 +170,8 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
             
             
             
-            NSString *zone = _customerTableZoneList[_selectedZoneIndex];
-            NSMutableArray *customerTableList = [CustomerTable getCustomerTableListWithZone:zone customerTableList:_filterCustomerTableList];
+            Zone *zone = _customerTableZoneList[_selectedZoneIndex];
+            NSMutableArray *customerTableList = [CustomerTable getCustomerTableListWithZone:zone.name customerTableList:_filterCustomerTableList];
             CustomerTable *customerTable = customerTableList[item];
             
             
@@ -226,15 +228,15 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         {
             if(fromCreditCardAndOrderSummaryMenu)
             {
-                NSString *zone = _customerTableZoneList[_selectedZoneIndex];
-                NSMutableArray *customerTableList = [CustomerTable getCustomerTableListWithZone:zone customerTableList:_filterCustomerTableList];
+                Zone *zone = _customerTableZoneList[_selectedZoneIndex];
+                NSMutableArray *customerTableList = [CustomerTable getCustomerTableListWithZone:zone.name customerTableList:_filterCustomerTableList];
                 customerTable = customerTableList[item];
                 [self performSegueWithIdentifier:@"segUnwindToCreditCardAndOrderSummary" sender:self];
             }
             else
             {
-                NSString *zone = _customerTableZoneList[_selectedZoneIndex];
-                NSMutableArray *customerTableList = [CustomerTable getCustomerTableListWithZone:zone customerTableList:_filterCustomerTableList];
+                Zone *zone = _customerTableZoneList[_selectedZoneIndex];
+                NSMutableArray *customerTableList = [CustomerTable getCustomerTableListWithZone:zone.name customerTableList:_filterCustomerTableList];
                 
                 
                 CustomerTable *customerTable = customerTableList[indexPath.item];
@@ -366,7 +368,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     int buttonX = 15;
     for (int i = 0; i < [_customerTableZoneList count]; i++)
     {
-        NSString *zone = _customerTableZoneList[i];
+        Zone *zone = _customerTableZoneList[i];
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(buttonX, 0, 100, 44)];
         button.titleLabel.font = [UIFont fontWithName:@"Prompt-SemiBold" size:15];
         if(i==0)
@@ -377,7 +379,7 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
         {
             [button setTitleColor:cSystem4 forState:UIControlStateNormal];
         }
-        [button setTitle:zone forState:UIControlStateNormal];
+        [button setTitle:zone.name forState:UIControlStateNormal];
         [button sizeToFit];
         [scrollView addSubview:button];
         buttonX = 15 + buttonX+button.frame.size.width;
@@ -429,8 +431,8 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     [tbvCustomerTable reloadData];
     if([_customerTableZoneList count]>0)
     {
-        NSString *zone = _customerTableZoneList[_selectedZoneIndex];
-        NSMutableArray *customerTableList = [CustomerTable getCustomerTableListWithZone:zone customerTableList:_filterCustomerTableList];
+        Zone *zone = _customerTableZoneList[_selectedZoneIndex];
+        NSMutableArray *customerTableList = [CustomerTable getCustomerTableListWithZone:zone.name customerTableList:_filterCustomerTableList];
         if([customerTableList count]>0)
         {
             [tbvCustomerTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:NO];
@@ -448,12 +450,6 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
 
 -(void)setData
 {
-    _customerTableList = [CustomerTable getCustomerTableListWithBranchID:branch.branchID];
-//    _customerTableList = [CustomerTable getCustomerTableListWithType:1 status:1 customerTableList:_customerTableList];
-//    _customerTableZoneList = [CustomerTable getCustomerTableZoneListWithType:1 status:1 customerTableList:_customerTableList];
-    _customerTableZoneList = [CustomerTable getCustomerTableZoneListWithCustomerTableList:_customerTableList];
-
-    
     _filterCustomerTableList = _customerTableList;
     
     
@@ -463,8 +459,8 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
     
     if([_customerTableZoneList count]>0)
     {
-        NSString *zone = _customerTableZoneList[0];
-        NSMutableArray *customerTableList = [CustomerTable getCustomerTableListWithZone:zone customerTableList:_filterCustomerTableList];
+        Zone *zone = _customerTableZoneList[0];
+        NSMutableArray *customerTableList = [CustomerTable getCustomerTableListWithZone:zone.name customerTableList:_filterCustomerTableList];
         if([customerTableList count]>0)
         {
             [tbvCustomerTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:NO];
@@ -483,6 +479,9 @@ static NSString * const reuseIdentifierSearchBar = @"CustomTableViewCellSearchBa
 -(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
 {
     [Utility updateSharedObject:items];
+    
+    _customerTableList = items[0];
+    _customerTableZoneList = items[1];
     [self setData];
 }
 

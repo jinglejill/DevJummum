@@ -227,20 +227,6 @@
     return [filterArray mutableCopy];
 }
 
-+(NSMutableArray *)getCustomerTableZoneListWithCustomerTableList:(NSMutableArray *)customerTableList
-{
-
-    NSSet *zoneSet = [NSSet setWithArray:[customerTableList valueForKey:@"_zone"]];
-    
-    NSArray *zoneList = [zoneSet allObjects];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"" ascending:YES];
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-    NSArray *sortArray = [zoneList sortedArrayUsingDescriptors:sortDescriptors];
-    
-    
-    return [sortArray mutableCopy];
-}
-
 +(NSMutableArray *)getCustomerTableListWithType:(NSInteger)type status:(NSInteger)status customerTableList:(NSMutableArray *)customerTableList
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_type = %ld and _status = %ld",type,status];

@@ -95,6 +95,7 @@ static NSString * const reuseIdentifierImageLabel = @"CustomTableViewCellImageLa
         cell.imgValue.image = [self generateQRCodeWithString:_encryptedMessage.encryptedMessage scale:5];        
     }
     
+    
     Branch *branch = [Branch getBranch:saveReceipt.branchID];
     cell.lblBranchName.text = branch?[NSString stringWithFormat:[Language getText:@"ร้าน %@"],branch.name]:@"";
     cell.lblText.text = [Utility dateToString:[Utility currentDateTime] toFormat:@"d MMM yy HH:mm"];

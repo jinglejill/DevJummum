@@ -42,6 +42,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[MyRewardViewController tableView:cellForRowAtIndexPath:]:MyRewardViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.lblCountDown.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "+[OrderTaking createSumUpOrderTakingWithTheSameMenuAndNote:]:OrderTaking.m">
       </ContextState>
       <ContextState

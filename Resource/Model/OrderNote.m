@@ -11,6 +11,7 @@
 #import "Note.h"
 #import "OrderTaking.h"
 #import "Utility.h"
+#import "Language.h"
 
 
 @implementation OrderNote
@@ -240,11 +241,25 @@
             NSString *strQuantity = orderNote.quantity>1?[NSString stringWithFormat:@"(%ld)",(NSInteger)orderNote.quantity]:@"";
             if(i == [noteList count]-1)
             {
-                strNote = [NSString stringWithFormat:@"%@%@%@",strNote,item.name,strQuantity];
+                if([Language langIsEN])
+                {
+                    strNote = [NSString stringWithFormat:@"%@%@%@",strNote,item.nameEn,strQuantity];
+                }
+                else
+                {
+                    strNote = [NSString stringWithFormat:@"%@%@%@",strNote,item.name,strQuantity];
+                }
             }
             else
             {
-                strNote = [NSString stringWithFormat:@"%@%@%@,",strNote,item.name,strQuantity];
+                if([Language langIsEN])
+                {
+                    strNote = [NSString stringWithFormat:@"%@%@%@,",strNote,item.nameEn,strQuantity];
+                }
+                else
+                {
+                    strNote = [NSString stringWithFormat:@"%@%@%@,",strNote,item.name,strQuantity];
+                }
             }
             i++;
         }

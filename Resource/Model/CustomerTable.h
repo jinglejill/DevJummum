@@ -37,7 +37,6 @@
 
 +(NSMutableArray *)getCustomerTableZoneListWithType:(NSInteger)type status:(NSInteger)status;
 +(NSMutableArray *)getCustomerTableZoneListWithType:(NSInteger)type status:(NSInteger)status customerTableList:(NSMutableArray *)customerTableList;
-+(NSMutableArray *)getCustomerTableZoneListWithCustomerTableList:(NSMutableArray *)customerTableList;
 +(NSMutableArray *)getCustomerTableListWithType:(NSInteger)type status:(NSInteger)status;
 +(NSMutableArray *)getCustomerTableListWithType:(NSInteger)type status:(NSInteger)status customerTableList:(NSMutableArray *)customerTableList;
 +(NSMutableArray *)getCustomerTableListWithZone:(NSString *)zone customerTableList:(NSMutableArray *)customerTableList;

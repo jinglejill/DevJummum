@@ -1925,9 +1925,9 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 if(!error)
                 {
                     NSLog(@"%@",[token tokenId]);
-//                    btnPay.enabled = YES;
-//                    [self removeWaitingView];
-//                    return;
+                    btnPay.enabled = YES;
+                    [self removeWaitingView];
+                    return;
                     
                     //update nsuserdefault _creditcard
                     UserAccount *userAccount = [UserAccount getCurrentUserAccount];

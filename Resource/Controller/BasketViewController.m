@@ -515,7 +515,7 @@ static NSString * const reuseIdentifierNote = @"CustomTableViewCellNote";
                 cell.txtNote.attributedText = strAllNote;
                 
                 
-                float sumNotePrice = orderTaking.notePrice;// [OrderNote getSumNotePriceWithOrderTakingID:orderTaking.orderTakingID branchID:branch.branchID];
+                float sumNotePrice = orderTaking.notePrice;
                 NSString *strSumNotePrice = [Utility formatDecimal:sumNotePrice withMinFraction:0 andMaxFraction:0];
                 strSumNotePrice = sumNotePrice>0?[NSString stringWithFormat:@"+%@",strSumNotePrice]:strSumNotePrice;
                 cell.lblTotalNotePrice.text = sumNotePrice==0?@"":strSumNotePrice;                

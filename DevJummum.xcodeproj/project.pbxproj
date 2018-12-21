@@ -359,6 +359,8 @@
 		EF33D118211C36D200560C69 /* Kanit-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF33CFD2211C36D100560C69 /* Kanit-ExtraLightItalic.ttf */; };
 		EF33D119211C36D200560C69 /* Kanit-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF33CFD3211C36D100560C69 /* Kanit-Medium.ttf */; };
 		EF33D11A211C36D200560C69 /* Kanit-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF33CFD4211C36D100560C69 /* Kanit-SemiBoldItalic.otf */; };
+		EF44363821C789950024BD6A /* Zone.m in Sources */ = {isa = PBXBuildFile; fileRef = EF44363721C789950024BD6A /* Zone.m */; };
+		EF44363B21C789AE0024BD6A /* SharedZone.m in Sources */ = {isa = PBXBuildFile; fileRef = EF44363A21C789AE0024BD6A /* SharedZone.m */; };
 		EF5C546321B3A82B0022FE83 /* ShowQRToPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5C546221B3A82B0022FE83 /* ShowQRToPayViewController.m */; };
 		EF5C546721B3D56E0022FE83 /* CustomTableViewCellQRToPay.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5C546521B3D56E0022FE83 /* CustomTableViewCellQRToPay.m */; };
 		EF5C546821B3D56E0022FE83 /* CustomTableViewCellQRToPay.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5C546621B3D56E0022FE83 /* CustomTableViewCellQRToPay.xib */; };
@@ -374,7 +376,6 @@
 		EF6C7CFE21318CAA00C335AC /* MenuForBuffet.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6C7CFC21318CAA00C335AC /* MenuForBuffet.m */; };
 		EF6C7D08213529B900C335AC /* VoucherCodeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6C7D07213529B900C335AC /* VoucherCodeListViewController.m */; };
 		EF713E232192631E00117F42 /* Time.m in Sources */ = {isa = PBXBuildFile; fileRef = EF713E222192631E00117F42 /* Time.m */; };
-		EF713E872195652900117F42 /* giftBoxBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF713E242195652800117F42 /* giftBoxBackground.jpg */; };
 		EF713E882195652900117F42 /* giftBoxExcellent00021.png in Resources */ = {isa = PBXBuildFile; fileRef = EF713E272195652900117F42 /* giftBoxExcellent00021.png */; };
 		EF713E892195652900117F42 /* giftBoxExcellent00009.png in Resources */ = {isa = PBXBuildFile; fileRef = EF713E282195652900117F42 /* giftBoxExcellent00009.png */; };
 		EF713E8A2195652900117F42 /* giftBoxExcellent00008.png in Resources */ = {isa = PBXBuildFile; fileRef = EF713E292195652900117F42 /* giftBoxExcellent00008.png */; };
@@ -1064,6 +1065,10 @@
 		EF33CFD2211C36D100560C69 /* Kanit-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		EF33CFD3211C36D100560C69 /* Kanit-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-Medium.ttf"; sourceTree = "<group>"; };
 		EF33CFD4211C36D100560C69 /* Kanit-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-SemiBoldItalic.otf"; sourceTree = "<group>"; };
+		EF44363621C789950024BD6A /* Zone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Zone.h; sourceTree = "<group>"; };
+		EF44363721C789950024BD6A /* Zone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Zone.m; sourceTree = "<group>"; };
+		EF44363921C789AE0024BD6A /* SharedZone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedZone.h; sourceTree = "<group>"; };
+		EF44363A21C789AE0024BD6A /* SharedZone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedZone.m; sourceTree = "<group>"; };
 		EF5C546121B3A82B0022FE83 /* ShowQRToPayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowQRToPayViewController.h; sourceTree = "<group>"; };
 		EF5C546221B3A82B0022FE83 /* ShowQRToPayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowQRToPayViewController.m; sourceTree = "<group>"; };
 		EF5C546421B3D56E0022FE83 /* CustomTableViewCellQRToPay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCellQRToPay.h; sourceTree = "<group>"; };
@@ -1089,7 +1094,6 @@
 		EF6C7D07213529B900C335AC /* VoucherCodeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoucherCodeListViewController.m; sourceTree = "<group>"; };
 		EF713E212192631E00117F42 /* Time.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Time.h; sourceTree = "<group>"; };
 		EF713E222192631E00117F42 /* Time.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Time.m; sourceTree = "<group>"; };
-		EF713E242195652800117F42 /* giftBoxBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giftBoxBackground.jpg; sourceTree = "<group>"; };
 		EF713E272195652900117F42 /* giftBoxExcellent00021.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giftBoxExcellent00021.png; sourceTree = "<group>"; };
 		EF713E282195652900117F42 /* giftBoxExcellent00009.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giftBoxExcellent00009.png; sourceTree = "<group>"; };
 		EF713E292195652900117F42 /* giftBoxExcellent00008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giftBoxExcellent00008.png; sourceTree = "<group>"; };
@@ -1459,7 +1463,6 @@
 			children = (
 				EF713EE52196ECB700117F42 /* jummumWatermark.jpg */,
 				EF713E252195652900117F42 /* card4 */,
-				EF713E242195652800117F42 /* giftBoxBackground.jpg */,
 				EF9480AA21807284007CA270 /* QR-white.png */,
 				EF9480A821807006007CA270 /* share.png */,
 				EF9480A621806DD4007CA270 /* QRTab.png */,
@@ -1869,6 +1872,10 @@
 				EF1F380A2176FDAA00EFB214 /* VoucherCode.m */,
 				EF5C547121B3E8420022FE83 /* GBPrimeQr.h */,
 				EF5C547221B3E8420022FE83 /* GBPrimeQr.m */,
+				EF44363621C789950024BD6A /* Zone.h */,
+				EF44363721C789950024BD6A /* Zone.m */,
+				EF44363921C789AE0024BD6A /* SharedZone.h */,
+				EF44363A21C789AE0024BD6A /* SharedZone.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2414,7 +2421,6 @@
 				EF713E8A2195652900117F42 /* giftBoxExcellent00008.png in Resources */,
 				EF713EA72195652900117F42 /* giftBoxGood00014.png in Resources */,
 				EF33D100211C36D200560C69 /* Kanit-ExtraBoldItalic.ttf in Resources */,
-				EF713E872195652900117F42 /* giftBoxBackground.jpg in Resources */,
 				EF33D0E6211C36D200560C69 /* Kanit-ExtraLight.ttf in Resources */,
 				EF33D0E5211C36D200560C69 /* Prompt-ThinItalic.ttf in Resources */,
 				EF33D0ED211C36D200560C69 /* Prompt-BoldItalic.ttf in Resources */,
@@ -2720,6 +2726,7 @@
 				EF14CC402162310E0035A292 /* BuffetMenuMap.m in Sources */,
 				EF713E232192631E00117F42 /* Time.m in Sources */,
 				EF33D0DB211C36D200560C69 /* CustomTableViewCellImageText.m in Sources */,
+				EF44363821C789950024BD6A /* Zone.m in Sources */,
 				EF7E9497218592470009B945 /* CustomTableViewCellReceiptHeader.m in Sources */,
 				EF33D0AC211C36D200560C69 /* CustomTableViewCellProfile.m in Sources */,
 				EF33D07A211C36D200560C69 /* SharedOrderNote.m in Sources */,
@@ -2769,6 +2776,7 @@
 				EF33D0BE211C36D200560C69 /* CustomTableViewCellDisputeDetail.m in Sources */,
 				EF33D0BC211C36D200560C69 /* CustomTableViewCellText.m in Sources */,
 				EF33D074211C36D200560C69 /* SharedOrderTaking.m in Sources */,
+				EF44363B21C789AE0024BD6A /* SharedZone.m in Sources */,
 				EF8801E52143793C0062D9D4 /* LuckyDrawViewController.m in Sources */,
 				EF94809F21802688007CA270 /* ScanToJoinViewController.m in Sources */,
 				EF5C546721B3D56E0022FE83 /* CustomTableViewCellQRToPay.m in Sources */,

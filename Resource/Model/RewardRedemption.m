@@ -312,12 +312,13 @@
     for(int i=0; i<[rewardRedemptionList count]; i++)
     {
         RewardRedemption *item = rewardRedemptionList[i];
-        if(item.rewardRedemptionID == rewardRedemption.rewardRedemptionID)
+        if(item == rewardRedemption)
+//        if(item.rewardRedemptionID == rewardRedemption.rewardRedemptionID && [rewardRedemption.voucherCode isEqualToString:item.voucherCode])
         {
             return i;
         }
     }
-    return 0;
+    return -1;
 }
 @end
 

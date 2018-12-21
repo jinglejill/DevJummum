@@ -147,6 +147,7 @@
 
 -(void)itemsInsertedWithReturnData:(NSArray *)items
 {
+    [self removeOverlayViews];
     NSMutableArray *orderJoiningList = items[0];
     if([orderJoiningList count] > 0)
     {
