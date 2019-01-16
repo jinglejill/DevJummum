@@ -1200,6 +1200,7 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                     
                     [cell.btnChooseVoucherCode setTitle:[Language getText:@"คุณมี voucher code สำหรับร้านนี้"] forState:UIControlStateNormal];
                     [cell.btnChooseVoucherCode addTarget:self action:@selector(chooseVoucherCode:) forControlEvents:UIControlEventTouchUpInside];
+                    cell.btnChooseVoucherCode.hidden = !_orderSummary.showVoucherListButton;
                     return cell;
                 }
                 
@@ -1925,9 +1926,9 @@ static NSString * const reuseIdentifierLabelTextView = @"CustomTableViewCellLabe
                 if(!error)
                 {
                     NSLog(@"%@",[token tokenId]);
-                    btnPay.enabled = YES;
-                    [self removeWaitingView];
-                    return;
+//                    btnPay.enabled = YES;
+//                    [self removeWaitingView];
+//                    return;
                     
                     //update nsuserdefault _creditcard
                     UserAccount *userAccount = [UserAccount getCurrentUserAccount];

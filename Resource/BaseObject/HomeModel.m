@@ -745,7 +745,8 @@
             break;
         case dbReceiptAndLuckyDraw:
         {
-            noteDataString = [Utility getNoteDataString:data];
+            NSNumber *objReceiptID = (NSNumber *)data;
+            noteDataString = [NSString stringWithFormat:@"receiptID=%ld",[objReceiptID integerValue]];
             url = [NSURL URLWithString:[Utility appendRandomParam:[Utility url:urlReceiptAndLuckyDrawGetList]]];
         }
             break;

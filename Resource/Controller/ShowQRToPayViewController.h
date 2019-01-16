@@ -19,6 +19,7 @@
 @property (strong, nonatomic) Receipt *receipt;
 @property (nonatomic) NSInteger goToHotDeal;
 @property (nonatomic) NSInteger fromReceiptSummary;
+@property (nonatomic) NSInteger receiptID;
     
     
 - (IBAction)goBack:(id)sender;

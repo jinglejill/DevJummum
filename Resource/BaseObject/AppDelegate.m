@@ -275,7 +275,10 @@ void myExceptionHandler(NSException *exception)
     }
     else if([categoryIdentifier isEqualToString:@"gbpQR"])
     {
+        NSDictionary *data = [myAps objectForKey:@"data"];
+        NSNumber *objReceiptID = [data objectForKey:@"receiptID"];
         ShowQRToPayViewController *vc = (ShowQRToPayViewController *)currentVc;
+        vc.receiptID = [objReceiptID integerValue];
         [vc reloadVc];
     }
     //////////////////
@@ -373,7 +376,10 @@ void myExceptionHandler(NSException *exception)
             currentVc = parentViewController;
         }
         //*****
+        NSDictionary *data = [myAps objectForKey:@"data"];
+        NSNumber *objReceiptID = [data objectForKey:@"receiptID"];
         ShowQRToPayViewController *vc = (ShowQRToPayViewController *)currentVc;
+        vc.receiptID = [objReceiptID integerValue];
         [vc reloadVc];
     }
 
@@ -496,6 +502,23 @@ void myExceptionHandler(NSException *exception)
 
 -(void)itemsDownloaded:(NSArray *)items manager:(NSObject *)objHomeModel
 {
+    //Get current vc
+    CustomViewController *currentVc;
+    CustomViewController *parentViewController = (CustomViewController *)[[[UIApplication sharedApplication] delegate] window].rootViewController;
+
+    while (parentViewController.presentedViewController != nil && ![parentViewController.presentedViewController isKindOfClass:[UIAlertController class]])
+    {
+        parentViewController = (CustomViewController *)parentViewController.presentedViewController;
+    }
+    if([parentViewController isKindOfClass:[UITabBarController class]])
+    {
+        currentVc = ((UITabBarController *)parentViewController).selectedViewController;
+    }
+    else
+    {
+        currentVc = parentViewController;
+    }
+    
     HomeModel *homeModel = (HomeModel *)objHomeModel;
     if(homeModel.propCurrentDB == dbReceiptDisputeRating)//tap at noti
     {
@@ -504,26 +527,6 @@ void myExceptionHandler(NSException *exception)
         
         
         //ไม่ว่าอยู่หน้าไหน ให้ไปที่หน้า orderDetail
-        //Get current vc
-        CustomViewController *currentVc;
-        CustomViewController *parentViewController = (CustomViewController *)[[[UIApplication sharedApplication] delegate] window].rootViewController;
-        
-        while (parentViewController.presentedViewController != nil && ![parentViewController.presentedViewController isKindOfClass:[UIAlertController class]])
-        {
-            parentViewController = (CustomViewController *)parentViewController.presentedViewController;
-        }
-        if([parentViewController isKindOfClass:[UITabBarController class]])
-        {
-            currentVc = ((UITabBarController *)parentViewController).selectedViewController;
-        }
-        else
-        {
-            currentVc = parentViewController;
-        }
-        
-        
-        
-        
         NSMutableArray *receiptList = items[0];
         Receipt *receipt = receiptList[0];
         Receipt *selectedReceipt = [Receipt getReceipt:receipt.receiptID];
@@ -587,28 +590,7 @@ void myExceptionHandler(NSException *exception)
         
         
         //ไม่ว่าอยู่หน้าไหน ให้ไปที่หน้า orderDetail
-        //Get current vc
-        CustomViewController *currentVc;
-        CustomViewController *parentViewController = (CustomViewController *)[[[UIApplication sharedApplication] delegate] window].rootViewController;
-        
-        while (parentViewController.presentedViewController != nil && ![parentViewController.presentedViewController isKindOfClass:[UIAlertController class]])
-        {
-            parentViewController = (CustomViewController *)parentViewController.presentedViewController;
-        }
-        if([parentViewController isKindOfClass:[UITabBarController class]])
-        {
-            currentVc = ((UITabBarController *)parentViewController).selectedViewController;
-        }
-        else
-        {
-            currentVc = parentViewController;
-        }
-        
-        
-        
-        
         NSMutableArray *receiptList = items[0];
-        Receipt *receipt = receiptList[0];
         if([currentVc isKindOfClass:[OrderDetailViewController class]] || [currentVc isKindOfClass:[ConfirmDisputeViewController class]] || [currentVc isKindOfClass:[DisputeFormViewController class]] || [currentVc isKindOfClass:[CommentRatingViewController class]] || [currentVc isKindOfClass:[CommentViewController class]] ||
                 [currentVc isKindOfClass:[BasketViewController class]] ||
                 [currentVc isKindOfClass:[BranchSearchViewController class]] ||
@@ -651,25 +633,6 @@ void myExceptionHandler(NSException *exception)
     {
         //update
         [Utility updateSharedObject:items];
-        
-        
-        //reload when in receipt summary and orderDetail vc
-        //Get current vc
-        CustomViewController *currentVc;
-        CustomViewController *parentViewController = (CustomViewController *)[[[UIApplication sharedApplication] delegate] window].rootViewController;
-        
-        while (parentViewController.presentedViewController != nil && ![parentViewController.presentedViewController isKindOfClass:[UIAlertController class]])
-        {
-            parentViewController = (CustomViewController *)parentViewController.presentedViewController;
-        }
-        if([parentViewController isKindOfClass:[UITabBarController class]])
-        {
-            currentVc = ((UITabBarController *)parentViewController).selectedViewController;
-        }
-        else
-        {
-            currentVc = parentViewController;
-        }
         
         
         if([currentVc isKindOfClass:[ReceiptSummaryViewController class]])

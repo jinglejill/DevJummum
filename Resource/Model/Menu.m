@@ -234,10 +234,10 @@
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_menuTypeID = %ld",menuTypeID];
     NSArray *filterArray = [menuList filteredArrayUsingPredicate:predicate];
+    return [filterArray mutableCopy];
     
-    
-    NSMutableArray *sortArray = [self sortList:[filterArray mutableCopy]];
-    return sortArray;
+//    NSMutableArray *sortArray = [self sortList:[filterArray mutableCopy]];
+//    return sortArray;
 }
 
 +(NSMutableArray *)sortList:(NSMutableArray *)menuList

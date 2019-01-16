@@ -74,7 +74,6 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
 @synthesize saveReceipt;
 @synthesize saveOrderTakingList;
 @synthesize saveOrderNoteList;
-//@synthesize fromOrderItAgain;
 
 
 -(IBAction)unwindToMenuSelection:(UIStoryboardSegue *)segue
@@ -190,9 +189,6 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
             _menuList = menuForBuffet.menuList;
             _menuTypeList = menuForBuffet.menuTypeList;
             _filterMenuList = _menuList;
-//            _menuTypeList = [MenuType getMenuTypeListWithMenuList:_menuList];
-//            _menuTypeList = [MenuType sortList:_menuTypeList];
-//            _filterMenuList = _menuList;
             [self setData];
             
             
@@ -244,10 +240,7 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         
         
         
-        
-//        _menuList = [Menu getCurrentMenuList];
         MenuForAlacarte *menuForAlacarte = [Menu getCurrentMenuList];
-//        if([_menuList count] == 0)
         if([menuForAlacarte.menuList count] == 0 || menuForAlacarte.branchID != branch.branchID)
         {
             [self loadingOverlayView];
@@ -321,7 +314,8 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
             if(_menuTypeList && [_menuTypeList count]>0)
             {
                 NSMutableArray *menuList = [self getMenuListWithSelectedIndex:_selectedMenuTypeIndex];
-                if([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0)
+//                if([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0)
+                if(_selectedMenuTypeIndex == 0)
                 {
                     [_lblSpentForLuckyDraw removeFromSuperview];
                     return ceilf([menuList count]/2.0);
@@ -372,7 +366,8 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
         }
         else
         {
-            if([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0)
+//            if([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0)
+            if(_selectedMenuTypeIndex == 0)
             {
                 CustomTableViewCellSquareThumbNail *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierSquareThumbNail];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -385,7 +380,6 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
             
                 //vw
                 cell.vwLeftWidth.constant = (self.view.frame.size.width - 3*8)/2;
-//                cell.vwLeftHeight.constant = cell.vwLeftWidth.constant+44;
                 cell.vwLeftHeight.constant = cell.vwLeftWidth.constant+44+30;
                 cell.vwLeft.layer.shadowColor = [UIColor lightGrayColor].CGColor;
                 cell.vwLeft.layer.shadowOpacity = 0.8;
@@ -672,10 +666,10 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
     }
     else
     {
-        if([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0)
+//        if([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0)
+        if(_selectedMenuTypeIndex == 0)
         {
             return 4 + (self.view.frame.size.width - 3*8)/2 + 44 + 4 + 30;
-//            return 4 + (self.view.frame.size.width - 3*8)/2 + 44 + 4;
         }
         else
         {
@@ -718,7 +712,8 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
     {
         if(section == 1)
         {
-            if(([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0))
+//            if(([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0))
+            if(_selectedMenuTypeIndex == 0)
             {
                 
             }
@@ -1186,11 +1181,11 @@ static NSString * const reuseIdentifierSquareThumbNail = @"CustomTableViewCellSq
 -(NSMutableArray *)getMenuListWithSelectedIndex:(NSInteger)selectedIndex
 {
     NSMutableArray *menuList;
-    if([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0)
-    {
-        menuList = [Menu getMenuListRecommendedWithMenuList:_filterMenuList];
-    }
-    else
+//    if([Menu hasRecommendedMenuWithMenuList:_filterMenuList] && _selectedMenuTypeIndex == 0)
+//    {
+//        menuList = [Menu getMenuListRecommendedWithMenuList:_filterMenuList];
+//    }
+//    else
     {
         MenuType *menuType = _menuTypeList[_selectedMenuTypeIndex];
         menuList = [Menu getMenuListWithMenuType:menuType.menuTypeID menuList:_filterMenuList];

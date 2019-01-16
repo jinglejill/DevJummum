@@ -31,6 +31,7 @@ static NSString * const reuseIdentifierHeaderFooterButtonButton = @"CustomTableV
 @synthesize fromReceiptSummary;
 @synthesize btnBack;
 @synthesize btnBackFalse;
+@synthesize receiptID;
 
 
 -(void)viewDidLayoutSubviews
@@ -265,7 +266,8 @@ static NSString * const reuseIdentifierHeaderFooterButtonButton = @"CustomTableV
 {
     self.homeModel = [[HomeModel alloc]init];
     self.homeModel.delegate = self;
-    [self.homeModel downloadItems:dbReceiptAndLuckyDraw withData:receipt];
+    NSInteger receiptIDPayByTransfer = receiptID?receiptID:receipt.receiptID;
+    [self.homeModel downloadItems:dbReceiptAndLuckyDraw withData:@(receiptIDPayByTransfer)];
 }
 
 - (void)thisImage:(UIImage *)image hasBeenSavedInPhotoAlbumWithError:(NSError *)error usingContextInfo:(void*)ctxInfo {
